@@ -1,50 +1,90 @@
-From: Ian Campbell <Ian.Campbell-Sxgqhf6Nn4DQT0dZR+AlfA@public.gmane.org>
-Subject: Re: [PATCH 2/2] arm/xen: Don't use xen DMA ops when the device is
- protected by an IOMMU
-Date: Thu, 20 Feb 2014 17:13:21 +0000
-Message-ID: <1392916401.32657.31.camel@kazak.uk.xensource.com>
-References: <1392913301-25524-1-git-send-email-julien.grall@linaro.org>
+From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: devicetree repository separation/migration
+Date: Thu, 20 Feb 2014 13:15:58 -0800
+Message-ID: <5306708E.1000101@gmail.com>
+References: <20140217180544.GU7862@titan.lakedaemon.net> <20140218155750.GS17250@pengutronix.de> <20140218181854.GB7862@titan.lakedaemon.net> <CAOesGMhvoB7vRf3H1kMaL5+MgZ2gJy=ZVNU0gsXVye9S4YGBOg@mail.gmail.com> <CAOesGMi8zJXhfj46CLB-_Kk2s4MY9da46DhMoCtRj=zSUiuOGA@mail.gmail.com> <CA+bK7J5+n2Se4cLv5WjR5B31ej7FdrGjPcjUULNrhb1UQ7=vmA@mail.gmail.com> <20140219090854.GW17250@pengutronix.de> <53051102.8060801@gmail.com> <CACxGe6uhA6FMR76WJGVEt44x6bQOC=woCkDr6ZUH30hTd8f2wA@mail.gmail.com> <53058B69.4040502@gmail.com> <CACxGe6ugF2_kzDPLdv-Z1LUnkX4DHq9R45o64kJHVBSQjWFiNg@mail.gmail.com>
+Reply-To: frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org
 Mime-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <1392913301-25524-1-git-send-email-julien.grall-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=message-id:date:from:reply-to:user-agent:mime-version:to:cc:subject
+         :references:in-reply-to:content-type:content-transfer-encoding;
+        bh=zSCQrczv8x0+QX0xQCVUiQBkekG2lSmek/j+WJdJISE=;
+        b=I/Ro02RVqn7qKmPI9BDSTAJ5E/H/tBpV/bvz7iwxgPx+nxQ7RIq928wCQcL67LkT8y
+         0XS0744JOyxuXXmTJirN8PvQVDUvF4vHEJuw89LxoXaOI/exuSl4bV+Fzita52RyH7zn
+         v8tg10tL6sznZhc9RGKM9VvoLP/xXX4QxGBgxYXemeTSnjT6RvXFf+WsgK9HMkgqWsT9
+         ORJb5cbviTyXc7Z6zHURlVEDpj04bhYwg+SRk3s9xoLIfDxSKbqYqJRb4kBap7lf5raa
+         2FehLlfJGr3RL2aTAm5BbssQbfTU/NKOr8eHqpisHuKr5SgoMGnYz4kJkiw5KnlYCXDu
+         OG8A==
+In-Reply-To: <CACxGe6ugF2_kzDPLdv-Z1LUnkX4DHq9R45o64kJHVBSQjWFiNg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Julien Grall <julien.grall-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, stefano.stabellini-mvvWK6WmYclDPfheJLI6IQ@public.gmane.org, linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, xen-devel-GuqFBffKawtpuQazS67q72D2FQJk+8+b@public.gmane.org, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Rob Landley <rob-VoJi6FS/r0vR7s880joybQ@public.gmane.org>, Russell King <linux-lFZ/pmaqli7XmaaqVzeoHQ@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Cc: Sascha Hauer <s.hauer-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Tim Bird <tbird20d-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Olof Johansson <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>, Jason Cooper <jason-NLaQJdtUoK4Be96aLqz0jA@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Ian Campbell <ijc-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Rob Landley <rob-VoJi6FS/r0vR7s880joybQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-compiler-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Ian Campbell <ian.campbell-Sxgqhf6Nn4DQT0dZR+AlfA@public.gmane.org>
 
-Adding the -spec list for the generic IOMMU binding question.
+On 2/20/2014 12:14 AM, Grant Likely wrote:
+> On Thu, Feb 20, 2014 at 4:58 AM, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+>> On 2/19/2014 1:15 PM, Grant Likely wrote:
+>>> On Wed, Feb 19, 2014 at 8:16 PM, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+>>>> On 2/19/2014 1:08 AM, Sascha Hauer wrote:
+>>>>> On Tue, Feb 18, 2014 at 02:44:15PM -0800, Tim Bird wrote:
+>>>>>> I'm not in favor of separating the device tree information from the kernel.
+>>>>>>
+>>>>>> If we switch, then whatever synchronization issues other projects
+>>>>>> are having now with synching with the device tree info from the kernel will
+>>>>>> just then become the problem of the kernel developers, who will then
+>>>>>> have to sync with the device tree info from another repository.  If the
+>>>>>> sync issues can't be solved now for them, why or how would it be solved
+>>>>>> post-separation for us?  (It sounds like a zero-sum game of pain transfer
+>>>>>> to me.)
+>>>>>>
+>>>>>> I'm relatively unfamiliar with the arguments.  Can someone provide
+>>>>>> a brief list of reasons this is needed, and how the inconvenience to Linux
+>>>>>> kernel developers will be minimized, should it proceed?
+>>>>>
+>>>>
+>>>>
+>>>>> One of the reasons for doing devicetrees is to separate the hardware
+>>>>> description from the code so that:
+>>>>> - Other OSes (and bootloaders) can use the same description to start on
+>>>>>   a given hardware
+>>>>> - A generic Kernel can be started on any hardware
+>>>>> - A hardware describes itself, makes itself more introspecitve so we can
+>>>>>   go away from very specialized kernels
+>>>>
+>>>> Tim knows this ^^^^.  He was asking for the arguments for moving dts files
+>>>> out of the linux kernel source tree.
+>>>
+>>> We've made the decision that devicetree bindings need to be treated as
+>>> ABI, but as long as the .dts files live in the kernel there will
+>>> always be the temptation to just tweak things in lock-step and nobody
+>>> will notice. Splitting the files out gives that extra push to think
+>>> about whether changes to a binding will backwards compatible with a
+>>> tree that doesn't have those changes because the chances are a lot
+>>> higher that someone will hit that combination.
+>>>
+>>> The other argument is shared source between
+>>> BSD/U-Boot/Barebox/Linux/etc. Until we have a separate .dts repo there
+>>> is no good way to share the database of hardware descriptions.
+>>
+>> We could provide an easy export (see below).  What do you think?
+> 
+> Ian Campbell is already maintaining an export tree as a staging area
+> for an eventual split. He's had it up and running for almost a year
+> now:
+> 
+> http://xenbits.xen.org/gitweb/?p=people/ianc/device-tree-rebasing.git
+> 
+> g.
+> 
 
-On Thu, 2014-02-20 at 16:21 +0000, Julien Grall wrote:
-> diff --git a/Documentation/devicetree/bindings/arm/xen.txt b/Documentation/devicetree/bindings/arm/xen.txt
-> index 0f7b9c2..ee25a57 100644
-> --- a/Documentation/devicetree/bindings/arm/xen.txt
-> +++ b/Documentation/devicetree/bindings/arm/xen.txt
-> @@ -15,6 +15,8 @@ the following properties:
->  - interrupts: the interrupt used by Xen to inject event notifications.
->    A GIC node is also required.
->  
-> +- protected-devices: (optional) List of phandles to device node where the
-> +IOMMU has been programmed by Xen. 
+So there already is a "good way to share the database of hardware
+descriptions" in addition to the one I provided.
 
-Is there some common/generic IOMMU binding which we can reuse here?
-Although this isn't exactly an IOMMU it certainly has some similarities
--- it is providing IOMMU like functionality (albeit a very inflexible
-IOMMU which you don't need to/can't actually program).
-
-I'd far rather we followed existing patterns rather than invent our own
-things.
-
-I'm wondering if perhaps we didn't ought to integrate this as an actual
-IOMMU driver, although I'm not convinced this would make sense.
-
-I'm also not sure about shovelling everything as properties under a
-single Xen node, should this not be its own node with compatible =
-"xen,(pv)iommu"?
-
-Ian.
-
+-Frank
 --
 To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
 the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
