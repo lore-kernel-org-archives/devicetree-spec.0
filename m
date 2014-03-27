@@ -1,47 +1,108 @@
-From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: Re: devicetree repository separation/migration
-Date: Sat, 01 Mar 2014 21:04:41 +0000
-Message-ID: <20140301210441.8290AC40DCB@trevor.secretlab.ca>
-References: <20140217180544.GU7862@titan.lakedaemon.net> <5306A6C0.9000206@ gmail.com> <20140221141136.GI17250@pengutronix.de> < CAOesGMjY2aDLPYLncxHs9gqmWCFy+e4sZK_ET-17qzEU-JwvdQ@mail.gmail.com> < 20140228080025.GK24917@pengutronix.de>
+From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: [RFC] Serial port aliases in DT
+Date: Thu, 27 Mar 2014 08:54:09 -0500
+Message-ID: <CAL_Jsq+SWZUz4D+3pdDs5yfi_XbTODC0ytt1S5KpmR_C5vVL=A@mail.gmail.com>
+References: <5448979.WQPtOb56tW@avalon>
+	<2488692.p5nEA6pWSY@wuerfel>
+	<1454965.NzCSO7fLpj@avalon>
+	<9498012.PtNMJ9hipe@avalon>
+Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <20140228080025.GK24917-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+         :cc:content-type;
+        bh=i1Np/Er8UzJDRmNyWagUYOcakHBkIpSMR7D83DaXcA4=;
+        b=MSJkWqRD9RoGtcbVrq5ZWbfZ3SGZpg9UF23yh2Rb6ydb914mQYkBXR2FIlt8tFm96q
+         aXn0jl5zT4IMV3i1GvFEC/fPInjyBVsMnZ+UbE8xw3UbW7++G+MEmu2hxUqX53r/PIIP
+         AaedQH/Iwml2YKhU3cbAD4T2pPUgSFz7kcHxivc/7B+QS0ndPySmyuuNyQtgoZdUwhGa
+         Eb2SAtYjetKFbuc1I75qRZGb/ZryhwpEl8nnb5HK/B9npeTWOK5kfw0S0fLQ4TDA+ev2
+         ulpwXd+Frzhhfri4+AwQ5N50bBzpe5N4oedOZKeNWw3b52If9gIA7aUq6eZFBW6PT1MD
+         LSsQ==
+In-Reply-To: <9498012.PtNMJ9hipe@avalon>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Sascha Hauer <s.hauer-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Olof Johansson <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>
-Cc: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Jason Cooper <jason-NLaQJdtUoK4Be96aLqz0jA@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Ian Campbell <ijc-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Rob Landley <rob-VoJi6FS/r0vR7s880joybQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-compiler-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: Laurent Pinchart <laurent.pinchart-ryLnwIuWjnjg/C1BVhZhaw@public.gmane.org>
+Cc: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, SH-Linux <linux-sh-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Wolfram Sang <wsa-z923LK4zBo2bacvFa/9K2g@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-On Fri, 28 Feb 2014 09:00:25 +0100, Sascha Hauer <s.hauer-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org> wrote:
-> On Fri, Feb 21, 2014 at 10:47:09AM -0800, Olof Johansson wrote:
-> > On Fri, Feb 21, 2014 at 6:11 AM, Sascha Hauer <s.hauer-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org> wrote:
-> > > On Thu, Feb 20, 2014 at 05:07:12PM -0800, Frank Rowand wrote:
-> > 
-> > >> Why are the changes not submitted upstream?  (Or if they were submitted, why
-> > >> were they not accepted?)
-> > >
-> > > The descriptions where to find the environment are obviously barebox
-> > > specific and not acceptable upstream.
-> > 
-> > Why not? Wouldn't it be useful if you could find where the environment
-> > is from the running Linux image so that you can change variables
-> > without rebooting into Barebox first?
-> 
-> Indeed that would be very useful. Generally that would require some
-> generic binding for referring to partitions on mtd devices, partitions
-> on block devices and EEPROMs. If you think such a binding would have a
-> chance upstream I could try and come up with a binding.
+On Thu, Mar 27, 2014 at 7:50 AM, Laurent Pinchart
+<laurent.pinchart-ryLnwIuWjnjg/C1BVhZhaw@public.gmane.org> wrote:
+> Hello DT maintainers,
+>
+> Ping ? This issue is blocking the merge of serial port DT support on Renesas
+> platforms, as we need to decide on how to name the ports.
 
-I agree. I want to explore doing the same thing for UEFI also. Currently
-the UEFI spec pretty much requires UEFI runtime services to 'own' the
-device that holds variable storage, but that doesn't work on
-cost-sensitive devices that can't afford separate flash dedicated to
-UEFI. I'd like to investigate a spec extension that defines the variable
-storage format on a block device so that Linux can directly manipulate
-it without a runtime services call.
+This seems like a topic for devicetree-spec.
 
-g.
+> On Tuesday 11 March 2014 12:57:59 Laurent Pinchart wrote:
+>> On Monday 10 March 2014 13:57:23 Arnd Bergmann wrote:
+>> > On Monday 10 March 2014 12:59:03 Laurent Pinchart wrote:
+>> > > The SoC includes 8 serial ports. They are all disabled in the SoC .dtsi,
+>> > > and enabled selectively by board DT files. As not all serial ports are
+>> > > available on all boards, the question was whether to add aliases for all
+>> > > ports (in the .dtsi in this case) like
+>> > >
+>> > >          serial0 = &scif0;
+>> > >          serial1 = &scif1;
+>> > >          serial2 = &scif2;
+>> > >          serial3 = &scif3;
+>> > >          serial4 = &scif4;
+>> > >          serial5 = &scif5;
+>> > >          serial6 = &scif6;
+>> > >          serial7 = &scif7;
+>> > >
+>> > > or to just add aliases for the enabled ports (in the board DT file) like
+>> > >
+>> > >          serial0 = &scif2;
+>> > >          serial1 = &scif3;
+>> > >
+>> > > Note the numbering in the latter case: as the board doesn't use serial
+>> > > ports 0 and 1, hardware ports 2 and 3 become logical ports 0 and 1.
+>> > >
+>> > > I considered that having Linux create ttySC0 and ttySC1 devices for the
+>> > > first two ports of the board, regardless of which hardware ports are
+>> > > used, is simpler from a user point of view (it allows sharing the same
+>> > > inittab settings for the console serial port across several boards for
+>> > > instance). I'd appreciate feedback on that.
+>> >
+>> > I think the traditional interpretation is that we want to use the aliases
+>> > to reflect the device names in the OS.
+>>
+>> If I interpret this correctly it means that the question boils down to
+>> whether we want the system to expose ttySC0 and ttySC1 or ttySC2 and
+>> ttySC3, in case only ports 2 and 3 are enabled.
+>>
+>> Let's note that, despite the above example showing 8 instances of identical
+>> serial IP cores, the reality is a bit more complex and Renesas SoCs usually
+>> include different serial IP cores with several instances of each of them.
+>> Ports of the same time are numbered in the datasheet, but there's no
+>> standard or natural ordering global to all serial ports.
+>>
+>> This starts to remind me about the whole stable network device name changes
+>> we went through recently.
+>>
+>> > This however comes back to the more general issue of serial port device
+>> > naming: Linux traditionally uses separate names per driver (e.g. ttySC0
+>> > instead of ttyS0).
+>> >
+>> > There has been discussion in the past about changing this to let all
+>> > drivers use the same namespace, but it's not yet clear to me how we'd do
+>> > this in a 100% backwards compatible way. Maybe it's best left to udev to
+>> > figure out the driver independent name, but then we definitely should use
+>> > the alias for that name.
+
+This discussion has come up in just the last month or so.
+
+My opinion is device name numbering should start at 0 with 0 being the
+preferred console device. My main reasoning is giving consistent
+naming across boards and it is more inline with how other devices are
+named. The aliases are just to give you consistency in the numbering
+within the 0 to N. Hopefully this is inline with what other platforms
+have done as above all I think we should be consistent.
+
+Rob
 --
 To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
 the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
