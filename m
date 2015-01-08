@@ -1,59 +1,69 @@
-From: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: Updated ePAPR specification?
-Date: Fri, 27 Jun 2014 21:52:29 -0700
-Message-ID: <CAGVrzcZCt7Yp7Yxa9Kn-A38qwFCpZNpnawzSR0B+9pKBDKwOAw@mail.gmail.com>
-References: <CAGVrzcZcLooRwP3yH=HxgaGNfVp6AbGdk9cqx7vvhsPgwv0BMA@mail.gmail.com>
- <1403856166.19234.7.camel@hornet>
+From: Nikhil Devshatwar <nikhil.nd-l0cyMroinI0@public.gmane.org>
+Subject: [PATCH] dtc: parser: Add label while overriding nodes
+Date: Thu, 8 Jan 2015 19:42:42 +0530
+Message-ID: <1420726362-22555-1-git-send-email-nikhil.nd@ti.com>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc:content-type;
-        bh=qVhCxUsyV0WA04MhRcDKjmWQN2NrOCL7KNIdbrOZZ4s=;
-        b=RC6f1SgMwJfWnkiLInkkw9kKG1ghthKBYH405BAn2L1HA/MF1cy1lHF2tEPIwLOlZ2
-         NUmukzaZ+P+ES1iJYcK5znqnRsvUqLP6KE3BbHVIeFjug+wZtzXKP5tYG6B1JPfzEfJx
-         1gxGZUkr3cRGY3mGFOSWx1LAn2q16pVyDq/6qkcaZgRrs3loY7U2eGuiY0ieyzAeGW2G
-         Fu4wMLg53JJ8tZRWjcKMK03TCwegszF+dT57QOLdUXTjY3vybphqoSjYA+BV5Uyy7DcP
-         00G7gJ2RvemTsvF6X9bIooSmPGLWeLngud4RS6WPYdXy0wQYYUvO2AGYvPW3t9jroYYP
-         tpIA==
-In-Reply-To: <1403856166.19234.7.camel@hornet>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>
-Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-compiler-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-compiler-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Olof Johansson <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+To: devicetree-compiler-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-omap-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: Nikhil Devshatwar <nikhil.nd-l0cyMroinI0@public.gmane.org>
 
-2014-06-27 1:02 GMT-07:00 Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>:
-> On Thu, 2014-06-26 at 19:24 +0100, Florian Fainelli wrote:
->> If we were serious about doing this, how would you recommend we move
->> forward, should we aim at doing something similar to the virtio
->> specification and publish an update Device Tree binding specification
->> as part of an OASIS working group?
->
-> I'm sure OASIS admins would be delighted to have more non-XML-related
-> standards in the portfolio ;-)
->
-> One thing I must point out (after going through the process with virtio)
-> is that in order to participate in a OASIS Technical Committee, one must
-> be either an employee of a company being a OASIS member, or pay for an
-> individual membership (there seem to be some limitations in this case
-> though). OASIS people are very strict on this (also on the communication
-> channels - ie. all discussions *must* happen on the official OASIS
-> mailing lists) due to IP Rights policies.
+Current device tree compiler allows to define multiple labels when defining
+the device node the first time. Typically device nodes are defined in
+DTSI files. Now these nodes can be overriden for updating some of the
+properties. Typically, device nodes are overridden in DTS files.
 
-Ok, that should not be a problem, I can certainly get my employer to
-back me up on this initiative.
+When working with adapter boards, most of the time adapter board can fit to
+multiple base boards. But depending on which base board it is connected to,
+the devices on the adapter board would be children of different devices.
 
-I am mostly wondering if having something aside from ePAPR either
-makes sense or is something that is desirable to have for the various
-open-source and proprietary boot loader and OSes out there that use
-Device Tree.
+e.g. On dra7-evm.dts, i2c2 is exported for expansion connector whereas
+on dra72-evm.dts, i2c5 is exported for expansion connector.
+This causes a problem when writing a generic device tree file for
+the adapter board. Because, you cannot know wheather all the devices on
+adpter board are present on i2c or i2c5.
 
-Thanks
+The problem can be solved by adding a common label (e.g. i2cexp) in both
+of the DTS files when overriding the device nodes for i2c2 or i2c5.
+This way, generic adapter board file would override the i2cexp. And
+depending on which base board you use the adpter board, all the devices
+are automatically added for correct device nodes.
+
+Change-Id: I3ad7247a79baed7268a91fc691360aece73d6d1b
+Signed-off-by: Nikhil Devshatwar <nikhil.nd-l0cyMroinI0@public.gmane.org>
+---
+ scripts/dtc/dtc-parser.y |   12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/scripts/dtc/dtc-parser.y b/scripts/dtc/dtc-parser.y
+index f412460..d9ed3b7 100644
+--- a/scripts/dtc/dtc-parser.y
++++ b/scripts/dtc/dtc-parser.y
+@@ -145,6 +145,18 @@ devicetree:
+ 		{
+ 			$$ = merge_nodes($1, $3);
+ 		}
++
++	| devicetree DT_LABEL DT_REF nodedef
++		{
++			struct node *target = get_node_by_ref($1, $3);
++
++			add_label(&target->labels, $2);
++			if (target)
++				merge_nodes(target, $4);
++			else
++				print_error("label or path, '%s', not found", $2);
++			$$ = $1;
++		}
+ 	| devicetree DT_REF nodedef
+ 		{
+ 			struct node *target = get_node_by_ref($1, $2);
 -- 
-Florian
+1.7.9.5
+
 --
 To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
 the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
