@@ -1,118 +1,101 @@
 From: Peter Maydell <peter.maydell-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 Subject: Re: Secure resources in device trees
-Date: Thu, 22 Jan 2015 11:09:02 +0000
-Message-ID: <CAFEAcA_2tVB6655aio52BL9OUrp=zostYq0wx4MYytSX4uHovg@mail.gmail.com>
+Date: Thu, 22 Jan 2015 11:14:44 +0000
+Message-ID: <CAFEAcA_J6GVyeiqj=9sfZFJ_KK2uGaRsgRXcg3C4KM13UcVmMQ@mail.gmail.com>
 References: <CAOgzsHVpXZTHoq7HyfrGeGe92onnb6=BQr30PvKrg04h=0De0w@mail.gmail.com>
- <CAL_Jsq+rN07CfdNjErhLipKNJJj3uoczR98YuWSAwjMRW1xVag@mail.gmail.com>
+ <20150121162938.GJ5044@leverpostej>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <CAL_Jsq+rN07CfdNjErhLipKNJJj3uoczR98YuWSAwjMRW1xVag-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+In-Reply-To: <20150121162938.GJ5044@leverpostej>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Greg Bellows <greg.bellows-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Christoffer Dall <christoffer.dall-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+To: Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>
+Cc: Greg Bellows <greg.bellows-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Christoffer Dall <christoffer.dall-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org" <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 
-On 21 January 2015 at 16:21, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
-> On Tue, Jan 20, 2015 at 1:15 PM, Greg Bellows <greg.bellows-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> wrote:
->> The addition of ARM security extension (TrustZone) support to QEMU has
->> exposed the issue of how secure resources are communicated to secure
->> software responsible for booting the HLOS.  The natural choice for
->> communicating these details is the device tree.
->
-> You could also have a secure OS use DT and the HLOS use something else
-> (ACPI). Or the secure OS and non-secure firmware (UEFI) use DT and the
-> OS uses ACPI.
->
+On 21 January 2015 at 16:29, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org> wrote:
+> On Tue, Jan 20, 2015 at 07:15:51PM +0000, Greg Bellows wrote:
 >> In the case of real hardware, the device tree supplied to the HLOS
 >> only needs to describe non-secure resources as secure software can
 >> rely on static knowledge about the hardware.  This also holds true for
 >> QEMU machines modeled after actual fixed hardware configurations.
 >> However, this is not the case with QEMU's virtual machine models, such
 >> as machvirt, where the hardware configuration can change over time.
->> In this case, secure software is dependent on QEMU's dynamically
->> constructed device tree to describe the hardware, making it impossible
->> for secure software to know ahead of time what is secure, non-secure,
->> or both.
 >
-> For purposes of this discussion, what works better for QEMU is irrelevant IMO.
+> When you say this changes over time, I assume you mean for the lifetime
+> of the project, as opposed to the lifetime of a running instance? i.e.
+> non-probeable devices are not dynamically injected to a running system.
 
-Given that this discussion is "how can QEMU do this thing in a
-way that works with device tree", what works better for QEMU
-is worth considering (though not the deciding factor).
+We mean in the sense that any particular version of QEMU (or a
+particular run of QEMU with different user supplied options) might
+expose a different set of hardware to the firmware and OS. The
+only thing the firmware can assume is the base address of RAM;
+everything else it must determine via DTB.
 
->> Two possible approaches for handling this particular case are:
->>
->> 1) Create two device tree blobs; one describing the non-secure
->> configuration and the other the full configuration.  This would allow
->> secure software to see the full hardware picture including secure
->> resources while the non-secure world would only see the non-secure
->> device tree configuration.  The QEMU virt machine would be responsible
->> for producing the device tree blobs.
->
-> I've thought about this some in the past and leaned toward this
-> direction mainly because I'd expect you are partitioning most nodes to
-> one side. You could do some crazy partitioning with secure and
-> non-secure world. It was suggested on highbank to use the secure bit
-> as a 33rd address bit to get 8GB of address space for example. You
-> could have entirely different view of the system.
->
+For hotplug we're going to end up using PCIe I think, so not
+a device tree issue at all.
+
 >> The drawbacks to this approach are:
 >> * There are 2 device trees to manage
->
-> You already have 2 bootloaders and 2 OS's to manage.
-
-No, QEMU doesn't have multiple numbers of any of those to
-manage. It wants to tell the (single) thing it's booting what
-the config of the (virtual) hardware is, that's all.
-
 >> * The two DTBs will typically be almost identical.
->
-> I don't really agree. If the secure dtb has all non-secure peripherals
-> too, then yes. But if you only include peripherals allocated to secure
-> world and secure view of peripherals, then I don't think there would
-> be much overlap. You pretty much have to statically allocate each
-> peripheral to one side or the other.
-
-As Pawel notes, the trustzone address space controller lets
-the secure side dynamically choose to allocate some subnodes
-to S or NS as it pleases. (That's not a situation I care about
-at the moment, as it happens, though.)
-
 >> * Not possible to identify whether a device is shared or not between
 >> the secure and non-secure worlds.
->
-> Typically, sharing requires a peripheral to be designed to be shared
-> like PL330 or MMU-400.
-
-Only if you care about actually dynamically letting both sides
-use it at once. What Greg means by "shared" here is "appears in
-both the S and NS address spaces", as opposed to "appears in only
-one and is physically inaccessible from the other".
-
 >> * Identifying device available only to the secure world require
 >> cumbersome comparison of the two device trees.
 >
-> But that is pretty static. It doesn't seem like a big deal to me.
+> I'm not sure I follow why such identification is necessary?
 
-Static in what sense? The firmware being handed the DTB(s)
-by QEMU by definition doesn't know what is secure and what
-is not without looking at and comparing the DTBs (since the
-DTBs are what tells the firmware what hardware exists and
-whether it is S or NS).
+If I'm the secure world firmware and I want to use a UART to
+send some debug output to the world, I can look through the S
+device tree blob and find a PL011. But I can't tell if it's the
+PL011 that I should use, or the one that's shared with the NS
+address space and which the nonsecure guest OS should use, unless
+I go through both device tree blobs cross-checking for which
+devices appear in both blobs (or unless the devices are marked
+up for which address space they appear in, in which case why
+have two blobs in the first place?).
 
-> You could also do this w/o dts changes. You could start with a full
-> description and the knowledge of what to filter out resides in the
-> secure OS or bootloader. It depends where you want to put the
-> partitioning decisions.
+>> * A mechanism would be needed to pass an additional device tree.
+>>
+>> 2) Modify the standard device tree blob to include annotations or
+>> modifications to describe which resources are secure or not.  In this
+>> case, secure software would use the single device tree to identify the
+>> secure resources.  The added information could be used by secure
+>> software to trim the device tree before passing it.  Alternatively,
+>> the information could be passed on to non-secure software with the
+>> expectation that it would honor the device security.   It would be
+>> crucial that any data added to the device tree adhere to existing
+>> conventions or expectations.
+>
+> This approach assumes assumes that the secure and non-secure physical
+> address spaces are identical bar some portions being masked out on the
+> non-secure side. This is not necessarily the case.
+>
+> Architecturally the secure and non-secure physical address spaces are
+> entiorely separate, and do not necessarily mirror each other.
+>
+> It's entirely valid for some devices/RAM to only exist in one of the
+> address spaces (we typically see secure-only devices, but
+> non-secure-only devices are also possible). It's also entirely valid for
+> the same device to be mapped at different addresses in each address
+> space (e.g. the same UART could be mapped at both S:0xffff0000 and also
+> at NS:0xcccc0000 and nowhere else in either address space).
 
-The firmware (secure OS, bootloader) can make partitioning
-decisions, but it can't change what the hardware physically
-is. It has to be told whether devices are visible in the S, NS or
-both address spaces (via DTB).
+This is all true, but the common case is "most things are shared
+and a few devices are S-only". What I envisaged with this approach
+was an easy way to describe the common case, with presumably syntax
+that would permit the weird case to be described too.
 
-thanks
+> So approach (2) does not fit the architecture generally. From what I
+> recall of previous discussions, we eventually figured out that you
+> either need separate trees or a higher level container to address the
+> secure vs nonsecure split.
+
+I would definitely prefer some sort of single container or blob.
+I only want to describe the hardware once and pass the DTB
+consumer a single thing describing the hardware.
+
 -- PMM
 --
 To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
