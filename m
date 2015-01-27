@@ -1,73 +1,85 @@
-From: Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>
-Subject: Re: Secure resources in device trees
-Date: Thu, 22 Jan 2015 18:27:07 +0000
-Message-ID: <20150122182707.GD12911@leverpostej>
-References: <CAOgzsHVpXZTHoq7HyfrGeGe92onnb6=BQr30PvKrg04h=0De0w@mail.gmail.com>
- <20150121162938.GJ5044@leverpostej>
- <CAL_JsqJDNziqcX-8cq0PkSE61NVpmSBUM+fo3vmD3WrBG3=R7Q@mail.gmail.com>
+From: "Devshatwar, Nikhil" <nikhil.nd@ti.com>
+Subject: RE: [PATCH] dtc: parser: Add label while overriding nodes
+Date: Tue, 27 Jan 2015 15:11:55 +0000
+Message-ID: <E60A9E1B4132A24DB80BD56ABC92684735043E3E@DBDE04.ent.ti.com>
+References: <1420726362-22555-1-git-send-email-nikhil.nd@ti.com>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-Content-Disposition: inline
-In-Reply-To: <CAL_JsqJDNziqcX-8cq0PkSE61NVpmSBUM+fo3vmD3WrBG3=R7Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Greg Bellows <greg.bellows-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Christoffer Dall <christoffer.dall-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Peter Maydell <peter.maydell-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org" <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Content-Transfer-Encoding: 8BIT
+Return-path: <linux-omap-owner@vger.kernel.org>
+In-Reply-To: <1420726362-22555-1-git-send-email-nikhil.nd@ti.com>
+Content-Language: en-US
+Sender: linux-omap-owner@vger.kernel.org
+List-ID: <devicetree-spec.vger.kernel.org>
+To: "Devshatwar, Nikhil" <nikhil.nd@ti.com>, "devicetree-compiler@vger.kernel.org" <devicetree-compiler@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>, "linux-omap@vger.kernel.org" <linux-omap@vger.kernel.org>
+Cc: "grant.likely@linaro.org" <grant.likely@linaro.org>, "robh+dt@kernel.org" <robh+dt@kernel.org>
 
-[...]
+Hi all,
 
-> >> * A mechanism would be needed to pass an additional device tree.
-> >>
-> >> 2) Modify the standard device tree blob to include annotations or
-> >> modifications to describe which resources are secure or not.  In this
-> >> case, secure software would use the single device tree to identify the
-> >> secure resources.  The added information could be used by secure
-> >> software to trim the device tree before passing it.  Alternatively,
-> >> the information could be passed on to non-secure software with the
-> >> expectation that it would honor the device security.   It would be
-> >> crucial that any data added to the device tree adhere to existing
-> >> conventions or expectations.
-> >
-> > This approach assumes assumes that the secure and non-secure physical
-> > address spaces are identical bar some portions being masked out on the
-> > non-secure side. This is not necessarily the case.
+Does this patch make sense?
+
+> -----Original Message-----
+> From: Devshatwar, Nikhil
+> Sent: Thursday, January 08, 2015 7:43 PM
+> To: devicetree-compiler@vger.kernel.org; devicetree@vger.kernel.org;
+> devicetree-spec@vger.kernel.org; linux-omap@vger.kernel.org
+> Cc: Devshatwar, Nikhil
+> Subject: [PATCH] dtc: parser: Add label while overriding nodes
 > 
-> True, but I would guess this is the common case.
-
-In practically every system I can think of, the address spaces are
-essentially the same bar masking.
-
-However, if we're trying to model the architectural envelope, then the
-fact that a single DTB can't encode that needs some consideration in
-this matter.
-
-> > Architecturally the secure and non-secure physical address spaces are
-> > entiorely separate, and do not necessarily mirror each other.
-> >
-> > It's entirely valid for some devices/RAM to only exist in one of the
-> > address spaces (we typically see secure-only devices, but
-> > non-secure-only devices are also possible). It's also entirely valid for
-> > the same device to be mapped at different addresses in each address
-> > space (e.g. the same UART could be mapped at both S:0xffff0000 and also
-> > at NS:0xcccc0000 and nowhere else in either address space).
-> >
-> > So approach (2) does not fit the architecture generally. From what I
-> > recall of previous discussions, we eventually figured out that you
-> > either need separate trees or a higher level container to address the
-> > secure vs nonsecure split.
+> Current device tree compiler allows to define multiple labels when
+> defining the device node the first time. Typically device nodes are
+> defined in DTSI files. Now these nodes can be overriden for updating
+> some of the properties. Typically, device nodes are overridden in DTS
+> files.
 > 
-> Though there's no reason both approaches can't be supported. If the 2
-> views are radically different, then use 2 DTs. If they are similar and
-> just a matter of partitioning, then you can fix up the DT before
-> passing to non-secure world (or even do this with a script offline
-> (i.e. 1 dts and 2 dtb's)).
+> When working with adapter boards, most of the time adapter board can
+> fit to multiple base boards. But depending on which base board it is
+> connected to, the devices on the adapter board would be children of
+> different devices.
+> 
+> e.g. On dra7-evm.dts, i2c2 is exported for expansion connector whereas
+> on dra72-evm.dts, i2c5 is exported for expansion connector.
+> This causes a problem when writing a generic device tree file for the
+> adapter board. Because, you cannot know wheather all the devices on
+> adpter board are present on i2c or i2c5.
+> 
+> The problem can be solved by adding a common label (e.g. i2cexp) in
+> both of the DTS files when overriding the device nodes for i2c2 or
+> i2c5.
+> This way, generic adapter board file would override the i2cexp. And
+> depending on which base board you use the adpter board, all the devices
+> are automatically added for correct device nodes.
+> 
+> Change-Id: I3ad7247a79baed7268a91fc691360aece73d6d1b
+> Signed-off-by: Nikhil Devshatwar <nikhil.nd@ti.com>
+> ---
+>  scripts/dtc/dtc-parser.y |   12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+> 
+> diff --git a/scripts/dtc/dtc-parser.y b/scripts/dtc/dtc-parser.y index
+> f412460..d9ed3b7 100644
+> --- a/scripts/dtc/dtc-parser.y
+> +++ b/scripts/dtc/dtc-parser.y
+> @@ -145,6 +145,18 @@ devicetree:
+>  		{
+>  			$$ = merge_nodes($1, $3);
+>  		}
+> +
+> +	| devicetree DT_LABEL DT_REF nodedef
+> +		{
+> +			struct node *target = get_node_by_ref($1, $3);
+> +
+> +			add_label(&target->labels, $2);
+> +			if (target)
+> +				merge_nodes(target, $4);
+> +			else
+> +				print_error("label or path, '%s', not found",
+> $2);
+> +			$$ = $1;
+> +		}
+>  	| devicetree DT_REF nodedef
+>  		{
+>  			struct node *target = get_node_by_ref($1, $2);
+> --
+> 1.7.9.5
 
-That sounds possible, yes.
-
-Mark.
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
