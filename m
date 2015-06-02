@@ -1,141 +1,114 @@
-From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [RFC v4 1/4] Broadcom Bluetooth UART Device Tree bindings
-Date: Mon, 1 Jun 2015 19:18:38 -0500
-Message-ID: <CAL_JsqLO+g56KYUocpWLpz4dDTP0fEXTa4RjJzeRsPvYjCyF4A@mail.gmail.com>
-References: <1432325420-12782-1-git-send-email-ifaenson@broadcom.com> <1432325420-12782-2-git-send-email-ifaenson@broadcom.com>
+From: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+Subject: RE: [RFC v4 1/4] Broadcom Bluetooth UART Device Tree bindings
+Date: Tue, 2 Jun 2015 12:20:03 +0000
+Message-ID: <E0D3336E15B58B4294723AC879BA5E9425D49D@IRVEXCHMB15.corp.ad.broadcom.com>
+References: <1432325420-12782-1-git-send-email-ifaenson@broadcom.com>
+ <1432325420-12782-2-git-send-email-ifaenson@broadcom.com>
+ <CAL_JsqLO+g56KYUocpWLpz4dDTP0fEXTa4RjJzeRsPvYjCyF4A@mail.gmail.com>
 Mime-Version: 1.0
+Content-Transfer-Encoding: base64
 Return-path: <linux-bluetooth-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc:content-type;
-        bh=QJMMCGCA9dwRHIo+9BHMBYtuO0cfWSQ3bXmH5XTiJUI=;
-        b=wDNScn+gKOtKT3HNr5QENCwJNWqO7L5x7eA1xeqkkQhiRJHF1165D5OFVZho8xaLfG
-         39EY2HVyIhvGre1lCYt/NOrLW+ykI1f0+v9JePhT3go7EYAFUbY/DMDdBTSe1bX8XM3U
-         9hlRHAlhH4ROtNCSmMgl9/Mh4k4XPk9uR+6monq4KCiRgWgrLkn8tSVmkcQO6UdDzZMu
-         F1B8wVPNCbfFUsZhf2XYXb19ArbPNaNaXTzM2FejPtNhquOt5hAWQOSnaNbDor3yU08D
-         5SRM4JVQd7ANX0I9rvDTgd6ZoTOVtmW7Pe+wbPFLoKkzyoMDhdZqPFYGR/nr5gOWsW9F
-         c99g==
-In-Reply-To: <1432325420-12782-2-git-send-email-ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+In-Reply-To: <CAL_JsqLO+g56KYUocpWLpz4dDTP0fEXTa4RjJzeRsPvYjCyF4A-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Content-Language: en-US
 Sender: linux-bluetooth-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
-Cc: Marcel Holtmann <marcel-kz+m5ild9QBg9hUCZPvPmw@public.gmane.org>, linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+To: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: Marcel Holtmann <marcel-kz+m5ild9QBg9hUCZPvPmw@public.gmane.org>, "linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Arend Van Spriel <arend-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
 
-On Fri, May 22, 2015 at 3:10 PM, Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org> wrote:
-> Device Tree bindings to configure the Broadcom Bluetooth UART device.
->
-> Signed-off-by: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
-> ---
->  .../devicetree/bindings/net/bluetooth/btbcm.txt    | 82 ++++++++++++++++++++++
->  1 file changed, 82 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
->
-> diff --git a/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt b/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
-> new file mode 100644
-> index 0000000..968421b
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
-> @@ -0,0 +1,82 @@
-> +btbcm
-> +------
-> +
-> +Required properties:
-> +
-> +       - compatible : must be "brcm,brcm-bt-uart".
-> +       - tty : tty device connected to this Bluetooth device.
-
-Neil Brown has been working on generic bindings for tty/UART slaves
-which should be used here.
-
-> +
-> +Optional properties:
-> +
-> +  - bt-host-wake-gpios : bt-host-wake input GPIO to be used as an interrupt.
-> +
-> +  - bt-wake-gpios : bt-wake output GPIO to be used to suspend / resume device.
-> +
-> +  - bt-reg-on-gpios : reg-on output GPIO to be used to power device on/off.
-> +
-> +  - baud-rate-before-config-download : initial Bluetooth device baud rate.
-> +    Default: 3000000.
-
-What's the baudrate after download? Why not just use standard
-"baud-rate" if you only specify one rate?
-
-> +
-> +  - manual-fc : flow control UART in suspend / resume scenarios.
-> +    Default: 0.
-> +
-> +  - configure-sleep : configure suspend / resume flag.
-> +    Default: false.
-> +
-> +  - configure-audio : configure platform PCM SCO flag.
-> +    Default: false.
-> +
-> +  - PCMClockMode : PCM clock mode. 0-slave, 1-master.
-> +    Default: 0.
-> +
-> +  - PCMFillMethod : PCM fill method. 0 to 3.
-> +    Default: 2.
-> +
-> +  - PCMFillNum : PCM number of fill bits. 0 to 3.
-> +    Default: 0.
-> +
-> +  - PCMFillValue : PCM fill value. 0 to 7.
-> +    Default: 3.
-> +
-> +  - PCMInCallBitclock : PCM interface rate. 0-128Kbps, 1-256Kbps, 2-512Kbps,
-> +    3-1024Kbps, 4-2048Kbps.
-> +    Default: 0.
-> +
-> +  - PCMLSBFirst : PCM LSB first. 0 or 1.
-> +    Default: 0.
-> +
-> +  - PCMRightJustify : PCM Justify. 0-left, 1-right.
-> +    Default: 0.
-> +
-> +  - PCMRouting : PCM routing. 0-PCM, 1-SCO over HCI.
-> +    Default: 0.
-> +
-> +  - PCMShortFrameSync : PCM sync. 0-short, 1-long.
-> +    Default: 0.
-> +
-> +  - PCMSyncMode : PCM sync mode. 0-slave, 1-master.
-
-Please no CamelCase. These need better descriptions.
-
-> +    Default: 0.
-> +
-> +
-> +Example:
-> +
-> +       brcm4354_bt_uart: brcm4354-bt-uart {
-> +               compatible = "brcm,brcm-bt-uart";
-> +               bt-wake-gpios = <&gpio4 30 GPIO_ACTIVE_HIGH>;
-> +               bt-host-wake-gpios = <&gpio4 31 GPIO_ACTIVE_HIGH>;
-> +               tty = "ttyS0";
-> +               baud-rate-before-config-download = <3000000>;
-> +               configure-sleep;
-> +               configure-audio;
-> +               PCMClockMode = <0>;
-> +               PCMFillMethod = <2>;
-> +               PCMFillNum = <0>;
-> +               PCMFillValue = <3>;
-> +               PCMInCallBitclock = <0>;
-> +               PCMLSBFirst = <0>;
-> +               PCMRightJustify = <0>;
-> +               PCMRouting = <0>;
-> +               PCMShortFrameSync = <0>;
-> +               PCMSyncMode = <0>;
-> +       };
-> +
-> --
-> 1.9.1
->
-> --
-> To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
-> the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-> More majordomo info at  http://vger.kernel.org/majordomo-info.html
+SGkgUm9iLA0KDQpBcHByZWNpYXRlIHlvdXIgaW5zaWdodHMuDQoNCi0tLS0tT3JpZ2luYWwgTWVz
+c2FnZS0tLS0tDQpGcm9tOiBSb2IgSGVycmluZyBbbWFpbHRvOnJvYmhlcnJpbmcyQGdtYWlsLmNv
+bV0gDQpTZW50OiBNb25kYXksIEp1bmUgMDEsIDIwMTUgODoxOSBQTQ0KVG86IElseWEgRmFlbnNv
+bg0KQ2M6IE1hcmNlbCBIb2x0bWFubjsgbGludXgtYmx1ZXRvb3RoQHZnZXIua2VybmVsLm9yZzsg
+ZGV2aWNldHJlZS1zcGVjQHZnZXIua2VybmVsLm9yZzsgZGV2aWNldHJlZUB2Z2VyLmtlcm5lbC5v
+cmcNClN1YmplY3Q6IFJlOiBbUkZDIHY0IDEvNF0gQnJvYWRjb20gQmx1ZXRvb3RoIFVBUlQgRGV2
+aWNlIFRyZWUgYmluZGluZ3MNCg0KT24gRnJpLCBNYXkgMjIsIDIwMTUgYXQgMzoxMCBQTSwgSWx5
+YSBGYWVuc29uIDxpZmFlbnNvbkBicm9hZGNvbS5jb20+IHdyb3RlOg0KPiBEZXZpY2UgVHJlZSBi
+aW5kaW5ncyB0byBjb25maWd1cmUgdGhlIEJyb2FkY29tIEJsdWV0b290aCBVQVJUIGRldmljZS4N
+Cj4NCj4gU2lnbmVkLW9mZi1ieTogSWx5YSBGYWVuc29uIDxpZmFlbnNvbkBicm9hZGNvbS5jb20+
+DQo+IC0tLQ0KPiAgLi4uL2RldmljZXRyZWUvYmluZGluZ3MvbmV0L2JsdWV0b290aC9idGJjbS50
+eHQgICAgfCA4MiArKysrKysrKysrKysrKysrKysrKysrDQo+ICAxIGZpbGUgY2hhbmdlZCwgODIg
+aW5zZXJ0aW9ucygrKQ0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IERvY3VtZW50YXRpb24vZGV2aWNl
+dHJlZS9iaW5kaW5ncy9uZXQvYmx1ZXRvb3RoL2J0YmNtLnR4dA0KPg0KPiBkaWZmIC0tZ2l0IGEv
+RG9jdW1lbnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdzL25ldC9ibHVldG9vdGgvYnRiY20udHh0
+IGIvRG9jdW1lbnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdzL25ldC9ibHVldG9vdGgvYnRiY20u
+dHh0DQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAuLjk2ODQyMWINCj4g
+LS0tIC9kZXYvbnVsbA0KPiArKysgYi9Eb2N1bWVudGF0aW9uL2RldmljZXRyZWUvYmluZGluZ3Mv
+bmV0L2JsdWV0b290aC9idGJjbS50eHQNCj4gQEAgLTAsMCArMSw4MiBAQA0KPiArYnRiY20NCj4g
+Ky0tLS0tLQ0KPiArDQo+ICtSZXF1aXJlZCBwcm9wZXJ0aWVzOg0KPiArDQo+ICsgICAgICAgLSBj
+b21wYXRpYmxlIDogbXVzdCBiZSAiYnJjbSxicmNtLWJ0LXVhcnQiLg0KPiArICAgICAgIC0gdHR5
+IDogdHR5IGRldmljZSBjb25uZWN0ZWQgdG8gdGhpcyBCbHVldG9vdGggZGV2aWNlLg0KDQpOZWls
+IEJyb3duIGhhcyBiZWVuIHdvcmtpbmcgb24gZ2VuZXJpYyBiaW5kaW5ncyBmb3IgdHR5L1VBUlQg
+c2xhdmVzDQp3aGljaCBzaG91bGQgYmUgdXNlZCBoZXJlLg0KDQpJRjogSSBjZXJ0YWlubHkgbGlr
+ZSB3aGF0IGlzIGJlaW5nIGRldmVsb3BlZCBmb3IgdGhlIFVBUlQgY2hpbGQgZGV2aWNlcyBpbiB0
+aGUgRGV2aWNlVHJlZS4gSXQgd2lsbCBmaW5hbGx5IGNhdGNoIHVwIHdpdGggd2hhdCdzIGJlZW4g
+YXZhaWxhYmxlIGluIHRoZSBBQ1BJIGZvciB5ZWFycy4gSG93ZXZlciwgdG8gdGhlIGJlc3Qgb2Yg
+bXkgdW5kZXJzdGFuZGluZywgdGhhdCBlZmZvcnQgaXMgY3VycmVudGx5IG5vdCBpbiB0aGUgYmx1
+ZXRvb3RoLW5leHQgZ2l0IHJlcG8uIEFzIE1hcmNlbCB0b2xkIG1lIGVhcmxpZXIgdGhpcyB5ZWFy
+LCAiaWYgaXQgaXMgbm90IGluIHRoZSBibHVldG9vdGgtbmV4dCwgaXQgZG9lcyBub3QgZXhpc3Qi
+LiBJJ20gYWZyYWlkIEkgY2FuJ3QgdXNlIGl0IHRoZXJlZm9yZS4gQWxzbywgd2UgbmVlZCB0byBz
+aGlwIHRoaXMgZHJpdmVyIHNvb25lciByYXRoZXIgdGhhbiBsYXRlci4gVGhlIGludGVncmF0aW9u
+IHdpdGggdGhlIFVBUlQgc2xhdmUgZGV2aWNlcyBzb3VuZHMgbGlrZSBhIHdvcnRod2hpbGUgZnV0
+dXJlIGVuaGFuY2VtZW50IHRvIG1lLg0KDQo+ICsNCj4gK09wdGlvbmFsIHByb3BlcnRpZXM6DQo+
+ICsNCj4gKyAgLSBidC1ob3N0LXdha2UtZ3Bpb3MgOiBidC1ob3N0LXdha2UgaW5wdXQgR1BJTyB0
+byBiZSB1c2VkIGFzIGFuIGludGVycnVwdC4NCj4gKw0KPiArICAtIGJ0LXdha2UtZ3Bpb3MgOiBi
+dC13YWtlIG91dHB1dCBHUElPIHRvIGJlIHVzZWQgdG8gc3VzcGVuZCAvIHJlc3VtZSBkZXZpY2Uu
+DQo+ICsNCj4gKyAgLSBidC1yZWctb24tZ3Bpb3MgOiByZWctb24gb3V0cHV0IEdQSU8gdG8gYmUg
+dXNlZCB0byBwb3dlciBkZXZpY2Ugb24vb2ZmLg0KPiArDQo+ICsgIC0gYmF1ZC1yYXRlLWJlZm9y
+ZS1jb25maWctZG93bmxvYWQgOiBpbml0aWFsIEJsdWV0b290aCBkZXZpY2UgYmF1ZCByYXRlLg0K
+PiArICAgIERlZmF1bHQ6IDMwMDAwMDAuDQoNCldoYXQncyB0aGUgYmF1ZHJhdGUgYWZ0ZXIgZG93
+bmxvYWQ/IFdoeSBub3QganVzdCB1c2Ugc3RhbmRhcmQNCiJiYXVkLXJhdGUiIGlmIHlvdSBvbmx5
+IHNwZWNpZnkgb25lIHJhdGU/DQoNCklGOiBZb3UncmUgcmlnaHQ6IHRoaXMgZG9jIHVzZWQgdG8g
+bGlzdCB0d28gcmF0ZXMuIDotKSBUbyBiZSBjb21wYXRpYmxlIHdpdGggd2hhdCBJbnRlbCBpcyBk
+b2luZyBpbiB0aGUgc2FtZSBhcmVhLCBJIHdpbGwgY2FsbCBpdCAib3Blci1zcGVlZCIgaWYgeW91
+IGRvbid0IG1pbmQuDQoNCj4gKw0KPiArICAtIG1hbnVhbC1mYyA6IGZsb3cgY29udHJvbCBVQVJU
+IGluIHN1c3BlbmQgLyByZXN1bWUgc2NlbmFyaW9zLg0KPiArICAgIERlZmF1bHQ6IDAuDQo+ICsN
+Cj4gKyAgLSBjb25maWd1cmUtc2xlZXAgOiBjb25maWd1cmUgc3VzcGVuZCAvIHJlc3VtZSBmbGFn
+Lg0KPiArICAgIERlZmF1bHQ6IGZhbHNlLg0KPiArDQo+ICsgIC0gY29uZmlndXJlLWF1ZGlvIDog
+Y29uZmlndXJlIHBsYXRmb3JtIFBDTSBTQ08gZmxhZy4NCj4gKyAgICBEZWZhdWx0OiBmYWxzZS4N
+Cj4gKw0KPiArICAtIFBDTUNsb2NrTW9kZSA6IFBDTSBjbG9jayBtb2RlLiAwLXNsYXZlLCAxLW1h
+c3Rlci4NCj4gKyAgICBEZWZhdWx0OiAwLg0KPiArDQo+ICsgIC0gUENNRmlsbE1ldGhvZCA6IFBD
+TSBmaWxsIG1ldGhvZC4gMCB0byAzLg0KPiArICAgIERlZmF1bHQ6IDIuDQo+ICsNCj4gKyAgLSBQ
+Q01GaWxsTnVtIDogUENNIG51bWJlciBvZiBmaWxsIGJpdHMuIDAgdG8gMy4NCj4gKyAgICBEZWZh
+dWx0OiAwLg0KPiArDQo+ICsgIC0gUENNRmlsbFZhbHVlIDogUENNIGZpbGwgdmFsdWUuIDAgdG8g
+Ny4NCj4gKyAgICBEZWZhdWx0OiAzLg0KPiArDQo+ICsgIC0gUENNSW5DYWxsQml0Y2xvY2sgOiBQ
+Q00gaW50ZXJmYWNlIHJhdGUuIDAtMTI4S2JwcywgMS0yNTZLYnBzLCAyLTUxMkticHMsDQo+ICsg
+ICAgMy0xMDI0S2JwcywgNC0yMDQ4S2Jwcy4NCj4gKyAgICBEZWZhdWx0OiAwLg0KPiArDQo+ICsg
+IC0gUENNTFNCRmlyc3QgOiBQQ00gTFNCIGZpcnN0LiAwIG9yIDEuDQo+ICsgICAgRGVmYXVsdDog
+MC4NCj4gKw0KPiArICAtIFBDTVJpZ2h0SnVzdGlmeSA6IFBDTSBKdXN0aWZ5LiAwLWxlZnQsIDEt
+cmlnaHQuDQo+ICsgICAgRGVmYXVsdDogMC4NCj4gKw0KPiArICAtIFBDTVJvdXRpbmcgOiBQQ00g
+cm91dGluZy4gMC1QQ00sIDEtU0NPIG92ZXIgSENJLg0KPiArICAgIERlZmF1bHQ6IDAuDQo+ICsN
+Cj4gKyAgLSBQQ01TaG9ydEZyYW1lU3luYyA6IFBDTSBzeW5jLiAwLXNob3J0LCAxLWxvbmcuDQo+
+ICsgICAgRGVmYXVsdDogMC4NCj4gKw0KPiArICAtIFBDTVN5bmNNb2RlIDogUENNIHN5bmMgbW9k
+ZS4gMC1zbGF2ZSwgMS1tYXN0ZXIuDQoNClBsZWFzZSBubyBDYW1lbENhc2UuIFRoZXNlIG5lZWQg
+YmV0dGVyIGRlc2NyaXB0aW9ucy4NCg0KSUY6IEkgYW0gY2VydGFpbmx5IGF3YXJlIHRoYXQgdGhl
+IENhbWVsQ2FzZSBpcyBnZW5lcmFsbHkgbm90IHVzZWQgb24gTGludXguIFRoZSBCcm9hZGNvbSBo
+b3dldmVyIGhhdmUgYSBzcGVjIGRlc2NyaWJpbmcgd2hhdCBuZWVkcyB0byBiZSBkb25lIHRvIGlu
+dGVncmF0ZSB0aGVzZSBraW5kcyBvZiBjaGlwcyBvbiBoYXJkd2FyZSBwbGF0Zm9ybXMgKGZvciBX
+aW5kb3dzKS4gQW55Ym9keSB3aG8gd2lzaGVzIHRvIHVzZSBTQ08gUENNIGF1ZGlvIHdpbGwgbmVl
+ZCB0byByZWFkIHRoYXQgc3BlYy4gVGhlc2UgcGFyYW1ldGVyIG5hbWVzIGFyZSBmcm9tIHRoYXQg
+c3BlYy4gQSBsb3Qgb2YgYWRkaXRpb25hbCB0ZWNobmljYWwgaW5mbyBJcyB0aGVyZSwgYWxvbmcg
+d2l0aCB2YXJpb3VzIGRpYWdyYW1zLiBJdCBjYW4ndCBiZSBhbGwgcGxhY2VkIGluIHRoaXMgaGVs
+cCBmaWxlLiBPZiBjb3Vyc2UsIEkgY2FuIGNoYW5nZSB0aGVzZSBwYXJhbWV0ZXIgbmFtZXMgYnV0
+IGl0IHdvdWxkIG1ha2UgdGhpbmdzIGhhcmRlciBmb3IgdGhvc2Ugd2lzaGluZyB0byB1c2UgdGhl
+IGhhcmR3YXJlIGFzIHRoZXkgd291bGQgbm90IG1hdGNoIHRoZSBzcGVjLiBDb3VsZCB5b3UgbWFr
+ZSBhbiBleGNlcHRpb24/DQoNCj4gKyAgICBEZWZhdWx0OiAwLg0KPiArDQo+ICsNCj4gK0V4YW1w
+bGU6DQo+ICsNCj4gKyAgICAgICBicmNtNDM1NF9idF91YXJ0OiBicmNtNDM1NC1idC11YXJ0IHsN
+Cj4gKyAgICAgICAgICAgICAgIGNvbXBhdGlibGUgPSAiYnJjbSxicmNtLWJ0LXVhcnQiOw0KPiAr
+ICAgICAgICAgICAgICAgYnQtd2FrZS1ncGlvcyA9IDwmZ3BpbzQgMzAgR1BJT19BQ1RJVkVfSElH
+SD47DQo+ICsgICAgICAgICAgICAgICBidC1ob3N0LXdha2UtZ3Bpb3MgPSA8JmdwaW80IDMxIEdQ
+SU9fQUNUSVZFX0hJR0g+Ow0KPiArICAgICAgICAgICAgICAgdHR5ID0gInR0eVMwIjsNCj4gKyAg
+ICAgICAgICAgICAgIGJhdWQtcmF0ZS1iZWZvcmUtY29uZmlnLWRvd25sb2FkID0gPDMwMDAwMDA+
+Ow0KPiArICAgICAgICAgICAgICAgY29uZmlndXJlLXNsZWVwOw0KPiArICAgICAgICAgICAgICAg
+Y29uZmlndXJlLWF1ZGlvOw0KPiArICAgICAgICAgICAgICAgUENNQ2xvY2tNb2RlID0gPDA+Ow0K
+PiArICAgICAgICAgICAgICAgUENNRmlsbE1ldGhvZCA9IDwyPjsNCj4gKyAgICAgICAgICAgICAg
+IFBDTUZpbGxOdW0gPSA8MD47DQo+ICsgICAgICAgICAgICAgICBQQ01GaWxsVmFsdWUgPSA8Mz47
+DQo+ICsgICAgICAgICAgICAgICBQQ01JbkNhbGxCaXRjbG9jayA9IDwwPjsNCj4gKyAgICAgICAg
+ICAgICAgIFBDTUxTQkZpcnN0ID0gPDA+Ow0KPiArICAgICAgICAgICAgICAgUENNUmlnaHRKdXN0
+aWZ5ID0gPDA+Ow0KPiArICAgICAgICAgICAgICAgUENNUm91dGluZyA9IDwwPjsNCj4gKyAgICAg
+ICAgICAgICAgIFBDTVNob3J0RnJhbWVTeW5jID0gPDA+Ow0KPiArICAgICAgICAgICAgICAgUENN
+U3luY01vZGUgPSA8MD47DQo+ICsgICAgICAgfTsNCj4gKw0KPiAtLQ0KPiAxLjkuMQ0KPg0KPiAt
+LQ0KPiBUbyB1bnN1YnNjcmliZSBmcm9tIHRoaXMgbGlzdDogc2VuZCB0aGUgbGluZSAidW5zdWJz
+Y3JpYmUgZGV2aWNldHJlZS1zcGVjIiBpbg0KPiB0aGUgYm9keSBvZiBhIG1lc3NhZ2UgdG8gbWFq
+b3Jkb21vQHZnZXIua2VybmVsLm9yZw0KPiBNb3JlIG1ham9yZG9tbyBpbmZvIGF0ICBodHRwOi8v
+dmdlci5rZXJuZWwub3JnL21ham9yZG9tby1pbmZvLmh0bWwNCg==
