@@ -1,843 +1,141 @@
-From: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
-Subject: [RFC v4 2/4] Broadcom Bluetooth UART Platform Driver
-Date: Fri, 22 May 2015 16:10:18 -0400
-Message-ID: <1432325420-12782-3-git-send-email-ifaenson@broadcom.com>
-References: <1432325420-12782-1-git-send-email-ifaenson@broadcom.com>
+From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: [RFC v4 1/4] Broadcom Bluetooth UART Device Tree bindings
+Date: Mon, 1 Jun 2015 19:18:38 -0500
+Message-ID: <CAL_JsqLO+g56KYUocpWLpz4dDTP0fEXTa4RjJzeRsPvYjCyF4A@mail.gmail.com>
+References: <1432325420-12782-1-git-send-email-ifaenson@broadcom.com> <1432325420-12782-2-git-send-email-ifaenson@broadcom.com>
 Mime-Version: 1.0
 Return-path: <linux-bluetooth-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <1432325420-12782-1-git-send-email-ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+         :cc:content-type;
+        bh=QJMMCGCA9dwRHIo+9BHMBYtuO0cfWSQ3bXmH5XTiJUI=;
+        b=wDNScn+gKOtKT3HNr5QENCwJNWqO7L5x7eA1xeqkkQhiRJHF1165D5OFVZho8xaLfG
+         39EY2HVyIhvGre1lCYt/NOrLW+ykI1f0+v9JePhT3go7EYAFUbY/DMDdBTSe1bX8XM3U
+         9hlRHAlhH4ROtNCSmMgl9/Mh4k4XPk9uR+6monq4KCiRgWgrLkn8tSVmkcQO6UdDzZMu
+         F1B8wVPNCbfFUsZhf2XYXb19ArbPNaNaXTzM2FejPtNhquOt5hAWQOSnaNbDor3yU08D
+         5SRM4JVQd7ANX0I9rvDTgd6ZoTOVtmW7Pe+wbPFLoKkzyoMDhdZqPFYGR/nr5gOWsW9F
+         c99g==
+In-Reply-To: <1432325420-12782-2-git-send-email-ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
 Sender: linux-bluetooth-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Marcel Holtmann <marcel-kz+m5ild9QBg9hUCZPvPmw@public.gmane.org>
-Cc: linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+To: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+Cc: Marcel Holtmann <marcel-kz+m5ild9QBg9hUCZPvPmw@public.gmane.org>, linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-Introduce the device tree enumerated Broadcom Bluetooth UART driver.
+On Fri, May 22, 2015 at 3:10 PM, Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org> wrote:
+> Device Tree bindings to configure the Broadcom Bluetooth UART device.
+>
+> Signed-off-by: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+> ---
+>  .../devicetree/bindings/net/bluetooth/btbcm.txt    | 82 ++++++++++++++++++++++
+>  1 file changed, 82 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
+>
+> diff --git a/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt b/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
+> new file mode 100644
+> index 0000000..968421b
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
+> @@ -0,0 +1,82 @@
+> +btbcm
+> +------
+> +
+> +Required properties:
+> +
+> +       - compatible : must be "brcm,brcm-bt-uart".
+> +       - tty : tty device connected to this Bluetooth device.
 
-Signed-off-by: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
----
- drivers/bluetooth/Kconfig      |   9 +
- drivers/bluetooth/Makefile     |   1 +
- drivers/bluetooth/btbcm_uart.c | 674 +++++++++++++++++++++++++++++++++++++++++
- drivers/bluetooth/btbcm_uart.h |  89 ++++++
- 4 files changed, 773 insertions(+)
- create mode 100644 drivers/bluetooth/btbcm_uart.c
- create mode 100644 drivers/bluetooth/btbcm_uart.h
+Neil Brown has been working on generic bindings for tty/UART slaves
+which should be used here.
 
-diff --git a/drivers/bluetooth/Kconfig b/drivers/bluetooth/Kconfig
-index ed5c273..7127ada 100644
---- a/drivers/bluetooth/Kconfig
-+++ b/drivers/bluetooth/Kconfig
-@@ -128,6 +128,7 @@ config BT_HCIUART_BCM
- 	bool "Broadcom protocol support"
- 	depends on BT_HCIUART
- 	select BT_HCIUART_H4
-+	select BT_UART_BCM
- 	select BT_BCM
- 	help
- 	  The Broadcom protocol support enables Bluetooth HCI over serial
-@@ -135,6 +136,14 @@ config BT_HCIUART_BCM
- 
- 	  Say Y here to compile support for Broadcom protocol.
- 
-+config BT_UART_BCM
-+	tristate "Broadcom BT UART driver"
-+	depends on BT_HCIUART_H4 && TTY
-+	help
-+	  This driver supports the HCI_UART_BT protocol.
-+
-+	  It manages Bluetooth UART device properties and GPIOs.
-+
- config BT_HCIBCM203X
- 	tristate "HCI BCM203x USB driver"
- 	depends on USB
-diff --git a/drivers/bluetooth/Makefile b/drivers/bluetooth/Makefile
-index dd0d9c4..0e5fd66 100644
---- a/drivers/bluetooth/Makefile
-+++ b/drivers/bluetooth/Makefile
-@@ -21,6 +21,7 @@ obj-$(CONFIG_BT_MRVL)		+= btmrvl.o
- obj-$(CONFIG_BT_MRVL_SDIO)	+= btmrvl_sdio.o
- obj-$(CONFIG_BT_WILINK)		+= btwilink.o
- obj-$(CONFIG_BT_BCM)		+= btbcm.o
-+obj-$(CONFIG_BT_UART_BCM)	+= btbcm_uart.o
- 
- btmrvl-y			:= btmrvl_main.o
- btmrvl-$(CONFIG_DEBUG_FS)	+= btmrvl_debugfs.o
-diff --git a/drivers/bluetooth/btbcm_uart.c b/drivers/bluetooth/btbcm_uart.c
-new file mode 100644
-index 0000000..d2de15f
---- /dev/null
-+++ b/drivers/bluetooth/btbcm_uart.c
-@@ -0,0 +1,674 @@
-+/*
-+ *  Bluetooth BCM UART Driver
-+ *
-+ *  Copyright (c) 2015 Broadcom Corporation
-+ *
-+ *  This program is free software; you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation; either version 2 of the License, or
-+ *  (at your option) any later version.
-+ *
-+ *  This program is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ *  GNU General Public License for more details.
-+ *
-+ */
-+
-+#include <linux/module.h>
-+
-+#include <linux/kernel.h>
-+#include <linux/init.h>
-+#include <linux/types.h>
-+#include <linux/fcntl.h>
-+#include <linux/interrupt.h>
-+#include <linux/ptrace.h>
-+#include <linux/poll.h>
-+
-+#include <linux/slab.h>
-+#include <linux/tty.h>
-+#include <linux/errno.h>
-+#include <linux/string.h>
-+#include <linux/signal.h>
-+#include <linux/ioctl.h>
-+#include <linux/skbuff.h>
-+#include <linux/list.h>
-+
-+#include <net/bluetooth/bluetooth.h>
-+#include <net/bluetooth/hci_core.h>
-+
-+#include <linux/gpio/consumer.h>
-+#include <linux/of.h>
-+#include <linux/of_gpio.h>
-+#include <linux/of_platform.h>
-+
-+#include "btbcm_uart.h"
-+
-+static int idle_timeout = 5;
-+module_param(idle_timeout, int, 0);
-+MODULE_PARM_DESC(idle_timeout, "Bluetooth idle timeout in seconds");
-+
-+/* Device context */
-+struct bcm_device {
-+	struct list_head list;
-+
-+	struct platform_device *pdev;
-+	struct gpio_desc *bt_wake_gpio;
-+	struct gpio_desc *dev_wake_gpio;
-+	struct gpio_desc *reg_on_gpio;
-+	int bt_wake_irq;
-+	int dev_wake_active_low;
-+	int reg_on_active_low;
-+	int bt_wake_active_low;
-+	bool configure_sleep;
-+	u32 manual_fc;
-+	u32 baud_rate_before_config_download;
-+	bool configure_audio;
-+	u32 PCMClockMode;
-+	u32 PCMFillMethod;
-+	u32 PCMFillNum;
-+	u32 PCMFillValue;
-+	u32 PCMInCallBitclock;
-+	u32 PCMLSBFirst;
-+	u32 PCMRightJustify;
-+	u32 PCMRouting;
-+	u32 PCMShortFrameSync;
-+	u32 PCMSyncMode;
-+
-+	char tty_name[64];
-+
-+	struct btbcm_uart_callbacks protocol_callbacks;
-+	struct work_struct wakeup_work;
-+};
-+
-+/* List of BCM BT UART devices */
-+static DEFINE_SPINLOCK(device_list_lock);
-+static LIST_HEAD(device_list);
-+
-+/*
-+ * Calling the BCM protocol at lower execution priority
-+ */
-+static void bcm_bt_wakeup_task(struct work_struct *ws)
-+{
-+	int gpio_value;
-+	struct bcm_device *p_bcm_device =
-+		container_of(ws, struct bcm_device, wakeup_work);
-+
-+	if (!p_bcm_device) {
-+		BT_DBG("%s - failing, no device", __func__);
-+		return;
-+	}
-+
-+	/* Make sure the device is resumed */
-+	gpio_value = !p_bcm_device->dev_wake_active_low;
-+	if (p_bcm_device->dev_wake_gpio) {
-+		gpiod_set_value(p_bcm_device->dev_wake_gpio, gpio_value);
-+		BT_DBG("%s - resume %d written, delaying 15 ms",
-+		       __func__, gpio_value);
-+		mdelay(15);
-+	}
-+
-+	/* Let the protocol know it's time to wake up */
-+	if (p_bcm_device->protocol_callbacks.p_wakeup)
-+		p_bcm_device->protocol_callbacks.p_wakeup(
-+			p_bcm_device->protocol_callbacks.context);
-+}
-+
-+/*
-+ * Interrupt routine for the wake from the device
-+ */
-+static irqreturn_t bcm_bt_uart_isr(int irq, void *context)
-+{
-+	unsigned int bt_wake;
-+	struct bcm_device *p = (struct bcm_device *)context;
-+
-+	bt_wake = gpiod_get_value(p->bt_wake_gpio);
-+	BT_DBG("%s with bt_wake of %d (active_low %d), req bh",
-+	       __func__, bt_wake, p->bt_wake_active_low);
-+
-+	/* Defer the actual processing to the platform work queue */
-+	schedule_work(&p->wakeup_work);
-+	return IRQ_HANDLED;
-+}
-+
-+/*
-+ * Device instance startup
-+ */
-+static int bcm_bt_uart_probe(struct platform_device *pdev)
-+{
-+	int ret = 0;
-+	struct device_node *np = pdev->dev.of_node;
-+	const char *tty_name;
-+	struct bcm_device *p_bcm_device = NULL;
-+
-+	p_bcm_device = devm_kzalloc(&pdev->dev, sizeof(*p_bcm_device),
-+		GFP_KERNEL);
-+	if (!p_bcm_device) {
-+		BT_DBG("%s - failing due to no memory", __func__);
-+		return -ENOMEM;
-+	}
-+	p_bcm_device->pdev = pdev;
-+	BT_DBG("%s %p context", __func__, p_bcm_device);
-+
-+	/* Get dev wake GPIO */
-+	p_bcm_device->dev_wake_gpio = gpiod_get(&pdev->dev, "bt-wake");
-+	BT_DBG("%s - gpiod_get for bt-wake returned %p",
-+	       __func__, p_bcm_device->dev_wake_gpio);
-+	if (IS_ERR(p_bcm_device->dev_wake_gpio)) {
-+		ret = PTR_ERR(p_bcm_device->dev_wake_gpio);
-+		if (ret != -ENOENT) {
-+			dev_err(&pdev->dev,
-+				"%s - dev_wake GPIO: %d\n", __func__, ret);
-+		}
-+		p_bcm_device->dev_wake_gpio = NULL;
-+	} else {
-+		int gpio_value;
-+
-+		p_bcm_device->dev_wake_active_low = gpiod_is_active_low
-+			(p_bcm_device->dev_wake_gpio);
-+		BT_DBG("%s - dev_wake a-low is %d (cans %d)",
-+		       __func__, p_bcm_device->dev_wake_active_low,
-+		       gpiod_cansleep(p_bcm_device->dev_wake_gpio));
-+
-+		/* configure dev_wake as output with init resumed state */
-+		gpio_value = !p_bcm_device->dev_wake_active_low;
-+		ret = gpiod_direction_output(p_bcm_device->dev_wake_gpio,
-+					     gpio_value);
-+		if (ret < 0) {
-+			dev_err(&pdev->dev,
-+				"%s s dev_wake GPIO: %d\n", __func__, ret);
-+			gpiod_put(p_bcm_device->dev_wake_gpio);
-+			p_bcm_device->dev_wake_gpio = NULL;
-+			goto end;
-+		} else {
-+			BT_DBG("%s - dev_wake set to %d", __func__,
-+			       gpio_value);
-+		}
-+	}
-+
-+	/* Get power on/off GPIO */
-+	p_bcm_device->reg_on_gpio = gpiod_get(&pdev->dev, "bt-reg-on");
-+	BT_DBG("%s - gpiod_get for bt-reg-on returned %p", __func__,
-+	       p_bcm_device->reg_on_gpio);
-+	if (IS_ERR(p_bcm_device->reg_on_gpio)) {
-+		ret = PTR_ERR(p_bcm_device->reg_on_gpio);
-+		if (ret != -ENOENT) {
-+			dev_err(&pdev->dev,
-+				"%s - reg_on GPIO: %d\n", __func__, ret);
-+		}
-+		p_bcm_device->reg_on_gpio = NULL;
-+	} else {
-+		int poweron_flag;
-+
-+		p_bcm_device->reg_on_active_low = gpiod_is_active_low
-+			(p_bcm_device->reg_on_gpio);
-+		BT_DBG("%s - reg_on a-low is %d (cans %d)",
-+		       __func__, p_bcm_device->reg_on_active_low,
-+		       gpiod_cansleep(p_bcm_device->reg_on_gpio));
-+
-+		/* configure reg_on as output with init on state */
-+		poweron_flag = !p_bcm_device->reg_on_active_low;
-+		ret = gpiod_direction_output(p_bcm_device->reg_on_gpio,
-+					     poweron_flag);
-+		if (ret < 0) {
-+			dev_err(&pdev->dev,
-+				"%s set reg_on GPIO: %d\n", __func__, ret);
-+			gpiod_put(p_bcm_device->reg_on_gpio);
-+			p_bcm_device->reg_on_gpio = NULL;
-+		} else {
-+			BT_DBG("%s - reg_on initially set to %d", __func__,
-+			       poweron_flag);
-+		}
-+	}
-+
-+	platform_set_drvdata(pdev, p_bcm_device);
-+	/* Must be done before interrupt is requested */
-+	INIT_WORK(&p_bcm_device->wakeup_work, bcm_bt_wakeup_task);
-+
-+	/* Get bt host wake GPIO */
-+	p_bcm_device->bt_wake_gpio = gpiod_get(&pdev->dev, "bt-host-wake");
-+	BT_DBG("%s - gpiod_get for bt-host-wake returned %p", __func__,
-+	       p_bcm_device->bt_wake_gpio);
-+	if (IS_ERR(p_bcm_device->bt_wake_gpio)) {
-+		ret = PTR_ERR(p_bcm_device->bt_wake_gpio);
-+		if (ret != -ENOENT) {
-+			dev_err(&pdev->dev,
-+				"%s - bt_wake GPIO: %d\n", __func__, ret);
-+		}
-+		p_bcm_device->bt_wake_gpio = NULL;
-+	} else {
-+		/* configure bt_wake as input */
-+		ret = gpiod_direction_input(p_bcm_device->bt_wake_gpio);
-+		if (ret < 0) {
-+			dev_err(&pdev->dev,
-+				"%s set bt_wake GPIO: %d\n", __func__, ret);
-+			gpiod_put(p_bcm_device->bt_wake_gpio);
-+			p_bcm_device->bt_wake_gpio = NULL;
-+		} else {
-+			p_bcm_device->bt_wake_active_low = gpiod_is_active_low
-+				(p_bcm_device->bt_wake_gpio);
-+			BT_DBG("%s -bt_wake a-low is %d(cans%d)",
-+			       __func__, p_bcm_device->bt_wake_active_low,
-+			       gpiod_cansleep(p_bcm_device->bt_wake_gpio));
-+			p_bcm_device->bt_wake_irq = gpiod_to_irq
-+				(p_bcm_device->bt_wake_gpio);
-+			if (p_bcm_device->bt_wake_irq < 0) {
-+				dev_err(&pdev->dev,
-+				"%s - HOST_WAKE IRQ: %d\n", __func__, ret);
-+			} else {
-+				unsigned long intflags = IRQF_TRIGGER_RISING;
-+
-+				if (p_bcm_device->bt_wake_active_low)
-+					intflags = IRQF_TRIGGER_FALLING;
-+
-+				ret = request_irq(p_bcm_device->bt_wake_irq,
-+						  bcm_bt_uart_isr,
-+						  intflags, "bt_host_wake",
-+						  p_bcm_device);
-+				if (ret < 0) {
-+					dev_err(&pdev->dev,
-+						"%s - failed IRQ %d: %d",
-+						__func__,
-+						p_bcm_device->bt_wake_irq, ret);
-+				} else {
-+					BT_DBG("%s - IRQ %d", __func__,
-+					       p_bcm_device->bt_wake_irq);
-+				}
-+			}
-+		}
-+	}
-+
-+	p_bcm_device->configure_sleep = of_property_read_bool(
-+		np, "configure-sleep");
-+	BT_DBG("configure-sleep read as %d", p_bcm_device->configure_sleep);
-+	p_bcm_device->manual_fc = 0;
-+	if (!of_property_read_u32(np, "manual-fc",
-+				  &p_bcm_device->manual_fc)) {
-+		BT_DBG("manual-fc read as %d",
-+			p_bcm_device->manual_fc);
-+	}
-+	p_bcm_device->baud_rate_before_config_download = 3000000;
-+	if (!of_property_read_u32(
-+		np, "baud-rate-before-config-download",
-+		&p_bcm_device->baud_rate_before_config_download)) {
-+		BT_DBG("baud-rate-before-config-download read as %d",
-+			p_bcm_device->baud_rate_before_config_download);
-+	}
-+	p_bcm_device->configure_audio = of_property_read_bool(
-+		np, "configure-audio");
-+	BT_DBG("configure-audio read as %d", p_bcm_device->configure_audio);
-+	if (p_bcm_device->configure_audio) {
-+		/* Defaults for audio */
-+		p_bcm_device->PCMClockMode = 0;
-+		p_bcm_device->PCMFillMethod = 2;
-+		p_bcm_device->PCMFillNum = 0;
-+		p_bcm_device->PCMFillValue = 3;
-+		p_bcm_device->PCMInCallBitclock = 0;
-+		p_bcm_device->PCMLSBFirst = 0;
-+		p_bcm_device->PCMRightJustify = 0;
-+		p_bcm_device->PCMRouting = 0;
-+		p_bcm_device->PCMShortFrameSync = 0;
-+		p_bcm_device->PCMSyncMode = 0;
-+
-+		if (!of_property_read_u32(np, "PCMClockMode",
-+					  &p_bcm_device->PCMClockMode))
-+			BT_DBG("PCMClockMode read as %d",
-+				p_bcm_device->PCMClockMode);
-+		if (!of_property_read_u32(np, "PCMFillMethod",
-+					  &p_bcm_device->PCMFillMethod))
-+			BT_DBG("PCMFillMethod readas %d",
-+				p_bcm_device->PCMFillMethod);
-+		if (!of_property_read_u32(np, "PCMFillNum",
-+					  &p_bcm_device->PCMFillNum))
-+			BT_DBG("PCMFillNum read as %d",
-+				p_bcm_device->PCMFillNum);
-+		if (!of_property_read_u32(np, "PCMFillValue",
-+					  &p_bcm_device->PCMFillValue))
-+			BT_DBG("PCMFillValue read as %d",
-+				p_bcm_device->PCMFillValue);
-+		if (!of_property_read_u32(np, "PCMInCallBitclock",
-+					  &p_bcm_device->PCMInCallBitclock))
-+			BT_DBG("PCMInCallBitclock read as %d",
-+				p_bcm_device->PCMInCallBitclock);
-+		if (!of_property_read_u32(np, "PCMLSBFirst",
-+					  &p_bcm_device->PCMLSBFirst))
-+			BT_DBG("PCMLSBFirst read as %d",
-+				p_bcm_device->PCMLSBFirst);
-+		if (!of_property_read_u32(np, "PCMRightJustify",
-+					  &p_bcm_device->PCMRightJustify))
-+			BT_DBG("PCMRightJustify read as %d",
-+				p_bcm_device->PCMRightJustify);
-+		if (!of_property_read_u32(np, "PCMRouting",
-+					  &p_bcm_device->PCMRouting))
-+			BT_DBG("PCMRouting read as %d",
-+				p_bcm_device->PCMRouting);
-+		if (!of_property_read_u32(np, "PCMShortFrameSync",
-+					  &p_bcm_device->PCMShortFrameSync))
-+			BT_DBG("PCMShortFrameSync read as %d",
-+				p_bcm_device->PCMShortFrameSync);
-+		if (!of_property_read_u32(np, "PCMSyncMode",
-+					  &p_bcm_device->PCMSyncMode))
-+			BT_DBG("PCMSyncMode read as %d",
-+				p_bcm_device->PCMSyncMode);
-+	}
-+
-+	if (!of_property_read_string(np, "tty", &tty_name)) {
-+		strcpy(p_bcm_device->tty_name, tty_name);
-+		BT_DBG("tty name read as %s", p_bcm_device->tty_name);
-+	}
-+
-+	BT_DBG("idle_timeout set as %d", idle_timeout);
-+
-+	ret = 0;  /* If we made it here, we're fine */
-+
-+	/* Place this instance on the device list */
-+	spin_lock(&device_list_lock);
-+	list_add_tail(&p_bcm_device->list, &device_list);
-+	spin_unlock(&device_list_lock);
-+
-+end:
-+	if (ret) {
-+		if (p_bcm_device->reg_on_gpio) {
-+			gpiod_put(p_bcm_device->reg_on_gpio);
-+			p_bcm_device->reg_on_gpio = NULL;
-+		}
-+		if (p_bcm_device->bt_wake_gpio) {
-+			gpiod_put(p_bcm_device->bt_wake_gpio);
-+			p_bcm_device->bt_wake_gpio = NULL;
-+		}
-+		if (p_bcm_device->dev_wake_gpio) {
-+			gpiod_put(p_bcm_device->dev_wake_gpio);
-+			p_bcm_device->dev_wake_gpio = NULL;
-+		}
-+	}
-+
-+	BT_DBG("%s with the result %d", __func__, ret);
-+	return ret;
-+}
-+
-+/*
-+ * Device instance removal
-+ */
-+static int bcm_bt_uart_remove(struct platform_device *pdev)
-+{
-+	struct bcm_device *p_bcm_device = platform_get_drvdata(pdev);
-+
-+	if (p_bcm_device == NULL) {
-+		BT_DBG("%s - logic error, no probe?!", __func__);
-+		return 0;
-+	}
-+
-+	BT_DBG("%s %p context", __func__, p_bcm_device);
-+
-+	spin_lock(&device_list_lock);
-+	list_del(&p_bcm_device->list);
-+	spin_unlock(&device_list_lock);
-+
-+	BT_DBG("%s - freeing interrupt %d", __func__,
-+		p_bcm_device->bt_wake_irq);
-+	free_irq(p_bcm_device->bt_wake_irq, p_bcm_device);
-+
-+	if (p_bcm_device->reg_on_gpio) {
-+		BT_DBG("%s - releasing reg_on_gpio", __func__);
-+		gpiod_put(p_bcm_device->reg_on_gpio);
-+		p_bcm_device->reg_on_gpio = NULL;
-+	}
-+
-+	if (p_bcm_device->dev_wake_gpio) {
-+		BT_DBG("%s - releasing dev_wake_gpio", __func__);
-+		gpiod_put(p_bcm_device->dev_wake_gpio);
-+		p_bcm_device->dev_wake_gpio = NULL;
-+	}
-+
-+	if (p_bcm_device->bt_wake_gpio) {
-+		BT_DBG("%s - releasing bt_wake_gpio", __func__);
-+		gpiod_put(p_bcm_device->bt_wake_gpio);
-+		p_bcm_device->bt_wake_gpio = NULL;
-+	}
-+
-+	BT_DBG("%s %p done", __func__, p_bcm_device);
-+	return 0;
-+}
-+
-+/*
-+ * Platform resume callback
-+ */
-+static int bcm_bt_uart_resume(struct device *pdev)
-+{
-+	int gpio_value;
-+	struct bcm_device *p_bcm_device = platform_get_drvdata(
-+		to_platform_device(pdev));
-+
-+	if (p_bcm_device == NULL) {
-+		BT_DBG("%s - logic error, no device?!", __func__);
-+		return 0;
-+	}
-+
-+	BT_DBG("%s %p", __func__, p_bcm_device);
-+
-+	gpio_value = !p_bcm_device->dev_wake_active_low;
-+	if (p_bcm_device->dev_wake_gpio) {
-+		gpiod_set_value(p_bcm_device->dev_wake_gpio, gpio_value);
-+		BT_DBG("%s - %d written, delaying 15 ms", __func__,
-+		       gpio_value);
-+		mdelay(15);
-+	}
-+
-+	/* Let the protocol know the platform is resuming */
-+	if (p_bcm_device->protocol_callbacks.p_resume)
-+		p_bcm_device->protocol_callbacks.p_resume(
-+			p_bcm_device->protocol_callbacks.context);
-+
-+	return 0;
-+}
-+
-+/*
-+ * Platform suspend callback
-+ */
-+static int bcm_bt_uart_suspend(struct device *pdev)
-+{
-+	int gpio_value;
-+	struct bcm_device *p_bcm_device = platform_get_drvdata(
-+		to_platform_device(pdev));
-+
-+	if (p_bcm_device == NULL) {
-+		BT_DBG("%s - logic error, no device?!", __func__);
-+		return 0;
-+	}
-+
-+	BT_DBG("%s %p", __func__, p_bcm_device);
-+
-+	/* Let the protocol know the platform is suspending */
-+	if (p_bcm_device->protocol_callbacks.p_suspend)
-+		p_bcm_device->protocol_callbacks.p_suspend(
-+			p_bcm_device->protocol_callbacks.context);
-+
-+	/* Suspend the device */
-+	if (p_bcm_device->dev_wake_gpio) {
-+		gpio_value = !!p_bcm_device->dev_wake_active_low;
-+		gpiod_set_value(p_bcm_device->dev_wake_gpio, gpio_value);
-+		BT_DBG("%s - %d written, delaying 15 ms", __func__,
-+			gpio_value);
-+		mdelay(15);
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * Entry point for calls from the protocol
-+ */
-+int btbcm_uart_control(int action, void *device_context,
-+	void *p_data, unsigned long *p_size)
-+{
-+	struct btbcm_uart_callbacks *pc;
-+	struct btbcm_uart_parameters *pp = p_data; /* for pars action only */
-+	int ret = 0;
-+	int gpio_value, poweron_flag;
-+	struct bcm_device *p_bcm_device = device_context;
-+	struct list_head *ptr;
-+	bool is_found = false;
-+
-+	/* Special processing for the callback configuration */
-+	if (action == BTBCM_UART_ACTION_CONFIGURE_CALLBACKS) {
-+		pc = p_data;
-+
-+		BT_DBG("%s - configure callbacks", __func__);
-+		if (p_data == NULL || *p_size != sizeof(struct
-+		    btbcm_uart_callbacks) || (pc->interface_version !=
-+		    BTBCM_UART_INTERFACE_VERSION)) {
-+			BT_DBG("%s - callbacks mismatch!", __func__);
-+			return -E2BIG;
-+		}
-+
-+		BT_DBG("%s - configure callbacks for %s(%p)", __func__,
-+		       pc->name, pc->context);
-+		if (p_bcm_device == NULL) {
-+			spin_lock(&device_list_lock);
-+			list_for_each(ptr, &device_list) {
-+				p_bcm_device = list_entry(ptr, struct
-+							  bcm_device, list);
-+				if (!strcmp(p_bcm_device->tty_name, pc->name)) {
-+					is_found = true;
-+					break;
-+				}
-+			}
-+
-+			spin_unlock(&device_list_lock);
-+			if (!is_found) {
-+				BT_DBG("%s - no device!", __func__);
-+				return -ENOENT;
-+			}
-+		}
-+
-+		p_bcm_device->protocol_callbacks = *pc;
-+		memcpy(p_data, &p_bcm_device, sizeof(p_bcm_device));
-+		*p_size = sizeof(p_bcm_device);
-+		return ret;
-+	}
-+
-+	/* All other requests must have the right context */
-+	if (p_bcm_device == NULL) {
-+		BT_DBG("%s - failing, no device", __func__);
-+		return -ENOENT;
-+	}
-+
-+	switch (action) {
-+	case BTBCM_UART_ACTION_POWER_ON:
-+		BT_DBG("%s %p - power on", __func__, device_context);
-+		if (p_bcm_device->reg_on_gpio) {
-+			poweron_flag = !p_bcm_device->reg_on_active_low;
-+			gpiod_set_value(p_bcm_device->reg_on_gpio,
-+					poweron_flag);
-+			BT_DBG("%s - pwron %d, delay 15 ms", __func__,
-+			       poweron_flag);
-+			mdelay(15);
-+		}
-+		break;
-+
-+	case BTBCM_UART_ACTION_POWER_OFF:
-+		BT_DBG("%s %p - power off", __func__, device_context);
-+		if (p_bcm_device->reg_on_gpio) {
-+			poweron_flag = p_bcm_device->reg_on_active_low;
-+			gpiod_set_value(p_bcm_device->reg_on_gpio,
-+					poweron_flag);
-+			BT_DBG("%s - pwroff %d, delay 15 ms", __func__,
-+			       poweron_flag);
-+			mdelay(15);
-+		}
-+		break;
-+
-+	case BTBCM_UART_ACTION_RESUME:
-+		BT_DBG("%s %p - resume", __func__, device_context);
-+		if (p_bcm_device->dev_wake_gpio) {
-+			gpio_value = !p_bcm_device->dev_wake_active_low;
-+			gpiod_set_value(p_bcm_device->dev_wake_gpio,
-+					gpio_value);
-+			BT_DBG("%s - resume %d, delay 15 ms", __func__,
-+			       gpio_value);
-+			mdelay(15);
-+		}
-+		break;
-+
-+	case BTBCM_UART_ACTION_SUSPEND:
-+		BT_DBG("%s %p - suspend", __func__, device_context);
-+		if (p_bcm_device->dev_wake_gpio) {
-+			gpio_value = !!p_bcm_device->dev_wake_active_low;
-+			gpiod_set_value(p_bcm_device->dev_wake_gpio,
-+					gpio_value);
-+			BT_DBG("btbcm_uart_control - suspend %d, delay 15ms",
-+			       gpio_value);
-+			mdelay(15);
-+		}
-+		break;
-+
-+	case BTBCM_UART_ACTION_GET_PARAMETERS:
-+		BT_DBG("%s %p - get pars", __func__, device_context);
-+		if ((p_data == NULL) ||
-+			(*p_size < sizeof(struct btbcm_uart_parameters))) {
-+			BT_DBG("%s - failing, wrong par size", __func__);
-+			return -E2BIG;
-+		}
-+
-+		memset(pp, 0, sizeof(struct btbcm_uart_parameters));
-+		pp->interface_version = BTBCM_UART_INTERFACE_VERSION;
-+		pp->configure_sleep = p_bcm_device->configure_sleep;
-+		pp->manual_fc = p_bcm_device->manual_fc;
-+		pp->dev_wake_active_low = p_bcm_device->dev_wake_active_low;
-+		pp->bt_wake_active_low = p_bcm_device->bt_wake_active_low;
-+		pp->idle_timeout_in_secs = idle_timeout;
-+		pp->baud_rate_before_config_download =
-+			p_bcm_device->baud_rate_before_config_download;
-+		pp->configure_audio = p_bcm_device->configure_audio;
-+		pp->PCMClockMode = p_bcm_device->PCMClockMode;
-+		pp->PCMFillMethod = p_bcm_device->PCMFillMethod;
-+		pp->PCMFillNum = p_bcm_device->PCMFillNum;
-+		pp->PCMFillValue = p_bcm_device->PCMFillValue;
-+		pp->PCMInCallBitclock = p_bcm_device->PCMInCallBitclock;
-+		pp->PCMLSBFirst = p_bcm_device->PCMLSBFirst;
-+		pp->PCMRightJustify = p_bcm_device->PCMRightJustify;
-+		pp->PCMRouting = p_bcm_device->PCMRouting;
-+		pp->PCMShortFrameSync = p_bcm_device->PCMShortFrameSync;
-+		pp->PCMSyncMode = p_bcm_device->PCMSyncMode;
-+		*p_size = sizeof(struct btbcm_uart_parameters);
-+		break;
-+
-+	default:
-+		BT_DBG("%s %p unknown act %d", __func__,
-+		       device_context, action);
-+		ret = -EINVAL;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+EXPORT_SYMBOL(btbcm_uart_control);
-+
-+/* Platform susp and resume callbacks */
-+static SIMPLE_DEV_PM_OPS(bcm_bt_uart_pm_ops,
-+	bcm_bt_uart_suspend, bcm_bt_uart_resume);
-+
-+/* Driver match table */
-+static const struct of_device_id bcm_bt_uart_table[] = {
-+	{ .compatible = "brcm,brcm-bt-uart" },
-+	{}
-+};
-+
-+/* Driver configuration */
-+static struct platform_driver bcm_bt_uart_driver = {
-+	.probe = bcm_bt_uart_probe,
-+	.remove = bcm_bt_uart_remove,
-+	.driver = {
-+		.name = "brcm_bt_uart",
-+		.of_match_table = of_match_ptr(bcm_bt_uart_table),
-+		.owner = THIS_MODULE,
-+		.pm = &bcm_bt_uart_pm_ops,
-+	},
-+};
-+
-+module_platform_driver(bcm_bt_uart_driver);
-+
-+MODULE_AUTHOR("Ilya Faenson");
-+MODULE_DESCRIPTION("Broadcom Bluetooth UART Driver");
-+MODULE_LICENSE("GPL");
-+
-diff --git a/drivers/bluetooth/btbcm_uart.h b/drivers/bluetooth/btbcm_uart.h
-new file mode 100644
-index 0000000..420f7e7
---- /dev/null
-+++ b/drivers/bluetooth/btbcm_uart.h
-@@ -0,0 +1,89 @@
-+/*
-+ *  Bluetooth BCM UART Driver Header
-+ *
-+ *  Copyright (c) 2015 Broadcom Corporation
-+ *
-+ *  This program is free software; you can redistribute it and/or modify
-+ *  it under the terms of the GNU General Public License as published by
-+ *  the Free Software Foundation; either version 2 of the License, or
-+ *  (at your option) any later version.
-+ *
-+ *  This program is distributed in the hope that it will be useful,
-+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ *  GNU General Public License for more details.
-+ *
-+ */
-+
-+#ifndef BTBCM_UART_H
-+#define BTBCM_UART_H
-+
-+/* Change the version if you change anything in this header */
-+#define BTBCM_UART_INTERFACE_VERSION 1
-+/* Callbacks from the driver into the protocol */
-+typedef void (*p_suspend_callback)(void *context);
-+typedef void (*p_resume_callback)(void *context);
-+typedef void (*p_wakeup_callback)(void *context);
-+struct btbcm_uart_callbacks {
-+	int interface_version; /* interface # compiled against */
-+	void *context;         /* protocol instance context */
-+	char name[64];         /* protocol tty device, for example, ttyS0 */
-+
-+	/* client callbacks */
-+	p_suspend_callback p_suspend;
-+	p_resume_callback p_resume;
-+	p_wakeup_callback p_wakeup;
-+};
-+
-+/* Driver parameters retrieved from the DT or ACPI */
-+struct btbcm_uart_parameters {
-+	int interface_version; /* interface # compiled against */
-+
-+	/* Parameters themselves */
-+	bool configure_sleep;
-+	int manual_fc;
-+	int dev_wake_active_low;
-+	int bt_wake_active_low;
-+	int idle_timeout_in_secs;
-+	int baud_rate_before_config_download;
-+	bool configure_audio;
-+	int PCMClockMode;
-+	int PCMFillMethod;
-+	int PCMFillNum;
-+	int PCMFillValue;
-+	int PCMInCallBitclock;
-+	int PCMLSBFirst;
-+	int PCMRightJustify;
-+	int PCMRouting;
-+	int PCMShortFrameSync;
-+	int PCMSyncMode;
-+};
-+
-+/*
-+ * Actions on the BTBCM_UART driver
-+ */
-+
-+/* Configure protocol callbacks */
-+#define BTBCM_UART_ACTION_CONFIGURE_CALLBACKS 0
-+
-+/* Retrieve BT device parameters */
-+#define BTBCM_UART_ACTION_GET_PARAMETERS      1
-+
-+/* Resume the BT device via GPIO */
-+#define BTBCM_UART_ACTION_RESUME              2
-+
-+/* Suspend the BT device via GPIO */
-+#define BTBCM_UART_ACTION_SUSPEND             3
-+
-+/* Power the BT device off via GPIO */
-+#define BTBCM_UART_ACTION_POWER_OFF           4
-+
-+/* Power the BT device on via GPIO */
-+#define BTBCM_UART_ACTION_POWER_ON            5
-+
-+/* Execute an action on the BT device */
-+extern int btbcm_uart_control(int action, void *device_context,
-+			      void *p_data, unsigned long *p_size);
-+
-+#endif
-+
--- 
-1.9.1
+> +
+> +Optional properties:
+> +
+> +  - bt-host-wake-gpios : bt-host-wake input GPIO to be used as an interrupt.
+> +
+> +  - bt-wake-gpios : bt-wake output GPIO to be used to suspend / resume device.
+> +
+> +  - bt-reg-on-gpios : reg-on output GPIO to be used to power device on/off.
+> +
+> +  - baud-rate-before-config-download : initial Bluetooth device baud rate.
+> +    Default: 3000000.
+
+What's the baudrate after download? Why not just use standard
+"baud-rate" if you only specify one rate?
+
+> +
+> +  - manual-fc : flow control UART in suspend / resume scenarios.
+> +    Default: 0.
+> +
+> +  - configure-sleep : configure suspend / resume flag.
+> +    Default: false.
+> +
+> +  - configure-audio : configure platform PCM SCO flag.
+> +    Default: false.
+> +
+> +  - PCMClockMode : PCM clock mode. 0-slave, 1-master.
+> +    Default: 0.
+> +
+> +  - PCMFillMethod : PCM fill method. 0 to 3.
+> +    Default: 2.
+> +
+> +  - PCMFillNum : PCM number of fill bits. 0 to 3.
+> +    Default: 0.
+> +
+> +  - PCMFillValue : PCM fill value. 0 to 7.
+> +    Default: 3.
+> +
+> +  - PCMInCallBitclock : PCM interface rate. 0-128Kbps, 1-256Kbps, 2-512Kbps,
+> +    3-1024Kbps, 4-2048Kbps.
+> +    Default: 0.
+> +
+> +  - PCMLSBFirst : PCM LSB first. 0 or 1.
+> +    Default: 0.
+> +
+> +  - PCMRightJustify : PCM Justify. 0-left, 1-right.
+> +    Default: 0.
+> +
+> +  - PCMRouting : PCM routing. 0-PCM, 1-SCO over HCI.
+> +    Default: 0.
+> +
+> +  - PCMShortFrameSync : PCM sync. 0-short, 1-long.
+> +    Default: 0.
+> +
+> +  - PCMSyncMode : PCM sync mode. 0-slave, 1-master.
+
+Please no CamelCase. These need better descriptions.
+
+> +    Default: 0.
+> +
+> +
+> +Example:
+> +
+> +       brcm4354_bt_uart: brcm4354-bt-uart {
+> +               compatible = "brcm,brcm-bt-uart";
+> +               bt-wake-gpios = <&gpio4 30 GPIO_ACTIVE_HIGH>;
+> +               bt-host-wake-gpios = <&gpio4 31 GPIO_ACTIVE_HIGH>;
+> +               tty = "ttyS0";
+> +               baud-rate-before-config-download = <3000000>;
+> +               configure-sleep;
+> +               configure-audio;
+> +               PCMClockMode = <0>;
+> +               PCMFillMethod = <2>;
+> +               PCMFillNum = <0>;
+> +               PCMFillValue = <3>;
+> +               PCMInCallBitclock = <0>;
+> +               PCMLSBFirst = <0>;
+> +               PCMRightJustify = <0>;
+> +               PCMRouting = <0>;
+> +               PCMShortFrameSync = <0>;
+> +               PCMSyncMode = <0>;
+> +       };
+> +
+> --
+> 1.9.1
+>
+> --
+> To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
+> the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+> More majordomo info at  http://vger.kernel.org/majordomo-info.html
