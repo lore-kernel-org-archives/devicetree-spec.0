@@ -1,151 +1,132 @@
-From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [RFC v4 1/4] Broadcom Bluetooth UART Device Tree bindings
-Date: Tue, 2 Jun 2015 10:34:27 -0500
-Message-ID: <CAL_Jsq+iGtfB8JSdL-b6jTnFUPxQiJoR2VAb1rFv8MODnFoJLQ@mail.gmail.com>
-References: <1432325420-12782-1-git-send-email-ifaenson@broadcom.com>
- <1432325420-12782-2-git-send-email-ifaenson@broadcom.com> <CAL_JsqLO+g56KYUocpWLpz4dDTP0fEXTa4RjJzeRsPvYjCyF4A@mail.gmail.com>
- <E0D3336E15B58B4294723AC879BA5E9425D49D@IRVEXCHMB15.corp.ad.broadcom.com>
+From: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+Subject: FW: [PATCH v4 1/4] Broadcom Bluetooth UART Device Tree bindings
+Date: Wed, 17 Jun 2015 23:11:07 +0000
+Message-ID: <E0D3336E15B58B4294723AC879BA5E942634F2@IRVEXCHMB15.corp.ad.broadcom.com>
+References: <1434576658-20730-1-git-send-email-ifaenson@broadcom.com>
+ <1434576658-20730-2-git-send-email-ifaenson@broadcom.com>
 Mime-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 8BIT
 Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc:content-type:content-transfer-encoding;
-        bh=xNrkh9ptDbxG3tr9+c5uAQn/hc8yVV9tpouYINHJvhw=;
-        b=c+nVs8ps3386/Yol2Hi23G0OUauc2qOYX18qpNVd54SDS2caIZwYIGTvdNLIhSt+Ob
-         SQurWnPyoisgGxF+o3oG0WCwOOctmbfpSrNRTPCiobs8/sUDsLCGpXfrCMEmWbzz3N0/
-         Ojrv4OmDd2JIxVchqHPW69N4xX1tvH1gIgqURGrI1zBGIc1Gd2giw1L6mhgbRaCD3eYm
-         rZW9pxN6wmfKK07alBvRkMvxG9YQ3sErHzM7lGPVA3UvMspepiEACdrVcMikpSPw8SrE
-         8yQTNiLstAGAtmNA1VmXHu4AFBo5qCEqyxVPOgsRsPqSezUUi6IC8ix6vHA0IB5dFpdq
-         I1jw==
-In-Reply-To: <E0D3336E15B58B4294723AC879BA5E9425D49D-Wwdb2uEOBX8N93KskqRXH71+IgudQmzARxWJa1zDYLQ@public.gmane.org>
+In-Reply-To: <1434576658-20730-2-git-send-email-ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+Content-Language: en-US
 Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-To: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
-Cc: Marcel Holtmann <marcel-kz+m5ild9QBg9hUCZPvPmw@public.gmane.org>, "linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Arend Van Spriel <arend-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+To: "marcel-kz+m5ild9QBg9hUCZPvPmw@public.gmane.org" <marcel-kz+m5ild9QBg9hUCZPvPmw@public.gmane.org>, Arend Van Spriel <arend-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Cc: "linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-On Tue, Jun 2, 2015 at 7:20 AM, Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org> wrote:
-> Hi Rob,
->
-> Appreciate your insights.
->
-> -----Original Message-----
-> From: Rob Herring [mailto:robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org]
-> Sent: Monday, June 01, 2015 8:19 PM
-> To: Ilya Faenson
-> Cc: Marcel Holtmann; linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org; devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org; devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-> Subject: Re: [RFC v4 1/4] Broadcom Bluetooth UART Device Tree bindings
->
-> On Fri, May 22, 2015 at 3:10 PM, Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org> wrote:
->> Device Tree bindings to configure the Broadcom Bluetooth UART device.
->>
->> Signed-off-by: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
->> ---
->>  .../devicetree/bindings/net/bluetooth/btbcm.txt    | 82 ++++++++++++++++++++++
->>  1 file changed, 82 insertions(+)
->>  create mode 100644 Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
->>
->> diff --git a/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt b/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
->> new file mode 100644
->> index 0000000..968421b
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
->> @@ -0,0 +1,82 @@
->> +btbcm
->> +------
->> +
->> +Required properties:
->> +
->> +       - compatible : must be "brcm,brcm-bt-uart".
->> +       - tty : tty device connected to this Bluetooth device.
->
-> Neil Brown has been working on generic bindings for tty/UART slaves
-> which should be used here.
->
-> IF: I certainly like what is being developed for the UART child devices in the DeviceTree. It will finally catch up with what's been available in the ACPI for years. However, to the best of my understanding, that effort is currently not in the bluetooth-next git repo. As Marcel told me earlier this year, "if it is not in the bluetooth-next, it does not exist". I'm afraid I can't use it therefore. Also, we need to ship this driver sooner rather than later. The integration with the UART slave devices sounds like a worthwhile future enhancement to me.
++ devicetree lists
 
-If you merged this and then used the UART slave devices later, then
-you have to support both bindings as the bindings are an ABI. We have
-enough cases of that because we did not have the foresight to avoid
-it. In this case we do. You have not given me any reason why other
-than timing and that's not a valid reason.
+-----Original Message-----
+From: Ilya Faenson [mailto:ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org] 
+Sent: Wednesday, June 17, 2015 5:31 PM
+To: Marcel Holtmann
+Cc: linux-bluetooth-u79uwXL29TY76Z2rM5mHXA@public.gmane.org; Arend Van Spriel; Ilya Faenson
+Subject: [PATCH v4 1/4] Broadcom Bluetooth UART Device Tree bindings
 
->
->> +
->> +Optional properties:
->> +
->> +  - bt-host-wake-gpios : bt-host-wake input GPIO to be used as an interrupt.
->> +
->> +  - bt-wake-gpios : bt-wake output GPIO to be used to suspend / resume device.
->> +
->> +  - bt-reg-on-gpios : reg-on output GPIO to be used to power device on/off.
->> +
->> +  - baud-rate-before-config-download : initial Bluetooth device baud rate.
->> +    Default: 3000000.
->
-> What's the baudrate after download? Why not just use standard
-> "baud-rate" if you only specify one rate?
->
-> IF: You're right: this doc used to list two rates. :-) To be compatible with what Intel is doing in the same area, I will call it "oper-speed" if you don't mind.
+Device Tree bindings to configure the Broadcom Bluetooth UART device.
 
-So you need 2 values or not?
+Signed-off-by: Ilya Faenson <ifaenson-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>
+---
+ .../devicetree/bindings/net/bluetooth/btbcm.txt    | 86 ++++++++++++++++++++++
+ 1 file changed, 86 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
 
->> +
->> +  - manual-fc : flow control UART in suspend / resume scenarios.
->> +    Default: 0.
->> +
->> +  - configure-sleep : configure suspend / resume flag.
->> +    Default: false.
->> +
->> +  - configure-audio : configure platform PCM SCO flag.
->> +    Default: false.
->> +
->> +  - PCMClockMode : PCM clock mode. 0-slave, 1-master.
->> +    Default: 0.
->> +
->> +  - PCMFillMethod : PCM fill method. 0 to 3.
->> +    Default: 2.
->> +
->> +  - PCMFillNum : PCM number of fill bits. 0 to 3.
->> +    Default: 0.
->> +
->> +  - PCMFillValue : PCM fill value. 0 to 7.
->> +    Default: 3.
->> +
->> +  - PCMInCallBitclock : PCM interface rate. 0-128Kbps, 1-256Kbps, 2-512Kbps,
->> +    3-1024Kbps, 4-2048Kbps.
->> +    Default: 0.
->> +
->> +  - PCMLSBFirst : PCM LSB first. 0 or 1.
->> +    Default: 0.
->> +
->> +  - PCMRightJustify : PCM Justify. 0-left, 1-right.
->> +    Default: 0.
->> +
->> +  - PCMRouting : PCM routing. 0-PCM, 1-SCO over HCI.
->> +    Default: 0.
->> +
->> +  - PCMShortFrameSync : PCM sync. 0-short, 1-long.
->> +    Default: 0.
->> +
->> +  - PCMSyncMode : PCM sync mode. 0-slave, 1-master.
->
-> Please no CamelCase. These need better descriptions.
->
-> IF: I am certainly aware that the CamelCase is generally not used on Linux. The Broadcom however have a spec describing what needs to be done to integrate these kinds of chips on hardware platforms (for Windows). Anybody who wishes to use SCO PCM audio will need to read that spec. These parameter names are from that spec. A lot of additional technical info Is there, along with various diagrams. It can't be all placed in this help file. Of course, I can change these parameter names but it would make things harder for those wishing to use the hardware as they would not match the spec. Could you make an exception?
+diff --git a/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt b/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
+new file mode 100644
+index 0000000..5dbcd57
+--- /dev/null
++++ b/Documentation/devicetree/bindings/net/bluetooth/btbcm.txt
+@@ -0,0 +1,86 @@
++btbcm
++------
++
++Required properties:
++
++	- compatible : must be "brcm,brcm-bt-uart".
++	- tty : tty device connected to this Bluetooth device.
++
++Optional properties:
++
++  - bt-host-wake-gpios : bt-host-wake input GPIO to be used as an interrupt.
++
++  - bt-wake-gpios : bt-wake output GPIO to be used to suspend / resume device.
++
++  - bt-reg-on-gpios : reg-on output GPIO to be used to power device on/off.
++
++  - oper-speed : Bluetooth device operational baud rate.
++    Default: 3000000.
++
++  - manual-fc : flow control UART in suspend / resume scenarios.
++    Default: 0.
++
++  - configure-sleep : configure suspend / resume flag.
++    Default: false.
++
++  - idle-timeout : Number of seconds of inactivity before suspending.
++    Default: 5.
++
++  - configure-audio : configure platform PCM SCO flag.
++    Default: false.
++
++  - pcm-clockmode : PCM clock mode. 0-slave, 1-master.
++    Default: 0.
++
++  - pcm-fillmethod : PCM fill method. 0 to 3.
++    Default: 2.
++
++  - pcm-fillnum : PCM number of fill bits. 0 to 3.
++    Default: 0.
++
++  - pcm-fillvalue : PCM fill value. 0 to 7.
++    Default: 3.
++
++  - pcm-incallbitclock : PCM interface rate. 0-128Kbps, 1-256Kbps, 2-512Kbps,
++    3-1024Kbps, 4-2048Kbps.
++    Default: 0.
++
++  - pcm-lsbfirst : PCM LSB first. 0 or 1.
++    Default: 0.
++
++  - pcm-rightjustify : PCM Justify. 0-left, 1-right.
++    Default: 0.
++
++  - pcm-routing : PCM routing. 0-PCM, 1-SCO over HCI.
++    Default: 0.
++
++  - pcm-shortframesync : PCM sync. 0-short, 1-long.
++    Default: 0.
++
++  - pcm-syncmode : PCM sync mode. 0-slave, 1-master.
++    Default: 0.
++
++
++Example:
++
++	bcm4354_bt_uart: bcm4354-bt-uart {
++		compatible = "brcm,brcm-bt-uart";
++		bt-wake-gpios = <&gpio4 30 GPIO_ACTIVE_HIGH>;
++		bt-host-wake-gpios = <&gpio4 31 GPIO_ACTIVE_HIGH>;
++		tty = "ttyS0";
++		oper-speed = <3000000>;
++		configure-sleep;
++		idle-timeout = <5>;
++		configure-audio;
++		pcm-clockmode = <0>;
++		pcm-fillmethod = <2>;
++		pcm-fillnum = <0>;
++		pcm-fillvalue = <3>;
++		pcm-incallbitclock = <0>;
++		pcm-lsbfirst = <0>;
++		pcm-rightjustify = <0>;
++		pcm-routing = <0>;
++		pcm-shortframesync = <0>;
++		pcm-syncmode = <0>;
++	};
++
+-- 
+1.9.1
 
-I think humans are capable to translate. Besides, I don't really care
-so much what is in Broadcom's spec (besides the fact I probably don't
-have access). What I care about is what does the PCM configuration
-look like for the next BT uart chip with a DT binding that comes
-along. I don't want to see $vendor specific fields just dumped into DT
-as is with no regard to whether things should be common. Some of this
-is pretty Broadcom specific, but much of it is standard PCM/I2S audio
-configuration.
-
-Rob
 --
 To unsubscribe from this list: send the line "unsubscribe devicetree" in
 the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
