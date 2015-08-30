@@ -1,211 +1,184 @@
-From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [RFC PATCH 2/5] Documentation: dt-bindings: add example DT
- binding document
-Date: Fri, 28 Aug 2015 13:55:11 -0500
-Message-ID: <CAL_JsqJy21yBGe161MrTEC1kL4UD=h+skH=mPm-vjwZ7yEHoUA@mail.gmail.com>
+From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: [RFC PATCH 0/5] DT binding documents using text markup
+Date: Sun, 30 Aug 2015 15:04:20 -0700
+Message-ID: <55E37DE4.4090503@gmail.com>
 References: <1440739433-6799-1-git-send-email-mporter@konsulko.com>
- <1440739433-6799-3-git-send-email-mporter@konsulko.com> <CAL_Jsq+FE4MCCfZC5hDhQBmM1gHibY82S9a8PC1GwsnWsPNxkg@mail.gmail.com>
- <20150828174937.GB24203@beef>
+Reply-To: frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org
 Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc:content-type;
-        bh=54XlS3IayCKNReI9Ls609hnNAPNzd0nNxzVcZy6fj20=;
-        b=WbqPYa6ocGrjFiXrYXsbu/t0mg2ss1+1J6oCT/uvBhafRWiSXE0hkte5jjfik+5wND
-         x3Z7ucdkMp5Qyi5tXxj3s9EZz6kAyqBY+HsCtyQEq/PLoKqj51OqFIYHW0BEJzqv8CSl
-         QZv/nApe4at6p6WFFwnDo4O9sMMLgCIw/hNa9VH7lQgMQajKn0VKhZte++sXaLzhTldf
-         haaZuI28e+uQdBh2eAU/ouTznNmkaaMLkArAiVrZZZeIw9AJ4YszM1pUa9KpWeaM8doN
-         YMxhB01F2a8HwrNDxnWbNQNiSp92krntHnuSduhNgUD9IACd2V2PGEYMEtqky7ds4SwO
-         JrrQ==
-In-Reply-To: <20150828174937.GB24203@beef>
+        h=message-id:date:from:reply-to:user-agent:mime-version:to:cc:subject
+         :references:in-reply-to:content-type:content-transfer-encoding;
+        bh=OFc80MO2X77vVJ50o1pBfcDjIMZXnkNoLVVhbaPApCk=;
+        b=v6sCCM1trLHvhyTNXIxh6pSzVDXLiWSKBIc/dhHGecoUCQFP5+fX4sSxTJ5ayB3HAX
+         cP2KCjUm9hnPUGRTyjbf3VJMzE/8LyuF9m44b1h5xPCFws59sxeeWH3iCUo6IwiU3Nok
+         40XRy3OQDx2w606lRyEUN/yK9BnELKCxNFLcC7/bKiA7V5X6OwCML6uDsoywJa2n7Vzn
+         BiEJkshJcg5/bw1Wm4/ii6EwiFNINJTYkmGJlB1yXt9NjbdJW40lVRFY+aRa/OoEKE3S
+         GqCpLQ4XsM9Dwk+s2ZIkiqtpCEdueihTSnUyzXFrj0pozhuNzV0a9v9cHorJSI2fuVbR
+         H49Q==
+In-Reply-To: <1440739433-6799-1-git-send-email-mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 To: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
-Cc: Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
+Cc: Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
 
-On Fri, Aug 28, 2015 at 12:49 PM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
-> On Fri, Aug 28, 2015 at 09:53:06AM -0500, Rob Herring wrote:
->> On Fri, Aug 28, 2015 at 12:23 AM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
->> > Add a skeleton DT binding document that serves as the canonical
->> > example for implementing YAML-based DT bindings documentation.
->> > The skeleton binding illustrates use of all fields and variations
->> > described in the dt-binding-format.txt documentation.
->> >
->> > Signed-off-by: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
->> > ---
->> >  Documentation/devicetree/bindings/skeleton.yaml | 98 +++++++++++++++++++++++++
->> >  1 file changed, 98 insertions(+)
->> >  create mode 100644 Documentation/devicetree/bindings/skeleton.yaml
->> >
->> > diff --git a/Documentation/devicetree/bindings/skeleton.yaml b/Documentation/devicetree/bindings/skeleton.yaml
->> > new file mode 100644
->> > index 0000000..175965f
->> > --- /dev/null
->> > +++ b/Documentation/devicetree/bindings/skeleton.yaml
->> > @@ -0,0 +1,98 @@
->> > +%YAML 1.2
->> > +---
->> > +id: skel-device
->> > +
->> > +title: Skeleton Device
->> > +
->> > +maintainer:
->> > +  - name: Skeleton Person <skel-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
->>
->> We'd want to tie this into get_maintainers.pl obviously.
->
-> Right, I broke my rule of "no new tags for content we don't already
-> have" by adding this. It stems out of the discussion at LPC where
-> Mark suggested we could avoid the core bindings being moved by adding
-> maintainer info into the binding itself.
+On 8/27/2015 10:23 PM, Matt Porter wrote:
+> During the Device Tree microconference at Linux Plumbers 2015, we had
+> a short discussion about how to improve DT Binding Documentation. A
+> number of issues were raised (again, as these things have been
+> discussed in the past) including:
+> 
+> 	* Inconsistency between binding documents due to prose text
+> 	  format.
+> 	* Inability to reliably machine read bindings for mass update
+>           or search.
+>         * Bit rot of bindings as new conventions are agreed upon but
+> 	  only new bindings are changed.
+> 
+> Grant Likely probably summed up the issue best with "...as long as
+> bindings are human readable, we'll have issues...". The context
+> of that comment was, of course, regarding our current documents
+> written in very inconsistent prose style. When the topic of needing
+> the bindings in a rigid format was raised, there was general head
+> nodding that this was needed. It was noted that this has been
+> discussed many times before and nothing has been done.
+> 
+> My proposed solution to the problem is to convert all DT bindings
+> a rigid text markup format. In choosing a text markup language my
+> requirements were:
+> 
+> 	1) Human readable
+> 	2) Well documented
+> 	3) Easy to translate to other data formats
+> 	4) Well supported by tools and libraries
 
-If you stated that rule, I missed it...
-
-> This is an area where more docs are needed. Ideally, on the first pass
-> conversion we would not attempt to populate these. I had considered
-> that we *could* only add maintainer: tags on core bindings to and
-> adjust get_maintainers.pl to use that info to override the standard
-> directory-based info if it exists. I don't think it's necessary to add
-> a specific maintainer for all of the peripheral bindings if the default
-> is the subsystem maintainer and the dt list. We could at least start
-> directing core binding discussion to the -spec list which is where I
-> think you'd like it.
-
-Yes, certainly this can solve my problem around handling core bindings.
-
-Some subsystem maintainers require a driver have a maintainer. We
-could certainly enforce that too. We could probably automatically
-populate this with the original author as a starting point. OTOH,
-bindings should not change frequently.
-
->
->> > +
->> > +description: >
->> > +  The Skeleton Device binding represents the SK11 device produced by
->> > +  the Skeleton Corporation. The binding can also support compatible
->> > +  clones made by second source vendors.
->> > +
->> > +compatible:
->> > +  - name: "skel,sk11"
->> > +  - name: "faux,fx11"
->>
->> Is this an OR or AND? We need both.
->
-> True, this only covers the OR case atm.
->
->> The complicated case is "one of {specific names} followed by {generic name}."
->
-> I need to rethink these. I do have deprecated: tag for that case and
-> possibly "name:" gets split to "generic:" and "specific:" and we can
-> then do the right thing.
->
-> For the above I would have:
->
-> compatible:
->   - specific: "skel,sk11"
->   - specific: "faux,fx11"
-
-This can still be an AND or OR relationship.
-
->
-> and something like the Allwinner simple framebuffer would be:
->
-> compatible:
->   - generic: "simple-framebuffer"
->   - specific: "allwinner,simple-framebuffer"
->
-> where our validator would insist on seeing one of the specific: tags
-> along with the generic: tag. A lot of bindings, given current doc
-> patterns would just have two tags like above.
-
-We could follow Pantelis' suggestion and do C style logic expressions:
-
-name: ("chip1-ipblock" || "chip2-ipblock") && "generic-ipblock"
+Thanks for taking this on!  The proposal looks like a great start.
+The requirements look good.
 
 
->
->> > +    description: A clone of the original sk11 device
->> > +
->> > +required:
->> > +  - name: "reg"
->>
->> We definitely need type info from the start.
->
-> Are you sure? Ugh.
->
-> My big contention here is that we don't carry that content in the
-> docs today so we shouldn't try to add it in the initial conversion.
+> After looking at a number of markup options, YAML stood out as the
+> one that meets all of these requirements. The YAML syntax is adopted
+> in many projects specifically because of the high level of readability.
+> A comprehensive spec is at http://www.yaml.org/spec/1.2/spec.html.
+> There's a number of tools to convert between YAML and other popular
+> data formats such as JSON and XML. XML was cited by Behan Webster
+> during the microconference as an important data format as the type
+> of developers that may produce comprehensive DTS Binding validation
+> tools will want to use XML. Every major scripting language has a
+> high level binding to the low level libyaml C library to facilitate
+> handling of YAML data files.
+> 
+> One caveat with YAML is it does not tolerate tabs. Yes, I said it.
+> No tabs! This can be managed with proper editor modes and also with
+> helper scripts to strip tabs to aid in people passing planned
+> checkpatch.pl checks that would run YAML DT Binding specific tag
+> validators for new bindings.
 
-What? We have that all over the place. Boolean properties, phandles, etc.
+I'm just a casual user of some markup languages, nowhere near knowledgeable
+or an expert, so will be listening to reasoned opinions on the choice of
+YAML.  But a quick look at the spec you referenced and the examples you
+provided gives me some confidence that YAML will work.
 
-> I think you are right in that we should have it documented in the
-> schema but I'm concerned that we make the starting conversion
-> effort too large by adding type info to all converted docs.
 
-How we do the conversion certainly needs to be worked out. However,
-first we need some sort of agreement that yes this looks promising
-before we spend too much time on it. We need to wait for all the YAML
-haters to come out of hiding. :) Once the direction is settled, then
-we can iron out the details of the structure. Finally, then we can
-determine how to do the conversion. Just because we define how type
-information looks doesn't mean it has to be there day 1.
+> The scope of the initial YAML DT Binding format was specifically
+> limited to supporting *only* the content we have in bindings today.
+> The idea here is to propose and agree on something that will take
+> us just a few steps in the right direction. If we move *all* current
 
-> I think we gain a lot even without at the start, but I understand
-> why we need it and how it will help reduce the review firehose
-> with the associated validation tools.
->
->>
->> > +    description: chip select address of skeleton device
->> > +    reference: spi-slave
->>
->> I would like to not have to list properties if the inherited binding
->> lists it. The problem is we need to say how many cells and the order
->> (not a problem here, but for mmio devices).
->
-> Yeah, make sense.
->
->> Perhaps we can list the reference at the top level for the node
->> instead of for every property.
->
-> That's a good point. I was wondering if per prop references would
-> get unwieldy once we actually add them into all the converted docs.
-> There's a huge number of existing docs without proper references.
+Yes, this is a great approach so we can start making reasonable progress.
+(Caveat below.)
 
-Yes, in many cases they are implied. It should be simple enough to
-generate the list though whether they point to the doc file or just
-list the properties.
+> binding content to a machine parseable format, additional features
+> can be added with more automation and scripting. As it stands today,
+> because of the inconsistency of the wording of the files, we can't
+> add a lot of new features to the content until we convert what we
+> have today into a standard format.
+> 
+> With that said, it should be noted that some new features such as
+> "type" tags to indicate cell types could be added to support
+> additional DTS validation beyond what the current content supports.
+> Another possibility is adding "range" type information to validate
+> the legal values for a cell.
 
->
-> Ok, I'll take a look at collecting references per group of properties.
->
->>
->> > +  - name: "spi-max-frequency"
->> > +    description: >
->> > +      Maximum SPI clocking speed of skeleton device in Hz, must be
->> > +      1000000
->> > +    reference: spi-slave
->>
->> Rather than listing the property and having constraint in description,
->> perhaps we could add constraints like this:
->>
->> - spi-max-frequency-range: 1000000 1000000
->>
->> Or groups of constraints:
->>
->> - spi-max-frequency-constraints:
->>   range: 1000000 1000000
->>   some-other-constraint: <value>
->
-> I was hoping to avoid this to start due to my argument for keeping it
-> simple for the first pass at conversion. However, the latter looks
-> flexible enough. We have cases with enumerated values as well to handle
-> the require some thought.
+The caveat: I think we should look at some obvious features (such as
+"type" that you mention) to make sure that YAML and the chosen
+structuring will easily and effectively support the features.
 
-We can always add constraints as a second step, but I'd like to define
-the structure at least.
+Thinking about how some features might be implemented led to comments
+that I will make in replies to the other patches.
 
-Rob
+I agree that we should not attempt to add the additional information
+enabled by the new features if the information is not in the present
+bindings.  Adding the new information in a subsequent pass seems to be
+a good strategy.
+
+> 
+> This series is broken up into three major parts:
+> 
+> 1) The documentation defining the YAML DT binding format
+> 2) A skeleton device binding example illustrating use of this format
+> 3) Some real binding conversions (eeprom.txt, phy-bindings.txt, and
+>    ti-phy.txt
+> 
+> As a proof of concept of what can be done with a proper machine
+> readable DT binding source file, there's a simple markdown document
+> generator at https://github.com/konsulko/dtgendoc. Also, to see
+> actual output from the generator, the generated markdown from those
+> bindings is viewable at https://github.com/konsulko/dtgendoc/wiki
+> 
+> There's a lot of other possibilities for validation tools using
+> only the data we have today in the bindings. In addition, Frank
+> Rowand covered some DT debug techniques that would benefit from
+> the binding documentation being 100% reliably searchable.
+> 
+> I found it useful to see a side-by-side view of a converted doc
+> versus the original content, so here's a screenshot of eeprom.txt
+> vs. eeprom.yaml:
+> https://github.com/konsulko/dtgendoc/wiki#eepromtxt-vs-eepromyaml
+
+This binding is your patch 3, but the side by side example you provide
+makes it much easier to follow along, so I'll comment here.
+
+Part of the information about compatible got lost in the conversion.
+The part that is lost is:
+
+   If there is no specific driver for <manufacturer>, a generic
+   driver based on <type> is selected.
+
+I will discuss this a little more in response to patch 1, where I will
+ask whether compatible should be treated differently than other
+properties.  So maybe any further discussion of this should be in
+reply to that email.
+
+
+> When we decide on a text markup format that is acceptable, then the
+> next step is to convert all the bindings. That process would start
+> with the complete set of generic bindings as they will be referenced
+> by the actual device bindings.
+> 
+> If the RFC wasn't explicit enough...comments welcome.
+> 
+> -Matt
+> 
+> Matt Porter (5):
+>   Documentation: dt-bindings: add documentation on new DT binding format
+>   Documentation: dt-bindings: add example DT binding document
+>   Documentation: dt-bindings: add YAML eeprom binding
+>   Documentation: dt-bindings: phy: add YAML generic PHY binding
+>   Documentation: dt-bindings: phy: add YAML TI PHY binding
+> 
+>  .../devicetree/bindings/dt-binding-format.txt      | 106 +++++++++++++
+>  Documentation/devicetree/bindings/eeprom.yaml      |  44 ++++++
+>  .../devicetree/bindings/phy/phy-bindings.yaml      |  89 +++++++++++
+>  Documentation/devicetree/bindings/phy/ti-phy.yaml  | 166 +++++++++++++++++++++
+>  Documentation/devicetree/bindings/skeleton.yaml    |  98 ++++++++++++
+>  5 files changed, 503 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/dt-binding-format.txt
+>  create mode 100644 Documentation/devicetree/bindings/eeprom.yaml
+>  create mode 100644 Documentation/devicetree/bindings/phy/phy-bindings.yaml
+>  create mode 100644 Documentation/devicetree/bindings/phy/ti-phy.yaml
+>  create mode 100644 Documentation/devicetree/bindings/skeleton.yaml
+> 
