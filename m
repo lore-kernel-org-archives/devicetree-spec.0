@@ -1,237 +1,147 @@
-From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [RFC PATCH 2/5] Documentation: dt-bindings: add example DT binding
- document
-Date: Sun, 30 Aug 2015 15:18:19 -0700
-Message-ID: <55E3812B.2090105@gmail.com>
-References: <1440739433-6799-1-git-send-email-mporter@konsulko.com> <1440739433-6799-3-git-send-email-mporter@konsulko.com> <CAL_Jsq+FE4MCCfZC5hDhQBmM1gHibY82S9a8PC1GwsnWsPNxkg@mail.gmail.com> <20150828174937.GB24203@beef> <CAL_JsqJy21yBGe161MrTEC1kL4UD=h+skH=mPm-vjwZ7yEHoUA@mail.gmail.com>
-Reply-To: frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org
+From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: [RFC PATCH 0/5] DT binding documents using text markup
+Date: Mon, 31 Aug 2015 09:05:00 -0500
+Message-ID: <CAL_JsqJ7C4JtjGjFJjLQpLEdzbs2rw0K0TzVNB2VjOz4Sr9Nbw@mail.gmail.com>
+References: <1440739433-6799-1-git-send-email-mporter@konsulko.com>
+ <CAL_Jsq+qCJfLYxVfyQ4gAxPWLZ2=WNa0H21+cRcBi7dGVG0PMA@mail.gmail.com> <20150828171323.GA24203@beef>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20120113;
-        h=message-id:date:from:reply-to:user-agent:mime-version:to:cc:subject
-         :references:in-reply-to:content-type:content-transfer-encoding;
-        bh=KpCfClMPDIajdzHA46rAQ4JkEGzcoHmVMSEP02LtpMM=;
-        b=SplmM0HF4viVMbzAUY3PBbbPf0AQ/P0LbLIcXDZ6AqMcHIYmZu6bdIvH3qxQlq1aii
-         oy6MpN7crzSOULvmzbK8qRNuaOP6NDxqSsU5io8Y7zImTTyYvfYBHAvsSr0Lh3tCre3Z
-         zCUJgc0ZPy+WUEDxtMJwSdib6faAZPgpkYU3Bm/N02byrMASuSSyJ+4YjGdU6QhKr7D8
-         HeeWlLZnnQhzS2nto3SS+A7ozhLJc40EZpDt6VvWfgCOgc59es/hpyktZrIdd6vSaYdo
-         gmmOcmmGgHVkGbBKVrWpuA/bmV3LrrymwLXbnii684SHClVz6hKie1fSvwye+XDFuo0p
-         g/PA==
-In-Reply-To: <CAL_JsqJy21yBGe161MrTEC1kL4UD=h+skH=mPm-vjwZ7yEHoUA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+         :cc:content-type;
+        bh=WFc73msyr0NMn+aHYdwOCI4gAcaYnAyyYwNuwdDsCxE=;
+        b=GxfAx4eRukBvFmKiSM4BYu9YDIPM0JADLTJxBjh0XVI0btu5bsHJ021UEtnC3YnFDm
+         rJrMpX8S9c+aTAz6+9Tbe6QDXTZKADWQZHwpQ/dOovYNfgeSKaubvt/j/s6q1AJbje3S
+         9bBNzbHhIZDieP9biFnKTcz5r7n7CDP0QUbTcvVlSzQlldtxM3p8ovFyR1qg7u3D9I3g
+         848Eo8K4dQY1xQ5cTPP05kZDINk8Cv/BYl4gdejJzXaH9cTYn4DFQWCxsixMtfbtlbmv
+         ZmgUHTrPo5C+g1t75wK8E89SXKFKBVkmTvHTvOuE0y6LnJh0vSdymnS36BKALxu3QGkz
+         G0jA==
+In-Reply-To: <20150828171323.GA24203@beef>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
+Content-Transfer-Encoding: 7bit
+To: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+Cc: Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
 
-On 8/28/2015 11:55 AM, Rob Herring wrote:
-> On Fri, Aug 28, 2015 at 12:49 PM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
->> On Fri, Aug 28, 2015 at 09:53:06AM -0500, Rob Herring wrote:
->>> On Fri, Aug 28, 2015 at 12:23 AM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
->>>> Add a skeleton DT binding document that serves as the canonical
->>>> example for implementing YAML-based DT bindings documentation.
->>>> The skeleton binding illustrates use of all fields and variations
->>>> described in the dt-binding-format.txt documentation.
->>>>
->>>> Signed-off-by: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
->>>> ---
->>>>  Documentation/devicetree/bindings/skeleton.yaml | 98 +++++++++++++++++++++++++
->>>>  1 file changed, 98 insertions(+)
->>>>  create mode 100644 Documentation/devicetree/bindings/skeleton.yaml
->>>>
->>>> diff --git a/Documentation/devicetree/bindings/skeleton.yaml b/Documentation/devicetree/bindings/skeleton.yaml
->>>> new file mode 100644
->>>> index 0000000..175965f
->>>> --- /dev/null
->>>> +++ b/Documentation/devicetree/bindings/skeleton.yaml
->>>> @@ -0,0 +1,98 @@
->>>> +%YAML 1.2
->>>> +---
->>>> +id: skel-device
->>>> +
->>>> +title: Skeleton Device
->>>> +
->>>> +maintainer:
->>>> +  - name: Skeleton Person <skel-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
->>>
->>> We'd want to tie this into get_maintainers.pl obviously.
->>
->> Right, I broke my rule of "no new tags for content we don't already
->> have" by adding this. It stems out of the discussion at LPC where
->> Mark suggested we could avoid the core bindings being moved by adding
->> maintainer info into the binding itself.
-> 
-> If you stated that rule, I missed it...
-> 
->> This is an area where more docs are needed. Ideally, on the first pass
->> conversion we would not attempt to populate these. I had considered
->> that we *could* only add maintainer: tags on core bindings to and
->> adjust get_maintainers.pl to use that info to override the standard
->> directory-based info if it exists. I don't think it's necessary to add
->> a specific maintainer for all of the peripheral bindings if the default
->> is the subsystem maintainer and the dt list. We could at least start
->> directing core binding discussion to the -spec list which is where I
->> think you'd like it.
+On Fri, Aug 28, 2015 at 12:13 PM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
+> On Fri, Aug 28, 2015 at 09:26:17AM -0500, Rob Herring wrote:
+>> On Fri, Aug 28, 2015 at 12:23 AM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
+>> > During the Device Tree microconference at Linux Plumbers 2015, we had
+>> > a short discussion about how to improve DT Binding Documentation. A
 
-I think that adding the maintainer: tags for core bindings in the conversion
-process (and optionally add the tag for other bindings in the person
-converting has the driver and subsystem knowledge to intelligently
-do so -- not just a blind list from get_maintainer) would be a valid
-exception to your desire to not add new information on the conversion
-step.  As much as other uses of information from bindings is near and
-dear to me, I think that throttling the binding review fire hose is
-the highest priority use of additional information.
+[...]
 
+>> > One caveat with YAML is it does not tolerate tabs. Yes, I said it.
+>> > No tabs! This can be managed with proper editor modes and also with
+>> > helper scripts to strip tabs to aid in people passing planned
+>> > checkpatch.pl checks that would run YAML DT Binding specific tag
+>> > validators for new bindings.
+>>
+>> What do parsers do with tabs? Throw an error?
+>
+> Yes, they throw an error. Keep in mind that most of what I used to start
+> are general purpose conversion tools on top of a particular scripting
+> languages's high level binding to libyaml. The error output leaves a
+> bit to be desired for our use case. In any case, when I was developing
+> the skeleton.yaml I used the yaml script from
+> https://github.com/ryo/yamltools to catch all these syntax errors I
+> was inserting..like tabs. the PyYaml binding being used in my PoC
+> dtgendoc does the same thing but I don't gracefully handle those
+> errors like we could.
+>
+>> Beyond tabs, how do we check files can be parsed both generically and
+>> for any binding specific requirements. We now need a schema for
+>> checking the schema. We need some equivalent to compile testing.
+>
+> Right. So, I think what you are touching on is something I should
+> have expanded on in the TODO list. Basically, we need a scripted
+> tool that we run from checkpatch.pl that 1) reads the .yaml and
+> validates the YAML itself (that comes for free in the high level
+> parsers) reporting errors in a sensical manner 2) validates our
+> DT binding specific tags
 
-> Yes, certainly this can solve my problem around handling core bindings.
-> 
-> Some subsystem maintainers require a driver have a maintainer. We
-> could certainly enforce that too. We could probably automatically
-> populate this with the original author as a starting point. OTOH,
-> bindings should not change frequently.
-> 
->>
->>>> +
->>>> +description: >
->>>> +  The Skeleton Device binding represents the SK11 device produced by
->>>> +  the Skeleton Corporation. The binding can also support compatible
->>>> +  clones made by second source vendors.
->>>> +
->>>> +compatible:
->>>> +  - name: "skel,sk11"
->>>> +  - name: "faux,fx11"
->>>
->>> Is this an OR or AND? We need both.
->>
->> True, this only covers the OR case atm.
->>
->>> The complicated case is "one of {specific names} followed by {generic name}."
->>
->> I need to rethink these. I do have deprecated: tag for that case and
->> possibly "name:" gets split to "generic:" and "specific:" and we can
->> then do the right thing.
->>
->> For the above I would have:
->>
->> compatible:
->>   - specific: "skel,sk11"
->>   - specific: "faux,fx11"
-> 
-> This can still be an AND or OR relationship.
-> 
->>
->> and something like the Allwinner simple framebuffer would be:
->>
->> compatible:
->>   - generic: "simple-framebuffer"
->>   - specific: "allwinner,simple-framebuffer"
->>
->> where our validator would insist on seeing one of the specific: tags
->> along with the generic: tag. A lot of bindings, given current doc
->> patterns would just have two tags like above.
-> 
-> We could follow Pantelis' suggestion and do C style logic expressions:
-> 
-> name: ("chip1-ipblock" || "chip2-ipblock") && "generic-ipblock"
-> 
-> 
->>
->>>> +    description: A clone of the original sk11 device
->>>> +
->>>> +required:
->>>> +  - name: "reg"
->>>
->>> We definitely need type info from the start.
->>
->> Are you sure? Ugh.
->>
->> My big contention here is that we don't carry that content in the
->> docs today so we shouldn't try to add it in the initial conversion.
-> 
-> What? We have that all over the place. Boolean properties, phandles, etc.
+We all know that no one runs checkpatch.pl. ;) I really want the basic
+checking of the doc files to run from make (and run by 0-day). The
+tool dependency could be an issue though. However, DocBook builds from
+make and I don't think many people check that regularly. Then there is
+using the binding docs to check dts files. That should probably be
+part of the dtb building.
 
-Piling on...  If the type information is obvious in the current binding
-doc, then it should be captured in the conversion and not lost.  If the
-information is not currently present then it should not be required in
-the conversion step.
+> Now, I would caution about trying to do too much on Day 1 or we
+> could end up back at the "never doing anything" stage.
 
-Which means that we need to define the how to specify the type information.
+Certainly, but I would like to have a plan for what Day 2 and 3 look like.
 
+> It would
+> be an improvement to simply check that the basic tags exist as
+> shown in the [R] or [O] fields in the documentation. One thing
+> I should point out is that I carefully avoided marking some tags
+> as [R] where existing bindings don't have them...even if logically,
+> a description should be required on every binding. The idea here
+> is to avoid updating content at the same time that we are updating
+> the format. Rather, I think it would be better to get the base
+> format updated, then come back with a janitorial team and add
+> descriptions (since now we can generate a worklist of those
+> bindings missing a top-level description) and systematically
+> fix those and review with the appropriate maintainers.
 
->> I think you are right in that we should have it documented in the
->> schema but I'm concerned that we make the starting conversion
->> effort too large by adding type info to all converted docs.
-> 
-> How we do the conversion certainly needs to be worked out. However,
-> first we need some sort of agreement that yes this looks promising
-> before we spend too much time on it. We need to wait for all the YAML
-> haters to come out of hiding. :) Once the direction is settled, then
-> we can iron out the details of the structure. Finally, then we can
-> determine how to do the conversion. Just because we define how type
-> information looks doesn't mean it has to be there day 1.
-> 
->> I think we gain a lot even without at the start, but I understand
->> why we need it and how it will help reduce the review firehose
->> with the associated validation tools.
+Yes. Any checking would be a great improvement.
+
+[...]
+
+>> > When we decide on a text markup format that is acceptable, then the
+>> > next step is to convert all the bindings. That process would start
+>> > with the complete set of generic bindings as they will be referenced
+>> > by the actual device bindings.
 >>
->>>
->>>> +    description: chip select address of skeleton device
->>>> +    reference: spi-slave
->>>
->>> I would like to not have to list properties if the inherited binding
->>> lists it. The problem is we need to say how many cells and the order
->>> (not a problem here, but for mmio devices).
->>
->> Yeah, make sense.
->>
->>> Perhaps we can list the reference at the top level for the node
->>> instead of for every property.
->>
->> That's a good point. I was wondering if per prop references would
->> get unwieldy once we actually add them into all the converted docs.
->> There's a huge number of existing docs without proper references.
-> 
-> Yes, in many cases they are implied. It should be simple enough to
-> generate the list though whether they point to the doc file or just
-> list the properties.
-> 
->>
->> Ok, I'll take a look at collecting references per group of properties.
->>
->>>
->>>> +  - name: "spi-max-frequency"
->>>> +    description: >
->>>> +      Maximum SPI clocking speed of skeleton device in Hz, must be
->>>> +      1000000
->>>> +    reference: spi-slave
->>>
->>> Rather than listing the property and having constraint in description,
->>> perhaps we could add constraints like this:
->>>
->>> - spi-max-frequency-range: 1000000 1000000
->>>
->>> Or groups of constraints:
->>>
->>> - spi-max-frequency-constraints:
->>>   range: 1000000 1000000
->>>   some-other-constraint: <value>
->>
->> I was hoping to avoid this to start due to my argument for keeping it
->> simple for the first pass at conversion. However, the latter looks
->> flexible enough. We have cases with enumerated values as well to handle
->> the require some thought.
-> 
-> We can always add constraints as a second step, but I'd like to define
-> the structure at least.
+>> You are going to do that for everyone, right? ;)
+>
+> Let's just say that I'm banking on others helping here once we have
+> a format agreed upon. If we can hold the binding doc schema definition
+> initially to just define tags for content that already exists in our
+> textual binding docs, the effort for conversion is tolerable. To give
+> an example, that phy-bindings.txt, it took 15 minutes to convert and
+> and pass through the yaml parser and dtgendoc. The reason is that it's
+> pure reformatting work. It doesn't take any special knowledge of the
+> hardware and it doesn't involve reviewing dts files to extra
+> additional information. Some of the annoyances can be streamlined
+> like tab stripping and handling the two space indentation to make
+> this process faster. One of my next things is to get a simple tool
+> going that reports problems with conversions, essentially what I
+> said was needed to integrate with checkpatch, so this process of
+> conversion is even faster. Trivial peripheral bindings like eeprom.txt
+> can be done in 5 minutes or so right now.
 
-Agreed, this is something that I would like to see defined, just to make
-sure that we can do it in a reasonable way with the proposed tool.
+What if instead of using the docs as a starting point, we use dts
+files as a starting point? They give us something parse-able that we
+can do some automation with.
 
+Additionaly, perhaps we can do a mass conversion of all the doc files
+from txt to yaml where all the current text is converted to comments
+and we fill in boilerplate and whatever we can convert with some
+automation? The downside here would be it will be hard to tell which
+conversions are complete.
 
-> Rob
-> 
+Putting both together, we could then fairly easily for example extract
+compatible strings from dts files, lookup which doc file they are in
+and fill in the compatible string info.
 
+> If we decide we must have tags like "type:" in the initial binding
+> doc schema definition *and* we must add that content in each
+> conversion, then this becomes more time consuming to validate that
+> information against working dts files. IMHO, we'd be better off
+> to get the base format straight, addressing missing pieces like
+> all the compatible permutations, and convert them all with
+> just that content. After that, we come back and add new content
+> features like type: tagging. I'm trying to find a reasonable
+> place to do this incrementally since the volume of bindings to
+> convert is enormous.
 
--Frank
+I wouldn't say we have to add it, but we need to maintain type info.
+
+Are you proposing we can actually validate dts files on day 1? That I
+would expect to come later.
+
+Rob
