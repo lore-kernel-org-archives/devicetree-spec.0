@@ -1,23 +1,22 @@
-From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+From: Tim Bird <tbird20d-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Subject: Re: [RFC PATCH 0/5] DT binding documents using text markup
-Date: Mon, 31 Aug 2015 09:05:00 -0500
-Message-ID: <CAL_JsqJ7C4JtjGjFJjLQpLEdzbs2rw0K0TzVNB2VjOz4Sr9Nbw@mail.gmail.com>
+Date: Tue, 1 Sep 2015 09:14:24 -0700
+Message-ID: <CA+bK7J5MriF95d2OGAZRT8PyJkK_x5r1J1yPq2Ke=SZkit6xHA@mail.gmail.com>
 References: <1440739433-6799-1-git-send-email-mporter@konsulko.com>
- <CAL_Jsq+qCJfLYxVfyQ4gAxPWLZ2=WNa0H21+cRcBi7dGVG0PMA@mail.gmail.com> <20150828171323.GA24203@beef>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+        h=mime-version:in-reply-to:references:date:message-id:subject:from:to
          :cc:content-type;
-        bh=WFc73msyr0NMn+aHYdwOCI4gAcaYnAyyYwNuwdDsCxE=;
-        b=GxfAx4eRukBvFmKiSM4BYu9YDIPM0JADLTJxBjh0XVI0btu5bsHJ021UEtnC3YnFDm
-         rJrMpX8S9c+aTAz6+9Tbe6QDXTZKADWQZHwpQ/dOovYNfgeSKaubvt/j/s6q1AJbje3S
-         9bBNzbHhIZDieP9biFnKTcz5r7n7CDP0QUbTcvVlSzQlldtxM3p8ovFyR1qg7u3D9I3g
-         848Eo8K4dQY1xQ5cTPP05kZDINk8Cv/BYl4gdejJzXaH9cTYn4DFQWCxsixMtfbtlbmv
-         ZmgUHTrPo5C+g1t75wK8E89SXKFKBVkmTvHTvOuE0y6LnJh0vSdymnS36BKALxu3QGkz
-         G0jA==
-In-Reply-To: <20150828171323.GA24203@beef>
+        bh=kpCDMiUwGcQ5bpwv3N3pBOHtF8wJnMtyqBCJYCcvNgw=;
+        b=EjwRM8/HH2tdBytAe4GvblbXh4eVWcaljRnBroS+lEHo4SZ46ozOV0iQ8CIlg+eAk2
+         SWFYvwjhZd5VNlqbUOjR/gyMp0qd+t8eutwpaN0Ju7AO45yicBDqVZUfYYFqLF7pGExH
+         aBGJzrJtyhjYyMCK94RBkUqhEkBMmVyDFoUGMwn6E4SRowwwTX4cZ4h6S3BAbUWDue3V
+         PkCIbrkZX5QD0vTUH5JF9TwNnmtVYz9uu2ClZFX5t+y6yH/1TS0Vn87v+p69WHWv480G
+         UC626qj6q3XXuiRjimRCbBBbbNFGvR9iVTtN3NaAd4GpDkLAWVOjP2uiagu8lpXq5NYr
+         4J4w==
+In-Reply-To: <1440739433-6799-1-git-send-email-mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
@@ -25,123 +24,131 @@ Content-Transfer-Encoding: 7bit
 To: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
 Cc: Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
 
-On Fri, Aug 28, 2015 at 12:13 PM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
-> On Fri, Aug 28, 2015 at 09:26:17AM -0500, Rob Herring wrote:
->> On Fri, Aug 28, 2015 at 12:23 AM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
->> > During the Device Tree microconference at Linux Plumbers 2015, we had
->> > a short discussion about how to improve DT Binding Documentation. A
-
-[...]
-
->> > One caveat with YAML is it does not tolerate tabs. Yes, I said it.
->> > No tabs! This can be managed with proper editor modes and also with
->> > helper scripts to strip tabs to aid in people passing planned
->> > checkpatch.pl checks that would run YAML DT Binding specific tag
->> > validators for new bindings.
->>
->> What do parsers do with tabs? Throw an error?
+On Thu, Aug 27, 2015 at 10:23 PM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
+> During the Device Tree microconference at Linux Plumbers 2015, we had
+> a short discussion about how to improve DT Binding Documentation. A
+> number of issues were raised (again, as these things have been
+> discussed in the past) including:
 >
-> Yes, they throw an error. Keep in mind that most of what I used to start
-> are general purpose conversion tools on top of a particular scripting
-> languages's high level binding to libyaml. The error output leaves a
-> bit to be desired for our use case. In any case, when I was developing
-> the skeleton.yaml I used the yaml script from
-> https://github.com/ryo/yamltools to catch all these syntax errors I
-> was inserting..like tabs. the PyYaml binding being used in my PoC
-> dtgendoc does the same thing but I don't gracefully handle those
-> errors like we could.
+>         * Inconsistency between binding documents due to prose text
+>           format.
+>         * Inability to reliably machine read bindings for mass update
+>           or search.
+>         * Bit rot of bindings as new conventions are agreed upon but
+>           only new bindings are changed.
 >
->> Beyond tabs, how do we check files can be parsed both generically and
->> for any binding specific requirements. We now need a schema for
->> checking the schema. We need some equivalent to compile testing.
+> Grant Likely probably summed up the issue best with "...as long as
+> bindings are human readable, we'll have issues...".
+I'd rephrase that to "... as long as bindings are not machine readable,
+we'll have issues...".  Human readable and machine readable are not
+mutually exclusive.  XML is not, IMHO, human readable, but YAML looks
+pretty good, so I think it's a good choice.
+
+> The context
+> of that comment was, of course, regarding our current documents
+> written in very inconsistent prose style. When the topic of needing
+> the bindings in a rigid format was raised, there was general head
+> nodding that this was needed. It was noted that this has been
+> discussed many times before and nothing has been done.
 >
-> Right. So, I think what you are touching on is something I should
-> have expanded on in the TODO list. Basically, we need a scripted
-> tool that we run from checkpatch.pl that 1) reads the .yaml and
-> validates the YAML itself (that comes for free in the high level
-> parsers) reporting errors in a sensical manner 2) validates our
-> DT binding specific tags
-
-We all know that no one runs checkpatch.pl. ;) I really want the basic
-checking of the doc files to run from make (and run by 0-day). The
-tool dependency could be an issue though. However, DocBook builds from
-make and I don't think many people check that regularly. Then there is
-using the binding docs to check dts files. That should probably be
-part of the dtb building.
-
-> Now, I would caution about trying to do too much on Day 1 or we
-> could end up back at the "never doing anything" stage.
-
-Certainly, but I would like to have a plan for what Day 2 and 3 look like.
-
-> It would
-> be an improvement to simply check that the basic tags exist as
-> shown in the [R] or [O] fields in the documentation. One thing
-> I should point out is that I carefully avoided marking some tags
-> as [R] where existing bindings don't have them...even if logically,
-> a description should be required on every binding. The idea here
-> is to avoid updating content at the same time that we are updating
-> the format. Rather, I think it would be better to get the base
-> format updated, then come back with a janitorial team and add
-> descriptions (since now we can generate a worklist of those
-> bindings missing a top-level description) and systematically
-> fix those and review with the appropriate maintainers.
-
-Yes. Any checking would be a great improvement.
-
-[...]
-
->> > When we decide on a text markup format that is acceptable, then the
->> > next step is to convert all the bindings. That process would start
->> > with the complete set of generic bindings as they will be referenced
->> > by the actual device bindings.
->>
->> You are going to do that for everyone, right? ;)
+> My proposed solution to the problem is to convert all DT bindings
+> a rigid text markup format. In choosing a text markup language my
+> requirements were:
 >
-> Let's just say that I'm banking on others helping here once we have
-> a format agreed upon. If we can hold the binding doc schema definition
-> initially to just define tags for content that already exists in our
-> textual binding docs, the effort for conversion is tolerable. To give
-> an example, that phy-bindings.txt, it took 15 minutes to convert and
-> and pass through the yaml parser and dtgendoc. The reason is that it's
-> pure reformatting work. It doesn't take any special knowledge of the
-> hardware and it doesn't involve reviewing dts files to extra
-> additional information. Some of the annoyances can be streamlined
-> like tab stripping and handling the two space indentation to make
-> this process faster. One of my next things is to get a simple tool
-> going that reports problems with conversions, essentially what I
-> said was needed to integrate with checkpatch, so this process of
-> conversion is even faster. Trivial peripheral bindings like eeprom.txt
-> can be done in 5 minutes or so right now.
+>         1) Human readable
+>         2) Well documented
+>         3) Easy to translate to other data formats
+>         4) Well supported by tools and libraries
+>
+> After looking at a number of markup options, YAML stood out as the
+> one that meets all of these requirements. The YAML syntax is adopted
+> in many projects specifically because of the high level of readability.
+> A comprehensive spec is at http://www.yaml.org/spec/1.2/spec.html.
+> There's a number of tools to convert between YAML and other popular
+> data formats such as JSON and XML. XML was cited by Behan Webster
+> during the microconference as an important data format as the type
+> of developers that may produce comprehensive DTS Binding validation
+> tools will want to use XML. Every major scripting language has a
+> high level binding to the low level libyaml C library to facilitate
+> handling of YAML data files.
+>
+> One caveat with YAML is it does not tolerate tabs. Yes, I said it.
+> No tabs! This can be managed with proper editor modes and also with
+> helper scripts to strip tabs to aid in people passing planned
+> checkpatch.pl checks that would run YAML DT Binding specific tag
+> validators for new bindings.
 
-What if instead of using the docs as a starting point, we use dts
-files as a starting point? They give us something parse-able that we
-can do some automation with.
+This will be an endless source of pain.  Based on your examples,
+it looks like we only need a very small subset of YAML.  I'd be willing
+to write a parser for the language, but we might lose the ability to
+do conversions to other formats.  It depends on how comprehensive
+and automatic the helper scripts to strip tabs would be.
 
-Additionaly, perhaps we can do a mass conversion of all the doc files
-from txt to yaml where all the current text is converted to comments
-and we fill in boilerplate and whatever we can convert with some
-automation? The downside here would be it will be hard to tell which
-conversions are complete.
+>
+> The scope of the initial YAML DT Binding format was specifically
+> limited to supporting *only* the content we have in bindings today.
+> The idea here is to propose and agree on something that will take
+> us just a few steps in the right direction. If we move *all* current
+> binding content to a machine parseable format, additional features
+> can be added with more automation and scripting. As it stands today,
+> because of the inconsistency of the wording of the files, we can't
+> add a lot of new features to the content until we convert what we
+> have today into a standard format.
+>
+> With that said, it should be noted that some new features such as
+> "type" tags to indicate cell types could be added to support
+> additional DTS validation beyond what the current content supports.
+> Another possibility is adding "range" type information to validate
+> the legal values for a cell.
 
-Putting both together, we could then fairly easily for example extract
-compatible strings from dts files, lookup which doc file they are in
-and fill in the compatible string info.
+I would recommend we add type and something for value constraints.
+Even if we don't add populate those immediately, I think thinking
+through some of the possible uses will be helpful to avoid doing
+something dumb.
+'choices' or 'enums' seem frequently used.  I see lots of "must be one
+of..." in the binding docs I read.
 
-> If we decide we must have tags like "type:" in the initial binding
-> doc schema definition *and* we must add that content in each
-> conversion, then this becomes more time consuming to validate that
-> information against working dts files. IMHO, we'd be better off
-> to get the base format straight, addressing missing pieces like
-> all the compatible permutations, and convert them all with
-> just that content. After that, we come back and add new content
-> features like type: tagging. I'm trying to find a reasonable
-> place to do this incrementally since the volume of bindings to
-> convert is enormous.
+Another important thing to document would be a 'superclass' or
+'inherit-from' attribute, for things that are of a specific type (i2c,
+regulator, clock, etc.)
 
-I wouldn't say we have to add it, but we need to maintain type info.
+> This series is broken up into three major parts:
+>
+> 1) The documentation defining the YAML DT binding format
+> 2) A skeleton device binding example illustrating use of this format
+> 3) Some real binding conversions (eeprom.txt, phy-bindings.txt, and
+>    ti-phy.txt
+>
+> As a proof of concept of what can be done with a proper machine
+> readable DT binding source file, there's a simple markdown document
+> generator at https://github.com/konsulko/dtgendoc. Also, to see
+> actual output from the generator, the generated markdown from those
+> bindings is viewable at https://github.com/konsulko/dtgendoc/wiki
+>
+> There's a lot of other possibilities for validation tools using
+> only the data we have today in the bindings. In addition, Frank
+> Rowand covered some DT debug techniques that would benefit from
+> the binding documentation being 100% reliably searchable.
+>
+> I found it useful to see a side-by-side view of a converted doc
+> versus the original content, so here's a screenshot of eeprom.txt
+> vs. eeprom.yaml:
+> https://github.com/konsulko/dtgendoc/wiki#eepromtxt-vs-eepromyaml
+>
+> When we decide on a text markup format that is acceptable, then the
+> next step is to convert all the bindings. That process would start
+> with the complete set of generic bindings as they will be referenced
+> by the actual device bindings.
 
-Are you proposing we can actually validate dts files on day 1? That I
-would expect to come later.
+Although there are a lot of files to convert, I think the job is manageable,
+and can be done with conversion sprints at conferences and the like.
+You don't have to be a kernel 'C' coder to do a conversion, so I think
+a lot of non-traditional contributers can help out.  I'm already
+thinking about what could be done at an Embedded Linux Conference.
 
-Rob
+One thing that would help would be a conversion guide.  It would have
+things like: "if you see this type of language, put that in the
+description, some examples are ..."
+
+I'll have more comments on individual patches.
+ -- Tim
