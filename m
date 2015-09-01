@@ -1,22 +1,24 @@
 From: Tim Bird <tbird20d-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [RFC PATCH 0/5] DT binding documents using text markup
-Date: Tue, 1 Sep 2015 09:14:24 -0700
-Message-ID: <CA+bK7J5MriF95d2OGAZRT8PyJkK_x5r1J1yPq2Ke=SZkit6xHA@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/5] Documentation: dt-bindings: add documentation on
+ new DT binding format
+Date: Tue, 1 Sep 2015 09:59:14 -0700
+Message-ID: <CA+bK7J76Z6H4gh-UXxMWqUYrdRx1GYKFkAAtDUszpT_8k=RCQw@mail.gmail.com>
 References: <1440739433-6799-1-git-send-email-mporter@konsulko.com>
+	<1440739433-6799-2-git-send-email-mporter@konsulko.com>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20120113;
         h=mime-version:in-reply-to:references:date:message-id:subject:from:to
          :cc:content-type;
-        bh=kpCDMiUwGcQ5bpwv3N3pBOHtF8wJnMtyqBCJYCcvNgw=;
-        b=EjwRM8/HH2tdBytAe4GvblbXh4eVWcaljRnBroS+lEHo4SZ46ozOV0iQ8CIlg+eAk2
-         SWFYvwjhZd5VNlqbUOjR/gyMp0qd+t8eutwpaN0Ju7AO45yicBDqVZUfYYFqLF7pGExH
-         aBGJzrJtyhjYyMCK94RBkUqhEkBMmVyDFoUGMwn6E4SRowwwTX4cZ4h6S3BAbUWDue3V
-         PkCIbrkZX5QD0vTUH5JF9TwNnmtVYz9uu2ClZFX5t+y6yH/1TS0Vn87v+p69WHWv480G
-         UC626qj6q3XXuiRjimRCbBBbbNFGvR9iVTtN3NaAd4GpDkLAWVOjP2uiagu8lpXq5NYr
-         4J4w==
-In-Reply-To: <1440739433-6799-1-git-send-email-mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+        bh=+hcS+NaAmTXW7nDnfn3HW+07OeEkmtDOsPToikwkIFY=;
+        b=iP7vPokwLPnNwuY1ORSP2iRZIGReRiBu0P2U6RqDA2WOjLnFIYJNpoA+LJamx1YUgm
+         z67PrPv3xTFH0hno2+mIPzzJdQ5FFpA7zVrXSye09OOG9fZHd3YbMJxPfhpI0Btfi6hG
+         9FdSbEO/0tK96+OSOMLffOEEG6fjAMXqbtwtWKUV90Dyfir+xt7gIz4PRCzDvKtPydBm
+         klPPaXnl5Nwigt2kDyrDudFjVN+8cDasloebn9zvEw0joRXmGJhIDQvSYEaTQrdL3/gv
+         VFUldRiA3Y80cBbKXG00DL5eGHMFSlXzg/hZOX0W5l7gWxKN2pL64kqHnP+eWWhStjhV
+         /G5Q==
+In-Reply-To: <1440739433-6799-2-git-send-email-mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
@@ -25,130 +27,194 @@ To: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
 Cc: Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
 
 On Thu, Aug 27, 2015 at 10:23 PM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
-> During the Device Tree microconference at Linux Plumbers 2015, we had
-> a short discussion about how to improve DT Binding Documentation. A
-> number of issues were raised (again, as these things have been
-> discussed in the past) including:
+> Documentation explaining the syntax and format of the YAML-based DT binding
+> documentation.
 >
->         * Inconsistency between binding documents due to prose text
->           format.
->         * Inability to reliably machine read bindings for mass update
->           or search.
->         * Bit rot of bindings as new conventions are agreed upon but
->           only new bindings are changed.
+> Signed-off-by: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+> ---
+>  .../devicetree/bindings/dt-binding-format.txt      | 106 +++++++++++++++++++++
+>  1 file changed, 106 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/dt-binding-format.txt
 >
-> Grant Likely probably summed up the issue best with "...as long as
-> bindings are human readable, we'll have issues...".
-I'd rephrase that to "... as long as bindings are not machine readable,
-we'll have issues...".  Human readable and machine readable are not
-mutually exclusive.  XML is not, IMHO, human readable, but YAML looks
-pretty good, so I think it's a good choice.
+> diff --git a/Documentation/devicetree/bindings/dt-binding-format.txt b/Documentation/devicetree/bindings/dt-binding-format.txt
+> new file mode 100644
+> index 0000000..f9acc22
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/dt-binding-format.txt
+> @@ -0,0 +1,106 @@
+> +--------------------------
+> +Device Tree Binding Format
+> +--------------------------
+> +
+> +Background
+> +----------
+> +
+> +DT bindings historically were written as text in prose format which
+> +led to issues in usability of that source documentation. Some of
+> +these issues include the need to programmatically process binding
+> +source documentation to do DTS validation, perform mass updates to
+> +format/style, and to generate publishable documentation in HTML or
+> +PDF form.
+> +
+> +Overview
+> +--------
+> +
+> +The DT binding format is based on the YAML text markup language.
+> +Although there are many text markup options available, YAML
+> +fulfills all requirements considered for a DT binding source format
+> +which include:
+> +
+> +1) Must be human readable
+> +2) Must be easily translated to other data formats (XML, JSON, etc).
+> +3) Must have sufficient tools and libraries to enable developers to
+> +   build new tools for DT binding processing
+> +4) Must have a complete spec to refer to syntax
+> +
+> +YAML is documentated in the specification found at
+> +http://www.yaml.org/spec/1.2/spec.html
+> +
+> +The required YAML DT binding tag format and syntax are defined in
+> +the following sections.
+> +
+> +YAML DT Binding Syntax
+> +----------------------
+> +
+> +* Lines starting with "#" are comments and not part of the binding itself
+> +* "%YAML 1.2" starts a file, indicating the version of YAML in use
 
-> The context
-> of that comment was, of course, regarding our current documents
-> written in very inconsistent prose style. When the topic of needing
-> the bindings in a rigid format was raised, there was general head
-> nodding that this was needed. It was noted that this has been
-> discussed many times before and nothing has been done.
->
-> My proposed solution to the problem is to convert all DT bindings
-> a rigid text markup format. In choosing a text markup language my
-> requirements were:
->
->         1) Human readable
->         2) Well documented
->         3) Easy to translate to other data formats
->         4) Well supported by tools and libraries
->
-> After looking at a number of markup options, YAML stood out as the
-> one that meets all of these requirements. The YAML syntax is adopted
-> in many projects specifically because of the high level of readability.
-> A comprehensive spec is at http://www.yaml.org/spec/1.2/spec.html.
-> There's a number of tools to convert between YAML and other popular
-> data formats such as JSON and XML. XML was cited by Behan Webster
-> during the microconference as an important data format as the type
-> of developers that may produce comprehensive DTS Binding validation
-> tools will want to use XML. Every major scripting language has a
-> high level binding to the low level libyaml C library to facilitate
-> handling of YAML data files.
->
-> One caveat with YAML is it does not tolerate tabs. Yes, I said it.
-> No tabs! This can be managed with proper editor modes and also with
-> helper scripts to strip tabs to aid in people passing planned
-> checkpatch.pl checks that would run YAML DT Binding specific tag
-> validators for new bindings.
+I think it would be good to specify a DT Binding Format version as well.
+I would expect we may expand the syntax, or we may alter it, so it
+would be good to have a number for our specific syntax.  This would
+help in some circumstances, if we make multiple passes over the
+documents to achieve our conversion.  Maybe this should be added
+below.
 
-This will be an endless source of pain.  Based on your examples,
-it looks like we only need a very small subset of YAML.  I'd be willing
-to write a parser for the language, but we might lose the ability to
-do conversions to other formats.  It depends on how comprehensive
-and automatic the helper scripts to strip tabs would be.
+> +* "---" starts a binding document
+> +* "..." ends a binding document
+> +* Multiple binding documents may exist in a single file
+> +* Tabs are not permitted
+> +* Scope is denoted by indentation of two spaces
+> +* Key value pairs are denoted by "key: value"
+> +* Sequences are denoted by "- "
+> +* Scalar values may convert newlines to spaces and preserve blank
+> +  lines for long description formatting using ">"
+> +* Scalar values may escape all reserved characters and preserve
+> +  newlines by using "|" to denote literal style
+> +
+> +For additional information on YAML syntax, refer to the specification
+> +at http://www.yaml.org/spec/1.2/spec.html
+> +
+> +YAML DT Binding Format
+> +----------------------
+> +
+> +The following YAML types are supported in the DT binding format:
+> +
 
->
-> The scope of the initial YAML DT Binding format was specifically
-> limited to supporting *only* the content we have in bindings today.
-> The idea here is to propose and agree on something that will take
-> us just a few steps in the right direction. If we move *all* current
-> binding content to a machine parseable format, additional features
-> can be added with more automation and scripting. As it stands today,
-> because of the inconsistency of the wording of the files, we can't
-> add a lot of new features to the content until we convert what we
-> have today into a standard format.
->
-> With that said, it should be noted that some new features such as
-> "type" tags to indicate cell types could be added to support
-> additional DTS validation beyond what the current content supports.
-> Another possibility is adding "range" type information to validate
-> the legal values for a cell.
+Based on my comment above, I recommend:
+[R] binding-format: 1
 
-I would recommend we add type and something for value constraints.
-Even if we don't add populate those immediately, I think thinking
-through some of the possible uses will be helpful to avoid doing
-something dumb.
-'choices' or 'enums' seem frequently used.  I see lots of "must be one
-of..." in the binding docs I read.
+> +* [R] id: unique identifier in property form (e.g. skel-device)
+> +
+> +* [R] title: title of the binding
+> +
+> +* [O] maintainer: sequence of maintainers
+> +      [R] name: name and email of maintainer or mailing list in RFC822
+> +                form.
+> +
+> +* [O] description: full description of the binding
+> +
+> +* [O] compatible: sequence of valid compatible descriptors
+> +      [R] name: the compatible string surrounded in double quotes
+> +      [O] deprecated: a deprecated compatible string surrounded in
+> +                      double quotes
+> +      [O] description: description of the compatible string
 
-Another important thing to document would be a 'superclass' or
-'inherit-from' attribute, for things that are of a specific type (i2c,
-regulator, clock, etc.)
+compatible is a property like all the others, and I think it's confusing
+to have it in a separate section.  For example, when listing other
+properties, the "name:" field specifies the property name, but for
+the compatible section the "name:" field specifies the possible values
+for the compatible property.  This is (at least to me) quite confusing.
 
-> This series is broken up into three major parts:
->
-> 1) The documentation defining the YAML DT binding format
-> 2) A skeleton device binding example illustrating use of this format
-> 3) Some real binding conversions (eeprom.txt, phy-bindings.txt, and
->    ti-phy.txt
->
-> As a proof of concept of what can be done with a proper machine
-> readable DT binding source file, there's a simple markdown document
-> generator at https://github.com/konsulko/dtgendoc. Also, to see
-> actual output from the generator, the generated markdown from those
-> bindings is viewable at https://github.com/konsulko/dtgendoc/wiki
->
-> There's a lot of other possibilities for validation tools using
-> only the data we have today in the bindings. In addition, Frank
-> Rowand covered some DT debug techniques that would benefit from
-> the binding documentation being 100% reliably searchable.
->
-> I found it useful to see a side-by-side view of a converted doc
-> versus the original content, so here's a screenshot of eeprom.txt
-> vs. eeprom.yaml:
-> https://github.com/konsulko/dtgendoc/wiki#eepromtxt-vs-eepromyaml
->
-> When we decide on a text markup format that is acceptable, then the
-> next step is to convert all the bindings. That process would start
-> with the complete set of generic bindings as they will be referenced
-> by the actual device bindings.
+Can we make this a regular property, with an option 'deprecated' attribute.
+I guess we may need to distinguish between deprecated properties and
+deprecated vales of properties.
+The above 'deprecated' specifies deprecated values for the compatible
+property, while
+the section below specifies deprecated properties.  I don't see a way
+to indicate a deprecated
+value for a still-existing property, but that may be too much detail for now.
 
-Although there are a lot of files to convert, I think the job is manageable,
-and can be done with conversion sprints at conferences and the like.
-You don't have to be a kernel 'C' coder to do a conversion, so I think
-a lot of non-traditional contributers can help out.  I'm already
-thinking about what could be done at an Embedded Linux Conference.
 
-One thing that would help would be a conversion guide.  It would have
-things like: "if you see this type of language, put that in the
-description, some examples are ..."
+> +* [O] required: sequence of required properties:
+> +      [R] name: name of the property surrounded in double quotes
+> +      [R] description: description of the property
+> +      [O] reference: optional reference to a binding id
 
-I'll have more comments on individual patches.
+I would recommend we add types and value constraints to the
+binding schema:
+
+[O] type: type of value for this property, and if specified must be
+one of the following (without quotes):
+"string", "number", "array", "phandle"
+[O] value constraint: specifies a limit on the value for a property.
+This can be specified as English text, or be a range or choice constraint.
+The latter two should be expressed with the following exact english
+phrases (without quotes):
+"must be in the range x to y, inclusive"
+where x and y are numbers
+"must be one of <choice 1>, <choice 2>, ..."
+where <choice x> is a string, which should be quoted
+if it includes a comma.
+
+Any other constraint is expressed in free-form English text
+
+I would recommend adding these to this binding schema doc, but
+not requiring them on the first conversion pass of the docs.
+
+Basically my idea is that you want the each pass over the binding
+documents to be as painless as possible.  Every time a user encounters
+something they're not sure about, it will slow them down.  There will
+be lots of ambiguous situations, and we want the process to be as
+lossless as possible, so I would recommend a strategy of doing as
+much as people can, and if in doubt just put any outstanding text
+in the descriptions.  The descriptions will always be free-form text,
+and we can come along later and convert these to types, constraints,
+as we see fit.
+
+> +* [O] optional: sequence of optional properties:
+> +      [R] name: name of the property surrounded in double quotes
+> +      [R] description: description of the property
+> +      [O] reference: optional reference to a binding id
+> +
+> +* [O] deprecated: sequence of deprecated properties:
+> +      [R] name: name of the property surrounded in double quotes
+> +      [R] description: description of the property
+> +      [O] reference: optional reference to a binding id
+> +
+> +* [R] example: sequence of examples:
+> +      [R] dts: DT source of example usage. The example text must use
+> +               literal style ("|") so that it retains indentation and
+> +               newlines.
+> +      [O] description: description of the example
+> +
+
+I'd recommend having a top-level notes section:
+* [O] note: any other notes about this node that are not covered by
+preceding property descriptions.
+
+> +Note: [R] and [O] denote required and optional fields, respectively.
+
+I'd put this note before the format description.
+
  -- Tim
+
+> +
+> +Skeleton Binding
+> +----------------
+> +
+> +The skeleton.yaml binding found in the top of the DT binding tree
+> +is the canonical example of syntax and format to use when writing
+> +a DT binding document. It is maintained with the latest formatting
+> +conventions, making it the best starting point when writing a new DT
+> +binding.
+> --
