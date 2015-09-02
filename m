@@ -1,84 +1,62 @@
-From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [RFC PATCH 0/5] DT binding documents using text markup
-Date: Tue, 1 Sep 2015 13:24:17 -0500
-Message-ID: <CAL_Jsq+7NQdZivTpwRDwcGrCzpcQQoV5gvSkjz3NNOWNXdBhMA@mail.gmail.com>
+From: Nicolas Ferre <nicolas.ferre-AIFe0yeh4nAAvxtiuMwx3w@public.gmane.org>
+Subject: Re: [RFC PATCH 2/5] Documentation: dt-bindings: add example DT
+ binding document
+Date: Wed, 2 Sep 2015 10:45:13 +0200
+Message-ID: <55E6B719.6080203@atmel.com>
 References: <1440739433-6799-1-git-send-email-mporter@konsulko.com>
- <CAL_Jsq+qCJfLYxVfyQ4gAxPWLZ2=WNa0H21+cRcBi7dGVG0PMA@mail.gmail.com>
- <20150828171323.GA24203@beef> <CA+bK7J4Ha55oFhCYDnUcBu8ZHCP3ReB6B=7Y9Fw7CknxPcaoWQ@mail.gmail.com>
- <55E5E1E2.6040607@gmail.com> <CA+bK7J6kErnKPHs=r+X9T8KBn45HptPmtMe31CoapunKpuY34Q@mail.gmail.com>
+ <1440739433-6799-3-git-send-email-mporter@konsulko.com>
+ <CAL_Jsq+FE4MCCfZC5hDhQBmM1gHibY82S9a8PC1GwsnWsPNxkg@mail.gmail.com>
+ <CA+bK7J4x2vY-tzUFWjM9KFMtvE+qW6jzmz=ZxWU9L8Mpe8Lduw@mail.gmail.com>
 Mime-Version: 1.0
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc:content-type;
-        bh=UHrXpx+WOqbvue2OPRJfOu7B9xiS/7AAkhizyhNPn/U=;
-        b=Sf8/1OFhggBODaOc0mWUndo74qVYl5xqPqLU1+cwEMxPIV8UDD6fSRRfcUtTw8OukY
-         e0T9Y35nGgjDi1SViYhX+dy4VVoR3lkb7mYM/LYbRrcPBnkgTEyGhm9vpJrINa2/9iHH
-         0tKSUDRp+SEJ4ur4U1USxEzBzyPmkPGybaRbNB1f/jKe1d+XI4HiUQw7dWXm7mY2cZT5
-         1flzfpUdqKCR1FzkquoT4m/4RrDQ0OQJ3TDslDiznFRoS1grDbXRZn+vs+PmT/YC0H6g
-         3+evgN+OuExe54YA6sr4p/bh+dcanm217wtizW+k6k3nkrVGDouy09fBfRvNkVsDk1Vx
-         krbw==
-In-Reply-To: <CA+bK7J6kErnKPHs=r+X9T8KBn45HptPmtMe31CoapunKpuY34Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+In-Reply-To: <CA+bK7J4x2vY-tzUFWjM9KFMtvE+qW6jzmz=ZxWU9L8Mpe8Lduw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Tim Bird <tbird20d-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
+Content-Type: text/plain; charset="iso-8859-1"
+To: Tim Bird <tbird20d-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
 
-On Tue, Sep 1, 2015 at 1:03 PM, Tim Bird <tbird20d-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
-> On Tue, Sep 1, 2015 at 10:35 AM, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
->> On 9/1/2015 10:14 AM, Tim Bird wrote:
->>> On Fri, Aug 28, 2015 at 10:13 AM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
+Le 01/09/2015 19:35, Tim Bird a =C3=A9crit :
+> On Fri, Aug 28, 2015 at 7:53 AM, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> =
+wrote:
+>> On Fri, Aug 28, 2015 at 12:23 AM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>=
+ wrote:
+> ...
+>>> +example:
+>>> +  - dts: |
+>>> +      sk11@0 {
+>>> +              compatible =3D "skel,sk11";
+>>> +              reg =3D <0>;
+>>> +              spi-max-frequency =3D <1000000>;
+>>> +              spi-cs-high;
+>>> +      };
 >>
->> < snip >
->>
->>>>
->>>> But to answer your question, if we get a format I'll do
->>>> conversions and hope I'm not alone.
->>>
->>> I'm sure others will help out.  I will, and I'm pretty sure we can get
->>> some conversion sprints set up at conferences (I know I can set aside
->>> some time or resources at ELC in the spring - it might be too late for
->>> ELCE in October to set up a scheduled block of time, but we can start
->>> getting the word out.)  As I said in my other e-mail, one doesn't have
->>> to be a kernel coder to do this, and the conversions should be pretty
->>> straight-forward.
->>>  -- Tim
->>>
->>
->> A conversion sprint at ELCE sounds like a good idea if we can find a
->> good time to schedule it.  I can help, so there will be at least two
->> of us who can help people as they encounter issues.
->
-> Even if we don't find a block of time, we can do something like
-> announce a "contest", ask people to do something in their spare time,
-> and find some way to get them a raffle ticket if they submit a patch
-> with a conversion.  Then hold an extra prize drawing during the
-> closing session, with just those raffle tickets, and give someone a
-> nice award for contributing.  Of course, there's always the adage that
-> you should be careful what you measure and reward...  We don't want a
-> flood of crappy conversions, with a time constraint on the review.
-> I'll think some more about this.  An alternative would be to have a
-> contest announced ahead of the event, with enough time for people to
-> submit and get reviewed.
+>> At least in this example, we could generate it. Examples are nice, b=
+ut
+>> we have dts files full of examples already. I get a fair number of
+>> "fix the example" patches, so maybe we should eliminate the simple
+>> ones.
+>=20
+> I would hesitate to eliminate examples.  I've been saved by them on
+> a few occasions, when the dts files only had one or two instances
+> of a type of binding, somewhat different from each other, and the exa=
+mple helped
+> break the tie.  If there's something wrong with the example, it's a s=
+ign
+> of an out-of-date binding doc, just as much as if the text were wrong=
+=2E
+> It ought to be possible to validate the example versus the binding do=
+c
+> (as Pantelis says), so ultimately we should be able to catch errors h=
+ere
+> as well.
 
-Sounds like a review nightmare. That's another reason why as much
-automated conversion we can do, the better.
+I back Tim's advice.
+Example are so important that I regularly find myself thinking "ah-ha,
+okay that's supposed to work like that" after having read the binding
+documentation.
 
-> By the way - I presume the new docs will replace the existing ones,
-> but I could imagine wanting to have them live side-by-side
-> temporarily.  Any thoughts on this?  Will file name or location
-> changes be allowed during the conversion?
-
-I proposed some ideas earlier in the thread. Either we can have both
-side by side or do a mass conversion to YAML making the existing doc a
-comment (add # prefix).
-
-Any renames/moving should be separate (there's some clean-up I'd like
-to there as well). Exact rules depend on the approach, but we need to
-be able to tell which bindings conversions are not started, in
-progress, or complete.
-
-Rob
+Bye,
+--=20
+Nicolas Ferre
