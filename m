@@ -1,108 +1,94 @@
-From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+From: Lee Jones <lee.jones-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 Subject: Re: st_fdma: Firmware filename in DT?
-Date: Thu, 3 Sep 2015 16:45:35 -0500
-Message-ID: <CAL_JsqKQqbAQCPR6xuR2Ke5gEdX4kQYb29-W3qNaZqjM_JBoYg@mail.gmail.com>
+Date: Fri, 4 Sep 2015 07:59:16 +0100
+Message-ID: <20150904065916.GZ4796@x1>
 References: <20150903144944.GC7093@griffinp-ThinkPad-X1-Carbon-2nd>
+ <CAL_JsqKQqbAQCPR6xuR2Ke5gEdX4kQYb29-W3qNaZqjM_JBoYg@mail.gmail.com>
 Mime-Version: 1.0
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc:content-type;
-        bh=MZ39FuofWA5IQqL8BBwyNHt5F6O8FFjmU3qfBJIIvvU=;
-        b=BO3GnaaKDUiWyBZgt/cL3OYe759ODiGRIfziLrjP2LlzyToKJB8Wirz2WQnK95l/uB
-         F8N1J2RQjiMqc8J1+KroJatf/G0IKHAhjFO1gQMdN35/PFNCJpe9/W6VCayIL+kmG00g
-         EJCxRJkxRlfRN9KEVd34pditBqFs9p9IT0XBdBSND2gyAs4qAEwcUFHJtQZHjlwkrWAZ
-         uLCSN6dz/FRAM1bS2flUZ8nfNoVYh7AphablsBZSvSJY0NKx/P2mWFAWEGtXwQy8wBUs
-         SYjDeehgagFjUUEoQgTon/1opY2njp3bpEP8LGdh6BkNE7JyyTV+9bmwfDxCRLEbSvdv
-         vzhA==
-In-Reply-To: <20150903144944.GC7093@griffinp-ThinkPad-X1-Carbon-2nd>
+Content-Disposition: inline
+In-Reply-To: <CAL_JsqKQqbAQCPR6xuR2Ke5gEdX4kQYb29-W3qNaZqjM_JBoYg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Peter Griffin <peter.griffin-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Cc: Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Lee Jones <lee.jones-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Vinod Koul <vinod.koul-ral2JQCrhuEAvxtiuMwx3w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Maxime Coquelin <maxime.coquelin-qxv4g6HH51o@public.gmane.org>, Patrice Chotard <patrice.chotard-qxv4g6HH51o@public.gmane.org>, Ludovic Barre <ludovic.barre-qxv4g6HH51o@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Type: text/plain; charset="utf-8"
+To: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: Peter Griffin <peter.griffin-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Vinod Koul <vinod.koul-ral2JQCrhuEAvxtiuMwx3w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Maxime Coquelin <maxime.coquelin-qxv4g6HH51o@public.gmane.org>, Patrice Chotard <patrice.chotard-qxv4g6HH51o@public.gmane.org>, Ludovic Barre <ludovic.barre-qxv4g6HH51o@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-+devicetree-spec as a good question to separate from the fire hose.
+[...]
 
-On Thu, Sep 3, 2015 at 9:49 AM, Peter Griffin <peter.griffin-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> wrote:
-> Hi Rob, Pawel, Mark, Ian and Kumar,
->
-> Quick question regarding this series here
-> https://lkml.org/lkml/2015/7/8/832. and the proposed
-> st,fw-name binding.
+> > If yes, is it worth having a generic binding?
+>=20
+> If we decide it is a good idea, then yes. It doesn't look that hard t=
+o
+> arrive at something common.
+>=20
+> Strictly speaking, the firmware name is just an agreed upon name
+> between the kernel and userspace. So why tie that into DT? Would othe=
+r
+> OS's use it or want something different? What if we started including
+> paths in the names like <soc>/<firmware file>? Now we are imposing a
+> directory structure on the OS filesystem.
 
-Thanks for looking at the bigger picture.
+In Linux we have a standard place for firmwares, so the path should
+not be required.  I certainly agree that DT is no place for absolute
+paths or OS'isums.
 
-> What are the rules with putting firmware names into DT?
+[...]
 
-Whatever you can sneak in without DT maintainers noticing...
+> > Presumably the alternative would be to add a whole bunch of compati=
+bles
+> > in the driver for each SoC, where the only difference from a
+> > functional point of view would be to help build the correct string =
+for
+> > the firmware filename. However I'm also then wondering what the bes=
+t way
+> > would be to find out the instance name of the IP.
+>=20
+> If the name/path is Linux specific, then that is probably what we sho=
+uld do.
+>=20
+> You could perhaps make a policy that firmware files be named by
+> compatible string. So rather than translating from matching compatibl=
+e
+> to an arbitrary file name, you enforce file name is "<vendor>,<ip
+> block>.fw" or something. I know we don't have policy in the kernel,
+> but we already have it with hardcoded file names and search paths.
 
-> Is it allowed?
+Absolutely not.  Firmwares have no direct link to DT or platforms that
+run DT specifically.  They are carried by most platforms these days.
+Insisting on firmwares using a DT compatible string format is way off.
 
-They are already there as you have found, so yes. But should they be
-allowed? Possibly. I'm not saying no, but do have some concerns.
+If we flip it the other way round, some subsystems derive the firmware
+name from the 'node name'.  For instance, our zeroth General Purpose
+Co-Processor RemoteProc driver has a corresponding node called
+'st231-gp0@40000000'.  RemoteProc adds an 'rproc-' prefix and a '-fw'
+suffix and et voil=C3=A0, we load file:
 
-> If yes, is it worth having a generic binding?
+  lib/firmware/rproc-st231-gp0-fw
 
-If we decide it is a good idea, then yes. It doesn't look that hard to
-arrive at something common.
+> > We could do it by parsing the node name e.g. fdma0-audio, or by add=
+ing
+> > a "instance" DT property to the node?
+>=20
+> Generally we try to avoid caring about node names. Having some index
+> or numbering also comes up which we also try to avoid. Generally, if
+> you care about which instance you use for something, then there is
+> some property you care about and should add.
 
-Strictly speaking, the firmware name is just an agreed upon name
-between the kernel and userspace. So why tie that into DT? Would other
-OS's use it or want something different? What if we started including
-paths in the names like <soc>/<firmware file>? Now we are imposing a
-directory structure on the OS filesystem.
+Right, the alternative is a property like the ones already used.
+However, as these are becoming more prevalent I suggested
+standardising the property to avoid all these vendor specific firmware
+properties cluttering up the place.
 
-We'd also need to consider firmware that is needed to boot. In that
-case, we could include firmware binary directly in the dtb. I think
-that has been done before, but not in any standard way. u-boot FIT
-images happen to be DTBs containing mostly binary blobs.
+  firmware =3D "firmwarename.fw";
+OR
+  firmware-name =3D "firmwarename.fw";
 
-> From what I can see TI are using: -
->     ti,pm-firmware in wkup_m3_rproc.c
->
-> and Freescale are using: -
->     fsl,sdma-ram-script-name in imx-sdma.c
->
-> So other platforms seem to be putting firmware names into DT,
-> there are probably other examples.
->
-> Most other STi drivers keep the firmware name in the C code, which is
-> usually my first preference. However with fdma it is more complicated
-> as there are seperate firmware files for each instance of the IP block.
->
-> Currently also the same IP block "fdma_mpe31" is used on a number
-> of different SoC's but each firmware is named: -
->
->  fdma_<SoC>_<instancenum>.elf
->
-> e.g. fdma_STiH407_0.elf
->
-> So currently all we need to provide is a different firmware name in DT
-> for the new SoC and the driver "just works".
->
-> Presumably the alternative would be to add a whole bunch of compatibles
-> in the driver for each SoC, where the only difference from a
-> functional point of view would be to help build the correct string for
-> the firmware filename. However I'm also then wondering what the best way
-> would be to find out the instance name of the IP.
+=2E.. seems appropriate.
 
-If the name/path is Linux specific, then that is probably what we should do.
-
-You could perhaps make a policy that firmware files be named by
-compatible string. So rather than translating from matching compatible
-to an arbitrary file name, you enforce file name is "<vendor>,<ip
-block>.fw" or something. I know we don't have policy in the kernel,
-but we already have it with hardcoded file names and search paths.
-
-> We could do it by parsing the node name e.g. fdma0-audio, or by adding
-> a "instance" DT property to the node?
-
-Generally we try to avoid caring about node names. Having some index
-or numbering also comes up which we also try to avoid. Generally, if
-you care about which instance you use for something, then there is
-some property you care about and should add.
-
-Rob
+--=20
+Lee Jones
+Linaro STMicroelectronics Landing Team Lead
+Linaro.org =E2=94=82 Open source software for ARM SoCs
+=46ollow Linaro: Facebook | Twitter | Blog
