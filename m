@@ -1,103 +1,108 @@
-From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+From: Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>
 Subject: Re: st_fdma: Firmware filename in DT?
-Date: Fri, 4 Sep 2015 14:04:55 -0500
-Message-ID: <CAL_Jsq+bw1TcXt0c8L4BSvwWK82L2cG-qdw369EkvxWe-5RXbQ@mail.gmail.com>
-References: <20150903144944.GC7093@griffinp-ThinkPad-X1-Carbon-2nd>
- <CAL_JsqKQqbAQCPR6xuR2Ke5gEdX4kQYb29-W3qNaZqjM_JBoYg@mail.gmail.com>
- <20150904065916.GZ4796@x1> <20150904092005.GA2990@griffinp-ThinkPad-X1-Carbon-2nd>
- <20150904102130.GA4796@x1> <5E0DCAA5-DB90-4682-92F2-061A07FE973E@bsdimp.com>
+Date: Sat, 5 Sep 2015 11:17:59 +0200
+Message-ID: <201509051117.59751.arnd@arndb.de>
+References: <20150903144944.GC7093@griffinp-ThinkPad-X1-Carbon-2nd> <201509041504.38412.arnd@arndb.de> <20150904132617.GB4796@x1>
 Mime-Version: 1.0
 Content-Transfer-Encoding: QUOTED-PRINTABLE
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc:content-type:content-transfer-encoding;
-        bh=pFcVpmfmlCVXkNltNyA/pstKCdAnK5G+WlZAje5rdx8=;
-        b=nAFtz6tWjm5dXACNDwXG6XnnTIeObkQ2i6SlnkwzigcIxQpqZZIaqNa/6/N4IV6GZw
-         a9jP/ttp5wuIV2FfccTf1uXwXZrKfKGLZF07d83nEbpE8yBbpJI4e8PChrgqGgz/wqh6
-         rPzsPB0PiheqxEh4uvV1bYWSr57k9rWQtP9+I92NtGMoBKlPeahsjzVA9YsExzy8cERY
-         4GYtNFnVoE0wN7v4Lt7b7WB8lTXB7hB6wxDPc5VmjjFqk4UIIXM4NQgZp2lrk0vRhAke
-         IH+IH+78xkHWeNKTpiEgpsCKNELZtHRo7Gg1e5VyZcp5+eg9GxGw+fcQKZZSzCYgUrcN
-         PvBQ==
-In-Reply-To: <5E0DCAA5-DB90-4682-92F2-061A07FE973E-uzTCJ5RojNnQT0dZR+AlfA@public.gmane.org>
+In-Reply-To: <20150904132617.GB4796@x1>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-To: Warner Losh <imp-uzTCJ5RojNnQT0dZR+AlfA@public.gmane.org>
-Cc: Lee Jones <lee.jones-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Peter Griffin <peter.griffin-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Vinod Koul <vinod.koul-ral2JQCrhuEAvxtiuMwx3w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Maxime Coquelin <maxime.coquelin-qxv4g6HH51o@public.gmane.org>, Patrice Chotard <patrice.chotard-qxv4g6HH51o@public.gmane.org>, Ludovic Barre <ludovic.barre-qxv4g6HH51o@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Type: Text/Plain; charset="iso-8859-1"
+To: Lee Jones <lee.jones-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Cc: Peter Griffin <peter.griffin-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Vinod Koul <vinod.koul-ral2JQCrhuEAvxtiuMwx3w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Maxime Coquelin <maxime.coquelin-qxv4g6HH51o@public.gmane.org>, Patrice Chotard <patrice.chotard-qxv4g6HH51o@public.gmane.org>, Ludovic Barre <ludovic.barre-qxv4g6HH51o@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-On Fri, Sep 4, 2015 at 9:27 AM, Warner Losh <imp-uzTCJ5RojNnQT0dZR+AlfA@public.gmane.org> wrote:
->
->> On Sep 4, 2015, at 4:21 AM, Lee Jones <lee.jones-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> wrote:
->>
->>>>>> We could do it by parsing the node name e.g. fdma0-audio, or by =
-adding
->>>>>> a "instance" DT property to the node?
->>>>>
->>>>> Generally we try to avoid caring about node names. Having some in=
-dex
->>>>> or numbering also comes up which we also try to avoid. Generally,=
- if
->>>>> you care about which instance you use for something, then there i=
+On Friday 04 September 2015, Lee Jones wrote:
+> On Fri, 04 Sep 2015, Arnd Bergmann wrote:
+>=20
+> > On Friday 04 September 2015, Lee Jones wrote:
+> > > > > If we flip it the other way round, some subsystems derive the=
+ firmware
+> > > > > name from the 'node name'.  For instance, our zeroth General =
+Purpose
+> > > > > Co-Processor RemoteProc driver has a corresponding node calle=
+d
+> > > > > 'st231-gp0@40000000'.  RemoteProc adds an 'rproc-' prefix and=
+ a '-fw'
+> > > > > suffix and et voil=C3=A0, we load file:
+> > > > >=20
+> > > > >   lib/firmware/rproc-st231-gp0-fw
+> > > >=20
+> > > > IMO deriving from the node name seems fragile. Also imposing a =
+linux'ism
+> > > > "rproc" prefix on the firmware name doesn't seem correct as the=
+ firmwares
+> > > > can be shared across OS's. Although this is how remoteproc subs=
+ys core
+> > > > is currently working. It seems a generic DT firmware binding wo=
+uld actually
+> > > > be most useful for the remoteproc subsystem.
+> > >=20
+> > > The "rproc-%s-fw", where %s =3D=3D driver name, is only a fall-ba=
+ck.  The
+> > > RProc driver is welcome to supply a different firmware name if it
+> > > desires.  This is where I think a generic 'firmware' property wou=
+ld be
+> > > of use.
+> >=20
+> > The firmware file name is agreed on between the device driver and t=
+he
+> > file system, so encoding the linux driver name in it seems appropri=
+ate.
+> >=20
+> > Generally speaking, I'd say a good policy would be to try basing
+> > the firmware name on the "compatible" property strings. That proper=
+ty
+> > already contains a hierarchical list of models, which makes it part=
+icularly
+> > easy to have firmware files for specific models or those that are s=
+hared
+> > across multiple variations if necessary. Just ask for the most spec=
+ific
+> > compatible string first and try the more specific compatible string=
 s
->>>>> some property you care about and should add.
->>>>
->>>> Right, the alternative is a property like the ones already used.
->>>> However, as these are becoming more prevalent I suggested
->>>> standardising the property to avoid all these vendor specific firm=
-ware
->>>> properties cluttering up the place.
->>>
->>> I agree a proliferation of vendor specific firmware properties isn'=
-t
->>> s good way forward.
->>>
->>>>  firmware =3D "firmwarename.fw";
->>>> OR
->>>>  firmware-name =3D "firmwarename.fw";
->>>>
->>>> ... seems appropriate.
->>>
->>> Either of those is fine with me.
->>
->> Just need a DT nod and I'll happily code it up.
->
-> From a FreeBSD perspective, having a filename for the firmware to
-> load for this node is fine. It doesn=E2=80=99t impose a substantial b=
-urden on
-> the OS so long as the choices of where that file lives is up to the O=
-S
-> and not encoded in the property. A note saying =E2=80=98this firmware=
- should
-> be loaded=E2=80=99 seems a reasonable description of the hardware sin=
-ce
-> the DT tells us many things about the device, and those things may
-> well be dependent on which firmware is loaded. Having an explicit
-> name is good since it helps insulate from DT and doesn=E2=80=99t forc=
-e vendors
-> to do silly renames. It also allows for multiple devices of the same
-> type to have different firmware loaded.
->
-> FreeBSD would generally put these things in /boot/firmware and
-> it has a generalized mechanism to load the firmware at run time
-> that=E2=80=99s based on this. While the path names are flexible, havi=
-ng
-> the firmware live in a central place is useful from an automation
-> point of view. Having just a name, and not a full path, enables
-> this policy, while still allowing others to have other policies.
->
-> Linux distributions would be free to do whatever they wanted
-> and implement other policies than FreeBSD.
->
-> So a property like this, with the semantics discussed, seems to
-> meet the OS independent test.
+> > (with an appropriate prefix and/or postfix added by the driver) unt=
+il
+> > a file is found.
+>=20
+> It depends what you mean by "basing the firmware name on the
+> \"compatible\" property" here.  If you mean actually renaming the
+> firmware binary file to match a driver's compatible string, that's
+> absolutely out of the question.  Firmwares are not only OS agnostic,
+> but are also independent of any H/W description language a particular
+> OS or platform might be using.  Using DT'isums to rename these
+> binaries is not logical.
+>=20
 
-Good. I'll await a binding to review...
+I was thinking of naming the firmware and the compatible string the
+same, and often enough that makes sense when both names are picked
+by the same person. However, you make a good point that there are cases
+where the firmware file already has a name based on some other
+decision process and there may be good reasons not to rename the
+file. In that case a driver writer can do a lookup table from
+one to the other.
 
-I would suggest "firmware-names" to be consistent with other naming
-convention and because their can be more than one (either at the same
-time or as fallback). It also leaves "firmware" available if we want
-to have phandle's to firmware embedded in the DT at some point later.
+The downside of a lookup table of course is that you have to modify
+the driver for each new firmware, but then again a lot of drivers
+already require that, and others can come up with a policy that lets
+you do a programmatic mapping from one to the other by picking
+clever compatible strings.
 
-Rob
+> However, if you mean simply match on compatible string and supply the
+> name from within the driver, that's closer to the mark (as then we ca=
+n
+> at least keep it in-house [kernel]), but it's still not particularly
+> practical for the aforementioned reasons mentioned by Peter earlier.
+>=20
+> Why not just create a new 'firmware' property?  Simples! [0]
+>=20
+> [0] http://www.oxforddictionaries.com/definition/english/simples
+
+My main thought was that loading a different firmware practically
+always means that the device behaves in a (sometimes more, sometimes
+less) different way, and we want to reflect that with a different
+compatible string. Having a 1:1 relation between the two strings
+enforces this.
+
+	Arnd
