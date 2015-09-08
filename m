@@ -1,80 +1,344 @@
 From: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
-Subject: Re: [RFC PATCH 2/5] Documentation: dt-bindings: add example DT
- binding document
-Date: Tue, 8 Sep 2015 11:06:29 -0400
-Message-ID: <20150908150629.GL17267@beef>
+Subject: Re: [RFC PATCH 1/5] Documentation: dt-bindings: add documentation on
+ new DT binding format
+Date: Tue, 8 Sep 2015 13:38:55 -0400
+Message-ID: <20150908173855.GM17267@beef>
 References: <1440739433-6799-1-git-send-email-mporter@konsulko.com>
- <1440739433-6799-3-git-send-email-mporter@konsulko.com>
- <CAL_Jsq+FE4MCCfZC5hDhQBmM1gHibY82S9a8PC1GwsnWsPNxkg@mail.gmail.com>
- <CA+bK7J4x2vY-tzUFWjM9KFMtvE+qW6jzmz=ZxWU9L8Mpe8Lduw@mail.gmail.com>
- <55E6B719.6080203@atmel.com>
+ <1440739433-6799-2-git-send-email-mporter@konsulko.com>
+ <55E37DF1.3080102@gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: QUOTED-PRINTABLE
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 Content-Disposition: inline
-In-Reply-To: <55E6B719.6080203-AIFe0yeh4nAAvxtiuMwx3w@public.gmane.org>
+In-Reply-To: <55E37DF1.3080102-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-To: Nicolas Ferre <nicolas.ferre-AIFe0yeh4nAAvxtiuMwx3w@public.gmane.org>
-Cc: Tim Bird <tbird20d-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
 
-On Wed, Sep 02, 2015 at 10:45:13AM +0200, Nicolas Ferre wrote:
-> Le 01/09/2015 19:35, Tim Bird a =E9crit :
-> > On Fri, Aug 28, 2015 at 7:53 AM, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org=
-> wrote:
-> >> On Fri, Aug 28, 2015 at 12:23 AM, Matt Porter <mporter-OWPKS81ov/HQFizaE/u3fw@public.gmane.org=
-m> wrote:
-> > ...
-> >>> +example:
-> >>> +  - dts: |
-> >>> +      sk11@0 {
-> >>> +              compatible =3D "skel,sk11";
-> >>> +              reg =3D <0>;
-> >>> +              spi-max-frequency =3D <1000000>;
-> >>> +              spi-cs-high;
-> >>> +      };
-> >>
-> >> At least in this example, we could generate it. Examples are nice,=
- but
-> >> we have dts files full of examples already. I get a fair number of
-> >> "fix the example" patches, so maybe we should eliminate the simple
-> >> ones.
-> >=20
-> > I would hesitate to eliminate examples.  I've been saved by them on
-> > a few occasions, when the dts files only had one or two instances
-> > of a type of binding, somewhat different from each other, and the e=
-xample helped
-> > break the tie.  If there's something wrong with the example, it's a=
- sign
-> > of an out-of-date binding doc, just as much as if the text were wro=
-ng.
-> > It ought to be possible to validate the example versus the binding =
-doc
-> > (as Pantelis says), so ultimately we should be able to catch errors=
- here
-> > as well.
->=20
-> I back Tim's advice.
-> Example are so important that I regularly find myself thinking "ah-ha=
-,
-> okay that's supposed to work like that" after having read the binding
-> documentation.
+On Sun, Aug 30, 2015 at 03:04:33PM -0700, Frank Rowand wrote:
+> On 8/27/2015 10:23 PM, Matt Porter wrote:
+> > Documentation explaining the syntax and format of the YAML-based DT binding
+> > documentation.
+> > 
+> > Signed-off-by: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+> > ---
+> >  .../devicetree/bindings/dt-binding-format.txt      | 106 +++++++++++++++++++++
+> >  1 file changed, 106 insertions(+)
+> >  create mode 100644 Documentation/devicetree/bindings/dt-binding-format.txt
+> > 
+> > diff --git a/Documentation/devicetree/bindings/dt-binding-format.txt b/Documentation/devicetree/bindings/dt-binding-format.txt
+> > new file mode 100644
+> > index 0000000..f9acc22
+> > --- /dev/null
+> > +++ b/Documentation/devicetree/bindings/dt-binding-format.txt
+> > @@ -0,0 +1,106 @@
+> > +--------------------------
+> > +Device Tree Binding Format
+> > +--------------------------
+> > +
+> > +Background
+> > +----------
+> > +
+> > +DT bindings historically were written as text in prose format which
+> > +led to issues in usability of that source documentation. Some of
+> > +these issues include the need to programmatically process binding
+> > +source documentation to do DTS validation, perform mass updates to
+> > +format/style, and to generate publishable documentation in HTML or
+> > +PDF form.
+> > +
+> > +Overview
+> > +--------
+> > +
+> > +The DT binding format is based on the YAML text markup language.
+> > +Although there are many text markup options available, YAML
+> > +fulfills all requirements considered for a DT binding source format
+> > +which include:
+> > +
+> > +1) Must be human readable
+> > +2) Must be easily translated to other data formats (XML, JSON, etc).
+> > +3) Must have sufficient tools and libraries to enable developers to
+> > +   build new tools for DT binding processing
+> > +4) Must have a complete spec to refer to syntax
+> > +
+> > +YAML is documentated in the specification found at
+> > +http://www.yaml.org/spec/1.2/spec.html
+> > +
+> > +The required YAML DT binding tag format and syntax are defined in
+> > +the following sections.
+> > +
+> > +YAML DT Binding Syntax
+> > +----------------------
+> > +
+> > +* Lines starting with "#" are comments and not part of the binding itself
+> > +* "%YAML 1.2" starts a file, indicating the version of YAML in use
+> > +* "---" starts a binding document
+> > +* "..." ends a binding document
+> > +* Multiple binding documents may exist in a single file
+> > +* Tabs are not permitted
+> > +* Scope is denoted by indentation of two spaces
+> > +* Key value pairs are denoted by "key: value"
+> > +* Sequences are denoted by "- "
+> > +* Scalar values may convert newlines to spaces and preserve blank
+> > +  lines for long description formatting using ">"
+> > +* Scalar values may escape all reserved characters and preserve
+> > +  newlines by using "|" to denote literal style
+> > +
+> > +For additional information on YAML syntax, refer to the specification
+> > +at http://www.yaml.org/spec/1.2/spec.html
+> > +
+> > +YAML DT Binding Format
+> > +----------------------
+> > +
+> > +The following YAML types are supported in the DT binding format:
+> > +
+> > +* [R] id: unique identifier in property form (e.g. skel-device)
+> > +
+> > +* [R] title: title of the binding
+> > +
+> > +* [O] maintainer: sequence of maintainers
+> > +      [R] name: name and email of maintainer or mailing list in RFC822
+> > +                form.
+> > +
+> > +* [O] description: full description of the binding
+> > +
+> > +* [O] compatible: sequence of valid compatible descriptors
+> > +      [R] name: the compatible string surrounded in double quotes
+> > +      [O] deprecated: a deprecated compatible string surrounded in
+> > +                      double quotes
+> > +      [O] description: description of the compatible string
+> > +
+> > +* [O] required: sequence of required properties:
+> > +      [R] name: name of the property surrounded in double quotes
+> > +      [R] description: description of the property
+> > +      [O] reference: optional reference to a binding id
+> > +
+> > +* [O] optional: sequence of optional properties:
+> > +      [R] name: name of the property surrounded in double quotes
+> > +      [R] description: description of the property
+> > +      [O] reference: optional reference to a binding id
+> > +
+> > +* [O] deprecated: sequence of deprecated properties:
+> > +      [R] name: name of the property surrounded in double quotes
+> > +      [R] description: description of the property
+> > +      [O] reference: optional reference to a binding id
+> 
+> I commented in reply to patch 0 that we should think through how
+> this structure will support adding new features as the next step
+> after converting existing bindings.
+> 
+> The specific case I started thinking about was the distinction between
+> required, optional, required-if, and optional-if.  A property might
+> be required in all cases, optional in all cases, required in some
+> specified cases, and/or optional in some specified cases.  So a
+> property could be both "required-if" and "optional-if".  Or it
+> might just be one of the two.
+ 
+Ok, so this is similar to the issue Rob points out about AND and
+ORs of compatible strings.
 
-See my comments on Tim's post. In summary, we'd retain the complex type
-examples but allow the trivial ones to not bother with it in explicit
-source. OTOH, this would have to be a final change in the conversion
-process, most likely, because we need all the type: and constraints:
-tags present in order to generate a working example.
+> Here is where my YAML ignorance jumps out.  I really do not know the
+> best way to approach it.  And I do not know if the syntax I am using
+> is even remotely correct - I am trying to extrapolate from the examples
+> in the spec, without having read past the examples yet.  My naive knee
+> jerk alternatives where (by example, because I can explain it more
+> concisely that way instead of the way it should be described in this file):
 
-Of course, that's the same info necessary to validate a dts as well.
+I will confess that I'm not an expert either so we can learn together.
+:)
 
-Perhaps it's best to look at this as the automated conversion process
-that Rob suggested. That is, we'll have the current text (including
-all examples) brought into the .yaml file as comments. So we aren't
-eliminating examples. Later, if those examples are too trivial to
-bother capturing as above, we simply remove and one can dump an example
-via a doc generator not unlike my markdown example (which can spit out
-pasteable text).
+> 
+> ---- (1)
+> 
+> required:
+>   - &P1
+>     name: "prop1"
+>     required-if: < some condition >
+> 
+> optional:
+>   - *P1
+>     optional-if: < some other condition>
+>   - name: "prop2"
+>     required: true
+>   - name: "prop3"
+>     optional: true
+> 
+
+Couple concerns here. First, we have to consider properties being
+inherited from a generic binding rather than repeating them in
+a peripheral binding. The conditions in which a generic property
+may be required can be different in a child peripheral binding.
+So you may have a property inhereit that is optional in the generic
+binding, but is required in a particular child peripheral binding.
+
+Now, having said that, if we make use of the anchor/alias syntax
+as above, now we have to have unique anchor names across all generic
+bindings. Further, we have this issue of yaml parsers not having
+the ability now to directly include other files. Certainly we could
+make a wrapper to pull in each referenced generic binding into a
+single yaml document to be run through the parser.
+
+The second thing is that in the example above we still have
+the required-if tag populated within the optional section which
+is not ideal.
+
+> ---- (2)
+> 
+> property:
+>   - name: "prop1"
+>     required-if: < some condition >
+>     optional-if: < some other condition >
+>   - name: "prop2"
+>     required: true
+>   - name: "prop3"
+>     optional: true
+
+This looks better to me. If coupled with the C like constraint
+expressions it should work well for most cases.
+
+I'm thinking of the resource-names.txt common case such as:
+
+property:
+  - name: "reg"
+    required-if: iface(mmio)
+  - name "reg-names"
+    required-if: prop(reg)
+
+Keep in mind I'm not sure yet what we'll allow in these conditional
+statements. I just believe that we'll want the same syntax for
+constraints and property conditionals
+
+> 
+> 
+> In a related question, I commented in my reply to patch 0 that some of
+> the information about the compatible got lost in the conversion from
+> the existing binding to the YAML format.  That led me to wonder why
+> the compatible property should be at the YAML top level (same as
+> "optional" and "required").  My (again naive, YAML amateur) thought
+> is that the form should be something like:
+> 
+> [O] property:
+>     [R] optional: | required: | required-if: | optional-if: | required-if: optional-if:
+>     [O] deprecated: a deprecated compatible string surrounded in
+>                     double quotes | ???
+>     [R] name: name of the property surrounded in double quotes
+>     [R] description: description of the property
+>     [O] reference: optional reference to a binding id
+
+TBH, compatible started getting treated separately from other properties
+simply because of my initial take on readability in the yaml source.
+There's technically no reason it can't be folded back in as yet another
+property as above. However, we need a way to show ands and ors for
+compatibles in a sane manner. Consider a device where the generic
+compatible string from the original part in the family is gendev1001
+and subsequent family members requiring tweaks exist.
+
+property:
+  - name: "foo,gendev1001"
+    required: true
+  - name: "foo,gendev1005"
+    required-or: true
+  - name: "foo,gendev1006"
+    required-or: true
+  - name: "foo,gendev1007"
+    required-or: true
+
+Not sure here, but that's one way to do it with the keys driving it
+versus a conditional expression.
+
+or
+
+property:
+  - name: "foo,gendev1001"
+    required: true
+  - name: "foo,gendev1005" || "foo,gendev1006" || "foo,gendev1007"
+    required-if: !"foo,gendev1001"
+
+which seems to look a lot better to me. A
+not-yet-existing-smart-validator would check that a dts had:
+
+compatible = "foo,gendev100[5|6|7]", "foo,gendev1001"
+
+or simply
+
+compatible = "foo,gendev1001"
+
+> Apologies for bizarre format for "optional:", but for the purposes of this
+> comment, hopefully my intent will be clear.
+> 
+> Then "compatible" becomes just another "property:", just as it is in the
+> .dts, but any processing or analysis tool knows that the name "compatible"
+> is used in a very specific way and has magical meaning for .dts.
+> 
+> Then if compatible is just another "property:" then the information that
+> lost was in the conversion process would not be lost, it would appear
+> in "description:".
+
+Sounds good.
+
+> 
+> 
+> > +
+> > +* [R] example: sequence of examples:
+> > +      [R] dts: DT source of example usage. The example text must use
+> > +               literal style ("|") so that it retains indentation and
+> > +               newlines.
+> > +      [O] description: description of the example
+> > +
+> > +Note: [R] and [O] denote required and optional fields, respectively.
+> > +
+> > +Skeleton Binding
+> > +----------------
+> > +
+> > +The skeleton.yaml binding found in the top of the DT binding tree
+> > +is the canonical example of syntax and format to use when writing
+> > +a DT binding document. It is maintained with the latest formatting
+> > +conventions, making it the best starting point when writing a new DT
+> > +binding.
+> 
+> It would be good to have a comment of YAML style.  Looking at the spec,
+> there appear to be multiple ways to format content that is functionally
+> equivalent.  For example:
+> 
+>    # a flow sequence
+>    - [name        , hr, avg  ]
+>    - [Mark McGwire, 65, 0.278]
+>    - [Sammy Sosa  , 63, 0.288]
+> 
+> vs.
+> 
+>    # a flow mapping
+>    Mark McGwire: {hr: 65, avg: 0.278}
+>    Sammy Sosa: {
+>        hr: 63,
+>        avg: 0.288
+>      }
+> 
+> This is my first quick reading of the YAML spec, so maybe a flow sequence and
+> a flow mapping are not equivalent, but that was my naive impression.
+
+The examples section in the intro is incomplete and glosses over some
+stuff such that it's expected to get confused by this part. I got lost
+there at first as well.
+
+The quick summary is that YAML allows either Flow Style or Block Style
+of describing nodes. The two example above use flow style as described
+in Chapter 7 to show a sequence construct and separately a mapping
+construct. I chose to use block style through the proposed YAML dt
+binding format as it's my personal preference for human readability.
+Compare, for example, the format of doing sequences in flow style
+(section 7.4.1) versus block style (section 8.2.1) and you'll see that
+I'm making heavy use of block style sequences throughout this format.
+
+> I think that in the interest of human readability (requirement 1), that a
+> specific formatting style should be specified.  That will make life easier
+> for people who do not know YAML, but are (1) merely copying from existing binding
+> docs to create new ones, or (2) trying to understand how different bindings
+> differ.
+
+Agreed. I'll explicitly mention that we use block style formatting now.
+Also, David asked that we explicitly mention the YAML schema used (which
+is the default core schema that also parsers have to implement).
 
 -Matt
