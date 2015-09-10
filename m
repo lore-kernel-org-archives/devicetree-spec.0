@@ -1,171 +1,112 @@
-From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
-Subject: Re: [RFC PATCH 2/5] Documentation: dt-bindings: add example DT
- binding document
-Date: Thu, 10 Sep 2015 17:08:50 +1000
-Message-ID: <20150910070850.GA11781@voom>
-References: <1440739433-6799-1-git-send-email-mporter@konsulko.com>
- <1440739433-6799-3-git-send-email-mporter@konsulko.com>
- <CAL_Jsq+FE4MCCfZC5hDhQBmM1gHibY82S9a8PC1GwsnWsPNxkg@mail.gmail.com>
+From: Peter Griffin <peter.griffin-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Subject: Re: st_fdma: Firmware filename in DT?
+Date: Thu, 10 Sep 2015 15:18:09 +0100
+Message-ID: <20150910141809.GA21497@griffinp-ThinkPad-X1-Carbon-2nd>
+References: <20150903144944.GC7093@griffinp-ThinkPad-X1-Carbon-2nd>
+ <201509051125.43527.arnd@arndb.de>
+ <55ED6733.7050807@linaro.org>
+ <1638322.iN3qcjUCN8@wuerfel>
+ <55EDA0EB.1040501@linaro.org>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="y0ulUmNC+osPPQO6"
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 Content-Disposition: inline
-In-Reply-To: <CAL_Jsq+FE4MCCfZC5hDhQBmM1gHibY82S9a8PC1GwsnWsPNxkg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+In-Reply-To: <55EDA0EB.1040501-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: Daniel Thompson <daniel.thompson-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Cc: Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Warner Losh <imp-uzTCJ5RojNnQT0dZR+AlfA@public.gmane.org>, Lee Jones <lee.jones-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Vinod Koul <vinod.koul-ral2JQCrhuEAvxtiuMwx3w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Maxime Coquelin <maxime.coquelin-qxv4g6HH51o@public.gmane.org>, Patrice Chotard <patrice.chotard-qxv4g6HH51o@public.gmane.org>, Ludovic Barre <ludovic.barre-qxv4g6HH51o@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
+Hi,
 
---y0ulUmNC+osPPQO6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 07 Sep 2015, Daniel Thompson wrote:
 
-On Fri, Aug 28, 2015 at 09:53:06AM -0500, Rob Herring wrote:
-> On Fri, Aug 28, 2015 at 12:23 AM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrot=
-e:
-> > Add a skeleton DT binding document that serves as the canonical
-> > example for implementing YAML-based DT bindings documentation.
-> > The skeleton binding illustrates use of all fields and variations
-> > described in the dt-binding-format.txt documentation.
+> On 07/09/15 13:33, Arnd Bergmann wrote:
+> >On Monday 07 September 2015 11:30:11 Daniel Thompson wrote:
+> >>>>
+> >>>>I would suggest "firmware-names" to be consistent with other naming
+> >>>>convention and because their can be more than one (either at the same
+> >>>>time or as fallback). It also leaves "firmware" available if we want
+> >>>>to have phandle's to firmware embedded in the DT at some point later.
+> >>>
+> >>>Having list of strings would certainly make this more flexible than
+> >>>just a single string, for the same reason as taking the list of
+> >>>compatible values as the base, so +1 for "firmware-names" over "firmware".
+> >>
+> >>I was recently thinking about how DT filenames would interact with
+> >>incompatible ABI changes to the firmware's register and/or wire protocol.
+> >>
+> >>Just for example we start with f/ware ABI A and we create a mainline
+> >>kernel X that supported it.
+> >>
+> >>Vendor now releases a new firmware with ABI B and we update the mainline
+> >>driver to support ABI A (to avoid breaking old userspaces) and B,
+> >>eventually releasing kernel Y.
+> >>
+> >>The question now is how kernels X and Y should use the DT to generate
+> >>the filename. It is very desirable that kernels X and Y use *different*
+> >>filenames because otherwise a single userspace could not support the new
+> >>feature *and* boot with both X and Y.
 > >
-> > Signed-off-by: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
-> > ---
-> >  Documentation/devicetree/bindings/skeleton.yaml | 98 +++++++++++++++++=
-++++++++
-> >  1 file changed, 98 insertions(+)
-> >  create mode 100644 Documentation/devicetree/bindings/skeleton.yaml
+> >Generally speaking, the kernel should shield user space from ABI
+> >differences in the firmware and still provide the same user space ABI
+> >(possibly emulated, when the newer firmware removes features of the
+> >old one). Can you think of a case where a device firmware directly
+> >defines the user ABI without having kernel visible changes?
+> 
+> I don't mean that the firmware ABI is exposed to userspace.
+> 
+> I mean if you use the same filename for both ABIs (in /lib/firmware)
+> then kernel X with lose functionality if it is booted with a
+> userspace that has updated to the new firmware (maybe even crash if
+> I can't detect at runtime the version of the firmware is has
+> loaded). That sort of thing is the pain for distros which support
+> booting with multiple kernels (apt-get/dnf simply won't know when it
+> is safe to update the firmware binary).
+> 
+> 
+> >>Having lists of firmwares can certainly help solve this (providing the
+> >>list can be used to allow a driver to select for an ABI is supports).
+> >>However I afraid I find this example argues against having filenames in
+> >>DT at all because it seems odd to me that, for kernel and userspace to
+> >>adopt ABI B that must wait until the DT is updated to include support
+> >>for ABI B. The hardware didn't change...
+
+This is a really good point and one I'd not considered.
+
 > >
-> > diff --git a/Documentation/devicetree/bindings/skeleton.yaml b/Document=
-ation/devicetree/bindings/skeleton.yaml
-> > new file mode 100644
-> > index 0000000..175965f
-> > --- /dev/null
-> > +++ b/Documentation/devicetree/bindings/skeleton.yaml
-> > @@ -0,0 +1,98 @@
-> > +%YAML 1.2
-> > +---
-> > +id: skel-device
-> > +
-> > +title: Skeleton Device
-> > +
-> > +maintainer:
-> > +  - name: Skeleton Person <skel-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
->=20
-> We'd want to tie this into get_maintainers.pl obviously.
->=20
-> > +
-> > +description: >
-> > +  The Skeleton Device binding represents the SK11 device produced by
-> > +  the Skeleton Corporation. The binding can also support compatible
-> > +  clones made by second source vendors.
-> > +
-> > +compatible:
-> > +  - name: "skel,sk11"
-> > +  - name: "faux,fx11"
->=20
-> Is this an OR or AND? We need both.
+> >This is not what I was thinking of for a list of file names: I would not
+> >want a case where the kernel might pick between multiple incompatible
+> >files without knowing what they are, especially if the differences
+> >are ABI relevant.
+> 
+> Nor me.
+> 
+> Personally I prefer an "assertive" driver that imposes a filename
+> for the firmwares it needs. Thus if there is an ABI change the
+> driver writer can load a completely different firmware file without
+> needing a DT update. That said I'm not especially invested either
+> way.
+> 
+> However whatever solution is reached I would quite like to be able
+> to boot kernels from either side of an ABI break from a single
+> userspace (and get the new features when the kernel supports them).
 
-Hrm.  So, from the example below it's an OR.  But.. I think the
-considerations here change when you separate out "tag" information as
-I've suggested elsewhere.
+So to summarise, I think given Daniels good points about ABI
+compatability, and also David and Arnd PoV, it would be best to leave
+the generation of the firmware filename to the individual driver and
+not put the filename in DT.
 
-The command AND case, I can think of is where you want both
-"foo,new-model-device" and "foo,old-model-device".  I think the first
-belongs in the "tag", but the second in the body of the requirements.
+The driver can then generate a unique filename based off of the
+compatible string.
 
-The OR case demonstrated here strikes me as very poor binding design -
-but that doesn't mean we can totally avoid it, since we do have poor
-bindings we want to convert.
+I will send an updated version of the fdma patches which generate
+the filename in this way.
 
-Fwiw, I think the right way to encode "OR" at least in the "tag" is to
-pick just the preferred form, then have additional bindings tagged on
-the alternative forms and inheriting the main binding.  I don't know
-if that's practical in the short term though.
+Many thanks to you all for your valuable input!
 
-> The complicated case is "one of {specific names} followed by {generic nam=
-e}."
->=20
-> > +    description: A clone of the original sk11 device
-> > +
-> > +required:
-> > +  - name: "reg"
->=20
-> We definitely need type info from the start.
+regards,
 
-It's interesting you should mention that here, because 'reg' is
-actually a hard case for describint the type: because it's format is
-determined as much by the parent bus binding as this node's binding.
+Peter.
 
-I suspect it will be worth special-casing "reg" in order to make
-common bindings more compact, but again, probably not in the first
-pass.
-
-> > +    description: chip select address of skeleton device
-> > +    reference: spi-slave
->=20
-> I would like to not have to list properties if the inherited binding
-> lists it. The problem is we need to say how many cells and the order
-> (not a problem here, but for mmio devices).
->=20
-> Perhaps we can list the reference at the top level for the node
-> instead of for every property.
-
-Yeah, I think it would be worth having a top-level "inherits" field.
-
-> > +  - name: "spi-max-frequency"
-> > +    description: >
-> > +      Maximum SPI clocking speed of skeleton device in Hz, must be
-> > +      1000000
-> > +    reference: spi-slave
->=20
-> Rather than listing the property and having constraint in description,
-> perhaps we could add constraints like this:
->=20
-> - spi-max-frequency-range: 1000000 1000000
->=20
-> Or groups of constraints:
->=20
-> - spi-max-frequency-constraints:
->   range: 1000000 1000000
->   some-other-constraint: <value>
-
-Not for the first pass I think.  What I would suggest is having
-"description" for pure informational stuff, and "constraint" or maybe
-just "extra" for normative constraints expressed in English.
-
-The idea here is that over time we can add new ways of expressing
-constraints.  In the meantime tools can use the "extra" field to
-preseve any difficult text in the current versions and at least let
-tools know that they won't be able to check everything.
-
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---y0ulUmNC+osPPQO6
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQIcBAEBAgAGBQJV8SyBAAoJEGw4ysog2bOSupsQAOC4cfiU/eVdsme4oAHfHRtd
-n4ruQjUpMvJDmsX1PM8csi5kjmHAphthNhOaOBsPcOl1seoAwoXksiCwMxNlyOgy
-LUciPZaREYkkD482QeJL5PPv73JeTr0N4djK5m89rl4CZLrRYut+N+00RM6fmMl9
-x8fzzcZoY+NCwxqachusR3mupRYamrOOnPfjXheU2JF4oEL7PKYFvqvMqfAQckOQ
-SmO/Rab/ck3YTxO2nyRPxFovTKB5LZ93/p/vEVdhw8nqYmxbcvDFNdE+FuIuu9qB
-dJDd3wS0t4DmN6CSphE+rhKCMs95/RhJcKD3zZ0S6bO2jUlp1RawneXEmlvlbe33
-p0x7HB78JwsDv7v6eHVy6KHaQz7arAe9h0/po41TDhSzGH1uVWsLInxjB3OX2CBR
-eyNrBzStjqV8i+CZ52wlizf0kwuwyp0gDSoEz+Nz/dLVYqhy+aigvqgjG26diJ2i
-DfXmWnKu3yACsDfZO9QFRXzWVwBuAuoLlIX2nviWpf88JxX1Jd6esbgeJpthmg2T
-Y8f+IeXuN0pmJqSQvKXMcEp32ps7QizasS2mlSUk1FEpFwuPdQwBCdEtPu02equa
-edCRNWoRje7dBr2rZHAU9AP8QASCQuixEeS+LBZw2Ba6oCCu9Js+KFL49gD64sD+
-Qsrqqgb4Pou1kETlJ1sk
-=dLsV
------END PGP SIGNATURE-----
-
---y0ulUmNC+osPPQO6--
