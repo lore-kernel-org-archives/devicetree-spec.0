@@ -1,207 +1,256 @@
-From: Peter Griffin <peter.griffin-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: Re: st_fdma: Firmware filename in DT?
-Date: Fri, 11 Sep 2015 13:31:08 +0100
-Message-ID: <20150911123108.GA15908@griffinp-ThinkPad-X1-Carbon-2nd>
-References: <20150903144944.GC7093@griffinp-ThinkPad-X1-Carbon-2nd>
- <201509051125.43527.arnd@arndb.de>
- <55ED6733.7050807@linaro.org>
- <1638322.iN3qcjUCN8@wuerfel>
- <55EDA0EB.1040501@linaro.org>
- <20150910141809.GA21497@griffinp-ThinkPad-X1-Carbon-2nd>
- <20150911091700.GI3260@x1>
- <20150911094621.GA9865@griffinp-ThinkPad-X1-Carbon-2nd>
- <20150911102516.GA18779@x1>
+From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+Subject: Re: [RFC PATCH 2/5] Documentation: dt-bindings: add example DT
+ binding document
+Date: Mon, 14 Sep 2015 18:15:58 +1000
+Message-ID: <20150914081558.GM2547@voom.fritz.box>
+References: <1440739433-6799-1-git-send-email-mporter@konsulko.com>
+ <1440739433-6799-3-git-send-email-mporter@konsulko.com>
+ <CAL_Jsq+FE4MCCfZC5hDhQBmM1gHibY82S9a8PC1GwsnWsPNxkg@mail.gmail.com>
+ <20150910070850.GA11781@voom>
+ <55F25C95.3010104@kernel.org>
 Mime-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="dp9QYJgVRVEW2bsm"
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 Content-Disposition: inline
-In-Reply-To: <20150911102516.GA18779@x1>
+In-Reply-To: <55F25C95.3010104-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Lee Jones <lee.jones-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Cc: Daniel Thompson <daniel.thompson-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Warner Losh <imp-uzTCJ5RojNnQT0dZR+AlfA@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Vinod Koul <vinod.koul-ral2JQCrhuEAvxtiuMwx3w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Maxime Coquelin <maxime.coquelin-qxv4g6HH51o@public.gmane.org>, Patrice Chotard <patrice.chotard-qxv4g6HH51o@public.gmane.org>, Ludovic Barre <ludovic.barre-qxv4g6HH51o@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Cc: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>
 
-Hi Lee,
 
-On Fri, 11 Sep 2015, Lee Jones wrote:
+--dp9QYJgVRVEW2bsm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On Fri, 11 Sep 2015, Peter Griffin wrote:
-> > On Fri, 11 Sep 2015, Lee Jones wrote:
-> > > On Thu, 10 Sep 2015, Peter Griffin wrote:
-> > > > On Mon, 07 Sep 2015, Daniel Thompson wrote:
-> > > > > On 07/09/15 13:33, Arnd Bergmann wrote:
-> > > > > >On Monday 07 September 2015 11:30:11 Daniel Thompson wrote:
-> > > > > >>>>
-> > > > > >>>>I would suggest "firmware-names" to be consistent with other naming
-> > > > > >>>>convention and because their can be more than one (either at the same
-> > > > > >>>>time or as fallback). It also leaves "firmware" available if we want
-> > > > > >>>>to have phandle's to firmware embedded in the DT at some point later.
-> > > > > >>>
-> > > > > >>>Having list of strings would certainly make this more flexible than
-> > > > > >>>just a single string, for the same reason as taking the list of
-> > > > > >>>compatible values as the base, so +1 for "firmware-names" over "firmware".
-> > > > > >>
-> > > > > >>I was recently thinking about how DT filenames would interact with
-> > > > > >>incompatible ABI changes to the firmware's register and/or wire protocol.
-> > > > > >>
-> > > > > >>Just for example we start with f/ware ABI A and we create a mainline
-> > > > > >>kernel X that supported it.
-> > > > > >>
-> > > > > >>Vendor now releases a new firmware with ABI B and we update the mainline
-> > > > > >>driver to support ABI A (to avoid breaking old userspaces) and B,
-> > > > > >>eventually releasing kernel Y.
-> > > > > >>
-> > > > > >>The question now is how kernels X and Y should use the DT to generate
-> > > > > >>the filename. It is very desirable that kernels X and Y use *different*
-> > > > > >>filenames because otherwise a single userspace could not support the new
-> > > > > >>feature *and* boot with both X and Y.
-> > > > > >
-> > > > > >Generally speaking, the kernel should shield user space from ABI
-> > > > > >differences in the firmware and still provide the same user space ABI
-> > > > > >(possibly emulated, when the newer firmware removes features of the
-> > > > > >old one). Can you think of a case where a device firmware directly
-> > > > > >defines the user ABI without having kernel visible changes?
-> > > > > 
-> > > > > I don't mean that the firmware ABI is exposed to userspace.
-> > > > > 
-> > > > > I mean if you use the same filename for both ABIs (in /lib/firmware)
-> > > > > then kernel X with lose functionality if it is booted with a
-> > > > > userspace that has updated to the new firmware (maybe even crash if
-> > > > > I can't detect at runtime the version of the firmware is has
-> > > > > loaded). That sort of thing is the pain for distros which support
-> > > > > booting with multiple kernels (apt-get/dnf simply won't know when it
-> > > > > is safe to update the firmware binary).
-> > > > > 
-> > > > > 
-> > > > > >>Having lists of firmwares can certainly help solve this (providing the
-> > > > > >>list can be used to allow a driver to select for an ABI is supports).
-> > > > > >>However I afraid I find this example argues against having filenames in
-> > > > > >>DT at all because it seems odd to me that, for kernel and userspace to
-> > > > > >>adopt ABI B that must wait until the DT is updated to include support
-> > > > > >>for ABI B. The hardware didn't change...
-> > > > 
-> > > > This is a really good point and one I'd not considered.
-> > > > 
-> > > > > >
-> > > > > >This is not what I was thinking of for a list of file names: I would not
-> > > > > >want a case where the kernel might pick between multiple incompatible
-> > > > > >files without knowing what they are, especially if the differences
-> > > > > >are ABI relevant.
-> > > > > 
-> > > > > Nor me.
-> > > > > 
-> > > > > Personally I prefer an "assertive" driver that imposes a filename
-> > > > > for the firmwares it needs. Thus if there is an ABI change the
-> > > > > driver writer can load a completely different firmware file without
-> > > > > needing a DT update. That said I'm not especially invested either
-> > > > > way.
-> > > > > 
-> > > > > However whatever solution is reached I would quite like to be able
-> > > > > to boot kernels from either side of an ABI break from a single
-> > > > > userspace (and get the new features when the kernel supports them).
-> > > > 
-> > > > So to summarise, I think given Daniels good points about ABI
-> > > > compatability, and also David and Arnd PoV, it would be best to leave
-> > > > the generation of the firmware filename to the individual driver and
-> > > > not put the filename in DT.
-> > > 
-> > > <hijacking>
-> > > 
-> > > That doesn't work for middle-layer drivers such as Remoteproc, where
-> > > it doesn't have its own associated firmwares.  Remoteproc's job is
-> > > simply to load the firmware.  It doesn't care which version of the ABI
-> > > that particular binary uses, and has no reason to.  Ideally, I guess
-> > > the Remoteproc client should be providing the firmware name, but why
-> > > should the client care who or what was used to load the firmware?
-> > 
-> > I believe you answered your own question...
-> > 
-> > In your case, I believe it should be the client driver which wishes to
-> > use rproc to boot the co-processor which provides the name.
-> > 
-> > For example a v4l2 driver which wishes to use the st231-deltamu
-> > co-processor, and requests rproc to boot that CPU with a supplied
-> > firmware name. The v4l2 driver has the knowledge to know it wishes to
-> > use the st231 for video decoding, and can provide a unique name based
-> > on its compatible (what SoC etc) it is with an approriate suffix / prefix.
-> > 
-> > This nicely also handles the
-> > 
-> > "The hardware is identical, and different firmware is used to apply
-> >    it in different ways."
-> > 
-> > which David pointed out.
-> > 
-> > Say you now wish to use that st231 for some other general
-> > accelerator usecase, and have client driver X, then X can provide
-> > a suitable unique name to rproc.
-> > 
-> > To accomodate that usecase with the filename in DT would require changing DT
-> > to provide a new filename. Obviously the hardware hasn't changed, just the
-> > way in which you wish to apply it.
-> > 
-> > This also solves the issue Daniel pointed out about the name being
-> > sufficiently unique to allow multiple STi SoC's to use the same
-> > userspace, which your current approach does not.
-> > 
-> > To answer your question, the client should care about the filename
-> > because it is the client which wishes to use the services of the firimware
-> > and is in a unique position to know what that firmware is called.
-> > As you point out, rproc is not in that position.
-> 
-> You're preaching to the converted.  I agree with all of this, which is
-> why I said:
+On Thu, Sep 10, 2015 at 11:46:13PM -0500, Rob Herring wrote:
+> On 09/10/2015 02:08 AM, David Gibson wrote:
+> > On Fri, Aug 28, 2015 at 09:53:06AM -0500, Rob Herring wrote:
+> >> On Fri, Aug 28, 2015 at 12:23 AM, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> w=
+rote:
+> >>> Add a skeleton DT binding document that serves as the canonical
+> >>> example for implementing YAML-based DT bindings documentation.
+> >>> The skeleton binding illustrates use of all fields and variations
+> >>> described in the dt-binding-format.txt documentation.
+> >>>
+> >>> Signed-off-by: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+> >>> ---
+> >>>  Documentation/devicetree/bindings/skeleton.yaml | 98 +++++++++++++++=
+++++++++++
+> >>>  1 file changed, 98 insertions(+)
+> >>>  create mode 100644 Documentation/devicetree/bindings/skeleton.yaml
+> >>>
+> >>> diff --git a/Documentation/devicetree/bindings/skeleton.yaml b/Docume=
+ntation/devicetree/bindings/skeleton.yaml
+> >>> new file mode 100644
+> >>> index 0000000..175965f
+> >>> --- /dev/null
+> >>> +++ b/Documentation/devicetree/bindings/skeleton.yaml
+> >>> @@ -0,0 +1,98 @@
+> >>> +%YAML 1.2
+> >>> +---
+> >>> +id: skel-device
+> >>> +
+> >>> +title: Skeleton Device
+> >>> +
+> >>> +maintainer:
+> >>> +  - name: Skeleton Person <skel-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+> >>
+> >> We'd want to tie this into get_maintainers.pl obviously.
+> >>
+> >>> +
+> >>> +description: >
+> >>> +  The Skeleton Device binding represents the SK11 device produced by
+> >>> +  the Skeleton Corporation. The binding can also support compatible
+> >>> +  clones made by second source vendors.
+> >>> +
+> >>> +compatible:
+> >>> +  - name: "skel,sk11"
+> >>> +  - name: "faux,fx11"
+> >>
+> >> Is this an OR or AND? We need both.
+> >=20
+> > Hrm.  So, from the example below it's an OR.  But.. I think the
+> > considerations here change when you separate out "tag" information as
+> > I've suggested elsewhere.
+> >=20
+> > The command AND case, I can think of is where you want both
+> > "foo,new-model-device" and "foo,old-model-device".  I think the first
+> > belongs in the "tag", but the second in the body of the requirements.
+> >=20
+> > The OR case demonstrated here strikes me as very poor binding design -
+> > but that doesn't mean we can totally avoid it, since we do have poor
+> > bindings we want to convert.
+>=20
+> I don't think so. Often "old" is a singleton, and "new" is one of
+> several newer chips.
 
-Oh I thought you were un-converted as you said it wouldn't work for rproc.
+Yeah, so the trouble is bindings like that are kind of unclear
+(although you can generally figure it out by convention).  Giving AND
+and OR conditions gives more detail, but still doesn't really express
+what you want here.
 
-> 
-> "Ideally, I guess the Remoteproc client should be providing the
-> firmware name"
-> 
-> ... but you missed the critical part of my query:
-> 
-> "but why should the client care who or what was used to load the
-> firmware?"
+Supposeyou have the SK33 device, and its backwards compatible
+revisions the SK34 and SK35.  There's also the SK38, which is
+compatible with the original SK33, but not the revised versions.
 
-Most drivers in the kernel if they need a firmware call request_firmware
-or request_firmware_nowait directly, i.e. they care about loading the
-firmware that they need and call the correct kernel API to do so.
+So really, you have a cluster of related bindings:
 
-If your client driver wishes to use rproc to load the firmware instead of
-request_firmware directly, then it seems obvious that it needs to care
-about rproc API's so it can call them.
+SK33 binding:
+	Applies when compatible contains "skel,sk33"
+	Requires compatible contain "skel,sk33"
+	Describes all the basic properties of the device
+SK34 binding:
+	Applies when compatible contains "skel,sk34"
+	Requires compatible contain "skel,sk34" AND "skel,sk33"
+	Inherits the SK33 binding
+	Describes any properties necessary for SK34 extensions
+SK35 binding
+	Applies when compatible contains "skel,sk35"
+	Requires compatible contains "skel,sk35", "skel,sk34" AND "skel,sk33"
+	Inherits the SK34 binding
+	Describes any properties for SK35 extensions
+SK38 binding
+	Applies when compatible contains "skel,sk38"
+	Requires compatible contains "skel,sk38" AND "skel,sk33"
+	Requires compatible DOES NOT contain "skel,sk34" or
+	  "skel,sk35" (arguably you don't need to specify that, though)
+	Inherits the SK33 binding
+	Describes any properties for SK38 extensions
 
-> 
-> At the moment the client has no other way (besides DT) to tell
-> Remoteproc (or any other firmware loader) which firmware binary to
-> load.
+Plus, for backwards compatibility you might have to have the:
 
-Um yes it does, using the compatible strings like we've already
-discussed to generate a unique filename.
+SK3x binding
+	Deprecated
+	Applies when compatible contains "skel,sk3x"
+	Inherits the SK33 binding
 
->
->  To solve this, we would have to call load_firmware(name)
-> [which doesn't exist yet], from the client, into either the core or
-> the vendor driver.
+> It is also very common for licensed IP blocks. All
+> the vendors have different quirks and possibly different versions of the
+> IP. In the better cases, we can have a vendor compat for each vendor and
+> then a generic compat.
 
-I'm not sure what your getting at here (or maybe I've misunderstood you)
-anyways...
+So, similar considerations here.  You really have a bunch of at least
+potentially different bindings for each licensed variant, but all
+based on the core common binding.
 
-The API for loading a firmware in the kernel is request_firmware, or
-request_firmware_nowait, and you pass it the name of the firmware you
-wish to load. So the API exists, and is used throughout the kernel.
+> > Fwiw, I think the right way to encode "OR" at least in the "tag" is to
+> > pick just the preferred form, then have additional bindings tagged on
+> > the alternative forms and inheriting the main binding.  I don't know
+> > if that's practical in the short term though.
 
-The client driver then generates a unique name based on the compatible
-and calls request_firmware(name).
+But, yeah, these are common cases so we need a less verbose way of
+describing it than the full version above.  At least when the
+differences between the devices don't require any new properties at
+all.
 
-From what I can see rproc then adds another level of abstraction on
-top of the request_firmware API. But the ability to pass
-a name to request_firmware still exists. Maybe it will require changes
-in rproc to propogate the name down properly to the request_firmware call,
-but that is just a rproc implementation detail.
+I think we want to special case this for the compatible property
+though.  I thinkAND and OR conditions will be complex, while still not
+really expressing what we need for compatible.
 
-regards,
 
-Peter.
+> >=20
+> >> The complicated case is "one of {specific names} followed by {generic =
+name}."
+> >>
+> >>> +    description: A clone of the original sk11 device
+> >>> +
+> >>> +required:
+> >>> +  - name: "reg"
+> >>
+> >> We definitely need type info from the start.
+> >=20
+> > It's interesting you should mention that here, because 'reg' is
+> > actually a hard case for describint the type: because it's format is
+> > determined as much by the parent bus binding as this node's binding.
+>=20
+> And reg is well defined, so that's one I'm least worried about.
 
+True/
+
+> > I suspect it will be worth special-casing "reg" in order to make
+> > common bindings more compact, but again, probably not in the first
+> > pass.
+>=20
+> Yes, I would fully expect reg to just be flagged as used and how many
+> addresses.
+>=20
+> >=20
+> >>> +    description: chip select address of skeleton device
+> >>> +    reference: spi-slave
+> >>
+> >> I would like to not have to list properties if the inherited binding
+> >> lists it. The problem is we need to say how many cells and the order
+> >> (not a problem here, but for mmio devices).
+> >>
+> >> Perhaps we can list the reference at the top level for the node
+> >> instead of for every property.
+> >=20
+> > Yeah, I think it would be worth having a top-level "inherits" field.
+> >=20
+> >>> +  - name: "spi-max-frequency"
+> >>> +    description: >
+> >>> +      Maximum SPI clocking speed of skeleton device in Hz, must be
+> >>> +      1000000
+> >>> +    reference: spi-slave
+> >>
+> >> Rather than listing the property and having constraint in description,
+> >> perhaps we could add constraints like this:
+> >>
+> >> - spi-max-frequency-range: 1000000 1000000
+> >>
+> >> Or groups of constraints:
+> >>
+> >> - spi-max-frequency-constraints:
+> >>   range: 1000000 1000000
+> >>   some-other-constraint: <value>
+> >=20
+> > Not for the first pass I think.  What I would suggest is having
+> > "description" for pure informational stuff, and "constraint" or maybe
+> > just "extra" for normative constraints expressed in English.
+>=20
+> At least for simple constraints, I don't see the point of manually
+> converting to something still not machine parse-able. We should be able
+> to figure out a syntax. Sure, there may be complex examples we just punt
+> on, but we can address most common cases. But if we can't define a
+> syntax, then lets do nothing until we do.
+
+Sure.
+
+> > The idea here is that over time we can add new ways of expressing
+> > constraints.  In the meantime tools can use the "extra" field to
+> > preseve any difficult text in the current versions and at least let
+> > tools know that they won't be able to check everything.
+>=20
+> Just keeping the existing doc text will preserve things.
+
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
+
+--dp9QYJgVRVEW2bsm
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBAgAGBQJV9oI+AAoJEGw4ysog2bOSej8P/2aALkfBq+ecAyOpZ7ao2wnV
+h2gyYhNZG6Wb/u0kZAb38sdyOlmtCK4OiUzSvEBeZ9G/qvLfbB2s9d3Fiw7shY+L
+WUsMYEYfKx+s8xyfEFaU4zrFyNWlf4U70LHBuiviMBg5NavJzICcbcpkZoXm3EaA
+4PjDbGr5cdIS9+5FRK3FLSqgu0fgUiZncMsHRfEvS5URQ7J7OJgArkKOwAIRKvf/
+Bdsb3w/6QiDHy4aWTP2PVd46SVYqvQ+4sfqmDzpstwoy8Fj/Q67AT/UO/ruasyJN
+hFsTZP7irsD4yji0MiJEEpiF1iEiGzgelwVgHBwC4Vl3W8Olt7hRYdiGbgf7vd1+
+jCXqfYDjjYHsnlqR3fy6hhwAYAbus3hXNa7PMnpjJ5NDiCA/r0OtLOm3kdbdf2nA
+/lEQQK4qyb2+X55ydrRvcwTt3TOu84IrnnF5x0OBhlCDjyQgFnfdwWcHmbyGSuIX
+XUzw+UaIMmrpqlmthvxmY7S53B62M0tkJKcAcCOgX7N3pOvWcl36RL4eQMgtKt2H
+mGYdXw9oqoDbF/45CED42+LiJ/Y+ihgGcivIGUmdBnC1HgqBgPRHW49DYqtlB982
+vl47MVDEzTn5mMCBor6+X3CBj+IdztdqdFDIaObqUZVxlL9gXxrzdA7z+GCIcFkg
+xj4v8WUXOksNdVqqxZvK
+=wJ92
+-----END PGP SIGNATURE-----
+
+--dp9QYJgVRVEW2bsm--
