@@ -1,195 +1,140 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [RFC PATCH v2 3/3] Documentation: dt-bindings: add example DT
- binding document
-Date: Sat, 24 Oct 2015 11:59:53 -0500
-Message-ID: <562BB909.8070200@kernel.org>
-References: <1442894358-15606-1-git-send-email-mporter@konsulko.com>
- <1442894358-15606-4-git-send-email-mporter@konsulko.com>
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+From: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: [PATCH v4] doc: dt: mtd: support partitions in a special 'partitions' subnode
+Date: Wed, 28 Oct 2015 15:48:06 -0700
+Message-ID: <1446072486-145169-1-git-send-email-computersforpeace@gmail.com>
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <1442894358-15606-4-git-send-email-mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=from:to:cc:subject:date:message-id;
+        bh=ztwjp+31ZcoucXRdJ3gNNiZPzwi3B+CKEQIwCejOHWw=;
+        b=XUiWP0MwvrVuarB0YE/7jGEfzPWR2kY7jYr2yu0mnfdAlhG/O4o6Vw8UukPqp4inxF
+         uihm7kANXUx5UZoL54KCbZoxz2Cpgw+cVmDwlJ3oXz4GT427ulep7A/sE1KvOEqbn322
+         CqNJ2eRNqJLwWB+xZ7pY1+xJUdJp+7X/tNoLqcMRzsmfqd+PCALVi5H+6fn8sjmIpPQ9
+         MMbjuL2EsWydMlFYzeE+/sN2G1Bmk4g5W30+eIqEHXnT6Kj9TpEdLAq3W6D+55usJwcy
+         GFKqJ/B8OVerki57yljQYZ4c8BCYCSGgplc82LhBDmGHxFJDxKlHXDs9/hEm9xwFfVYT
+         pslA==
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
-To: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
-Cc: Devicetree List <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Tim Bird <tbird20d-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Nicolas Ferre <nicolas.ferre-AIFe0yeh4nAAvxtiuMwx3w@public.gmane.org>
+Content-Transfer-Encoding: 7bit
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-On 09/21/2015 10:59 PM, Matt Porter wrote:
-> Add a skeleton DT binding document that serves as the canonical
-> example for implementing YAML-based DT bindings documentation.
-> The skeleton binding illustrates use of all fields and variations
-> described in the dt-binding-format.txt documentation.
-> 
-> Signed-off-by: Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
-> ---
->  Documentation/devicetree/bindings/skeleton.yaml | 138 ++++++++++++++++++++++++
->  1 file changed, 138 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/skeleton.yaml
-> 
-> diff --git a/Documentation/devicetree/bindings/skeleton.yaml b/Documentation/devicetree/bindings/skeleton.yaml
-> new file mode 100644
-> index 0000000..d7a27cb
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/skeleton.yaml
-> @@ -0,0 +1,138 @@
-> +%YAML 1.2
-> +---
-> +version: 1
-> +
-> +id: skel-device
-> +
-> +title: Skeleton Device
-> +
-> +maintainer:
-> +    -   name: Skeleton Person <skel-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+From: Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-Do we need more than just name and more than 1 maintainer? With both
-we'd need to figure out the grouping.
+To avoid conflict with other drivers using subnodes of the mtd device
+create only one ofpart-specific node rather than any number of
+arbitrary partition subnodes.
 
-> +
-> +description: >
-> +    The Skeleton Device binding represents the SK11 device produced by
-> +    the Skeleton Corporation. The binding can also support compatible
-> +    clones made by second source vendors.
-> +
-> +# This binding inherits property characteristics from the generic
-> +# spi-slave binding
-> +
-> +inherits:
-> +    -   id: spi-slave
+Signed-off-by: Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Acked-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Signed-off-by: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+---
+ .../devicetree/bindings/mtd/partition.txt          | 71 +++++++++++++---------
+ 1 file changed, 42 insertions(+), 29 deletions(-)
 
-I would drop "id" here and inherits is just an array of values.
-
-> +
-> +properties:
-> +
-> +# The compatible property is a reserved name. The type is always "string"
-> +# and should not be repeated device binding.
-
-I think we should just always be explicit with type.
-
-> +
-> +    -   name: "compatible"
-> +        constraint: |
-> +            "skel,sk11" || "faux,fx11" , BASE("skel,sk11")
-> +        description: FX11 is a clone of the original SK11 device
-> +
-> +# The reg property is a reserved name. The type is always "int" and
-> +# should not be repeated in a device binding. Constraints are defined
-> +# only in the context of the parent node's address, size, and ranges
-> +# cells. The description is inherited from the spi-slave binding.
-
-Is this a general statement or specific to spi-slave? On I2C devices, we
-know the constraints. It may be a single value or a list of strapped values.
-
-> +
-> +    -   name: "reg"
-
-We also need to know how many entries and what each entry is. We will
-only ever be able to validate the count except cases we have
-constraints, but those should only have 1 entry I think. So I would just
-add "count" which can be a list of valid counts.
-
-
-> +
-> +# spi-max-frequency needs the device-specific constraint to be supplied
-> +
-> +    -   name: "spi-max-frequency"
-> +        constraint: |
-> +            if (compatible == "skel,sk11") c <= 10000000 else c <= 1000000
-> +
-> +# This property overrides the generic binding description with
-> +# a device specific description in order to mention the chip's
-> +# h/w cfg strapping pins.
-> +
-> +    -   name: "spi-cs-high"
-> +        description: >
-> +            Set if skeleton device configuration pins are set for chip
-> +            select polarity high
-> +
-> +# Device specific properties don't inherit characteristic from a generic
-> +# binding so category, type, constraint, and description must be specified
-> +# if needed.
-> +
-> +    -   name: "skel,deprecated1"
-> +        category: deprecated
-> +        type: int
-> +        constraint: |
-> +            (c >= 100000) && (c <= 200000)
-> +        description: >
-> +            First of two deprecated properties.
-> +
-> +# There are no constraints for properties of empty type
-> +
-> +    -   name: "skel,deprecated2"
-> +        category: deprecated
-> +        type: empty
-> +        description: >
-> +            Second of two deprecated properties.
-> +
-> +# This example could be auto-generated rather than explicitly included
-> +# in the yaml source.
-> +
-> +example:
-> +    -   dts: |
-> +            sk11@0 {
-> +                compatible = "skel,sk11";
-> +                reg = <0>;
-> +                spi-max-frequency = <1000000>;
-> +                spi-cs-high;
-> +            };
-> +...
-> +
-> +---
-> +version: 1
-> +
-> +id: skel-mini
-> +
-> +title: Skeleton Mini Device
-> +
-> +maintainer:
-> +    -   name: Rogue Developer <rogue-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-> +
-> +description: >
-> +    The Skeleton Mini Device binding represents the SK47x series devices
-> +    produced by the Skeleton Corporation.
-> +
-> +properties:
-> +    -   name: "compatible"
-> +        category: required
-> +        constraint: |
-> +            "skel,sk472" || skel,sk473" || "skel,sk474" , BASE("skel,sk472")
-> +        deprecated: "skel,sk47x"
-> +        description: >
-> +            SK472 is the original part in the family. SK473/4 are later releases
-> +            with minor register changes.
-> +
-> +    -   name: "reg"
-> +        category: required
-> +        description: Address and size of Skeleton Mini register range.
-> +
-> +    -   name: "skel,sync-mode"
-> +        category: optional
-> +        type: empty
-> +        description: Enable synchronous transfer mode
-> +
-> +example:
-> +    -   dts: |
-> +            sk472@beef0000 {
-> +                compatible = "skel,sk472";
-> +                reg = <0xbeef0000 0x100>;
-> +            };
-> +        description: >
-> +            Demonstrates an SK472 in normal mode.
-> +
-> +    -   dts: |
-> +            sk474@dead0000 {
-> +                compatible = "skel,sk474", "skel,sk472";
-> +                reg = <0xdead0000 0x100>;
-> +                skel,sync-mode;
-> +            };
-> +        description: >
-> +            Demonstrates an SK474 in synchronous mode.
-> +...
-> 
+diff --git a/Documentation/devicetree/bindings/mtd/partition.txt b/Documentation/devicetree/bindings/mtd/partition.txt
+index 8e5557da1955..f1e2a02381a4 100644
+--- a/Documentation/devicetree/bindings/mtd/partition.txt
++++ b/Documentation/devicetree/bindings/mtd/partition.txt
+@@ -4,10 +4,17 @@ Partitions can be represented by sub-nodes of an mtd device. This can be used
+ on platforms which have strong conventions about which portions of a flash are
+ used for what purposes, but which don't use an on-flash partition table such
+ as RedBoot.
+-NOTE: if the sub-node has a compatible string, then it is not a partition.
+ 
+-#address-cells & #size-cells must both be present in the mtd device. There are
+-two valid values for both:
++The partition table should be a subnode of the mtd node and should be named
++'partitions'. Partitions are defined in subnodes of the partitions node.
++
++For backwards compatibility partitions as direct subnodes of the mtd device are
++supported. This use is discouraged.
++NOTE: also for backwards compatibility, direct subnodes that have a compatible
++string are not considered partitions, as they may be used for other bindings.
++
++#address-cells & #size-cells must both be present in the partitions subnode of the
++mtd device. There are two valid values for both:
+ <1>: for partitions that require a single 32-bit cell to represent their
+      size/address (aka the value is below 4 GiB)
+ <2>: for partitions that require two 32-bit cells to represent their
+@@ -28,44 +35,50 @@ Examples:
+ 
+ 
+ flash@0 {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
++	partitions {
++		#address-cells = <1>;
++		#size-cells = <1>;
+ 
+-	partition@0 {
+-		label = "u-boot";
+-		reg = <0x0000000 0x100000>;
+-		read-only;
+-	};
++		partition@0 {
++			label = "u-boot";
++			reg = <0x0000000 0x100000>;
++			read-only;
++		};
+ 
+-	uimage@100000 {
+-		reg = <0x0100000 0x200000>;
++		uimage@100000 {
++			reg = <0x0100000 0x200000>;
++		};
+ 	};
+ };
+ 
+ flash@1 {
+-	#address-cells = <1>;
+-	#size-cells = <2>;
++	partitions {
++		#address-cells = <1>;
++		#size-cells = <2>;
+ 
+-	/* a 4 GiB partition */
+-	partition@0 {
+-		label = "filesystem";
+-		reg = <0x00000000 0x1 0x00000000>;
++		/* a 4 GiB partition */
++		partition@0 {
++			label = "filesystem";
++			reg = <0x00000000 0x1 0x00000000>;
++		};
+ 	};
+ };
+ 
+ flash@2 {
+-	#address-cells = <2>;
+-	#size-cells = <2>;
++	partitions {
++		#address-cells = <2>;
++		#size-cells = <2>;
+ 
+-	/* an 8 GiB partition */
+-	partition@0 {
+-		label = "filesystem #1";
+-		reg = <0x0 0x00000000 0x2 0x00000000>;
+-	};
++		/* an 8 GiB partition */
++		partition@0 {
++			label = "filesystem #1";
++			reg = <0x0 0x00000000 0x2 0x00000000>;
++		};
+ 
+-	/* a 4 GiB partition */
+-	partition@200000000 {
+-		label = "filesystem #2";
+-		reg = <0x2 0x00000000 0x1 0x00000000>;
++		/* a 4 GiB partition */
++		partition@200000000 {
++			label = "filesystem #2";
++			reg = <0x2 0x00000000 0x1 0x00000000>;
++		};
+ 	};
+ };
+-- 
+2.6.0.rc2.230.g3dd15c0
