@@ -1,163 +1,139 @@
 From: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [PATCH v4] doc: dt: mtd: support partitions in a special
- 'partitions' subnode
-Date: Wed, 28 Oct 2015 15:50:37 -0700
-Message-ID: <20151028225037.GD13239@google.com>
-References: <1446072486-145169-1-git-send-email-computersforpeace@gmail.com>
+Subject: Re: [PATCH 1/3] mtd: create a partition type device tree binding
+Date: Thu, 29 Oct 2015 09:29:08 -0700
+Message-ID: <20151029162908.GA13275@localhost>
+References: <1446123152-22666-1-git-send-email-linus.walleij@linaro.org>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20120113;
         h=date:from:to:cc:subject:message-id:references:mime-version
          :content-type:content-disposition:in-reply-to:user-agent;
-        bh=SCKQwozG9eeIL+wqSMwIvXq5vc7SE6FB/jaVjD8Qr2g=;
-        b=XhhQuvn6lsTm3nTz5b/vKE43Qk/yOxGCp0QC5VqL4cVIptwY4jwQfxg+QMWK7DPhFp
-         Lj+VjprbTNwuUPWMyJTl2987c8BNdje/ie5W1hYQT+5cy2QTrNwjbS1oP2LwCi2ZLinG
-         i9N4aADgtS/2qdn3EQAHcgjZUDderXM/NMpylmM2Y6kOkRJN6EKXGICThexP29CglRZr
-         yDDlNberm1Pu8e0L6uFHQtjChMrAzSrAt+aXh+a2zHeCBMOUm9bvZPnA4FBCTKUOfq92
-         8vhRWvKOOL5wc0fG3II23hBD/Xmb/BAdzheY+0ZQwWvaIIxlw+q44AKJ8KzSW7GTbVf/
-         q0aw==
+        bh=phF8WbZY2zNoGZOx5b16zM4mp8FmUiEWz0AL7n9kFw0=;
+        b=Zch+S+1YAXm+5fkoPhShvbe9hRF+SY1mdyxcZ88ddq49Y40WZ1DfxDUo+8OaM3bfrw
+         LQlGcFJ3uo75/Atn0TW1WdmjyFZSy+zxtTCBc9YjgxlZLHx5O5XikLQSZVu3MQw87J99
+         GU4RAko1sbEtInSKDqy+EbuQ5KhVDzrRTc0FYgwyDyLp0m+obPlB91BSKFZmq9SVnBFu
+         ftABEp5TAV8P5hcxBuI2mAXuFwqKxvCrPnbnFHRVB5MtSrMoBte2pTvFt5Q40JmvuKRs
+         z9XOlL0r2DAlL1id2yOja1996nNxhx+9GiR1ZhbkQPRVKBJDY293TWxps9dAL2i7CBTt
+         nGZQ==
 Content-Disposition: inline
-In-Reply-To: <1446072486-145169-1-git-send-email-computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+In-Reply-To: <1446123152-22666-1-git-send-email-linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+To: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org
 
-On Wed, Oct 28, 2015 at 03:48:06PM -0700, Brian Norris wrote:
-> From: Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
++ devicetree-spec and others, since other non-driver-specific MTD
+partitioning stuff has gotten directed there [1], and this binding
+should probably get promoted in short order to the core mtdpart.c
+partitioning
+
+On Thu, Oct 29, 2015 at 01:52:30PM +0100, Linus Walleij wrote:
+> The Linux code in drivers/mtd/maps/physmap_of.c will optionally
+> look for the linux,part-probe binding for hints on a partition type to
+> look for in the MTD. It was added in commit 9d5da3a9b849
+> "mtd: extend physmap_of to let the device tree specify the parition probe"
 > 
-> To avoid conflict with other drivers using subnodes of the mtd device
-> create only one ofpart-specific node rather than any number of
-> arbitrary partition subnodes.
+> This solution is too Linux-specific and depend on some
+> Linux kernel-internal naming conventions. We need a proper
+> way of describing partition types that follow the pattern set by
+> other device tree bindings.
 > 
-> Signed-off-by: Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-> Acked-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-> Signed-off-by: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+> Create a "partition-type" binding for this, and add "my" bindings
+> for "arm,arm-flash-structure" as a starter for others to follow.
+> A follow-on patch adds support to the Linux kernel to handle this
+> binding, with some infrastructure for others to use it too.
+
+Overall, I like this. And thanks for expanding the explanation of DT
+partitions vs. parsers. It'd be good if we make parsers like this easier
+to integrate, so we see less hard-coded partitions in device tree.
+
+> Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+> Cc: Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>
+> Cc: Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>
+> Reported-by: Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>
+> Signed-off-by: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 > ---
-
-Ugh, I wrote this up to stick below the '---' but I forgot to send it
-out with the patch. Here goes:
-
-This is a resend with only slight modifications of Michal's v3 patch, for 
-clarity:
-
-http://thread.gmane.org/gmane.linux.drivers.mtd/60890/focus=60889
-
-It's been reviewed by me and Rob and I plan to take it for v4.4. But at Rob's
-suggestion, I'm sending this to the devicetree-spec list too, as this is a
-binding for somewhat generic infrastructure, rather than just drivers.
-
-Regards,
-Brian
-
->  .../devicetree/bindings/mtd/partition.txt          | 71 +++++++++++++---------
->  1 file changed, 42 insertions(+), 29 deletions(-)
+>  .../devicetree/bindings/mtd/mtd-physmap.txt        |  2 ++
+>  .../devicetree/bindings/mtd/partition.txt          | 35 +++++++++++++++++++---
+>  2 files changed, 33 insertions(+), 4 deletions(-)
 > 
+> diff --git a/Documentation/devicetree/bindings/mtd/mtd-physmap.txt b/Documentation/devicetree/bindings/mtd/mtd-physmap.txt
+> index 4a0a48bf4ecb..863560bdbb19 100644
+> --- a/Documentation/devicetree/bindings/mtd/mtd-physmap.txt
+> +++ b/Documentation/devicetree/bindings/mtd/mtd-physmap.txt
+> @@ -23,6 +23,8 @@ file systems on embedded devices.
+>     unaligned accesses as implemented in the JFFS2 code via memcpy().
+>     By defining "no-unaligned-direct-access", the flash will not be
+>     exposed directly to the MTD users (e.g. JFFS2) any more.
+> + - partition-type : a flash partition type to expect and probe for
+> +   on this device. See "partition.txt" for available partition types.
+>   - linux,mtd-name: allow to specify the mtd name for retro capability with
+>     physmap-flash drivers as boot loader pass the mtd partition via the old
+>     device name physmap-flash.
 > diff --git a/Documentation/devicetree/bindings/mtd/partition.txt b/Documentation/devicetree/bindings/mtd/partition.txt
-> index 8e5557da1955..f1e2a02381a4 100644
+> index 8e5557da1955..85d45764a4b3 100644
 > --- a/Documentation/devicetree/bindings/mtd/partition.txt
 > +++ b/Documentation/devicetree/bindings/mtd/partition.txt
-> @@ -4,10 +4,17 @@ Partitions can be represented by sub-nodes of an mtd device. This can be used
->  on platforms which have strong conventions about which portions of a flash are
->  used for what purposes, but which don't use an on-flash partition table such
->  as RedBoot.
-> -NOTE: if the sub-node has a compatible string, then it is not a partition.
+> @@ -1,9 +1,36 @@
+>  Representing flash partitions in devicetree
 >  
-> -#address-cells & #size-cells must both be present in the mtd device. There are
-> -two valid values for both:
-> +The partition table should be a subnode of the mtd node and should be named
-> +'partitions'. Partitions are defined in subnodes of the partitions node.
+> -Partitions can be represented by sub-nodes of an mtd device. This can be used
+> -on platforms which have strong conventions about which portions of a flash are
+> -used for what purposes, but which don't use an on-flash partition table such
+> -as RedBoot.
+> +On-device partition types:
 > +
-> +For backwards compatibility partitions as direct subnodes of the mtd device are
-> +supported. This use is discouraged.
-> +NOTE: also for backwards compatibility, direct subnodes that have a compatible
-> +string are not considered partitions, as they may be used for other bindings.
+> +It is possible for some drivers to indicate an on-device partition type, i.e.
+> +partition tables, footers or other binary pattern in the flash used to
+> +define how the flash is partitioned. This can be done in the device tree node
+> +of an MTD device by specifying partition-type = "foo"; This tells the operating
+> +system to look for the partition type indicated.
 > +
-> +#address-cells & #size-cells must both be present in the partitions subnode of the
-> +mtd device. There are two valid values for both:
->  <1>: for partitions that require a single 32-bit cell to represent their
->       size/address (aka the value is below 4 GiB)
->  <2>: for partitions that require two 32-bit cells to represent their
-> @@ -28,44 +35,50 @@ Examples:
+> +Required properties:
+> +- partition-type : the type of partition. Only one type can be specified.
+
+You're supporting this as a list property (for future expansion,
+presumably), so I can only assume the "only one type" is referring to
+the number of different parsers available currently, not the behavior of
+the property itself? This should probably be worded differently if
+that's the intention. Like, "a list of partition types ... ordered by
+priority .... We currently support the following: (list only the AFS
+type)" (fill in the blanks how you'd like).
+
+Also, this patch will conflict with [1]. I'll probably take [1] soon, so
+one of us will have to rebase this.
+
+Brian
+
+[1] http://thread.gmane.org/gmane.comp.devicetree.spec/191
+
+> +  Valid types are:
+> +  "arm,arm-flash-structure" (also called AFS)
+> +
+> +Example:
+> +
+> +flash0@40000000 {
+> +	/* 2 * 32MiB NOR Flash memory */
+> +	compatible = "arm,vexpress-flash", "cfi-flash";
+> +	partition-type = "arm,arm-flash-structure";
+> +	reg = <0x40000000 0x04000000>;
+> +	bank-width = <4>;
+> +};
+> +
+> +
+> +Device Tree specified partitions:
+> +
+> +If there is no specified on-device binary format, partitions can be
+> +represented by sub-nodes of an mtd device. This can be used on platforms which
+> +have strong conventions about which portions of a flash are used for what
+> +purposes.
+> +
+>  NOTE: if the sub-node has a compatible string, then it is not a partition.
 >  
->  
->  flash@0 {
-> -	#address-cells = <1>;
-> -	#size-cells = <1>;
-> +	partitions {
-> +		#address-cells = <1>;
-> +		#size-cells = <1>;
->  
-> -	partition@0 {
-> -		label = "u-boot";
-> -		reg = <0x0000000 0x100000>;
-> -		read-only;
-> -	};
-> +		partition@0 {
-> +			label = "u-boot";
-> +			reg = <0x0000000 0x100000>;
-> +			read-only;
-> +		};
->  
-> -	uimage@100000 {
-> -		reg = <0x0100000 0x200000>;
-> +		uimage@100000 {
-> +			reg = <0x0100000 0x200000>;
-> +		};
->  	};
->  };
->  
->  flash@1 {
-> -	#address-cells = <1>;
-> -	#size-cells = <2>;
-> +	partitions {
-> +		#address-cells = <1>;
-> +		#size-cells = <2>;
->  
-> -	/* a 4 GiB partition */
-> -	partition@0 {
-> -		label = "filesystem";
-> -		reg = <0x00000000 0x1 0x00000000>;
-> +		/* a 4 GiB partition */
-> +		partition@0 {
-> +			label = "filesystem";
-> +			reg = <0x00000000 0x1 0x00000000>;
-> +		};
->  	};
->  };
->  
->  flash@2 {
-> -	#address-cells = <2>;
-> -	#size-cells = <2>;
-> +	partitions {
-> +		#address-cells = <2>;
-> +		#size-cells = <2>;
->  
-> -	/* an 8 GiB partition */
-> -	partition@0 {
-> -		label = "filesystem #1";
-> -		reg = <0x0 0x00000000 0x2 0x00000000>;
-> -	};
-> +		/* an 8 GiB partition */
-> +		partition@0 {
-> +			label = "filesystem #1";
-> +			reg = <0x0 0x00000000 0x2 0x00000000>;
-> +		};
->  
-> -	/* a 4 GiB partition */
-> -	partition@200000000 {
-> -		label = "filesystem #2";
-> -		reg = <0x2 0x00000000 0x1 0x00000000>;
-> +		/* a 4 GiB partition */
-> +		partition@200000000 {
-> +			label = "filesystem #2";
-> +			reg = <0x2 0x00000000 0x1 0x00000000>;
-> +		};
->  	};
->  };
+>  #address-cells & #size-cells must both be present in the mtd device. There are
 > -- 
-> 2.6.0.rc2.230.g3dd15c0
+> 2.4.3
 > 
