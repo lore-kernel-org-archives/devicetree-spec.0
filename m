@@ -1,139 +1,55 @@
-From: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+From: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 Subject: Re: [PATCH 1/3] mtd: create a partition type device tree binding
-Date: Thu, 29 Oct 2015 09:29:08 -0700
-Message-ID: <20151029162908.GA13275@localhost>
+Date: Fri, 30 Oct 2015 15:00:57 +0100
+Message-ID: <CACRpkdYS5Jf8UC2K0bNdEQZDjTeZZx44Uu-kkof+9E=4Ny0oDg@mail.gmail.com>
 References: <1446123152-22666-1-git-send-email-linus.walleij@linaro.org>
+	<20151029162908.GA13275@localhost>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-type:content-disposition:in-reply-to:user-agent;
-        bh=phF8WbZY2zNoGZOx5b16zM4mp8FmUiEWz0AL7n9kFw0=;
-        b=Zch+S+1YAXm+5fkoPhShvbe9hRF+SY1mdyxcZ88ddq49Y40WZ1DfxDUo+8OaM3bfrw
-         LQlGcFJ3uo75/Atn0TW1WdmjyFZSy+zxtTCBc9YjgxlZLHx5O5XikLQSZVu3MQw87J99
-         GU4RAko1sbEtInSKDqy+EbuQ5KhVDzrRTc0FYgwyDyLp0m+obPlB91BSKFZmq9SVnBFu
-         ftABEp5TAV8P5hcxBuI2mAXuFwqKxvCrPnbnFHRVB5MtSrMoBte2pTvFt5Q40JmvuKRs
-         z9XOlL0r2DAlL1id2yOja1996nNxhx+9GiR1ZhbkQPRVKBJDY293TWxps9dAL2i7CBTt
-         nGZQ==
-Content-Disposition: inline
-In-Reply-To: <1446123152-22666-1-git-send-email-linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+        d=linaro_org.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+         :cc:content-type;
+        bh=kmi1aSr0+DE33Spk/cK9I0+z11P7rAVuIHggUt0UeTc=;
+        b=oLEQQm6s9oIqJTDVKC0ZEm6cuDLZcDN33iZXjFbcUVpdCZnX8NVAsRQKVW9P7pwccw
+         C95NMiRwLQ4+7JkWr/YEUNPVF2lHkeOvWkoFEYaw/+7410w9hsfnNLbucpD8Mo0kuKqN
+         5UX2JaCHYfkniiBPFZwA0LvgR9fjfqHFuIfsZ0S7V2sv8oWq690HxHwmrxzh1/tsQ80C
+         eEBpLwAP5D/BTXLjfD5mzQDKIFTm4XTnxNNFF0bunH73bMiT0YsS/zgMPJVawqGrLBhZ
+         TrlhjEOCjYfo6bm44UbThK9Z1DKJ/zgUVTDXcMMWc/RIRiy8QYAVdle2Pfy6hAwMVZdL
+         SAmA==
+In-Reply-To: <20151029162908.GA13275@localhost>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org
+To: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, "linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>
 
-+ devicetree-spec and others, since other non-driver-specific MTD
-partitioning stuff has gotten directed there [1], and this binding
-should probably get promoted in short order to the core mtdpart.c
-partitioning
+On Thu, Oct 29, 2015 at 5:29 PM, Brian Norris
+<computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
 
-On Thu, Oct 29, 2015 at 01:52:30PM +0100, Linus Walleij wrote:
-> The Linux code in drivers/mtd/maps/physmap_of.c will optionally
-> look for the linux,part-probe binding for hints on a partition type to
-> look for in the MTD. It was added in commit 9d5da3a9b849
-> "mtd: extend physmap_of to let the device tree specify the parition probe"
-> 
-> This solution is too Linux-specific and depend on some
-> Linux kernel-internal naming conventions. We need a proper
-> way of describing partition types that follow the pattern set by
-> other device tree bindings.
-> 
-> Create a "partition-type" binding for this, and add "my" bindings
-> for "arm,arm-flash-structure" as a starter for others to follow.
-> A follow-on patch adds support to the Linux kernel to handle this
-> binding, with some infrastructure for others to use it too.
+>> +Required properties:
+>> +- partition-type : the type of partition. Only one type can be specified.
+>
+> You're supporting this as a list property (for future expansion,
+> presumably), so I can only assume the "only one type" is referring to
+> the number of different parsers available currently, not the behavior of
+> the property itself?
 
-Overall, I like this. And thanks for expanding the explanation of DT
-partitions vs. parsers. It'd be good if we make parsers like this easier
-to integrate, so we see less hard-coded partitions in device tree.
+I was thinking that it would not be a list actually.
 
-> Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-> Cc: Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>
-> Cc: Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>
-> Reported-by: Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>
-> Signed-off-by: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-> ---
->  .../devicetree/bindings/mtd/mtd-physmap.txt        |  2 ++
->  .../devicetree/bindings/mtd/partition.txt          | 35 +++++++++++++++++++---
->  2 files changed, 33 insertions(+), 4 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/mtd/mtd-physmap.txt b/Documentation/devicetree/bindings/mtd/mtd-physmap.txt
-> index 4a0a48bf4ecb..863560bdbb19 100644
-> --- a/Documentation/devicetree/bindings/mtd/mtd-physmap.txt
-> +++ b/Documentation/devicetree/bindings/mtd/mtd-physmap.txt
-> @@ -23,6 +23,8 @@ file systems on embedded devices.
->     unaligned accesses as implemented in the JFFS2 code via memcpy().
->     By defining "no-unaligned-direct-access", the flash will not be
->     exposed directly to the MTD users (e.g. JFFS2) any more.
-> + - partition-type : a flash partition type to expect and probe for
-> +   on this device. See "partition.txt" for available partition types.
->   - linux,mtd-name: allow to specify the mtd name for retro capability with
->     physmap-flash drivers as boot loader pass the mtd partition via the old
->     device name physmap-flash.
-> diff --git a/Documentation/devicetree/bindings/mtd/partition.txt b/Documentation/devicetree/bindings/mtd/partition.txt
-> index 8e5557da1955..85d45764a4b3 100644
-> --- a/Documentation/devicetree/bindings/mtd/partition.txt
-> +++ b/Documentation/devicetree/bindings/mtd/partition.txt
-> @@ -1,9 +1,36 @@
->  Representing flash partitions in devicetree
->  
-> -Partitions can be represented by sub-nodes of an mtd device. This can be used
-> -on platforms which have strong conventions about which portions of a flash are
-> -used for what purposes, but which don't use an on-flash partition table such
-> -as RedBoot.
-> +On-device partition types:
-> +
-> +It is possible for some drivers to indicate an on-device partition type, i.e.
-> +partition tables, footers or other binary pattern in the flash used to
-> +define how the flash is partitioned. This can be done in the device tree node
-> +of an MTD device by specifying partition-type = "foo"; This tells the operating
-> +system to look for the partition type indicated.
-> +
-> +Required properties:
-> +- partition-type : the type of partition. Only one type can be specified.
+The reason being that if you're anyways going to the trouble of
+specifying exactly what partition type is going to be used, you're
+not really interested in specifying a few different ones, you know
+exactly what type it is going to be.
 
-You're supporting this as a list property (for future expansion,
-presumably), so I can only assume the "only one type" is referring to
-the number of different parsers available currently, not the behavior of
-the property itself? This should probably be worded differently if
-that's the intention. Like, "a list of partition types ... ordered by
-priority .... We currently support the following: (list only the AFS
-type)" (fill in the blanks how you'd like).
+But if you think it needs to be a list, I'll specify that, no big
+deal. I'll also try to get the Linux code to handle a list then.
 
-Also, this patch will conflict with [1]. I'll probably take [1] soon, so
-one of us will have to rebase this.
+> Also, this patch will conflict with [1]. I'll probably take [1] soon, so
+> one of us will have to rebase this.
 
-Brian
+Sure I'll rebase on whatever you say.
 
-[1] http://thread.gmane.org/gmane.comp.devicetree.spec/191
-
-> +  Valid types are:
-> +  "arm,arm-flash-structure" (also called AFS)
-> +
-> +Example:
-> +
-> +flash0@40000000 {
-> +	/* 2 * 32MiB NOR Flash memory */
-> +	compatible = "arm,vexpress-flash", "cfi-flash";
-> +	partition-type = "arm,arm-flash-structure";
-> +	reg = <0x40000000 0x04000000>;
-> +	bank-width = <4>;
-> +};
-> +
-> +
-> +Device Tree specified partitions:
-> +
-> +If there is no specified on-device binary format, partitions can be
-> +represented by sub-nodes of an mtd device. This can be used on platforms which
-> +have strong conventions about which portions of a flash are used for what
-> +purposes.
-> +
->  NOTE: if the sub-node has a compatible string, then it is not a partition.
->  
->  #address-cells & #size-cells must both be present in the mtd device. There are
-> -- 
-> 2.4.3
-> 
+Yours,
+Linus Walleij
