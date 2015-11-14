@@ -1,91 +1,65 @@
-From: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+From: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 Subject: Re: [PATCH 1/3] mtd: create a partition type device tree binding
-Date: Fri, 13 Nov 2015 14:00:39 -0800
-Message-ID: <20151113220039.GA74382@google.com>
+Date: Sat, 14 Nov 2015 11:46:59 +0100
+Message-ID: <CACRpkdakyae95f_Lc-R7Uf7wndj5hyfCqqHziwmZjwm-uNkGAg@mail.gmail.com>
 References: <1446123152-22666-1-git-send-email-linus.walleij@linaro.org>
- <20151029162908.GA13275@localhost>
- <CACRpkdYS5Jf8UC2K0bNdEQZDjTeZZx44Uu-kkof+9E=4Ny0oDg@mail.gmail.com>
- <20151030175145.GF13239@google.com>
- <CAL_JsqL2F3p7qBPbOiGytVyzF_aNLWbrCT0mAX1WZo6SxE3JoA@mail.gmail.com>
+	<20151029162908.GA13275@localhost>
+	<CACRpkdYS5Jf8UC2K0bNdEQZDjTeZZx44Uu-kkof+9E=4Ny0oDg@mail.gmail.com>
+	<20151030175145.GF13239@google.com>
+	<CAL_JsqL2F3p7qBPbOiGytVyzF_aNLWbrCT0mAX1WZo6SxE3JoA@mail.gmail.com>
+	<20151113220039.GA74382@google.com>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-type:content-disposition:in-reply-to:user-agent;
-        bh=IEY+8EdIi5C5vzX0aSIseEUKXLDIiQHJH6xmEFDAdAM=;
-        b=uZ0f6vnYIukQjA3vA+i3ibUjiivI5Fsh/7oahXdTcRsZ4eXS+J3WXIobOYMRvUXBg4
-         NACu0YhD8uzgqc/LJ2vWSzPCs0A6hkD+WOTKeAbKfPX/0r11FQ5Kw31mUS9imW3gJiIc
-         /9opmoLx/xi2YY6KTwdIHIXwDhs8eBQvoM32cW9QBuFn4rNyGIK7wBEhuBtYrHkOgTLu
-         Dgnl4jL88xVRH1RZBWi4tOfycJ55MpZmizl2nxd5g1tni+jvNkmg+gifzGa6owcWe2Cx
-         Lbr9ZXWnE7BL1ihWsw0VWv3Yw8lhxLoGRTJbh1ClvzQ1omUtc0g6ynxs4mng61LWV9SP
-         mS9A==
-Content-Disposition: inline
-In-Reply-To: <CAL_JsqL2F3p7qBPbOiGytVyzF_aNLWbrCT0mAX1WZo6SxE3JoA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+        d=linaro_org.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+         :cc:content-type;
+        bh=PL7N7OtQGT9S7vCwojK2nvw+YUYxOHOJq0PjM7f1USY=;
+        b=WPFCD/xoPeA8p8VunxeOK40u2QpWOXi7giGi+fPdxogTkqGY3rbthCGpDgSIhIks+H
+         uNf3o3ZU3Lyq7JszLW2x1OndJa13eo7gB0GSVeAGYuYp1IoVn0Le/bSoa5UkmbQLrY4y
+         ZrkDOZb5qpNtJEU9S5SY0I+awDHbsJsLqVtXMH66V3TUSZrdPzdYKaw/37IZ+6lo/XHe
+         /WCqLpEvAnH3Ro+4MWrU8cRL6QwCyrSIyWmpo09j7itKK9iHwf+0qLukv1DaAHJOGGUU
+         4gu+6M0k5Kz2oZMy4FOJz+QJyzEo5LByglhkOHHhPfXXFHkOzao158TateIELVQft2Ln
+         dIrg==
+In-Reply-To: <20151113220039.GA74382-hpIqsD4AKlfQT0dZR+AlfA@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, "linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>, Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+To: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, "linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>, Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-On Fri, Nov 06, 2015 at 08:13:13AM -0600, Rob Herring wrote:
-> Since we now have partitions contained in a sub node, how about using
-> compatible for that sub node instead.
+On Fri, Nov 13, 2015 at 11:00 PM, Brian Norris
+<computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
 
-I see that Linus and I spoke up in agreement on this one.
+(...)
+>  (2) we should define a comptible property for the hard-coded
+>  partitioning case (e.g., compatible = "partitions")
+(...)
+> If we went with option (2), then ofpart.c could just check only for
+> 'compatible = "partitions"' (or similar), and if not found bail out.
 
-I took a little look at adding of_match_table support to the core MTD
-partitioning code (not sure if that's duplicating anything Linus was
-attempting on his own?), and I'm observing that there's potential for
-conflict with the new binding [1]. If we're going to start overloading
-the 'partitions' node to support other partitioning types via
-'compatible' property, then we either need to:
+So this "hard-coded partitioning case" the case is where all partitions
+are defined in the device tree as described in
+Documentation/devicetree/bindings/mtd/partition.txt ?
 
- (1) go back to specifying that full ofpart specifications must have
- *no* compatible property or
+Or is it a way to indicate that this array
+static const char * const part_probe_types_def[] = {
+        "cmdlinepart", "RedBoot", "ofpart", "ofoldpart", NULL };
+in physmap_of.c should be used?
 
- (2) we should define a comptible property for the hard-coded
- partitioning case (e.g., compatible = "partitions")
+Sorry if I don't fully follow, I'm a bit stupid when it comes to the MTD
+helicopter  view of the situation.... :(
 
-IOW, I could imagine a new partition parser that needs a DT like this:
+> I think option (2) makes more sense. But it would require an update to
+> the binding and code for 4.4, since [1] was only introduced during this
+> release cycle.
 
-	flash@xxx {
-		compatible = "vendor,flash-type";
-		...
-		partitions {
-			compatible = "some-new-partition-parser";
-			...
-			subnode {
-				// "some-new-partition-parser" might
-				// need to put something here
-			};
-		};
-	};
+Does that mean all old device trees that specify no compatible
+string all of a sudden stop working? We can't break the DT ABI, so I
+guess not.
 
-But currently, the binding would say that 'subnode' must be a partition,
-even if it's really something else auxiliary to
-"some-new-partition-parser" [2].
+A bit confused here, I can't really see what I should do with the patch...
 
-If we went with option (1), then we'd just have ofpart.c see that
-'partitions' has a compatible property and bail out. That seems kinda
-hacky.
-
-If we went with option (2), then ofpart.c could just check only for
-'compatible = "partitions"' (or similar), and if not found bail out.
-
-I think option (2) makes more sense. But it would require an update to
-the binding and code for 4.4, since [1] was only introduced during this
-release cycle.
-
-Brian
-
-[1] fe2585e9c29a ("doc: dt: mtd: support partitions in a special 'partitions' subnode")
-
-[2] Possibilities: something relevant to partition splitting. See some
-previous work, which I haven't gotten around to fully addressing yet,
-but can hopefully be rolled into this work:
-
-http://patchwork.ozlabs.org/patch/476373/
-http://patchwork.ozlabs.org/patch/473364/
-http://patchwork.ozlabs.org/patch/475988/
+Yours,
+Linus Walleij
