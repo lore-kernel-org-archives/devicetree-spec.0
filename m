@@ -1,65 +1,80 @@
-From: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+From: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
 Subject: Re: [PATCH 1/3] mtd: create a partition type device tree binding
-Date: Sat, 14 Nov 2015 11:46:59 +0100
-Message-ID: <CACRpkdakyae95f_Lc-R7Uf7wndj5hyfCqqHziwmZjwm-uNkGAg@mail.gmail.com>
+Date: Sun, 15 Nov 2015 10:06:07 +0100
+Message-ID: <CAMuHMdVBdnjH0xQoMY7yT6Q-Z4bnukWgjBcWNYzhhNpO6263Rg@mail.gmail.com>
 References: <1446123152-22666-1-git-send-email-linus.walleij@linaro.org>
 	<20151029162908.GA13275@localhost>
 	<CACRpkdYS5Jf8UC2K0bNdEQZDjTeZZx44Uu-kkof+9E=4Ny0oDg@mail.gmail.com>
 	<20151030175145.GF13239@google.com>
 	<CAL_JsqL2F3p7qBPbOiGytVyzF_aNLWbrCT0mAX1WZo6SxE3JoA@mail.gmail.com>
-	<20151113220039.GA74382@google.com>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro_org.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-         :cc:content-type;
-        bh=PL7N7OtQGT9S7vCwojK2nvw+YUYxOHOJq0PjM7f1USY=;
-        b=WPFCD/xoPeA8p8VunxeOK40u2QpWOXi7giGi+fPdxogTkqGY3rbthCGpDgSIhIks+H
-         uNf3o3ZU3Lyq7JszLW2x1OndJa13eo7gB0GSVeAGYuYp1IoVn0Le/bSoa5UkmbQLrY4y
-         ZrkDOZb5qpNtJEU9S5SY0I+awDHbsJsLqVtXMH66V3TUSZrdPzdYKaw/37IZ+6lo/XHe
-         /WCqLpEvAnH3Ro+4MWrU8cRL6QwCyrSIyWmpo09j7itKK9iHwf+0qLukv1DaAHJOGGUU
-         4gu+6M0k5Kz2oZMy4FOJz+QJyzEo5LByglhkOHHhPfXXFHkOzao158TateIELVQft2Ln
-         dIrg==
-In-Reply-To: <20151113220039.GA74382-hpIqsD4AKlfQT0dZR+AlfA@public.gmane.org>
+        d=gmail.com; s=20120113;
+        h=mime-version:sender:in-reply-to:references:date:message-id:subject
+         :from:to:cc:content-type;
+        bh=KXkBA8NVr2b2TTbmoVJjyAeuS3KbDkHk/4uR0A1XJ64=;
+        b=ywKbsXUXoTjmxcG2Xdugfh+TsTJi5T6elAk3ub3snfc0K3WTCWOAFjOwUmbsyqlBus
+         Sxh9Tz98HloavBgRYVK7nZ6pFmroMBotHKN2Nk3vkx9BuuzcqM55dnr0YMKrnMN/B/Y3
+         RVorejKEYH2j6wmrDJTPupgeP3WkKd+2IkyHEI7nYedbDd8gzA1GLu2C3bwKlvL6N6hi
+         c89T3ykMnmi6cv/5nXpl/fyXD30VNA15IDRb1DJ4qb0wICLuaFrHAgzL2fLDo6XYdwwT
+         mUe9ZHiTw0t7s7PoNvvbuOI+43J7k1W1sG7h6i942Ve+HuGsf1LCQXdHzBebaIw/0WRj
+         Dysw==
+In-Reply-To: <CAL_JsqL2F3p7qBPbOiGytVyzF_aNLWbrCT0mAX1WZo6SxE3JoA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, "linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>, Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Cc: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, "linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>
 
-On Fri, Nov 13, 2015 at 11:00 PM, Brian Norris
-<computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+On Fri, Nov 6, 2015 at 3:13 PM, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
+> On Fri, Oct 30, 2015 at 12:51 PM, Brian Norris
+> <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+>> On Fri, Oct 30, 2015 at 03:00:57PM +0100, Linus Walleij wrote:
+>>> On Thu, Oct 29, 2015 at 5:29 PM, Brian Norris
+>>> <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+>>>
+>>> >> +Required properties:
+>>> >> +- partition-type : the type of partition. Only one type can be specified.
+>>> >
+>>> > You're supporting this as a list property (for future expansion,
+>>> > presumably), so I can only assume the "only one type" is referring to
+>>> > the number of different parsers available currently, not the behavior of
+>>> > the property itself?
+>>>
+>>> I was thinking that it would not be a list actually.
 
-(...)
->  (2) we should define a comptible property for the hard-coded
->  partitioning case (e.g., compatible = "partitions")
-(...)
-> If we went with option (2), then ofpart.c could just check only for
-> 'compatible = "partitions"' (or similar), and if not found bail out.
+Why not? It is (was) not uncommon to have multiple partition table types on
+hard disks (e.g. bsd disklabel and msdos and/or amiga rdb).
 
-So this "hard-coded partitioning case" the case is where all partitions
-are defined in the device tree as described in
-Documentation/devicetree/bindings/mtd/partition.txt ?
+>>> The reason being that if you're anyways going to the trouble of
+>>> specifying exactly what partition type is going to be used, you're
+>>> not really interested in specifying a few different ones, you know
+>>> exactly what type it is going to be.
+>>
+>> OK, that makes sense. I think it's still *possible* that a board might
+>> have the option of more than one partition parser, and so they might
+>> just include both in the DTS, but that seems unlikely and so it makes
+>> sense not to (over)engineer for it before it's needed. Anyway, your
+>> binding can easily be expanded in the future if needed.
+>
+> Since we now have partitions contained in a sub node, how about using
+> compatible for that sub node instead.
 
-Or is it a way to indicate that this array
-static const char * const part_probe_types_def[] = {
-        "cmdlinepart", "RedBoot", "ofpart", "ofoldpart", NULL };
-in physmap_of.c should be used?
+And "compatible" supports a list of multiple values.
 
-Sorry if I don't fully follow, I'm a bit stupid when it comes to the MTD
-helicopter  view of the situation.... :(
+BTW, this means it also (can) becomes more generic. Will it be applicable
+to other block devices (e.g. hard disks), too?
+Integration with block/partitions?
 
-> I think option (2) makes more sense. But it would require an update to
-> the binding and code for 4.4, since [1] was only introduced during this
-> release cycle.
+Gr{oetje,eeting}s,
 
-Does that mean all old device trees that specify no compatible
-string all of a sudden stop working? We can't break the DT ABI, so I
-guess not.
+                        Geert
 
-A bit confused here, I can't really see what I should do with the patch...
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org
 
-Yours,
-Linus Walleij
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
