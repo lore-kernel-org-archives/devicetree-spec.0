@@ -1,80 +1,131 @@
-From: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
+From: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Subject: Re: [PATCH 1/3] mtd: create a partition type device tree binding
-Date: Sun, 15 Nov 2015 10:06:07 +0100
-Message-ID: <CAMuHMdVBdnjH0xQoMY7yT6Q-Z4bnukWgjBcWNYzhhNpO6263Rg@mail.gmail.com>
+Date: Sun, 15 Nov 2015 20:12:44 -0800
+Message-ID: <20151116041244.GA4021@brian-ubuntu>
 References: <1446123152-22666-1-git-send-email-linus.walleij@linaro.org>
-	<20151029162908.GA13275@localhost>
-	<CACRpkdYS5Jf8UC2K0bNdEQZDjTeZZx44Uu-kkof+9E=4Ny0oDg@mail.gmail.com>
-	<20151030175145.GF13239@google.com>
-	<CAL_JsqL2F3p7qBPbOiGytVyzF_aNLWbrCT0mAX1WZo6SxE3JoA@mail.gmail.com>
+ <20151029162908.GA13275@localhost>
+ <CACRpkdYS5Jf8UC2K0bNdEQZDjTeZZx44Uu-kkof+9E=4Ny0oDg@mail.gmail.com>
+ <20151030175145.GF13239@google.com>
+ <CAL_JsqL2F3p7qBPbOiGytVyzF_aNLWbrCT0mAX1WZo6SxE3JoA@mail.gmail.com>
+ <20151113220039.GA74382@google.com>
+ <CACRpkdakyae95f_Lc-R7Uf7wndj5hyfCqqHziwmZjwm-uNkGAg@mail.gmail.com>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20120113;
-        h=mime-version:sender:in-reply-to:references:date:message-id:subject
-         :from:to:cc:content-type;
-        bh=KXkBA8NVr2b2TTbmoVJjyAeuS3KbDkHk/4uR0A1XJ64=;
-        b=ywKbsXUXoTjmxcG2Xdugfh+TsTJi5T6elAk3ub3snfc0K3WTCWOAFjOwUmbsyqlBus
-         Sxh9Tz98HloavBgRYVK7nZ6pFmroMBotHKN2Nk3vkx9BuuzcqM55dnr0YMKrnMN/B/Y3
-         RVorejKEYH2j6wmrDJTPupgeP3WkKd+2IkyHEI7nYedbDd8gzA1GLu2C3bwKlvL6N6hi
-         c89T3ykMnmi6cv/5nXpl/fyXD30VNA15IDRb1DJ4qb0wICLuaFrHAgzL2fLDo6XYdwwT
-         mUe9ZHiTw0t7s7PoNvvbuOI+43J7k1W1sG7h6i942Ve+HuGsf1LCQXdHzBebaIw/0WRj
-         Dysw==
-In-Reply-To: <CAL_JsqL2F3p7qBPbOiGytVyzF_aNLWbrCT0mAX1WZo6SxE3JoA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-type:content-disposition:in-reply-to:user-agent;
+        bh=gnFHOi91Q0nf3nBYTql+g/OL0lhFtD7p4oB5ZrzIJCU=;
+        b=hjKlBnuP/f6WKOFZOA0qW4Gw+dKHtUtRVU/IjaSvfaAk/iHnmFAIg9g5EXtj/5jyBA
+         GcFoH759d50uX1UOyWrMmtdKrhh5Ehmi+LC9Mq8mlWnK5QPh8i89tBXBQN0KpFDriGxV
+         ms10ELkPx361ivWA64naCzVN6AKJhFZ9UdxZ5yFWpzRIgasoGYEBz4cvN713dGiZ0oLH
+         fkqtzvinjlGfGwoGTKqg9AMUDmfVzqzrlc+IGmbixlBSgq4F5WoQSm3GPLnUxS1SSfBJ
+         /GOb4jhR1v3BZb/LRGThqZuYIrRDqm2U8qMuzDH5AtYAEPBZvzxmHeL5krCHjwtIpTcZ
+         w5Vg==
+Content-Disposition: inline
+In-Reply-To: <CACRpkdakyae95f_Lc-R7Uf7wndj5hyfCqqHziwmZjwm-uNkGAg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, "linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>
+To: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Cc: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, "linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>, Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-On Fri, Nov 6, 2015 at 3:13 PM, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
-> On Fri, Oct 30, 2015 at 12:51 PM, Brian Norris
+On Sat, Nov 14, 2015 at 11:46:59AM +0100, Linus Walleij wrote:
+> On Fri, Nov 13, 2015 at 11:00 PM, Brian Norris
 > <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
->> On Fri, Oct 30, 2015 at 03:00:57PM +0100, Linus Walleij wrote:
->>> On Thu, Oct 29, 2015 at 5:29 PM, Brian Norris
->>> <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
->>>
->>> >> +Required properties:
->>> >> +- partition-type : the type of partition. Only one type can be specified.
->>> >
->>> > You're supporting this as a list property (for future expansion,
->>> > presumably), so I can only assume the "only one type" is referring to
->>> > the number of different parsers available currently, not the behavior of
->>> > the property itself?
->>>
->>> I was thinking that it would not be a list actually.
+> 
+> (...)
+> >  (2) we should define a comptible property for the hard-coded
+> >  partitioning case (e.g., compatible = "partitions")
+> (...)
+> > If we went with option (2), then ofpart.c could just check only for
+> > 'compatible = "partitions"' (or similar), and if not found bail out.
+> 
+> So this "hard-coded partitioning case" the case is where all partitions
+> are defined in the device tree as described in
+> Documentation/devicetree/bindings/mtd/partition.txt ?
 
-Why not? It is (was) not uncommon to have multiple partition table types on
-hard disks (e.g. bsd disklabel and msdos and/or amiga rdb).
+Right.
 
->>> The reason being that if you're anyways going to the trouble of
->>> specifying exactly what partition type is going to be used, you're
->>> not really interested in specifying a few different ones, you know
->>> exactly what type it is going to be.
->>
->> OK, that makes sense. I think it's still *possible* that a board might
->> have the option of more than one partition parser, and so they might
->> just include both in the DTS, but that seems unlikely and so it makes
->> sense not to (over)engineer for it before it's needed. Anyway, your
->> binding can easily be expanded in the future if needed.
->
-> Since we now have partitions contained in a sub node, how about using
-> compatible for that sub node instead.
+> Or is it a way to indicate that this array
+> static const char * const part_probe_types_def[] = {
+>         "cmdlinepart", "RedBoot", "ofpart", "ofoldpart", NULL };
+> in physmap_of.c should be used?
 
-And "compatible" supports a list of multiple values.
+No. At this point, I would consider that to be a legacy method. We still
+have to support this for many cases (including the non-DT case; but
+hopefully we can do better than that soon), and that would be an option.
 
-BTW, this means it also (can) becomes more generic. Will it be applicable
-to other block devices (e.g. hard disks), too?
-Integration with block/partitions?
+> Sorry if I don't fully follow, I'm a bit stupid when it comes to the MTD
+> helicopter  view of the situation.... :(
 
-Gr{oetje,eeting}s,
+Yeah...sorry if I wasn't too clear. And I definitely don't blame you for
+not understanding the mess that MTD often is :(
 
-                        Geert
+> > I think option (2) makes more sense. But it would require an update to
+> > the binding and code for 4.4, since [1] was only introduced during this
+> > release cycle.
+> 
+> Does that mean all old device trees that specify no compatible
+> string all of a sudden stop working? We can't break the DT ABI, so I
+> guess not.
 
---
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org
+No, that's not what I was intending. The binding before commmit
+fe2585e9c29a ("doc: dt: mtd: support partitions in a special
+'partitions' subnode") should still stay working as-is. That is, we
+don't mess with the way things worked for anything that doesn't have a
+'partitions' subnode. But now that we have a 'partitions' subnode (in
+4.4-rc1), I'm just suggesting that we enforce this always have a
+compatible property, so we can be more clear on the difference between:
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+	partitions {
+		// do I have a
+		// compatible = "partitons";
+		// here?
+
+		partition@0 {
+			label = "foo-partition";
+			reg = <0 0x100000>;
+		};
+	};
+
+and
+
+	partitions {
+		compatible = "arm,arm-flash-structure";
+
+		subnode {
+			// what if we need something here eventually?
+		};
+	};
+
+This would require some modifications to partitions.txt and to
+drivers/mtd/ofpart.c.
+
+> A bit confused here, I can't really see what I should do with the patch...
+
+Hopefully that cleared up a bit? The code changes for my suggestion
+would just be something like this, I think. (Not tested in any way.)
+
+diff --git a/drivers/mtd/ofpart.c b/drivers/mtd/ofpart.c
+index 669c3452f278..6811bc5440a4 100644
+--- a/drivers/mtd/ofpart.c
++++ b/drivers/mtd/ofpart.c
+@@ -50,6 +50,10 @@ static int parse_ofpart_partitions(struct mtd_info *master,
+ 			master->name, mtd_node->full_name);
+ 		ofpart_node = mtd_node;
+ 		dedicated = false;
++	} else {
++		/* The "partitions" subnode may belong to some other parser */
++		if (!of_device_is_compatible(ofpart_node, "partitions"))
++			return 0;
+ 	}
+ 
+ 	/* First count the subnodes */
+
+I was just bringing this up for discussion, since it's related to
+your/Rob's new proposal. I'll send a proper (and tested) patch, along
+with a doc update, if that looks reasonable.
+
+Brian
