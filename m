@@ -1,31 +1,24 @@
-From: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
+From: Jonas Gorski <jogo@openwrt.org>
 Subject: Re: [RFC PATCH 0/7] mtd: partitions: add of_match_table support
-Date: Sat, 5 Dec 2015 11:15:54 +0100
-Message-ID: <CAMuHMdUJXHs_OhT0da+kzc=D4MOFUT9BB3eJ+7a_p6DYx-PKBA@mail.gmail.com>
+Date: Sat, 5 Dec 2015 12:35:42 +0100
+Message-ID: <CAOiHx==8TFK9t4h2C0Q+j==nuRP3EbyVa+nuYuSEj_LCDa820Q@mail.gmail.com>
 References: <1449292763-129421-1-git-send-email-computersforpeace@gmail.com>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=mime-version:sender:in-reply-to:references:date:message-id:subject
-         :from:to:cc:content-type;
-        bh=PaEQVOhQi2pSoHhqKzwm+ZIwyvxx8ie26PhHQqHl+nw=;
-        b=GQ7B0p4fW1rlpqiTQ1Mv9GPY23EtxLbSLYSdhjY2vcu5wBSXCeJfacxxQ5byTSHlIc
-         oLDdE+XWExeAgK/EeQFiL6r03mNZTlVHjlkOpno+iV8/kki0o7tf5jyY4C7BhAGAseGw
-         y8K/4ZZaF/a9SVbImAEAzXCD6wHn2ZijElYJF+WxiLhn/N1cEPOFkUrV3elOqvAJbEfs
-         /u+p3pe67PsO1R0FTvxudCiHJ7NTHivQdiuikVMmJJamZMVfKbxeLt52SYYZ3olheUR/
-         Ki42ja1Yp2lmdZNWrwN/kbsaDQb98PegdINPblAREpfw+iZnKKPM2wczpH5i8IgsmixT
-         H79A==
-In-Reply-To: <1449292763-129421-1-git-send-email-computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Return-path: <linux-kernel-owner@vger.kernel.org>
+In-Reply-To: <1449292763-129421-1-git-send-email-computersforpeace@gmail.com>
+Sender: linux-kernel-owner@vger.kernel.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: MTD Maling List <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Geert Uytterhoeven <geert+renesas-gXvu3+zWzMSzQB+pC5nmwQ@public.gmane.org>, Simon Arlott <simon-A6De1vDTPLDsq35pWSNszA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, David Hendricks <dhendrix-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
+To: Brian Norris <computersforpeace@gmail.com>
+Cc: MTD Maling List <linux-mtd@lists.infradead.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Boris Brezillon <boris.brezillon@free-electrons.com>, Linus Walleij <linus.walleij@linaro.org>, Geert Uytterhoeven <geert+renesas@glider.be>, Simon Arlott <simon@fire.lp0.eu>, Jason Gunthorpe <jgunthorpe@obsidianresearch.com>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, devicetree-spec@vger.kernel.org, Rob Herring <robh+dt@kernel.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, Hauke Mehrtens <hauke@hauke-m.de>, Arnd Bergmann <arnd@arndb.de>, David Hendricks <dhendrix@chromium.org>
+
+Hi,
 
 On Sat, Dec 5, 2015 at 6:19 AM, Brian Norris
-<computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+<computersforpeace@gmail.com> wrote:
+> Hi,
+>
 > There have been several discussions [1] about adding a device tree binding for
 > associating flash devices with the partition parser(s) that are used on the
 > flash. There are a few reasons:
@@ -38,23 +31,76 @@ On Sat, Dec 5, 2015 at 6:19 AM, Brian Norris
 >      always safe or efficient to attempt to do so, particularly since many of
 >      them allow their data structures to be placed anywhere on the flash, and
 >      so require scanning the entire flash device to find them.
+>
+> So instead, let's support a new binding so that a device tree can specify what
+> partition formats might be used. This seems like a reasonable choice (even
+> though it's not strictly a hardware description) because the flash layout /
+> partitioning is often very closely tied with the bootloader/firmware, at
+> production time.
 
-I read the second reason, but would it be useful to (partially) merge
-block/partitions/ and drivers/mtd/partitions/, so I can use e.g. msdos
-partitions
-on an mtd device??
+On a first glance this looks good to me, and looks easily extensible
+for application of non-complete partition parsers.
 
-Gr{oetje,eeting}s,
+E.g. for the "brcm,bcm6345-imagetag" we would want to actually do something like
 
-                        Geert
+partitions {
+    ....
 
---
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org
+    partition@0 {
+        reg = <0x0 0x10000>;
+        label = "cfe";
+        read-only;
+    };
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+    partition@10000 {
+        reg = <0x10000 0x3d0000>;
+        label = "firmware";
+        compatible = "brcm,bcm6345-imagetag";
+    };
+
+    partition@3e0000 {
+        reg = <0x3e0000 0x10000>;
+        label = "art";
+        read-only;
+    };
+
+   partition@3f0000 {
+        reg = <0x3f0000 0x10000>;
+        label = "nvram";
+        read-only;
+    };
+};
+
+as the image tag can only specify the offsets and sizes of the rootfs
+and kernel parts, but not of any other parts.
+
+>
+> Also, as an example first-use of this mechanism, I support Google's FMAP flash
+> structure, used on Chrome OS devices.
+>
+> Note that this is an RFC, mainly for the reason noted in patch 6 ("RFC: mtd:
+> partitions: enable of_match_table matching"): the of_match_table support won't
+> yet autoload a partition parser that is built as a module. I'm not quite sure
+> if there's a lot of value in supporting MTD parsers as modules (block partition
+> support can't be), but that is supported for "by-name" parser lookups in MTD
+> already, so I don't feel like dropping that feature yet. Tips or thoughts are
+> particularly welcome on this aspect!
+
+I would assume a lot of the cases these would be a chicken-egg
+problem, you need the parser to be able to find and mount the rootfs,
+but you you need mount the rootfs to load the parser.
+
+> Also note that there's an existing undocumented binding for a
+> "linux,part-probe" property, but it is only usable on the physmap_of.c driver
+> at the moment, and it is IMO not a good binding. I posted my thoughts on that
+> previously here [2], and since no one else cared to make a better one...I did
+> it myself.
+>
+> I'd love it if we could kill the unreviewed binding off in favor of something
+> more like this...
+
+I agree fully that this is a bad binding, as it exposes internal names
+that aren't supposed to be fixed.
+
+
+Jonas
