@@ -1,131 +1,138 @@
 From: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [PATCH 1/3] mtd: create a partition type device tree binding
-Date: Sun, 15 Nov 2015 20:12:44 -0800
-Message-ID: <20151116041244.GA4021@brian-ubuntu>
-References: <1446123152-22666-1-git-send-email-linus.walleij@linaro.org>
- <20151029162908.GA13275@localhost>
- <CACRpkdYS5Jf8UC2K0bNdEQZDjTeZZx44Uu-kkof+9E=4Ny0oDg@mail.gmail.com>
- <20151030175145.GF13239@google.com>
- <CAL_JsqL2F3p7qBPbOiGytVyzF_aNLWbrCT0mAX1WZo6SxE3JoA@mail.gmail.com>
- <20151113220039.GA74382@google.com>
- <CACRpkdakyae95f_Lc-R7Uf7wndj5hyfCqqHziwmZjwm-uNkGAg@mail.gmail.com>
-Mime-Version: 1.0
+Subject: [RFC PATCH 0/7] mtd: partitions: add of_match_table support
+Date: Fri,  4 Dec 2015 21:19:16 -0800
+Message-ID: <1449292763-129421-1-git-send-email-computersforpeace@gmail.com>
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20120113;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-type:content-disposition:in-reply-to:user-agent;
-        bh=gnFHOi91Q0nf3nBYTql+g/OL0lhFtD7p4oB5ZrzIJCU=;
-        b=hjKlBnuP/f6WKOFZOA0qW4Gw+dKHtUtRVU/IjaSvfaAk/iHnmFAIg9g5EXtj/5jyBA
-         GcFoH759d50uX1UOyWrMmtdKrhh5Ehmi+LC9Mq8mlWnK5QPh8i89tBXBQN0KpFDriGxV
-         ms10ELkPx361ivWA64naCzVN6AKJhFZ9UdxZ5yFWpzRIgasoGYEBz4cvN713dGiZ0oLH
-         fkqtzvinjlGfGwoGTKqg9AMUDmfVzqzrlc+IGmbixlBSgq4F5WoQSm3GPLnUxS1SSfBJ
-         /GOb4jhR1v3BZb/LRGThqZuYIrRDqm2U8qMuzDH5AtYAEPBZvzxmHeL5krCHjwtIpTcZ
-         w5Vg==
-Content-Disposition: inline
-In-Reply-To: <CACRpkdakyae95f_Lc-R7Uf7wndj5hyfCqqHziwmZjwm-uNkGAg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+        h=from:to:cc:subject:date:message-id;
+        bh=I6TefEXclqklnRnr9fgnNqVYHQXKYy7KN+815XqdPn8=;
+        b=BwwR4DtIhnEIMuIc2jZyTToaV8J++D1/FCGRvfwKDyRdKX8CY3xToiZXhqZnjp9gqX
+         wo5I+dJUbXjUBQA48O1U4axNvUe4hZBBPgDaXHeLTTFLy5BSASKYag0vxFSJ/mP3qq4g
+         6UubFwQ73w0Gj/1V1ojhb0f53svdYNY7OELAIumnGP17TruXghyZl3A/G/vXfkO6MQrV
+         p+R01Des/XJRGKuo3nfVImOazL+0Kfr3wGI+VplRSpKY5MknCIWXgD1iMStqYjJBJp72
+         sG/+OvcJX9z8k7lxAJZEXntpqmSRRembTXTrkdKi1nYEsPqn4VvS0UlJNEsaDFwOUCFg
+         kEEA==
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Cc: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Woodhouse <dwmw2-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, "linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Liviu Dudau <Liviu.Dudau-5wv7dgnIgG8@public.gmane.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>, Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+To: linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org
+Cc: linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Geert Uytterhoeven <geert+renesas-gXvu3+zWzMSzQB+pC5nmwQ@public.gmane.org>, Simon Arlott <simon-A6De1vDTPLDsq35pWSNszA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org>, Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, David Hendricks <dhendrix-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
 
-On Sat, Nov 14, 2015 at 11:46:59AM +0100, Linus Walleij wrote:
-> On Fri, Nov 13, 2015 at 11:00 PM, Brian Norris
-> <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
-> 
-> (...)
-> >  (2) we should define a comptible property for the hard-coded
-> >  partitioning case (e.g., compatible = "partitions")
-> (...)
-> > If we went with option (2), then ofpart.c could just check only for
-> > 'compatible = "partitions"' (or similar), and if not found bail out.
-> 
-> So this "hard-coded partitioning case" the case is where all partitions
-> are defined in the device tree as described in
-> Documentation/devicetree/bindings/mtd/partition.txt ?
+Hi,
 
-Right.
+There have been several discussions [1] about adding a device tree binding for
+associating flash devices with the partition parser(s) that are used on the
+flash. There are a few reasons:
 
-> Or is it a way to indicate that this array
-> static const char * const part_probe_types_def[] = {
->         "cmdlinepart", "RedBoot", "ofpart", "ofoldpart", NULL };
-> in physmap_of.c should be used?
+ (1) drivers shouldn't have to be encoding platform knowledge by listing what
+     parsers might be used on a given system (this is the currently all that's
+     supported)
+ (2) we can't just scan for all supported parsers (like the block system does), since
+     there is a wide diversity of "formats" (no standardization), and it is not
+     always safe or efficient to attempt to do so, particularly since many of
+     them allow their data structures to be placed anywhere on the flash, and
+     so require scanning the entire flash device to find them.
 
-No. At this point, I would consider that to be a legacy method. We still
-have to support this for many cases (including the non-DT case; but
-hopefully we can do better than that soon), and that would be an option.
+So instead, let's support a new binding so that a device tree can specify what
+partition formats might be used. This seems like a reasonable choice (even
+though it's not strictly a hardware description) because the flash layout /
+partitioning is often very closely tied with the bootloader/firmware, at
+production time.
 
-> Sorry if I don't fully follow, I'm a bit stupid when it comes to the MTD
-> helicopter  view of the situation.... :(
+Also, as an example first-use of this mechanism, I support Google's FMAP flash
+structure, used on Chrome OS devices.
 
-Yeah...sorry if I wasn't too clear. And I definitely don't blame you for
-not understanding the mess that MTD often is :(
+Note that this is an RFC, mainly for the reason noted in patch 6 ("RFC: mtd:
+partitions: enable of_match_table matching"): the of_match_table support won't
+yet autoload a partition parser that is built as a module. I'm not quite sure
+if there's a lot of value in supporting MTD parsers as modules (block partition
+support can't be), but that is supported for "by-name" parser lookups in MTD
+already, so I don't feel like dropping that feature yet. Tips or thoughts are
+particularly welcome on this aspect!
 
-> > I think option (2) makes more sense. But it would require an update to
-> > the binding and code for 4.4, since [1] was only introduced during this
-> > release cycle.
-> 
-> Does that mean all old device trees that specify no compatible
-> string all of a sudden stop working? We can't break the DT ABI, so I
-> guess not.
+Also note that there's an existing undocumented binding for a
+"linux,part-probe" property, but it is only usable on the physmap_of.c driver
+at the moment, and it is IMO not a good binding. I posted my thoughts on that
+previously here [2], and since no one else cared to make a better one...I did
+it myself.
 
-No, that's not what I was intending. The binding before commmit
-fe2585e9c29a ("doc: dt: mtd: support partitions in a special
-'partitions' subnode") should still stay working as-is. That is, we
-don't mess with the way things worked for anything that doesn't have a
-'partitions' subnode. But now that we have a 'partitions' subnode (in
-4.4-rc1), I'm just suggesting that we enforce this always have a
-compatible property, so we can be more clear on the difference between:
+I'd love it if we could kill the unreviewed binding off in favor of something
+more like this...
 
-	partitions {
-		// do I have a
-		// compatible = "partitons";
-		// here?
+Currently based on v2 of "mtd: partitions: support cleanup callback for
+parsers":
 
-		partition@0 {
-			label = "foo-partition";
-			reg = <0 0x100000>;
-		};
-	};
+  http://lkml.kernel.org/g/1449271518-118900-1-git-send-email-computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org
 
-and
+and this series
+("mtd: ofpart: don't complain about missing 'partitions' node too loudly" and
+"doc: dt: mtd: partitions: add compatible property to "partitions" node"):
 
-	partitions {
-		compatible = "arm,arm-flash-structure";
+  http://lkml.kernel.org/g/1449194529-145705-1-git-send-email-computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org
 
-		subnode {
-			// what if we need something here eventually?
-		};
-	};
+Both of which should hopefully be merged soon.
 
-This would require some modifications to partitions.txt and to
-drivers/mtd/ofpart.c.
+The current total of this work is stashed here for now:
 
-> A bit confused here, I can't really see what I should do with the patch...
+  git fetch git://git.infradead.org/users/norris/linux-mtd.git partition-of-match
 
-Hopefully that cleared up a bit? The code changes for my suggestion
-would just be something like this, I think. (Not tested in any way.)
+I may rewrite this branch if I post future revisions of these patch sets, FYI.
 
-diff --git a/drivers/mtd/ofpart.c b/drivers/mtd/ofpart.c
-index 669c3452f278..6811bc5440a4 100644
---- a/drivers/mtd/ofpart.c
-+++ b/drivers/mtd/ofpart.c
-@@ -50,6 +50,10 @@ static int parse_ofpart_partitions(struct mtd_info *master,
- 			master->name, mtd_node->full_name);
- 		ofpart_node = mtd_node;
- 		dedicated = false;
-+	} else {
-+		/* The "partitions" subnode may belong to some other parser */
-+		if (!of_device_is_compatible(ofpart_node, "partitions"))
-+			return 0;
- 	}
- 
- 	/* First count the subnodes */
+I look forward to your reviews.
 
-I was just bringing this up for discussion, since it's related to
-your/Rob's new proposal. I'll send a proper (and tested) patch, along
-with a doc update, if that looks reasonable.
-
+Regards,
 Brian
+
+[1] Trying to extend "linux,part-probe":
+    http://patchwork.ozlabs.org/patch/475988/
+    For bcm47xxpart:
+    http://patchwork.ozlabs.org/patch/475986/
+    For AFS:
+    http://patchwork.ozlabs.org/patch/537827/
+
+[2] "mtd: document linux-specific partition parser DT binding"
+    http://lists.infradead.org/pipermail/linux-mtd/2015-October/062773.html
+
+Brian Norris (7):
+  mtd: move partition parsers to drivers/mtd/partitions/
+  mtd: move partition parsers' Kconfig under a sub-menu
+  doc: dt: mtd: partition: add on-flash format binding
+  mtd: add of_match_mtd_parser() and of_mtd_match_mtd_parser() helpers
+  mtd: partitions: factor out "match by name" handling
+  RFC: mtd: partitions: enable of_match_table matching
+  mtd: partitions: add Google's FMAP partition parser
+
+ .../devicetree/bindings/mtd/partition.txt          |  75 ++++++-
+ drivers/mtd/Kconfig                                | 134 +-----------
+ drivers/mtd/Makefile                               |   8 +-
+ drivers/mtd/mtdpart.c                              |  99 +++++++--
+ drivers/mtd/partitions/Kconfig                     | 138 +++++++++++++
+ drivers/mtd/partitions/Makefile                    |   8 +
+ drivers/mtd/{ => partitions}/afs.c                 |   0
+ drivers/mtd/{ => partitions}/ar7part.c             |   0
+ drivers/mtd/{ => partitions}/bcm47xxpart.c         |   0
+ drivers/mtd/{ => partitions}/bcm63xxpart.c         |   0
+ drivers/mtd/{ => partitions}/cmdlinepart.c         |   0
+ drivers/mtd/partitions/google_fmap.c               | 226 +++++++++++++++++++++
+ drivers/mtd/{ => partitions}/ofpart.c              |   0
+ drivers/mtd/{ => partitions}/redboot.c             |   0
+ drivers/of/of_mtd.c                                |  33 +++
+ include/linux/mtd/partitions.h                     |   2 +
+ include/linux/of_mtd.h                             |  13 ++
+ 17 files changed, 577 insertions(+), 159 deletions(-)
+ create mode 100644 drivers/mtd/partitions/Kconfig
+ create mode 100644 drivers/mtd/partitions/Makefile
+ rename drivers/mtd/{ => partitions}/afs.c (100%)
+ rename drivers/mtd/{ => partitions}/ar7part.c (100%)
+ rename drivers/mtd/{ => partitions}/bcm47xxpart.c (100%)
+ rename drivers/mtd/{ => partitions}/bcm63xxpart.c (100%)
+ rename drivers/mtd/{ => partitions}/cmdlinepart.c (100%)
+ create mode 100644 drivers/mtd/partitions/google_fmap.c
+ rename drivers/mtd/{ => partitions}/ofpart.c (100%)
+ rename drivers/mtd/{ => partitions}/redboot.c (100%)
+
+-- 
+2.6.0.rc2.230.g3dd15c0
