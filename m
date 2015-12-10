@@ -1,102 +1,95 @@
-From: Qais Yousef <qais.yousef-1AXoQHu6uovQT0dZR+AlfA@public.gmane.org>
-Subject: Re: Generic DT binding for IPIs
-Date: Thu, 10 Dec 2015 10:20:49 +0000
-Message-ID: <56695201.2070807@imgtec.com>
-References: <561E2BE6.2090807@imgtec.com> <5628BE00.4020106@imgtec.com>
- <20151022115551.GI3953@io.lakedaemon.net> <56684877.3020708@imgtec.com>
- <CAL_Jsq+yv1UnBhrR+x+DEA41yETVANY9_-5W0DSQJVEQ4+Mx_w@mail.gmail.com>
+From: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: [RFC PATCH 3/7] doc: dt: mtd: partition: add on-flash format
+ binding
+Date: Thu, 10 Dec 2015 12:43:24 -0800
+Message-ID: <20151210204324.GK144338@google.com>
+References: <1449292763-129421-1-git-send-email-computersforpeace@gmail.com>
+ <1449292763-129421-4-git-send-email-computersforpeace@gmail.com>
+ <CAOiHx=nz2bdA_R610ozsQHhccdcrHVVCamTtne5ReHrA-FcaaQ@mail.gmail.com>
+ <CAOMqctTbUNd0GtY07YJuxem9HkU1WZ-NtO556=Yg2QrsF49Xjw@mail.gmail.com>
+ <20151207013628.GC20139@voom.fritz.box>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <CAL_Jsq+yv1UnBhrR+x+DEA41yETVANY9_-5W0DSQJVEQ4+Mx_w-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-type:content-disposition:in-reply-to:user-agent;
+        bh=pYGXZFbEDMY+inOUfZP7cidoQj1lyLVVZA72KLk2tYQ=;
+        b=jKD1jteRJoHkpFLvPrpxcBndZmwO4bnCQBmdZR1sozgrf+PwZeNV2xkZksyntljQBy
+         TT1U6sfLN7gYxo/8DPTPnP0pT03JXQuMcIvOz2uajmsDUo1YBHy7h791yw+K8L3UeB/8
+         KqY1BV2jCDP8OK0X5yEch3A/VDYqqTUJ18EPRZQUFR0xl82t0ruZ/oj0IMPHMdvTtKOo
+         EubI7tfLN10ulT5WBdVz9MymLW3ybXjqqrxX6Qp/EKtrMWKCLoO224knXWWAf8FM+s12
+         PHdhGZ8r/xaQ4tTwhh79oauuwZMuUZa6hzYsrCwvRZaASfoCEguEKZk+/c8wuCKw2Buo
+         zgNQ==
+Content-Disposition: inline
+In-Reply-To: <20151207013628.GC20139-RXTfZT5YzpxwFLYp8hBm2A@public.gmane.org>
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Cooper <jason-NLaQJdtUoK4Be96aLqz0jA@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Thomas Gleixner <tglx-hfZtesqFncYOwBW4kG4KsQ@public.gmane.org>, Marc Zyngier <marc.zyngier-5wv7dgnIgG8@public.gmane.org>, Jiang Liu <jiang.liu-VuQAYsv1563Yd54FQh9/CA@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Lisa Parratt <Lisa.Parratt-1AXoQHu6uovQT0dZR+AlfA@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+Cc: Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org>, Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, Geert Uytterhoeven <geert+renesas-gXvu3+zWzMSzQB+pC5nmwQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Simon Arlott <simon-A6De1vDTPLDsq35pWSNszA@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, MTD Maling List <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>
 
-On 12/09/2015 04:50 PM, Rob Herring wrote:
-> On Wed, Dec 9, 2015 at 9:27 AM, Qais Yousef <qais.yousef-1AXoQHu6uovQT0dZR+AlfA@public.gmane.org> wrote:
->
->> What I have in mind is:
->>
->>       coproc {
->>               ipi-parent = <&gic>;
->>
->>               ipis = <CPU_VALUE IPI_SPEC>;
->>               ipi-names = "in";
->>       };
->>
->> This will allocate an IPI to go to cpu @CPU_VALUE passing @IPI_SPEC as
->> parameters to the controller. Which means we need a new ipi-cells to
->> define how many cells are in ipis property. Note the new ipi-parent too.
-> These are still interrupts, so I'd prefer to use or extend the
-> interrupt binding if possible.
+On Mon, Dec 07, 2015 at 12:36:28PM +1100, David Gibson wrote:
+> On Sat, Dec 05, 2015 at 10:33:30PM +0100, Michal Suchanek wrote:
+> > On 5 December 2015 at 12:39, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org> wrote:
+> > > On Sat, Dec 5, 2015 at 6:19 AM, Brian Norris
+> > > <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+> > 
+> > >> +
+> > >> +Examples:
+> > >> +
+> > >> +flash@0 {
+> > >> +       partitions {
+> > >> +               compatible = "google,fmap";
+> > >> +       };
+> > >> +};
+> > >
+> > > I wonder if this wouldn't be better served in a separate binding doc
+> > > with its compatible name as the filename, like we do with
+> > > driver^Whardware blocks, especially if we want to add more parsers.
+> > 
+> > 
+> > I find that *very* counter productive for bindings that go to the same
+> > node. You have a description of a node, and then suddenly there you
+> > have another file with another description of the same node. Totally
+> > awesome.
+> 
+> I can't actually work out from that if you're agreeing with the
+> original post or the first reply.
 
-The IPIs have two properties that are different from a regular interrupts:
+Perhaps I'm biased, but I think he was agreeing with the first reply.
+(Particularly, "I find that *very* counter productive" uses the word
+"that" to refer to "separate binding doc[s]".)
 
-     1. An IPI is not only received, it could also be sent.
-     2. The IPI is dynamic. There's an actual allocation from a pool of 
-available
-         IPIs happening when we ask for one to be reserved.
+> > Also how do you plan to write partitioning schemes with parameters
+> > like with non-zero offset of the partition table.
 
-The difference might be borderline..
+If you are directing this question at me: I don't have a specific plan
+for it. MTD parsers don't currently take external input for this; many
+scan the whole device, but some might also have conventions built into
+the parser itself too, so this just gets hooked based on "compatible".
+But if the need arose, I would hope we could work out a common binding.
 
-Do you have any rough idea on what a possible extension could look like? 
-Reusing means writing less code, which is always better of course :)
+> Presumably with properties in the patitions node.  Not seeing the
+> problem here.
 
-By the way, on MIPS GIC, we can use interrupts property to describe an 
-IPI the host system will receive. But to send one to the coprocessor, we 
-need to define an outgoing IPI.
+I believe Michal is bringing up the (important, IMO) point that if
+distinct partition types are being described in the same node, then any
+use of additional properties *must* be closely coordinated. We can't
+have two parsers "foo" and "bar" defining conflicting uses of the same
+property in the same node, like this:
 
-In this case, the firmware will be hardcoded to send an interrupt to a 
-specific hwirq, so one can then describe it in DT as a regular interrupt 
-to the host system. Hardcoding is not ideal and less portable though.
+	partitions {
+		compatible = "foo", "bar";
+		property-baz = ...; // e.g., reg = <...>;
+	};
 
->> ipis property also is similar to interrupts, so using it would be easier
->> (I think).
->>
->> If we have 2 coprocessors that want to communicate using IPIs that are
->> managed by the host we use ipi-refs property to refer to IPIs defined in
->> another node.
->>
->>       coproc1 {
->>               ipis = <CPU1>, <CPU2>, <CPU2>;
-> Don't you need to specify a certain IPI number in addition to which
-> cpu is the target?
+where if "foo" is not found, we fall back to "bar". But what if "foo"
+and "bar" use "property-baz" differently?
 
-No. The way IPI reserving works is we just need to specify the target 
-CPU(s).
+Having everything in one doc would help ensure that the entire
+"partitions" binding is considered as a whole when extending it, in my
+(and an in my interpretation of Michal's) opinion.
 
->
-> I'm thinking the cpu target could be part of the interrupts property
-> flags field or something.
-
-I'll look more at this option.
-
->
->>               ipi-names = "in", "coproc2data", "coproc2ctrl";
-> -names should be optional in general. So define something that works
-> without them.
-
-If it's not specified, then the driver can get the definition by index 
-and it would have to define the order it expects the IPIs in the binding?
-
->>       };
->>
->>       coproc2 {
->>               ipi-refs = <&coproc1 "in">, <&coproc1 "coproc2data">, <&coproc1
->> "corpoc2ctrl">;
-> This isn't actually parseable. You need a known length of cells after a phandle.
->
-
-To clarify, what you're saying we can't pass strings, right?
-
-Thanks for your comments!
-
-Thanks,
-Qais
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+Brian
