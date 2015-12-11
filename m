@@ -1,94 +1,87 @@
-From: Qais Yousef <qais.yousef-1AXoQHu6uovQT0dZR+AlfA@public.gmane.org>
-Subject: Re: Generic DT binding for IPIs
-Date: Fri, 11 Dec 2015 10:47:57 +0000
-Message-ID: <566AA9DD.6040404@imgtec.com>
-References: <561E2BE6.2090807@imgtec.com> <5628BE00.4020106@imgtec.com>
- <20151022115551.GI3953@io.lakedaemon.net> <56684877.3020708@imgtec.com>
- <CAL_Jsq+yv1UnBhrR+x+DEA41yETVANY9_-5W0DSQJVEQ4+Mx_w@mail.gmail.com>
- <56695201.2070807@imgtec.com> <20151211003902.GE20139@voom.fritz.box>
+From: Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: [RFC PATCH 0/7] mtd: partitions: add of_match_table support
+Date: Fri, 11 Dec 2015 16:34:10 +0100
+Message-ID: <CAOMqctQVMCEa_k4xMW1qooEpe8X1-NhUOjD6pp0qJpDP_H+8hw@mail.gmail.com>
+References: <1449292763-129421-1-git-send-email-computersforpeace@gmail.com>
+ <CAMuHMdUJXHs_OhT0da+kzc=D4MOFUT9BB3eJ+7a_p6DYx-PKBA@mail.gmail.com>
+ <20151210205449.GL144338@google.com> <CAMuHMdV-uethsChWVZGSx1JNcAofODmg14ppGYJP2ewfwhEv1Q@mail.gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <20151211003902.GE20139-RXTfZT5YzpxwFLYp8hBm2A@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+         :cc:content-type;
+        bh=0MpPDlILSZqTXWjLmFFxjzjOCeaAHbE/13KffvkBPnM=;
+        b=LiSvtDi16+J9LpFxfJ2TRIBJz80vBKt9EU2NciP7yGczI2ze16AjPWFm8L3vVoE9KT
+         v2KKGuloDdvInjQokaVGuI/+NaE6mPZ6/ZIoVK7eXZ/5Q2Sna3+Yx7FvAdwGsAXnS4Ql
+         Q9gBRluPmdF2RWTruhIMw/cpi5PNKDx1fcDkYK17kFQmJ26wqYVX+6glgakxvIdRMJMF
+         G6EygneuZm2fHIoH3EgYjuZ/65sgqzQhj8+sIJG/0BvsDMODxccJ6uMxRnd9Twf3DJuU
+         +gjRvCXj+OmGLkTQM7CYCy0HmHifPQwPJQOgxnawkAxkWjCzfTj+4Y7nLz05TGY8WuvV
+         aStQ==
+In-Reply-To: <CAMuHMdV-uethsChWVZGSx1JNcAofODmg14ppGYJP2ewfwhEv1Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-To: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
-Cc: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Cooper <jason-NLaQJdtUoK4Be96aLqz0jA@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Thomas Gleixner <tglx-hfZtesqFncYOwBW4kG4KsQ@public.gmane.org>, Marc Zyngier <marc.zyngier-5wv7dgnIgG8@public.gmane.org>, Jiang Liu <jiang.liu-VuQAYsv1563Yd54FQh9/CA@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Lisa Parratt <Lisa.Parratt-1AXoQHu6uovQT0dZR+AlfA@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
+Cc: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, Geert Uytterhoeven <geert+renesas-gXvu3+zWzMSzQB+pC5nmwQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Simon Arlott <simon-A6De1vDTPLDsq35pWSNszA@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, David Hendricks <dhendrix-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, MTD Maling List <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>
 
-On 12/11/2015 12:39 AM, David Gibson wrote:
-> On Thu, Dec 10, 2015 at 10:20:49AM +0000, Qais Yousef wrote:
->>
->> The IPIs have two properties that are different from a regular interrupts:
->>
->>      1. An IPI is not only received, it could also be sent.
-> Any interrupt is sent by the device, received by an interrupt
-> controller, so this isn't really anything fundamentally different.
-
-No they're not fundamentally different. It's just the way they're 
-created and used.
-
->>      2. The IPI is dynamic. There's an actual allocation from a pool of
->> available
->>          IPIs happening when we ask for one to be reserved.
-> It's not really clear to me what that means, and why it requires any
-> particular different information in the device tree.
-
-Maybe it would help to look at the new IPI reservation API?
-
-     https://lkml.org/lkml/2015/12/8/249
-
->> The difference might be borderline..
->>
->> Do you have any rough idea on what a possible extension could look like?
->> Reusing means writing less code, which is always better of course :)
->>
->> By the way, on MIPS GIC, we can use interrupts property to describe an IPI
->> the host system will receive. But to send one to the coprocessor, we need to
->> define an outgoing IPI.
-> Ah, ok, so is what you're trying to describe here (from the host OS
-> and CPU point of view) a purely outgoing signal to the coproc?
-
-Yes.
-
->> In this case, the firmware will be hardcoded to send an interrupt to a
->> specific hwirq, so one can then describe it in DT as a regular interrupt to
->> the host system. Hardcoding is not ideal and less portable though.
-> Or is the signal that goes to the coproc then somehow being translated
-> into a host interrupt?  If that's so you should be able to represent
-> the coproc as an interrupt controller or interrupt nexus.
+On 11 December 2015 at 09:44, Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org> wrote:
+> Hi Brian,
 >
-
-I'm not sure I understood you completely but no, there's no translation 
-happening. When the IPI is allocated it would be routed
-to the coproc. When the host wants to send a signal, it'll use the 
-allocated hwirq value (indirectly via the virq) to write to a register, 
-which will cause an interrupt to be generated at the coproc.
-
-
->>>>       };
->>>>
->>>>       coproc2 {
->>>>               ipi-refs = <&coproc1 "in">, <&coproc1 "coproc2data">, <&coproc1
->>>> "corpoc2ctrl">;
->>> This isn't actually parseable. You need a known length of cells after a phandle.
+> On Thu, Dec 10, 2015 at 9:54 PM, Brian Norris
+> <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+>> On Sat, Dec 05, 2015 at 11:15:54AM +0100, Geert Uytterhoeven wrote:
+>>> On Sat, Dec 5, 2015 at 6:19 AM, Brian Norris
+>>> <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+>>> > There have been several discussions [1] about adding a device tree binding for
+>>> > associating flash devices with the partition parser(s) that are used on the
+>>> > flash. There are a few reasons:
+>>> >
+>>> >  (1) drivers shouldn't have to be encoding platform knowledge by listing what
+>>> >      parsers might be used on a given system (this is the currently all that's
+>>> >      supported)
+>>> >  (2) we can't just scan for all supported parsers (like the block system does), since
+>>> >      there is a wide diversity of "formats" (no standardization), and it is not
+>>> >      always safe or efficient to attempt to do so, particularly since many of
+>>> >      them allow their data structures to be placed anywhere on the flash, and
+>>> >      so require scanning the entire flash device to find them.
 >>>
->> To clarify, what you're saying we can't pass strings, right?
-> So, I'm not entirely sure what point Rob was making.  The above
-> certainly isn't valid dts syntax - strings can't appear within
-> the < > construct.  But if you make the obvious fix to:
->      ipi-refs = <&coproc1>, "in", <&coproc1>, "coproc2data";
+>>> I read the second reason, but would it be useful to (partially) merge
+>>> block/partitions/ and drivers/mtd/partitions/, so I can use e.g. msdos
+>>> partitions
+>>> on an mtd device??
+>>
+>> I kinda agree with Michal: is there a good use case?
 >
-> then it's certainly a parseable property format.  It's kind of clunky
-> mixing integers and strings that way, but it's possible and there are
-> existing bindings using properties in a similar format.
+> I don't have an immediate use case.
+> Just looking at it from a high-level viewpoint.
+>
+>> Really, MTD partitioning is not a highly-scalable design. Particularly,
+>> it's not typically that well-suited to large (read: unreliable) NAND
+>> flash, where fixing partitions at the raw flash level mostly serves to
+>> restrict UBI's ability to wear-level across the device. For that sort of
+>> case, it's best if people are using UBI volumes on a (mostly?)
+>> unpartitioned MTD, instead of using MTD partitions as the main
+>> separation mechanism. Also, most partition designs (either MTD or block)
+>> aren't very robust against bitflips, read disturb, etc.
+>>
+>> IOW, I wouldn't expect MBR or GPT to work well on large raw NAND flash,
+>> and so I don't plan to do that sort of work myself. If you can provide
+>> some better argument for it, and some nice maintainable code to go with
+>> it, then of course it could be considered :)
+>
+> There's also NOR FLASH (e.g. SPI-NOR), which is what most boards I'm
+> working on have.
 >
 
-Ah OK thanks! I think this form would be handy to get the refs even if 
-we end up reusing the interrupts property to allocate an IPI.
+Yes, you can dump the content of a NOR flash to a file, attach a loop
+device to it, and if block devices had the ability to use flash
+partitioning access the different partitions.
 
-So if reusing the interrupts property is the right thing to do, do you 
-(or anyone else) have a rough idea how this should look like?
+Maybe it would be more useful to use some kind of mtdloop, though.
+There might even be one already. I never needed it.
 
-Thanks,
-Qais
+Thanks
+
+Michal
