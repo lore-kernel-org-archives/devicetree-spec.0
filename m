@@ -1,89 +1,106 @@
-From: Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [RFC PATCH 3/7] doc: dt: mtd: partition: add on-flash format binding
-Date: Fri, 11 Dec 2015 16:58:00 +0100
-Message-ID: <CAOMqctQyS0dTAn6nifNzTFTqAZ3caJTj=yKnawP-A3Z4=Sv5rw@mail.gmail.com>
+From: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
+Subject: Re: [RFC PATCH 0/7] mtd: partitions: add of_match_table support
+Date: Fri, 11 Dec 2015 17:00:28 +0100
+Message-ID: <CAMuHMdV2feXKWkJzRkMUBiAUCxp4LwaRgg+aPYwm0sUnKzm0Rg@mail.gmail.com>
 References: <1449292763-129421-1-git-send-email-computersforpeace@gmail.com>
- <1449292763-129421-4-git-send-email-computersforpeace@gmail.com>
- <CAOiHx=nz2bdA_R610ozsQHhccdcrHVVCamTtne5ReHrA-FcaaQ@mail.gmail.com>
- <CAOMqctTbUNd0GtY07YJuxem9HkU1WZ-NtO556=Yg2QrsF49Xjw@mail.gmail.com>
- <20151207013628.GC20139@voom.fritz.box> <20151210204324.GK144338@google.com>
+	<CAMuHMdUJXHs_OhT0da+kzc=D4MOFUT9BB3eJ+7a_p6DYx-PKBA@mail.gmail.com>
+	<20151210205449.GL144338@google.com>
+	<CAMuHMdV-uethsChWVZGSx1JNcAofODmg14ppGYJP2ewfwhEv1Q@mail.gmail.com>
+	<CAOMqctQVMCEa_k4xMW1qooEpe8X1-NhUOjD6pp0qJpDP_H+8hw@mail.gmail.com>
 Mime-Version: 1.0
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc:content-type;
-        bh=CxA2iNqcPPquV627YYA03kwHUG5Eizm85z2Odb103XI=;
-        b=UHtXQ4JaKqrMQMyL8zo/YEyzieVuxeaSIF/4cz4YkC5PqZmIPvbqiN7an7dmg8c8nE
-         wNFF0LtndYXllIUHcjdsivzPqJJ90k+fLPEm0kMYmBS/W+xF2LXAYiqVZ7FEZL+9MiLz
-         31exa2gyYJNKSGMIicOg3zQgqHnLraLbVQCOcj1bqBzqwXKJLfSr1CoYvTbBWvr3OTj4
-         4apArK3oHdDtWfWo4rEsEKYevWZf66wWsABy0LYqnZbbS4HgVl0ZAVjB7AL9Dtey/nbz
-         /f5qg17BZirslIiKGOFbAsdbWcDLwRB6K1m6jYEfH+3UnHUXihIZ+8bFM1zwKqvtNKu2
-         fovw==
-In-Reply-To: <20151210204324.GK144338-hpIqsD4AKlfQT0dZR+AlfA@public.gmane.org>
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+        h=mime-version:sender:in-reply-to:references:date:message-id:subject
+         :from:to:cc:content-type;
+        bh=he+GF4h4GPnFvDJT4jw2nNhP0ake/+1szkfm62B6h3M=;
+        b=AqzxMt2Iz3r9upKTAcq4yQ+wL7z1O0lgKmNsuODsW7vXMmy/2Y4cU/6NIDsK/5EErh
+         kuqWz4kCvRSoJoO2f7CD0RIQEJga8OeIzl/twm2xaHHx8OkEfjdl6Auaqxuo4pYdUO4n
+         9fxySq3Vys4sitD2hdorzHOaOwC855OTTfV40UY17W9CZkCz8Sb36jRKWgCf+h/YbI4K
+         HSPCHE4gmow86Wqu3zk+3KPJDPQnvrP0V36betKPYh5zQT1zsxRf8yqC+2rTysAe5y/U
+         P3ByS41SxOOi+ZG8NfFI2FwyKQyAplim/z9qIYqfMXM9JJIxrMXUVDCY8O6JF6ATgcK/
+         0I9w==
+In-Reply-To: <CAOMqctQVMCEa_k4xMW1qooEpe8X1-NhUOjD6pp0qJpDP_H+8hw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org>, Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, Geert Uytterhoeven <geert+renesas-gXvu3+zWzMSzQB+pC5nmwQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Simon Arlott <simon-A6De1vDTPLDsq35pWSNszA@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, MTD Maling List <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>
+To: Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, Geert Uytterhoeven <geert+renesas-gXvu3+zWzMSzQB+pC5nmwQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Simon Arlott <simon-A6De1vDTPLDsq35pWSNszA@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, David Hendricks <dhendrix-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, MTD Maling List <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>
 
-Hello,
+Hi Michal,
 
-On 10 December 2015 at 21:43, Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
-> On Mon, Dec 07, 2015 at 12:36:28PM +1100, David Gibson wrote:
->> On Sat, Dec 05, 2015 at 10:33:30PM +0100, Michal Suchanek wrote:
->> > On 5 December 2015 at 12:39, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org> wrote:
->> > > On Sat, Dec 5, 2015 at 6:19 AM, Brian Norris
->> > > <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
->> >
->> > >> +
->> > >> +Examples:
->> > >> +
->> > >> +flash@0 {
->> > >> +       partitions {
->> > >> +               compatible = "google,fmap";
->> > >> +       };
->> > >> +};
->> > >
->> > > I wonder if this wouldn't be better served in a separate binding doc
->> > > with its compatible name as the filename, like we do with
->> > > driver^Whardware blocks, especially if we want to add more parsers.
->> >
->> >
->> > I find that *very* counter productive for bindings that go to the same
->> > node. You have a description of a node, and then suddenly there you
->> > have another file with another description of the same node. Totally
->> > awesome.
+On Fri, Dec 11, 2015 at 4:34 PM, Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+> On 11 December 2015 at 09:44, Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org> wrote:
+>> On Thu, Dec 10, 2015 at 9:54 PM, Brian Norris
+>> <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+>>> On Sat, Dec 05, 2015 at 11:15:54AM +0100, Geert Uytterhoeven wrote:
+>>>> On Sat, Dec 5, 2015 at 6:19 AM, Brian Norris
+>>>> <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+>>>> > There have been several discussions [1] about adding a device tree binding for
+>>>> > associating flash devices with the partition parser(s) that are used on the
+>>>> > flash. There are a few reasons:
+>>>> >
+>>>> >  (1) drivers shouldn't have to be encoding platform knowledge by listing what
+>>>> >      parsers might be used on a given system (this is the currently all that's
+>>>> >      supported)
+>>>> >  (2) we can't just scan for all supported parsers (like the block system does), since
+>>>> >      there is a wide diversity of "formats" (no standardization), and it is not
+>>>> >      always safe or efficient to attempt to do so, particularly since many of
+>>>> >      them allow their data structures to be placed anywhere on the flash, and
+>>>> >      so require scanning the entire flash device to find them.
+>>>>
+>>>> I read the second reason, but would it be useful to (partially) merge
+>>>> block/partitions/ and drivers/mtd/partitions/, so I can use e.g. msdos
+>>>> partitions
+>>>> on an mtd device??
+>>>
+>>> I kinda agree with Michal: is there a good use case?
 >>
->> I can't actually work out from that if you're agreeing with the
->> original post or the first reply.
+>> I don't have an immediate use case.
+>> Just looking at it from a high-level viewpoint.
+>>
+>>> Really, MTD partitioning is not a highly-scalable design. Particularly,
+>>> it's not typically that well-suited to large (read: unreliable) NAND
+>>> flash, where fixing partitions at the raw flash level mostly serves to
+>>> restrict UBI's ability to wear-level across the device. For that sort of
+>>> case, it's best if people are using UBI volumes on a (mostly?)
+>>> unpartitioned MTD, instead of using MTD partitions as the main
+>>> separation mechanism. Also, most partition designs (either MTD or block)
+>>> aren't very robust against bitflips, read disturb, etc.
+>>>
+>>> IOW, I wouldn't expect MBR or GPT to work well on large raw NAND flash,
+>>> and so I don't plan to do that sort of work myself. If you can provide
+>>> some better argument for it, and some nice maintainable code to go with
+>>> it, then of course it could be considered :)
+>>
+>> There's also NOR FLASH (e.g. SPI-NOR), which is what most boards I'm
+>> working on have.
+>>
 >
-> Perhaps I'm biased, but I think he was agreeing with the first reply.
-> (Particularly, "I find that *very* counter productive" uses the word
-> "that" to refer to "separate binding doc[s]".)
+> Yes, you can dump the content of a NOR flash to a file, attach a loop
+> device to it, and if block devices had the ability to use flash
+> partitioning access the different partitions.
 >
->
-> I believe Michal is bringing up the (important, IMO) point that if
-> distinct partition types are being described in the same node, then any
-> use of additional properties *must* be closely coordinated. We can't
-> have two parsers "foo" and "bar" defining conflicting uses of the same
-> property in the same node, like this:
->
+> Maybe it would be more useful to use some kind of mtdloop, though.
+> There might even be one already. I never needed it.
 
-I have seen some MFD bindings which are described in multiple files
-with no crossreference whatsoever.
+That's the inverse, which looks like a solid use case to me ;-)
+E.g. for investigation or virtualization.
 
-If on-flash partition table bindings are going to be the same then
-people are not going to find there are even some on-flash partition
-table bindings (because the document describing the in-DT bindings is
-complete and exhaustive, right). Can't even imagine coordination.
+You can do this already in userspace with kpartx, though.
 
-When you have to grep the tree for docs anyway what's even the point
-of the Documentation directory?
+Gr{oetje,eeting}s,
 
-You can just grep the whole tree.
+                        Geert
 
-Thanks
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org
 
-Michal
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
+--
+To unsubscribe from this list: send the line "unsubscribe devicetree" in
+the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+More majordomo info at  http://vger.kernel.org/majordomo-info.html
