@@ -1,47 +1,130 @@
-From: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [RFC PATCH 0/7] mtd: partitions: add of_match_table support
-Date: Fri, 11 Dec 2015 17:33:49 -0800
-Message-ID: <20151212013349.GA86087@google.com>
+From: David Gibson <david@gibson.dropbear.id.au>
+Subject: Re: [RFC PATCH 3/7] doc: dt: mtd: partition: add on-flash format
+ binding
+Date: Sat, 12 Dec 2015 16:51:05 +1100
+Message-ID: <20151212055105.GA17011@voom.fritz.box>
 References: <1449292763-129421-1-git-send-email-computersforpeace@gmail.com>
- <CAMuHMdUJXHs_OhT0da+kzc=D4MOFUT9BB3eJ+7a_p6DYx-PKBA@mail.gmail.com>
- <20151210205449.GL144338@google.com>
- <CAMuHMdV-uethsChWVZGSx1JNcAofODmg14ppGYJP2ewfwhEv1Q@mail.gmail.com>
+ <1449292763-129421-4-git-send-email-computersforpeace@gmail.com>
+ <CAOiHx=nz2bdA_R610ozsQHhccdcrHVVCamTtne5ReHrA-FcaaQ@mail.gmail.com>
+ <CAOMqctTbUNd0GtY07YJuxem9HkU1WZ-NtO556=Yg2QrsF49Xjw@mail.gmail.com>
+ <20151207013628.GC20139@voom.fritz.box>
+ <20151210204324.GK144338@google.com>
 Mime-Version: 1.0
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-type:content-disposition:in-reply-to:user-agent;
-        bh=tc8plVFDPsl9XGzr72vJVK5s/tdhS3KfHIxUz/HXzTo=;
-        b=iKeW/h84HaAF2oAz4D384VT5trUWhnW89OI4Uy/tZzbmVFmbiPRSNu9IX3LAhGAyZj
-         I6r3+e6pRfKsLemsFg1TVw+JccLJuWexI1d7TBN8NrYLBf0ldNVs8x0J9pLCQmbvlKQG
-         JxGMxp2omddbC2qkbTJEEOEwM6ITFxeYug6rEHFZ6n10WdMOavywEZEBqTNjTWSF6kdF
-         qdwzCDO6bZ8Wk8VPLP96K+vFWL1diccrNd6jNLc9JZnXSDosQH6UdZUuW5RKS5EuXcTo
-         hyyj+gb4sTUi2Qb3wpZpiUt2LcYwoKLqYBVdICal+Yt3CAT7W5O3GAOpkP2YqnaTjkEa
-         lBlw==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="/9DWx/yDrRhgMJTb"
+Return-path: <linux-kernel-owner@vger.kernel.org>
 Content-Disposition: inline
-In-Reply-To: <CAMuHMdV-uethsChWVZGSx1JNcAofODmg14ppGYJP2ewfwhEv1Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+In-Reply-To: <20151210204324.GK144338@google.com>
+Sender: linux-kernel-owner@vger.kernel.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
-Cc: MTD Maling List <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Geert Uytterhoeven <geert+renesas-gXvu3+zWzMSzQB+pC5nmwQ@public.gmane.org>, Simon Arlott <simon-A6De1vDTPLDsq35pWSNszA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, David Hendricks <dhendrix-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
+To: Brian Norris <computersforpeace@gmail.com>
+Cc: Michal Suchanek <hramrach@gmail.com>, Jonas Gorski <jogo@openwrt.org>, Boris Brezillon <boris.brezillon@free-electrons.com>, Arnd Bergmann <arnd@arndb.de>, Geert Uytterhoeven <geert+renesas@glider.be>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, devicetree-spec@vger.kernel.org, Simon Arlott <simon@fire.lp0.eu>, Linus Walleij <linus.walleij@linaro.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Jason Gunthorpe <jgunthorpe@obsidianresearch.com>, Rob Herring <robh+dt@kernel.org>, MTD Maling List <linux-mtd@lists.infradead.org>, Hauke Mehrtens <hauke@hauke-m.de>
 
-On Fri, Dec 11, 2015 at 09:44:37AM +0100, Geert Uytterhoeven wrote:
-> On Thu, Dec 10, 2015 at 9:54 PM, Brian Norris
-> <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
-> > IOW, I wouldn't expect MBR or GPT to work well on large raw NAND flash,
-> > and so I don't plan to do that sort of work myself. If you can provide
-> > some better argument for it, and some nice maintainable code to go with
-> > it, then of course it could be considered :)
-> 
-> There's also NOR FLASH (e.g. SPI-NOR), which is what most boards I'm
-> working on have.
 
-OK. But these flash are often used for the boot firmware, no? And then,
-does the boot code have to be provided at one end of the flash (e.g.,
-bottom)? If so, then something like MBR or GPT will likely not apply,
-since they reserve the first (and sometimes last) blocks of the medium.
+--/9DWx/yDrRhgMJTb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Brian
+On Thu, Dec 10, 2015 at 12:43:24PM -0800, Brian Norris wrote:
+> On Mon, Dec 07, 2015 at 12:36:28PM +1100, David Gibson wrote:
+> > On Sat, Dec 05, 2015 at 10:33:30PM +0100, Michal Suchanek wrote:
+> > > On 5 December 2015 at 12:39, Jonas Gorski <jogo@openwrt.org> wrote:
+> > > > On Sat, Dec 5, 2015 at 6:19 AM, Brian Norris
+> > > > <computersforpeace@gmail.com> wrote:
+> > >=20
+> > > >> +
+> > > >> +Examples:
+> > > >> +
+> > > >> +flash@0 {
+> > > >> +       partitions {
+> > > >> +               compatible =3D "google,fmap";
+> > > >> +       };
+> > > >> +};
+> > > >
+> > > > I wonder if this wouldn't be better served in a separate binding doc
+> > > > with its compatible name as the filename, like we do with
+> > > > driver^Whardware blocks, especially if we want to add more parsers.
+> > >=20
+> > >=20
+> > > I find that *very* counter productive for bindings that go to the same
+> > > node. You have a description of a node, and then suddenly there you
+> > > have another file with another description of the same node. Totally
+> > > awesome.
+> >=20
+> > I can't actually work out from that if you're agreeing with the
+> > original post or the first reply.
+>=20
+> Perhaps I'm biased, but I think he was agreeing with the first reply.
+> (Particularly, "I find that *very* counter productive" uses the word
+> "that" to refer to "separate binding doc[s]".)
+>=20
+> > > Also how do you plan to write partitioning schemes with parameters
+> > > like with non-zero offset of the partition table.
+>=20
+> If you are directing this question at me: I don't have a specific plan
+> for it. MTD parsers don't currently take external input for this; many
+> scan the whole device, but some might also have conventions built into
+> the parser itself too, so this just gets hooked based on "compatible".
+> But if the need arose, I would hope we could work out a common binding.
+>=20
+> > Presumably with properties in the patitions node.  Not seeing the
+> > problem here.
+>=20
+> I believe Michal is bringing up the (important, IMO) point that if
+> distinct partition types are being described in the same node, then any
+> use of additional properties *must* be closely coordinated. We can't
+> have two parsers "foo" and "bar" defining conflicting uses of the same
+> property in the same node, like this:
+>=20
+> 	partitions {
+> 		compatible =3D "foo", "bar";
+> 		property-baz =3D ...; // e.g., reg =3D <...>;
+> 	};
+>=20
+> where if "foo" is not found, we fall back to "bar". But what if "foo"
+> and "bar" use "property-baz" differently?
+
+Ah.. that is an excellent point, and leads me to realise that using
+compatible in this way is wrong.  The whole point of compatible is
+that the node is, well, compatible with *all* the things in the list,
+and therefore the things in the list are compatible with each other.
+
+Using it for a list of entirely different things to attempt in order
+is not correct.
+
+
+> Having everything in one doc would help ensure that the entire
+> "partitions" binding is considered as a whole when extending it, in my
+> (and an in my interpretation of Michal's) opinion.
+>=20
+> Brian
+
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
+
+--/9DWx/yDrRhgMJTb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBAgAGBQJWa7XJAAoJEGw4ysog2bOSBWoQALjYls+DpoYTVxJCSeQxE1Fk
+OKGQir1DdPa+/sufisuieOvw3vn5tPV96s13n82I+86G0V83Qi3PoYMpU+I8wOx7
+zR6UNI0VmyRWEDOrGKP62K+iCEqYEDTcyaf/lvGLP9XcDYLfar20DDTOmIrWt+7T
+5NcLx5EG93VxES99iyaYqKTODB85R4X0z9O9AewaE+qHQDjvrgL2yn74dmPMlE79
+CyUcEGEErPFOA5EgQOK69YDfUxdrPbL2uVFuyzuQSDapSgwxPSiVCdApxBZEp9wY
+Rvxn/7TIDAaua2tMKQvvhDk6Tt4figSFTV0199vKrPUqfy29w9JY0XdPR5mdM8zg
+bNjMuazbeTMzpIr7tdJWh+ipA/rTsdXTVmSbGnQIzkRlDFiRBg4M+T8ZbcWbDujz
+MNO91QoRYnzICNH+dN6+npPZJkoI52cxfUMi8qd/Lf3t6HmxS7cYe/ZOru49VS5c
+uWWFqJCGMaNMZ+xvrIYvlD/HGTFxus9SHaKgE804QaxSPc+W15+1x0sp1v95XW9o
+Y3oqUclqIX7i58iN2cYavbA4XwoLdENhLtvErMXNTjZ69UkBGU/ZNjT2NDZpanfv
+x27guz5PeF8tjHUJJuyD3+eIkhPEVIJOq/P8ShjmjM0nN714BnEH8auZGyF/O7D7
+RwlTJDiIb+g1cbekXl0D
+=YGRz
+-----END PGP SIGNATURE-----
+
+--/9DWx/yDrRhgMJTb--
