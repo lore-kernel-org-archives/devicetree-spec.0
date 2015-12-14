@@ -1,104 +1,135 @@
-From: David Gibson <david@gibson.dropbear.id.au>
-Subject: Re: [RFC PATCH 3/7] doc: dt: mtd: partition: add on-flash format
- binding
-Date: Sat, 12 Dec 2015 16:51:05 +1100
-Message-ID: <20151212055105.GA17011@voom.fritz.box>
-References: <1449292763-129421-1-git-send-email-computersforpeace@gmail.com>
- <1449292763-129421-4-git-send-email-computersforpeace@gmail.com>
- <CAOiHx=nz2bdA_R610ozsQHhccdcrHVVCamTtne5ReHrA-FcaaQ@mail.gmail.com>
- <CAOMqctTbUNd0GtY07YJuxem9HkU1WZ-NtO556=Yg2QrsF49Xjw@mail.gmail.com>
- <20151207013628.GC20139@voom.fritz.box>
- <20151210204324.GK144338@google.com>
+From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+Subject: Re: Generic DT binding for IPIs
+Date: Mon, 14 Dec 2015 12:40:57 +1100
+Message-ID: <20151214014057.GM22783@voom.fritz.box>
+References: <561E2BE6.2090807@imgtec.com>
+ <5628BE00.4020106@imgtec.com>
+ <20151022115551.GI3953@io.lakedaemon.net>
+ <56684877.3020708@imgtec.com>
+ <CAL_Jsq+yv1UnBhrR+x+DEA41yETVANY9_-5W0DSQJVEQ4+Mx_w@mail.gmail.com>
+ <56695201.2070807@imgtec.com>
+ <20151211003902.GE20139@voom.fritz.box>
+ <566AA9DD.6040404@imgtec.com>
 Mime-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/9DWx/yDrRhgMJTb"
-Return-path: <linux-kernel-owner@vger.kernel.org>
+	protocol="application/pgp-signature"; boundary="8c07nsHwQobhlezh"
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 Content-Disposition: inline
-In-Reply-To: <20151210204324.GK144338@google.com>
-Sender: linux-kernel-owner@vger.kernel.org
+In-Reply-To: <566AA9DD.6040404-1AXoQHu6uovQT0dZR+AlfA@public.gmane.org>
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Brian Norris <computersforpeace@gmail.com>
-Cc: Michal Suchanek <hramrach@gmail.com>, Jonas Gorski <jogo@openwrt.org>, Boris Brezillon <boris.brezillon@free-electrons.com>, Arnd Bergmann <arnd@arndb.de>, Geert Uytterhoeven <geert+renesas@glider.be>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, devicetree-spec@vger.kernel.org, Simon Arlott <simon@fire.lp0.eu>, Linus Walleij <linus.walleij@linaro.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Jason Gunthorpe <jgunthorpe@obsidianresearch.com>, Rob Herring <robh+dt@kernel.org>, MTD Maling List <linux-mtd@lists.infradead.org>, Hauke Mehrtens <hauke@hauke-m.de>
+To: Qais Yousef <qais.yousef-1AXoQHu6uovQT0dZR+AlfA@public.gmane.org>
+Cc: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Cooper <jason-NLaQJdtUoK4Be96aLqz0jA@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Thomas Gleixner <tglx-hfZtesqFncYOwBW4kG4KsQ@public.gmane.org>, Marc Zyngier <marc.zyngier-5wv7dgnIgG8@public.gmane.org>, Jiang Liu <jiang.liu-VuQAYsv1563Yd54FQh9/CA@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Lisa Parratt <Lisa.Parratt-1AXoQHu6uovQT0dZR+AlfA@public.gmane.org>
 
 
---/9DWx/yDrRhgMJTb
+--8c07nsHwQobhlezh
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 10, 2015 at 12:43:24PM -0800, Brian Norris wrote:
-> On Mon, Dec 07, 2015 at 12:36:28PM +1100, David Gibson wrote:
-> > On Sat, Dec 05, 2015 at 10:33:30PM +0100, Michal Suchanek wrote:
-> > > On 5 December 2015 at 12:39, Jonas Gorski <jogo@openwrt.org> wrote:
-> > > > On Sat, Dec 5, 2015 at 6:19 AM, Brian Norris
-> > > > <computersforpeace@gmail.com> wrote:
-> > >=20
-> > > >> +
-> > > >> +Examples:
-> > > >> +
-> > > >> +flash@0 {
-> > > >> +       partitions {
-> > > >> +               compatible =3D "google,fmap";
-> > > >> +       };
-> > > >> +};
-> > > >
-> > > > I wonder if this wouldn't be better served in a separate binding doc
-> > > > with its compatible name as the filename, like we do with
-> > > > driver^Whardware blocks, especially if we want to add more parsers.
-> > >=20
-> > >=20
-> > > I find that *very* counter productive for bindings that go to the same
-> > > node. You have a description of a node, and then suddenly there you
-> > > have another file with another description of the same node. Totally
-> > > awesome.
-> >=20
-> > I can't actually work out from that if you're agreeing with the
-> > original post or the first reply.
+On Fri, Dec 11, 2015 at 10:47:57AM +0000, Qais Yousef wrote:
+> On 12/11/2015 12:39 AM, David Gibson wrote:
+> >On Thu, Dec 10, 2015 at 10:20:49AM +0000, Qais Yousef wrote:
+> >>
+> >>The IPIs have two properties that are different from a regular interrup=
+ts:
+> >>
+> >>     1. An IPI is not only received, it could also be sent.
+> >Any interrupt is sent by the device, received by an interrupt
+> >controller, so this isn't really anything fundamentally different.
 >=20
-> Perhaps I'm biased, but I think he was agreeing with the first reply.
-> (Particularly, "I find that *very* counter productive" uses the word
-> "that" to refer to "separate binding doc[s]".)
+> No they're not fundamentally different. It's just the way they're created
+> and used.
 >=20
-> > > Also how do you plan to write partitioning schemes with parameters
-> > > like with non-zero offset of the partition table.
+> >>     2. The IPI is dynamic. There's an actual allocation from a pool of
+> >>available
+> >>         IPIs happening when we ask for one to be reserved.
+> >It's not really clear to me what that means, and why it requires any
+> >particular different information in the device tree.
 >=20
-> If you are directing this question at me: I don't have a specific plan
-> for it. MTD parsers don't currently take external input for this; many
-> scan the whole device, but some might also have conventions built into
-> the parser itself too, so this just gets hooked based on "compatible".
-> But if the need arose, I would hope we could work out a common binding.
+> Maybe it would help to look at the new IPI reservation API?
 >=20
-> > Presumably with properties in the patitions node.  Not seeing the
-> > problem here.
->=20
-> I believe Michal is bringing up the (important, IMO) point that if
-> distinct partition types are being described in the same node, then any
-> use of additional properties *must* be closely coordinated. We can't
-> have two parsers "foo" and "bar" defining conflicting uses of the same
-> property in the same node, like this:
->=20
-> 	partitions {
-> 		compatible =3D "foo", "bar";
-> 		property-baz =3D ...; // e.g., reg =3D <...>;
-> 	};
->=20
-> where if "foo" is not found, we fall back to "bar". But what if "foo"
-> and "bar" use "property-baz" differently?
+>     https://lkml.org/lkml/2015/12/8/249
 
-Ah.. that is an excellent point, and leads me to realise that using
-compatible in this way is wrong.  The whole point of compatible is
-that the node is, well, compatible with *all* the things in the list,
-and therefore the things in the list are compatible with each other.
+Hmm.. not as much as I might have hoped.
 
-Using it for a list of entirely different things to attempt in order
-is not correct.
+=46rom the API, it looks like you're reserving IPIs to signal between
+different CPUs all of which are in Linux.  From your description here
+it sounds like the coproc is a separate specialized thing not running
+Linux (or at least, not the same Linux instance as the host OS which
+this device tree is for).
+
+> >>The difference might be borderline..
+> >>
+> >>Do you have any rough idea on what a possible extension could look like?
+> >>Reusing means writing less code, which is always better of course :)
+> >>
+> >>By the way, on MIPS GIC, we can use interrupts property to describe an =
+IPI
+> >>the host system will receive. But to send one to the coprocessor, we ne=
+ed to
+> >>define an outgoing IPI.
+> >Ah, ok, so is what you're trying to describe here (from the host OS
+> >and CPU point of view) a purely outgoing signal to the coproc?
+>=20
+> Yes.
+
+Ok.  In that case 'interrupts' is definitely *not* the right way to
+describe this.  'interrupts' describes a signal going _from_ the node
+in which it appears, _to_ the (host) cpu.  Or at least to an interrupt
+controller which will generally forward it to the host cpu one way or
+another.
 
 
-> Having everything in one doc would help ensure that the entire
-> "partitions" binding is considered as a whole when extending it, in my
-> (and an in my interpretation of Michal's) opinion.
+> >>In this case, the firmware will be hardcoded to send an interrupt to a
+> >>specific hwirq, so one can then describe it in DT as a regular interrup=
+t to
+> >>the host system. Hardcoding is not ideal and less portable though.
+> >Or is the signal that goes to the coproc then somehow being translated
+> >into a host interrupt?  If that's so you should be able to represent
+> >the coproc as an interrupt controller or interrupt nexus.
+> >
 >=20
-> Brian
+> I'm not sure I understood you completely but no, there's no translation
+> happening. When the IPI is allocated it would be routed
+> to the coproc. When the host wants to send a signal, it'll use the alloca=
+ted
+> hwirq value (indirectly via the virq) to write to a register, which will
+> cause an interrupt to be generated at the coproc.
+
+Where is this magic register located?  In the host cpu?  In the
+coproc?  In some special IPI controller?
+
+> >>>>      };
+> >>>>
+> >>>>      coproc2 {
+> >>>>              ipi-refs =3D <&coproc1 "in">, <&coproc1 "coproc2data">,=
+ <&coproc1
+> >>>>"corpoc2ctrl">;
+> >>>This isn't actually parseable. You need a known length of cells after =
+a phandle.
+> >>>
+> >>To clarify, what you're saying we can't pass strings, right?
+> >So, I'm not entirely sure what point Rob was making.  The above
+> >certainly isn't valid dts syntax - strings can't appear within
+> >the < > construct.  But if you make the obvious fix to:
+> >     ipi-refs =3D <&coproc1>, "in", <&coproc1>, "coproc2data";
+> >
+> >then it's certainly a parseable property format.  It's kind of clunky
+> >mixing integers and strings that way, but it's possible and there are
+> >existing bindings using properties in a similar format.
+> >
+>=20
+> Ah OK thanks! I think this form would be handy to get the refs even if we
+> end up reusing the interrupts property to allocate an IPI.
+>=20
+> So if reusing the interrupts property is the right thing to do, do you (or
+> anyone else) have a rough idea how this should look like?
+
+So as noted above, I'm now sure that 'interrupts' is not the right
+thing.  I'm trying to understand the coprocs and the ipi mechanism a
+bit better to work out if there is something existing which would make
+sense, or if we do need something entirely new.
 
 --=20
 David Gibson			| I'll have my music baroque, and my code
@@ -106,25 +137,25 @@ david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
 				| _way_ _around_!
 http://www.ozlabs.org/~dgibson
 
---/9DWx/yDrRhgMJTb
+--8c07nsHwQobhlezh
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iQIcBAEBAgAGBQJWa7XJAAoJEGw4ysog2bOSBWoQALjYls+DpoYTVxJCSeQxE1Fk
-OKGQir1DdPa+/sufisuieOvw3vn5tPV96s13n82I+86G0V83Qi3PoYMpU+I8wOx7
-zR6UNI0VmyRWEDOrGKP62K+iCEqYEDTcyaf/lvGLP9XcDYLfar20DDTOmIrWt+7T
-5NcLx5EG93VxES99iyaYqKTODB85R4X0z9O9AewaE+qHQDjvrgL2yn74dmPMlE79
-CyUcEGEErPFOA5EgQOK69YDfUxdrPbL2uVFuyzuQSDapSgwxPSiVCdApxBZEp9wY
-Rvxn/7TIDAaua2tMKQvvhDk6Tt4figSFTV0199vKrPUqfy29w9JY0XdPR5mdM8zg
-bNjMuazbeTMzpIr7tdJWh+ipA/rTsdXTVmSbGnQIzkRlDFiRBg4M+T8ZbcWbDujz
-MNO91QoRYnzICNH+dN6+npPZJkoI52cxfUMi8qd/Lf3t6HmxS7cYe/ZOru49VS5c
-uWWFqJCGMaNMZ+xvrIYvlD/HGTFxus9SHaKgE804QaxSPc+W15+1x0sp1v95XW9o
-Y3oqUclqIX7i58iN2cYavbA4XwoLdENhLtvErMXNTjZ69UkBGU/ZNjT2NDZpanfv
-x27guz5PeF8tjHUJJuyD3+eIkhPEVIJOq/P8ShjmjM0nN714BnEH8auZGyF/O7D7
-RwlTJDiIb+g1cbekXl0D
-=YGRz
+iQIcBAEBAgAGBQJWbh4pAAoJEGw4ysog2bOS2RMQALwcxxCdIi0qhCkpnvPHsa5x
+vwNT6jwtoyTH9DqFqy5rYXRkUCNcQUITmAqqBg+qYtGMaIAEVEUm3+206eyFij+c
+UYJisscffDn+IS6WjOiLq5nfJYZ/MKyR1QEO9GNL0PGh7GIysAk1LamVmgQOvPTA
+SRM5JQm9kFohWEEOto38TbdCIViUkzO1DOBY9pznQDsCL4RBc/NV7jvpHFcZkZRY
+4PDSg4CDj2X++G2Q2+Al9zQ4HlJWJaF4Z74Epmt+ODh6+mNYeUnPKse1dvzQJ8RI
+XnP1wP2D7t2iBEPHudwqc4nY1x4Hl279KuX0wsuTznuLQFtOJUdGsHzF0AEUhHxb
+f2X3cShaocZqb8aQVKTUE9qMevXm3gNd930xaFe7bE+c/A3ZE80MQkLZRxmr7DUE
+HIxhFgxSMICPRTE7AK4/5/WPhCG87dmDwgHi9dXH7mZXFsJTHqZcVOECMzBLuB8f
+1M58DV95zxOZ8dYSjxTmxRRaK3dcndqY+SaSG3pEx3HVypC7QGysv4dAn2EKoZ+W
+HqXFJrLLH8k+qE/ywhsGPd3L+wgwALrn7BoNnSt1fMx8T+YFrV/iy1b3dMzBe9H+
+5vL7FgoKAC8v1ucf6PcOItK8K572TRitvXwFnITlLHOLxs5wpfysZ1mACFJpMU8P
+y5aFthsxeq9WFRmm92n2
+=nh/h
 -----END PGP SIGNATURE-----
 
---/9DWx/yDrRhgMJTb--
+--8c07nsHwQobhlezh--
