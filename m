@@ -1,71 +1,95 @@
-From: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
-Subject: Re: [RFC PATCH 3/7] doc: dt: mtd: partition: add on-flash format binding
-Date: Tue, 15 Dec 2015 11:03:48 +0100
-Message-ID: <CAMuHMdVUMHEAGSwF=nvbncHEj6Co9f6CofeVqZbrWzhaprBvGQ@mail.gmail.com>
+From: David Gibson <david@gibson.dropbear.id.au>
+Subject: Re: [RFC PATCH 3/7] doc: dt: mtd: partition: add on-flash format
+ binding
+Date: Thu, 17 Dec 2015 12:05:03 +1100
+Message-ID: <20151217010503.GD3011@voom.redhat.com>
 References: <1449292763-129421-1-git-send-email-computersforpeace@gmail.com>
-	<1449292763-129421-4-git-send-email-computersforpeace@gmail.com>
-	<CAOiHx=nz2bdA_R610ozsQHhccdcrHVVCamTtne5ReHrA-FcaaQ@mail.gmail.com>
-	<CAOMqctTbUNd0GtY07YJuxem9HkU1WZ-NtO556=Yg2QrsF49Xjw@mail.gmail.com>
-	<20151207013628.GC20139@voom.fritz.box>
-	<20151210204324.GK144338@google.com>
-	<20151212055105.GA17011@voom.fritz.box>
-	<CAMuHMdXA4-BZpvtCM8_9fYWLzoVsuCXDqvF3G4cVd50Cqsfv0g@mail.gmail.com>
-	<20151215060056.GB3011@voom.redhat.com>
+ <1449292763-129421-4-git-send-email-computersforpeace@gmail.com>
+ <CAOiHx=nz2bdA_R610ozsQHhccdcrHVVCamTtne5ReHrA-FcaaQ@mail.gmail.com>
+ <CAOMqctTbUNd0GtY07YJuxem9HkU1WZ-NtO556=Yg2QrsF49Xjw@mail.gmail.com>
+ <20151207013628.GC20139@voom.fritz.box>
+ <20151210204324.GK144338@google.com>
+ <20151212055105.GA17011@voom.fritz.box>
+ <CAMuHMdXA4-BZpvtCM8_9fYWLzoVsuCXDqvF3G4cVd50Cqsfv0g@mail.gmail.com>
+ <20151215060056.GB3011@voom.redhat.com>
+ <CAMuHMdVUMHEAGSwF=nvbncHEj6Co9f6CofeVqZbrWzhaprBvGQ@mail.gmail.com>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=mime-version:sender:in-reply-to:references:date:message-id:subject
-         :from:to:cc:content-type;
-        bh=aKU/K5Ad+P3IWXS5XKfJO4ScV0CrbfL6mbLhrcHVno0=;
-        b=zxQfEas79cug4+12V4sT6DVcnksNdj72yuZoGLdEVoriRqN1tO+QuakkfKW5qRl/11
-         NiYGZLDGM3DZlGbWoI2wcttH45vOvwIlKspwznNVCpTKmyICG9/xreq0CbNfq1P0wZk4
-         q2slH4i80knqUeKAxSY+jjrihrPmruxTZ8zWQnGFmSkOP+V+RCU38cKrp5+m7o5hG7kC
-         TkFTX4gvB54+0opvYK41HP8vNVvAK1JLMHfGm6SOCOje3FBa67MJPBiHKqa+8Xl9tzVh
-         nfLw2Qx4jsKHmocxXbQrw8VgOTf5WqGla4QEJf/oGvW7iglB1D+4sCNlfko0tT3LTpS8
-         S4Mw==
-In-Reply-To: <20151215060056.GB3011-1s0os16eZneny3qCrzbmXA@public.gmane.org>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Hf61M2y+wYpnELGG"
+Return-path: <linux-kernel-owner@vger.kernel.org>
+Content-Disposition: inline
+In-Reply-To: <CAMuHMdVUMHEAGSwF=nvbncHEj6Co9f6CofeVqZbrWzhaprBvGQ@mail.gmail.com>
+Sender: linux-kernel-owner@vger.kernel.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
-Cc: Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Michal Suchanek <hramrach-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Jonas Gorski <jogo-p3rKhJxN3npAfugRpC6u6w@public.gmane.org>, Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>, Geert Uytterhoeven <geert+renesas-gXvu3+zWzMSzQB+pC5nmwQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Simon Arlott <simon-A6De1vDTPLDsq35pWSNszA@public.gmane.org>, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jason Gunthorpe <jgunthorpe-ePGOBjL8dl3ta4EC/59zMFaTQe2KTcn/@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, MTD Maling List <linux-mtd-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, Hauke Mehrtens <hauke-5/S+JYg5SzeELgA04lAiVw@public.gmane.org>
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Cc: Brian Norris <computersforpeace@gmail.com>, Michal Suchanek <hramrach@gmail.com>, Jonas Gorski <jogo@openwrt.org>, Boris Brezillon <boris.brezillon@free-electrons.com>, Arnd Bergmann <arnd@arndb.de>, Geert Uytterhoeven <geert+renesas@glider.be>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, devicetree-spec@vger.kernel.org, Simon Arlott <simon@fire.lp0.eu>, Linus Walleij <linus.walleij@linaro.org>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Jason Gunthorpe <jgunthorpe@obsidianresearch.com>, Rob Herring <robh+dt@kernel.org>, MTD Maling List <linux-mtd@lists.infradead.org>, Hauke Mehrtens <hauke@hauke-m.de>
 
-Hi David,
 
-On Tue, Dec 15, 2015 at 7:00 AM, David Gibson
-<david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org> wrote:
->> If the only property needed is the partition table offset, it can be encoded
->> in the unit-address, and the "reg" property:
->>
->>         partitions {
->>
->>                 partition-table@xxxx {
->>                         reg = <0xxxx ...>;
->>                         ...
->>                 };
->>
->>                 ...
->>         };
->
-> Urgh.. and that's abusing the unit address.
+--Hf61M2y+wYpnELGG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Why? The partition is part of the FLASH. In this respect, it doesn't differ
-from other hardcoded partitions using the same DT syntax.
-It would just have a compatible value indicating it's a partition table.
+On Tue, Dec 15, 2015 at 11:03:48AM +0100, Geert Uytterhoeven wrote:
+> Hi David,
+>=20
+> On Tue, Dec 15, 2015 at 7:00 AM, David Gibson
+> <david@gibson.dropbear.id.au> wrote:
+> >> If the only property needed is the partition table offset, it can be e=
+ncoded
+> >> in the unit-address, and the "reg" property:
+> >>
+> >>         partitions {
+> >>
+> >>                 partition-table@xxxx {
+> >>                         reg =3D <0xxxx ...>;
+> >>                         ...
+> >>                 };
+> >>
+> >>                 ...
+> >>         };
+> >
+> > Urgh.. and that's abusing the unit address.
+>=20
+> Why? The partition is part of the FLASH. In this respect, it doesn't diff=
+er
+> from other hardcoded partitions using the same DT syntax.
+> It would just have a compatible value indicating it's a partition
+> table.
 
-Gr{oetje,eeting}s,
+Ah.. yes, fair enough.  I'd forgotten that the encoding of explicit
+partitions in the device tree already established the address space
+here as being the flash blocks.  So, no, it's not an abuse of unit
+address.
 
-                        Geert
+Doesn't help for partition table types which require scanning the
+device, of course.
 
---
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+--Hf61M2y+wYpnELGG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBAgAGBQJWcgo/AAoJEGw4ysog2bOSatIQAKZqCg3MvfxT/vSzUw6SBeKx
+a4QKXJlmxFtsGzBfFBHog+/YkJx4ewLRE7fPn2JDhHBWYqG4V5/QxKKIgqZVVIl4
+yGvN4M3AEw4SHoKesRiL8rfR49/FHJZkTwV7eF4h2RfaT7/aDyqlrlMf5LOvGgN2
+GqInKWZqCSQafELz3BY0r2jjxWwxoo34A6hEqVkxUgQ1oC1oy34JsePeThMzYj7V
+nMsxelmtN0+q2xkXLQ/A8kjRMnn9A3wvbW4ysbtqU37BEZ65IOgOux2FMdE/+vqb
+FFaWDsyXxUOULEtpXRrLNYdwqtFD6lcH7s1KSYKNlz9gZ8A6xWgnKeFOlkWhNdiT
+Nk8HmkCkcn01v9Y+IovxJk1KqQzOfREYVVI+4okN3xUmSDvOkUpz2aWBVdl+hSao
+Tq6vYRlgK4+ZmEQzID0+DbeWN+hnjuY8J1syaBphWWUMeCfN/9OQ6XroDiR666Fg
+3SijBSJfRGQddV4eM97Y4QoQHrqV+gl5G0QKmySZBQFYrI03GcZydr4Zh/yDIHzT
+lsbyl46G5rByKIH2X0e7H9XnGZGIcqgdijYQ3Nr8yUgUr5rXntasV2UX7L1vpZ2W
+O1x33Lfb1PcVJ1GeXpd9hYXpB9af2Q3nQ8LPYY8chbjOg4pIGf8eIM4zv15dmGhv
+5CTFqkcI6XNO/vCo3c5I
+=wYqu
+-----END PGP SIGNATURE-----
+
+--Hf61M2y+wYpnELGG--
