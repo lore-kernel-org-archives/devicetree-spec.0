@@ -1,128 +1,123 @@
-From: David Gibson <david@gibson.dropbear.id.au>
-Subject: Re: Generic DT binding for IPIs
-Date: Tue, 22 Dec 2015 15:38:28 +1100
-Message-ID: <20151222043828.GU3011@voom.redhat.com>
-References: <561E2BE6.2090807@imgtec.com>
- <5628BE00.4020106@imgtec.com>
- <20151022115551.GI3953@io.lakedaemon.net>
- <56684877.3020708@imgtec.com>
- <CAL_Jsq+yv1UnBhrR+x+DEA41yETVANY9_-5W0DSQJVEQ4+Mx_w@mail.gmail.com>
- <56695201.2070807@imgtec.com>
- <20151211003902.GE20139@voom.fritz.box>
- <566AA9DD.6040404@imgtec.com>
- <20151214014057.GM22783@voom.fritz.box>
- <CA+mqd+6Qbp9EsvT0-A7YUBLn7TeffzqWSbM9i+ZcKVWytt9rvA@mail.gmail.com>
+From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: [PATCH 1/5] arm: devtree: Set system_rev from DT "/revision"
+Date: Mon, 28 Dec 2015 13:01:22 -0800
+Message-ID: <5681A322.2090204@gmail.com>
+References: <1436214373-12969-1-git-send-email-pali.rohar@gmail.com> <1436214373-12969-2-git-send-email-pali.rohar@gmail.com> <20151224190237.GA17343@pali>
+Reply-To: frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="z118w8IfbP8nVdqq"
-Return-path: <linux-kernel-owner@vger.kernel.org>
-Content-Disposition: inline
-In-Reply-To: <CA+mqd+6Qbp9EsvT0-A7YUBLn7TeffzqWSbM9i+ZcKVWytt9rvA@mail.gmail.com>
-Sender: linux-kernel-owner@vger.kernel.org
+Content-Transfer-Encoding: QUOTED-PRINTABLE
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=message-id:date:from:reply-to:user-agent:mime-version:to:cc:subject
+         :references:in-reply-to:content-type:content-transfer-encoding;
+        bh=/IRZ656RlRDxW2p2yjMLVVH05PhxmUrJXdTyEhJuPDg=;
+        b=Vv3TKy0g0dzIR5vSs49PvC4crDOjx4kglfDiy0FcxS2xiVvSW5QCsBD79BF58e7nMa
+         EmeoxXxv4m++yeI3liXBkCLawqhdyd8CmF5Am3C7g8hJ4MNtCRSaD7LHCoYV8YR73p/e
+         9EN00I/bOYmISgyLEypnec3lD31h1qnbQgSZoIdpLEJYQy2LGvqS6Yuir0+y4bGFeoYW
+         tdJwLxI0IZzarIjhOa6U06VTsvHcqLSiTY2O2M/tRDnSj7oJu/NChcwWcUf5AhsLWRNW
+         FS5pCGyvnvxLI21xu2n+IYH8IkAcKL9uPa04vuM8/88Vf1sGkLYuhl7K6VT5DqWLnSii
+         JztA==
+In-Reply-To: <20151224190237.GA17343@pali>
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Qais Yousef <qsyousef@gmail.com>
-Cc: Qais Yousef <qais.yousef@imgtec.com>, Rob Herring <robh+dt@kernel.org>, "devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>, Jason Cooper <jason@lakedaemon.net>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, Pawel Moll <pawel.moll@arm.com>, Mark Rutland <mark.rutland@arm.com>, Ian Campbell <ijc+devicetree@hellion.org.uk>, Kumar Gala <galak@codeaurora.org>, Thomas Gleixner <tglx@linutronix.de>, Marc Zyngier <marc.zyngier@arm.com>, Jiang Liu <jiang.liu@linux.intel.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Lisa Parratt <Lisa.Parratt@imgtec.com>
+Content-Type: text/plain; charset="utf-8"
+To: =?UTF-8?B?UGFsaSBSb2jDoXI=?= <pali.rohar-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: Russell King <linux-lFZ/pmaqli7XmaaqVzeoHQ@public.gmane.org>, Laura Abbott <lauraa-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Will Deacon <will.deacon-5wv7dgnIgG8@public.gmane.org>, Ivaylo Dimitrov <ivo.g.dimitrov.75-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Sebastian Reichel <sre-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Pavel Machek <pavel-+ZI9xUNit7I@public.gmane.org>, Tony Lindgren <tony-4v6yS6AI5VpBDgjK7y7TUQ@public.gmane.org>, =?UTF-8?B?QW5kcmVhcyBGw6RyYmVy?= <afaerber-l3A5Bk7waGM@public.gmane.org>, linux-omap-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
+Adding devicetree-spec, and commenting below.
 
---z118w8IfbP8nVdqq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Dec 17, 2015 at 11:31:14AM +0000, Qais Yousef wrote:
-> > > Maybe it would help to look at the new IPI reservation API?
-> > >
-> > >     https://lkml.org/lkml/2015/12/8/249
-> >
-> > Hmm.. not as much as I might have hoped.
-> >
-> > From the API, it looks like you're reserving IPIs to signal between
-> > different CPUs all of which are in Linux.  From your description here
-> > it sounds like the coproc is a separate specialized thing not running
-> > Linux (or at least, not the same Linux instance as the host OS which
-> > this device tree is for).
+On 12/24/2015 11:02 AM, Pali Roh=C3=A1r wrote:
+> On Monday 06 July 2015 22:26:09 Pali Roh=C3=A1r wrote:
+>> With this patch "/revision" DT entry is used to set global system_re=
+v
+>> variable. DT "/revision" is expected to be u32 numeric value.
+>>
+>> TODO: add documentation
+>>
+>> Signed-off-by: Pali Roh=C3=A1r <pali.rohar-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+>> ---
+>>  arch/arm/kernel/devtree.c |   12 ++++++++++--
+>>  1 file changed, 10 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/arch/arm/kernel/devtree.c b/arch/arm/kernel/devtree.c
+>> index 11c54de..7d82749 100644
+>> --- a/arch/arm/kernel/devtree.c
+>> +++ b/arch/arm/kernel/devtree.c
+>> @@ -19,6 +19,7 @@
+>>  #include <linux/of_irq.h>
+>>  #include <linux/of_platform.h>
+>>  #include <linux/smp.h>
+>> +#include <linux/libfdt_env.h>
+>> =20
+>>  #include <asm/cputype.h>
+>>  #include <asm/setup.h>
+>> @@ -26,6 +27,7 @@
+>>  #include <asm/smp_plat.h>
+>>  #include <asm/mach/arch.h>
+>>  #include <asm/mach-types.h>
+>> +#include <asm/system_info.h>
+>> =20
+>> =20
+>>  #ifdef CONFIG_SMP
+>> @@ -204,6 +206,8 @@ static const void * __init arch_get_next_mach(co=
+nst char *const **match)
+>>  const struct machine_desc * __init setup_machine_fdt(unsigned int d=
+t_phys)
+>>  {
+>>  	const struct machine_desc *mdesc, *mdesc_best =3D NULL;
+>> +	unsigned long dt_root;
+>> +	const u32 *rev;
+>> =20
+>>  #ifdef CONFIG_ARCH_MULTIPLATFORM
+>>  	DT_MACHINE_START(GENERIC_DT, "Generic DT based system")
+>> @@ -215,17 +219,16 @@ const struct machine_desc * __init setup_machi=
+ne_fdt(unsigned int dt_phys)
+>>  	if (!dt_phys || !early_init_dt_verify(phys_to_virt(dt_phys)))
+>>  		return NULL;
+>> =20
+>> +	dt_root =3D of_get_flat_dt_root();
+>>  	mdesc =3D of_flat_dt_match_machine(mdesc_best, arch_get_next_mach)=
+;
+>> =20
+>>  	if (!mdesc) {
+>>  		const char *prop;
+>>  		int size;
+>> -		unsigned long dt_root;
+>> =20
+>>  		early_print("\nError: unrecognized/unsupported "
+>>  			    "device tree compatible list:\n[ ");
+>> =20
+>> -		dt_root =3D of_get_flat_dt_root();
+>>  		prop =3D of_get_flat_dt_prop(dt_root, "compatible", &size);
+>>  		while (size > 0) {
+>>  			early_print("'%s' ", prop);
+>> @@ -246,5 +249,10 @@ const struct machine_desc * __init setup_machin=
+e_fdt(unsigned int dt_phys)
+>>  	/* Change machine number to match the mdesc we're using */
+>>  	__machine_arch_type =3D mdesc->nr;
+>> =20
+>> +	/* Set system revision from DT */
+>> +	rev =3D of_get_flat_dt_prop(dt_root, "revision", NULL);
+>> +	if (rev)
+>> +		system_rev =3D fdt32_to_cpu(*rev);
+>> +
+>>  	return mdesc;
+>>  }
 >=20
-> No the CPUs aren't only Linux CPUs. It should be any CPU that the interru=
-pt
-> controller can talk to.
-> That CPU can be one of Linux CPUs, or a coproc.
-
-Ok.. but it looks like anything you can reserve an IPI for must be
-cpu_possible_mask, so I'm guessing they're CPUs that could be CPUs,
-even if they're not at the present time.  Is that right?
-
-I guess the point is that the targets of these IPIs are participating
-in the same coherency fabric as the host CPUs, yes?
-
-> > > I'm not sure I understood you completely but no, there's no translati=
-on
-> > > happening. When the IPI is allocated it would be routed
-> > > to the coproc. When the host wants to send a signal, it'll use the
-> allocated
-> > > hwirq value (indirectly via the virq) to write to a register, which w=
-ill
-> > > cause an interrupt to be generated at the coproc.
-> >
-> > Where is this magic register located?  In the host cpu?  In the
-> > coproc?  In some special IPI controller?
+> This patch and second one (with subject "[PATCH 2/5] arm: boot: conve=
+rt
+> ATAG_REVISION to DT "/revision" entry") are still needed.
 >=20
-> The IPI controller. In my use case, the IPI controller is the same as the
-> interrupt controller used by Linux. Generally they don't have to be the
-> same though.
+> Are there any objections for them? If not, I will add missing DT
+> documentation and will resend them.
 
-Ok.  So, the one existing thing I can think of which might fit -
-although it seems a bit odd - is the gpio binding.  I'm not that
-familiar with the binding, so it's possible I've overlooked something
-that would make it unsuitable, still..
+Patch 2/5 copies the value from ATAG_REVISION into the fdt "/revision"
+property.
 
-I think you might be able to treat the IPIs bound for a coproc as
-gpios to that coproc device, with the IPI controller designated as the
-gpio controller.  The driver for this gpio controller would know that
-it uses the IPI reservation mechanism to trigger those "gpio" lines.
+If the use of /revision is limited to being a location to hold an ATAG
+value to pass to the global variable system_rev, then it would make
+sense to just copy directly from the ATAG value into system_rev in the
+same board file where you are copying the ATAGs.
 
-This scheme would have the advatage that if you ever have a version of
-the coproc that exists as a separate piece of hardware *not* belonging
-to the same coherency fabric as the host cpu - and with it's inbound
-interrupts instead triggered by "real" gpios - then that should, at
-least in theory, be supported without host kernel changes.
-
-> > So as noted above, I'm now sure that 'interrupts' is not the right
-> > thing.  I'm trying to understand the coprocs and the ipi mechanism a
-> > bit better to work out if there is something existing which would make
-> > sense, or if we do need something entirely new.
->=20
-> Let me know if I can help.
-
-I don't know what sort of software is running on the coproc.  If it
-also uses a device tree, then the device tree from the coproc point of
-view *would* represent these inbound IPIs as 'interrupts' properties -
-probably on some node representing the host cpu / system.
-
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---z118w8IfbP8nVdqq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQIcBAEBAgAGBQJWeNPEAAoJEGw4ysog2bOSD/UP/0xbb2os9EdK7mJ4I1AzSgSE
-EkwewQ7mbR+Ou1EQ/huS2WZbmGjBQbWhJcush8FWgkm3iBp8GT/I0RJPmExW7lDO
-xbHwWlj3DJ+tWPIGk2T+GboyQjzSXCE3KtrUli4jGNFvoE7zD5YZUOaEQ6iLOjfr
-O5ZIcUFDX3tAYv/SdPGPsiRm20zX7yUyam7Iwc6d+ueYBgm7Qyqomi51pcdbrlYU
-t5eNRzkeLXW78y7B9yrvZxmfR9mQbcCXZZnWAAD+sr8zZNczc4sPlRx3Pc2APhRU
-sGo5CxQPu2G+dB2zlTvy5G2SzYjBOD1trDO8QW0/hSabKIkgWVE9zjj1jn3sAknN
-QOVhJvtiy/q0f6TLtAnczKQEES0/c+nMGb0Kkh7UqMvhfW5F8UPcwKgnGffj5oOV
-dtXbZagq6D/Ff6g0js3C0STH3bHwZqAxLEZTDYxK8/JoIhrXVIcH7HOgXvZnY6Ts
-AVJsJLNrUVq0RP5XbnHtY20CjYbN8BxcFsl7DrSCmmapvJFn8W5FCYPITjALoILW
-Ojfu9OQEWp4eVRoIRliO04TrIamaP9iCfbAKasXcjaAZyooUOQ3sfhHHCMEggMrk
-ObsUlDp7GmyxpDgndhyH+fl2CwBfaztIETetsOLRuSe5A+LXv6XEht81Z7PG+EG6
-Pol/3F22f9pJ5NFsK/8N
-=NjSs
------END PGP SIGNATURE-----
-
---z118w8IfbP8nVdqq--
+-Frank
