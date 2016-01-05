@@ -1,32 +1,59 @@
-From: Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>
+From: Pali =?utf-8?B?Um9ow6Fy?= <pali.rohar-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Subject: Re: [PATCH 1/5] arm: devtree: Set system_rev from DT "/revision"
-Date: Mon, 28 Dec 2015 23:27:17 +0100
-Message-ID: <50067860.qzAxcgo8L4@wuerfel>
-References: <1436214373-12969-1-git-send-email-pali.rohar@gmail.com> <20151224190237.GA17343@pali> <5681A322.2090204@gmail.com>
+Date: Tue, 5 Jan 2016 12:37:50 +0100
+Message-ID: <20160105113750.GL22661@pali>
+References: <1436214373-12969-1-git-send-email-pali.rohar@gmail.com>
+ <20151224190237.GA17343@pali>
+ <5681A322.2090204@gmail.com>
+ <50067860.qzAxcgo8L4@wuerfel>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7Bit
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <5681A322.2090204-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-type:content-disposition:content-transfer-encoding
+         :in-reply-to:user-agent;
+        bh=82kVtVTWGtpTEzzd0SD3XN3Fv2+J7ZkVolF51Ot3a8A=;
+        b=TyP1c0vIS2Pzfs/g9oJHOJBy6gnCg84TXJLUpD3dCJXgVk9IKCbMpz7PzejrL7TULz
+         9LM5/yoHBLfgEMfTMebMPQOF3226MUPTXezJvyPKvzmF0p3ijXlL4n7/qEaAGtmn+f2a
+         gPYLh2WgEpLaUPqtqn0o4jUiSsRvXXR9UtnmMtrGlT+QfRdBouzDPbf/VWipGiKAp7Hq
+         88JUJN1jAz/AzApITlfl5/15Y7lr+n1yuVJzVx9tP3Gr8VaObDa4WM5FHyxWjYwnP6mT
+         riY3HkaxGOZWJb3CuPdc1Y5O/aNdTjgS2vJLIRy86qqA0RC6dG64rFMh1pHPRm97WPKp
+         yumQ==
+Content-Disposition: inline
+In-Reply-To: <50067860.qzAxcgo8L4@wuerfel>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org
-Cc: Pali =?ISO-8859-1?Q?Roh=E1r?= <pali.rohar-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Ivaylo Dimitrov <ivo.g.dimitrov.75-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Laura Abbott <lauraa-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Tony Lindgren <tony-4v6yS6AI5VpBDgjK7y7TUQ@public.gmane.org>, Sebastian Reichel <sre-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Will Deacon <will.deacon-5wv7dgnIgG8@public.gmane.org>, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Pavel Machek <pavel-+ZI9xUNit7I@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Russell King <linux-lFZ/pmaqli7XmaaqVzeoHQ@public.gmane.org>, linux-omap-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Andreas =?ISO-8859-1?Q?F=E4rber?= <afaerber-l3A5Bk7waGM@public.gmane.org>
+Content-Type: text/plain; charset="macroman"
+To: Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>
+Cc: linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org, Ivaylo Dimitrov <ivo.g.dimitrov.75-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Laura Abbott <lauraa-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Tony Lindgren <tony-4v6yS6AI5VpBDgjK7y7TUQ@public.gmane.org>, Sebastian Reichel <sre-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Will Deacon <will.deacon-5wv7dgnIgG8@public.gmane.org>, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Pavel Machek <pavel-+ZI9xUNit7I@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Russell King <linux-lFZ/pmaqli7XmaaqVzeoHQ@public.gmane.org>, linux-omap-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Andreas =?utf-8?Q?F=C3=A4rber?= <afaerber-l3A5Bk7waGM@public.gmane.org>
 
-On Monday 28 December 2015 13:01:22 Frank Rowand wrote:
-> 
-> Patch 2/5 copies the value from ATAG_REVISION into the fdt "/revision"
-> property.
-> 
-> If the use of /revision is limited to being a location to hold an ATAG
-> value to pass to the global variable system_rev, then it would make
-> sense to just copy directly from the ATAG value into system_rev in the
-> same board file where you are copying the ATAGs.
+On Monday 28 December 2015 23:27:17 Arnd Bergmann wrote:
+> On Monday 28 December 2015 13:01:22 Frank Rowand wrote:
+> >=20
+> > Patch 2/5 copies the value from ATAG_REVISION into the fdt "/revisi=
+on"
+> > property.
+> >=20
+> > If the use of /revision is limited to being a location to hold an A=
+TAG
+> > value to pass to the global variable system_rev, then it would make
+> > sense to just copy directly from the ATAG value into system_rev in =
+the
+> > same board file where you are copying the ATAGs.
+>=20
+> Agreed. That would be simpler, and avoid a situation where someone re=
+lies
+> on the /revision property in DT to be set from the atags compat code
+> (preventing an upgrade to a newer bootloader), or on the system_rev v=
+ariable
+> to be the same across multiple boot loaders, in the absence of other
+> kernel code setting it.
 
-Agreed. That would be simpler, and avoid a situation where someone relies
-on the /revision property in DT to be set from the atags compat code
-(preventing an upgrade to a newer bootloader), or on the system_rev variable
-to be the same across multiple boot loaders, in the absence of other
-kernel code setting it.
+So, set system_rev only for Nokia N900? At same place where is called
+save_atags()?
 
-	Arnd
+--=20
+Pali Roh=C3=A1r
+pali.rohar-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org
