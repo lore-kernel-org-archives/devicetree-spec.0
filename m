@@ -1,49 +1,72 @@
-From: Arnd Bergmann <arnd-r2nGTMty4D4@public.gmane.org>
-Subject: Re: [PATCH 1/5] arm: devtree: Set system_rev from DT "/revision"
-Date: Tue, 05 Jan 2016 12:45:52 +0100
-Message-ID: <3663322.UyrB2OmX6o@wuerfel>
-References: <1436214373-12969-1-git-send-email-pali.rohar@gmail.com> <50067860.qzAxcgo8L4@wuerfel> <20160105113750.GL22661@pali>
-Mime-Version: 1.0
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: [PATCH] dt/bindings: add documentation on standard property unit suffixes
+Date: Mon,  8 Feb 2016 11:04:04 -0600
+Message-ID: <1454951044-18223-1-git-send-email-robh@kernel.org>
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <20160105113750.GL22661@pali>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-To: linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org
-Cc: Pali =?ISO-8859-1?Q?Roh=E1r?= <pali.rohar-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Ivaylo Dimitrov <ivo.g.dimitrov.75-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Laura Abbott <lauraa-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Tony Lindgren <tony-4v6yS6AI5VpBDgjK7y7TUQ@public.gmane.org>, Sebastian Reichel <sre-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Will Deacon <will.deacon-5wv7dgnIgG8@public.gmane.org>, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Devicetree Spec List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Pavel Machek <pavel-+ZI9xUNit7I@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Russell King <linux-lFZ/pmaqli7XmaaqVzeoHQ@public.gmane.org>, linux-omap-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org, Andreas =?ISO-8859-1?Q?F=E4rber?= <afaerber-l3A5Bk7waGM@public.gmane.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>, Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>
 
-On Tuesday 05 January 2016 12:37:50 Pali Roh=E1r wrote:
-> On Monday 28 December 2015 23:27:17 Arnd Bergmann wrote:
-> > On Monday 28 December 2015 13:01:22 Frank Rowand wrote:
-> > >=20
-> > > Patch 2/5 copies the value from ATAG_REVISION into the fdt "/revi=
-sion"
-> > > property.
-> > >=20
-> > > If the use of /revision is limited to being a location to hold an=
- ATAG
-> > > value to pass to the global variable system_rev, then it would ma=
-ke
-> > > sense to just copy directly from the ATAG value into system_rev i=
-n the
-> > > same board file where you are copying the ATAGs.
-> >=20
-> > Agreed. That would be simpler, and avoid a situation where someone =
-relies
-> > on the /revision property in DT to be set from the atags compat cod=
-e
-> > (preventing an upgrade to a newer bootloader), or on the system_rev=
- variable
-> > to be the same across multiple boot loaders, in the absence of othe=
-r
-> > kernel code setting it.
->=20
-> So, set system_rev only for Nokia N900? At same place where is called
-> save_atags()?
->=20
->=20
+A common review comment is to add units to DT property names. The naming
+convention is inconsistent unfortunately although there are clear
+majorities in use already. This makes it hard to remember the exact name
+preferred, so I'm documenting this to provide an easy point of
+reference.
 
-Yes.
+Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Cc: Pawel Moll <pawel.moll-5wv7dgnIgG8@public.gmane.org>
+Cc: Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>
+Cc: Ian Campbell <ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org>
+Cc: Kumar Gala <galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>
+---
+ .../devicetree/bindings/property-units.txt         | 35 ++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/property-units.txt
 
-	Arnd
+diff --git a/Documentation/devicetree/bindings/property-units.txt b/Documentation/devicetree/bindings/property-units.txt
+new file mode 100644
+index 0000000..f8231ed
+--- /dev/null
++++ b/Documentation/devicetree/bindings/property-units.txt
+@@ -0,0 +1,35 @@
++Standard Unit Suffixes for Property names
++
++Properties which have a unit of measure are recommended to have a unit
++suffix appended to the property name. The list below contains the
++recommended suffixes. Other variations exist in bindings, but should not
++be used in new bindings or added here. The inconsistency in the unit
++prefixes is due to selecting the most commonly used variants.
++
++It is also recommended to use the units listed here and not add additional
++unit prefixes.
++
++Time/Frequency
++----------------------------------------
++-mhz		: megahertz
++-hz		: Hertz (preferred)
++-sec		: seconds
++-ms		: milliseconds
++-us		: microseconds
++-ns		: nanoseconds
++
++Electricity
++----------------------------------------
++-microamp	: micro amps
++-ohms		: Ohms
++-micro-ohms	: micro Ohms
++-microvolt	: micro volts
++
++Temperature
++----------------------------------------
++-celsius	: Degrees Celsius
++-millicelsius	: Degreee milli-Celsius
++
++Pressure
++----------------------------------------
++-kpascal	: kiloPascal
+-- 
+2.5.0
