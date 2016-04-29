@@ -1,129 +1,75 @@
-From: Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
-Subject: Re: [U-Boot] [PATCH V2 5/6] ARM: dts: k2g: Add support for PMMC
-Date: Fri, 4 Mar 2016 17:08:53 -0500
-Message-ID: <20160304220853.GA23166@bill-the-cat>
-References: <1456426427-23166-1-git-send-email-nm@ti.com>
- <1456426427-23166-6-git-send-email-nm@ti.com>
- <20160226181827.GB23166@bill-the-cat>
- <CAGo_u6o0V6PgurVvs5cL9iDMM1w-8m9z7npmv=7LiAhaFwXXtw@mail.gmail.com>
- <20160227002736.GG23166@bill-the-cat>
- <CAGo_u6oS-WqukK9crkevH_DWVY=bZtdVd8kTpfFiZKZL+rWj5w@mail.gmail.com>
-Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="L1q7c0b5dK0vsO5K"
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+From: Douglas Anderson <dianders-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
+Subject: [PATCH v2 0/4] Patches to allow consistent mmc / mmcblk numbering w/ device tree
+Date: Fri, 29 Apr 2016 10:32:15 -0700
+Message-ID: <1461951139-6109-1-git-send-email-dianders@chromium.org>
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=8/ccs6iC/qvKJ3O1svzUL5/VRWq3hUlPNHAprqZmcI0=;
-        b=kQ73jQ5fglh/apXeiGUy4jGt651Bdd9bp96OqpSHQ1sLsKjxQ2r/+gFKZxvwsxevJf
-         SJT+Qtzju5Z+RRF1r3dH3+SV0PYZXRrAqzqokETFvbh+VF4Q5GaxWmnNXrQd7Khurpn3
-         e6Y7IJb3YJm3FnIezi/LhC7Dda/Wa5hCpdSTU=
-Content-Disposition: inline
-In-Reply-To: <CAGo_u6oS-WqukK9crkevH_DWVY=bZtdVd8kTpfFiZKZL+rWj5w-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id;
+        bh=T2sT5HvXGGqW8yZXr4/nyto1TyF73JVl1+4zFAX68kc=;
+        b=hoErNCv35I6msRUxGl6dXvP99NUJwui5UZL36VaC05D+WwHttNjSFXLW4c6YWJ0lDs
+         flniouQS6UDIVo4/d/ErtYd1Hzs17Qlzjn0EoMMMkXD6Hre0KMIc1niLcZWH6Yq2k98x
+         XKEtUlP/5sSUshpfXw/w9C++L7/NFNbEXRF+k=
+Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Nishanth Menon <nm-l0cyMroinI0@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: u-boot <u-boot-0aAXYlwwYIKGBzrmiIFOJg@public.gmane.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: ulf.hansson-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org, jh80.chung-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org
+Cc: shawn.lin-TNX95d0MmH7DzftRWevZcw@public.gmane.org, adrian.hunter-ral2JQCrhuEAvxtiuMwx3w@public.gmane.org, stefan-XLVq0VzYD2Y@public.gmane.org, linux-mmc-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org, dmitry.torokhov-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org, Heiko Stuebner <heiko-4mtYJXux2i+zQB+pC5nmwQ@public.gmane.org>, jszhang-eYqpPyKDWXRBDgjK7y7TUQ@public.gmane.org, linux-rockchip-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Douglas Anderson <dianders-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>, mark.rutland-5wv7dgnIgG8@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, vbyravarasu-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org, lars-Qo5EllUWu/uELgA04lAiVw@public.gmane.org, linux-lFZ/pmaqli7XmaaqVzeoHQ@public.gmane.org, jonathanh-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org, linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, pawel.moll-5wv7dgnIgG8@public.gmane.org, ijc+devicetree-KcIKpvwj1kUDXYZnReoRVg@public.gmane.org, grundler-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org, galak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org, lporzio-AL4WhLSQfzjQT0dZR+AlfA@public.gmane.org, robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org, chaotian.jing-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org, sergei.shtylyov-M4DtvfQ/ZS1MRgGoP+s0PdBPR1lH4CV8@public.gmane.org, sudeep.holla-5wv7dgnIgG8@public.gmane.org, zhonghui.fu-VuQAYsv1563Yd54FQh9/CA@public.gmane.org, kirill.shutemov-VuQAYsv1563Yd54FQh9/CA@public.gmane.org
 
+This series picks patches from various different places to produce what
+I consider the best solution to getting consistent mmc and mmcblk
+ordering.
 
---L1q7c0b5dK0vsO5K
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Why consistent ordering and why not just use UUIDs?  IMHO consistent
+ordering solves a few different problems:
 
-=2E.. adding in devicetree-spec,
-http://lists.denx.de/pipermail/u-boot/2016-February/246542.html for the
-first part of this
+1. For poor, feeble-minded humans like me, have sane numbering for
+   devices helps a lot.  When grepping through dmesg it's terribly handy
+   if a given SDMMC device has a consistent number.  I know that I can
+   do "dmesg | grep mmc0" or "dmesg | grep mmcblk0" to find info about
+   the eMMC.  I know that I can do "dmesg | grep mmc1" to find info
+   about the SD card slot.  I don't want it to matter which one probed
+   first, I don't want it to matter if I'm working on a variant of the
+   hardware that has the SD card slot disabled, and I don't want to care
+   what my boot device was.  Worrying about what device number I got
+   increases my cognitive load.
 
-On Fri, Feb 26, 2016 at 07:10:23PM -0600, Nishanth Menon wrote:
-> Tom,
->=20
->=20
-> On Fri, Feb 26, 2016 at 6:27 PM, Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
-> > On Fri, Feb 26, 2016 at 06:18:30PM -0600, Nishanth Menon wrote:
-> >> On Fri, Feb 26, 2016 at 12:18 PM, Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
-> >> > On Thu, Feb 25, 2016 at 12:53:46PM -0600, Nishanth Menon wrote:
-> [...]
-> >> >
-> >> > ... and this will match whatever is in the kernel, right?
-> >>
-> >> The Linux kernel will not need to access PMMC similar to how bootloade=
-r has to.
-> >>
-> >> Bootloader looks to load up the peripheral - so, it's view of the
-> >> hardware is as a programmable core (similar to how we'd look at a
-> >> DSP/other remote proc), however, linux kernel only cares about the
-> >> communication link (which is the message manager) and the protocol on
-> >> top to communicate and does not need to access PMMC directly (it is
-> >> only done once by bootloader).
-> >>
-> >> So the the current u-boot dt binding will not even need to be send
-> >> upstream kernel, instead a protocol level definition (similar to SCPI)
-> >> will be exposed to linux kernel.
-> >
-> > So is the kernel community going to be unhappy about getting what it
-> > might consider extraneous information in the device tree?  The goal here
-> > is to be able to just copy in the DT files from $upstream and really
-> > really not have local changes without a good reason (and yes, we need to
-> > revisit u-boot,dm-pre-reloc at some point).  Maybe a question for one of
-> > the higher level DT lists...
->=20
-> Hmmm... I can switch to platform data if maintenance is an concern. I
-> dont think PMMC will be an unique experience for DT view of the
-> hardware where every  piece of software looks at things differently.
-> For example: if we move DDR configuration to device tree (which dt is
-> pretty capable of doing), then we are stuck with the same issue yet
-> again. DDR configuration is not necessary for kernel device tree since
-> it has nothing to do there - and we dont provide that information
-> (since it becomes a maintenance pain in kernel world as well), but
-> u-boot SPL will need to have that information.
->=20
-> Device tree is a representation of hardware is exactly what we do,
-> except that view depends on what we need to expose to each software
-> solution. Even in Linux, in a hypervisor world, a guest OS may only
-> have access to certain peripherals of the SoC - we dont expose all the
-> peripherals to the OS via dt, instead a custom guest OS dt view of the
-> world is created. This is one problem we all have with DT -> the
-> extent to which we "describe hardware" - there is no objective rules
-> for the same that can get blindly applied..
->=20
-> Do let me know if I need to bring this device outside of dt into
-> platform data world. It wont be my first preference, but if it does
-> create a severe maintenance burden, then maybe that is what needs to
-> happen -> only resources that are shared between kernel and bootloader
-> can reside in dt... just my 2 cents..
+2. There are cases where it's not trivially easy during development to
+   use the UUID.  Specifically I work a lot with coreboot / depthcharge
+   as a BIOS.  When configured properly, that BIOS has a nice feature to
+   allow you to fetch the kernel and kernel command line from TFTP by
+   pressing Ctrl-N.  In this particular case the BIOS doesn't actually
+   know which disk I'd like for my root filesystem, so it's not so easy
+   for it to put the right UUID into the command line.  For this
+   purpose, knowing that "mmcblk0" will always refer to eMMC is handy.
 
-So, I would like to see this particular bit stay in the DT, and I would
-like to see this part of the DT not be only in the U-Boot tree but
-rather the authorative DT which today resides in the Linux kernel.  But
-I'm not the person to make that final call, so adding in more people
-here.
+Changes in v2:
+- Rebased atop mmc-next
+- Stat dynamic allocation after fixed allocation; thanks Wolfram!
+- rk3288 patch new for v2
 
---=20
-Tom
+Douglas Anderson (1):
+  ARM: dts: rockchip: Add mmc aliases for rk3288 platform
 
---L1q7c0b5dK0vsO5K
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Jaehoon Chung (1):
+  Documentation: mmc: Document mmc aliases
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (GNU/Linux)
+Stefan Agner (2):
+  mmc: read mmc alias from device tree
+  mmc: use SD/MMC host ID for block device name ID
 
-iQIcBAEBAgAGBQJW2gd1AAoJEIf59jXTHXZSUHAQAJuDnN8g0ZqQFK+GTRGsCy7i
-QInwoULIj8ckJ8hfgyY8Qn4jiydNAOaxDCF1LTM6W2voWb5NOJvG6XP/zRqrhJuv
-Y4l5pbP4CTszc9V3DyMCBHPPsG1d5mE7bxcVhy96yVhj0FvcCt3hR2fxhJnbFlYF
-fVsyrQCamRuIhgNRoT34/qSGbAtG15d7KY/Y0aZIQIV2X/kTEaBb38IPO53g4P34
-ARaRzmOamBwYYxbD5DrI8cyN7U0x95/K4RZsProCR75jzjTWDJ5A8qh1NUzrS/dZ
-aSvGv7O7qwxp/lbiJRy4w2JQeJwBpPYmI4QuBMfNOrSvumCJjLhohW+uaUguCJwG
-g9sVtjWk4sK5ihR6xEpu8aR7f63V3jXhqTyPywe1+HpGdvUT/AcoBXTSc7AXh8AM
-OXx1QC/anE91YEBKIb9O9xai75g/DtJQ7z/xi7va4yNG1lj48Iqiq45vEqF+Hd+z
-toKZPrNQQWmI+KFYz9fUaTjZgzYbZtqZuAPO5ZRwTqVc39ROzvBgBJkkCtSkIBVb
-xk9xKBnt9qB7w4jb70z2BHEYru27rMU77LTGG/DEAfAEfMcmW0pEhrt4ooKTUxi8
-b/8CFzad4ugpjOXpmdCNB4AHIJ9P85RPx+kKQLoTfGIPOQ04y4KwopH1F6XeRL/o
-msbGE/RvoQPRs2OB6H4h
-=2zhP
------END PGP SIGNATURE-----
+ Documentation/devicetree/bindings/mmc/mmc.txt | 11 +++++++++++
+ arch/arm/boot/dts/rk3288.dtsi                 |  4 ++++
+ drivers/mmc/card/block.c                      |  2 +-
+ drivers/mmc/core/host.c                       | 17 ++++++++++++++++-
+ 4 files changed, 32 insertions(+), 2 deletions(-)
 
---L1q7c0b5dK0vsO5K--
+-- 
+2.8.0.rc3.226.g39d4020
+
+--
+To unsubscribe from this list: send the line "unsubscribe devicetree" in
+the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+More majordomo info at  http://vger.kernel.org/majordomo-info.html
