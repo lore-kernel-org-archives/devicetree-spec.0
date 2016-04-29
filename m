@@ -1,60 +1,65 @@
-From: Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: Devicetree specification process
-Date: Sat, 30 Apr 2016 00:23:41 +0100
-Message-ID: <CACxGe6uY-b49YfgBEkJmhjrZ5Pv3+_GPGj+eZOWOkJ43Qc2e4A@mail.gmail.com>
+From: Peter Hurley <peter-WaGBZJeGNqdsbIuE7sb01tBPR1lH4CV8@public.gmane.org>
+Subject: Re: [PATCH v2 0/4] Patches to allow consistent mmc / mmcblk numbering
+ w/ device tree
+Date: Fri, 29 Apr 2016 16:58:12 -0700
+Message-ID: <5723F514.4@hurleysoftware.com>
+References: <20160429195741.GY19428@n2100.arm.linux.org.uk>
+ <CAD=FV=UGyi0r3kDmc1cpcANTP-2u+7UEgW3r9kRvF2f8qcWH+g@mail.gmail.com>
+ <20160429211328.GZ19428@n2100.arm.linux.org.uk>
+ <CAD=FV=V8BOsO36eUOGAcXp04xCiN13UGG0Vaf2yhh1MQn85FjA@mail.gmail.com>
+ <20160429212920.GA19428@n2100.arm.linux.org.uk>
+ <CAD=FV=V9V8P=d59RX1eaAdVxJgMxub1F6hzQNw1QW+7t=3POBw@mail.gmail.com>
+ <20160429215017.GC19428@n2100.arm.linux.org.uk>
+ <CAD=FV=VgQX_EVhUUCugzv+CZqjzTS8LwyeU5419aX9FbDnWJDg@mail.gmail.com>
+ <20160429221606.GE19428@n2100.arm.linux.org.uk>
+ <CAD=FV=WzgGFzzpeYAPrOpMS684_G=XRoSRjTegK-vre=fX=kpw@mail.gmail.com>
+ <20160429224407.GF19428@n2100.arm.linux.org.uk>
+ <CAD=FV=U5jnJJ3v=nFGFecoKB5KGv1ufC+aKbHx2iCqBTWpDTww@mail.gmail.com>
 Mime-Version: 1.0
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Transfer-Encoding: 7bit
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:from:date:message-id:subject:to;
-        bh=sRLqQvfp7+pt9yzXS7n9aaYxeGIZWOqgfWiMRQdokbQ=;
-        b=e5OosOveZ3oNx5R0JjcfzqKQNaXGZKZsWedBRDcMDZZKbO3UbbzfZqHqdQTXTjb/12
-         x/EXOJf75Ngo2QHJZWBqc3FudZTN1mJJLl9MvkEN5CVHkLuVJ2AsE6ehhW3yfrA4/Rdi
-         DOE7XF511Ej6nhn9HXtjHFy7XIxvm9tZThdyPzyoEVbxdHuTuscylWVc0QUjb1RSSTAg
-         p0dlOwLKc5Fmq5jEeMtCHtuEp1Q/JUXM0eg3g0rJ5KDBrrTtfw4HD4OX0/lxwNC5VrKV
-         zjzQBHWgpLYnO+1S+5GPJm2bGrVQ4Gcd/0XL8OmwM27NqVskQVQvgsdsTCNx0ycTqt1p
-         KKOQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:sender:from:date:message-id:subject:to;
-        bh=sRLqQvfp7+pt9yzXS7n9aaYxeGIZWOqgfWiMRQdokbQ=;
-        b=Q+o7WG3+2zr5OaP6MsiWGPH9hexCKGkEPEtkxFcRHEwg50a2bAXcfyAhzS20AGjxJm
-         hM83mWwj5cVXFRYPv3kOp8Upa5go1Uwc+FK8POir/Vfj+XUSm4fgj2zeGD9kzJ0t9XTd
-         f8xFPrVQpw5T+ATWs1LBQfh8Cn/AQnMaa7U58=
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+        d=hurleysoftware-com.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:references:cc:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding;
+        bh=gx1ViwtRnPy5vu+dusSDE3mpIXSKHltncWs8qnT31gk=;
+        b=o3t0XHDWuQGshI7mSdjoNr7d2nwU+hTj+thLsA4d/RHF/5PTj916oUdY0c8C9eSxP9
+         zn9a80t++ygMO3qdjzYSaMFfGPYMlymsnFkGcxje6E+UCfLa/nKb4BTBq/N0iCosDMBS
+         4QlGC8BKm6lUkIj5mNDE7xP6f5TNKyaNyCnd+PYIY/PX8afVjkZ02eE/zIgQbuOnjvBb
+         N4ZCawGA5ZOd0MfB0Q8Ik8txv3jB5EyjLEU3q2oGzKwncDpWZmk6l//hJI4vVjkK61aP
+         BYmREPPcFoBKjo3pY8n8mpu2El2uAAsI0SzzPlb4lvHu7a3g9XxooEdzHiaUxHmEMEJG
+         4NEQ==
+In-Reply-To: <CAD=FV=U5jnJJ3v=nFGFecoKB5KGv1ufC+aKbHx2iCqBTWpDTww-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, U-Boot <u-boot-0aAXYlwwYIKGBzrmiIFOJg@public.gmane.org>
+To: Doug Anderson <dianders-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>, Russell King - ARM Linux <linux-lFZ/pmaqli7XmaaqVzeoHQ@public.gmane.org>
+Cc: Ulf Hansson <ulf.hansson-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Jaehoon Chung <jh80.chung-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, Shawn Lin <shawn.lin-TNX95d0MmH7DzftRWevZcw@public.gmane.org>, Adrian Hunter <adrian.hunter-ral2JQCrhuEAvxtiuMwx3w@public.gmane.org>, Stefan Agner <stefan-XLVq0VzYD2Y@public.gmane.org>, "linux-mmc-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-mmc-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Brian Norris <computersforpeace-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Dmitry Torokhov <dmitry.torokhov-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Heiko Stuebner <heiko-4mtYJXux2i+zQB+pC5nmwQ@public.gmane.org>, Jisheng Zhang <jszhang-eYqpPyKDWXRBDgjK7y7TUQ@public.gmane.org>, "open list:ARM/Rockchip SoC..." <linux-rockchip-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, "linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Venu Byravarasu <vbyravarasu-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Lars-Peter Clausen <lars-Qo5EllUWu/uELgA04lAiVw@public.gmane.org>, Jon Hunter <jonathanh-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, "linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org" <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pawel Moll <p>
 
-I'm pleased to announce the first *very early draft* of the new
-devicetree specification that I and several others have been working
-on since January. This document picks up where ePAPR left off in 2012.
-I'm announcing it now along with the new devicetree.org organization
-which will handle governance for the spec.
+On 04/29/2016 04:01 PM, Doug Anderson wrote:
+> * serial allows numbering devices by alias.
 
-We're still in the process of getting all the details sorted out (not
-everything on the website is accurate at the moment), but in the mean
-time you can look at the current state of the document. At the moment,
-it is little more than repackaging the ePAPR text. The next step will
-be pulling in the new core bindings that were never covered by ePAPR.
-You can look at a draft copy of the document here:
+Which is in fact a total nightmare.
 
-https://github.com/kvekaria/devicetree-specification-released/blob/master/prerelease/DevicetreeSpecification-20160429-pre1.pdf
+While stable device order is mandatory in serial because of
+console command line parameters and existing userspace expectations,
+it is the number one barrier to providing a shared ttyS namespace
+for mixed uart platforms.
 
-If you want to help out, the document source markup can be cloned from
-GitHub. You can find the project page here:
+Stable device order has a very real (and often unforeseen) maintenance
+burden.
 
-https://github.com/devicetree-org/devicetree-specification
+For example, I noticed these patches are strictly for DT.
+I'm assuming that's because guaranteeing stable device order for
+mmc in general is more difficult; eg., by performing minimal scan
+serially and more expensive portion of the probe async.
 
-Feedback is greatly appreciate. Please send any comments and/or
-changes to the devicetree specification mailing list:
+Regards,
+Peter Hurley
 
-devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-For more information, you can refer to the slides presented at BKK16 and ELC[1].
 
-[1] http://elinux.org/images/b/b7/Devicetree_specification_linaro_connect_bangkok_2016.pdf
-
-Thanks,
-g.
+--
+To unsubscribe from this list: send the line "unsubscribe devicetree" in
+the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+More majordomo info at  http://vger.kernel.org/majordomo-info.html
