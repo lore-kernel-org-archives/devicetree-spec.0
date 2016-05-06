@@ -1,55 +1,94 @@
 From: Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: Re: [PATCH DT spec 0/3] Misc fixes and additions for phy-connection-type
-Date: Fri, 6 May 2016 11:13:23 +0100
-Message-ID: <CACxGe6vd_W1wYGiVV0Kntpf-T+w6R5dFCJkCbe9WR2jH7HL64Q@mail.gmail.com>
-References: <1462511327-21077-1-git-send-email-f.fainelli@gmail.com>
-Mime-Version: 1.0
+Subject: [PATCH] Add target to generate changebar pdfs
+Date: Fri,  6 May 2016 15:36:08 +0100
+Message-ID: <1462545368-21103-1-git-send-email-grant.likely@linaro.org>
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=GHpQAkB1k5i+N7xn1flUNs3GUCw/rP1Xit8WfiTrk1g=;
-        b=yMIZC+auwrnKQ/qJSC4VtW3YaVfXDYaLbdR15hB7wMfFo00cOeNBOv31l5y2tGVnTK
-         ZqtjVkuzehGCX66IECVs8vzC0hnaY3GafL/pWxhAYUqWRzVh92JrNWbySL0uF1HVannG
-         97/HCn6WtiPPTRJgKgh7mbZBWZAbB4QVOkRniqaNHG7ND8OPjsvsq754z4hCsI9TWuDF
-         2pV8tyicBmfuGPsmxexMQrPJfMfrqEEHUfSmOnTp9SlYxLVcDfiz3mjOA3wuwMbAzKeV
-         H5w6B6vOHpUBOTKmLq2cVljiuYvg5WjS2wWr46i/ybjmYTa2iZeHT+2CVFqNdsRCnnQn
-         53Iw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=GHpQAkB1k5i+N7xn1flUNs3GUCw/rP1Xit8WfiTrk1g=;
-        b=A5JRgWRKWHau9nRRsW8eI3PYz8FufcTGGKiK9RS03IRUX8olujyzMOlYjUqAlv1+L9
-         S/SnXyo4+/D2hN43DTC6O+VIsuObo3bnC+ikbZVufNgc3JcYEofFUv8AD4d262mrjTRE
-         ZpvhDJ9gxvsU+ta1LVX/PD78nsQalPlQQe8RY=
-In-Reply-To: <1462511327-21077-1-git-send-email-f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+        h=sender:from:to:cc:subject:date:message-id;
+        bh=rj7CwrtlCOG6By7rWQYRfyi3ENPurFSjlsyatc34fps=;
+        b=iOXrGm97WQrmSWZI7mGV1ClR3qJ6M0haqUsNENU26TCWK2VMQYtKrzfIkqta8GW11P
+         nSaMf7qboQasawTZpQ6kxPzLHY+0aa5AbhnnzuP/0tMkEGB3ILq6sOUw2fKL4LVFX30Z
+         52GceqWY7d1j+O0BTnwYiRq0/Zzgzx5A9tREgsW+XjS54UXMb5R6GU6YaYhrj4FqqaFb
+         EAJaj30rZ9Q+/04Jz5kNiy7FBRGO2Dq0sLT/PmGYkTSasukt305O+d3jdEIdczhCvFM0
+         Xo0UNmK5rPcAupCsFn7ho+m1lI3k+u6qrGhgTrcXblk8OoHWttOueZ/8jEIp2LvN+AGh
+         oh+w==
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 
-On Fri, May 6, 2016 at 6:08 AM, Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
-> Hi Grant,
->
-> Here are some fixes in the phy-connection-type property area, thanks!
->
-> Florian Fainelli (3):
->   Fix property value for the Gigabit MII type
->   Fix property name, table and defined value for "phy-connection-type"
->   Document additional "phy-connection-type" values
->
->  source/device-bindings.rst | 37 +++++++++++++++++++++----------------
->  1 file changed, 21 insertions(+), 16 deletions(-)
+Add the "latexdiff" make target to generate a diff between the current
+build and the previous release of the document. Type "make latexdiff" to
+use this new target.
 
-Merged all three. Thanks.
+This patch is inelegant since it hard codes the file name, but it works.
+It can be cleaned up to be more generic, but that isn't immediately
+necessary.
 
-g.
+Signed-off-by: Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+---
+ Makefile  | 13 +++++++++++++
+ README.md |  5 ++++-
+ 2 files changed, 17 insertions(+), 1 deletion(-)
 
->
-> --
-> 2.7.4
->
+diff --git a/Makefile b/Makefile
+index 6c1247b3d0f4..8e3bd9f7c733 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,7 +5,9 @@
+ SPHINXOPTS    =
+ SPHINXBUILD   = sphinx-build
+ PAPER         =
++RELEASEDIR    = release
+ BUILDDIR      = build
++LATEXDIFF     = latexdiff
+ 
+ # User-friendly check for sphinx-build
+ ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
+@@ -34,6 +36,7 @@ help:
+ 	@echo "  epub       to make an epub"
+ 	@echo "  epub3      to make an epub3"
+ 	@echo "  latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter"
++	@echo "  latexdiff  to make LaTeX files including changebars against previous release"
+ 	@echo "  latexpdf   to make LaTeX files and run them through pdflatex"
+ 	@echo "  latexpdfja to make LaTeX files and run them through platex/dvipdfmx"
+ 	@echo "  text       to make text files"
+@@ -138,6 +141,16 @@ latex:
+ 	@echo "Run \`make' in that directory to run these through (pdf)latex" \
+ 	      "(use \`make latexpdf' here to do that automatically)."
+ 
++.PHONY: latexdiff
++latexdiff:
++	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
++	@echo "Generating LaTeX changebars..."
++	$(LATEXDIFF) --type=CULINECHBAR $(RELEASEDIR)/latex/devicetree-specification.tex $(BUILDDIR)/latex/devicetree-specification.tex > $(BUILDDIR)/latex/devicetree-specification-changebars.tex
++	@echo "Running LaTeX files through pdflatex..."
++	$(MAKE) -C $(BUILDDIR)/latex all-pdf
++	@echo
++	@echo "latexdiff finished; the PDF files are in $(BUILDDIR)/latex."
++
+ .PHONY: latexpdf
+ latexpdf:
+ 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
+diff --git a/README.md b/README.md
+index 9f56146a1d2f..60415c07dc97 100644
+--- a/README.md
++++ b/README.md
+@@ -18,7 +18,10 @@ Requirements:
+ 
+ On Ubuntu:
+ 
+-`# apt-get install python-sphinx texlive texlive-latex-extra texlive-humanities graphviz`
++```
++# apt-get install python-sphinx latexdiff texlive texlive-latex-extra \
++                  texlive-humanities texlive-generic-recommended graphviz
++```
+ 
+ If the version of python-spinx installed is too old, then an additional
+ new version can be installed with the Python package installer:
+-- 
+2.5.0
