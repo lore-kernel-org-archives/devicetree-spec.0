@@ -1,63 +1,60 @@
-From: Neil Armstrong <narmstrong-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>
-Subject: Node names and properties names collision
-Date: Thu, 12 May 2016 09:40:21 +0200
-Message-ID: <57343365.6080000@baylibre.com>
+From: Stuart Yoder <stuart.yoder-3arQi8VN3Tc@public.gmane.org>
+Subject: RE: Node names and properties names collision
+Date: Thu, 12 May 2016 16:22:39 +0000
+Message-ID: <HE1PR04MB1641C4DB11CDF2618E27BEF18D730@HE1PR04MB1641.eurprd04.prod.outlook.com>
+References: <57343365.6080000@baylibre.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20150623.gappssmtp.com; s=20150623;
-        h=to:from:subject:organization:message-id:date:user-agent
-         :mime-version:content-transfer-encoding;
-        bh=OqUADlb7n0xVozOcAei6au+WumNZqRDF3SHCbU3nwkE=;
-        b=PhSZDVA1jIwj+KGoQT6ptPQt8+TrsTu4IPxuRZWYpDx7ScvOSV6FQ08PoVKb7eFKNr
-         gILEMpxo2KhFQ0zsNp9pUbXLT4P/p1n3lQ3PcJ+nLil0QuaIrcmPjB+XFVNIngkV2BZY
-         WXOkgmUdgdhDy2KtjlYTIdj+1QZFN5g7OAT76dTr/o6wzEazMFwT4zCx83CFQf9zw/n+
-         HWx2z2V7dmp2KGB8LRHCjFz7mxESWO0Tbdi9IUquiMtFhhj01wkcckp02m40O3xDwrtj
-         /ANkgUuVS8EekYo0YtgYHTgZCHUgrEtbEEybnoReeGI6tI0NgBlqhF0hSDMCd+NLIntf
-         g9WQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-nxp-com;
+ h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=hGGKv1J3GXPbfQPFYZrQvpFfssXtv8qOxE/woIleEJA=;
+ b=Cb1OqQhJkydApJ2ADTAbR0Mg/RIsvT53l8B34kTnEbJu0CIA3VUDqIeDviii6lVLMBMt9I5k/a1GgrpS8El/2qaGko677rhOR0hpdBVP+WiITuLuXteMz1L9mOB2535jOYDsQSrDe+PBHgP6NzKI0NhL6Jv5EbvgNZ8pJiOG2TA=
+In-Reply-To: <57343365.6080000-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>
+Content-Language: en-US
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: Neil Armstrong <narmstrong-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-Hi,
-
-I'm working on a full python device tree library to load blobs and manipulate the tree in-memory as an object tree (http://github.com/superna9999/pyfdt).
-My testsuite strategy was to run the DTC testsuite and load every DTC generated dtbs, re-generate a DTS and compare the DTC dtb-to-dts output.
-
-But I have a strange case using the Amlogic out-of-tree BSP dts where they use the same name for a sub-node and a property :
-
-	efusekey:efusekey{
-		keynum = <4>;
-		key0 = <&key0>;
-		key1 = <&key1>;
-		key2 = <&key2>;
-		key3 = <&key3>;
-		key0:key0{
-			keyname = "mac";
-			offset = <0>;
-			size = <6>;
-		};
-		key1:key1{
-			keyname = "mac_bt";
-			offset = <6>;
-			size = <6>;
-		};
-		key2:key2{
-			keyname = "mac_wifi";
-			offset = <12>;
-			size = <6>;
-		};
-		key3:key3{
-			keyname = "usid";
-			offset = <18>;
-			size = <16>;
-		};
-	};
-
-While reading the original ePAPR and the new linaro specifications, I was not able to find an answer....
-
-Is it authorized ? Could this be clarified in the new specifications ?
-
-Neil
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogZGV2aWNldHJlZS1zcGVj
+LW93bmVyQHZnZXIua2VybmVsLm9yZyBbbWFpbHRvOmRldmljZXRyZWUtc3BlYy1vd25lckB2Z2Vy
+Lmtlcm5lbC5vcmddIE9uIEJlaGFsZiBPZg0KPiBOZWlsIEFybXN0cm9uZw0KPiBTZW50OiBUaHVy
+c2RheSwgTWF5IDEyLCAyMDE2IDI6NDAgQU0NCj4gVG86IGRldmljZXRyZWUtc3BlY0B2Z2VyLmtl
+cm5lbC5vcmcNCj4gU3ViamVjdDogTm9kZSBuYW1lcyBhbmQgcHJvcGVydGllcyBuYW1lcyBjb2xs
+aXNpb24NCj4gDQo+IEhpLA0KPiANCj4gSSdtIHdvcmtpbmcgb24gYSBmdWxsIHB5dGhvbiBkZXZp
+Y2UgdHJlZSBsaWJyYXJ5IHRvIGxvYWQgYmxvYnMgYW5kIG1hbmlwdWxhdGUgdGhlIHRyZWUgaW4t
+bWVtb3J5IGFzIGFuDQo+IG9iamVjdCB0cmVlIChodHRwOi8vZ2l0aHViLmNvbS9zdXBlcm5hOTk5
+OS9weWZkdCkuDQo+IE15IHRlc3RzdWl0ZSBzdHJhdGVneSB3YXMgdG8gcnVuIHRoZSBEVEMgdGVz
+dHN1aXRlIGFuZCBsb2FkIGV2ZXJ5IERUQyBnZW5lcmF0ZWQgZHRicywgcmUtZ2VuZXJhdGUgYSBE
+VFMNCj4gYW5kIGNvbXBhcmUgdGhlIERUQyBkdGItdG8tZHRzIG91dHB1dC4NCj4gDQo+IEJ1dCBJ
+IGhhdmUgYSBzdHJhbmdlIGNhc2UgdXNpbmcgdGhlIEFtbG9naWMgb3V0LW9mLXRyZWUgQlNQIGR0
+cyB3aGVyZSB0aGV5IHVzZSB0aGUgc2FtZSBuYW1lIGZvciBhIHN1Yi0NCj4gbm9kZSBhbmQgYSBw
+cm9wZXJ0eSA6DQo+IA0KPiAJZWZ1c2VrZXk6ZWZ1c2VrZXl7DQo+IAkJa2V5bnVtID0gPDQ+Ow0K
+PiAJCWtleTAgPSA8JmtleTA+Ow0KPiAJCWtleTEgPSA8JmtleTE+Ow0KPiAJCWtleTIgPSA8Jmtl
+eTI+Ow0KPiAJCWtleTMgPSA8JmtleTM+Ow0KPiAJCWtleTA6a2V5MHsNCj4gCQkJa2V5bmFtZSA9
+ICJtYWMiOw0KPiAJCQlvZmZzZXQgPSA8MD47DQo+IAkJCXNpemUgPSA8Nj47DQo+IAkJfTsNCj4g
+CQlrZXkxOmtleTF7DQo+IAkJCWtleW5hbWUgPSAibWFjX2J0IjsNCj4gCQkJb2Zmc2V0ID0gPDY+
+Ow0KPiAJCQlzaXplID0gPDY+Ow0KPiAJCX07DQo+IAkJa2V5MjprZXkyew0KPiAJCQlrZXluYW1l
+ID0gIm1hY193aWZpIjsNCj4gCQkJb2Zmc2V0ID0gPDEyPjsNCj4gCQkJc2l6ZSA9IDw2PjsNCj4g
+CQl9Ow0KPiAJCWtleTM6a2V5M3sNCj4gCQkJa2V5bmFtZSA9ICJ1c2lkIjsNCj4gCQkJb2Zmc2V0
+ID0gPDE4PjsNCj4gCQkJc2l6ZSA9IDwxNj47DQo+IAkJfTsNCj4gCX07DQo+IA0KPiBXaGlsZSBy
+ZWFkaW5nIHRoZSBvcmlnaW5hbCBlUEFQUiBhbmQgdGhlIG5ldyBsaW5hcm8gc3BlY2lmaWNhdGlv
+bnMsIEkgd2FzIG5vdCBhYmxlIHRvIGZpbmQgYW4gYW5zd2VyLi4uLg0KPiANCj4gSXMgaXQgYXV0
+aG9yaXplZCA/IENvdWxkIHRoaXMgYmUgY2xhcmlmaWVkIGluIHRoZSBuZXcgc3BlY2lmaWNhdGlv
+bnMgPw0KDQpOb2RlcyBhbmQgcHJvcGVydGllcyBjYW4gaW5oZXJlbnRseSBiZSBkaWZmZXJlbnRp
+YXRlZCwgc28gdGhlcmUgc2hvdWxkIGJlDQpubyBhbWJpZ3VpdHkgaWYgdGhleSBoYXBwZW4gdG8g
+aGF2ZSB0aGUgc2FtZSBuYW1lLiAgVGhhdCBiZWluZyBzYWlkLCBpbiBwcmFjdGljZQ0KSSBkb24n
+dCB0aGluayB0aGlzIHNpdHVhdGlvbiBoYXBwZW5zLiAgQSBkZXZpY2UgdHJlZSBkZXNjcmliZXMg
+aGFyZHdhcmUuICBBIG5vZGUNCm5hbWUgInNob3VsZCBkZXNjcmliZSB0aGUgZ2VuZXJhbCBjbGFz
+cyBvZiB0aGUgZGV2aWNlIi4gIFByb3BlcnR5IG5hbWVzDQpzaG91bGQgYmUgbWVhbmluZnVsIGFu
+ZCBpZiB0aGV5IGFyZSBub24tc3RhbmRhcmQgc2hvdWxkIGhhdmUgYSBvcmdhbml6YXRpb24NCnNw
+ZWNpZmljIHByZWZpeC4NCg0KVGhlIERUUyBleGFtcGxlIGFib3ZlIHNlZW1zIHRvIGJlIGEgaG9y
+cmlibGUgZXhhbXBsZSBhbmQgZm9sbG93cyBub25lIG9mIHRob3NlIGNvbnZlbnRpb25zLg0KVGhl
+cmUgYXJlIG5vIGNvbXBhdGlibGUgc3RyaW5ncywgdGhlIG5vZGUgbmFtZXMgZG9uJ3Qgc2VlbSB0
+byBiZSBkZXNjcmliaW5nDQpoYXJkd2FyZS4gIEFuZCBub3Qgc3VyZSB3aHkgeW91IHdvdWxkIG5l
+ZWQgcHJvcGVydGllcyBwb2ludGluZyB0byBzdWJub2Rlcy4gIFNvLA0KdGhlIHN5bnRheC9zZW1h
+bnRpY3Mgb2YgZGV2aWNlIHRyZWUgYWxsb3dzIGl0LCBidXQgbm90aGluZyBsaWtlIHRoYXQgZXhh
+bXBsZSB3b3VsZA0KZXZlciBwYXNzIGEgcHVibGljIHJldmlldy4NCg0KVGhhbmtzLA0KU3R1YXJ0
+DQo=
