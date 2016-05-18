@@ -1,114 +1,88 @@
 From: Warner Losh <imp-uzTCJ5RojNnQT0dZR+AlfA@public.gmane.org>
-Subject: Re:
-Date: Wed, 18 May 2016 16:01:59 -0600
-Message-ID: <CANCZdfr5=udwB3NQ+Tim8=Q90UwtXJsFU6w3gkLEZCo+gwv3Hg@mail.gmail.com>
-References: <CANCZdfow154vh3kHqUNUM6CoBsC9Vu3_+SEjFG1dz=FOkc9vsg@mail.gmail.com>
-	<CAL_Jsq+s3PjzKCaT03EaqNCoyuwDQ6dXHDF808+U=hjvvfRYdg@mail.gmail.com>
+Subject: Re: DTS license for non-linux use
+Date: Wed, 18 May 2016 16:31:50 -0600
+Message-ID: <CANCZdfpd5n8j9cLKrkT=1yYy1WCPfsdEFNFSF7XBADXE2x9Tyw@mail.gmail.com>
+References: <573CE609.2030007@gmail.com>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bsdimp-com.20150623.gappssmtp.com; s=20150623;
         h=mime-version:sender:in-reply-to:references:date:message-id:subject
          :from:to:cc;
-        bh=AN+chaGxhsEl6f8j/TFGcaXUyVsW/dNz2gtSUr0fKHI=;
-        b=13eT+3v/ReoioQHAzjkCHfvhwZ/fqD2u0rYa90fGP0Q0wqisVr/zBZHAu1XYToXACz
-         9SBc7gb1SPgXLLuKRPvSyNLrJUoT8RWnFEethgqyl20RipRBpTFq6yHVg7qMudgpGCjo
-         AFMWVr43vy9wjOz+iPMHOdXSc3Fmb/TJgbonS6OWgz37dmsiVjPphz8SSSMcXH24pyN0
-         ud6NHFP1bD5NMQT9gRdHlvhufZ6R03lkiVdEKASpfgoyGFPuPvCg7NBH5Y8UAszIJaAE
-         GrcAJ1VvEjdYKvmveDHL7IekrPMVU8RFY3V5forGW1mxsdTIC1bR3f3iUqRUZ/Kzuj/Z
-         8poQ==
-In-Reply-To: <CAL_Jsq+s3PjzKCaT03EaqNCoyuwDQ6dXHDF808+U=hjvvfRYdg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+        bh=N1tnTeRChoKSi5icEqIHE8AsSmcs56rFOfTtxH3H9Bs=;
+        b=h4e15+T3pIu6wbdRUudrorhSMAk8D95KoY+Jh/83Txs3OEQEMrJqV05tDXwe9seJTV
+         fx6xu4mYIt4qpy4AadmbZDIto40UlkyLjyc1CW69esFeg2Lz7hNGEF52Pj1853zgO3iE
+         aQ7ZeQEEVEHSUXV5e6EkuvHQyMyPLAQvhRWkywBiqvSOf4mAKTVO+KocoE2diKaSNf1H
+         z2h64kX6gDmFpUc40FsEWyPXGOiA84ocJ6wJHAeTS3UfC3q9YJyDD+I0t3Fs1r0ZVRnd
+         NuLJWuDJrDz0ibz4SruiY+ceFv8drl07rxL/9FNxVoRZa/4Bla0mwd8O7QKlc89GJmqj
+         T5mg==
+In-Reply-To: <573CE609.2030007-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+To: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-On Wed, May 18, 2016 at 12:02 PM, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
-> +devicetree-spec which is the right list.
+On Wed, May 18, 2016 at 4:00 PM, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+> Warner Losh asked a question about the use of cpp #include in dts
+> source files, and while the topic of license of existing devicetree
+> source files in the linux source tree has a bearing on the question,
+> he adeptly tried to avoid stirring up a hornet's nest.  Instead of
+> sidetracking his thread with license issues, this is a new thread
+> with my license question.
 >
-> On Wed, May 18, 2016 at 11:26 AM, Warner Losh <imp-uzTCJ5RojNnQT0dZR+AlfA@public.gmane.org> wrote:
->> Greetings,
->>
->> I was looking at the draft link posted here
->> https://github.com/devicetree-org/devicetree-specification-released/blob/master/prerelease/devicetree-specification-v0.1-pre1-20160429.pdf
->> a while ago. I hope this is the right place to ask about it.
->>
->> It raised a bit of a question. There's nothing in it talking about the
->> current
->> practice of using CPP to pre-process the .dts/.dtsi files before passing
->> them
->> into dtc to compile them into dtb.
+> I'm sure I'll regret asking this, but what the heck.
 >
-> Can't say I'm really a fan of it.
-
-Yes. But fan or no, there's a huge base that depends on it, and on some quirky
-behavior to boot. So better to accept and document and move on.
-
->> Normally, I see such things outside the scope of standardization. However,
->> many of the .dts files that are in the wild today use a number of #define
->> constants to make things more readable (having GPIO_ACTIVE_HIGH
->> instead of '0' makes the .dts files easier to read). However, there's a
->> small
->> issue that I've had. The files that contain those definitions are currently
->> in the Linux kernel and have a wide variety of licenses (including none
->> at all).
+> The result of compiling a devicetree source file (.dts and .dtsi)
+> generates a .dtb file aka devicetree blob aka flattened device
+> tree (FDT).  The FDT is a binary and ascii data structure that
+> contains no code.  If the devicetree source file(s) license is
+> gpl, then it seems to me that the license of the blob is also
+> gpl.
 >
-> Yes, this is a problem. In lieu of any explicit license, I'd say the
-> license defaults to GPL. There is also the same issue with the
-> Documentation as we plan to move some of the common bindings such as
-> clocks, gpio, etc. into the spec which is Apache licensed.
-
-I tend to agree.
-
-> In both cases, we're going to need to get permission of the authors to
-> re-license. For the headers, these should be patches to the kernel.
-> For the docs, we just need to record the permission when committing
-> the addition to the spec. Neither should be too hard as they should
-> not be changing much and we have complete history in git.
-
-Personally, I'd opt to cut the original authors completely out
-of the loop and generate the files. I have nothing against the
-original authors, but to be maximally interoperable, I think this
-option should be seriously considered.
-
->> So before even getting to the notion of licenses and such (which past
->> expereince suggests may be the worst place to start a discussion), I'm
->> wondering where that will be defined, and if these #defines will become
->> part of the standard for each of the bindings that are defined.
+> If an operating system kernel "reads" an FDT, would that somehow
+> be a license, copyright, or other issue if the kernel was not also
+> gpl licensed?
 >
-> Perhaps. We need to at least define the standard flag values if not
-> the symbolic name. I don't think it makes sense to both document and
-> maintain headers of the defines. We should ideally just have 1 source
-> for all and generate what we need from it. There's been some related
-> discussion around having machine parseable bindings as both the
-> documentation source and binding validation source, but nothing
-> concrete.
-
-I think it would make sense to have a machine-parseable format that
-allows generation of the header files. Once they become generated,
-the license issue goes away. None of these files have much creative
-content anyway, and they certainly don't need to have what little
-creative content they have if it were included as part of a
-machine-parseable file.
-
->> I'm also wondering where the larger issue of using cpp to process the dts
->> files will be discussed, since FreeBSD's BSDL dtc suffers interoperability
->> due to this issue. Having the formal spec will also be helpful for its care and
->> feeding since many fine points have had to be decided based on .dts
->> files in the wild rather than a clear spec.
->>
->> Thanks again for spear-heading the effort to get a new version out now
->> that ePAPR has fallen on hard times.
->>
->> Warner
->>
->> P.S. I'm mostly a FreeBSD guy, but just spent some time digging into this
->> issue for another of the BSDs that's considering adopting DTS files.
+> My naive, "I'm not a lawyer", view is that there would not be
+> an issue, but my third hand impression is that the BSDs are
+> concerned that there may be an issue.
 >
-> We certainly need and want the BSD folks involved in the spec.
+> Are there any good authoritative sources that have addressed
+> this issue or a similar issue?
 
-Excellent! There's many people that are quire interested.
+My belief, based on my layman's understanding of the law, is that
+the DTB would be a separate work. Using the DTB by the kernel
+would not infect the kernel any more than running a GPL'd binary.
+It's my belief that the extent to which the dts files are a creative
+work, then the resulting DTB would be covered under the licenses
+for each file. For the overwhelming majority of users, this is an
+acceptable situation since the exposure for releasing the DTB
+source is low. And most of the source can be produced by
+dtc outputting dts format anyway. As this question hasn't been
+litigated to my knowledge, we have to follow similar precidents
+like arguing an analogy to an executable. One could also argue
+that it's similar to ACPI in that it loads a blob from elsewhere, then
+interprets the blob based on a fixed set of rules.
+
+Since dts is purely descriptive of the hardware, an argument
+could be made that it's not creative enough to enjoy copyright
+protection. The bar is usually pretty low to get copyright
+protection, but many cases that had novel aggregations of
+facts failed to gain copyright protection because you can't
+copyright facts. So that makes it an open question, since it
+hasn't been litigated. On the other hand, there are several
+examples of works that are barely creative at all that have
+copyright protection. For certainty, thought, I'd prefer a
+definitive answer in the form of a legal opinion. It would be
+better from the BSD community's perspective if there were
+an explicit license that was more like BSDL than GPL,
+but I understand the sensitivities in other communities may
+not allow that. Such a license, though, would render this point
+moot.
+
+I'd be interested if anybody has an expert legal opinion
+that's been prepared on the topic as well.
 
 Warner
