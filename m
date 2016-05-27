@@ -1,98 +1,56 @@
-From: Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: [DTSpec PATCH] Create FAQ.md
-Date: Wed, 25 May 2016 12:36:36 +0100
-Message-ID: <1464176196-18056-1-git-send-email-grant.likely@linaro.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+From: Kanta Vekaria <kanta.vekaria-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Subject: [DTSpec PATCH] Fix typos and heading
+Date: Fri, 27 May 2016 13:30:39 +0100
+Message-ID: <1464352239-16013-1-git-send-email-kanta.vekaria@linaro.org>
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=sender:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2s4mGxGMOnurNYoP9+vtkMJMpB0RGE5CUkKc/TIZnZU=;
-        b=S2gLfTWBJbLu/h9rSjFLOOJdzVQeyDIM3IJrGHO2YSYz4rzYfffb88FlVMcNCWYElW
-         3d5J0BDmCWcxYuBgOjTPSVpxT8kuWtDolVdH+t4yQaRmpiSdkbh8MCE9tU0KVlZKtzOD
-         jRcmPjYd2mf0XxhF6AS1LSGRbxpWGo1k5s5rVkbZEwEanAETAIElq7NB3nXEo4WDX41H
-         g+NsuRZuf1JayB5CyEJdrLwsAADpNEsNn/h7u0AtZEckFgMMRc1Ai+hUgLPl5ktNYLAm
-         99TXRyi4qNFRDPEjvZGaiZ5omS2F78F/SnkDq28IbpR3gaiPw1xM5QXt7z/DMAlKgmUc
-         LuYw==
+        d=linaro.org; s=google;
+        h=from:to:subject:date:message-id;
+        bh=3NA6rEv2dt8hAsddz7nkD3HvxNHDN+gaY3V7R72YeqI=;
+        b=HeymmMXo1XAOcAi97atg3yZFKhRMjhIAunLhdenfWqo5DKoCj1Khi4iITpxUSJ+Hwy
+         +5JFoZALpBueDIz31BnYJD447+REiKSgZhjBh2K3A+xUeVPWRf+gRysaRI1ZLLO40xRc
+         v8yPraX7Jz1qpGgSwTAUPf5GUWRNIriCmQzkw=
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="windows-1252"
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org
 
-Copy the FAQ from the website to the main repository so any developer c=
-an update it.
+Minor edits
 
-Signed-off-by: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Signed-off-by: Kanta Vekaria <kanta.vekaria-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 ---
- FAQ.md | 45 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
- create mode 100644 FAQ.md
+ README.md | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/FAQ.md b/FAQ.md
-new file mode 100644
-index 000000000000..0d8a032cdc23
---- /dev/null
-+++ b/FAQ.md
-@@ -0,0 +1,45 @@
-+# FAQ
-+
-+## Getting the Specification
-+
-+### Where can I find the latest version of the Devicetree Specificatio=
-n
-+
-+You can always find the latest released, as well as all older releases=
-,
-+in our GitHub repository:
-+
-+[Devicetree Specification release repository](https://github.com/devic=
-etree-org/devicetree-specification-released)
-+
-+### How often is a new specification released
-+
-+We're planning to make a v1.0 release by end of August, 2016,
-+which will be up to date with current core DT bindings used by the Lin=
-ux kernel.
-+
-+A second major release is planned for December 2016 to cover new featu=
-res.
-+
-+## Governance
-+
-+### Do I need to be a member to comment and send patches for the Spec?
-+
-+No. Changes to the spec are proposed and discussed on a=20
-+[public mailing list](http://vger.kernel.org/vger-lists.html#devicetre=
-e-spec)
-+and the source document is hosted in the
-+[Devicetree Specification](https://github.com/devicetree-org/devicetre=
-e-specification)
-+project on GitHub.
-+
-+You can find details about the mailing list and submission process in =
-the [Readme](README.md) file.
-+
-+### What will membership give me?
-+
-+Membership gives you a seat on Technical Steering Committee (TSC).=20
-+The TSC is responsible for handling governance issues,=20
-+managing the technical goals, release schedule,=20
-+and helping to define vision for future versions of the spec.
-+
-+### How is Linaro and devicetree.org connected?
-+
-+Linaro kick started this process and is hosting devicetree.org under i=
-ts organisation.=20
-+[devicetree.org](http://devicetree.org) membership fees are associated=
- with devicetree.org
-+only and not with Linaro membership.
-+The membership proceeds go towards the defraying of Linaro=E2=80=99s c=
-osts for hosting devicetree.org.
-+
-+If you have useful FAQs you would like to see here, please contact us =
-through the mailing list
---=20
-2.7.4
+diff --git a/README.md b/README.md
+index 1fa4db2..8ff30c4 100644
+--- a/README.md
++++ b/README.md
+@@ -1,4 +1,4 @@
+-# Document master project for the Devicetree Specification hosted at http://devicetree.org/ #
++# Document master project for the Devicetree Specification #
+ 
+ The latest release of the specification can be found at http://devicetree.org/ or https://github.com/devicetree-org/devicetree-specification-released
+ 
+@@ -38,7 +38,7 @@ On Mac OS X:
+ 
+ > Install [MacTeX](http://tug.org/mactex/)
+ >
+-> Install pip if you don't have it:
++> Install pip if you do not have it:
+ >```
+ >$ sudo easy_install pip
+ >```
+@@ -49,7 +49,7 @@ On Mac OS X:
+ >sudo pip install --upgrade Sphinx
+ >```
+ >
+->If your are using [brew](http://brew.sh) then you can install graphviz like this:
++>If you are using [brew](http://brew.sh) then you can install graphviz like this:
+ >```
+ brew install graphviz
+ >```
+-- 
+2.7.4 (Apple Git-66)
