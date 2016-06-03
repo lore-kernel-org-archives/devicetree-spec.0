@@ -1,56 +1,137 @@
-From: Kanta Vekaria <kanta.vekaria-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: [DTSpec PATCH] Fix typos and heading
-Date: Fri, 27 May 2016 13:30:39 +0100
-Message-ID: <1464352239-16013-1-git-send-email-kanta.vekaria@linaro.org>
+From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: [DTSpec PATCH] Add items to Devicetree Source Format chapter
+Date: Fri, 3 Jun 2016 12:29:19 -0700
+Message-ID: <5751DA8F.2090708@gmail.com>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:subject:date:message-id;
-        bh=3NA6rEv2dt8hAsddz7nkD3HvxNHDN+gaY3V7R72YeqI=;
-        b=HeymmMXo1XAOcAi97atg3yZFKhRMjhIAunLhdenfWqo5DKoCj1Khi4iITpxUSJ+Hwy
-         +5JFoZALpBueDIz31BnYJD447+REiKSgZhjBh2K3A+xUeVPWRf+gRysaRI1ZLLO40xRc
-         v8yPraX7Jz1qpGgSwTAUPf5GUWRNIriCmQzkw=
+        d=gmail.com; s=20120113;
+        h=to:from:subject:message-id:date:user-agent:mime-version
+         :content-transfer-encoding;
+        bh=381gQz2+azX2Zjn02eEkPLP0xwvXTe+j6sdBjdS/Fvs=;
+        b=bA03iermRFjcqRndGaXgm2nthBUh0burqHrFvvLysRtj0lM/BOyRVHwvBqdPfZQo1L
+         UPdhc1vbnY17dIvCIaK7aGaaXTbVPUzINVx5zoIbVBQCD+sOltJUtt9DC7L/CZthbNUL
+         LstpMB+TkD+uYHDzRmjJQcFLZOKu7/JsQgxKeHs4IW/SxSXuYjActrM2stxEp0IXd6Ew
+         TcL5PekogM4Q/281OO9FDBthA5aG+gz0afHEC6BgwKksClOt46zPVkWvYzx1rmOB/mqJ
+         dIIS3Mij4lmNwWMGCacsAsRqYuaWiUo+pfkLnFzo2pGBb1aAn8ipenlxVyYQRknu6RGF
+         tnng==
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-Minor edits
+From: Frank Rowand <frank.rowand-mEdOJwZ7QcZBDgjK7y7TUQ@public.gmane.org>
 
-Signed-off-by: Kanta Vekaria <kanta.vekaria-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Add items to Devicetree Source Format chapter
+
+- Add naming convention for DTS files and DTS include files
+- Add /include/ compiler directive
+- Add ";" to end of node definition
+- Add /delete-node/ and /delete-property/
+- Add arithmetic, bitwise, and logical expressions
+
+Note that cpp directives are not included in this patch, and
+are not yet specified in this appendix.
+
+Signed-off-by: Frank Rowand <frank.rowand-mEdOJwZ7QcZBDgjK7y7TUQ@public.gmane.org>
 ---
- README.md | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ source/source-language.rst |   60 ++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 59 insertions(+), 1 deletion(-)
 
-diff --git a/README.md b/README.md
-index 1fa4db2..8ff30c4 100644
---- a/README.md
-+++ b/README.md
-@@ -1,4 +1,4 @@
--# Document master project for the Devicetree Specification hosted at http://devicetree.org/ #
-+# Document master project for the Devicetree Specification #
+Index: b/source/source-language.rst
+===================================================================
+--- a/source/source-language.rst
++++ b/source/source-language.rst
+@@ -9,6 +9,19 @@ devicetree in the form expected by the k
+ not a formal syntax definition of DTS, but describes the basic
+ constructs used to represent devicetrees.
  
- The latest release of the specification can be found at http://devicetree.org/ or https://github.com/devicetree-org/devicetree-specification-released
++The name of DTS files should end with ".dts".
++
++Compiler directives
++-------------------
++
++Other source files can be included from a DTS file.  The name of include
++files should end with ".dtsi".  Included files can in turn include
++additional files.
++
++::
++
++    /include/ "FILE"
++
+ Node and property definitions
+ -----------------------------
  
-@@ -38,7 +38,7 @@ On Mac OS X:
+@@ -21,11 +34,18 @@ preceded by a label.
+     [label:] node-name[@unit-address] {
+         [properties definitions]
+         [child nodes]
+-    }
++    };
  
- > Install [MacTeX](http://tug.org/mactex/)
- >
--> Install pip if you don't have it:
-+> Install pip if you do not have it:
- >```
- >$ sudo easy_install pip
- >```
-@@ -49,7 +49,7 @@ On Mac OS X:
- >sudo pip install --upgrade Sphinx
- >```
- >
-->If your are using [brew](http://brew.sh) then you can install graphviz like this:
-+>If you are using [brew](http://brew.sh) then you can install graphviz like this:
- >```
- brew install graphviz
- >```
--- 
-2.7.4 (Apple Git-66)
+ Nodes may contain property definitions and/or child node definitions. If
+ both are present, properties shall come before child nodes.
+ 
++Previously defined nodes may be deleted.
++
++::
++
++    /delete-node/ node-name;
++    /delete-node/ &label;
++
+ Property definitions are name value pairs in the form:
+ 
+ ::
+@@ -39,6 +59,12 @@ form:
+ 
+         [label:] property-name;
+ 
++Previously defined properties may be deleted.
++
++::
++
++    /delete-property/ property-name;
++
+ Property values may be defined as an array of 32-bit integer cells, as
+ null-terminated strings, as bytestrings or a combination of these.
+ 
+@@ -48,6 +74,38 @@ null-terminated strings, as bytestrings
+ ::
+ 
+         interrupts = <17 0xc>;
++-  values may be represented as arithmetic, bitwise, or logical expressions
++   within parenthesis.
++
++::
++
++    Arithmetic operators
++
++    +   add
++    -   subtract
++    *   multiply
++    /   divide
++    <<  left shift
++    >>  right shift
++
++::
++
++    Bitwise operators
++
++    &&   and
++    ||   or
++
++::
++
++    Logical operators
++
++    <    less than
++    >    greater than
++    <=   less than or equal
++    >=   greater than or equal
++    ==   equal
++    !=   not equal
++
+ 
+ -  A 64-bit value is represented with two 32-bit cells. Example:
+ 
