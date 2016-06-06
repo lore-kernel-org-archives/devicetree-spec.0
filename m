@@ -1,137 +1,53 @@
 From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: [DTSpec PATCH] Add items to Devicetree Source Format chapter
-Date: Fri, 3 Jun 2016 12:29:19 -0700
-Message-ID: <5751DA8F.2090708@gmail.com>
+Subject: Linux Plumbers devicetree session - conference registration is now
+ open
+Date: Mon, 6 Jun 2016 11:03:48 -0700
+Message-ID: <5755BB04.3080506@gmail.com>
+References: <20160606115036.19cb2503@redtail.lan>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20120113;
-        h=to:from:subject:message-id:date:user-agent:mime-version
-         :content-transfer-encoding;
-        bh=381gQz2+azX2Zjn02eEkPLP0xwvXTe+j6sdBjdS/Fvs=;
-        b=bA03iermRFjcqRndGaXgm2nthBUh0burqHrFvvLysRtj0lM/BOyRVHwvBqdPfZQo1L
-         UPdhc1vbnY17dIvCIaK7aGaaXTbVPUzINVx5zoIbVBQCD+sOltJUtt9DC7L/CZthbNUL
-         LstpMB+TkD+uYHDzRmjJQcFLZOKu7/JsQgxKeHs4IW/SxSXuYjActrM2stxEp0IXd6Ew
-         TcL5PekogM4Q/281OO9FDBthA5aG+gz0afHEC6BgwKksClOt46zPVkWvYzx1rmOB/mqJ
-         dIIS3Mij4lmNwWMGCacsAsRqYuaWiUo+pfkLnFzo2pGBb1aAn8ipenlxVyYQRknu6RGF
-         tnng==
+        h=subject:references:to:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-transfer-encoding;
+        bh=OC3RiFcZ6rJ0ngC6/8EQJ6io5O2PjbjdTtNOzCM20AA=;
+        b=aIx+71oCKS5py8+XVNvEL9kJBBoGPGd85BbtL+Vfkf0Kpb79ZjlIdJuQVPn0GoPeSL
+         goTkoYKIQfx4D1dKUoLDO+OXMOGeVp+a6INZgOzNVA3Y/aW75fx9qCoZhscFIW6YfC/Q
+         I0okqul6QYUU5bEOaxY1YpUFXpdOL8C3UaL2xgRXhMCpEFYn8UNRge8/XeX+ZNqUjwEE
+         Im1Vtr8J6rxzjfEl/paFJ4B4a63e+ScYcNbjqh8Qa/Vu56fvoEQBQh0UhTjooHKzb0Rc
+         qmxKaZx/Tqtu9Z0HB+ZcPnse0+zIrxERXJfDLO2Vd5unwQRTjraIsNbVZHGEc6Ta2k92
+         Jfxg==
+In-Reply-To: <20160606115036.19cb2503-Pua/EWH76orhXIiyNabO3w@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-From: Frank Rowand <frank.rowand-mEdOJwZ7QcZBDgjK7y7TUQ@public.gmane.org>
 
-Add items to Devicetree Source Format chapter
+For anyone who is interested in attending the devicetree session at
+Linux Plumbers, I am forwarding the registration info.
 
-- Add naming convention for DTS files and DTS include files
-- Add /include/ compiler directive
-- Add ";" to end of node definition
-- Add /delete-node/ and /delete-property/
-- Add arithmetic, bitwise, and logical expressions
+-Frank
 
-Note that cpp directives are not included in this patch, and
-are not yet specified in this appendix.
 
-Signed-off-by: Frank Rowand <frank.rowand-mEdOJwZ7QcZBDgjK7y7TUQ@public.gmane.org>
----
- source/source-language.rst |   60 ++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 59 insertions(+), 1 deletion(-)
+-------- Forwarded Message --------
+Subject: [Lpc-announce] Linux Plumbers Conference registration is now open
+Date: Mon, 6 Jun 2016 11:50:36 -0600
+From: Jake Edge <jake-T1hC0tSOHrs@public.gmane.org>
+To: lpc-announce-cunTk1MwBs990ICgHLs2ApIRA52/M9t8QH7oEaQurus@public.gmane.org
 
-Index: b/source/source-language.rst
-===================================================================
---- a/source/source-language.rst
-+++ b/source/source-language.rst
-@@ -9,6 +9,19 @@ devicetree in the form expected by the k
- not a formal syntax definition of DTS, but describes the basic
- constructs used to represent devicetrees.
- 
-+The name of DTS files should end with ".dts".
-+
-+Compiler directives
-+-------------------
-+
-+Other source files can be included from a DTS file.  The name of include
-+files should end with ".dtsi".  Included files can in turn include
-+additional files.
-+
-+::
-+
-+    /include/ "FILE"
-+
- Node and property definitions
- -----------------------------
- 
-@@ -21,11 +34,18 @@ preceded by a label.
-     [label:] node-name[@unit-address] {
-         [properties definitions]
-         [child nodes]
--    }
-+    };
- 
- Nodes may contain property definitions and/or child node definitions. If
- both are present, properties shall come before child nodes.
- 
-+Previously defined nodes may be deleted.
-+
-+::
-+
-+    /delete-node/ node-name;
-+    /delete-node/ &label;
-+
- Property definitions are name value pairs in the form:
- 
- ::
-@@ -39,6 +59,12 @@ form:
- 
-         [label:] property-name;
- 
-+Previously defined properties may be deleted.
-+
-+::
-+
-+    /delete-property/ property-name;
-+
- Property values may be defined as an array of 32-bit integer cells, as
- null-terminated strings, as bytestrings or a combination of these.
- 
-@@ -48,6 +74,38 @@ null-terminated strings, as bytestrings
- ::
- 
-         interrupts = <17 0xc>;
-+-  values may be represented as arithmetic, bitwise, or logical expressions
-+   within parenthesis.
-+
-+::
-+
-+    Arithmetic operators
-+
-+    +   add
-+    -   subtract
-+    *   multiply
-+    /   divide
-+    <<  left shift
-+    >>  right shift
-+
-+::
-+
-+    Bitwise operators
-+
-+    &&   and
-+    ||   or
-+
-+::
-+
-+    Logical operators
-+
-+    <    less than
-+    >    greater than
-+    <=   less than or equal
-+    >=   greater than or equal
-+    ==   equal
-+    !=   not equal
-+
- 
- -  A 64-bit value is represented with two 32-bit cells. Example:
- 
+
+The registration for LPC 2016 is now open.  The early-bird rate is
+available until our quota of 140 runs out or we reach 26 August.  The
+registration site is here [1].
+
+LPC 2016 will be held November 1-4 in Santa Fe, New Mexico, US.
+
+[1] http://bit.ly/lpc16reg
+_______________________________________________
+Lpc-announce mailing list
+Lpc-announce-cunTk1MwBs990ICgHLs2ApIRA52/M9t8QH7oEaQurus@public.gmane.org
+http://lists.linuxplumbersconf.org/mailman/listinfo/lpc-announce
+
+
