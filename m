@@ -1,100 +1,45 @@
-From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
-Subject: Re: case sensitivity for devicetree node names
-Date: Tue, 14 Jun 2016 16:05:17 +1000
-Message-ID: <20160614060517.GN4882@voom.fritz.box>
-References: <575B1D84.2010703@gmail.com>
- <20160614011021.GD4882@voom.fritz.box>
- <575F7FC1.5040508@gmail.com>
- <20160614051028.GL4882@voom.fritz.box>
- <575F963F.8090105@gmail.com>
+From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: [DTSpec PATCH v3] Add items to Devicetree Source Format chapter
+Date: Tue, 14 Jun 2016 09:16:36 -0500
+Message-ID: <CAL_JsqJ9jdfPvL0Lr6Q=33GjE7jpT3X8phaPmZ1UhxJTzMFgDA@mail.gmail.com>
+References: <57585979.1050402@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Vxa5joy26gVGOrvU"
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=gibson.dropbear.id.au; s=201602; t=1465886059;
-	bh=Xs6fZH7mg9NWpc4ZWepeglM2ch3o5w9O0D784TrJ6R4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=QXjLFemYuK2nxi1qnZc+ZnKMjhoqagT1S11DqVlQWvLFcICAj91ojTn4AaNCnaAvy
-	 Id+bkqej0+/j09SwHyqMOgxX9bvh/G4pythKENmrXFUy/LVFjlpXqqv/u7cECDfNqm
-	 +/FAzNl6edSE5tBxJh3bX3Yw/GVTUkFOKvEbpj8w=
-Content-Disposition: inline
-In-Reply-To: <575F963F.8090105-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+         :cc;
+        bh=23+vca3RN27NQioKDekPtizRzZmq8o9tRlY24ns/Jbk=;
+        b=KfhaxVljXS9VLPasW+K4Hmi1lVYPm+i1JDZQfEJD+vCeBwLS3Vfxd15rbOYOga21cF
+         kdlux0a9OOJUZCvE9vnJi9dEhbgH5PcWywpOHsRnf3qGZOBihaCpBMp+5z+f41LECRMG
+         IimvnSFmDCKP2k2/3sycVbOZ9QVyqhU5dn9K0bYFOhSqeYPQGwgJ3/YHpVF8fyIloMMq
+         +qy9GKuKDsvmHt+SRjPduuW1JgQY4+KRgm0/RCwNznpcUNQHHFvwy/NgXURNTt1l0yVx
+         33AHjuABuGVoRjyr+YBD3vGgIsoX852OwYYStGG8BeJu2wg2Pf75z/vXtjzfYIWf9ii4
+         0IJw==
+In-Reply-To: <57585979.1050402-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
 
+On Wed, Jun 8, 2016 at 12:44 PM, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+> From: Frank Rowand <frank.rowand-mEdOJwZ7QcZBDgjK7y7TUQ@public.gmane.org>
+>
+> Add items to Devicetree Source Format chapter
+>
+> - Add naming convention for DTS files and DTS include files
+> - Add /include/ compiler directive
+> - Add ";" to end of node definition
+> - Add /delete-node/ and /delete-property/
+> - Add arithmetic, bitwise, logical, and ternary expressions
+>
+> Note that cpp directives are not included in this patch, and
+> are not yet specified in this appendix.
+>
+> Signed-off-by: Frank Rowand <frank.rowand-mEdOJwZ7QcZBDgjK7y7TUQ@public.gmane.org>
 
---Vxa5joy26gVGOrvU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Applied.
 
-On Mon, Jun 13, 2016 at 10:29:35PM -0700, Frank Rowand wrote:
-> On 06/13/16 22:10, David Gibson wrote:
-> > On Mon, Jun 13, 2016 at 08:53:37PM -0700, Frank Rowand wrote:
-> >> On 06/13/16 18:10, David Gibson wrote:
->=20
-> < snip >
->=20
-> >>> Here's my inclination for how to treat this in dtc for the time being:
-> >>>     1) Leave the bulk of dtc case sensitive, as now
-> >>>     2) Add a new check which will generate an error if there are node
-> >>>        names which differ only in case.
-> >>>
-> >>> Any objections to that plan?
-> >>
-> >> I think that the kernel should match the current behavior of dtc.
-> >>
-> >> I agree with "1)".
-> >>
-> >> I don't think that "2)" is required.  I think it is a really dumb idea=
- for
-> >> anyone to create a dts with node names that differ only in case.  But I
-> >> don't think it is the compiler's job to protect people from being dumb.
-> >> An analogue would be the C language and compilers.  The C compiler doe=
-sn't
-> >> error on a program that has variables "foo" and "Foo".
-> >=20
-> > Hmm.. actually I think protecting you from being dumb is exactly the
-> > purpose of compiler warnings.  Now that you found that quote from
-> > 1275, which is pretty definitive as far as I'm concerned, I'd expect
-> > to reduce that error to a warning (by default).
->=20
-> A warning is ok by me.
-
-Ok, I'll implement that when I get a chance.
-
-Note that in most cases there's no fundamental distinction between dtc
-errors and dtc warnings - it's just a question of whether they're
-flagged as "error" or "warning" level in the check table.
-
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---Vxa5joy26gVGOrvU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQIcBAEBAgAGBQJXX56dAAoJEGw4ysog2bOS4ZwP/R9kUcc/rWcz1LZmAo03iR5w
-RwC926Z5n04PoEwiwkTFqYjYr5XqO4E7AwitHubQ2ZJindQcHE4YXN2usR96d0Da
-ggDXL2y0MdyJv5dCkAchsZnupr2lVLQyl1zvKhejWPK7O99amstRdVX7eY0suPVA
-nOY7foFROaV1DNS9/91iLoegIjDs4Np2gbM5M6H66wTZGWyVvYudGrzOFzaD5fqs
-YMHdxiQD0cN7KOc/ztR/pGNB2swh0Lq7k+e7Pb0t6DaEW27VFw8QV1VEaOvQeP9i
-56lzMD5wB20trGHIhQ5P6rZ38XbIl9s6hDzQ8S5G4nPM4ciiMunotlwVMcQk1ZLe
-4GW5nPz6XdIHszSxyOXvdD37IlZevS3TAkCVD49F6ET2UKLkF+enYLABULMYCcXc
-iMRNTdXmQgsoXO5e1AKZQeYTVFt/Pezs3AJduIApERus81KC39hz0fWpE6aqXxrV
-9/gZoOSf/X3Rx3QiuMDLbJgA1+9JzqepiabrXrq9x58KnQRDjaWQEfIKtrFbwnBT
-2P8S5Muw6K6OzluYTWMFVUrlM29cAu//wZlyYCfFuVyBMH1ChZ2HBa32QVzsXg6g
-kWlSlDe0JBUhnv97HYRRkoY0hYEpferjhMZrqcdJjslnknMelU+E+8/qEhFQ06VB
-xUwt9c1PcslNqTCeyhdP
-=727m
------END PGP SIGNATURE-----
-
---Vxa5joy26gVGOrvU--
+Rob
