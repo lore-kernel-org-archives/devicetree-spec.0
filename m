@@ -1,45 +1,59 @@
-From: Rob Herring <robherring2-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [DTSpec PATCH v3] Add items to Devicetree Source Format chapter
-Date: Tue, 14 Jun 2016 09:16:36 -0500
-Message-ID: <CAL_JsqJ9jdfPvL0Lr6Q=33GjE7jpT3X8phaPmZ1UhxJTzMFgDA@mail.gmail.com>
-References: <57585979.1050402@gmail.com>
-Mime-Version: 1.0
+From: Kanta Vekaria <kanta.vekaria-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Subject: [PATCH] Clarify use of mailing list
+Date: Thu, 21 Jul 2016 14:57:04 +0100
+Message-ID: <1469109424-2482-1-git-send-email-kanta.vekaria@linaro.org>
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20120113;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc;
-        bh=23+vca3RN27NQioKDekPtizRzZmq8o9tRlY24ns/Jbk=;
-        b=KfhaxVljXS9VLPasW+K4Hmi1lVYPm+i1JDZQfEJD+vCeBwLS3Vfxd15rbOYOga21cF
-         kdlux0a9OOJUZCvE9vnJi9dEhbgH5PcWywpOHsRnf3qGZOBihaCpBMp+5z+f41LECRMG
-         IimvnSFmDCKP2k2/3sycVbOZ9QVyqhU5dn9K0bYFOhSqeYPQGwgJ3/YHpVF8fyIloMMq
-         +qy9GKuKDsvmHt+SRjPduuW1JgQY4+KRgm0/RCwNznpcUNQHHFvwy/NgXURNTt1l0yVx
-         33AHjuABuGVoRjyr+YBD3vGgIsoX852OwYYStGG8BeJu2wg2Pf75z/vXtjzfYIWf9ii4
-         0IJw==
-In-Reply-To: <57585979.1050402-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id;
+        bh=ss4iomI1jY9yeI1dnsFQgc+5/LiCBNVfz3VJFtJHb5I=;
+        b=CJ1A/Fx85J1iLEbrXqHE6bbsA8yaTKmssyeRtwRDfp98AJzkDrexyUAp4XbG3Z0sAM
+         aYoGAAXJNVXRgfojF4wl+MA+vL++I+wyUilHWYi2P/fqRfA7FoUFyumNzM14l5KuokR8
+         mvaWFmLUKGrl2kNCgd5nCaD2F7EEAtvTSXDwA=
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org
+Cc: grunk-BIb/Zk+JBDab9/CCa1Sigw@public.gmane.org, daniel.buenzli-llsTEZYSXZwXXHkOk0aIfQ@public.gmane.org, kanta.vekaria-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org
 
-On Wed, Jun 8, 2016 at 12:44 PM, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
-> From: Frank Rowand <frank.rowand-mEdOJwZ7QcZBDgjK7y7TUQ@public.gmane.org>
->
-> Add items to Devicetree Source Format chapter
->
-> - Add naming convention for DTS files and DTS include files
-> - Add /include/ compiler directive
-> - Add ";" to end of node definition
-> - Add /delete-node/ and /delete-property/
-> - Add arithmetic, bitwise, logical, and ternary expressions
->
-> Note that cpp directives are not included in this patch, and
-> are not yet specified in this appendix.
->
-> Signed-off-by: Frank Rowand <frank.rowand-mEdOJwZ7QcZBDgjK7y7TUQ@public.gmane.org>
+- Create new mailing list section
+- Add mailing list in contribution section
 
-Applied.
+Signed-off-by: Kanta Vekaria <kanta.vekaria-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+---
+ README.md | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-Rob
+diff --git a/README.md b/README.md
+index 8ff30c4..83a5188 100644
+--- a/README.md
++++ b/README.md
+@@ -2,12 +2,12 @@
+ 
+ The latest release of the specification can be found at http://devicetree.org/ or https://github.com/devicetree-org/devicetree-specification-released
+ 
+-Mailing list:
+-   devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+-   http://vger.kernel.org/vger-lists.html#devicetree-spec
+-
+ This [repository](https://github.com/devicetree-org/devicetree-specification) holds the source for the generation of the Devicetree Specification using Sphinx and LaTeX. 
+ 
++## Mailing list: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org ##
++   * Use this mailing list for submitting patches, questions and general discussion
++   * Sign up to the mailing list at http://vger.kernel.org/vger-lists.html#devicetree-spec
++
+ ## Build Instructions ##
+ 
+ Requirements:
+@@ -75,6 +75,7 @@ in the LICENSE and NOTICE file or online at:
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ ## Contributions ##
++Please submit all patches to the mailing list devicetree-spec-u79uwXL29TaiAVqoAR/hOA@public.gmane.org
+ Contributions to the Devicetree Specification are managed by the gatekeepers,
+ Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> and Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+ 
+-- 
+2.7.4 (Apple Git-66)
