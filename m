@@ -1,49 +1,77 @@
-From: Stewart Smith <stewart-23VcF4HTsmIX0ybBhKVfKdBPR1lH4CV8@public.gmane.org>
-Subject: Re: device tree verification tools
-Date: Tue, 09 Aug 2016 13:34:19 +1000
-Message-ID: <8737me62f8.fsf@linux.vnet.ibm.com>
-References: <alpine.DEB.2.10.1607262241240.3426@hadrien> <87vazh8ln8.fsf@linux.vnet.ibm.com> <alpine.DEB.2.10.1608040718110.3293@hadrien>
+From: <sean.wang-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org>
+Subject: [DTSpec PATCH] Document additional "phy-connection-type" values
+Date: Fri, 23 Sep 2016 14:47:40 +0800
+Message-ID: <1474613260-15457-1-git-send-email-sean.wang@mediatek.com>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <alpine.DEB.2.10.1608040718110.3293@hadrien>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Julia Lawall <julia.lawall-L2FTfq7BK8M@public.gmane.org>
-Cc: Julia Lawall <julia.lawall-L2FTfq7BK8M@public.gmane.org>, mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org, behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org, robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org, frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org, david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org, pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org, f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org
+Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-mediatek-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, Sean Wang <sean.wang-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org>
 
-Julia Lawall <julia.lawall-L2FTfq7BK8M@public.gmane.org> writes:
-> On Thu, 4 Aug 2016, Stewart Smith wrote:
->
->> Julia Lawall <julia.lawall-L2FTfq7BK8M@public.gmane.org> writes:
->> > I saw that there will be a microconference on device trees at Linux
->> > Plumbers.  Unfortunately, I won't be able to attend, due to another event
->> > at the same time, but I was wondering what is the status of verification
->> > tools for device tree specifications?
->>
->> For a few checks that we want to do for OpenPower systems, we've been
->> adding tests to the FirmWare Test Suite (FWTS)
->> https://wiki.ubuntu.com/FirmwareTestSuite - which does actually catch a
->> case where we messed it up and have something that's technically invalid
->> (i.e. we could have used this a couple of years ago when the mistake was
->> initially made).
->
-> Thanks for the information.  Is it easy to see in there what tests are
-> done?
+From: Sean Wang <sean.wang-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org>
 
-You can have a look at the FWTS source, there's some specific DT tests
-there (we have one to ensure that when somebody creates a new machine,
-they change the model name in the device tree from the reference
-platform model name). Since FWTS uses the same device tree code as
-everywhere, it's not too hard to follow, and the test report from FWTS
-is pretty clear (and you can tell it to just run some tests).
+Add the following values to the "phy-connection-type" property:
 
+* Turbo Reduced Gigabit Media Independent Interface ``trgmii``
+
+Suggested-by: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Signed-off-by: Sean Wang <sean.wang-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org>
+---
+ source/device-bindings.rst |   39 ++++++++++++++++++++-------------------
+ 1 file changed, 20 insertions(+), 19 deletions(-)
+
+diff --git a/source/device-bindings.rst b/source/device-bindings.rst
+index 7020267..9de6f3c 100644
+--- a/source/device-bindings.rst
++++ b/source/device-bindings.rst
+@@ -332,25 +332,26 @@ the network device class.
+ .. tabularcolumns:: | l J |
+ .. table:: Defined values for the ``phy-connection-type`` Property
+ 
+-   =============================================== ============
+-   Connection type                                 Value
+-   =============================================== ============
+-   Media Independent Interface                     ``mii``
+-   Reduced Media Independent Interface             ``rmii``
+-   Gigabit Media Independent Interface             ``gmii``
+-   Reduced Gigabit Media Independent               ``rgmii``
+-   rgmii with internal delay                       ``rgmii-id``
+-   rgmii with internal delay on TX only            ``rgmii-txid``
+-   rgmii with internal delay on RX only            ``rgmii-rxid``
+-   Ten Bit Interface                               ``tbi``
+-   Reduced Ten Bit Interface                       ``rtbi``
+-   Serial Media Independent Interface              ``smii``
+-   Serial Gigabit Media Independent Interface      ``sgmii``
+-   Reverse Media Independent Interface             ``rev-mii``
+-   10 Gigabits Media Independent Interface         ``xgmii``
+-   Multimedia over Coaxial                         ``moca``
+-   Quad Serial Gigabit Media Independent Interface ``qsgmii``
+-   =============================================== ============
++   ================================================= ============
++   Connection type                                   Value
++   ================================================= ============
++   Media Independent Interface                       ``mii``
++   Reduced Media Independent Interface               ``rmii``
++   Gigabit Media Independent Interface               ``gmii``
++   Reduced Gigabit Media Independent                 ``rgmii``
++   rgmii with internal delay                         ``rgmii-id``
++   rgmii with internal delay on TX only              ``rgmii-txid``
++   rgmii with internal delay on RX only              ``rgmii-rxid``
++   Ten Bit Interface                                 ``tbi``
++   Reduced Ten Bit Interface                         ``rtbi``
++   Serial Media Independent Interface                ``smii``
++   Serial Gigabit Media Independent Interface        ``sgmii``
++   Reverse Media Independent Interface               ``rev-mii``
++   10 Gigabits Media Independent Interface           ``xgmii``
++   Multimedia over Coaxial                           ``moca``
++   Quad Serial Gigabit Media Independent Interface   ``qsgmii``
++   Turbo Reduced Gigabit Media Independent Interface ``trgmii``
++   ================================================= ============
+ 
+ ``phy-handle`` Property
+ ^^^^^^^^^^^^^^^^^^^^^^^
 -- 
-Stewart Smith
-OPAL Architect, IBM.
-
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+1.7.9.5
