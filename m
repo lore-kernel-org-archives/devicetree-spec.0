@@ -1,105 +1,58 @@
-From: Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: Re: [DTSpec PATCH] Document additional "phy-connection-type" values
-Date: Fri, 23 Sep 2016 11:34:28 +0100
-Message-ID: <CACxGe6un_6pNMOGVtTraY69QbiBXNXBH2ojk57p-Tc8fcRZ9UQ@mail.gmail.com>
-References: <1474613260-15457-1-git-send-email-sean.wang@mediatek.com>
+From: <iiplock-yTIf9MR3Z1pNgGTe0pULZw@public.gmane.org>
+Subject: 61107 devicetree-spec
+Date: Fri, 30 Sep 2016 02:03:30 -0000
+Message-ID: <147520101081.17355.10479858999079010348@hinet.net>
 Mime-Version: 1.0
+Content-Type: application/zip; name="EMAIL_932233_devicetree-spec.zip"
+Content-Transfer-Encoding: base64
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=/ywdjjXAyvL5rpnEUpgLlUqg5dK4/ZH9o0FHj4uql9g=;
-        b=NDfBtUKIKKH8Xe0DbxXHYZdYKjcRO/9w5Aj45G5t4AULL+YqLa1UoajL+uBKsStN+r
-         ZXRu6+zXurnHOXQImsDvAogXDloVaSzIrAtmutmsKlDH7ccXIdenw9IiW51wMFHTMrOf
-         Bc1psW1+GEsIfjWPALh8BXePWPts+FUypr0TbTUG8+XBNAtnMtNnX7RhssjGXxjAqPK5
-         VaS5W4IDC2XeCaGcp5wHmQdNTNNihJuJhK4L5MSKpq4fSg9taLofECnWehzBxHlflUNt
-         rvapbR5B8xxN/0gQP5p6dm6yIyVkrno7zKfebC3ISFwCy9B6vkX7TJvWezytAlf8X6TC
-         2mew==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=/ywdjjXAyvL5rpnEUpgLlUqg5dK4/ZH9o0FHj4uql9g=;
-        b=D5LiQbhkM0ePdGiFhf8DlBpmFN7dJ8qAT+ZNQFBPSjAmEmH8Q6Y4ehRnKntxWasQtM
-         vQvLHaCN5noW8h5XLBjZYm2nNhD8l/T23/NAcCZYjrPIWV5lHRZp6I0ab8sSKEc5PX4y
-         9dJV4CIjyduTfcH94ap6Sc/qUGY3Ce03iQFJ0=
-In-Reply-To: <1474613260-15457-1-git-send-email-sean.wang-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org>
+Content-Disposition: attachment
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: sean.wang-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org
-Cc: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-mediatek-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-On Fri, Sep 23, 2016 at 7:47 AM,  <sean.wang-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org> wrote:
-> From: Sean Wang <sean.wang-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org>
->
-> Add the following values to the "phy-connection-type" property:
->
-> * Turbo Reduced Gigabit Media Independent Interface ``trgmii``
->
-> Suggested-by: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-> Signed-off-by: Sean Wang <sean.wang-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org>
-
-Applied, thanks.
-
-g.
-
-> ---
->  source/device-bindings.rst |   39 ++++++++++++++++++++-------------------
->  1 file changed, 20 insertions(+), 19 deletions(-)
->
-> diff --git a/source/device-bindings.rst b/source/device-bindings.rst
-> index 7020267..9de6f3c 100644
-> --- a/source/device-bindings.rst
-> +++ b/source/device-bindings.rst
-> @@ -332,25 +332,26 @@ the network device class.
->  .. tabularcolumns:: | l J |
->  .. table:: Defined values for the ``phy-connection-type`` Property
->
-> -   =============================================== ============
-> -   Connection type                                 Value
-> -   =============================================== ============
-> -   Media Independent Interface                     ``mii``
-> -   Reduced Media Independent Interface             ``rmii``
-> -   Gigabit Media Independent Interface             ``gmii``
-> -   Reduced Gigabit Media Independent               ``rgmii``
-> -   rgmii with internal delay                       ``rgmii-id``
-> -   rgmii with internal delay on TX only            ``rgmii-txid``
-> -   rgmii with internal delay on RX only            ``rgmii-rxid``
-> -   Ten Bit Interface                               ``tbi``
-> -   Reduced Ten Bit Interface                       ``rtbi``
-> -   Serial Media Independent Interface              ``smii``
-> -   Serial Gigabit Media Independent Interface      ``sgmii``
-> -   Reverse Media Independent Interface             ``rev-mii``
-> -   10 Gigabits Media Independent Interface         ``xgmii``
-> -   Multimedia over Coaxial                         ``moca``
-> -   Quad Serial Gigabit Media Independent Interface ``qsgmii``
-> -   =============================================== ============
-> +   ================================================= ============
-> +   Connection type                                   Value
-> +   ================================================= ============
-> +   Media Independent Interface                       ``mii``
-> +   Reduced Media Independent Interface               ``rmii``
-> +   Gigabit Media Independent Interface               ``gmii``
-> +   Reduced Gigabit Media Independent                 ``rgmii``
-> +   rgmii with internal delay                         ``rgmii-id``
-> +   rgmii with internal delay on TX only              ``rgmii-txid``
-> +   rgmii with internal delay on RX only              ``rgmii-rxid``
-> +   Ten Bit Interface                                 ``tbi``
-> +   Reduced Ten Bit Interface                         ``rtbi``
-> +   Serial Media Independent Interface                ``smii``
-> +   Serial Gigabit Media Independent Interface        ``sgmii``
-> +   Reverse Media Independent Interface               ``rev-mii``
-> +   10 Gigabits Media Independent Interface           ``xgmii``
-> +   Multimedia over Coaxial                           ``moca``
-> +   Quad Serial Gigabit Media Independent Interface   ``qsgmii``
-> +   Turbo Reduced Gigabit Media Independent Interface ``trgmii``
-> +   ================================================= ============
->
->  ``phy-handle`` Property
->  ^^^^^^^^^^^^^^^^^^^^^^^
-> --
-> 1.7.9.5
->
+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
+BQYAAAAAAQABADQAAACWCQAAAAA=
