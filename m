@@ -1,35 +1,41 @@
-From: Stewart Smith <stewart-23VcF4HTsmIX0ybBhKVfKdBPR1lH4CV8@public.gmane.org>
-Subject: [PATCH 0/2] Syntax highlighting
-Date: Fri, 28 Oct 2016 17:12:51 +1100
-Message-ID: <1477635173-9292-1-git-send-email-stewart@linux.vnet.ibm.com>
+From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: device tree verification tools
+Date: Fri, 4 Nov 2016 13:03:14 -0700
+Message-ID: <581CE982.60605@gmail.com>
+References: <alpine.DEB.2.10.1607262241240.3426@hadrien>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=subject:to:references:cc:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding;
+        bh=1JSf7YM/gkDerGrGhmqHPPJz/5IwpGEwkflaARW4OoU=;
+        b=PjTDbSrUx3P5owGYGqF/4OLZbVigjlOBSc86Y6TSnyNvXqFJoHnery1Cx/a6+Jk3s0
+         MdxzFqk02kt3dHfZTuM/luZZaC4LpEP1/E0Jfqu4QhCj9hwXXSJK0GBribOVAF4knu8K
+         Qnx36M3lCbryqf6HHmXVmiddSyMe6T7yeUdGSVJcq9RrrNKn0TyUW1d6JP1hxdKZaAfS
+         RXgINypgjGhNbKOo7mOkIGxdhgs4KaLR0WcTjK/Woqs5Iqh/QWJWGl/ycO/p6NcFnzKv
+         F3DC7Hskeq8S9lBbbGvUEelPfvgA8ypvnENshtdlwqsbN0kgI5M8oGMKm097zLQ9VSgL
+         Cx3g==
+In-Reply-To: <alpine.DEB.2.10.1607262241240.3426@hadrien>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: Stewart Smith <stewart-23VcF4HTsmIX0ybBhKVfKdBPR1lH4CV8@public.gmane.org>
+To: Julia Lawall <julia.lawall-L2FTfq7BK8M@public.gmane.org>, mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org, behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org, robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org, david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org, pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org
+Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Grant Likely <glikely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
 
-Since http://pygments.org/ (what Sphinx uses for syntax highlighting)
-doesn't do DTS yet, implement DTS syntax highlighting and then use it
-(and the standard C source highlighting).
+On 07/26/16 13:43, Julia Lawall wrote:
+> I saw that there will be a microconference on device trees at Linux
+> Plumbers.  Unfortunately, I won't be able to attend, due to another event
+> at the same time, but I was wondering what is the status of verification
+> tools for device tree specifications?
+> 
+> thanks,
+> julia
+> 
 
-I'll be submitting the DTS highlighting upstream too, but having it in
-tree will ensure it works for people not running a future version of
-pygments.
+Hi Julia,
 
-Stewart Smith (2):
-  Enable syntax highlighting of device tree source
-  Syntax highlight C and DTS
+Grant Likely is breathing new life into the verification effort.
 
- source/conf.py                |  6 +++
- source/devicenodes.rst        | 18 ++++-----
- source/devicetree-basics.rst  | 14 ++++---
- source/extensions/DtsLexer.py | 89 +++++++++++++++++++++++++++++++++++++++++++
- source/flattened-format.rst   |  6 +--
- 5 files changed, 115 insertions(+), 18 deletions(-)
- create mode 100644 source/extensions/DtsLexer.py
-
--- 
-2.7.4
+-Frank
