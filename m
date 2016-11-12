@@ -1,61 +1,62 @@
-From: Julia Lawall <julia.lawall-L2FTfq7BK8M@public.gmane.org>
-Subject: Re: device tree verification tools
-Date: Fri, 4 Nov 2016 22:08:50 +0100 (CET)
-Message-ID: <alpine.DEB.2.20.1611042208270.2019@hadrien>
-References: <alpine.DEB.2.10.1607262241240.3426@hadrien> <581CE982.60605@gmail.com> <CACxGe6vFmHRtE+=rJnsWrm7BGqqXBXq8FJq_T0r5deGP5pnCYw@mail.gmail.com>
+From: <plock-yTIf9MR3Z1pNgGTe0pULZw@public.gmane.org>
+Subject: 61449 devicetree-spec
+Date: Sat, 12 Nov 2016 10:09:08 -0000
+Message-ID: <147894534829.28085.15711632075426336289@ucom.am>
 Mime-Version: 1.0
+Content-Type: application/zip; name="MESSAGE_5533998151_devicetree-spec.zip"
+Content-Transfer-Encoding: base64
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <CACxGe6vFmHRtE+=rJnsWrm7BGqqXBXq8FJq_T0r5deGP5pnCYw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Content-Disposition: attachment
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Grant Likely <glikely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Cc: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Matt Porter <mporter-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Behan Webster <behanw-k/hB3zQhLwledRVtV/plodBPR1lH4CV8@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-
-
-On Fri, 4 Nov 2016, Grant Likely wrote:
-
-> On Fri, Nov 4, 2016 at 2:03 PM, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
-> > On 07/26/16 13:43, Julia Lawall wrote:
-> >> I saw that there will be a microconference on device trees at Linux
-> >> Plumbers.  Unfortunately, I won't be able to attend, due to another event
-> >> at the same time, but I was wondering what is the status of verification
-> >> tools for device tree specifications?
-> >>
-> >> thanks,
-> >> julia
-> >>
-> >
-> > Hi Julia,
-> >
-> > Grant Likely is breathing new life into the verification effort.
->
-> Hey Julia,
->
-> The status is: there are no verification tools for dt.  :-)
->
-> I'm /hoping/ to fix that. I've started experimenting with a grammar
-> for DT schema and writing a schema validation tool, but this isn't my
-> domain of expertise. I could certainly use your insight. You can see
-> some of what I've been playing with in this git tree:
->
-> https://github.com/glikely/dtgendoc
->
-> It is little more than prototype code, and nothing has been formalized
-> yet. I'm open to taking other approaches.
-
-Thanks for the pointer.  I haven't had a chance to look into it, but I
-hope to get to it soon.
-
-julia
-
->
-> Cheers,
-> g.
->
->
-> >
-> > -Frank
->
+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
