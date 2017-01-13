@@ -1,129 +1,104 @@
-From: Laurent Pinchart <laurent.pinchart-ryLnwIuWjnjg/C1BVhZhaw@public.gmane.org>
+From: Grant Likely <glikely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
 Subject: Re: [PATCH] Describe interrupts-extended property
-Date: Wed, 04 Jan 2017 03:28:05 +0200
-Message-ID: <1665775.WCU4pXZEJj@avalon>
-References: <20170103192423.5838-1-f.fainelli@gmail.com> <7729185.EsL4Kmsiv2@avalon> <663f501c-4646-8f15-cb90-0477ceff3daf@gmail.com>
+Date: Fri, 13 Jan 2017 08:51:52 +0000
+Message-ID: <CACxGe6vmqC7diRC_8ESxv2yH3oogR8WnuDrvAj8UbL+N5PvxOQ@mail.gmail.com>
+References: <20170103192423.5838-1-f.fainelli@gmail.com> <CAL_Jsq+2TVHGS2onm50rG_AxesJEBUhEGLZNEJN8XAGo4CbMgA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7Bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-        s=mail; t=1483493256;
-        bh=iI7WQVPtC0pBApGS7OuBQNKrUA8tRUNusv21InOj0dE=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=FQa/kyPJ+/XqMFTN2TR4w279RsVnTnbLaKr8Du2USBnojiZr4eUnBLb8VW3/m/L41
-         XBy6YCzdzk21ixE/qdvgpuI5f/mA6Iol8WBqLxokQZDx/b+ncfvJmfTgExvMCyPWj4
-         apdB7+fCTWyq6WD+Bk4MFW0WvPE0naGSBxofB/kk=
-In-Reply-To: <663f501c-4646-8f15-cb90-0477ceff3daf-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+         :cc;
+        bh=m5NoyhQpIPdk88CHongcSk2aR+srZibdfxxOo1q2E+A=;
+        b=MubyhtSO/+t9KAySlsRQHSbFzSfUDDPh4ToX2iQj5D15RxlaeNKWwHPrrd3yhCrMhZ
+         1EM2LVmcPMeAwvcBkmDE2MWr23i0HpBZHJ2u+zWVol9q1LiXNEw9NnuCVLjwgUJ5wBnY
+         dWHU22pjuNELpR8ww/Yggg56sgqNxLd+1wXIubNi5RLxgXrgI1BGCX0h4nN11r3qnYod
+         lPpZSfu+VNRmBlvmQxRZRP8oCct0F3YeQzporNr9YsRovCkKTaG4fLo9qRTDjUYTqna6
+         bWc7q7Nasd6EtxqzJcvJFbr6+m9IcrG/jElRpF+GxDKtaayD7oGF69r93W2wBpGIAkFQ
+         9ETw==
+In-Reply-To: <CAL_Jsq+2TVHGS2onm50rG_AxesJEBUhEGLZNEJN8XAGo4CbMgA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org, grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Cc: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-Hi Florian,
+On Tue, Jan 3, 2017 at 10:24 PM, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
+> Correcting Grant's email.
+>
+> On Tue, Jan 3, 2017 at 1:24 PM, Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
+>> The interrupts-extended property is a common property used when
+>> interrupt generating devices having interrupt lines in several interrupt
+>> controllers with possibly distinct interrupt specifiers.
+>>
+>> Signed-off-by: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+>
+> I assume this is mostly copied from the kernel documentation. This
+> needs Grant's ack as the kernel documentation license is ambiguous
+> (default GPL) and the spec is Apache.
 
-On Tuesday 03 Jan 2017 17:19:29 Florian Fainelli wrote:
-> On 01/03/2017 05:03 PM, Laurent Pinchart wrote:
-> > On Tuesday 03 Jan 2017 16:47:03 Florian Fainelli wrote:
-> >> On 01/03/2017 04:31 PM, David Gibson wrote:
-> >>> On Tue, Jan 03, 2017 at 03:44:28PM -0800, Florian Fainelli wrote:
-> > 
-> > [snip]
-> > 
-> >>>> Digression: I was actually wondering if we may not have a need to do
-> >>>> the same thing for "reg" properties, where a given device may have
-> >>>> memory mapped I/O registers in one place, and another address in
-> >>>> another bus, with a different address space, this is actually pretty
-> >>>> common for e.g: PHY (Ethernet, PCIe, SATA or USB).
-> >>> 
-> >>> I've wondered about something like that for some time (my working name
-> >>> was 'bus-reg').  The use cases I encountered were on PPC4xx machines
-> >>> which had lots of things controlled (at least partially) by the
-> >>> sideband "DCR" (Device Control Register) bus.  We did invent a
-> >>> 'dcr-reg' property to cover that specific case, and I think something
-> >>> similar has been done for some other sideband busses.  Something like
-> >>> 'bus-reg' would be a more general solution to the problem.
-> >> 
-> >> Seems to me like syscon is pretty much what was invented in Linux to
-> >> support that use case.
-> >> 
-> >>> I believe the "classic" IEEE1275 way of solving this is to have
-> >>> separate nodes on each of the relevant busses, with phandle pointers
-> >>> linking them together.  The relevant driver would claim all the
-> >>> related nodes.  Again, it gets pretty messy, though.
-> >> 
-> >> Yes still pretty ugly.
-> >> 
-> >> Device Tree tends to list resources as properties of the node that
-> >> consumes them, which is fine, although it can lead to duplicate values
-> >> in a given DTB, but one could also imagine, say listing all register
-> >> resources as properties of the bus that decodes these addresses, and
-> >> then having child nodes of that bus node reference via phandle their
-> >> relevant "reg" cells. Something like this for instance:
-> >> 
-> >> bus@deadbeef {
-> >> 	reg = <0x10000000 0x100>, //UART 0
-> >> 		<0x10000100 0x100> //UART 1
-> >> 	uart@100 {
-> >> 		compatible = "acme,uart";
-> >> 		reg = <&bus 0>;
-> >> 	};
-> >> };
-> >> 
-> >> You get the idea ;)
-> > 
-> > /me shivers :-)
-> > 
-> > The problem you've raised comes down in my opinion to the fact that a tree
-> > simply can't represent a topology that isn't tree-like. The device tree
-> > more or less lays down nodes from the point of view of control buses. As
-> > soon as your device sits on multiple buses the device tree can't
-> > represent it accurately.
-> 
-> I partially agree with that statement, the accurately part is what I
-> disagree with, you can represent it with some accuracy, just not
-> necessarily using standard properties, you may have to cook your own,
-> meaning the standard somehow failed to cover that part.
+Looks fine to me. I've pulled it in.
 
-Of course, I meant using standard properties, or rather the DT core node 
-model. We now have bindings (named OF graph) that can represent a graph of 
-connected nodes using phandles.
+Thanks,
+g.
 
-> The other part, is that with a tree, you may have some repetition and
-> multiple references, which is far from ideal.
-> 
-> > So far this hasn't really been an issue (probably thank to the
-> > occasional hack), but with devices becoming more and more complex I
-> > wouldn't be surprised if we had to really tackle this problem in the not
-> > too distant future. A nasty example that comes to my mind is an SoC with
-> > two clusters of CPU of different architectures (namely ARM and SH) where
-> > some peripheral are accessible to both the ARM and SH side, but mapped at
-> > different addresses. So far we've only described the ARM view of the
-> > system, but wouldn't it be lovely to have a single DT that can cover both
-> > ? :-)
-> 
-> An argument could be made that your cluster is most likely not running
-> the same instance of the operating system (although there has been
-> research on that done before, not sure where that stands in real life?)
-
-In all practical use cases, yes, they would be running separate OS instances 
-(of either the same or different OSes).
-
-> so while having a single blob would be nice, you most likely, for all
-> practical reasons, would duplicate what is necessary (which should be
-> reasonably easy with scripting/separate sources and include files) and
-> provide separate blobs to each OS instance?
-
-Sure, I'm not blocked here, it was more of a theoretical example, not 
-something for which I'm in need of a solution.
-
-Another possibly more useful class of examples is related to multi-master 
-buses. For instance, the existing DT bindings can't represent an I2C bus that 
-has two masters inside the SoC, as I2C slaves have to be children of the I2C 
-bus master. Similarly we don't really have a good way to represent multi-
-master I2S buses.
-
--- 
-Regards,
-
-Laurent Pinchart
+>
+>> ---
+>>  source/devicetree-basics.rst | 34 ++++++++++++++++++++++++++++++++++
+>>  1 file changed, 34 insertions(+)
+>>
+>> diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
+>> index be80af3d825b..1bda0fa54e7a 100644
+>> --- a/source/devicetree-basics.rst
+>> +++ b/source/devicetree-basics.rst
+>> @@ -955,6 +955,40 @@ Description:
+>>     to the interrupt parent. If this property is missing from a device, its
+>>     interrupt parent is assumed to be its devicetree parent.
+>>
+>> +interrupts-extended
+>> +^^^^^^^^^^^^^^^^^^^
+>> +
+>> +Property: ``interrupts-extended``
+>> +
+>> +Value type: ``<phandle> <prop-encoded-array>``
+>> +
+>> +Description:
+>> +
+>> +   The *interrupts-extended* property of a device node defines the interrupt or
+>> +   the interrupts that are generated by the device. In case where an interrupt
+>
+> In the case...
+>
+>> +   generating devices has several interrupt lines, some of them having distinct
+>
+> s/devices/device/
+>
+>> +   interrupt parents, the *interrupts-extended* property should be used to
+>> +   fully describe the interrupts of this device, relative to the interrupt
+>> +   controller(s), which is encoded by the phandle part of the property. The non
+>> +   phandle part of the property encodes the interrupt specifiers and obeys to
+>> +   the *interrupts* property description.
+>> +
+>> +   If both *interrupts-extended* and *interrupts* properties are present, the
+>> +   *interrupts-extended* properties takes precedence, and the *interrupts*
+>> +   property may be provided to a client program for compatibility purposes.
+>> +
+>> +Example:
+>> +
+>> +   A device with several interrupt lines in distinct interrupt controllers,
+>> +   having different interrupt specifiers is illustrated below. In this example
+>> +   ``pic`` is an interrupt controller with an *#interrupt-cells* specifier
+>> +   of 2, while ``gic`` is an interrupt controller with an *#interrupts-cells*
+>> +   specifier of 1.
+>> +
+>> +
+>> +      ``interrupts-extended = <&pic 0xA 8>, <&gic 0xda>;``
+>> +
+>> +
+>>  Properties for Interrupt Controllers
+>>  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>>
+>> --
+>> 2.9.3
+>>
