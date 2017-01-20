@@ -1,104 +1,130 @@
-From: Grant Likely <glikely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: Re: [PATCH] Describe interrupts-extended property
-Date: Fri, 13 Jan 2017 08:51:52 +0000
-Message-ID: <CACxGe6vmqC7diRC_8ESxv2yH3oogR8WnuDrvAj8UbL+N5PvxOQ@mail.gmail.com>
-References: <20170103192423.5838-1-f.fainelli@gmail.com> <CAL_Jsq+2TVHGS2onm50rG_AxesJEBUhEGLZNEJN8XAGo4CbMgA@mail.gmail.com>
-Mime-Version: 1.0
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-         :cc;
-        bh=m5NoyhQpIPdk88CHongcSk2aR+srZibdfxxOo1q2E+A=;
-        b=MubyhtSO/+t9KAySlsRQHSbFzSfUDDPh4ToX2iQj5D15RxlaeNKWwHPrrd3yhCrMhZ
-         1EM2LVmcPMeAwvcBkmDE2MWr23i0HpBZHJ2u+zWVol9q1LiXNEw9NnuCVLjwgUJ5wBnY
-         dWHU22pjuNELpR8ww/Yggg56sgqNxLd+1wXIubNi5RLxgXrgI1BGCX0h4nN11r3qnYod
-         lPpZSfu+VNRmBlvmQxRZRP8oCct0F3YeQzporNr9YsRovCkKTaG4fLo9qRTDjUYTqna6
-         bWc7q7Nasd6EtxqzJcvJFbr6+m9IcrG/jElRpF+GxDKtaayD7oGF69r93W2wBpGIAkFQ
-         9ETw==
-In-Reply-To: <CAL_Jsq+2TVHGS2onm50rG_AxesJEBUhEGLZNEJN8XAGo4CbMgA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: [PATCH] Add more recommended generic node names
+Date: Fri, 20 Jan 2017 16:29:32 -0600
+Message-ID: <20170120222932.14753-1-robh@kernel.org>
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-On Tue, Jan 3, 2017 at 10:24 PM, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
-> Correcting Grant's email.
->
-> On Tue, Jan 3, 2017 at 1:24 PM, Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
->> The interrupts-extended property is a common property used when
->> interrupt generating devices having interrupt lines in several interrupt
->> controllers with possibly distinct interrupt specifiers.
->>
->> Signed-off-by: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
->
-> I assume this is mostly copied from the kernel documentation. This
-> needs Grant's ack as the kernel documentation license is ambiguous
-> (default GPL) and the spec is Apache.
+DT usage and hardware types have evolved quite a bit and the generic
+node names list is quite out of date. Add new entries to the list based
+on dumping out node names from dts files. This is by no means complete,
+but is low hanging fruit.
 
-Looks fine to me. I've pulled it in.
+Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+---
+ source/devicetree-basics.rst | 51 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 51 insertions(+)
 
-Thanks,
-g.
+diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
+index be80af3d825b..93cea8e82a64 100644
+--- a/source/devicetree-basics.rst
++++ b/source/devicetree-basics.rst
+@@ -182,44 +182,95 @@ name should be one of the following choices:
+ .. hlist::
+    :columns: 3
+ 
++   * adc
++   * accelerometer
+    * atm
++   * audio-codec
++   * audio-controller
++   * backlight
++   * bluetooth
++   * bus
+    * cache-controller
++   * camera
++   * can
++   * charger
++   * clock
++   * clock-controller
+    * compact-flash
+    * can
+    * cpu
++   * cpus
+    * crypto
+    * disk
+    * display
+    * dma-controller
++   * dsp
++   * eeprom
++   * efuse
++   * endpoint
+    * ethernet
+    * ethernet-phy
+    * fdc
+    * flash
+    * gpio
++   * gpu
++   * gyrometer
++   * hdmi
+    * i2c
+    * ide
+    * interrupt-controller
+    * isa
+    * keyboard
++   * key
++   * keys
++   * lcd-controller
++   * led
++   * leds
++   * led-controller
++   * light-sensor
++   * magnetometer
++   * mailbox
+    * mdio
+    * memory
+    * memory-controller
++   * mmc
++   * mmc-slot
+    * mouse
++   * nand-controller
+    * nvram
++   * oscillator
+    * parallel
+    * pc-card
+    * pci
+    * pcie
++   * phy
++   * pinctrl
++   * pmic
++   * pmu
++   * port
++   * ports
++   * pwm
++   * regulator
++   * reset-controller
+    * rtc
+    * sata
+    * scsi
+    * serial
+    * sound
+    * spi
++   * sram-controller
++   * ssi-controller
++   * syscon
++   * temperature-sensor
+    * timer
++   * touchscreen
+    * usb
++   * usb-hub
++   * usb-phy
++   * video-codec
+    * vme
+    * watchdog
++   * wifi
+ 
+ Path Names
+ ~~~~~~~~~~
+-- 
+2.10.1
 
->
->> ---
->>  source/devicetree-basics.rst | 34 ++++++++++++++++++++++++++++++++++
->>  1 file changed, 34 insertions(+)
->>
->> diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
->> index be80af3d825b..1bda0fa54e7a 100644
->> --- a/source/devicetree-basics.rst
->> +++ b/source/devicetree-basics.rst
->> @@ -955,6 +955,40 @@ Description:
->>     to the interrupt parent. If this property is missing from a device, its
->>     interrupt parent is assumed to be its devicetree parent.
->>
->> +interrupts-extended
->> +^^^^^^^^^^^^^^^^^^^
->> +
->> +Property: ``interrupts-extended``
->> +
->> +Value type: ``<phandle> <prop-encoded-array>``
->> +
->> +Description:
->> +
->> +   The *interrupts-extended* property of a device node defines the interrupt or
->> +   the interrupts that are generated by the device. In case where an interrupt
->
-> In the case...
->
->> +   generating devices has several interrupt lines, some of them having distinct
->
-> s/devices/device/
->
->> +   interrupt parents, the *interrupts-extended* property should be used to
->> +   fully describe the interrupts of this device, relative to the interrupt
->> +   controller(s), which is encoded by the phandle part of the property. The non
->> +   phandle part of the property encodes the interrupt specifiers and obeys to
->> +   the *interrupts* property description.
->> +
->> +   If both *interrupts-extended* and *interrupts* properties are present, the
->> +   *interrupts-extended* properties takes precedence, and the *interrupts*
->> +   property may be provided to a client program for compatibility purposes.
->> +
->> +Example:
->> +
->> +   A device with several interrupt lines in distinct interrupt controllers,
->> +   having different interrupt specifiers is illustrated below. In this example
->> +   ``pic`` is an interrupt controller with an *#interrupt-cells* specifier
->> +   of 2, while ``gic`` is an interrupt controller with an *#interrupts-cells*
->> +   specifier of 1.
->> +
->> +
->> +      ``interrupts-extended = <&pic 0xA 8>, <&gic 0xda>;``
->> +
->> +
->>  Properties for Interrupt Controllers
->>  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>
->> --
->> 2.9.3
->>
+--
+To unsubscribe from this list: send the line "unsubscribe devicetree" in
+the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+More majordomo info at  http://vger.kernel.org/majordomo-info.html
