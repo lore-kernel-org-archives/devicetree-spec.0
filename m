@@ -1,95 +1,63 @@
-From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
-Subject: Re: Extending /memreserve/ to allow defining descriptions
-Date: Tue, 7 Mar 2017 13:21:04 +1100
-Message-ID: <20170307022104.GA19967@umbus.fritz.box>
-References: <9c1cb5e8-2afd-e266-72b9-20ca6622956e@gmail.com>
- <20170306035856.GF12030@umbus.fritz.box>
- <87r32a6l43.fsf@linux.vnet.ibm.com>
- <fba988e1-40a0-4a7e-e680-45c7360c5aa3@gmail.com>
+From: Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+Subject: /aliases node and valid property names
+Date: Fri, 17 Mar 2017 21:19:06 -0400
+Message-ID: <20170318011906.GA19897@bill-the-cat>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="0F1p//8PRICkK4MW"
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-        d=gibson.dropbear.id.au; s=201602; t=1488855359;
-        bh=WTiS7++qadrr7xBJ8pRcB1dzdgIADAcGsiWEDVyRMY8=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=fqavQooQMCN1LlzGs0YoHGAbndvKeMKHgc872d6DSCkuKKIpIe90G/gtTcdDO0cMi
-         ZoMwq/aACcwDrTXY5ON7JxO2PF8BIxM8kH8hUUj3ZBpdA4P43gBJ9FcK4IWBe2JlMC
-         9P7rFSU7ArE+9jnkSgFkuKoTg5lhnbbty8qlCN5U=
+Content-Type: multipart/signed; micalg=pgp-sha1;
+        protocol="application/pgp-signature"; boundary="BvvXV5nz0HrS6QiS"
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google;
+        h=date:from:to:subject:message-id:mime-version:content-disposition
+         :user-agent;
+        bh=zweKfladLMyYOrJdo5MCkJhXpF26IKEB6+gPAfUZRo8=;
+        b=WYuAMQvjMNQj++n8M+sXlv1GOHxMX6I+Q3vnT3yjaKjoArz6SwdS74Agh+PGuG7J8c
+         +EkVEpmd1SNthHLEwEgdND8cnGnHvGHtRtSjFzrL03g71HZ1ftTQt7MzZiPQgNiHVqUs
+         zQ6AG0yHn6zTQQWjCErT3qcxTAWa9SaMFsiu0=
 Content-Disposition: inline
-In-Reply-To: <fba988e1-40a0-4a7e-e680-45c7360c5aa3-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Stewart Smith <stewart-23VcF4HTsmIX0ybBhKVfKdBPR1lH4CV8@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, glikely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
 
---0F1p//8PRICkK4MW
+--BvvXV5nz0HrS6QiS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 06, 2017 at 04:12:59PM -0800, Florian Fainelli wrote:
-> On 03/06/2017 03:28 PM, Stewart Smith wrote:
-> > David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org> writes:
-> >> What you could do is to add properties within the device tree further
-> >> annotating the reservations, with the extra structure essentially just
-> >> acting as an easy-to-parse summary of that.  In fact I know that POWER
-> >> systems firmware use 'reserved-ranges' and 'reserved-names' properties
-> >> for this.  I don't know if anyone else has adopted that though.
-> >=20
-> > We've also been toying with the idea of creating a binding for "named
-> > reserved memory range that should probably show up in debugfs"
-> >=20
-> > I'd also be happy with a standard binding to do it.
->=20
-> Seems like
-> Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
-> may be a good place to add descriptive properties about what these
-> reserved regions are? The code parsing this also seems to be easily
-> extensible with adding custom "name" properties.
->=20
-> Using "reserved-names" sounds like a good thing, I will be looking into
-> submitting a binding update in the next few days, but if you beat me to
-> it, happy to review it.
->=20
-> Tangential: is it me, or it's possible for /memreserve/'s address and
-> size cells to disagree with #address-cells and #size-cells defined by
-> the top-level node?
+Hey all,
 
-/memreserve/ has no address or size cells; they're simply 64-bit
-integers.
+I found out about https://github.com/raspberrypi/firmware/issues/613 and
+in digging a little harder, this is not the first case where 'ethernet'
+has been added rather than 'ethernet0'.  Looking at the spec, it's
+implied (by all the examples) that property names end in a number but
+it's certainly allowable by the way things are worded to not.  Is it
+worth adding any further words here, another example, or just leaving
+everything alone?  Thanks!
 
 --=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
+Tom
 
---0F1p//8PRICkK4MW
+--BvvXV5nz0HrS6QiS
 Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Version: GnuPG v1
 
-iQIcBAEBCAAGBQJYvhkOAAoJEGw4ysog2bOS+YsQALPe1t09u5UkjEl29lWCvems
-uu50ICa+2/uRUzDYN94xXSLEAJzb/2cAMyQRF0pGFI1IJzvtxkWi2VzxhHK+7ZNI
-REhKDnJiC66E0q8jeNkZhtWxhYrsACAoT6vfkJTyy5xIFcnqTyt1um7NyU2CC3Fe
-G0N7DxpNJDnZLj1cT/jDBVU8E1roM2g5WR3XzxHcVqA5kNeaKknUs+dNVuKYNOGG
-NskgGLdFpiIQJJJzTJPCZhEj58MVxPOVJ0zfADo+0vDGH2E6AIHvx1f5x+oXaCbl
-OrlkQBRU/SkQ3hKinkO+QpuhtfFShDKMvbhu7AtAZDoszlSETc/X6qHjMLu7lFGY
-tq7EdJmq6xitl2CYrWyHT8XQD9MeHbHIdnnABBkNZmylpLxdhAHhXrq82fX2zv/D
-90GgJk2T6BSRd500ahi5y0bw8OzHD6rh9fJZ0LWHVhww/EC86EU1HLXXFDK0OaGa
-4wrvfYT7MQ1M9OOHbOG5KLWMrO8TrPnXsx75t7NVmQdvY7RC9bNvxHS0UxIxs8XM
-qw4UEDg235kEkNkAXAaDImoFVPUDllxrFL2Vu3FjovsIn90Y/FKglTwVwW/cdw7E
-Maz/tuaRPwIhD9KCYFbwqRprImm4nindkbzvO/dc5RTZVAQqE/EIZkLNHxAtvmUW
-wOLZX3YtA2UvQkAdvwD1
-=JKF1
+iQIcBAEBAgAGBQJYzIsKAAoJEIf59jXTHXZSUToP/ilcvAhdaVH6ZHHyGO6McGsB
+3YVjfNAifNbyiQOEnQJlAEZD8v3dsAaQ4h4g2xO682pEf3x3Od6f56l36Pgagv3b
+ZQteYvxlfCHFrZLqC/nk32AaybAiu/RE4co9tdG5RhTuN6Ek1i49a8JYjaL1WtYM
+GQt8rAQue7YfN7EiBwhx6ckV6vT9oYFpzDMH3jLrxDrgKsimHLoiXBjIHsiPOgNz
+qOmqCTOzcRCTuBo7eggJaQgvaipNubwMg9/0xeEAwZjvIkm0zcKz5SMuYe/i7xT4
+xwh+hYmN5E0zXCBXb9CewY7uoEYvX8BE2fG4IewZHKXjL0uetCkzVQPPCebAzraf
+YQqpu30mhttev8Z6sAXS4C1/fabZFFL+XqjVsjuWvWZVGQAj0FJPp/pNsU+UDtLv
+ZqxfarW6qeYAmP+M9e2Ok9x85xnTBKAbA+KwyZXUFg6KVEqdr7net2nALbPy/MQ8
+bmVFmd5bheSiA+k4yNi6SOOMJDnVSXiRaLuZdblOLsNcnRmBh+00hgJNLIel4UbD
+elV14AWjmH7cORv55P5coY9SfAFErj5hO/Z0R+bJIRxWIiFp1lrfRHlhvcy+Gw31
+fCF6V0BZRU7bMIfyUdPh0zyqmRD+YDT6oeHF37XLLIDCGJNyWklJTRtQ+XhBr2Ch
+TXBrVkMjKo+Bz+gG/MvJ
+=inSF
 -----END PGP SIGNATURE-----
 
---0F1p//8PRICkK4MW--
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+--BvvXV5nz0HrS6QiS--
