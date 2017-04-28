@@ -1,132 +1,171 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+From: Freddie Chopin <freddie_chopin-FWhLrETftxM@public.gmane.org>
 Subject: Re: How to describe internal flash (ROM) in the microcontroller
-Date: Fri, 28 Apr 2017 07:59:43 -0500
-Message-ID: <CAL_Jsq+Gbu35bps2VcQ=pO3WyQE9VZhsuvpKtZ3TJ++B10jPWA@mail.gmail.com>
-References: <1492886823.1240.5.camel@op.pl> <20170424012734.GB16882@umbus.fritz.box>
- <1493364100.1425.6.camel@op.pl>
+Date: Fri, 28 Apr 2017 17:20:46 +0200
+Message-ID: <1493392846.1425.12.camel@op.pl>
+References: <1492886823.1240.5.camel@op.pl>
+         <20170424012734.GB16882@umbus.fritz.box> <1493364100.1425.6.camel@op.pl>
+         <CAL_Jsq+Gbu35bps2VcQ=pO3WyQE9VZhsuvpKtZ3TJ++B10jPWA@mail.gmail.com>
 Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <1493364100.1425.6.camel-FWhLrETftxM@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=op.pl; s=2011;
+        t=1493392847; bh=zaizlyxUHcQvI6mp1uro143ar3/tzYk+JAzZLUsMXl8=;
+        h=Subject:From:To:Date:In-Reply-To:References:From;
+        b=AGn/Z++IEO632eQKV2jCYmggHJj6dN9zW75gPEbJUAHZbCMA0zCg6OaP/NSNvihm6
+         GH64Vka51OPunD1qiYTh3fIQd2kGNPQyxN+FkNCtXKmKDFX55IUNRookqnRiZW9nSA
+         e97Zmh3P+QVDJmCpOQv8kdQZzy4t7acRCGsLqc38=
+In-Reply-To: <CAL_Jsq+Gbu35bps2VcQ=pO3WyQE9VZhsuvpKtZ3TJ++B10jPWA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Freddie Chopin <freddie_chopin-FWhLrETftxM@public.gmane.org>
-Cc: devicetree-spec <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Type: text/plain; charset="iso-8859-1"
+To: devicetree-spec <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-On Fri, Apr 28, 2017 at 2:21 AM, Freddie Chopin <freddie_chopin-FWhLrETftxM@public.gmane.org> wrote:
-> Hello again!
->
-> On Mon, 2017-04-24 at 11:27 +1000, David Gibson wrote:
->> Right, so basically you need a binding for your flash device - a
->> binding is the formal description of how a particular sort of device
->> should be represented in the device tree.  It's not uncommon for new
->> ports to require a few new bindings for "system" devices.
->>
->> First off, I think you want option 1, more or less.  Although I think
->> it originally had a wider meaning, for a long time memory@ nodes have
->> been used pretty much exclusively for general purpose RAM.  I
->> wouldn't
->> suggest overloading that binding for something quite different.
->>
->> I guess in theory I should tell you that all bindings shoul be made
->> clearly, standardized, published and so forth.  In practice, well,
->> it's a tradeoff.  Getting a binding reviewed, published and so forth
->> will generally improve its quality, mean less work for others who use
->> the device in the future and other good things.  On the other hand it
->> it can be a lot of work.  It's definitely worth it for common
->> devices;
->> maybe not so much for board-specific one-offs.
->>
->> Obviously, the first step is to look for an existing binding for the
->> device.  How to establish and maintain a canonical repository of
->> bindings is a subject of continuing debate.  In the meantime the
->> places to look are Documentation/devicetree/bindings in the Linux
->> kernel source, and devicetree.org.  There may be other places, but I
->> don't know them off hand.
->>
->> From the description of your device, I kind of doubt there's an
->> existing binding, though.  So you'll need to write one.  Good news is
->> your device is pretty simple - you can probably copy a binding for a
->> similar device, and just change the 'compatible' value and make any
->> few tweaks you need.
->>
->> I do recommend posting your draft binding here and getting at least
->> cursory new.  If you're new to writing bindings, there are a fair few
->> gotchas - things that might not make the binding unusable, but will
->> differ from existing conventions enough to make life harder for
->> people.
->
-> Thank you David for your reply! When I have something ready, I'll post
-> it here in the hope of some review. As you noticed - this "device" is
-> indeed extremely simple, so I hope it won't be that hard (;
->
-> I'm not so sure about the "standardization" and "publication" part. I
-> do realize that primary usage of devicetrees will be on "desktop PC"
+Hello Rob!
 
-PC's use ACPI.
+On Fri, 2017-04-28 at 07:59 -0500, Rob Herring wrote:
+> > I'm not so sure about the "standardization" and "publication" part.
+> > I
+> > do realize that primary usage of devicetrees will be on "desktop
+> > PC"
+>=20
+> PC's use ACPI.
 
-> and the use in microcontrollers is just an interesting curiosity for
-> now. Apart from the Zephyr project which I mentioned, I only found one
-> more project for microcontrollers which was using *.dts files - the
-> F4OS, which unfortunately seems dead. And if Zephyr didn't bother to
-> standarize and publish anything... (; We'll see how things will evolve.
+Yes, what I wrote was wrong, because I was thinking about something
+else (; I was thinking about devices capable of running a general
+purpose operating system (like Linux), which are quite different from
+microcontrollers. Sorry for the confusion, I have no idea why I wrote
+about "PC" (;
 
-uC's capable of running Linux generally use DT, too.
+> uC's capable of running Linux generally use DT, too.
 
-> Anyway - a few more days with devicetree and I have another question. I
-> don't want to start a new thread for that, as it is related to the
-> first one anyway. This one is harder, as I found no examples at all, so
-> I have absolutely nothing to start with. There are microcontroller
-> cores which may or may not contain a floating-point unit (FPU) - for
-> example ARM Cortex-M4 may have one or none. There are also
-> microcontroller cores which may contain either a single-precision or
-> double-precision FPU - for example ARM Cortex-M7, which may have either
-> fpv5-sp-d16 or fpv5-d16 FPU. Currently I include that info in the
-> kconfig system, where appropriate hidden options are set when selecting
-> a particular chip model/family. As you may imagine I would also like to
-> have that info in the devicetree. I see several options to express that
-> information, but I'm not sure which one fits best.
+You're right, and I'm targeting some of these microcontrollers too
+(like STM32F4 or STM32F7). But my needs are a little bit different when
+it comes to the "basics" (like on-chip flash memory, which is
+completely ignored in Linux). I hope that's only an initial obstacle,
+as I think using DT for typical peripherals like USART, SPI, DMA,
+external hardware and so on will be very similar.
 
-Doesn't the M7 have ID registers registers with define the FP
-capabilities? It should not be in DT if the feature is discoverable.
+Generally my problems are not related to the hardware itself - it
+doesn't really matter whether it's a small microcontroller of a
+multicore applications processor. I think the root cause of the issues
+I'm facing is that my "use case" (small embedded RTOS for
+microcontrollers) is completely different from the use case of a huge
+general purpose OS like Linux. I hope that this use case of mine is not
+so different to be completely incompatible with devicetree (;
 
-Or are you trying to use DT at build time like Zephyr?
+> > Anyway - a few more days with devicetree and I have another
+> > question. I
+> > don't want to start a new thread for that, as it is related to the
+> > first one anyway. This one is harder, as I found no examples at
+> > all, so
+> > I have absolutely nothing to start with. There are microcontroller
+> > cores which may or may not contain a floating-point unit (FPU) -
+> > for
+> > example ARM Cortex-M4 may have one or none. There are also
+> > microcontroller cores which may contain either a single-precision
+> > or
+> > double-precision FPU - for example ARM Cortex-M7, which may have
+> > either
+> > fpv5-sp-d16 or fpv5-d16 FPU. Currently I include that info in the
+> > kconfig system, where appropriate hidden options are set when
+> > selecting
+> > a particular chip model/family. As you may imagine I would also
+> > like to
+> > have that info in the devicetree. I see several options to express
+> > that
+> > information, but I'm not sure which one fits best.
+>=20
+> Doesn't the M7 have ID registers registers with define the FP
+> capabilities? It should not be in DT if the feature is discoverable.
+>=20
+> Or are you trying to use DT at build time like Zephyr?
 
-> 1. In some places the cores which have FPU are suffixed with "F" ("ARM
-> Cortex-M4" becomes "ARM Cortex-M4F"), so I'm considering embedding that
-> info inside "compatible" string of the cpu nodes (for example
-> "arm,cortex-m4" or "arm,cortex-m4f"). The problem here is that this
-> naming is not official and this wouldn't allow to differentiate between
-> different types of FPU (for example - does "arm,cortex-m7f" have
-> single-precision or double-precision FPU).
->
-> 2. I could just add a non-standard property to cpu nodes (or maybe to
-> cpus node?), something like:
->
-> distortos,fpu = "fpv5-d16";
+This is exactly my plan here. As I'm also targeting much smaller
+devices, I'm planning to use DT only during compilation, with no
+support for embedded binary devicetree blobs handled at run-time.
+That's why I actually need some of the things which are discoverable to
+be known during the build. For example if the device has no FPU, the
+code to do context switching is much smaller (and faster) and uses less
+stack space to save context. Other than that I will also need different
+compiler flags to build the RTOS for targets with or without FPU. It
+wouldn't be a good RTOS if the code size would be needlessly big... For
+Linux is doesn't really matter whether the binary size is 10 or 11MB,
+but here I'm dealing with targets which can have as little as a few
+dozen kB of flash space for the whole executable, and typically
+something around 128-256kB.
 
-Please don't. That would not scale if every OS out there did that.
+But you mentioned an important thing here - indeed DT contains (at
+least it should) only the things which cannot be discovered during run-
+time... So maybe my plan to add info about FPU to DT is not such a good
+idea.
 
-I would probably append something to the cpu compatible if you must.
-In any case, Zephyr folks are going to have the same problem, so we
-should have a common solution.
+Generally for my project I need some way to easily describe "board"
+(interfaces, external devices, GPIO pins, DMA channels, interrupts,
+...), preferably in a single file, easily editable by hand. My current
+plan is to use such "board description" to generate some real C++ code
+with Python scripts - this code will define global objects (like serial
+ports, GPIOs, EEPROM chips, ...), perform some low-level
+initialization, configure interrupts and GPIOs, ... Some of that
+functionality is already present and uses *.json file as input. But
+after some reading I come to conclusion that there's no point in
+inventing my own format to describe hardware, when there already is one
+- devicetree. *.dts generally fits my needs pretty good, there are just
+some small details which I need to handle somehow, and I'm still
+thinking about the best way to integrate my concepts with kconfig and
+build system.
 
-> 3. I could add FPU as a new node, where I could describe it with the
-> standard "compatible" property. I think this is actually the best
-> approach, but I'm having hard time thinking about location of such node
-> - should it be placed in the root of the devicetree, or maybe as a
-> child of the cpu node? The second variant seems to be the best one, as
-> it fits the scenario of Asymmetric Multiprocessing, where the FPU may
-> be present only on selected cores.
->
-> Could anyone share any pointers on that matter? Again - thanks in
-> advance!
->
-> Regards,
-> FCh
->
-> --
-> To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
-> the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-> More majordomo info at  http://vger.kernel.org/majordomo-info.html
+> > 2. I could just add a non-standard property to cpu nodes (or maybe
+> > to
+> > cpus node?), something like:
+> >=20
+> > distortos,fpu =3D "fpv5-d16";
+>=20
+> Please don't. That would not scale if every OS out there did that.
+>=20
+> I would probably append something to the cpu compatible if you must.
+> In any case, Zephyr folks are going to have the same problem, so we
+> should have a common solution.
+
+Do you mean "append" as "add suffix" (compatible =3D "arm,cortex-m7f";)
+or "append" as "add another value" (compatible =3D "arm,cortex-m7",
+"arm,fpv5-d16";)?
+
+In case of Zephyr - from what I understand - for now part of the
+configuration is inside kconfig anyway, and this includes the FPU
+information. Maybe I should do the same and just associate the
+"compatible" property of the chip with some kconfig part? For example I
+would require the board's compatible to have the chip model like that:
+
+/ {
+    compatible =3D "some-board", "st,stm32f407vg";
+    ...
+
+Which I would then map somehow to a kconfig fragment, which would be
+just:
+
+select HAS_FPU
+select HAS_MPU
+...
+
+This way I wouldn't have to "pollute" the devicetree with that info. Do
+you think this would be the preferable solution here?
+
+I'm still trying to get a good grasp of devicetree, so some of my
+questions and ideas are probably completely dumb (I hope they don't
+make you mad (; ). As I wrote above - probably 90% of my needs are
+already covered by DT, but some of the concepts important for small
+platforms require me to improvise (; These would generally stem from
+the fact that OS like Linux uses "compiled" *.dts file in run-time,
+while I want to use *.dts file only as an input format for source code
+generator and maybe during project configuration/compilation (for
+example to select proper piece of code=C2=A0to be compiled - like context
+switching routine  for appropriate core, with or without FPU).
+
+Another idea - maybe I should just include every such "non-standard"
+information in /chosen?
+
+Thanks for the advices already offered and thanks in advance for any
+further guidance you could share with me!
+
+Regards,
+FCh
