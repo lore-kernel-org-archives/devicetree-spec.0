@@ -1,47 +1,45 @@
 From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: Devicetree at Linux Plumbers Conference 2017
-Date: Mon, 31 Jul 2017 18:29:17 +0100
-Message-ID: <CACxGe6v0hm_YC+JdatGpNcYtaeSiUgm58Gnj1ZWndLHCPcA1tQ@mail.gmail.com>
+Subject: Re: Devicetree at Linux Plumbers Conference 2017
+Date: Tue, 1 Aug 2017 17:37:25 +0100
+Message-ID: <CACxGe6vz65ZhVRNCUYE91LAOJu7eQQRHkFOm5BS22Jvac=UaYA@mail.gmail.com>
+References: <CACxGe6v0hm_YC+JdatGpNcYtaeSiUgm58Gnj1ZWndLHCPcA1tQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=H7P+RjU+QkotCLKlZ4JeFzt86NFMGJCA7QbmMBFAnYs=;
-        b=GR/zOiD7G4QTiI/IgwhIFxAIn/8cWHXymkZazPDTvJalMThtYZ7lgh2IaIDBwslt4N
-         7PDUV+NTkwqUNWJ8j2AybwmpUbK+DUNmClqJqgNiUMjpN70eD7eLuJo5x05tmHzU81gR
-         tCGCURdm3pOBVouwp2wGJLGejrLV4gSkfLlyZ4hMZdK78HuJ3AwyDIty1qYYqVZxYEEV
-         hPOCHDkBI0GQgxOVoKE2OnBa8B4DFBGt7IK0J0PMr8nt9lEjaMGSPz5kPMWitdpSjG9J
-         1+tBDU1biXASxBbXa9tt7IDJCBEk+KjD1XL4CpBd4NPkG+O96fIHPX1RJe6SZqbVdFzM
-         E1DQ==
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+        h=mime-version:sender:in-reply-to:references:from:date:message-id
+         :subject:to:cc;
+        bh=c2CUhlp4BJQuuCVsie89jwaxTEUxr/cszFHDdm6BPlU=;
+        b=pwhyKxaaA2OMV4r+MNt8tMPaEfUrH4rpXafGKbCNS8qU5gRZKre5wZ9MqRC5bzwmt4
+         tFr8Kq9tzHz7s0NrxplI6ZaSxHHqGVYndeMWdwwZwT2E5rkM23NZ8AzzsYeWEgmgxuer
+         jgilyk0XDd/R7NVMBunMOTiXdS4WUAqegK9ffqXtsQjOQlDx7USsvLOzatl88mMSW1Qj
+         fStd9oTc6pgGwr/Uo7ulKMn7zjObYsnciqveKs3/4rujFN/Sh1+FxVyuDqei/IoBPqhE
+         hf84PyKIeYK3QuHB+gLcH7/NLgWmSfvd7b65fTgH5eoAfUoo6K7EGa173UPK4v6Qn+nL
+         YBDQ==
+In-Reply-To: <CACxGe6v0hm_YC+JdatGpNcYtaeSiUgm58Gnj1ZWndLHCPcA1tQ-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, =?UTF-8?Q?Pawe=C5=82_Moll?= <Pawel.Moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Tomasz Figa <tomasz.figa-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Benoit Cousson <bcousson-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Fabien Parent <fparent-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Stephen Warren <SWarren-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Jon Loeliger <jdl-CYoMK+44s/E@public.gmane.org>, Thomas Petazzoni <thomas.petazzoni-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>, Olof Johansson <olof.johansson-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-Hi folks,
+On Mon, Jul 31, 2017 at 6:29 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+> Hi folks,
+>
+> For anyone attending Linux Plumbers Conference this year, I'm trying
+> to put together an agenda for a Devicetree miniconference, and I need
+> topics. If you have anything you want to discuss or present, please
+> add it to the following wiki page and/or email me:
+>
+> http://wiki.linuxplumbersconf.org/2017:device_tree
 
-For anyone attending Linux Plumbers Conference this year, I'm trying
-to put together an agenda for a Devicetree miniconference, and I need
-topics. If you have anything you want to discuss or present, please
-add it to the following wiki page and/or email me:
+A number of people have asked about holding this at ELCE instead of
+Linux Plumbers, so I'd like some feedback. Here's a quick survey.
+Please reply ASAP if your interested in a Devicetree miniconference
+this year:
 
-http://wiki.linuxplumbersconf.org/2017:device_tree
+https://docs.google.com/forms/d/e/1FAIpQLSe0k9L597egFfOwZoDwq0Og-hRt8IAEPtp-JpvoH9nw2njx0g/viewform?usp=sf_link
 
-I=E2=80=99m interested primarily DT topics, but I=E2=80=99ll also consider =
-topics
-related to embedded platform-support and firmware.
-
-Topic proposals don=E2=80=99t need to be fully flushed out, but I do need t=
-hem
-quickly. I need to show progress on topics by Thursday this week if it
-is going to be accepted.
-
-Thanks in advance,
+Thanks,
 g.
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
