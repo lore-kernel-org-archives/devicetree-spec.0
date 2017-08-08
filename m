@@ -1,44 +1,33 @@
-From: Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: [PATCH 3/3] conf: Use the svg for html logo
-Date: Mon,  7 Aug 2017 16:39:17 -0700
-Message-ID: <20170807233917.17409-4-stephen.boyd@linaro.org>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: Re: [PATCH 0/3] HTML site tweaks + SVG
+Date: Tue, 8 Aug 2017 17:08:30 -0500
+Message-ID: <CAL_JsqLZhUBEbkL9VVwZF0bdDLu2sTV1xzH5XYsdrU7JXJw7fQ@mail.gmail.com>
 References: <20170807233917.17409-1-stephen.boyd@linaro.org>
+Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:subject:date:message-id:in-reply-to:references;
-        bh=O3aT6FCkVCZlhiSFEINFBMU+eUg7qBDbcbi1cIcCamA=;
-        b=LMLTZcZrx4ExJjwsdllk8SxG0oQI0L2VTgdxCDOE6dwIEwnVRvawBCcP6ALjYnPaY+
-         QijItG89goMBY1m1C76nCnvb2JjGvnOqo1+0qAtyOLHBrkSGqdypNPa3QmTLyOVeYID0
-         5DXSvoeluy8BWLNO5xl98qrzQ+BSGXrmcO5Ro=
 In-Reply-To: <20170807233917.17409-1-stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-I couldn't get the pdf output to use the svg, but at least we can
-get the html output to.
+On Mon, Aug 7, 2017 at 6:39 PM, Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> wrote:
+> These patches tweak the config to have the github project and sidebar
+> as well as add an SVG for the devicetree logo and then uses that
+> logo instead of the png on the website.
+>
+> Stephen Boyd (3):
+>   conf: Configure html to have github project and sidebar
+>   Add an SVG logo
+>   Use the svg for html logo
+>
+>  source/conf.py             | 17 +++++++++++++----
+>  source/devicetree-logo.svg | 14 ++++++++++++++
+>  2 files changed, 27 insertions(+), 4 deletions(-)
+>  create mode 100644 source/devicetree-logo.svg
 
-Signed-off-by: Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
----
- source/conf.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Series applied. Thanks.
 
-diff --git a/source/conf.py b/source/conf.py
-index 4654e49761d2..1881e29c8414 100644
---- a/source/conf.py
-+++ b/source/conf.py
-@@ -150,7 +150,7 @@ html_theme_path = [alabaster.get_path()]
- 
- # The name of an image file (relative to this directory) to place at the top
- # of the sidebar.
--html_logo = "devicetree-logo.png"
-+html_logo = "devicetree-logo.svg"
- 
- # The name of an image file (relative to this directory) to use as a favicon of
- # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
--- 
-2.10.0.297.gf6727b0
+Rob
