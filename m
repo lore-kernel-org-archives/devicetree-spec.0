@@ -1,77 +1,49 @@
 From: Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: Re: [PATCH] Add a Travis CI config
-Date: Wed, 09 Aug 2017 16:07:37 -0700
-Message-ID: <150232005798.32400.15126616491999695987@sboyd-linaro>
-References: <20170808235109.4099-1-robh@kernel.org>
- <150231119447.29244.17286240817028373744@sboyd-linaro>
- <CAL_JsqKx2kVXNa9VfA6G9vL=4E0CuPH1mo28s60xsdB62XYJeA@mail.gmail.com>
+Subject: [PATCH] interrupt-mapping: Fix parent interrupt specifier description
+Date: Wed,  9 Aug 2017 16:28:24 -0700
+Message-ID: <20170809232824.4959-1-stephen.boyd@linaro.org>
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
-        h=mime-version:content-transfer-encoding:to:from:in-reply-to:cc
-         :references:message-id:user-agent:subject:date;
-        bh=BP5P4/+KtQxMzsChMRuA/f/rxDaq34QzeBt6tmu4CQ0=;
-        b=jtdxf21DGDwsxLeRVQKMNK/2iCkB1lpEu2v4jxG1Opo0/SfQB3fZV9B9v0Ub1DVWcu
-         6kufPCqAIY/knyMha3mcbD6FnPhTIbawW6c+YaQIt1Hzct8TMpCWdL9h2XdNkkcSf8dn
-         hohjgqBIyrrpVYbfxtB/37GSF5trgAB36W+ic=
-In-Reply-To: <CAL_JsqKx2kVXNa9VfA6G9vL=4E0CuPH1mo28s60xsdB62XYJeA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=TjSuMIrWlwx+ib9eTOXqZZ3Z6sO4U7ynvXoo5uOeq1c=;
+        b=dUooMU3AyNvuWiEO9y52II2q8SS3jYexcDO+flFsAuYLcp8g1Y62WE4HvOjsbJ8mA+
+         4T0mvbl+H6ZkvNnIu7BxBmEU5YZajvIfwGACW7UfVukliEEO1ZO5z95cWHziWjdA3VSO
+         t/wOYL/DRU+BsA0aALagYmVjN913+jWDILF9Y=
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Type: text/plain; charset="windows-1252"
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-Quoting Rob Herring (2017-08-09 15:43:28)
-> On Wed, Aug 9, 2017 at 3:39 PM, Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> wr=
-ote:
-> > Quoting Rob Herring (2017-08-08 16:51:09)
-> >> Add an initial Travis CI configuration file. Currently, the output is
-> >> not deployed anywhere, so it's just pass/fail for the building of pdf
-> >> and html. The CI build is here:
-> >>
-> >> https://travis-ci.org/devicetree-org/devicetree-specification
-> >>
-> >> Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-> >> ---
-> >>  .travis.yml | 34 ++++++++++++++++++++++++++++++++++
-> >>  1 file changed, 34 insertions(+)
-> >>  create mode 100644 .travis.yml
-> >>
-> >> diff --git a/.travis.yml b/.travis.yml
-> >> new file mode 100644
-> >> index 000000000000..8426aa80db66
-> >> --- /dev/null
-> >> +++ b/.travis.yml
-> >> @@ -0,0 +1,34 @@
-> >> +language: c
-> >
-> > Can't use python? O well.
-> =
+The number of cells here is not dictated by the #interrupt-cells
+property of this node, but the same property in the interrupt
+parent. This looks like a copy/paste mistake from child interrupt
+specifier.
 
-> All this does is set CC. I don't think setting to python helps unless
-> I wanted to test with specific python versions, but what's in trusty
-> is fine.
-> =
+Signed-off-by: Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gma=
+ne.org>
+---
+ source/devicetree-basics.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> If I remove it, looks like the default is ruby (seems like a good default=
- ;) ).
-
-Heh ok.
-
-> =
-
-> Yes, I'll fold that in! I was wondering how that gets added. This is
-> my first foray into travis-ci...
-> =
-
-> Updated version is here:
-> https://github.com/devicetree-org/devicetree-specification/tree/travis-ci=
--testing
-> =
-
-
-Awesome! FWIW,
-
-Reviewed-by: Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
+index df3d3c313574..02696bac15c7 100644
+--- a/source/devicetree-basics.rst
++++ b/source/devicetree-basics.rst
+@@ -1120,8 +1120,8 @@ Description:
+    parent interrupt specifier
+        The interrupt specifier in the parent domain. The number of 32-bit
+        cells required to specify this component is described by the
+-       *#interrupt-cells* property of this node=E2=80=94the nexus node con=
+taining
+-       the *interrupt-map* property.
++       *#interrupt-cells* property of the node pointed to by the
++       interrupt-parent field.
+=20
+    Lookups are performed on the interrupt mapping table by matching a
+    unit-address/interrupt specifier pair against the child components in
+--=20
+2.7.4
