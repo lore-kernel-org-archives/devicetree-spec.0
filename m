@@ -1,117 +1,71 @@
-From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: editing-type thoughts on devicetree spec 0.1 document
-Date: Mon, 28 Aug 2017 19:22:44 -0700
-Message-ID: <59A4CFF4.1080101@gmail.com>
-References: <alpine.LFD.2.20.1708170751220.8230@localhost.localdomain>
+From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Subject: Re: Devicetree at Linux Plumbers Conference 2017
+Date: Wed, 30 Aug 2017 11:41:34 +0100
+Message-ID: <CACxGe6vOMsL=5tRzAyOoW-Rh5CjvJcvnn_Zv34L3g_tQVGfK4A@mail.gmail.com>
+References: <CACxGe6v0hm_YC+JdatGpNcYtaeSiUgm58Gnj1ZWndLHCPcA1tQ@mail.gmail.com>
+ <CACxGe6vz65ZhVRNCUYE91LAOJu7eQQRHkFOm5BS22Jvac=UaYA@mail.gmail.com>
+ <CACxGe6vX4tz9QiCvSyaf9kqHXk+ubpGx0+2w608b7NBY0yNnyQ@mail.gmail.com>
+ <CACxGe6u9v1pW=FFPJc04fwZqJRsvRaYHK4qfGzAmW=4Ft+Q_QQ@mail.gmail.com> <CACxGe6uEmrho8n5XrXOOEBybQGp7NJ2Jy68Gen+CVxv2Jj95Og@mail.gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-transfer-encoding;
-        bh=wTiC7DQfIHYZ3fxWOdN1qnYhhd7IsaCmMkTU225vG80=;
-        b=diPL4OpiGQhlbWBSCIlHD2Hc2cJen85mS97NN0zd6NqYIp+qOoFbW326JilEbYHkOG
-         3NjV9jI//oredM1iZw3dDLHLI1g9ZEH2ZZaP+ix7bDAV1foi8yBAMllG+O+sGNi9TPqH
-         ucxwwWCAiJOaTaHt+OO16/fHiwscUf3GvsfYY+i/nB0UFozqN1g+5x2I8cckQbMYsfs9
-         ItmWuqQXUBeIh3l+q9OY2a0E9qBOqiTT/bVI66/uxZbM4Gkltjt1HI31hI3kj/RVy07p
-         qdO3j7Q4dAqe9VA/IbMtBY6upwokHcRjQuHPG5Vh5sz73RrTRXNwwAG2Cb4urd99adJc
-         vBKw==
-In-Reply-To: <alpine.LFD.2.20.1708170751220.8230-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
+        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:sender:in-reply-to:references:from:date:message-id
+         :subject:to:cc;
+        bh=srSYOxotO2bPjPar+pu+d84p9Y4l/uLTGcF0F79D72Q=;
+        b=qbmc3yQUkPUBB24RFFYCBIfnvvHiYOpp8dC1ahuY8Qkm5va7Puk0pwf3vLvfciU1u8
+         1cRWjp29Ej4d8W1YYOCJo4ucHbf/tGWfNnDcym3gs8AGRoUVA/TTv1IOKmaHw3sUV2B3
+         fda1ZyfI4vPeM1luS31jk2SD8s46eSja9B3a4K7DSfyBE6xeS2Xo3WQSfkIPZRgXyth1
+         OvtrjkMAgQ7GjZjByiH90Sp7B6qzxb5FtGhELA/1nvzTxfve4P7ynsC98AoGM4egb47J
+         PMBP2knLFZ7Lpa07QB08Q5sL4+JWcMI52DFlAhiYp3ibGfrdBRaXoVFKvf0GLAP2F6KQ
+         0FHQ==
+In-Reply-To: <CACxGe6uEmrho8n5XrXOOEBybQGp7NJ2Jy68Gen+CVxv2Jj95Og-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: "Robert P. J. Day" <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Transfer-Encoding: 7bit
+To: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, =?UTF-8?Q?Pawe=C5=82_Moll?= <Pawel.Moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Tomasz Figa <tomasz.figa-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Benoit Cousson <bcousson-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Fabien Parent <fparent-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Stephen Warren <SWarren-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Jon Loeliger <jdl-CYoMK+44s/E@public.gmane.org>, Thomas Petazzoni <thomas.petazzoni-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>, Olof Johansson <olof.johansson-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-adding devicetree-spec to distribution list
+On Mon, Aug 28, 2017 at 1:30 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+> On Thu, Aug 10, 2017 at 8:23 AM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+>> On Wed, Aug 2, 2017 at 2:19 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+>>>> A number of people have asked about holding this at ELCE instead of
+>>>> Linux Plumbers, so I'd like some feedback. Here's a quick survey.
+>>>> Please reply ASAP if your interested in a Devicetree miniconference
+>>>> this year:
+>>>>
+>>>> https://docs.google.com/forms/d/e/1FAIpQLSe0k9L597egFfOwZoDwq0Og-hRt8IAEPtp-JpvoH9nw2njx0g/viewform?usp=sf_link
+>>>
+>>> Last call for survey responses.
+>>>
+>>> I've had 10 responses so far, and the concensus it to hold it at ELCE.
+>>> Ted thinks he'd be able to give us a 1/2 day on Thursday 26 October
+>>> (ELCE runs 23-25, and KSummit 24-26). Unless someone makes a strong
+>>> argument otherwise, I'm going to choose locating with ELCE/Ksummit.
+>>
+>> I've received 11 responses and by far the preference to hold the
+>> miniconference at ELCE/KSummit, so I'm going with that. I proposed it
+>> as a Ksummit workshop on ksummit-discuss. I've had a few private
+>> replies, but there hasn't been any on-list traffic yet. If you're
+>> planning to attend, it will help if you reply on ksummit-discuss
+>> saying that you would like to be there.
+>>
+>> https://lists.linuxfoundation.org/pipermail/ksummit-discuss/2017-August/004708.html
+>
+> I owe all of you an update. Unfortunately I don't have any new
+> information yet. I've still got a proposal in to hold a devicetree
+> workshop at Kernel Summit, and if it does get accepted, then /most
+> likely/ it will happen on Thursday afternoon. Don't make any travel
+> plans based on that.
+>
+> As soon as I hear something either way I'll reply to this thread with
+> the new information.
 
--Frank
+Confirmed! The Devicetree Workshop will be Thursday 26 October in the
+afternoon. Anyone registered for OSS will be able to attend. I don't
+know yet if there are any other consessions for registration. I'm
+finding out now and will update as soon as I know.
 
-On 08/20/17 12:08, Robert P. J. Day wrote:
-> 
->   Was recently asked to give a short tutorial on device trees, so
-> started perusing the current 0.1 spec, comparing contents to current
-> linux git repo, made a few notes, here they are, admittedly incredibly
-> nitpicky so anyone is free to do with them what they want or just
-> ignore them in their entirety; it's just my editor/proofreader side
-> coming out. Page numbers refer to PDF document.
-> 
-> p. 2: "... would like [to] thank ..."
-> 
-> p. 2: "... development [of] this specification ..."
-> 
-> p. 3: "In this document the term boot program ..."; italicize "boot
-> program"
-> 
-> p. 3,4: "Examples of a boot programs [sic] ..."
-> 
-> p. 4: "IEEE-1275" should not be hyphenated (occurs more than once)
-> 
-> p. 4: Should it be "PowerISA" or "Power ISA"? Both forms are used.
-> 
-> p. 6: "An [sic] DTSpec-compliant ..."
-> 
-> p. 7: "The nodes with the name Ethernet [sic] ..." actually, it's
-> "ethernet".
-> 
-> p. 8: Why are uart node and first ethernet node both at fe001000? Is
-> that deliberate? That seems wrong.
-> 
-> p. 9: Non-standard property names include orgs fsl, ibm and linux ...
-> i would be tempted to add samsung since there is a *ton* of samsung
-> content of that form. Just a thought.
-> 
-> p. 11: "Chapter 4 describes the representation of specific devices
-> [and?] may also specify additional requirements."
-> 
-> p. 11: Example of compatible property is:
-> 
->   compatible = "fsl,mpc8641-uart", "ns16550";
-> 
-> No such line appears in the current kernel source, but there is a
-> *pile* of:
-> 
->   compatible = "fsl,ns16550", "ns16550";
-> 
-> if one wants to provide an example that actually occurs in the source.
-> 
-> p. 11: What is the "model" property used for? Apart from being
-> moderately informational, is it used for any compatibility matching?
-> That short section doesn't make that clear.
-> 
-> p. 12: Regarding the deprecated "linux,phandle" property, the current
-> linux source using that as part of an actual DTS file appears to
-> consist entirely of three occurrences:
-> 
->   arm/boot/dts/imx6qdl-gw560x.dtsi:	linux,phandle = <&reg_vdd_arm>;
->   arm/boot/dts/imx6qdl-gw5903.dtsi:	linux,phandle = <&reg_vdd_arm>;
->   arm/boot/dts/imx6qdl-gw5903.dtsi:	linux,phandle = <&reg_vdd_soc>;
-> 
-> If those last three instances were fixed, would there be any need to
-> continue supporting "linux,phandle"?
-> 
-> Still on the topic of phandles, i notice a number of lines of the
-> form:
-> 
->   dcr-parent = <&{/cpus/cpu@0}>;
-> 
-> What's with the curly braces there? Perhaps i missed it, but those
-> don't seem to be explained in the spec. Are curly braces required when
-> specifying the full path to the node name? If so, is that mentioned
-> somewhere?
-> 
-> p. 12: One listed value for status is "okay", but I notice a number of
-> lines in various DTS files:
-> 
->   status = "ok";
-> 
-> If that's an acceptable alternative, it should be mentioned.
-> 
-> p. 13: "arbitraty"
-> 
-> 
->   i think i need to take a break and read the interrupts section
-> carefully.
-> 
-> rday
-> 
+Cheers,
+g.
