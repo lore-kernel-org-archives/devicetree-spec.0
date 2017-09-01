@@ -1,12 +1,11 @@
 From: "Robert P. J. Day" <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
-Subject: [PATCH] Aesthetic/grammar fixes to first part of devicetree-basics.rst
- 0.1 spec
-Date: Fri, 1 Sep 2017 15:37:49 -0400 (EDT)
-Message-ID: <alpine.LFD.2.21.1709011536310.5038@localhost.localdomain>
+Subject: [PATCH] Aesthetic tweaks to devicenodes.rst chapter, 0.1 DT spec.
+Date: Fri, 1 Sep 2017 15:54:28 -0400 (EDT)
+Message-ID: <alpine.LFD.2.21.1709011553350.5198@localhost.localdomain>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323328-725556867-1504243199=:20835"
+Content-Type: multipart/mixed; BOUNDARY="8323328-1835193447-1504246079=:21695"
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-Content-ID: <alpine.LFD.2.21.1709011536311.5038-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
+Content-ID: <alpine.LFD.2.21.1709011553351.5198-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
@@ -14,194 +13,154 @@ To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
   This message is in MIME format.  The first part should be readable text,
   while the remaining parts are likely unreadable without MIME-aware tools.
 
---8323328-725556867-1504243199=:20835
+--8323328-1835193447-1504246079=:21695
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Content-ID: <alpine.LFD.2.21.1709011536312.5038-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
+Content-ID: <alpine.LFD.2.21.1709011553352.5198-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
 
 
+Aesthetic fixups to devicenodes.rst chapter of DT spec, including:
 
-Various grammar/font/spacing tweaks to first part of
-devicetree-basics.rst, including:
-
- * rendering node names in monospaced font
- * italicizing some terms
- * proper capitalization of some terms
+ * grammar fixes
+ * font changes
+ * define "PIR" acronym when first used
 
 Signed-off-by: Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
 
 ---
 
-  have not processed the modified source file so i can't verify i
-didn't mess something up, but all these changes look pretty innocuous;
-more to come a chunk at a time.
+  resent to devicetree-spec list.
 
-  also resending to devicetree-spec list.
+diff --git a/source/devicenodes.rst b/source/devicenodes.rst
+index 78b5bdb..bf82114 100644
+--- a/source/devicenodes.rst
++++ b/source/devicenodes.rst
+@@ -7,14 +7,14 @@ Base Device Node Types
+ ----------------------
 
-diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
-index 02696ba..5874ec3 100644
---- a/source/devicetree-basics.rst
-+++ b/source/devicetree-basics.rst
-@@ -15,9 +15,9 @@ program’s memory and passes a pointer to the devicetree to the client.
- This chapter describes the logical structure of the devicetree and
- specifies a base set of properties for use in describing device nodes.
- Chapter :ref:`chapter-device-node-requirements` specifies certain device nodes
--required by a |spec| compliant
--devicetree. Chapter 6 describes the |spec| defined device bindings— the
--requirements for representing certain device types classes of devices.
-+required by a |spec|-compliant
-+devicetree. Chapter 6 describes the |spec|-defined device bindings—the
-+requirements for representing certain device types or classes of devices.
- Chapter 8 describes the in-memory encoding of the devicetree.
+ The sections that follow specify the requirements for the base set of
+-device nodes required in an |spec|-compliant devicetree.
++device nodes required in a |spec|-compliant devicetree.
 
- A devicetree is a tree data structure with nodes that describe the
-@@ -25,7 +25,7 @@ devices in a system. Each node has property/value pairs that describe
- the characteristics of the device being represented. Each node has
- exactly one parent except for the root node, which has no parent.
+ All devicetrees shall have a root node and the following nodes shall be
+ present at the root of all devicetrees:
 
--An |spec|-compliant devicetree describes device information in a system
-+A |spec|-compliant devicetree describes device information in a system
- that cannot necessarily be dynamically detected by a client program. For
- example, the architecture of PCI enables a client to probe and detect
- attached devices, and thus devicetree nodes describing PCI devices
-@@ -38,8 +38,8 @@ probing.
- :numref:`example-simple-devicetree` shows an example representation of a
- simple devicetree that is nearly
- complete enough to boot a simple operating system, with the platform
--type, CPU, and memory described. Device nodes are shown with properties
--and values shown beside the node.
-+type, CPU, memory and a single UART described. Device nodes are shown
-+with properties and values inside each node.
+ *  One ``/cpus`` node
 
- .. _example-simple-devicetree:
- .. digraph:: tree
-@@ -60,8 +60,8 @@ and values shown beside the node.
-    #size-cells=\<0\>\l"]
+-*  At least one ``memory`` node
++*  At least one ``/memory`` node
 
-    "cpu@0" [ label="\N |
--   reg=\<0\>\l
-    device_type=\"cpu\"\l
-+   reg=\<0\>\l
-    timebase-frequency=\<825000000\>\l
-    clock-frequency=\<825000000\>\l"]
+ Root node
+ ---------
+@@ -65,7 +65,7 @@ and have the node name ``/aliases``.
+ Each property of the ``/aliases`` node defines an alias. The property name
+ specifies the alias name. The property value specifies the full path to
+ a node in the devicetree. For example, the property serial0 =
+-``"/simple-bus@fe000000/serial@llc500"`` defines the alias serial0.
++``"/simple-bus@fe000000/serial@llc500"`` defines the alias ``serial0``.
 
-@@ -165,10 +165,10 @@ identified by a forward slash (/).
+ Alias names shall be a lowercase text strings of 1 to 31 characters from
+ the following set of characters.
+@@ -98,7 +98,7 @@ considering a string as a device path, shall detect and use the alias.
+         ethernet0 = "/simple-bus@fe000000/ethernet@31c000";
+     };
 
- In :numref:`example-nodenames`:
+-Given the alias serial0, a client program can look at the aliases node
++Given the alias ``serial0``, a client program can look at the ``/aliases`` node
+ and determine the alias refers to the device path
+ ``/simple-bus@fe000000/serial@llc500``.
 
--* The nodes with the name cpu are distinguished by their unit-address
-+* The nodes with the name ``cpu`` are distinguished by their unit-address
-   values of 0 and 1.
--* The nodes with the name Ethernet are distinguished by their
--  unit-address values of FE002000 and FE003000.
-+* The nodes with the name ``ethernet`` are distinguished by their
-+  unit-address values of ``fe002000`` and ``fe003000``.
+@@ -110,8 +110,8 @@ physical memory layout for the system. If a system has multiple ranges
+ of memory, multiple memory nodes can be created, or the ranges can be
+ specified in the *reg* property of a single memory node.
 
- Generic Names Recommendation
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@@ -435,7 +435,7 @@ properties are described in detail in this section. Device nodes defined
- by |spec| (see Chapter :ref:`chapter-device-node-requirements`) may specify
- additional requirements or constraints regarding the use of the standard
- properties. Chapter :ref:`chapter-device-bindings` describes the representation
--of specific devices may also specify additional requirements.
-+of specific devices and may also specify additional requirements.
+-The name component of the node name (see section :ref:`sect-node-names`)
+-shall be memory.
++The *unit-name* component of the node name (see section :ref:`sect-node-names`)
++shall be ``memory``.
 
- .. note:: All examples of devicetree nodes in this document use the
-    :abbr:`DTS (Devicetree Source)` format for specifying nodes and properties.
-@@ -467,10 +467,10 @@ Description:
+ The client program may access memory not covered by any memory
+ reservations (see section :ref:`sect-fdt-memory-reservation-block`)
+@@ -241,16 +241,16 @@ time. It shall be a child of the root node.
+     };
 
- Example:
+ Older versions of devicetrees may be encountered that contain a
+-deprecated form of the stdout-path property called linux,stdout-path.
++deprecated form of the *stdout-path* property called *linux,stdout-path*.
+ For compatibility, a client program might want to support
+-linux,stdout-path if a stdout-path property is not present. The meaning
++*linux,stdout-path* if a *stdout-path* property is not present. The meaning
+ and use of the two properties is identical.
 
--   ``compatible = "fsl,mpc8641-uart", "ns16550";``
-+   ``compatible = "fsl,ns16550", "ns16550";``
+ ``/cpus`` Node Properties
+ -------------------------
 
-    In this example, an operating system would first try to locate a device
--   driver that supported fsl,mpc8641-uart. If a driver was not found, it
-+   driver that supported fsl,ns16550. If a driver was not found, it
-    would then try to locate a driver that supported the more general
-    ns16550 device type.
+-A cpus node is required for all devicetrees. It does not represent a
+-real device in the system, but acts as a container for child cpu nodes
++A ``/cpus`` node is required for all devicetrees. It does not represent a
++real device in the system, but acts as a container for child ``cpu`` nodes
+ which represent the systems CPUs.
 
-@@ -560,7 +560,7 @@ Description:
-    ============== ==============================================================
-    Value          Description
-    ============== ==============================================================
--   ``"okay"``     Indicates the device is operational
-+   ``"okay"``     Indicates the device is operational.
-    -------------- --------------------------------------------------------------
-    ``"disabled"`` Indicates that the device is not presently operational, but it
-                   might become operational in the future (for example, something
-@@ -575,7 +575,7 @@ Description:
-    -------------- --------------------------------------------------------------
-    ``"fail-sss"`` Indicates that the device is not operational. A serious error
-                   was detected in the device and it is unlikely to become
--                  operational without repair. The sss portion of the value is
-+                  operational without repair. The *sss* portion of the value is
-                   specific to the device and indicates the error condition
-                   detected.
-    ============== ==============================================================
-@@ -600,7 +600,7 @@ Description:
-    The *#address-cells* and *#size-cells* properties are not inherited from
-    ancestors in the devicetree. They shall be explicitly defined.
+ .. tabularcolumns:: | l c l J |
+@@ -272,7 +272,7 @@ which represent the systems CPUs.
+    :ref:`sect-standard-properties`) are allowed but are optional.
 
--   An |spec|-compliant boot program shall supply *#address-cells* and
-+   A |spec|-compliant boot program shall supply *#address-cells* and
-    *#size-cells* on all nodes that have children.
 
-    If missing, a client program should assume a default value of 2 for
-@@ -625,13 +625,13 @@ Example:
-          };
-       };
+-The cpus node may contain properties that are common across CPU nodes.
++The ``/cpus`` node may contain properties that are common across ``cpu`` nodes.
+ See section :ref:`sect-cpus-cpu-node-properties` for details.
 
--   In this example, the *#address-cells* and *#size-cells* properties of the soc node
-+   In this example, the *#address-cells* and *#size-cells* properties of the ``soc`` node
-    are both set to 1. This setting specifies that one cell is required to
-    represent an address and one cell is required to represent the size of
-    nodes that are children of this node.
+ For an example, see section :ref:`sect-cpu-node-example`.
+@@ -282,12 +282,12 @@ For an example, see section :ref:`sect-cpu-node-example`.
+ ``/cpus/cpu*`` Node Properties
+ ------------------------------
 
-    The serial device *reg* property necessarily follows this specification
--   set in the parent (soc) node—the address is represented by a single cell
-+   set in the parent (``soc``) node—the address is represented by a single cell
-    (0x4600), and the size is represented by a single cell (0x100).
+-A cpu node represents a hardware execution block that is sufficiently
++A ``cpu`` node represents a hardware execution block that is sufficiently
+ independent that it is capable of running an operating system without
+ interfering with other CPUs possibly running other operating systems.
 
- reg
-@@ -647,7 +647,7 @@ Description:
-    within the address space defined by its parent bus. Most commonly this
-    means the offsets and lengths of memory-mapped IO register blocks, but
-    may have a different meaning on some bus types. Addresses in the address
--   space defined by root node are cpu real addresses.
-+   space defined by the root node are CPU real addresses.
+ Hardware threads that share an MMU would generally be represented under
+-one cpu node. If other more complex CPU topographies are designed, the
++one ``cpu`` node. If other more complex CPU topographies are designed, the
+ binding for the CPU must describe the topography (e.g. threads that
+ don’t share an MMU).
 
-    The value is a *<prop-encoded-array>*, composed of an arbitrary number
-    of pairs of address and length, *<address length>*. The number of
-@@ -738,7 +738,7 @@ Address Translation Example:
-              reg = <0x4600 0x100>;
-              clock-frequency = <0>;
-              interrupts = <0xA 0x8>;
--             interrupt-parent = < &ipic >;
-+             interrupt-parent = <&ipic>;
-           };
-        };
+@@ -295,18 +295,18 @@ CPUs and threads are numbered through a unified number-space that should
+ match as closely as possible the interrupt controller’s numbering of
+ CPUs/threads.
 
-@@ -800,7 +800,7 @@ Description:
-    The *name* property is a string specifying the name of the node. This
-    property is deprecated, and its use is not recommended. However, it
-    might be used in older non-|spec|-compliant devicetrees. Operating
--   system should determine a node’s name based on the *name* component of
-+   system should determine a node’s name based on the *node-name* component of
-    the node name (see section :ref:`sect-node-names`).
+-Properties that have identical values across CPU nodes may be placed in
+-the cpus node instead. A client program must first examine a specific
+-CPU node, but if an expected property is not found then it should look
+-at the parent cpus node. This results in a less verbose representation
++Properties that have identical values across ``cpu`` nodes may be placed in
++the ``/cpus`` node instead. A client program must first examine a specific
++``cpu`` node, but if an expected property is not found then it should look
++at the parent ``/cpus`` node. This results in a less verbose representation
+ of properties which are identical across all CPUs.
 
- device_type (deprecated)
-@@ -814,8 +814,8 @@ Description:
+-The node name for every cpu node should be ``cpu``.
++The node name for every CPU node should be ``cpu``.
 
-    The *device\_type* property was used in IEEE 1275 to describe the
-    device’s FCode programming model. Because |spec| does not have FCode, new
--   use of the property is deprecated, and it should be included only on cpu
--   and memory nodes for compatibility with IEEE 1275–derived devicetrees.
-+   use of the property is deprecated, and it should be included only on ``cpu``
-+   and ``memory`` nodes for compatibility with IEEE 1275–derived devicetrees.
+ General Properties of ``/cpus/cpu*`` nodes
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- .. _sect-interrupts:
+-The following table describes the general properties of CPU nodes. Some
++The following table describes the general properties of ``cpu`` nodes. Some
+ of the properties described in :numref:`table-cpu-node-props` are select
+ standard properties with specific applicable detail.
 
+@@ -342,7 +342,8 @@ standard properties with specific applicable detail.
+                                                    and out of bounds of the range addressed by
+                                                    the interrupt controller
+
+-                                                   If a CPU/thread's PIR is modifiable, a client
++                                                   If a CPU/thread's PIR (pending interrupt register)
++                                                   is modifiable, a client
+                                                    program should modify PIR to match the *reg*
+                                                    property value. If PIR cannot be modified and
+                                                    the PIR value is distinct from the interrupt
 
 -- 
 
@@ -212,4 +171,4 @@ Robert P. J. Day                                 Ottawa, Ontario, CANADA
 Twitter:                                       http://twitter.com/rpjday
 LinkedIn:                               http://ca.linkedin.com/in/rpjday
 ========================================================================
---8323328-725556867-1504243199=:20835--
+--8323328-1835193447-1504246079=:21695--
