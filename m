@@ -1,59 +1,113 @@
-From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: Re: Devicetree at Linux Plumbers Conference 2017
-Date: Wed, 30 Aug 2017 15:55:59 +0100
-Message-ID: <CACxGe6uhBeG0zmaFPqfiW1-RcPDX3M6hs=Ss8CRBKOZO17jtCQ@mail.gmail.com>
-References: <CACxGe6v0hm_YC+JdatGpNcYtaeSiUgm58Gnj1ZWndLHCPcA1tQ@mail.gmail.com>
- <CACxGe6vz65ZhVRNCUYE91LAOJu7eQQRHkFOm5BS22Jvac=UaYA@mail.gmail.com>
- <CACxGe6vX4tz9QiCvSyaf9kqHXk+ubpGx0+2w608b7NBY0yNnyQ@mail.gmail.com>
- <CACxGe6u9v1pW=FFPJc04fwZqJRsvRaYHK4qfGzAmW=4Ft+Q_QQ@mail.gmail.com>
- <CACxGe6uEmrho8n5XrXOOEBybQGp7NJ2Jy68Gen+CVxv2Jj95Og@mail.gmail.com>
- <CACxGe6vOMsL=5tRzAyOoW-Rh5CjvJcvnn_Zv34L3g_tQVGfK4A@mail.gmail.com>
- <3AA247F8-C570-4F09-AF7A-B8619B0D69CD@linaro.org> <CAMuHMdUYNxgJjFF1X6KPiMRUoQ0eJibyeHsKoDM=JZ+gQF6qCA@mail.gmail.com>
+From: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Re: [PATCH] Aesthetic fixes to DTSpec 0.1, Acknowledgements and
+ Chapter 1
+Date: Fri, 1 Sep 2017 12:14:05 -0700
+Message-ID: <04ec3dd3-dac4-fb62-09d7-f15f20112711@gmail.com>
+References: <alpine.LFD.2.21.1708311747500.16833@localhost.localdomain>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Transfer-Encoding: 7bit
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=0zBhfBVC6Qu3FKJbuzxrfKwByDiFaQSGr9gFo19ibHY=;
-        b=KmVrEhEOv7jxmMrrxttkg+k7Zk/8O8fxrQSjbeKpIFQnBt97Gba3Gk8Uz4DnlZR5GS
-         4jn1ihGw+37fHmn5oE35sgX1OzlFnh4S79XJI47nzZmsVdl4ZWotZN+V+DfHNIiBaeZM
-         LSMeshruqYYOSJK1jI1SazpuTxdfIYCs6DzyyH2VKEES/pegN4w8gmT0XtLly2SaEpoG
-         LOWJNTtjXq41sHNYlH3TwbHEK6LstvWx6Ku7j9iH5imw+vRJJCDB1G7cqLYibiE3aGBR
-         /HQElvVyPRKmgxadRDemYt3+AOX7tbbW55dH0jjDEF9cuIEP55dV/72DvMOoWiuEWqlL
-         P2LQ==
-In-Reply-To: <CAMuHMdUYNxgJjFF1X6KPiMRUoQ0eJibyeHsKoDM=JZ+gQF6qCA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-language:content-transfer-encoding;
+        bh=kgaaASpQfEkp0QlXym8sWrql4lwLcPPy7SmjVb5zRgU=;
+        b=G0LvdqqrdwpxRuPikgM0uDLyUX2dTjH4QnJYKTenrQ7Q6nMV1ssSbIC8fqIiobiq3H
+         yU0AHcj6TERkogckSkRlbK493t5AxhPoxvqRV+6ZwlIIO3Ew06mvtvKxIMwUgCAmROgb
+         3dAf0JqKp8cz3UT5E6neWYEmvAg7Gos3I08vNEysCIOEQVD2YmVsLOGqbU3Rh4/DYkZq
+         C7V2jupXd23d9tip9NfeEuY+ZlcIRBjul4qqwA3n4GoAZKKHqZPNSd0tAnc7E3XsRRgj
+         hNN/zx7ksYZj662SYKQKkLVlbmEI40Eo6xABKrPqmNqt5Renw/QsNnCZ30+IcmM2N8xk
+         A1Ag==
+In-Reply-To: <alpine.LFD.2.21.1708311747500.16833-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
+Content-Language: en-US
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
-Cc: Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, =?UTF-8?Q?Pawe=C5=82_Moll?= <Pawel.Moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Tomasz Figa <tomasz.figa-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Benoit Cousson <bcousson-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Fabien Parent <fparent-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Stephen Warren <SWarren-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Jon Loeliger <jdl-CYoMK+44s/E@public.gmane.org>, Thomas Petazzoni <thomas.petazzoni-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Olof Johansson <olof.johansson-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+To: "Robert P. J. Day" <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-On Wed, Aug 30, 2017 at 3:42 PM, Geert Uytterhoeven
-<geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org> wrote:
-> Hi Kumar,
->
-> On Wed, Aug 30, 2017 at 4:36 PM, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> wrote:
->>> On Aug 30, 2017, at 5:41 AM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
->>> Confirmed! The Devicetree Workshop will be Thursday 26 October in the
->>> afternoon. Anyone registered for OSS will be able to attend. I don't
->>> know yet if there are any other consessions for registration. I'm
->>> finding out now and will update as soon as I know.
->>>
->>> Cheers,
->>> g.
->>
->> Does ELCE registration count?
->
-> Yes, according to
-> http://events.linuxfoundation.org/events/linux-kernel-summit/attend/register
++devicetree-spec (which is where this should go)
 
-Yes. There is a single registration form for both OSSE and ELCE.
+On 08/31/2017 02:50 PM, Robert P. J. Day wrote:
+> 
+> Some aesthetic tweaks to DTSpec 0.1, including
+> 
+>  * grammar fixes
+>  * font fixes
+> 
+> Signed-off-by: Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
+> 
+> ---
+> 
+>   i'll do a chunk at a time, to avoid having a sizable submission
+> getting hung up on a single issue.
+> 
+> commit 10d4ba9bb1ad5baab5d9bff4e2dac643166f9356
+> Author: Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
+> Date:   Thu Aug 31 17:46:29 2017 -0400
+> 
+>     Ack and chapter 1.
+> 
+> diff --git a/source/acknowledgements.rst b/source/acknowledgements.rst
+> index 3e49046..a02e0aa 100644
+> --- a/source/acknowledgements.rst
+> +++ b/source/acknowledgements.rst
+> @@ -2,7 +2,7 @@
+> 
+>  The devicetree.org Technical Steering Committee would like to
+>  thank the many individuals and companies that contributed to the
+> -development this specification through writing, technical discussions
+> +development of this specification through writing, technical discussions
+>  and reviews.
+> 
+>  We want to thank the power.org Platform Architecture Technical Subcommittee who
+> diff --git a/source/introduction.rst b/source/introduction.rst
+> index 30ba3d9..d7dc2fc 100644
+> --- a/source/introduction.rst
+> +++ b/source/introduction.rst
+> @@ -13,10 +13,10 @@ hardware before passing control to software such as an operating system,
+>  bootloader, or hypervisor. Bootloaders and hypervisors can, in turn,
+>  load and transfer control to operating systems. Standard, consistent
+>  interfaces and conventions facilitate the interactions between these
+> -software components.  In this document the term boot program is used to
+> +software components.  In this document the term *boot program* is used to
+>  generically refer to a software component that initializes the system
+>  state and executes another software component referred to as a *client
+> -program*. Examples of a boot programs include: firmware, bootloaders, and
+> +program*. Examples of a boot program include: firmware, bootloaders, and
+>  hypervisors. Examples of a client program include: bootloaders,
+>  hypervisors, operating systems, and special purpose programs. A piece of
+>  software may be both a client program and a boot program  (e.g. a hypervisor).
+> @@ -101,14 +101,14 @@ IEEE 1275 specification that are omitted from the |spec| include:
+>  * FCode debugging
+>  * Operating system debugging
+> 
+> -What is retained from IEEE-1275 are concepts from the devicetree
+> +What is retained from IEEE 1275 are concepts from the devicetree
+>  architecture by which a boot program can describe and communicate system
+>  hardware information to client program, thus eliminating the need for
+>  the client program to have hard-coded descriptions of system hardware.
+> 
+>  This specification partially supersedes the |epapr| [EPAPR] specification.
+> -|epapr| documents how devicetree is used by the PowerISA, and covers both
+> -general concepts, as well as PowerISA specific bindings.
+> +|epapr| documents how devicetree is used by the Power ISA, and covers both
+> +general concepts, as well as Power ISA specific bindings.
+>  The text of this document was derived from |epapr|, but either removes architecture specific bindings, or moves them into an appendix.
+> 
+>  32-bit and 64-bit Support
+> @@ -141,7 +141,7 @@ Definition of Terms
+>     boot program
+>         Used to generically refer to a software component that initializes
+>         the system state and executes another software component referred to
+> -       as a client program. Examples of a boot programs include: firmware,
+> +       as a client program. Examples of a boot program include: firmware,
+>         bootloaders, and hypervisors.
+> 
+>     client program
+> 
+> rday
+> 
 
-Cheers,
-g.
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+
+-- 
+Florian
