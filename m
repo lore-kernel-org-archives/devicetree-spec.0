@@ -1,113 +1,215 @@
-From: Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [PATCH] Aesthetic fixes to DTSpec 0.1, Acknowledgements and
- Chapter 1
-Date: Fri, 1 Sep 2017 12:14:05 -0700
-Message-ID: <04ec3dd3-dac4-fb62-09d7-f15f20112711@gmail.com>
-References: <alpine.LFD.2.21.1708311747500.16833@localhost.localdomain>
+From: "Robert P. J. Day" <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
+Subject: [PATCH] Aesthetic/grammar fixes to first part of devicetree-basics.rst
+ 0.1 spec
+Date: Fri, 1 Sep 2017 15:37:49 -0400 (EDT)
+Message-ID: <alpine.LFD.2.21.1709011536310.5038@localhost.localdomain>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; BOUNDARY="8323328-725556867-1504243199=:20835"
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:references:from:message-id:date:user-agent:mime-version
-         :in-reply-to:content-language:content-transfer-encoding;
-        bh=kgaaASpQfEkp0QlXym8sWrql4lwLcPPy7SmjVb5zRgU=;
-        b=G0LvdqqrdwpxRuPikgM0uDLyUX2dTjH4QnJYKTenrQ7Q6nMV1ssSbIC8fqIiobiq3H
-         yU0AHcj6TERkogckSkRlbK493t5AxhPoxvqRV+6ZwlIIO3Ew06mvtvKxIMwUgCAmROgb
-         3dAf0JqKp8cz3UT5E6neWYEmvAg7Gos3I08vNEysCIOEQVD2YmVsLOGqbU3Rh4/DYkZq
-         C7V2jupXd23d9tip9NfeEuY+ZlcIRBjul4qqwA3n4GoAZKKHqZPNSd0tAnc7E3XsRRgj
-         hNN/zx7ksYZj662SYKQKkLVlbmEI40Eo6xABKrPqmNqt5Renw/QsNnCZ30+IcmM2N8xk
-         A1Ag==
-In-Reply-To: <alpine.LFD.2.21.1708311747500.16833-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
-Content-Language: en-US
+Content-ID: <alpine.LFD.2.21.1709011536311.5038-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-To: "Robert P. J. Day" <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-+devicetree-spec (which is where this should go)
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-On 08/31/2017 02:50 PM, Robert P. J. Day wrote:
-> 
-> Some aesthetic tweaks to DTSpec 0.1, including
-> 
->  * grammar fixes
->  * font fixes
-> 
-> Signed-off-by: Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
-> 
-> ---
-> 
->   i'll do a chunk at a time, to avoid having a sizable submission
-> getting hung up on a single issue.
-> 
-> commit 10d4ba9bb1ad5baab5d9bff4e2dac643166f9356
-> Author: Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
-> Date:   Thu Aug 31 17:46:29 2017 -0400
-> 
->     Ack and chapter 1.
-> 
-> diff --git a/source/acknowledgements.rst b/source/acknowledgements.rst
-> index 3e49046..a02e0aa 100644
-> --- a/source/acknowledgements.rst
-> +++ b/source/acknowledgements.rst
-> @@ -2,7 +2,7 @@
-> 
->  The devicetree.org Technical Steering Committee would like to
->  thank the many individuals and companies that contributed to the
-> -development this specification through writing, technical discussions
-> +development of this specification through writing, technical discussions
->  and reviews.
-> 
->  We want to thank the power.org Platform Architecture Technical Subcommittee who
-> diff --git a/source/introduction.rst b/source/introduction.rst
-> index 30ba3d9..d7dc2fc 100644
-> --- a/source/introduction.rst
-> +++ b/source/introduction.rst
-> @@ -13,10 +13,10 @@ hardware before passing control to software such as an operating system,
->  bootloader, or hypervisor. Bootloaders and hypervisors can, in turn,
->  load and transfer control to operating systems. Standard, consistent
->  interfaces and conventions facilitate the interactions between these
-> -software components.  In this document the term boot program is used to
-> +software components.  In this document the term *boot program* is used to
->  generically refer to a software component that initializes the system
->  state and executes another software component referred to as a *client
-> -program*. Examples of a boot programs include: firmware, bootloaders, and
-> +program*. Examples of a boot program include: firmware, bootloaders, and
->  hypervisors. Examples of a client program include: bootloaders,
->  hypervisors, operating systems, and special purpose programs. A piece of
->  software may be both a client program and a boot program  (e.g. a hypervisor).
-> @@ -101,14 +101,14 @@ IEEE 1275 specification that are omitted from the |spec| include:
->  * FCode debugging
->  * Operating system debugging
-> 
-> -What is retained from IEEE-1275 are concepts from the devicetree
-> +What is retained from IEEE 1275 are concepts from the devicetree
->  architecture by which a boot program can describe and communicate system
->  hardware information to client program, thus eliminating the need for
->  the client program to have hard-coded descriptions of system hardware.
-> 
->  This specification partially supersedes the |epapr| [EPAPR] specification.
-> -|epapr| documents how devicetree is used by the PowerISA, and covers both
-> -general concepts, as well as PowerISA specific bindings.
-> +|epapr| documents how devicetree is used by the Power ISA, and covers both
-> +general concepts, as well as Power ISA specific bindings.
->  The text of this document was derived from |epapr|, but either removes architecture specific bindings, or moves them into an appendix.
-> 
->  32-bit and 64-bit Support
-> @@ -141,7 +141,7 @@ Definition of Terms
->     boot program
->         Used to generically refer to a software component that initializes
->         the system state and executes another software component referred to
-> -       as a client program. Examples of a boot programs include: firmware,
-> +       as a client program. Examples of a boot program include: firmware,
->         bootloaders, and hypervisors.
-> 
->     client program
-> 
-> rday
-> 
+--8323328-725556867-1504243199=:20835
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-ID: <alpine.LFD.2.21.1709011536312.5038-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
+
+
+
+Various grammar/font/spacing tweaks to first part of
+devicetree-basics.rst, including:
+
+ * rendering node names in monospaced font
+ * italicizing some terms
+ * proper capitalization of some terms
+
+Signed-off-by: Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
+
+---
+
+  have not processed the modified source file so i can't verify i
+didn't mess something up, but all these changes look pretty innocuous;
+more to come a chunk at a time.
+
+  also resending to devicetree-spec list.
+
+diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
+index 02696ba..5874ec3 100644
+--- a/source/devicetree-basics.rst
++++ b/source/devicetree-basics.rst
+@@ -15,9 +15,9 @@ program’s memory and passes a pointer to the devicetree to the client.
+ This chapter describes the logical structure of the devicetree and
+ specifies a base set of properties for use in describing device nodes.
+ Chapter :ref:`chapter-device-node-requirements` specifies certain device nodes
+-required by a |spec| compliant
+-devicetree. Chapter 6 describes the |spec| defined device bindings— the
+-requirements for representing certain device types classes of devices.
++required by a |spec|-compliant
++devicetree. Chapter 6 describes the |spec|-defined device bindings—the
++requirements for representing certain device types or classes of devices.
+ Chapter 8 describes the in-memory encoding of the devicetree.
+
+ A devicetree is a tree data structure with nodes that describe the
+@@ -25,7 +25,7 @@ devices in a system. Each node has property/value pairs that describe
+ the characteristics of the device being represented. Each node has
+ exactly one parent except for the root node, which has no parent.
+
+-An |spec|-compliant devicetree describes device information in a system
++A |spec|-compliant devicetree describes device information in a system
+ that cannot necessarily be dynamically detected by a client program. For
+ example, the architecture of PCI enables a client to probe and detect
+ attached devices, and thus devicetree nodes describing PCI devices
+@@ -38,8 +38,8 @@ probing.
+ :numref:`example-simple-devicetree` shows an example representation of a
+ simple devicetree that is nearly
+ complete enough to boot a simple operating system, with the platform
+-type, CPU, and memory described. Device nodes are shown with properties
+-and values shown beside the node.
++type, CPU, memory and a single UART described. Device nodes are shown
++with properties and values inside each node.
+
+ .. _example-simple-devicetree:
+ .. digraph:: tree
+@@ -60,8 +60,8 @@ and values shown beside the node.
+    #size-cells=\<0\>\l"]
+
+    "cpu@0" [ label="\N |
+-   reg=\<0\>\l
+    device_type=\"cpu\"\l
++   reg=\<0\>\l
+    timebase-frequency=\<825000000\>\l
+    clock-frequency=\<825000000\>\l"]
+
+@@ -165,10 +165,10 @@ identified by a forward slash (/).
+
+ In :numref:`example-nodenames`:
+
+-* The nodes with the name cpu are distinguished by their unit-address
++* The nodes with the name ``cpu`` are distinguished by their unit-address
+   values of 0 and 1.
+-* The nodes with the name Ethernet are distinguished by their
+-  unit-address values of FE002000 and FE003000.
++* The nodes with the name ``ethernet`` are distinguished by their
++  unit-address values of ``fe002000`` and ``fe003000``.
+
+ Generic Names Recommendation
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@@ -435,7 +435,7 @@ properties are described in detail in this section. Device nodes defined
+ by |spec| (see Chapter :ref:`chapter-device-node-requirements`) may specify
+ additional requirements or constraints regarding the use of the standard
+ properties. Chapter :ref:`chapter-device-bindings` describes the representation
+-of specific devices may also specify additional requirements.
++of specific devices and may also specify additional requirements.
+
+ .. note:: All examples of devicetree nodes in this document use the
+    :abbr:`DTS (Devicetree Source)` format for specifying nodes and properties.
+@@ -467,10 +467,10 @@ Description:
+
+ Example:
+
+-   ``compatible = "fsl,mpc8641-uart", "ns16550";``
++   ``compatible = "fsl,ns16550", "ns16550";``
+
+    In this example, an operating system would first try to locate a device
+-   driver that supported fsl,mpc8641-uart. If a driver was not found, it
++   driver that supported fsl,ns16550. If a driver was not found, it
+    would then try to locate a driver that supported the more general
+    ns16550 device type.
+
+@@ -560,7 +560,7 @@ Description:
+    ============== ==============================================================
+    Value          Description
+    ============== ==============================================================
+-   ``"okay"``     Indicates the device is operational
++   ``"okay"``     Indicates the device is operational.
+    -------------- --------------------------------------------------------------
+    ``"disabled"`` Indicates that the device is not presently operational, but it
+                   might become operational in the future (for example, something
+@@ -575,7 +575,7 @@ Description:
+    -------------- --------------------------------------------------------------
+    ``"fail-sss"`` Indicates that the device is not operational. A serious error
+                   was detected in the device and it is unlikely to become
+-                  operational without repair. The sss portion of the value is
++                  operational without repair. The *sss* portion of the value is
+                   specific to the device and indicates the error condition
+                   detected.
+    ============== ==============================================================
+@@ -600,7 +600,7 @@ Description:
+    The *#address-cells* and *#size-cells* properties are not inherited from
+    ancestors in the devicetree. They shall be explicitly defined.
+
+-   An |spec|-compliant boot program shall supply *#address-cells* and
++   A |spec|-compliant boot program shall supply *#address-cells* and
+    *#size-cells* on all nodes that have children.
+
+    If missing, a client program should assume a default value of 2 for
+@@ -625,13 +625,13 @@ Example:
+          };
+       };
+
+-   In this example, the *#address-cells* and *#size-cells* properties of the soc node
++   In this example, the *#address-cells* and *#size-cells* properties of the ``soc`` node
+    are both set to 1. This setting specifies that one cell is required to
+    represent an address and one cell is required to represent the size of
+    nodes that are children of this node.
+
+    The serial device *reg* property necessarily follows this specification
+-   set in the parent (soc) node—the address is represented by a single cell
++   set in the parent (``soc``) node—the address is represented by a single cell
+    (0x4600), and the size is represented by a single cell (0x100).
+
+ reg
+@@ -647,7 +647,7 @@ Description:
+    within the address space defined by its parent bus. Most commonly this
+    means the offsets and lengths of memory-mapped IO register blocks, but
+    may have a different meaning on some bus types. Addresses in the address
+-   space defined by root node are cpu real addresses.
++   space defined by the root node are CPU real addresses.
+
+    The value is a *<prop-encoded-array>*, composed of an arbitrary number
+    of pairs of address and length, *<address length>*. The number of
+@@ -738,7 +738,7 @@ Address Translation Example:
+              reg = <0x4600 0x100>;
+              clock-frequency = <0>;
+              interrupts = <0xA 0x8>;
+-             interrupt-parent = < &ipic >;
++             interrupt-parent = <&ipic>;
+           };
+        };
+
+@@ -800,7 +800,7 @@ Description:
+    The *name* property is a string specifying the name of the node. This
+    property is deprecated, and its use is not recommended. However, it
+    might be used in older non-|spec|-compliant devicetrees. Operating
+-   system should determine a node’s name based on the *name* component of
++   system should determine a node’s name based on the *node-name* component of
+    the node name (see section :ref:`sect-node-names`).
+
+ device_type (deprecated)
+@@ -814,8 +814,8 @@ Description:
+
+    The *device\_type* property was used in IEEE 1275 to describe the
+    device’s FCode programming model. Because |spec| does not have FCode, new
+-   use of the property is deprecated, and it should be included only on cpu
+-   and memory nodes for compatibility with IEEE 1275–derived devicetrees.
++   use of the property is deprecated, and it should be included only on ``cpu``
++   and ``memory`` nodes for compatibility with IEEE 1275–derived devicetrees.
+
+ .. _sect-interrupts:
 
 
 -- 
-Florian
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
+--8323328-725556867-1504243199=:20835--
