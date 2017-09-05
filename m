@@ -1,84 +1,39 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [PATCH] Aesthetic fixes to DTSpec 0.1, Acknowledgements and
- Chapter 1
-Date: Fri, 1 Sep 2017 17:00:21 -0500
-Message-ID: <CAL_JsqJE75jKCk81ULKnG+4PkK5CLDuKTqsTPt3VfRKv+=u-Pg@mail.gmail.com>
-References: <alpine.LFD.2.21.1708311747500.16833@localhost.localdomain>
+From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: registering for Devicetree Workshop at Kernel Summit
+Date: Tue, 5 Sep 2017 09:55:27 -0700
+Message-ID: <59AED6FF.20607@gmail.com>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <alpine.LFD.2.21.1708311747500.16833-bi+AKbBUZKY6gyzm1THtWbp2dZbC/Bob@public.gmane.org>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Content-Transfer-Encoding: 7bit
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=to:from:subject:message-id:date:user-agent:mime-version
+         :content-transfer-encoding;
+        bh=z9qq9Vb8BJRpMQhMHlJXvL6g4djqf8v+jzxC5zYHVAU=;
+        b=V7JbVQjeiW8tc6EDskz3TXhZceUyl5tcWk41D9VW+mDCGLDz3QfC9nbGJhqlbnlY7/
+         DHqGz/kvCnomHZZllXGaF2kkU7fMDh4DH7JSKP2bJg4lgPbL8lNk6gjXmnMHjjViTNT6
+         X2pedl6Sv3XKSJmd584Gv3b1Gw3Hro8GxiqD4LM9lCMh0lIS35Il9QoEU+8HYgqg1qGF
+         2S+/tei1UTwsJ2rJkuh8Z5x48C5B4ZoniE0avn0efxUsqCuImRTYpyuOZUW6KvcXPJcj
+         Tz2URwzW3XXUZlIIhPch4+pYEKIyWBmKcH8LfWRV/9lkUU5fZ9qP6fpQ0AgUqeied9oO
+         XNDg==
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: "Robert P. J. Day" <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
-Cc: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-On Thu, Aug 31, 2017 at 4:50 PM, Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org> wrote:
->
-> Some aesthetic tweaks to DTSpec 0.1, including
->
->  * grammar fixes
->  * font fixes
->
-> Signed-off-by: Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
->
-> ---
->
->   i'll do a chunk at a time, to avoid having a sizable submission
-> getting hung up on a single issue.
->
-> commit 10d4ba9bb1ad5baab5d9bff4e2dac643166f9356
-> Author: Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
-> Date:   Thu Aug 31 17:46:29 2017 -0400
->
->     Ack and chapter 1.
+Information about the Devicetree Workshop at the kernel summit is now
+available at:
 
-Your header here is a bit messed up, but git-am seemed to apply it okay.
+  http://events.linuxfoundation.org/events/linux-kernel-summit/program/about
 
->
-> diff --git a/source/acknowledgements.rst b/source/acknowledgements.rst
-> index 3e49046..a02e0aa 100644
-> --- a/source/acknowledgements.rst
-> +++ b/source/acknowledgements.rst
-> @@ -2,7 +2,7 @@
->
->  The devicetree.org Technical Steering Committee would like to
->  thank the many individuals and companies that contributed to the
-> -development this specification through writing, technical discussions
-> +development of this specification through writing, technical discussions
->  and reviews.
->
->  We want to thank the power.org Platform Architecture Technical Subcommittee who
-> diff --git a/source/introduction.rst b/source/introduction.rst
-> index 30ba3d9..d7dc2fc 100644
-> --- a/source/introduction.rst
-> +++ b/source/introduction.rst
-> @@ -13,10 +13,10 @@ hardware before passing control to software such as an operating system,
->  bootloader, or hypervisor. Bootloaders and hypervisors can, in turn,
->  load and transfer control to operating systems. Standard, consistent
->  interfaces and conventions facilitate the interactions between these
-> -software components.  In this document the term boot program is used to
-> +software components.  In this document the term *boot program* is used to
->  generically refer to a software component that initializes the system
->  state and executes another software component referred to as a *client
-> -program*. Examples of a boot programs include: firmware, bootloaders, and
-> +program*. Examples of a boot program include: firmware, bootloaders, and
->  hypervisors. Examples of a client program include: bootloaders,
->  hypervisors, operating systems, and special purpose programs. A piece of
->  software may be both a client program and a boot program  (e.g. a hypervisor).
-> @@ -101,14 +101,14 @@ IEEE 1275 specification that are omitted from the |spec| include:
->  * FCode debugging
->  * Operating system debugging
->
-> -What is retained from IEEE-1275 are concepts from the devicetree
-> +What is retained from IEEE 1275 are concepts from the devicetree
+The important information is how to add the workshop to your existing
+conference registration (complimentary, free):
 
-I still see a mixture in the document. For things like this, better to
-do a search and replace for the whole document as 1 commit.
+   Add the Devicetree Workshop to your existing Open Source
+   Summit + Embedded Linux Conference Europe registration here.
 
-Rob
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+On that web page, click on the word "here" for the link.  I don't know
+if it is a static value or if it changes for different users, so I am
+not copying the link here.
+
+-Frank
