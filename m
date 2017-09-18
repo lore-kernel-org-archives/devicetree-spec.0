@@ -1,39 +1,65 @@
-From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: registering for Devicetree Workshop at Kernel Summit
-Date: Tue, 5 Sep 2017 09:55:27 -0700
-Message-ID: <59AED6FF.20607@gmail.com>
+From: Rob Herring <robh+dt@kernel.org>
+Subject: Re: [RFC/PATCH v4 1/4] Document nexus nodes/specifier remapping
+Date: Mon, 18 Sep 2017 12:44:38 -0500
+Message-ID: <CAL_Jsq+qRm=iAhQz6Ro3SAU45JEK8KNWpRBcXuRt47r8ncYYwQ@mail.gmail.com>
+References: <20170811154236.12891-1-stephen.boyd@linaro.org> <20170811154236.12891-2-stephen.boyd@linaro.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=to:from:subject:message-id:date:user-agent:mime-version
-         :content-transfer-encoding;
-        bh=z9qq9Vb8BJRpMQhMHlJXvL6g4djqf8v+jzxC5zYHVAU=;
-        b=V7JbVQjeiW8tc6EDskz3TXhZceUyl5tcWk41D9VW+mDCGLDz3QfC9nbGJhqlbnlY7/
-         DHqGz/kvCnomHZZllXGaF2kkU7fMDh4DH7JSKP2bJg4lgPbL8lNk6gjXmnMHjjViTNT6
-         X2pedl6Sv3XKSJmd584Gv3b1Gw3Hro8GxiqD4LM9lCMh0lIS35Il9QoEU+8HYgqg1qGF
-         2S+/tei1UTwsJ2rJkuh8Z5x48C5B4ZoniE0avn0efxUsqCuImRTYpyuOZUW6KvcXPJcj
-         Tz2URwzW3XXUZlIIhPch4+pYEKIyWBmKcH8LfWRV/9lkUU5fZ9qP6fpQ0AgUqeied9oO
-         XNDg==
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Return-path: <linux-kernel-owner@vger.kernel.org>
+In-Reply-To: <20170811154236.12891-2-stephen.boyd@linaro.org>
+Sender: linux-kernel-owner@vger.kernel.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Transfer-Encoding: 7bit
+To: Stephen Boyd <stephen.boyd@linaro.org>
+Cc: Frank Rowand <frowand.list@gmail.com>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, Russell King - ARM Linux <linux@armlinux.org.uk>, "devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>
 
-Information about the Devicetree Workshop at the kernel summit is now
-available at:
+On Fri, Aug 11, 2017 at 10:42 AM, Stephen Boyd <stephen.boyd@linaro.org> wrote:
+> Document the generic nexus node properties. This can be used by
+> any specifier that conforms to #<specifier>-cells where they
+> want to support remapping phandle lists through nexus nodes. This
+> is similar to interrupt remapping, but slightly different because
+> we don't consider unit addresses when doing mappings. This is
+> mostly a copy/paste of the interrupt specification, with the unit
+> address parts removed and generalized to any specifier. There's
+> also the addition of a pass through mechanism to make things more
+> compact if desired in the mapping table.
 
-  http://events.linuxfoundation.org/events/linux-kernel-summit/program/about
+Sorry for the slow response.
 
-The important information is how to add the workshop to your existing
-conference registration (complimentary, free):
+I'm still wondering how/if we can merge interrupts as part of this
+(both the spec and parsing implementation). Could we simply require
+that #address-cells is 0 or do we even need this distinction? If the
+usecase is connectors, then we should typically be able to set
+#address-cells to 0. Perhaps you could have a custom PCI connector
+with additional signals and the slot/connector node would have the PCI
+address. In this case, we would have #address-cells, but having them
+and ignoring the address cells via the mask would still work.
 
-   Add the Devicetree Workshop to your existing Open Source
-   Summit + Embedded Linux Conference Europe registration here.
+Also, I don't see any issue if we allow the -map-pass-thru property
+for interrupts.
 
-On that web page, click on the word "here" for the link.  I don't know
-if it is a static value or if it changes for different users, so I am
-not copying the link here.
+>
+> Signed-off-by: Stephen Boyd <stephen.boyd@linaro.org>
+> ---
+>
+> I still need to write the blurb about what this is all about, but
+> I wanted to send this out now to get early feedback. Some starting
+> points:
+>
+>  1) Replace child/parent with incoming/outgoing everywhere?
 
--Frank
+Parent/child is more common, so I think that's fine.
+
+>
+>  2) Make a pretty picture to describe remapping phandle+specifiers
+>     similar to the interrupt hierarchy diagram?
+
+Pictures are always nice, but I don't think required.
+
+>
+>  3) Come up with some better name than <specifier>? Kernel-doc uses <list>
+>     but I'm not sure that's any better.
+
+specifier seems fine to me.
+
+Rob
