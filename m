@@ -1,65 +1,61 @@
-From: Rob Herring <robh+dt@kernel.org>
-Subject: Re: [RFC/PATCH v4 1/4] Document nexus nodes/specifier remapping
-Date: Mon, 18 Sep 2017 12:44:38 -0500
-Message-ID: <CAL_Jsq+qRm=iAhQz6Ro3SAU45JEK8KNWpRBcXuRt47r8ncYYwQ@mail.gmail.com>
-References: <20170811154236.12891-1-stephen.boyd@linaro.org> <20170811154236.12891-2-stephen.boyd@linaro.org>
+From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Subject: Re: Devicetree at Linux Plumbers Conference 2017
+Date: Tue, 3 Oct 2017 23:50:45 +0100
+Message-ID: <CACxGe6uoRz1qUSxFNykgSHTO8mAaOoqLvJVbJ6oB3s09YMzzKw@mail.gmail.com>
+References: <CACxGe6v0hm_YC+JdatGpNcYtaeSiUgm58Gnj1ZWndLHCPcA1tQ@mail.gmail.com>
+ <CACxGe6vz65ZhVRNCUYE91LAOJu7eQQRHkFOm5BS22Jvac=UaYA@mail.gmail.com>
+ <CACxGe6vX4tz9QiCvSyaf9kqHXk+ubpGx0+2w608b7NBY0yNnyQ@mail.gmail.com>
+ <CACxGe6u9v1pW=FFPJc04fwZqJRsvRaYHK4qfGzAmW=4Ft+Q_QQ@mail.gmail.com>
+ <CACxGe6uEmrho8n5XrXOOEBybQGp7NJ2Jy68Gen+CVxv2Jj95Og@mail.gmail.com> <CACxGe6vOMsL=5tRzAyOoW-Rh5CjvJcvnn_Zv34L3g_tQVGfK4A@mail.gmail.com>
 Mime-Version: 1.0
-Return-path: <linux-kernel-owner@vger.kernel.org>
-In-Reply-To: <20170811154236.12891-2-stephen.boyd@linaro.org>
-Sender: linux-kernel-owner@vger.kernel.org
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:sender:in-reply-to:references:from:date:message-id
+         :subject:to:cc;
+        bh=VOhpS99zpI8QxvhTHZcHWqiZpeRX+H6GhQOTe2kLz38=;
+        b=lmZhEBwtQWIMSyXDMZtMlncseVV8bmjYg6hbN3PUpnT/8NJQzAPWlqsJEaOnBCMhzq
+         4btR+lD++Ag83u32cV3gJMr//z1FhJlzozWKzmvErhdcTTxKqUoMDnhyFARhYfXCUqFY
+         YrwfkxWs2TtjJyNcBBccfGPii/L9hlNaLOBLio6aVlopJhcITdNvOry+XGkWwgkvfw0M
+         4IzTtkzb/TUUoWtGEB5IgPeQeUNDtP7ORmf8ahuM4hAbfJ7Lf4DGFJ6wIuhxPjUbHQYO
+         r7Bkug7XsOBz6LCB1QbL9lC6AbqtNEnhYPFsjE/bhnfIsYVeKxHJFQVSSoLlgFmaOzDy
+         ilhg==
+In-Reply-To: <CACxGe6vOMsL=5tRzAyOoW-Rh5CjvJcvnn_Zv34L3g_tQVGfK4A-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Stephen Boyd <stephen.boyd@linaro.org>
-Cc: Frank Rowand <frowand.list@gmail.com>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, Russell King - ARM Linux <linux@armlinux.org.uk>, "devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>
+To: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>
+Cc: Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, =?UTF-8?Q?Pawe=C5=82_Moll?= <Pawel.Moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Tomasz Figa <tomasz.figa-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Benoit Cousson <bcousson-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Fabien Parent <fparent-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Stephen Warren <SWarren-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Jon Loeliger <jdl-CYoMK+44s/E@public.gmane.org>, Thomas Petazzoni <thomas.petazzoni-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>, Olof Johansson <olof.johansson-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-On Fri, Aug 11, 2017 at 10:42 AM, Stephen Boyd <stephen.boyd@linaro.org> wrote:
-> Document the generic nexus node properties. This can be used by
-> any specifier that conforms to #<specifier>-cells where they
-> want to support remapping phandle lists through nexus nodes. This
-> is similar to interrupt remapping, but slightly different because
-> we don't consider unit addresses when doing mappings. This is
-> mostly a copy/paste of the interrupt specification, with the unit
-> address parts removed and generalized to any specifier. There's
-> also the addition of a pass through mechanism to make things more
-> compact if desired in the mapping table.
-
-Sorry for the slow response.
-
-I'm still wondering how/if we can merge interrupts as part of this
-(both the spec and parsing implementation). Could we simply require
-that #address-cells is 0 or do we even need this distinction? If the
-usecase is connectors, then we should typically be able to set
-#address-cells to 0. Perhaps you could have a custom PCI connector
-with additional signals and the slot/connector node would have the PCI
-address. In this case, we would have #address-cells, but having them
-and ignoring the address cells via the mask would still work.
-
-Also, I don't see any issue if we allow the -map-pass-thru property
-for interrupts.
-
+On Wed, Aug 30, 2017 at 11:41 AM, Grant Likely
+<grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+> On Mon, Aug 28, 2017 at 1:30 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+>> I owe all of you an update. Unfortunately I don't have any new
+>> information yet. I've still got a proposal in to hold a devicetree
+>> workshop at Kernel Summit, and if it does get accepted, then /most
+>> likely/ it will happen on Thursday afternoon. Don't make any travel
+>> plans based on that.
+>>
+>> As soon as I hear something either way I'll reply to this thread with
+>> the new information.
 >
-> Signed-off-by: Stephen Boyd <stephen.boyd@linaro.org>
-> ---
->
-> I still need to write the blurb about what this is all about, but
-> I wanted to send this out now to get early feedback. Some starting
-> points:
->
->  1) Replace child/parent with incoming/outgoing everywhere?
+> Confirmed! The Devicetree Workshop will be Thursday 26 October in the
+> afternoon. Anyone registered for OSS will be able to attend. I don't
+> know yet if there are any other consessions for registration. I'm
+> finding out now and will update as soon as I know.
 
-Parent/child is more common, so I think that's fine.
+Some more information. I've actually got the workshop room booked for
+the full day on Thursday, 26th October. I'm planning to use the
+morning as a hacking sprint for anyone who is available, and the
+afternoon for discussion topics. I'll pull together a schedule this
+week and post an update. As always, feel free to add topics to the
+wiki page[1]
 
->
->  2) Make a pretty picture to describe remapping phandle+specifiers
->     similar to the interrupt hierarchy diagram?
+However, the timing is flexible. I can move some topics to the morning
+if there are people who aren't going to be around in the afternoon.
 
-Pictures are always nice, but I don't think required.
+[1] http://wiki.linuxplumbersconf.org/2017:device_tree
 
->
->  3) Come up with some better name than <specifier>? Kernel-doc uses <list>
->     but I'm not sure that's any better.
-
-specifier seems fine to me.
-
-Rob
+Cheers,
+g.
