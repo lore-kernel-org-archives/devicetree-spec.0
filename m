@@ -1,61 +1,59 @@
-From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: Re: Devicetree at Linux Plumbers Conference 2017
-Date: Tue, 3 Oct 2017 23:50:45 +0100
-Message-ID: <CACxGe6uoRz1qUSxFNykgSHTO8mAaOoqLvJVbJ6oB3s09YMzzKw@mail.gmail.com>
+From: Ben Dooks <ben.dooks-4yDnlxn2s6sWdaTGBSpHTA@public.gmane.org>
+Subject: Re: [Ksummit-discuss] Devicetree at Linux Plumbers Conference 2017
+Date: Wed, 4 Oct 2017 14:40:28 +0100
+Message-ID: <341aede4-a5ca-b324-c09c-51026a9c3fe0@codethink.co.uk>
 References: <CACxGe6v0hm_YC+JdatGpNcYtaeSiUgm58Gnj1ZWndLHCPcA1tQ@mail.gmail.com>
  <CACxGe6vz65ZhVRNCUYE91LAOJu7eQQRHkFOm5BS22Jvac=UaYA@mail.gmail.com>
  <CACxGe6vX4tz9QiCvSyaf9kqHXk+ubpGx0+2w608b7NBY0yNnyQ@mail.gmail.com>
  <CACxGe6u9v1pW=FFPJc04fwZqJRsvRaYHK4qfGzAmW=4Ft+Q_QQ@mail.gmail.com>
- <CACxGe6uEmrho8n5XrXOOEBybQGp7NJ2Jy68Gen+CVxv2Jj95Og@mail.gmail.com> <CACxGe6vOMsL=5tRzAyOoW-Rh5CjvJcvnn_Zv34L3g_tQVGfK4A@mail.gmail.com>
+ <CACxGe6uEmrho8n5XrXOOEBybQGp7NJ2Jy68Gen+CVxv2Jj95Og@mail.gmail.com>
+ <CACxGe6vOMsL=5tRzAyOoW-Rh5CjvJcvnn_Zv34L3g_tQVGfK4A@mail.gmail.com>
+ <CACxGe6uoRz1qUSxFNykgSHTO8mAaOoqLvJVbJ6oB3s09YMzzKw@mail.gmail.com>
 Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=VOhpS99zpI8QxvhTHZcHWqiZpeRX+H6GhQOTe2kLz38=;
-        b=lmZhEBwtQWIMSyXDMZtMlncseVV8bmjYg6hbN3PUpnT/8NJQzAPWlqsJEaOnBCMhzq
-         4btR+lD++Ag83u32cV3gJMr//z1FhJlzozWKzmvErhdcTTxKqUoMDnhyFARhYfXCUqFY
-         YrwfkxWs2TtjJyNcBBccfGPii/L9hlNaLOBLio6aVlopJhcITdNvOry+XGkWwgkvfw0M
-         4IzTtkzb/TUUoWtGEB5IgPeQeUNDtP7ORmf8ahuM4hAbfJ7Lf4DGFJ6wIuhxPjUbHQYO
-         r7Bkug7XsOBz6LCB1QbL9lC6AbqtNEnhYPFsjE/bhnfIsYVeKxHJFQVSSoLlgFmaOzDy
-         ilhg==
-In-Reply-To: <CACxGe6vOMsL=5tRzAyOoW-Rh5CjvJcvnn_Zv34L3g_tQVGfK4A-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+In-Reply-To: <CACxGe6uoRz1qUSxFNykgSHTO8mAaOoqLvJVbJ6oB3s09YMzzKw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Content-Language: en-GB
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>
-Cc: Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, =?UTF-8?Q?Pawe=C5=82_Moll?= <Pawel.Moll-5wv7dgnIgG8@public.gmane.org>, Mark Rutland <mark.rutland-5wv7dgnIgG8@public.gmane.org>, Ian Campbell <ijc-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Tomasz Figa <tomasz.figa-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Benoit Cousson <bcousson-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Fabien Parent <fparent-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Stephen Warren <SWarren-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Jon Loeliger <jdl-CYoMK+44s/E@public.gmane.org>, Thomas Petazzoni <thomas.petazzoni-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>, Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>, Olof Johansson <olof.johansson-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>
+Cc: Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Jon Loeliger <jdl-CYoMK+44s/E@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Stephen Warren <SWarren-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, =?UTF-8?Q?Pawe=c5=82_Moll?= <Pawel.Moll-5wv7dgnIgG8@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Fabien Parent <fparent-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Ian Campbell <ijc-8fiUuRrzOP0dnm+yROfE0A@public.gmane.org>, Olof Johansson <olof.johansson-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
 
-On Wed, Aug 30, 2017 at 11:41 AM, Grant Likely
-<grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
-> On Mon, Aug 28, 2017 at 1:30 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
->> I owe all of you an update. Unfortunately I don't have any new
->> information yet. I've still got a proposal in to hold a devicetree
->> workshop at Kernel Summit, and if it does get accepted, then /most
->> likely/ it will happen on Thursday afternoon. Don't make any travel
->> plans based on that.
+On 03/10/17 23:50, Grant Likely wrote:
+> On Wed, Aug 30, 2017 at 11:41 AM, Grant Likely
+> <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+>> On Mon, Aug 28, 2017 at 1:30 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+>>> I owe all of you an update. Unfortunately I don't have any new
+>>> information yet. I've still got a proposal in to hold a devicetree
+>>> workshop at Kernel Summit, and if it does get accepted, then /most
+>>> likely/ it will happen on Thursday afternoon. Don't make any travel
+>>> plans based on that.
+>>>
+>>> As soon as I hear something either way I'll reply to this thread with
+>>> the new information.
 >>
->> As soon as I hear something either way I'll reply to this thread with
->> the new information.
->
-> Confirmed! The Devicetree Workshop will be Thursday 26 October in the
-> afternoon. Anyone registered for OSS will be able to attend. I don't
-> know yet if there are any other consessions for registration. I'm
-> finding out now and will update as soon as I know.
+>> Confirmed! The Devicetree Workshop will be Thursday 26 October in the
+>> afternoon. Anyone registered for OSS will be able to attend. I don't
+>> know yet if there are any other consessions for registration. I'm
+>> finding out now and will update as soon as I know.
+> 
+> Some more information. I've actually got the workshop room booked for
+> the full day on Thursday, 26th October. I'm planning to use the
+> morning as a hacking sprint for anyone who is available, and the
+> afternoon for discussion topics. I'll pull together a schedule this
+> week and post an update. As always, feel free to add topics to the
+> wiki page[1]
+> 
+> However, the timing is flexible. I can move some topics to the morning
+> if there are people who aren't going to be around in the afternoon.
+> 
+> [1] http://wiki.linuxplumbersconf.org/2017:device_tree
 
-Some more information. I've actually got the workshop room booked for
-the full day on Thursday, 26th October. I'm planning to use the
-morning as a hacking sprint for anyone who is available, and the
-afternoon for discussion topics. I'll pull together a schedule this
-week and post an update. As always, feel free to add topics to the
-wiki page[1]
+I tried to register for the device-tree workshop, but couldn't seem
+to get it to work.
 
-However, the timing is flexible. I can move some topics to the morning
-if there are people who aren't going to be around in the afternoon.
 
-[1] http://wiki.linuxplumbersconf.org/2017:device_tree
-
-Cheers,
-g.
+-- 
+Ben Dooks				http://www.codethink.co.uk/
+Senior Engineer				Codethink - Providing Genius
