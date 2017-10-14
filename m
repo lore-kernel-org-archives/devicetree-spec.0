@@ -1,61 +1,64 @@
-From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: Devicetree Workshop at Kernel Summit Prague (26 Oct 2017)
-Date: Mon, 9 Oct 2017 21:39:51 +0100
-Message-ID: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
+From: Thomas Petazzoni <thomas.petazzoni-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>
+Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague
+ (26 Oct 2017)
+Date: Sat, 14 Oct 2017 14:34:57 +0200
+Message-ID: <20171014143457.72df1f54@windsurf.home>
+References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:from:date:message-id:subject:to;
-        bh=GI6yKMI7BhsqDviu5GsGhrgtD3hu0WQQr4zOSYaK1cQ=;
-        b=1k002k31WIEepwOSNmyU+HyJSRwdg4yNJ1By3J60Rgqji8Gs0jQJ+edDqTxBlviUue
-         z7SepmZFG7UAmTPNhCYxRudUNXDySAQrTiz27gTIIvK+UA3JqefF8JAMfcTQrjvi1vjE
-         3ayaDylXikSDiBNhhkP6CkFequPaITl3VUA1PZ8jzBrxDvEJNR2yNPLing92esBvSZWb
-         IuMlkSOMom0RbOC0pdQArPJ2BqfvVieqHaWQyw9ovN9gAY82y9FjRUTHXUr7rccg6JJX
-         xi5z4KM0S363GIbrc+QGFgM+qLQj1i8VD5X1zPmvZ5AOsCgUoWKelBRvglMBMQSxD3tu
-         JWcA==
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Content-Transfer-Encoding: 7bit
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+In-Reply-To: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Cc: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, =?UTF-8?B?R3LDqWdvcnk=?= Clement <gregory.clement-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>
 
-Kernel Summit is now just over 2 weeks away and it is time to pull
-together the schedule for the Devicetree workshop. Originally I
-planned on just an afternoon, but I've got the room for the whole day,
-so I've got a lot of flexibility on the schedule. Unscheduled time can
-be used for hacking.
+Hello,
 
-Date: 26 Oct 2017
-Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
-Location: Athens room - Hilton Prague
+On Mon, 9 Oct 2017 21:39:51 +0100, Grant Likely wrote:
 
-If you plan to attend, make sure you update your OSSunmitE/ELCE
-registration to include the DT Workshop (log in to access and modify
-your registration):
+> Here is my current list of topics in no particular order, including
+> the topic moderator:
+> 
+> Runtime memory consumption (Rob Herring)
+> Overlay maintenance plan (TBC)
+> Stable ABI for devicetree (TBC)
+> DT YAML encoding (Pantelis Antoniou)
+> DT Schema format - option 1 (Pantelis Antoniou)
+> DT Schema format - option 2 (Grant Likely)
+> Sharing Generic bindings (TBC)
+> devicetree.org update (Grant)
+> 
+> Reply to this email if you want to propose another topic.
 
-https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
+I'd like to propose a quick discussion on how to avoid duplicating DT
+description when a SoC is composed of aggregations of IP blocks that
+are duplicated (in 2, 4 or 8 copies).
 
-Here is my current list of topics in no particular order, including
-the topic moderator:
+As an example, we currently have
+arch/arm64/boot/dts/marvell/armada-cp110-master.dtsi and
+arch/arm64/boot/dts/marvell/armada-cp110-slave.dtsi that are almost
+identical, because they represent the same aggregation of IP blocks,
+present two times in the same SoC (Marvell Armada 8K). As we are going
+to have SoCs with more than 2 copies in the future, we want to find a
+way to avoid duplicating the description of those aggregations.
 
-Runtime memory consumption (Rob Herring)
-Overlay maintenance plan (TBC)
-Stable ABI for devicetree (TBC)
-DT YAML encoding (Pantelis Antoniou)
-DT Schema format - option 1 (Pantelis Antoniou)
-DT Schema format - option 2 (Grant Likely)
-Sharing Generic bindings (TBC)
-devicetree.org update (Grant)
+I'd like to present the problem scope, a possible solution solely based
+on C preprocessor macros, and then open the discussion to see what is
+the right approach to solve this problem.
 
-Reply to this email if you want to propose another topic.
+I don't think that more than 10-15 minutes is needed for presenting the
+problem scope and one possible solution. The following discussion may
+be longer though.
 
-Reply privately if there is a particular topic you want to attend but
-you are unable to be there in the morning or afternoon. I'll put the
-actual agenda together a week out from the event.
+I'll be attending on both the morning and afternoon, but I'll be
+leaving at ~4:30 PM.
 
-g.
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+Best regards,
+
+Thomas Petazzoni
+-- 
+Thomas Petazzoni, CTO, Free Electrons
+Embedded Linux and Kernel engineering
+http://free-electrons.com
