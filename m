@@ -1,86 +1,85 @@
-From: Michal Simek <monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague (26
  Oct 2017)
-Date: Mon, 16 Oct 2017 07:36:08 +0200
-Message-ID: <39f87f46-da67-11d9-4336-213c13025568@monstr.eu>
+Date: Mon, 16 Oct 2017 09:11:57 -0500
+Message-ID: <CABGGiswXP800Pshc8jpVv3N4O-u2hFHJs-Ut_xVe8xV9ixcJSw@mail.gmail.com>
 References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
-Reply-To: monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org
+ <39f87f46-da67-11d9-4336-213c13025568@monstr.eu>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=monstr-eu.20150623.gappssmtp.com; s=20150623;
-        h=reply-to:subject:to:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=SwAbENkX7wFcz4gxHyoRbY5BAc5DqXAUTxjwgOrIWZE=;
-        b=pJ1X8KKn9ggpJdtVu19WbQBtmacgq7kAdAZCYz0nQtt8j7vOyuIP8XzAtvSd9uuoeO
-         hY1Qh7uf54gH1nB8VJty+3JMJ91cSlyY2pCKlMAgl1us8UjfSsrgFwcsmounD9uS1GSx
-         3EjsvcY9WqKhqiZ+brFoN29S0TLsg3efJTJa1TzdIp8gxJRzVRI1oQ49IvprUa95bmNa
-         9SmBoBEG36/xUM9deUMdj08NwIHHRJKwkxJARyTOTka0wOwheaH3gMUviVNj67vk1OWs
-         4TPhWIKanktVsZcSapkFJJvLdB8LdsNd5V59wKddUu7iwsleIIy58R4kcBowx/CBf1rZ
-         Rz/A==
-In-Reply-To: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Content-Language: en-US
+In-Reply-To: <39f87f46-da67-11d9-4336-213c13025568-pSz03upnqPeHXe+LvDLADg@public.gmane.org>
 Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Content-Transfer-Encoding: 7bit
+To: Michal Simek <monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org>
+Cc: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-Hi,
+On Mon, Oct 16, 2017 at 12:36 AM, Michal Simek <monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org> wrote:
+> Hi,
+>
+> On 9.10.2017 22:39, Grant Likely wrote:
+>> Kernel Summit is now just over 2 weeks away and it is time to pull
+>> together the schedule for the Devicetree workshop. Originally I
+>> planned on just an afternoon, but I've got the room for the whole day,
+>> so I've got a lot of flexibility on the schedule. Unscheduled time can
+>> be used for hacking.
+>>
+>> Date: 26 Oct 2017
+>> Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
+>> Location: Athens room - Hilton Prague
+>>
+>> If you plan to attend, make sure you update your OSSunmitE/ELCE
+>> registration to include the DT Workshop (log in to access and modify
+>> your registration):
+>>
+>> https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
+>>
+>> Here is my current list of topics in no particular order, including
+>> the topic moderator:
+>>
+>> Runtime memory consumption (Rob Herring)
+>> Overlay maintenance plan (TBC)
+>> Stable ABI for devicetree (TBC)
+>> DT YAML encoding (Pantelis Antoniou)
+>> DT Schema format - option 1 (Pantelis Antoniou)
+>> DT Schema format - option 2 (Grant Likely)
+>> Sharing Generic bindings (TBC)
+>> devicetree.org update (Grant)
+>>
+>> Reply to this email if you want to propose another topic.
+>>
+>> Reply privately if there is a particular topic you want to attend but
+>> you are unable to be there in the morning or afternoon. I'll put the
+>> actual agenda together a week out from the event.
+>
+> I would like to talk how to add support for AArch32 based on arm64 dts file.
 
-On 9.10.2017 22:39, Grant Likely wrote:
-> Kernel Summit is now just over 2 weeks away and it is time to pull
-> together the schedule for the Devicetree workshop. Originally I
-> planned on just an afternoon, but I've got the room for the whole day,
-> so I've got a lot of flexibility on the schedule. Unscheduled time can
-> be used for hacking.
-> 
-> Date: 26 Oct 2017
-> Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
-> Location: Athens room - Hilton Prague
-> 
-> If you plan to attend, make sure you update your OSSunmitE/ELCE
-> registration to include the DT Workshop (log in to access and modify
-> your registration):
-> 
-> https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
-> 
-> Here is my current list of topics in no particular order, including
-> the topic moderator:
-> 
-> Runtime memory consumption (Rob Herring)
-> Overlay maintenance plan (TBC)
-> Stable ABI for devicetree (TBC)
-> DT YAML encoding (Pantelis Antoniou)
-> DT Schema format - option 1 (Pantelis Antoniou)
-> DT Schema format - option 2 (Grant Likely)
-> Sharing Generic bindings (TBC)
-> devicetree.org update (Grant)
-> 
-> Reply to this email if you want to propose another topic.
-> 
-> Reply privately if there is a particular topic you want to attend but
-> you are unable to be there in the morning or afternoon. I'll put the
-> actual agenda together a week out from the event.
+We already have that for RPi3, but it's a bit hacky in that you have
+to include files from one arch to the other. What I'd like to see
+ideally is no dependency on $ARCH to build dts files. You can't build
+dts files for an arch without a cross-compiler installed which is an
+artificial dependency. The dtb should be independent of whether you're
+building for 32 or 64 bit.
 
-I would like to talk how to add support for AArch32 based on arm64 dts file.
+There's the other aspect of being able to do armv8 32-bit builds as
+there's no explicit support for v8 in arch/arm/. But that's not a DT
+issue.
 
-And next topic is discuss criteria for adding new DTS board files to
-kernel for supporting custom boards especially for arm32 which can end
-up with a lot of dts files in this folder.
-If make sense to permit only boards with something new or just enable
-reference boards to go in.
+> And next topic is discuss criteria for adding new DTS board files to
+> kernel for supporting custom boards especially for arm32 which can end
+> up with a lot of dts files in this folder.
 
-Thanks,
-Michal
+We really should move the arm32 files into subdirs for each SoC vendor
+IMO, but I think armsoc maintainers have been against that churn.
 
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP SoCs
+> If make sense to permit only boards with something new or just enable
+> reference boards to go in.
 
+The board dts files are generally pretty minimal. What's the issue
+here? Just lots of files in arch/arm/boot/dts?
+
+Rob
 --
 To unsubscribe from this list: send the line "unsubscribe devicetree" in
 the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
