@@ -1,103 +1,67 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague (26
- Oct 2017)
-Date: Mon, 16 Oct 2017 14:45:59 -0500
-Message-ID: <CAL_JsqJxFJSE-=778oHvNgpaBzhX9mBSzh1a0ZMvwSG69qStLw@mail.gmail.com>
+From: Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>
+Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague
+ (26 Oct 2017)
+Date: Tue, 17 Oct 2017 11:48:23 +0200
+Message-ID: <20171017114823.58476908@bbrezillon>
 References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
- <39f87f46-da67-11d9-4336-213c13025568@monstr.eu> <8a168960-2dae-35cc-e610-0fe257c9121d@codethink.co.uk>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <8a168960-2dae-35cc-e610-0fe257c9121d-4yDnlxn2s6sWdaTGBSpHTA@public.gmane.org>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Content-Transfer-Encoding: 7bit
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+In-Reply-To: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Ben Dooks <ben.dooks-4yDnlxn2s6sWdaTGBSpHTA@public.gmane.org>
-Cc: Michal Simek <monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org>, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Cc: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-On Mon, Oct 16, 2017 at 11:40 AM, Ben Dooks <ben.dooks-4yDnlxn2s6sWdaTGBSpHTA@public.gmane.org> wrote:
-> On 16/10/17 06:36, Michal Simek wrote:
->>
->> Hi,
->>
->> On 9.10.2017 22:39, Grant Likely wrote:
->>>
->>> Kernel Summit is now just over 2 weeks away and it is time to pull
->>> together the schedule for the Devicetree workshop. Originally I
->>> planned on just an afternoon, but I've got the room for the whole day,
->>> so I've got a lot of flexibility on the schedule. Unscheduled time can
->>> be used for hacking.
->>>
->>> Date: 26 Oct 2017
->>> Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
->>> Location: Athens room - Hilton Prague
->>>
->>> If you plan to attend, make sure you update your OSSunmitE/ELCE
->>> registration to include the DT Workshop (log in to access and modify
->>> your registration):
->>>
->>>
->>> https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
->>>
->>> Here is my current list of topics in no particular order, including
->>> the topic moderator:
->>>
->>> Runtime memory consumption (Rob Herring)
->>> Overlay maintenance plan (TBC)
->>> Stable ABI for devicetree (TBC)
->>> DT YAML encoding (Pantelis Antoniou)
->>> DT Schema format - option 1 (Pantelis Antoniou)
->>> DT Schema format - option 2 (Grant Likely)
->>> Sharing Generic bindings (TBC)
->>> devicetree.org update (Grant)
->>>
->>> Reply to this email if you want to propose another topic.
->>>
->>> Reply privately if there is a particular topic you want to attend but
->>> you are unable to be there in the morning or afternoon. I'll put the
->>> actual agenda together a week out from the event.
->>
->>
->> I would like to talk how to add support for AArch32 based on arm64 dts
->> file.
->>
->> And next topic is discuss criteria for adding new DTS board files to
->> kernel for supporting custom boards especially for arm32 which can end
->> up with a lot of dts files in this folder.
->> If make sense to permit only boards with something new or just enable
->> reference boards to go in.
->
->
-> I am interested in this, as we seem to be repeating the quantity
-> issue with the board file of having many .dts sources in the kernel.
+Hello Grant,
 
-The problem was not so much having board files in the kernel. It was
-how to scale support for boards and SoCs with each family structuring
-things their own, different way.
+On Mon, 9 Oct 2017 21:39:51 +0100
+Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
 
-IIRC, the ARM tree was at ~400 boards at the start of DT conversion.
-Now we're at ~1100 boards for arm/arm64. Plus we still have 264 that
-aren't converted to DT.
+> Kernel Summit is now just over 2 weeks away and it is time to pull
+> together the schedule for the Devicetree workshop. Originally I
+> planned on just an afternoon, but I've got the room for the whole day,
+> so I've got a lot of flexibility on the schedule. Unscheduled time can
+> be used for hacking.
+> 
+> Date: 26 Oct 2017
+> Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
+> Location: Athens room - Hilton Prague
+> 
+> If you plan to attend, make sure you update your OSSunmitE/ELCE
+> registration to include the DT Workshop (log in to access and modify
+> your registration):
+> 
+> https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
+> 
+> Here is my current list of topics in no particular order, including
+> the topic moderator:
+> 
+> Runtime memory consumption (Rob Herring)
+> Overlay maintenance plan (TBC)
+> Stable ABI for devicetree (TBC)
+> DT YAML encoding (Pantelis Antoniou)
+> DT Schema format - option 1 (Pantelis Antoniou)
+> DT Schema format - option 2 (Grant Likely)
+> Sharing Generic bindings (TBC)
+> devicetree.org update (Grant)
+> 
+> Reply to this email if you want to propose another topic.
 
-> I'm not sure how to deal with this, on one hand only having the
-> reference (and possibly popular) boards is going to keep the size
-> down. On the other hand out of tree .dts files are going to be
-> difficult to find (or vanish with the vendor).
+Not sure yet if I'll attend the DT workshop or not, but I thought I
+could ask my question here because it might be of interest to someone
+else who is attending.
 
-Why do we care? What problem is that causing?
+What happens when the DT bindings is not documented in Linux but in an
+another project because this project was the first to use it.
 
-> It seems we are still no closer to having a DT repository outside
-> the kernel.
+I had the case here http://patchwork.ozlabs.org/patch/810275/, and I'm
+not sure what's the policy when this happens. Should we add a file
+under Documentation/devicetree/bindings/... that points to the external
+doc file, should we duplicate the DT bindings doc in Linux, or should
+we just leave the bindings undocumented in the kernel tree?
 
-In relationship to the above what problem would that solve? We've got
-all the platform maintainers and arm-soc maintainers to handle dts
-files. Mark and myself along with subsystem maintainers reviewing and
-applying device bindings. If you move all that to a separate
-repository, then you have me because no one else has volunteered. I'm
-pretty sure no one wants me as the single point of failure.
+Regards,
 
-Rob
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+Boris
