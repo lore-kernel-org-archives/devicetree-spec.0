@@ -1,88 +1,174 @@
-From: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
+From: Michal Simek <monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org>
 Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague (26
  Oct 2017)
-Date: Wed, 18 Oct 2017 15:21:40 +0200
-Message-ID: <CAMuHMdXhQQpnQEgOu92MVNd=m2FvkqD9XcYS3rMVMHpB2zY0Qw@mail.gmail.com>
+Date: Wed, 18 Oct 2017 16:04:56 +0200
+Message-ID: <52c0aa5e-4995-9c0e-babb-60ec84a3deff@monstr.eu>
 References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
- <20171017114823.58476908@bbrezillon> <CACxGe6tPQxwzN14TZtgNhw7OOuePLJxODrn-_b4gMDGzAFEf1Q@mail.gmail.com>
- <1508257276.74236.38.camel@freebsd.org> <2D4E6B6D-8F07-46D0-BB36-D97916802893@linaro.org>
- <CAMuHMdW-=-CdnD5Eb_w7fc7=c64i+bu=yv9_c0cj3UM940d8EA@mail.gmail.com>
- <ECADFF3FD767C149AD96A924E7EA6EAF3E64B904@USCULXMSG01.am.sony.com>
- <CACxGe6s8CbzRY7L1znq-nQ52eHp3pOu4X3pCX35ocQShnA_Ecw@mail.gmail.com>
- <B7292660-D602-473E-9B47-CF7B4D2449D7@antoniou-consulting.com> <20171018131809.q5nccysb2j7lu4bn@piout.net>
+ <39f87f46-da67-11d9-4336-213c13025568@monstr.eu>
+ <CABGGiswXP800Pshc8jpVv3N4O-u2hFHJs-Ut_xVe8xV9ixcJSw@mail.gmail.com>
+Reply-To: monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature";
+ boundary="PTS65lo0x06hExrJv28iuLv4fq9fEOVbl"
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc:content-transfer-encoding;
-        bh=O8Z240tsbpEUO/6ePi+ytmrtM2MGfX7gfwf4RxD7Zxs=;
-        b=M19ZuFaJR4CHuLqFuGkK9DWGNQ7zA7Q/Q+1Br8JlQ1AK4dvVmEt8wkXWvDvy2lmyx+
-         SUEI7Zx8pwubqRnNKTwpAgzImcPXcQ4pIolpsfSSxLPBH/FyiLe48P0+8pJOAYSQNUNp
-         2LB03koLxQ33nLO9XE97suODOuNIEvhWEh0KIIkpG3hUaTGJNebp4tqebT4tc7bS20MO
-         W30ZeBmi9H641suval22MRKwsWluHuPYX70agJGjOEsFNBnZv6gUQniQ+8nVf1mWjtdF
-         FHlyErneD7zBgA10/rxvp5JYxChESwYj7mQtA4Zi4ZKG+Oz/14Kcay1Ai41tpQ4khGyC
-         9aIg==
-In-Reply-To: <20171018131809.q5nccysb2j7lu4bn-m++hUPXGwpdeoWH0uzbU5w@public.gmane.org>
+        d=monstr-eu.20150623.gappssmtp.com; s=20150623;
+        h=reply-to:subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to;
+        bh=rZ0ohlhTbBxOjqGb2UFYydG5DZUrSOofApKL1m8XYgI=;
+        b=BP6XX2J7mGZMdzIZBMKRx5rQbslOZ246AIDqm1iqbQ29+jfXTAPIpmyPzpW8RH3j0F
+         /OcbbAWqKMbHpbNOOOX/D9NK7jnvlPtqrXTJzKsQtCQX375mYNbQwVX7dYvIh/w9gs5b
+         CgfTMJj4ONSH5t+1hVXfpm+t7ZHa3hGvqrjut5nBZ2H4m1dzvetGRVMZO50CqtXySQmB
+         Du3xnQImxTx48TwZSzJVL76IAGlBLDxaVMuMocWdHWAS4VCCJK/CVL5YONd2bpz0vosM
+         T5fiqD/n6xJWcmlYAUv+SqLUckGW8CRZtHe7yva3Z1AGxe70dVA4e1WjdCFcszxZ6MDv
+         D+/A==
+In-Reply-To: <CABGGiswXP800Pshc8jpVv3N4O-u2hFHJs-Ut_xVe8xV9ixcJSw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-To: Alexandre Belloni <alexandre.belloni-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>
-Cc: Pantelis Antoniou <panto-wVdstyuyKrO8r51toPun2/C9HSW9iNxf@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, Ian Lepore <ian-h+KGxgPPiopAfugRpC6u6w@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "Bird, Timothy" <Tim.Bird-7U/KSKJipcs@public.gmane.org>
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Cc: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-Hi Alexandre,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--PTS65lo0x06hExrJv28iuLv4fq9fEOVbl
+Content-Type: multipart/mixed; boundary="jTas288rc7q5Op4HHiAKe4sd0mnLCQI9l";
+ protected-headers="v1"
+From: Michal Simek <monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org>
+Reply-To: monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Cc: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>,
+ "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>,
+ devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org,
+ "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org"
+ <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>,
+ David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>,
+ Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>,
+ Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>,
+ Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>,
+ Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Message-ID: <52c0aa5e-4995-9c0e-babb-60ec84a3deff-pSz03upnqPeHXe+LvDLADg@public.gmane.org>
+Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague (26
+ Oct 2017)
+References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+ <39f87f46-da67-11d9-4336-213c13025568-pSz03upnqPeHXe+LvDLADg@public.gmane.org>
+ <CABGGiswXP800Pshc8jpVv3N4O-u2hFHJs-Ut_xVe8xV9ixcJSw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+In-Reply-To: <CABGGiswXP800Pshc8jpVv3N4O-u2hFHJs-Ut_xVe8xV9ixcJSw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 
-On Wed, Oct 18, 2017 at 3:18 PM, Alexandre Belloni
-<alexandre.belloni-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org> wrote:
-> On 18/10/2017 at 15:59:00 +0300, Pantelis Antoniou wrote:
->> > On Oct 18, 2017, at 15:14 , Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> w=
-rote:
->> > On Tue, Oct 17, 2017 at 8:03 PM, Bird, Timothy <Tim.Bird-7U/KSKJipcs@public.gmane.org> wro=
-te:
->> >>> -----Original Message-----
->> >>> From Geert Uytterhoeven on Tuesday, October 17, 2017 10:24 AM
->> >>> On Tue, Oct 17, 2017 at 7:02 PM, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> =
-wrote:
->> >>>> I think this also gets to having bindings described in a structured=
- way so
->> >>> they can be utilized for validation of dts files.  We are doing a li=
-ttle of this in
->> >>> Zephyr since we are using a structured binding spec to generate code=
- from
->> >>> .dts (since we don=E2=80=99t utilize a runtime dtb).
->> >>>
->> >>> So you are basically generating board files from .dts?
->> >>> (closing the loop ;-)
->> >>
->> >> I think we ought to do this on Linux, as a size optimization.
->> >> -- Tim
->> >>
->> >> P.S.  I think I'll leave it ambiguous whether this was meant as a jok=
-e or not. :-)
+--jTas288rc7q5Op4HHiAKe4sd0mnLCQI9l
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 16.10.2017 16:11, Rob Herring wrote:
+> On Mon, Oct 16, 2017 at 12:36 AM, Michal Simek <monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org> wrote=
+:
+>> Hi,
 >>
->> As crazy that sounds it is possible using the YAML bindings, i.e. C stru=
-cture definitions
->> and fill-up from DT automatically. Whether this is a good idea it=E2=80=
-=99s another question :)
->
-> But that doesn't work with any driver parsing custom properties (using
-> of_property_read_* and the likes). I would very much like to see what
-> are the boot time improvements when doing that ;)
+>> On 9.10.2017 22:39, Grant Likely wrote:
+>>> Kernel Summit is now just over 2 weeks away and it is time to pull
+>>> together the schedule for the Devicetree workshop. Originally I
+>>> planned on just an afternoon, but I've got the room for the whole day=
+,
+>>> so I've got a lot of flexibility on the schedule. Unscheduled time ca=
+n
+>>> be used for hacking.
+>>>
+>>> Date: 26 Oct 2017
+>>> Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
+>>> Location: Athens room - Hilton Prague
+>>>
+>>> If you plan to attend, make sure you update your OSSunmitE/ELCE
+>>> registration to include the DT Workshop (log in to access and modify
+>>> your registration):
+>>>
+>>> https://www.regonline.com/register/login.aspx?eventID=3D1883377&Metho=
+dId=3D0&EventsessionId=3D&Email_Address=3D&membershipID=3D
+>>>
+>>> Here is my current list of topics in no particular order, including
+>>> the topic moderator:
+>>>
+>>> Runtime memory consumption (Rob Herring)
+>>> Overlay maintenance plan (TBC)
+>>> Stable ABI for devicetree (TBC)
+>>> DT YAML encoding (Pantelis Antoniou)
+>>> DT Schema format - option 1 (Pantelis Antoniou)
+>>> DT Schema format - option 2 (Grant Likely)
+>>> Sharing Generic bindings (TBC)
+>>> devicetree.org update (Grant)
+>>>
+>>> Reply to this email if you want to propose another topic.
+>>>
+>>> Reply privately if there is a particular topic you want to attend but=
 
-Unless you override of_property_read_*() to work on the dense C structures
-instead?
+>>> you are unable to be there in the morning or afternoon. I'll put the
+>>> actual agenda together a week out from the event.
+>>
+>> I would like to talk how to add support for AArch32 based on arm64 dts=
+ file.
+>=20
+> We already have that for RPi3, but it's a bit hacky in that you have
+> to include files from one arch to the other. What I'd like to see
+> ideally is no dependency on $ARCH to build dts files. You can't build
+> dts files for an arch without a cross-compiler installed which is an
+> artificial dependency. The dtb should be independent of whether you're
+> building for 32 or 64 bit.
 
-Gr{oetje,eeting}s,
+I wasn't aware about RPI3 but yes - I have seen the same for ZynqMP.
 
-                        Geert
+>=20
+> There's the other aspect of being able to do armv8 32-bit builds as
+> there's no explicit support for v8 in arch/arm/. But that's not a DT
+> issue.
 
---
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
-.org
+Yep including Kconfig.platforms is required.
 
-In personal conversations with technical people, I call myself a hacker. Bu=
-t
-when I'm talking to journalists I just say "programmer" or something like t=
-hat.
-                                -- Linus Torvalds
+>=20
+>> And next topic is discuss criteria for adding new DTS board files to
+>> kernel for supporting custom boards especially for arm32 which can end=
+
+>> up with a lot of dts files in this folder.
+>=20
+> We really should move the arm32 files into subdirs for each SoC vendor
+> IMO, but I think armsoc maintainers have been against that churn.
+
+As you said above maybe we should consider to move all DTS files out of
+arch folder and sorted them based on SoC vendor. It sounds like a good
+topic to discuss.
+
+
+>> If make sense to permit only boards with something new or just enable
+>> reference boards to go in.
+>=20
+> The board dts files are generally pretty minimal. What's the issue
+> here? Just lots of files in arch/arm/boot/dts?
+
+yep. A lot of files there.
+
+Thanks,
+Michal
+
+--=20
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP SoCs
+
+
+
+--jTas288rc7q5Op4HHiAKe4sd0mnLCQI9l--
+
+--PTS65lo0x06hExrJv28iuLv4fq9fEOVbl
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlnnX4sACgkQykllyylKDCG8lQCgkQNeIRMicfpV1xxgc1NfX3LL
+DVYAnio70P+0NHJO0k/H0usgU938waNB
+=13YG
+-----END PGP SIGNATURE-----
+
+--PTS65lo0x06hExrJv28iuLv4fq9fEOVbl--
