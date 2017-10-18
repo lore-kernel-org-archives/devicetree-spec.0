@@ -1,233 +1,72 @@
-From: Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
-Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague
+From: "Bird, Timothy" <Tim.Bird-7U/KSKJipcs@public.gmane.org>
+Subject: RE: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague
  (26 Oct 2017)
-Date: Wed, 18 Oct 2017 19:20:44 +0300
-Message-ID: <1508343644.25643.14.camel@hp800z>
+Date: Wed, 18 Oct 2017 17:41:11 +0000
+Message-ID: <ECADFF3FD767C149AD96A924E7EA6EAF3E64BBCD@USCULXMSG01.am.sony.com>
 References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
-         <39f87f46-da67-11d9-4336-213c13025568@monstr.eu>
-         <CABGGiswXP800Pshc8jpVv3N4O-u2hFHJs-Ut_xVe8xV9ixcJSw@mail.gmail.com>
-         <52c0aa5e-4995-9c0e-babb-60ec84a3deff@monstr.eu>
-         <00068711-a9b8-e879-8212-b7eb4141e4b7@arm.com>
-         <CAL_Jsq+JiLgPLZSncWu=rQh80pnCXd0WpkLEkASPXeFSOMt4yg@mail.gmail.com>
-         <44857e9c-85c3-f1f7-514d-28d9966d243e@arm.com>
+        <20171017114823.58476908@bbrezillon>
+        <CACxGe6tPQxwzN14TZtgNhw7OOuePLJxODrn-_b4gMDGzAFEf1Q@mail.gmail.com>
+        <1508257276.74236.38.camel@freebsd.org>
+        <2D4E6B6D-8F07-46D0-BB36-D97916802893@linaro.org>
+        <CAMuHMdW-=-CdnD5Eb_w7fc7=c64i+bu=yv9_c0cj3UM940d8EA@mail.gmail.com>
+        <ECADFF3FD767C149AD96A924E7EA6EAF3E64B904@USCULXMSG01.am.sony.com>
+        <CACxGe6s8CbzRY7L1znq-nQ52eHp3pOu4X3pCX35ocQShnA_Ecw@mail.gmail.com>
+        <B7292660-D602-473E-9B47-CF7B4D2449D7@antoniou-consulting.com>
+        <20171018131809.q5nccysb2j7lu4bn@piout.net>
+ <CAMuHMdXhQQpnQEgOu92MVNd=m2FvkqD9XcYS3rMVMHpB2zY0Qw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=message-id:subject:from:to:cc:date:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=D0AL9Q4hd6QgPBFQxJMtBFERI/VtMeDSTPIvib1sgtE=;
-        b=XN5VXJ9VbSHPBqnkaP6eqAdpepgLGF5KColSjqveGX3vLo/hovj68XIOUrRHSUFU+/
-         oO6xuT+AkceP4/IWmPzKoyKMSY0Aa0qMb8+WVelj/EA087h3sVyCQBTKrkS01QfvCehW
-         xYdxHFn3gRgcLzCQwZpU6FljL3c31mSvv72Wk=
-In-Reply-To: <44857e9c-85c3-f1f7-514d-28d9966d243e-5wv7dgnIgG8@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Sony.onmicrosoft.com;
+ s=selector1-Sony-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=ZUolOcd/mDHZy+kuu5zfbOi/TYqeO8k+O7ptko5bnwQ=;
+ b=FWU4g+YFE64UPkApUqz+ZcqVJ1au8jjL4qcucAEDWvY01LjHk8AJHCNOzEZk9iQauy8FteAxo8bpaBBJ8iON/guA8rFAUxQY7SuQGCVKi5+j4BKETboHQzMDGrwkMKwQ1nRtnihW0PMsOaEZtrQMwP3UUwO9bPaX5dAMRd9lQq4=
+In-Reply-To: <CAMuHMdXhQQpnQEgOu92MVNd=m2FvkqD9XcYS3rMVMHpB2zY0Qw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Content-Language: en-US
 Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-To: Andre Przywara <andre.przywara-5wv7dgnIgG8@public.gmane.org>
-Cc: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Michal Simek <monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org>, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Content-Type: text/plain; charset="windows-1254"
+To: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>, Alexandre Belloni <alexandre.belloni-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>
+Cc: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, Ian Lepore <ian-h+KGxgPPiopAfugRpC6u6w@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pantelis Antoniou <panto-wVdstyuyKrO8r51toPun2/C9HSW9iNxf@public.gmane.org>
 
-Hi Andre,
-
-On Wed, 2017-10-18 at 17:05 +0100, Andre Przywara wrote:
-> Hi,
-> 
-> On 18/10/17 16:32, Rob Herring wrote:
-> > On Wed, Oct 18, 2017 at 9:28 AM, Andre Przywara <andre.przywara-5wv7dgnIgG8@public.gmane.org> wrote:
-> >> Hi,
-> >>
-> >> On 18/10/17 15:04, Michal Simek wrote:
-> >>> On 16.10.2017 16:11, Rob Herring wrote:
-> >>>> On Mon, Oct 16, 2017 at 12:36 AM, Michal Simek <monstr-pSz03upnqPeHXe+LvDLADg@public.gmane.org> wrote:
-> >>>>> Hi,
-> >>>>>
-> >>>>> On 9.10.2017 22:39, Grant Likely wrote:
-> >>>>>> Kernel Summit is now just over 2 weeks away and it is time to pull
-> >>>>>> together the schedule for the Devicetree workshop. Originally I
-> >>>>>> planned on just an afternoon, but I've got the room for the whole day,
-> >>>>>> so I've got a lot of flexibility on the schedule. Unscheduled time can
-> >>>>>> be used for hacking.
-> >>>>>>
-> >>>>>> Date: 26 Oct 2017
-> >>>>>> Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
-> >>>>>> Location: Athens room - Hilton Prague
-> >>>>>>
-> >>>>>> If you plan to attend, make sure you update your OSSunmitE/ELCE
-> >>>>>> registration to include the DT Workshop (log in to access and modify
-> >>>>>> your registration):
-> >>>>>>
-> >>>>>> https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
-> >>>>>>
-> >>>>>> Here is my current list of topics in no particular order, including
-> >>>>>> the topic moderator:
-> >>>>>>
-> >>>>>> Runtime memory consumption (Rob Herring)
-> >>>>>> Overlay maintenance plan (TBC)
-> >>>>>> Stable ABI for devicetree (TBC)
-> >>>>>> DT YAML encoding (Pantelis Antoniou)
-> >>>>>> DT Schema format - option 1 (Pantelis Antoniou)
-> >>>>>> DT Schema format - option 2 (Grant Likely)
-> >>>>>> Sharing Generic bindings (TBC)
-> >>>>>> devicetree.org update (Grant)
-> >>>>>>
-> >>>>>> Reply to this email if you want to propose another topic.
-> >>>>>>
-> >>>>>> Reply privately if there is a particular topic you want to attend but
-> >>>>>> you are unable to be there in the morning or afternoon. I'll put the
-> >>>>>> actual agenda together a week out from the event.
-> >>>>>
-> >>>>> I would like to talk how to add support for AArch32 based on arm64 dts file.
-> >>>>
-> >>>> We already have that for RPi3, but it's a bit hacky in that you have
-> >>>> to include files from one arch to the other. What I'd like to see
-> >>>> ideally is no dependency on $ARCH to build dts files. You can't build
-> >>>> dts files for an arch without a cross-compiler installed which is an
-> >>>> artificial dependency. The dtb should be independent of whether you're
-> >>>> building for 32 or 64 bit.
-> >>>
-> >>> I wasn't aware about RPI3 but yes - I have seen the same for ZynqMP.
-> >>>
-> >>>>
-> >>>> There's the other aspect of being able to do armv8 32-bit builds as
-> >>>> there's no explicit support for v8 in arch/arm/. But that's not a DT
-> >>>> issue.
-> >>>
-> >>> Yep including Kconfig.platforms is required.
-> >>>
-> >>>>
-> >>>>> And next topic is discuss criteria for adding new DTS board files to
-> >>>>> kernel for supporting custom boards especially for arm32 which can end
-> >>>>> up with a lot of dts files in this folder.
-> >>>>
-> >>>> We really should move the arm32 files into subdirs for each SoC vendor
-> >>>> IMO, but I think armsoc maintainers have been against that churn.
-> >>>
-> >>> As you said above maybe we should consider to move all DTS files out of
-> >>> arch folder and sorted them based on SoC vendor. It sounds like a good
-> >>> topic to discuss.
-> > 
-> > That is 2 separate topics really. For the latter, you need to come up
-> > with reasons to justify the churn.
-> > 
-> >>>>> If make sense to permit only boards with something new or just enable
-> >>>>> reference boards to go in.
-> >>>>
-> >>>> The board dts files are generally pretty minimal. What's the issue
-> >>>> here? Just lots of files in arch/arm/boot/dts?
-> >>>
-> >>> yep. A lot of files there.
-> > 
-> > Are we approaching the limits of # of files in one directory? Is
-> > Arnd/Olof or Linus complaining about there being too many files to
-> > maintain? Do sub-arch maintainers not know which files are theirs?
-> > What problem are we trying to solve here?
-> > 
-> > If we're talking about moving bindings and dts files out of the
-> > kernel, then call it that. Otherwise, let's not mix the topics. Unless
-> > you want nothing to happen then tie it to moving to a separate
-> > repository.
-> > 
-> >> I was wondering whether we should really stop providing .dts files for
-> >> *boards* in the *kernel* tree. In my impression this was more a stop-gap
-> >> measure to bridge the transition from board files to DT.
-> > 
-> > Not really. A stop-gap would be a couple of kernel cycles in my mind.
-> > PPC dts files have been there forever practically.
-> > 
-> >> Given that the particular board files are rather boring anyway, wouldn't
-> >> it be sufficient to just include the SoC .dtsi plus one (or two) example
-> >> .dts, for instance for the official evaluation board?
-> > 
-> > That sounds horrible to manage. You are assuming the split between
-> > board and SoC specifics are done perfectly from the start. I haven't
-> > checked the history, but I'm going to guess that has not been the
-> > case. That would effectively make the split be an ABI. Folks have
-> > enough issues with the entire dtb being an ABI.
-> 
-> I agree that we should not create an ABI between the SoC's .dtsi the
-> board's .dts files. But eventually people would put *.dtbs* on their
-> boards, so we don't really care, as long as they are created from the
-> right combination of both.
-> At the end of the day a vendor actually doesn't really need to provide a
-> DT matching exactly the kernel version, as long as it does not violate
-> any bindings.
-> 
-> > However, there is a coming issue with Android project Treble which
-> > does say all board specifics are an overlay (or multiple overlays) to
-> > a common SoC base dtb which does make the split an ABI. For mainline
-> > to handle this, we'd need to start making the board files overlays.
-> 
-> That does not sound good ...
-> 
-> > And to not break everything, we'd need to apply those overlays at
-> > build time to produce a single board dtb. OTOH, phones aren't really
-> > supported in mainline and vendors will do it wrong before mainline
-> > gets around to it.
-> > 
-> >> This could be used as a template for creating specific board DTs.
-> >> Ideally vendors could put those on their boards: into some flash or
-> >> integrated into the firmware (as part of U-Boot, for instance).
-> > 
-> > That's really a separate problem from where are dts files maintained.
-> > 
-> > Does u-boot support using the same dtb to configure itself and to pass
-> > to the kernel yet? That was a foreign concept though I think it was
-> > being worked on.
-> 
-> That works already for some platforms or SoCs, as long as someone cares
-> to keep the U-Boot copy up-to-date with the kernel version [1].
-> I boot the Pine64 with $fdtcontroladdr (which points to U-Boot's .dtb)
-> these days, without the need to load any .dtb. And on some boards U-Boot
-> lives in SPI flash, so the .dtb is really tied to the board. Like on
-> Highbank/Midway ;-)
-> 
-> Also this is the default address which the bootuefi command takes when
-> there is nothing more specific provided.
-> 
-> But this is purely platform specific, and for some of them the DT used
-> in U-Boot is quite different from the kernel version. Although this can
-> be fixed, as the U-Boot drivers can be changed and don't adhere to some ABI.
-> 
-> >> And having a source for the .dtsi should make it easier to get a
-> >> readable de-compilation of a given .dtb.
-> > 
-> > If such a tool existed to add back the annotations. YAML will solve
-> > that, I'm sure.
-> 
-> Yes, but you need some extra JSON to recover the formatting ;-)
-> 
-
-YAML output preserves references and anchors. But still would not
-be the same as the original sources since we're now heavily using
-macros and the preprocessor.
-
-Close, but no cigar.
-
-> >> We could collect .dts files for boards somewhere else. It's already the
-> >> case that we have some boards with a specific SoC "supported by the
-> >> kernel" and some not, for no technical reason at all, actually. It's
-> >> just whether there is someone willing to post (and push through) a .dts
-> >> file.
-> > 
-> > We could start accepting (but not requiring) patches against the
-> > devicetree-rebasing.git tree if that solves the problem of "kernel
-> > bindings" and "kernel dts files". We can mechanically convert their
-> > paths back to kernel paths and apply them. I've got no issue signing
-> > up to that because I fully expect that to be only a trickle.
-> 
-> But that would mean that they would still live in the kernel, right?
-> 
-> Cheers,
-> Andre.
-> 
-> [1]
-> http://git.denx.de/?p=u-boot.git;a=commit;h=f98852bfa9a99d7258eb06e4849e5c3d075f44cf
-> > 
-> > Rob
-> > 
-
-
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbSBHZWVydCBVeXR0ZXJob2V2
+ZW4gb24gV2VkbmVzZGF5LCBPY3RvYmVyIDE4LCAyMDE3IDY6MjIgQU0NCj4gT24gV2VkLCBPY3Qg
+MTgsIDIwMTcgYXQgMzoxOCBQTSwgQWxleGFuZHJlIEJlbGxvbmkNCj4gPGFsZXhhbmRyZS5iZWxs
+b25pQGZyZWUtZWxlY3Ryb25zLmNvbT4gd3JvdGU6DQo+ID4gT24gMTgvMTAvMjAxNyBhdCAxNTo1
+OTowMCArMDMwMCwgUGFudGVsaXMgQW50b25pb3Ugd3JvdGU6DQo+ID4+ID4gT24gT2N0IDE4LCAy
+MDE3LCBhdCAxNToxNCAsIEdyYW50IExpa2VseSA8Z3JhbnQubGlrZWx5QHNlY3JldGxhYi5jYT4N
+Cj4gd3JvdGU6DQo+ID4+ID4gT24gVHVlLCBPY3QgMTcsIDIwMTcgYXQgODowMyBQTSwgQmlyZCwg
+VGltb3RoeSA8VGltLkJpcmRAc29ueS5jb20+DQo+IHdyb3RlOg0KPiA+PiA+Pj4gLS0tLS1Pcmln
+aW5hbCBNZXNzYWdlLS0tLS0NCj4gPj4gPj4+IEZyb20gR2VlcnQgVXl0dGVyaG9ldmVuIG9uIFR1
+ZXNkYXksIE9jdG9iZXIgMTcsIDIwMTcgMTA6MjQgQU0NCj4gPj4gPj4+IE9uIFR1ZSwgT2N0IDE3
+LCAyMDE3IGF0IDc6MDIgUE0sIEt1bWFyIEdhbGENCj4gPGt1bWFyLmdhbGFAbGluYXJvLm9yZz4g
+d3JvdGU6DQo+ID4+ID4+Pj4gSSB0aGluayB0aGlzIGFsc28gZ2V0cyB0byBoYXZpbmcgYmluZGlu
+Z3MgZGVzY3JpYmVkIGluIGEgc3RydWN0dXJlZCB3YXkNCj4gc28NCj4gPj4gPj4+IHRoZXkgY2Fu
+IGJlIHV0aWxpemVkIGZvciB2YWxpZGF0aW9uIG9mIGR0cyBmaWxlcy4gIFdlIGFyZSBkb2luZyBh
+IGxpdHRsZSBvZg0KPiB0aGlzIGluDQo+ID4+ID4+PiBaZXBoeXIgc2luY2Ugd2UgYXJlIHVzaW5n
+IGEgc3RydWN0dXJlZCBiaW5kaW5nIHNwZWMgdG8gZ2VuZXJhdGUgY29kZQ0KPiBmcm9tDQo+ID4+
+ID4+PiAuZHRzIChzaW5jZSB3ZSBkb27igJl0IHV0aWxpemUgYSBydW50aW1lIGR0YikuDQo+ID4+
+ID4+Pg0KPiA+PiA+Pj4gU28geW91IGFyZSBiYXNpY2FsbHkgZ2VuZXJhdGluZyBib2FyZCBmaWxl
+cyBmcm9tIC5kdHM/DQo+ID4+ID4+PiAoY2xvc2luZyB0aGUgbG9vcCA7LSkNCj4gPj4gPj4NCj4g
+Pj4gPj4gSSB0aGluayB3ZSBvdWdodCB0byBkbyB0aGlzIG9uIExpbnV4LCBhcyBhIHNpemUgb3B0
+aW1pemF0aW9uLg0KPiA+PiA+PiAtLSBUaW0NCj4gPj4gPj4NCj4gPj4gPj4gUC5TLiAgSSB0aGlu
+ayBJJ2xsIGxlYXZlIGl0IGFtYmlndW91cyB3aGV0aGVyIHRoaXMgd2FzIG1lYW50IGFzIGEgam9r
+ZSBvcg0KPiBub3QuIDotKQ0KPiA+Pg0KPiA+PiBBcyBjcmF6eSB0aGF0IHNvdW5kcyBpdCBpcyBw
+b3NzaWJsZSB1c2luZyB0aGUgWUFNTCBiaW5kaW5ncywgaS5lLiBDIHN0cnVjdHVyZQ0KPiBkZWZp
+bml0aW9ucw0KPiA+PiBhbmQgZmlsbC11cCBmcm9tIERUIGF1dG9tYXRpY2FsbHkuIFdoZXRoZXIg
+dGhpcyBpcyBhIGdvb2QgaWRlYSBpdOKAmXMgYW5vdGhlcg0KPiBxdWVzdGlvbiA6KQ0KPiA+DQo+
+ID4gQnV0IHRoYXQgZG9lc24ndCB3b3JrIHdpdGggYW55IGRyaXZlciBwYXJzaW5nIGN1c3RvbSBw
+cm9wZXJ0aWVzICh1c2luZw0KPiA+IG9mX3Byb3BlcnR5X3JlYWRfKiBhbmQgdGhlIGxpa2VzKS4g
+SSB3b3VsZCB2ZXJ5IG11Y2ggbGlrZSB0byBzZWUgd2hhdA0KPiA+IGFyZSB0aGUgYm9vdCB0aW1l
+IGltcHJvdmVtZW50cyB3aGVuIGRvaW5nIHRoYXQgOykNCj4gDQo+IFVubGVzcyB5b3Ugb3ZlcnJp
+ZGUgb2ZfcHJvcGVydHlfcmVhZF8qKCkgdG8gd29yayBvbiB0aGUgZGVuc2UgQw0KPiBzdHJ1Y3R1
+cmVzIGluc3RlYWQ/DQoNCk9yIHR1cm4gdGhlIHByb3BlcnR5IHJlYWRzIGludG8gbWFjcm9zIHRo
+YXQgdGhlbiB0dXJuIGludG8gY29uc3RhbnQgZGVjbGFyYXRpb25zIGlubGluZSBpbiB0aGUgY29k
+ZS4NCk5vIG5lZWQgc3RvcCBhdCBkZW5zZSBDIHN0cnVjdHVyZXMuICBPZiBjb3Vyc2UgeW91IGxv
+c2UgYWxsIGNvbmZpZ3VyYXRpb24gZmxleGliaWxpdHkgYXQgcnVudGltZS4NCkJ1dCB0aGVuIHRo
+YXQncyB0aGUga2luZCBvZiB0cmFkZS1vZmYgb25lIG9mdGVuIG1ha2VzIHdpdGggZW1iZWRkZWQg
+c29mdHdhcmUsIGlzbid0IGl0Pw0KIC0tIFRpbQ0K
 --
 To unsubscribe from this list: send the line "unsubscribe devicetree" in
 the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
