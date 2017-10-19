@@ -1,130 +1,135 @@
-From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: Re: Devicetree Workshop at Kernel Summit Prague (26 Oct 2017)
-Date: Thu, 19 Oct 2017 12:10:31 +0100
-Message-ID: <CACxGe6vhYV5dbnNQXyRoPq=XSA5HOtpN0FCqyoKvGVbRu-aRqA@mail.gmail.com>
+From: Alexandre Torgue <alexandre.torgue-qxv4g6HH51o@public.gmane.org>
+Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague (26
+ Oct 2017)
+Date: Thu, 19 Oct 2017 16:00:44 +0200
+Message-ID: <23a238d7-0b3d-8b46-b2fe-88b9d0841aa1@st.com>
 References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
+ <20171017114823.58476908@bbrezillon>
+ <CAGb2v67GU4uW7uPMrqFjTW0qBR6LPNeX4Md+tf9S=HRWT_GVqA@mail.gmail.com>
+ <20171018110958.mh76pngzluazmc7y@sirena.co.uk>
+ <20171018175910.GP12015@bill-the-cat>
+ <FD387FCC-3F95-48DF-B412-3384EF96FCFC@fubar.geek.nz>
+ <CAL_JsqJTE5p0zjm-66D2143dEx+xQ0uKCV-20kMt-kq=SOa-8Q@mail.gmail.com>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to;
-        bh=8IvvXqOmfQCXjs/jNXsLtG0OXJd6AZzTD3q+LNgAFtg=;
-        b=09Zgk7FN6Itd60qwBJQn4dm3eVL9fqI+RSetScZAgujkR/FVMYXETzolUXnQIMjTCw
-         rOrJw67gDk7xyVhJfDCMdCSXwqNcVWrtCY8d8mtpKPjrOiotWNqLg1fu78Us75/kDq2y
-         ud6IuKsda1besxvKde9gJQ/tEDbapXTq+lasJRzjs7Gii3yoJlzT2I2TJ0hUN+J7eWBZ
-         wsP66PxRHZzd7WcZBHCXYxMaLe225tzQSa+emulrYu5VlkFTZkAN0hJto/D43d2C/vLP
-         1w0ZlOGoYQ/1nDCaanmpc2qmG5YwwKifbt3uM97bqfjZxyBAs8UKz3rlKa3huHbjppZ8
-         14lg==
-In-Reply-To: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Content-Transfer-Encoding: quoted-printable
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+In-Reply-To: <CAL_JsqJTE5p0zjm-66D2143dEx+xQ0uKCV-20kMt-kq=SOa-8Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Content-Language: en-US
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Content-Type: text/plain; charset="windows-1252"; format="flowed"
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Andrew Turner <andrew-/GQUgJ3qWXsIvnNNuaVxrw@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Cc: Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Mark Brown <broonie-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Chen-Yu Tsai <wens-jdAy2FN1RRM@public.gmane.org>, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>
 
-Hi folks,
+Hi Rob,
 
-I've flushed out the schedule. It is still a draft, but I've got names
-against the topics and put them into a rough order.
+On 10/19/2017 01:53 AM, Rob Herring wrote:
+> On Wed, Oct 18, 2017 at 6:28 PM, Andrew Turner <andrew-/GQUgJ3qWXsIvnNNua=
+Vxrw@public.gmane.org> wrote:
+>>
+>>> On 18 Oct 2017, at 18:59, Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public=
+.gmane.org> wrote:
+>>>
+>>> On Wed, Oct 18, 2017 at 12:09:58PM +0100, Mark Brown wrote:
+>>>> On Wed, Oct 18, 2017 at 06:35:24PM +0800, Chen-Yu Tsai wrote:
+>>>>
+>>>>> I'd like to add something on the topic of non-Linux projects. In this
+>>>>> case it's diverging DT bindings from U-boot:
+>>>>
+>>>>> https://patchwork.ozlabs.org/patch/823158/
+>>>>
+>>>>> U-boot already has a set of devicetree binding additions:
+>>>>> https://github.com/u-boot/u-boot/tree/master/doc/device-tree-bindings
+>>>>
+>>>>> The patch in question wants to ab(use) the regulator-name property for
+>>>>> driver instance binding. In my opinion this is not going to fly, as
+>>>>> boards are free to define the names. This either sees no use other th=
+an
+>>>>> as a dirty workaround for dts files that aren't following the PMIC
+>>>>> regulator bindings (regulator node names should follow well defined,
+>>>>> identifying names), or results in divergence of the DT files.
+>>>>
+>>>> One meta issue I'm seeing here is that the u-boot people appear to have
+>>>> their own divergent copy of some of the binding documents.
+>>>
+>>> Putting on my U-Boot hat now, it's mostly unintentional and something in
+>>> general (yes, the initial topic here is not such an example) we try and
+>>> avoid, or use u-boot, as the prefix on as it's something that had been
+>>> previously rejected or deemed inappropriate to be in the upstream
+>>> version of the binding.
+>>>
+>>> But perhaps it's time to try and force the issue again, given what Rob
+>>> and others have said in other parts of the thread.
+>>
+>>  From the FreeBSD perspective I=E2=80=99d like it if there was a common =
+repo for all devicetree consumers to share. We are trying to not have FreeB=
+SD specific properties as this has caused issues in the past where we had (=
+and still have) FreeBSD specific dts files. We are trying to remove these a=
+s drivers are updated to handle the common bindings.
+>=20
+> Are you aware of this repo[1]? I don't have a sense for how widely
+> used it is. If not, it is intended to provide a common repository of
+> binding docs and dts files. If so, what are your issues with using it?
+> It's generated from the kernel tree with git-filter-branch and through
+> the kernel tree is the only way to add things currently. But there's
+> no requirement that you add a Linux driver to submit a binding or dts
+> change. We could consider taking patches against the tree directly,
+> and the maintainers (me) can fixup the paths and apply to the kernel
+> tree.
+>=20
+> If there's bindings in the kernel tree you think are crap and Linux
+> specific, I'd like to know that too. We should start flagging those.
+>=20
+>> I have also spoken with some NetBSD and OpenBSD developers. They are bot=
+h using devicetree to handle device enumeration. Having all 5 projects usin=
+g a common set of dts files and binding would simplify keeping them in sync.
+>=20
+> There's more than 5 likely: linux, 3x BSD, u-boot, barebox, zephyr,
+> ARM trusted firmware?, UEFI?, ?
 
-If your name is listed below, it means I've asked you to frame the
-problem and moderate discussion for that topic. I'm *not* asking you
-to present unless the topic is specifically listed as a presentation.
-If you want you can have a slide or two, but you must get them to me
-by Tuesday evening, 24 October. I want to keep the time fiddling with
-projectors to a minimum.
+First, sorry to come late in this discussion (please be tolerant if you=20
+already respond to following requests/interrogations in precedent mails=20
+:)). From STmicro point of view we have the same kind of requests/needs=20
+than Andrew. We think about the possibility to use same DTS files for=20
+Linux, U-boot, ATF and Zephir (others could come with other vendors).=20
+Currently our main concerns about this are:
 
-Originally this was intended as a 1/2 day workshop, but given that we
-have the room for the full day, I've spread things out to give a bit
-more time for hallway track. I can also move things around if need be
-to avoid conflicts with the maintainers summit and KVM forum. The
-maintenance topics are in the afternoon under the assumption that
-there are folks in the maintainers summit who will want to attend. The
-tooling and schema topics are in the morning. I've also tried really
-hard to preserve the breaks and lunch to give time for hallway
-discussion.
+1-How to reduce dtb size:
+	--> Reading some thread, you already start this task with Nicolas. Does=20
+it concerns only XiP system ?
+	-->For example, I want to use the same dtsi files between Linux and=20
+U-boot. If in u-boot dts file I overload several "status" entry by=20
+"disabled", is it possible that compiler doesn't build it ? And what=20
+about not used phandle ?
 
-As always, none of this is set in stone. If you have any specific
-conflicts or concerns then please say so.
+2- The place of DT files (sources/scripts). I see (and clone) your=20
+"devicetree-rebasing.git" tree, it's a good start point. Currently=20
+(correct me  if I'm wrong) the Kernel seems to "lead" the devicetree=20
+bindings and devicetree dts(i) files. By using this external repo, it=20
+would be maybe easier to integrate changes for other components than=20
+Linux Kernel ? We could have (per vendor), same dtsi files which=20
+describes the hardware (SoC + board) and a extra dts files (at least at=20
+beginning) per software components to overload nodes (to disable some=20
+nodes not required (see (1)), to change bindings which are different=20
+regarding component ...).
+It will also allow to have all dt script / tools for all components at=20
+only one place.
 
-Cheers,
-g.
+Once again, sorry if I repeat things already discussed but I wanted to=20
+expose what STMicro has in mind for DT. It will be a good topic to=20
+discuss at Prague.
 
-==Morning==
-9:30 Welcome and Schedule bashing (0:10) (Grant Likely)
-
-===Tooling & Schema===
-9:40 (5min) Encoding and Schema checking: Framing the problem (Grant Likely)
-9:45 (15min) DT YAML encoding overview (Pantelis Antoniou - presentation)
-10:00 (20min) YAML encoding discussion
-10:20 (15min) DT Schema format - option 1 (Pantelis Antoniou - presentation)
-10:35 (15min) DT Schema format - option 2 (Grant Likely - presentation)
-10:50 (20min) DT Schema discussion - what should go in the spec?
-
-11:10-11:50 [Break]
-
-===Runtime usage===
-11:50 (20min) Code Generation from DT (Kumar Gala - presentation)
-12:10 (20min) Runtime memory consumption (Rob Herring - presentation)
-
-12:30-14:30 [Lunch]
-
-==Afternoon==
-===DTS maintenance issues===
-14:30 (15min) Overlay maintenance plan (Bill Mills)
-14:45 (15min) Avoiding duplicate descriptions (Thomas Petazzoni)
-15:00 (15min) Criteria for accepting board files
-15:15 (15min) Location for maintaining bindings - how to handle
-'foreign bindings' (Boris Brezillon)
-15:30 (15min) Sharing Generic bindings (Geert Uytterhoeven)
-15:45 (15min) ABI Stability (Lucas Stach)
-
-16:00-16:30 [break and overflow discussion]
-
-16:30 (20min) DT health check (Ben Dooks)
-16:50 (15min) devicetree.org update (Grant Likely)
-17:05 (15min) EBBR Discussion (Grant Likely)
-17:20 Closing and feedback
+Regards
+Alex
 
 
-On Mon, Oct 9, 2017 at 9:39 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
-> Kernel Summit is now just over 2 weeks away and it is time to pull
-> together the schedule for the Devicetree workshop. Originally I
-> planned on just an afternoon, but I've got the room for the whole day,
-> so I've got a lot of flexibility on the schedule. Unscheduled time can
-> be used for hacking.
->
-> Date: 26 Oct 2017
-> Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
-> Location: Athens room - Hilton Prague
->
-> If you plan to attend, make sure you update your OSSunmitE/ELCE
-> registration to include the DT Workshop (log in to access and modify
-> your registration):
->
-> https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
->
-> Here is my current list of topics in no particular order, including
-> the topic moderator:
->
-> Runtime memory consumption (Rob Herring)
-> Overlay maintenance plan (TBC)
-> Stable ABI for devicetree (TBC)
-> DT YAML encoding (Pantelis Antoniou)
-> DT Schema format - option 1 (Pantelis Antoniou)
-> DT Schema format - option 2 (Grant Likely)
-> Sharing Generic bindings (TBC)
-> devicetree.org update (Grant)
->
-> Reply to this email if you want to propose another topic.
->
-> Reply privately if there is a particular topic you want to attend but
-> you are unable to be there in the morning or afternoon. I'll put the
-> actual agenda together a week out from the event.
->
-> g.
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+>=20
+> Rob
+>=20
+> [1] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree=
+-rebasing.git/
+> --
+> To unsubscribe from this list: send the line "unsubscribe devicetree" in
+> the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+> More majordomo info at  http://vger.kernel.org/majordomo-info.html
+>=20
