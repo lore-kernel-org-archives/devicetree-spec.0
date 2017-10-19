@@ -1,75 +1,129 @@
-From: Mark Brown <broonie-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague
- (26 Oct 2017)
-Date: Thu, 19 Oct 2017 01:04:33 +0100
-Message-ID: <20171019000433.y3qt3xaw4nnzvsga@sirena.co.uk>
+From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Subject: Re: Devicetree Workshop at Kernel Summit Prague (26 Oct 2017)
+Date: Thu, 19 Oct 2017 12:10:31 +0100
+Message-ID: <CACxGe6vhYV5dbnNQXyRoPq=XSA5HOtpN0FCqyoKvGVbRu-aRqA@mail.gmail.com>
 References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
- <20171017114823.58476908@bbrezillon>
- <CAGb2v67GU4uW7uPMrqFjTW0qBR6LPNeX4Md+tf9S=HRWT_GVqA@mail.gmail.com>
- <20171018110958.mh76pngzluazmc7y@sirena.co.uk>
- <20171018175910.GP12015@bill-the-cat>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="lvrnqi4f33lcbutf"
 Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=sirena.org.uk; s=20170815-heliosphere; h=In-Reply-To:Content-Type:
-        MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
-        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-         bh=afy6Ym+6DmmHyAwml3NVpJfeLMvJw2+6iy1rINNwFeo=; b=Kb+8nvYDou0JPGQ+BGReVB95N
-        u1nR8EKkBD0JzxgTVQ2pRjlNCxUAiMJyjZrBa6T2tyg1DJFc6sK+60pc1jnsZTZVL1mQdT8M2GA4W
-        t7fQLSldeNAef/+h02i+66UeE3NsiryLNstuyzCgcsU1KBl8kGnaIOnatI6WgoEAU6ktc=;
-Content-Disposition: inline
-In-Reply-To: <20171018175910.GP12015@bill-the-cat>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:sender:in-reply-to:references:from:date:message-id
+         :subject:to;
+        bh=8IvvXqOmfQCXjs/jNXsLtG0OXJd6AZzTD3q+LNgAFtg=;
+        b=09Zgk7FN6Itd60qwBJQn4dm3eVL9fqI+RSetScZAgujkR/FVMYXETzolUXnQIMjTCw
+         rOrJw67gDk7xyVhJfDCMdCSXwqNcVWrtCY8d8mtpKPjrOiotWNqLg1fu78Us75/kDq2y
+         ud6IuKsda1besxvKde9gJQ/tEDbapXTq+lasJRzjs7Gii3yoJlzT2I2TJ0hUN+J7eWBZ
+         wsP66PxRHZzd7WcZBHCXYxMaLe225tzQSa+emulrYu5VlkFTZkAN0hJto/D43d2C/vLP
+         1w0ZlOGoYQ/1nDCaanmpc2qmG5YwwKifbt3uM97bqfjZxyBAs8UKz3rlKa3huHbjppZ8
+         14lg==
+In-Reply-To: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
-Cc: Chen-Yu Tsai <wens-jdAy2FN1RRM@public.gmane.org>, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+
+Hi folks,
+
+I've flushed out the schedule. It is still a draft, but I've got names
+against the topics and put them into a rough order.
+
+If your name is listed below, it means I've asked you to frame the
+problem and moderate discussion for that topic. I'm *not* asking you
+to present unless the topic is specifically listed as a presentation.
+If you want you can have a slide or two, but you must get them to me
+by Tuesday evening, 24 October. I want to keep the time fiddling with
+projectors to a minimum.
+
+Originally this was intended as a 1/2 day workshop, but given that we
+have the room for the full day, I've spread things out to give a bit
+more time for hallway track. I can also move things around if need be
+to avoid conflicts with the maintainers summit and KVM forum. The
+maintenance topics are in the afternoon under the assumption that
+there are folks in the maintainers summit who will want to attend. The
+tooling and schema topics are in the morning. I've also tried really
+hard to preserve the breaks and lunch to give time for hallway
+discussion.
+
+As always, none of this is set in stone. If you have any specific
+conflicts or concerns then please say so.
+
+Cheers,
+g.
+
+==Morning==
+9:30 Welcome and Schedule bashing (0:10) (Grant Likely)
+
+===Tooling & Schema===
+9:40 (5min) Encoding and Schema checking: Framing the problem (Grant Likely)
+9:45 (15min) DT YAML encoding overview (Pantelis Antoniou - presentation)
+10:00 (20min) YAML encoding discussion
+10:20 (15min) DT Schema format - option 1 (Pantelis Antoniou - presentation)
+10:35 (15min) DT Schema format - option 2 (Grant Likely - presentation)
+10:50 (20min) DT Schema discussion - what should go in the spec?
+
+11:10-11:50 [Break]
+
+===Runtime usage===
+11:50 (20min) Code Generation from DT (Kumar Gala - presentation)
+12:10 (20min) Runtime memory consumption (Rob Herring - presentation)
+
+12:30-14:30 [Lunch]
+
+==Afternoon==
+===DTS maintenance issues===
+14:30 (15min) Overlay maintenance plan (Bill Mills)
+14:45 (15min) Avoiding duplicate descriptions (Thomas Petazzoni)
+15:00 (15min) Criteria for accepting board files
+15:15 (15min) Location for maintaining bindings - how to handle
+'foreign bindings' (Boris Brezillon)
+15:30 (15min) Sharing Generic bindings (Geert Uytterhoeven)
+15:45 (15min) ABI Stability (Lucas Stach)
+
+16:00-16:30 [break and overflow discussion]
+
+16:30 (20min) DT health check (Ben Dooks)
+16:50 (15min) devicetree.org update (Grant Likely)
+17:05 (15min) EBBR Discussion (Grant Likely)
+17:20 Closing and feedback
 
 
---lvrnqi4f33lcbutf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Wed, Oct 18, 2017 at 01:59:10PM -0400, Tom Rini wrote:
-> On Wed, Oct 18, 2017 at 12:09:58PM +0100, Mark Brown wrote:
-
-> > One meta issue I'm seeing here is that the u-boot people appear to have
-> > their own divergent copy of some of the binding documents.
-
-> Putting on my U-Boot hat now, it's mostly unintentional and something in
-> general (yes, the initial topic here is not such an example) we try and
-> avoid, or use u-boot, as the prefix on as it's something that had been
-> previously rejected or deemed inappropriate to be in the upstream
-> version of the binding.
-
-Yeah, I didn't get the impression this was at all intentional.
-Unfortunately it's a shared property with divergent definitions rather
-than something u-boot specific that got added.
-
-> But perhaps it's time to try and force the issue again, given what Rob
-> and others have said in other parts of the thread.
-
-Yeah, if DT is going to be cross project we need to do better here.
-
---lvrnqi4f33lcbutf
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCAAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAlnn7BAACgkQJNaLcl1U
-h9B0Awf9Fb9ds/if88WdUyhXMveJnzD10GiVuZ+Q9QIo/Po1PFYUPHi9l4Fu6fbc
-fc3HdxF1DDy7ID3ejBJkagio0xqHnI20snL7kTJKFz+wy1TT0irx0To6iJfc202I
-3Ce/19fzEhes1uBpiMBhr9YJpi6ANBVGo6bOyYyva3ofgcmpUVizW0xPHCqwHcPA
-UXe7IhtVWcTh4dulOHksPJKMXnmdpyewcIIeQkon9zJxOc5eGENlWmeVWq/ah/aD
-JcEg1iin145YSBSCa3bIBlC+mXDC2vmJTD+SuylqZCSuOP2l8Iz5O+6plCwLlUGC
-3i9SZ4FlkPg7YAYG0KiLKJnBinVQCw==
-=Z5fZ
------END PGP SIGNATURE-----
-
---lvrnqi4f33lcbutf--
+On Mon, Oct 9, 2017 at 9:39 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+> Kernel Summit is now just over 2 weeks away and it is time to pull
+> together the schedule for the Devicetree workshop. Originally I
+> planned on just an afternoon, but I've got the room for the whole day,
+> so I've got a lot of flexibility on the schedule. Unscheduled time can
+> be used for hacking.
+>
+> Date: 26 Oct 2017
+> Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
+> Location: Athens room - Hilton Prague
+>
+> If you plan to attend, make sure you update your OSSunmitE/ELCE
+> registration to include the DT Workshop (log in to access and modify
+> your registration):
+>
+> https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
+>
+> Here is my current list of topics in no particular order, including
+> the topic moderator:
+>
+> Runtime memory consumption (Rob Herring)
+> Overlay maintenance plan (TBC)
+> Stable ABI for devicetree (TBC)
+> DT YAML encoding (Pantelis Antoniou)
+> DT Schema format - option 1 (Pantelis Antoniou)
+> DT Schema format - option 2 (Grant Likely)
+> Sharing Generic bindings (TBC)
+> devicetree.org update (Grant)
+>
+> Reply to this email if you want to propose another topic.
+>
+> Reply privately if there is a particular topic you want to attend but
+> you are unable to be there in the morning or afternoon. I'll put the
+> actual agenda together a week out from the event.
+>
+> g.
 --
 To unsubscribe from this list: send the line "unsubscribe devicetree" in
 the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
