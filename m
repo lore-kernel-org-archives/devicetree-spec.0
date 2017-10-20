@@ -1,235 +1,89 @@
-From: Alexandre Torgue <alexandre.torgue-qxv4g6HH51o@public.gmane.org>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague (26
  Oct 2017)
-Date: Fri, 20 Oct 2017 11:55:20 +0200
-Message-ID: <fea62563-6629-6d79-06a9-3d17c97ad238@st.com>
+Date: Fri, 20 Oct 2017 08:37:26 -0500
+Message-ID: <CAL_Jsq+kYCWFR5vSCuvT--N-hHTfFfEVrsv8VHw7PMiyONYs8A@mail.gmail.com>
 References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
- <20171017114823.58476908@bbrezillon>
- <CAGb2v67GU4uW7uPMrqFjTW0qBR6LPNeX4Md+tf9S=HRWT_GVqA@mail.gmail.com>
- <20171018110958.mh76pngzluazmc7y@sirena.co.uk>
- <20171018175910.GP12015@bill-the-cat>
- <FD387FCC-3F95-48DF-B412-3384EF96FCFC@fubar.geek.nz>
- <CAL_JsqJTE5p0zjm-66D2143dEx+xQ0uKCV-20kMt-kq=SOa-8Q@mail.gmail.com>
- <23a238d7-0b3d-8b46-b2fe-88b9d0841aa1@st.com>
- <CAL_Jsq+p=-yTY4BNKXdSccPcBWsCUkP8HPQ-ergZXPB8msY5ig@mail.gmail.com>
- <59E8F2EC.5090602@gmail.com>
+ <20171017114823.58476908@bbrezillon> <CAGb2v67GU4uW7uPMrqFjTW0qBR6LPNeX4Md+tf9S=HRWT_GVqA@mail.gmail.com>
+ <20171018110958.mh76pngzluazmc7y@sirena.co.uk> <20171018175910.GP12015@bill-the-cat>
+ <FD387FCC-3F95-48DF-B412-3384EF96FCFC@fubar.geek.nz> <CAL_JsqJTE5p0zjm-66D2143dEx+xQ0uKCV-20kMt-kq=SOa-8Q@mail.gmail.com>
+ <23a238d7-0b3d-8b46-b2fe-88b9d0841aa1@st.com> <CAL_Jsq+p=-yTY4BNKXdSccPcBWsCUkP8HPQ-ergZXPB8msY5ig@mail.gmail.com>
+ <59E8F2EC.5090602@gmail.com> <fea62563-6629-6d79-06a9-3d17c97ad238@st.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <59E8F2EC.5090602-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Content-Language: en-US
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+In-Reply-To: <fea62563-6629-6d79-06a9-3d17c97ad238-qxv4g6HH51o@public.gmane.org>
+Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="windows-1252"; format="flowed"
-To: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Andrew Turner <andrew-/GQUgJ3qWXsIvnNNuaVxrw@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: Alexandre Torgue <alexandre.torgue-qxv4g6HH51o@public.gmane.org>
+Cc: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Andrew Turner <andrew-/GQUgJ3qWXsIvnNNuaVxrw@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
 
-Hi Frank,
-
-On 10/19/2017 08:46 PM, Frank Rowand wrote:
-> On 10/19/17 07:59, Rob Herring wrote:
->> On Thu, Oct 19, 2017 at 9:00 AM, Alexandre Torgue
->> <alexandre.torgue-qxv4g6HH51o@public.gmane.org> wrote:
->>> Hi Rob,
->>>
->>>
->>> On 10/19/2017 01:53 AM, Rob Herring wrote:
->>>> On Wed, Oct 18, 2017 at 6:28 PM, Andrew Turner <andrew-/GQUgJ3qWXsIvnN=
-NuaVxrw@public.gmane.org>
->>>> wrote:
->>
->> [...]
->>
->>>>>   From the FreeBSD perspective I=E2=80=99d like it if there was a com=
-mon repo for
->>>>> all devicetree consumers to share. We are trying to not have FreeBSD
->>>>> specific properties as this has caused issues in the past where we ha=
-d (and
->>>>> still have) FreeBSD specific dts files. We are trying to remove these=
- as
->>>>> drivers are updated to handle the common bindings.
+On Fri, Oct 20, 2017 at 4:55 AM, Alexandre Torgue
+<alexandre.torgue-qxv4g6HH51o@public.gmane.org> wrote:
+> Hi Frank,
+>
+>
+> On 10/19/2017 08:46 PM, Frank Rowand wrote:
+>> On 10/19/17 07:59, Rob Herring wrote:
+>>> On Thu, Oct 19, 2017 at 9:00 AM, Alexandre Torgue
+>>> <alexandre.torgue-qxv4g6HH51o@public.gmane.org> wrote:
+>>>>
+>>>> Hi Rob,
 >>>>
 >>>>
->>>> Are you aware of this repo[1]? I don't have a sense for how widely
->>>> used it is. If not, it is intended to provide a common repository of
->>>> binding docs and dts files. If so, what are your issues with using it?
->>>> It's generated from the kernel tree with git-filter-branch and through
->>>> the kernel tree is the only way to add things currently. But there's
->>>> no requirement that you add a Linux driver to submit a binding or dts
->>>> change. We could consider taking patches against the tree directly,
->>>> and the maintainers (me) can fixup the paths and apply to the kernel
->>>> tree.
->>>>
->>>> If there's bindings in the kernel tree you think are crap and Linux
->>>> specific, I'd like to know that too. We should start flagging those.
->>>>
->>>>> I have also spoken with some NetBSD and OpenBSD developers. They are =
-both
->>>>> using devicetree to handle device enumeration. Having all 5 projects =
-using a
->>>>> common set of dts files and binding would simplify keeping them in sy=
-nc.
->>>>
->>>>
->>>> There's more than 5 likely: linux, 3x BSD, u-boot, barebox, zephyr,
->>>> ARM trusted firmware?, UEFI?, ?
+>>>> On 10/19/2017 01:53 AM, Rob Herring wrote:
+>>>>> On Wed, Oct 18, 2017 at 6:28 PM, Andrew Turner <andrew-/GQUgJ3qWXsIvnNNuaVxrw@public.gmane.org>
+>>>>> wrote:
 >>>
 >>>
->>> First, sorry to come late in this discussion (please be tolerant if you
->>> already respond to following requests/interrogations in precedent mails=
- :)).
->>>  From STmicro point of view we have the same kind of requests/needs than
->>> Andrew. We think about the possibility to use same DTS files for Linux,
->>> U-boot, ATF and Zephir (others could come with other vendors). Currentl=
-y our
->>> main concerns about this are:
+>>> [...]
+
+>>>>          -->For example, I want to use the same dtsi files between Linux
+>>>> and
+>>>> U-boot. If in u-boot dts file I overload several "status" entry by
+>>>> "disabled", is it possible that compiler doesn't build it ? And what
+>>>> about
+>>>> not used phandle ?
 >>>
->>> 1-How to reduce dtb size:
->>>          --> Reading some thread, you already start this task with Nico=
-las.
->>> Does it concerns only XiP system ?
->>
->> That's the main focus ATM. Nico has looked at shrinking code usage too
->> such as the tty layer and scheduler, but those have faced resistance.
->> We need actual products to prove the value (and that's a chicken and
->> egg problem).
->>
->>>          -->For example, I want to use the same dtsi files between Linu=
-x and
->>> U-boot. If in u-boot dts file I overload several "status" entry by
->>> "disabled", is it possible that compiler doesn't build it ? And what ab=
-out
->>> not used phandle ?
->>
->> You certainly could remove disabled nodes in dtc. I'm not sure how
->> hard it would be to plumb into dtc. I think phandle properties are
->> already only created if there's a reference to them. If that is
->=20
-> Yes, phandles are only created if referenced, unless compiled
-> for loading overlays into:
->=20
-
-Are there DTC "extra" options to use to not build those useless phandles=20
-? I just tried to revert the dtb to dts (using following command:
-  ./scripts/dtc/dtc -I dtb -O dts -o stm32f469-disco-flat.dts=20
-arch/arm/boot/dts/stm32f469-disco.dtb)
-
-I see that phandles not used are in the dts output file. It is=20
-especially an issue for pinmux phandles. All pinmux groups possibilities=20
-are written inside (in my case) stm32f4-pinctrl.dtsi. This file is=20
-included in each stm32 board dts files, and in those stm32 board dts=20
-files only required node are enabled. But I see that all pinmux=20
-definitions are embedded inside dtb binary (even ones not used in board=20
-dts file).
-
-
-regards
-Alex
-
-> $ cat test1.dts
-> /dts-v1/;
-> / {
-> 	mynode: node {
-> 	};
-> };
-> $ cat test2.dts
-> /dts-v1/;
-> / {
-> 	mynode: node {
-> 		myprop =3D < &mynode >;
-> 	};
-> };
-> $ scripts/dtc/dtx_diff test1.dts
-> /dts-v1/;
->=20
-> / {
->=20
-> 	mynode: node {
-> 	};
-> };
-> $ scripts/dtc/dtx_diff test2.dts
-> /dts-v1/;
->=20
-> / {
->=20
-> 	mynode: node {
-> 		myprop =3D <0x1>;
-> 		phandle =3D <0x1>;
-> 	};
-> };
->=20
->=20
-> If symbols are enabled for a base device tree, so that overlays
-> can later reference them, then all symbols generate phandles:
->=20
-> $ dtc -@ -O dts test1.dts
-> /dts-v1/;
->=20
-> / {
->=20
-> 	mynode: node {
-> 		phandle =3D <0x1>;
-> 	};
->=20
-> 	__symbols__ {
-> 		mynode =3D "/node";
-> 	};
-> };
->=20
->> created before you deleted nodes, then it would probably be hard to
->> find and remove all of those. It would be similar to solving the
->> device dependency problem. Or do you mean something like disable the
->> clock controller node if there are no enabled references to it? I
->> don't think we could do something like that generically and reliably.
->>
->> We did recently stop creating both "phandle" and "linux,phandle"
->> properties by default in dtc, so that will save some size.
->>
->>> 2- The place of DT files (sources/scripts). I see (and clone) your
->>> "devicetree-rebasing.git" tree, it's a good start point. Currently (cor=
-rect
->>> me  if I'm wrong) the Kernel seems to "lead" the devicetree bindings and
->>> devicetree dts(i) files.
->>
->> Yes, and there's not really any changing that regardless of where
->> bindings and dts files live given Linux has the broadest h/w support.
->>
->>> By using this external repo, it would be maybe
->>> easier to integrate changes for other components than Linux Kernel ?
->>
->> Yes, barebox at least regularly imports it.
->>
->>> We
->>> could have (per vendor), same dtsi files which describes the hardware (=
-SoC +
->>> board) and a extra dts files (at least at beginning) per software compo=
-nents
->>> to overload nodes (to disable some nodes not required (see (1)), to cha=
-nge
->>> bindings which are different regarding component ...).
->>
->> You mean dtsi files to disable nodes for linux, u-boot, etc. That may
->> make sense for mutually exclusive things like FreeBSD vs. Linux, but
->> for say u-boot, we really want u-boot and Linux (or whatever OS is
->> loaded) to use the same dtb. Having different dtbs is going to
->> increase your memory usage.
->>
->>> It will also allow to have all dt script / tools for all components at =
-only
->>> one place.
 >>>
->>> Once again, sorry if I repeat things already discussed but I wanted to
->>> expose what STMicro has in mind for DT. It will be a good topic to disc=
-uss
->>> at Prague.
+>>> You certainly could remove disabled nodes in dtc. I'm not sure how
+>>> hard it would be to plumb into dtc. I think phandle properties are
+>>> already only created if there's a reference to them. If that is
 >>
->> Yes, but I won't be there.
 >>
->> Rob
->> _______________________________________________
->> Ksummit-discuss mailing list
->> Ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane=
-.org
->> https://lists.linuxfoundation.org/mailman/listinfo/ksummit-discuss
+>> Yes, phandles are only created if referenced, unless compiled
+>> for loading overlays into:
 >>
->=20
+>
+> Are there DTC "extra" options to use to not build those useless phandles ? I
+> just tried to revert the dtb to dts (using following command:
+>  ./scripts/dtc/dtc -I dtb -O dts -o stm32f469-disco-flat.dts
+> arch/arm/boot/dts/stm32f469-disco.dtb)
+>
+> I see that phandles not used are in the dts output file. It is especially an
+> issue for pinmux phandles. All pinmux groups possibilities are written
+> inside (in my case) stm32f4-pinctrl.dtsi. This file is included in each
+> stm32 board dts files, and in those stm32 board dts files only required node
+> are enabled. But I see that all pinmux definitions are embedded inside dtb
+> binary (even ones not used in board dts file).
+
+Ah, you mean removing nodes without a phandle reference, not phandles
+themselves.
+
+There's no way dtc could do that because no reference doesn't equate
+to unused. For example, there's no phandle reference to the /memory
+node, but that is for sure needed. We would have to add some
+annotation to nodes that could be removed if unused. This could be
+some source annotation (/delete-if-unused/), some extension to status
+property, or some new property.
+
+Another option would be just mark all those nodes disabled and then
+postprocess the dtb to mark them okay if they have a phandle property
+and delete the node if not.
+
+Rob
+--
+To unsubscribe from this list: send the line "unsubscribe devicetree" in
+the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+More majordomo info at  http://vger.kernel.org/majordomo-info.html
