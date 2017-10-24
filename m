@@ -1,140 +1,141 @@
-From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+From: Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>
 Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague
  (26 Oct 2017)
-Date: Sun, 22 Oct 2017 19:25:26 +1100
-Message-ID: <20171022082526.GC15297@umbus>
-References: <CAGb2v67GU4uW7uPMrqFjTW0qBR6LPNeX4Md+tf9S=HRWT_GVqA@mail.gmail.com>
- <20171018110958.mh76pngzluazmc7y@sirena.co.uk>
- <20171018175910.GP12015@bill-the-cat>
- <FD387FCC-3F95-48DF-B412-3384EF96FCFC@fubar.geek.nz>
- <CAL_JsqJTE5p0zjm-66D2143dEx+xQ0uKCV-20kMt-kq=SOa-8Q@mail.gmail.com>
- <23a238d7-0b3d-8b46-b2fe-88b9d0841aa1@st.com>
- <CAL_Jsq+p=-yTY4BNKXdSccPcBWsCUkP8HPQ-ergZXPB8msY5ig@mail.gmail.com>
- <59E8F2EC.5090602@gmail.com>
- <fea62563-6629-6d79-06a9-3d17c97ad238@st.com>
- <CAL_Jsq+kYCWFR5vSCuvT--N-hHTfFfEVrsv8VHw7PMiyONYs8A@mail.gmail.com>
+Date: Tue, 24 Oct 2017 09:37:55 +0200
+Message-ID: <20171024093755.501c9045@bbrezillon>
+References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
+        <CACxGe6vhYV5dbnNQXyRoPq=XSA5HOtpN0FCqyoKvGVbRu-aRqA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="ABTtc+pdwF7KHXCz"
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-        d=gibson.dropbear.id.au; s=201602; t=1508660987;
-        bh=tgAeSTOmLc9D7VLiaF8HXlGxP5YXbERqptQPIKLGuRM=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=aZ00/DFXoBwFdfzTLVUt51wTehuPCNTYQqZlE9AvmXtZO4JkiXXEQa71K8rA9nwqn
-         ea704/VT7uiool3DL6n7OxCFPtfeK/RCR94/CR7/xjIC7QusOv0DxRnVMygGPBQAD0
-         eZw4dRr233hqoqmuJDb8EsINe7Llr2f42n+uACq4=
-Content-Disposition: inline
-In-Reply-To: <CAL_Jsq+kYCWFR5vSCuvT--N-hHTfFfEVrsv8VHw7PMiyONYs8A-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Content-Transfer-Encoding: 7bit
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+In-Reply-To: <CACxGe6vhYV5dbnNQXyRoPq=XSA5HOtpN0FCqyoKvGVbRu-aRqA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Alexandre Torgue <alexandre.torgue-qxv4g6HH51o@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Andrew Turner <andrew-/GQUgJ3qWXsIvnNNuaVxrw@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Grant Likely <grant.likely-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Cc: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
+Hi Grant,
 
---ABTtc+pdwF7KHXCz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 19 Oct 2017 12:10:31 +0100
+Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
 
-On Fri, Oct 20, 2017 at 08:37:26AM -0500, Rob Herring wrote:
-> On Fri, Oct 20, 2017 at 4:55 AM, Alexandre Torgue
-> <alexandre.torgue-qxv4g6HH51o@public.gmane.org> wrote:
-> > Hi Frank,
+> Hi folks,
+> 
+> I've flushed out the schedule. It is still a draft, but I've got names
+> against the topics and put them into a rough order.
+> 
+> If your name is listed below, it means I've asked you to frame the
+> problem and moderate discussion for that topic. I'm *not* asking you
+> to present unless the topic is specifically listed as a presentation.
+> If you want you can have a slide or two, but you must get them to me
+> by Tuesday evening, 24 October. I want to keep the time fiddling with
+> projectors to a minimum.
+> 
+> Originally this was intended as a 1/2 day workshop, but given that we
+> have the room for the full day, I've spread things out to give a bit
+> more time for hallway track. I can also move things around if need be
+> to avoid conflicts with the maintainers summit and KVM forum. The
+> maintenance topics are in the afternoon under the assumption that
+> there are folks in the maintainers summit who will want to attend. The
+> tooling and schema topics are in the morning. I've also tried really
+> hard to preserve the breaks and lunch to give time for hallway
+> discussion.
+> 
+> As always, none of this is set in stone. If you have any specific
+> conflicts or concerns then please say so.
+> 
+> Cheers,
+> g.
+> 
+> ==Morning==
+> 9:30 Welcome and Schedule bashing (0:10) (Grant Likely)
+> 
+> ===Tooling & Schema===
+> 9:40 (5min) Encoding and Schema checking: Framing the problem (Grant Likely)
+> 9:45 (15min) DT YAML encoding overview (Pantelis Antoniou - presentation)
+> 10:00 (20min) YAML encoding discussion
+> 10:20 (15min) DT Schema format - option 1 (Pantelis Antoniou - presentation)
+> 10:35 (15min) DT Schema format - option 2 (Grant Likely - presentation)
+> 10:50 (20min) DT Schema discussion - what should go in the spec?
+> 
+> 11:10-11:50 [Break]
+> 
+> ===Runtime usage===
+> 11:50 (20min) Code Generation from DT (Kumar Gala - presentation)
+> 12:10 (20min) Runtime memory consumption (Rob Herring - presentation)
+> 
+> 12:30-14:30 [Lunch]
+> 
+> ==Afternoon==
+> ===DTS maintenance issues===
+> 14:30 (15min) Overlay maintenance plan (Bill Mills)
+> 14:45 (15min) Avoiding duplicate descriptions (Thomas Petazzoni)
+> 15:00 (15min) Criteria for accepting board files
+> 15:15 (15min) Location for maintaining bindings - how to handle
+> 'foreign bindings' (Boris Brezillon)
+
+Sorry for late reply, but I will not attend the Device Tree workshop.
+I still think the problem should be discussed and you seemed to have an
+opinion on this, so maybe you can lead the discussion.
+
+Regards,
+
+Boris
+
+> 15:30 (15min) Sharing Generic bindings (Geert Uytterhoeven)
+> 15:45 (15min) ABI Stability (Lucas Stach)
+> 
+> 16:00-16:30 [break and overflow discussion]
+> 
+> 16:30 (20min) DT health check (Ben Dooks)
+> 16:50 (15min) devicetree.org update (Grant Likely)
+> 17:05 (15min) EBBR Discussion (Grant Likely)
+> 17:20 Closing and feedback
+> 
+> 
+> On Mon, Oct 9, 2017 at 9:39 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+> > Kernel Summit is now just over 2 weeks away and it is time to pull
+> > together the schedule for the Devicetree workshop. Originally I
+> > planned on just an afternoon, but I've got the room for the whole day,
+> > so I've got a lot of flexibility on the schedule. Unscheduled time can
+> > be used for hacking.
 > >
+> > Date: 26 Oct 2017
+> > Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
+> > Location: Athens room - Hilton Prague
 > >
-> > On 10/19/2017 08:46 PM, Frank Rowand wrote:
-> >> On 10/19/17 07:59, Rob Herring wrote:
-> >>> On Thu, Oct 19, 2017 at 9:00 AM, Alexandre Torgue
-> >>> <alexandre.torgue-qxv4g6HH51o@public.gmane.org> wrote:
-> >>>>
-> >>>> Hi Rob,
-> >>>>
-> >>>>
-> >>>> On 10/19/2017 01:53 AM, Rob Herring wrote:
-> >>>>> On Wed, Oct 18, 2017 at 6:28 PM, Andrew Turner <andrew-/GQUgJ3qWXtrsDanXnWFnQ@public.gmane.org=
-z>
-> >>>>> wrote:
-> >>>
-> >>>
-> >>> [...]
->=20
-> >>>>          -->For example, I want to use the same dtsi files between L=
-inux
-> >>>> and
-> >>>> U-boot. If in u-boot dts file I overload several "status" entry by
-> >>>> "disabled", is it possible that compiler doesn't build it ? And what
-> >>>> about
-> >>>> not used phandle ?
-> >>>
-> >>>
-> >>> You certainly could remove disabled nodes in dtc. I'm not sure how
-> >>> hard it would be to plumb into dtc. I think phandle properties are
-> >>> already only created if there's a reference to them. If that is
-> >>
-> >>
-> >> Yes, phandles are only created if referenced, unless compiled
-> >> for loading overlays into:
-> >>
+> > If you plan to attend, make sure you update your OSSunmitE/ELCE
+> > registration to include the DT Workshop (log in to access and modify
+> > your registration):
 > >
-> > Are there DTC "extra" options to use to not build those useless phandle=
-s ? I
-> > just tried to revert the dtb to dts (using following command:
-> >  ./scripts/dtc/dtc -I dtb -O dts -o stm32f469-disco-flat.dts
-> > arch/arm/boot/dts/stm32f469-disco.dtb)
+> > https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
 > >
-> > I see that phandles not used are in the dts output file. It is especial=
-ly an
-> > issue for pinmux phandles. All pinmux groups possibilities are written
-> > inside (in my case) stm32f4-pinctrl.dtsi. This file is included in each
-> > stm32 board dts files, and in those stm32 board dts files only required=
- node
-> > are enabled. But I see that all pinmux definitions are embedded inside =
-dtb
-> > binary (even ones not used in board dts file).
->=20
-> Ah, you mean removing nodes without a phandle reference, not phandles
-> themselves.
->=20
-> There's no way dtc could do that because no reference doesn't equate
-> to unused. For example, there's no phandle reference to the /memory
-> node, but that is for sure needed. We would have to add some
-> annotation to nodes that could be removed if unused. This could be
-> some source annotation (/delete-if-unused/), some extension to status
-> property, or some new property.
->=20
-> Another option would be just mark all those nodes disabled and then
-> postprocess the dtb to mark them okay if they have a phandle property
-> and delete the node if not.
+> > Here is my current list of topics in no particular order, including
+> > the topic moderator:
+> >
+> > Runtime memory consumption (Rob Herring)
+> > Overlay maintenance plan (TBC)
+> > Stable ABI for devicetree (TBC)
+> > DT YAML encoding (Pantelis Antoniou)
+> > DT Schema format - option 1 (Pantelis Antoniou)
+> > DT Schema format - option 2 (Grant Likely)
+> > Sharing Generic bindings (TBC)
+> > devicetree.org update (Grant)
+> >
+> > Reply to this email if you want to propose another topic.
+> >
+> > Reply privately if there is a particular topic you want to attend but
+> > you are unable to be there in the morning or afternoon. I'll put the
+> > actual agenda together a week out from the event.
+> >
+> > g.  
+> _______________________________________________
+> Ksummit-discuss mailing list
+> Ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org
+> https://lists.linuxfoundation.org/mailman/listinfo/ksummit-discuss
 
-I'd be happy enough to merge a patch to dtc which added an option to
-strip disabled nodes.  It's also pretty easy to do using libfdt (see
-fdt_next_node() and fdt_del_node()).
-
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---ABTtc+pdwF7KHXCz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAlnsVfYACgkQbDjKyiDZ
-s5JmrQ/+OgASJTJHmsHeWaAonQs+OmGmv6NvCThTuxhbq+HEsYpOFf/S6mV/927O
-oA6mChvFl3mZZ1eAHEyJaBMogfL4QyFjkzG52nrKrolvOwa1tr2QJTjJrqJn7Jau
-caHk9y4AkrnyUmd95dhF0OY27Ip+FjAfaOohDS6h9+Vsx9VdbXz5LvDFfMn+BD26
-yh3/nIvP1EafIQfYo6mVMQuJ0xS6n6LKLGk+VgGlOpKhxKE8M9suEeBRHzJZIj5R
-5Ond7gJIorI/P/kvOC9EE+0pINySvOsAHfa8sYRb4oE+5fLqFn1N5GI0PI82Z/HU
-EoMchZ6fi/YN3Ut+KSV3MCTgBh7NFywjhXvZAN7QAh6PPK1oC727vysmwnxiSz0a
-1v0dr/34Mxc9jpSQ+8i6V0MgKtwuMYF00EJwISVaaZSv/HIKXqWskbq9M1L/FPL6
-OVPJLRShQ6DuzV4g9ft951djBW+PqOOcZ46IIAuqsG0s7uPSsN415k5lm9uPebSM
-7kkbZ2p9CAe8Iv9pPVlsLZSH+dgyVCAbGU0hFgOWgg74MWYlrwldz7XXroM9V2XQ
-EvwPMIDpw4Sbq6B0I0oXLWi+4UEKy//cHAlqaR7rIdqqExZyhj+aMTGGg7txQ3c7
-8ZlqU2cskgYWlHKQcv4cFIvJGzhDM+XVUlpL0b4eXHUK3fUbYfg=
-=Bb93
------END PGP SIGNATURE-----
-
---ABTtc+pdwF7KHXCz--
+--
+To unsubscribe from this list: send the line "unsubscribe devicetree" in
+the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+More majordomo info at  http://vger.kernel.org/majordomo-info.html
