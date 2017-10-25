@@ -1,140 +1,67 @@
-From: Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>
+From: Maxime Ripard <maxime.ripard-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>
 Subject: Re: [Ksummit-discuss] Devicetree Workshop at Kernel Summit Prague
  (26 Oct 2017)
-Date: Tue, 24 Oct 2017 09:37:55 +0200
-Message-ID: <20171024093755.501c9045@bbrezillon>
+Date: Wed, 25 Oct 2017 16:40:27 +0200
+Message-ID: <20171025144027.qryjocn2zjblro4x@flea>
 References: <CACxGe6sxKzNKZbdGA-G=Th2oHwuanyC2kGYuaFcKbSRkuhep+Q@mail.gmail.com>
-        <CACxGe6vhYV5dbnNQXyRoPq=XSA5HOtpN0FCqyoKvGVbRu-aRqA@mail.gmail.com>
+ <CACxGe6vhYV5dbnNQXyRoPq=XSA5HOtpN0FCqyoKvGVbRu-aRqA@mail.gmail.com>
+ <20171024093755.501c9045@bbrezillon>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha1;
+        protocol="application/pgp-signature"; boundary="xgvf4odqsyzxok2f"
 Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <CACxGe6vhYV5dbnNQXyRoPq=XSA5HOtpN0FCqyoKvGVbRu-aRqA-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Content-Disposition: inline
+In-Reply-To: <20171024093755.501c9045@bbrezillon>
 Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Cc: "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>, Julia Lawall <Julia.Lawall-L2FTfq7BK8M@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+To: Boris Brezillon <boris.brezillon-wi1+55ScJUtKEb57/3fJTNBPR1lH4CV8@public.gmane.org>
+Cc: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Kumar Gala <kumar.gala-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org" <ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Andy Gross <andy.gross-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Lucas Stach <l.stach-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
 
-Hi Grant,
 
-On Thu, 19 Oct 2017 12:10:31 +0100
-Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+--xgvf4odqsyzxok2f
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hi folks,
-> 
-> I've flushed out the schedule. It is still a draft, but I've got names
-> against the topics and put them into a rough order.
-> 
-> If your name is listed below, it means I've asked you to frame the
-> problem and moderate discussion for that topic. I'm *not* asking you
-> to present unless the topic is specifically listed as a presentation.
-> If you want you can have a slide or two, but you must get them to me
-> by Tuesday evening, 24 October. I want to keep the time fiddling with
-> projectors to a minimum.
-> 
-> Originally this was intended as a 1/2 day workshop, but given that we
-> have the room for the full day, I've spread things out to give a bit
-> more time for hallway track. I can also move things around if need be
-> to avoid conflicts with the maintainers summit and KVM forum. The
-> maintenance topics are in the afternoon under the assumption that
-> there are folks in the maintainers summit who will want to attend. The
-> tooling and schema topics are in the morning. I've also tried really
-> hard to preserve the breaks and lunch to give time for hallway
-> discussion.
-> 
-> As always, none of this is set in stone. If you have any specific
-> conflicts or concerns then please say so.
-> 
-> Cheers,
-> g.
-> 
-> ==Morning==
-> 9:30 Welcome and Schedule bashing (0:10) (Grant Likely)
-> 
-> ===Tooling & Schema===
-> 9:40 (5min) Encoding and Schema checking: Framing the problem (Grant Likely)
-> 9:45 (15min) DT YAML encoding overview (Pantelis Antoniou - presentation)
-> 10:00 (20min) YAML encoding discussion
-> 10:20 (15min) DT Schema format - option 1 (Pantelis Antoniou - presentation)
-> 10:35 (15min) DT Schema format - option 2 (Grant Likely - presentation)
-> 10:50 (20min) DT Schema discussion - what should go in the spec?
-> 
-> 11:10-11:50 [Break]
-> 
-> ===Runtime usage===
-> 11:50 (20min) Code Generation from DT (Kumar Gala - presentation)
-> 12:10 (20min) Runtime memory consumption (Rob Herring - presentation)
-> 
-> 12:30-14:30 [Lunch]
-> 
-> ==Afternoon==
-> ===DTS maintenance issues===
-> 14:30 (15min) Overlay maintenance plan (Bill Mills)
-> 14:45 (15min) Avoiding duplicate descriptions (Thomas Petazzoni)
-> 15:00 (15min) Criteria for accepting board files
-> 15:15 (15min) Location for maintaining bindings - how to handle
-> 'foreign bindings' (Boris Brezillon)
+On Tue, Oct 24, 2017 at 09:37:55AM +0200, Boris Brezillon wrote:
+> > 15:15 (15min) Location for maintaining bindings - how to handle
+> > 'foreign bindings' (Boris Brezillon)
+>=20
+> Sorry for late reply, but I will not attend the Device Tree workshop.
+> I still think the problem should be discussed and you seemed to have an
+> opinion on this, so maybe you can lead the discussion.
 
-Sorry for late reply, but I will not attend the Device Tree workshop.
-I still think the problem should be discussed and you seemed to have an
-opinion on this, so maybe you can lead the discussion.
+I will be here though, so I can discuss this instead of Boris, we've
+been confronted to this recently as well.
 
-Regards,
+Maxime
 
-Boris
+--=20
+Maxime Ripard, Free Electrons
+Embedded Linux and Kernel engineering
+http://free-electrons.com
 
-> 15:30 (15min) Sharing Generic bindings (Geert Uytterhoeven)
-> 15:45 (15min) ABI Stability (Lucas Stach)
-> 
-> 16:00-16:30 [break and overflow discussion]
-> 
-> 16:30 (20min) DT health check (Ben Dooks)
-> 16:50 (15min) devicetree.org update (Grant Likely)
-> 17:05 (15min) EBBR Discussion (Grant Likely)
-> 17:20 Closing and feedback
-> 
-> 
-> On Mon, Oct 9, 2017 at 9:39 PM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
-> > Kernel Summit is now just over 2 weeks away and it is time to pull
-> > together the schedule for the Devicetree workshop. Originally I
-> > planned on just an afternoon, but I've got the room for the whole day,
-> > so I've got a lot of flexibility on the schedule. Unscheduled time can
-> > be used for hacking.
-> >
-> > Date: 26 Oct 2017
-> > Time: 9:00am-5:30pm (Lunch from 12:30-2:30)
-> > Location: Athens room - Hilton Prague
-> >
-> > If you plan to attend, make sure you update your OSSunmitE/ELCE
-> > registration to include the DT Workshop (log in to access and modify
-> > your registration):
-> >
-> > https://www.regonline.com/register/login.aspx?eventID=1883377&MethodId=0&EventsessionId=&Email_Address=&membershipID=
-> >
-> > Here is my current list of topics in no particular order, including
-> > the topic moderator:
-> >
-> > Runtime memory consumption (Rob Herring)
-> > Overlay maintenance plan (TBC)
-> > Stable ABI for devicetree (TBC)
-> > DT YAML encoding (Pantelis Antoniou)
-> > DT Schema format - option 1 (Pantelis Antoniou)
-> > DT Schema format - option 2 (Grant Likely)
-> > Sharing Generic bindings (TBC)
-> > devicetree.org update (Grant)
-> >
-> > Reply to this email if you want to propose another topic.
-> >
-> > Reply privately if there is a particular topic you want to attend but
-> > you are unable to be there in the morning or afternoon. I'll put the
-> > actual agenda together a week out from the event.
-> >
-> > g.  
-> _______________________________________________
-> Ksummit-discuss mailing list
-> Ksummit-discuss-cunTk1MwBs98uUxBSJOaYoYkZiVZrdSR2LY78lusg7I@public.gmane.org
-> https://lists.linuxfoundation.org/mailman/listinfo/ksummit-discuss
+--xgvf4odqsyzxok2f
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQIcBAEBAgAGBQJZ8KJbAAoJEBx+YmzsjxAgK2kQALyqvlJcsgsU88R/+yQlRP1E
+DVqeo+MTye1ab78cCUsUU0uHKeoDc77POaz1WeNy2+z9D5IBr/nBH2FxODoW3COu
+SotcbRk8JoB92eCP9Mf29GqkexgBQkcZp22QOWC/dU69q+bmiNmMuB6re2SJ7dqj
+KjXTmD1Nvp1aml9fEey2bfQ6vZ6MyskC1bbumEnJpmWHJkdo6iT3W+C/l9Uh1/ls
+MTAGvuJohw5coy3uoAzYaF6MJziHPoSXtWCg/tl4NWZr/r72pcHbx+BQaiPzIz8O
+8NGhN5J1syHCBDDdjiaBrzWvrSngJSh9KmUFTGJjDeEfbucomerF2Lx9Bgd1PS4y
+NMPPHh3b0511x3FNP8H2asVxe+HUWJcjZk4C3R9j7jtY9EfRPOYs2JWxNAzDAAc2
+7CO7Jgng51832+SfsR4lmjjn+7P9lAc5LJ6ML97E6ZNwUbAEYj6U3LJ2MHG0V/PS
+gFlWkS40E5XzZDseC4O0XSnJh/CB9bB8L8X750gxs/gRfdC4Jr9Rda+L4bgV0k0Q
+91Ynb9XgGQmRTpjzq6TLYfBcE+rkz0bcsalk3xtgjCkJoYWp7qHWBigJzuYfmPZA
+zYspiWeJWmUAMhb/gWbm8dpLCQd6iYPsPHEoTBtkw1NJBBq9l6Mj3eEib/ZN/WCO
+gcU9+DWOlXfgnuv6LApv
+=rlaO
+-----END PGP SIGNATURE-----
+
+--xgvf4odqsyzxok2f--
 --
 To unsubscribe from this list: send the line "unsubscribe devicetree" in
 the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
