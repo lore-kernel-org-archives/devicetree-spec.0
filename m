@@ -1,129 +1,80 @@
-From: Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Subject: Re: Next steps for schema language
-Date: Fri, 3 Nov 2017 16:41:01 +0200
-Message-ID: <E863FAFC-7613-4262-9C9D-0D2A4EF5F880@konsulko.com>
+Date: Fri, 3 Nov 2017 13:02:13 -0700
+Message-ID: <2754ddd0-b666-6117-0a8b-22ac0e622e6a@gmail.com>
 References: <CACxGe6s98i_T_ehHihUow9OL513Oiaof2hPLyQRe2ELgkCTx=g@mail.gmail.com>
- <CAL_JsqK1rtc81+=vzc36w4MRmQGYXBeib+QCj0TxtxEMVN2bKQ@mail.gmail.com>
- <8DE272D8-6004-4A47-B49C-D3DFB7D9E23C@konsulko.com>
- <CAL_JsqLx7fDZGNnxc-DXTajvDWGojNFDEUZeBG3A8LMduDNLtQ@mail.gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-Content-Transfer-Encoding: quoted-printable
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=mime-version:subject:from:in-reply-to:date:cc
-         :content-transfer-encoding:message-id:references:to;
-        bh=5V8WddYH3DVgWoOJwmbqBxvDTziEwnm+ZVawE4EHse8=;
-        b=rhmbiETHOQS/QceF2WPFXJ9wPwXFxKPnAq9ZZOdQnCFfdqrJyVY24IclHgrb0Qv0nO
-         CbsskfjHEp5tFeHK6Xg0QmKSRn16AEo1SQGkZGhvOYeANlWV3S0nk4goEieOUhHDluRH
-         clKAOCo/6w7b178/ulHtBPuEbY9TGFVM5bPAU=
-In-Reply-To: <CAL_JsqLx7fDZGNnxc-DXTajvDWGojNFDEUZeBG3A8LMduDNLtQ-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+        d=gmail.com; s=20161025;
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-language:content-transfer-encoding;
+        bh=5xRjWxTL27yq6/IhbVLS5L4vo37In6ztXisSvdl9k+A=;
+        b=uDL9xhm/NP4+8kHTwj8vZo6d7Ge09DeKF+f6HQCS0T7HRkbMPpUd9EV76bEF1/3Yxo
+         8TUBkG4DRVNRT8FOjAUlT6nj4PafyJWCuw1xXJkg176adgsL+ckDw+IfG5cOQX7kePVk
+         b2aKHoOwhi7qzkQjFM+AdqvZ0ii+35AiuMr0jcfXYO7xhP6wyKdD3HMEu3drBgNcaPSm
+         OZ0R1Q8SifxQEWWtj+VGCabVqWJtbD/PyLuyNSA7YFXtjnCND/MhGGQKsi9sMbILSlGK
+         +QzJoZBLDIJzGnbvxp43SxhYDF+HTjeb084cEkqAAAQWcgvnwCise/941kJDnBthAdwI
+         /uEQ==
+In-Reply-To: <CACxGe6s98i_T_ehHihUow9OL513Oiaof2hPLyQRe2ELgkCTx=g@mail.gmail.com>
+Content-Language: en-US
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 
-Hi Rob,
++me
 
-> On Nov 3, 2017, at 16:31 , Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
->=20
-> On Fri, Nov 3, 2017 at 9:11 AM, Pantelis Antoniou
-> <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
->> Hi Rob,
->>=20
->>> On Nov 3, 2017, at 15:59 , Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
->>>=20
->>> On Thu, Nov 2, 2017 at 11:44 AM, Grant Likely =
-<grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
->>>> Hi Pantelis and Rob,
->>>>=20
->>>> After the workshop next week, I'm trying to capture the direction
->>>> we're going for the schema format. Roughly I think we're aiming
->>>> towards:
->>>>=20
->>>> - Schema files to be written in YAML
->>>> - DT files shall remain written in DTS for the foreseeable future.
->>>> YAML will be treated as an intermediary format
->>>> - That said, we'll try to make design decisions that allow YAML to
->>>> be used as a source format.
->>>> - All schema files and yaml-encoded-dt files must be parsable by =
-stock
->>>> YAML parsers
->>>> - Schema files to use the jsonschema vocabulary
->>>> - (jsonschema assumes json files, but YAML is a superset so this =
-will be okay)
->>>> - Extended to add vocabulary for DT concepts (ignored by stock =
-validators)
->>>>   - C-like expressions as used in Pantelis' yamldt could be added =
-in this way
->>>> - Need to write a jsonschema "metaschema" do define DT specific =
-extensions
->>>>   - metaschema will be used to validate format of schema files
->>>>   - Existing tools can confirm is schema files are in the right =
-format.
->>>>   - will make review a lot easier.
->>>=20
->>> I want to start small here with defining top-level board/soc =
-bindings.
->>> This is essentially just defining the root node compatible strings.
->>> Seems easy enough, right? However, I quickly run into the problem of
->>> how to match for when to apply the schema. "compatible" is the =
-obvious
->>> choice, but that's also what I'm checking. We can't key off of what =
-we
->>> are validating. So we really need 2 schema. The first is for =
-matching
->>> on any valid compatible for board, then 2nd is checking for valid
->>> combinations (e.g. 1 board compatible followed by 1 SoC compatible). =
-I
->>> don't like that as we'd be listing compatibles twice. An alternative
->>> would be we apply every board schema and exactly 1 must pass. =
-Perhaps
->>> we generate a schema that's a "oneOf" of all the boards? Then we =
-just
->>> need to tag board schemas in some way.
->>>=20
->>=20
->> I=E2=80=99ve run into this as the first problem with validation using =
-compatible properties.
->>=20
->> The way I=E2=80=99ve solved it is by having a =E2=80=98selected=E2=80=99=
- property that is generating
->> a test for when to check a binding against a node.
->=20
-> Okay, but what's the "jsonschema way" to do this is my question =
-really.
->=20
-
-No idea :)
-
-DT is weird enough that there might not be a way to describe this in
-a regular jsonschema form. I would wait until Grant pitches in.
-
-> Your example is a bit different too. It's a generic match (has
-> compatible), then check something else (status). I have a binding
-> specific match and then a binding specific check on the same thing. We
-> could have the same thing for a device. Match on a set of compatibles
-> for a device, then check combination of compatibles along with other
-> properties. If you have '"example,soc2-uart",
-> "example,fallback-uart"', we need to match on either string, but check
-> that both strings are present because either one alone is not valid.
-> Then to add to that, you may have soc3, soc4, etc.
->=20
-
-I=E2=80=99m working on something to address this. The current scheme =
-that fires
-validation tests on matching on every node is going to be reworked.
-
-The intent is to match on root node for a compatible and then if a match
-is found fire off compatible matches on subnodes.
-
-The specific combination match is something that can be expressed with
-a C expression so it doesn=E2=80=99t look that difficult to me.
-
-> Rob
-
-Regards
-
-=E2=80=94 Pantelis
+On 11/02/17 09:44, Grant Likely wrote:
+> Hi Pantelis and Rob,
+> 
+> After the workshop next week, I'm trying to capture the direction
+> we're going for the schema format. Roughly I think we're aiming
+> towards:
+> 
+> - Schema files to be written in YAML
+> - DT files shall remain written in DTS for the foreseeable future.
+> YAML will be treated as an intermediary format
+>   - That said, we'll try to make design decisions that allow YAML to
+> be used as a source format.
+> - All schema files and yaml-encoded-dt files must be parsable by stock
+> YAML parsers
+> - Schema files to use the jsonschema vocabulary
+>   - (jsonschema assumes json files, but YAML is a superset so this will be okay)
+>   - Extended to add vocabulary for DT concepts (ignored by stock validators)
+>     - C-like expressions as used in Pantelis' yamldt could be added in this way
+>   - Need to write a jsonschema "metaschema" do define DT specific extensions
+>     - metaschema will be used to validate format of schema files
+>     - Existing tools can confirm is schema files are in the right format.
+>     - will make review a lot easier.
+> 
+> The yaml encoding produced by yamldt is a good start, but some changes
+> need to be made from the current code to be workable:
+> - The redefinition of the anchor/alias syntax needs to be dropped.
+>   - We need a labels/reference syntax instead.
+>   - I'm using a $labels property to contain a list of labels which is
+> working for me, but I'm open to other suggestions
+>   - A YAML style !phandle or !path type definition would work for
+> parsing references.
+> - At the top level, the yaml-encoded-dt needs to be structured as a
+> list, not a map.
+>   - Using a list will properly accounts for how multiple top level
+> trees are overlayed to create the final tree.
+>   - I'm using a $path property to encode the path of each top level
+> node. Again, I'm open to suggestions for a different approach
+> 
+> Pantelis, do you think you can rework yamldt to use that encoding?
+> 
+> I'm currently working on what is needed for a metaschema, and an
+> engine for validating device-specific schema files using a standard
+> jsonschema validation library. I'll post a git tree once I've got
+> something worth looking at.
+> 
+> Cheers,
+> g.
+> --
+> To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
+> the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+> More majordomo info at  http://vger.kernel.org/majordomo-info.html
+> 
