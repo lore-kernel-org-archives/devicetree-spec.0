@@ -1,35 +1,79 @@
-From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+From: Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
 Subject: Re: Next steps for schema language
-Date: Thu, 9 Nov 2017 17:48:50 +1100
-Message-ID: <20171109064850.GE7732@umbus.fritz.box>
+Date: Thu, 09 Nov 2017 12:16:27 +0200
+Message-ID: <1510222587.5500.57.camel@hp800z>
 References: <CACxGe6s98i_T_ehHihUow9OL513Oiaof2hPLyQRe2ELgkCTx=g@mail.gmail.com>
- <1509646427.5500.6.camel@hp800z>
- <CACxGe6vRSGbXAVo2TDvX0t+CiZFYcLfWTQsHt5LD3oaKL=4qew@mail.gmail.com>
+         <1509646427.5500.6.camel@hp800z>
+         <CACxGe6vRSGbXAVo2TDvX0t+CiZFYcLfWTQsHt5LD3oaKL=4qew@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="CGDBiGfvSTbxKZlW"
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-        d=gibson.dropbear.id.au; s=201602; t=1510210174;
-        bh=Pt9PZliw1zZH5r59VyVoLDn8dd4uht6O7QXyTSpARgw=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=n30cNKaTD7Mw1IZ+1dfnkf2ioCBRXy/jOUxeG80/uJXAsxar6Mr0khwVJS+qauOnv
-         GEl09kvVFlt4Bxwtg5Q1wtvF+XHqh9wk2jXXRsfdj3BgQKyRTapfCHF35SToEgkZaP
-         HrtCbbb6nEPK1mCc6TTmNxJTD89zmGNfsTfkAkHg=
-Content-Disposition: inline
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google;
+        h=message-id:subject:from:to:cc:date:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=ry5KRTwroGe+fWXoNKyhfgDGOBnbNLTxLjRbqul2TDo=;
+        b=Mw5PBjRZb+omf9REeWi1KY9+6EuZAbQeLLt2qJbCvucWkQV7P1CCK/KdWr3YMOPmxC
+         WjrES+8J+P88P7AMv3FZJlvd16LVRZihW8z81gxBGVfapA+vrToHkfrj7ilG3Fmsh6F+
+         EFi9gNTm3+ehpnfEMAbTk/1NXTKF3iQxhbi1o=
 In-Reply-To: <CACxGe6vRSGbXAVo2TDvX0t+CiZFYcLfWTQsHt5LD3oaKL=4qew-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Cc: Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
+Hi Grant,
 
---CGDBiGfvSTbxKZlW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Just pushed a few changes to yamldt which among other things enables
+JSON support. Note that JSON is strictly an output format for now.
 
-On Tue, Nov 07, 2017 at 02:14:06PM +0000, Grant Likely wrote:
+Notable features are:
+
+- JSON output is now supported.
+
+- '$' is supported as well as a reference indicator on bare scalars
+similar to '*'
+
+    property: *ref 
+    property: $ref
+
+are equivalent.
+
+- Labels can be declared using the /label/ special property.
+The use of /label/ was used since it's similar to the way /memreserve/
+is a special keyword. Internally it's the same as declaring an
+anchor.
+
+  foo: &label
+  foo:
+    /label/: label
+
+You can also use a sequence for multiple label declaration in one go.
+
+  foo:
+    /label/: [ label1, label2 ]
+
+- !ref as a long form method for a reference:
+
+  foo: *label
+  foo: $label
+  foo: !ref label
+
+Are all equivalent.
+
+- JSON does not support tags; so yaml tags are transformed to a tuple
+sequence:
+
+  foo: !int16 10
+
+  foo: [ "\f!int16", 10 ]
+
+The form feed escape and ! at the start of a string scalar allows
+detection that this is a type declaration. This is arguably ugly but
+then again, JSON is not meant to be used as a source format.
+
+On Tue, 2017-11-07 at 14:14 +0000, Grant Likely wrote:
 > On Thu, Nov 2, 2017 at 6:13 PM, Pantelis Antoniou
 > <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
 > > Hi Grant,
@@ -51,17 +95,12 @@ On Tue, Nov 07, 2017 at 02:14:06PM +0000, Grant Likely wrote:
 > >> - All schema files and yaml-encoded-dt files must be parsable by stock
 > >> YAML parsers
 > >> - Schema files to use the jsonschema vocabulary
-> >>   - (jsonschema assumes json files, but YAML is a superset so this wil=
-l be okay)
-> >>   - Extended to add vocabulary for DT concepts (ignored by stock valid=
-ators)
-> >>     - C-like expressions as used in Pantelis' yamldt could be added in=
- this way
-> >>   - Need to write a jsonschema "metaschema" do define DT specific exte=
-nsions
+> >>   - (jsonschema assumes json files, but YAML is a superset so this will be okay)
+> >>   - Extended to add vocabulary for DT concepts (ignored by stock validators)
+> >>     - C-like expressions as used in Pantelis' yamldt could be added in this way
+> >>   - Need to write a jsonschema "metaschema" do define DT specific extensions
 > >>     - metaschema will be used to validate format of schema files
-> >>     - Existing tools can confirm is schema files are in the right form=
-at.
+> >>     - Existing tools can confirm is schema files are in the right format.
 > >>     - will make review a lot easier.
 > >>
 > >> The yaml encoding produced by yamldt is a good start, but some changes
@@ -74,26 +113,17 @@ at.
 > > I'm working on supporting just that. Should be ready for testing in a
 > > couple of days. Do note that I think we should keep the old '*' usage
 > > for supporting the binding files that are YAML.
->=20
+> 
 > Not sure what you mean here. Do you mean allowing native YAML
 > anchors/aliases in binding files to reduce duplication? If so, I think
 > that should be discouraged in favour of jsonschema's native $ref
 > keyword for referencing other nodes. It's not quite as expressive as
 > anchors/alias, but it is portable for anyone who needs to transcode
 > into strict JSON.
+> 
 
-Yeah, I'm not sure what's meant here either.  I think the anchor alias
-syntax should be supported in the standard YAML way, with the alias
-expanding to the full object referenced.  It doesn't help us for
-phandle/path references, but it's useful in its own right.
-
-Note that the problem with using alias syntax for references is purely
-on the alias side.  I don't see a reason we can't use standard YAML
-anchor syntax then something else to construct a reference to that
-anchor.
-
-The $labels magic property is pretty yucky, it'd be good to avoid it
-if we can.
+Sorry, didn't express my self clearly there. I meant using $ as a
+reference prefix.
 
 > >>   - A YAML style !phandle or !path type definition would work for
 > >> parsing references.
@@ -101,26 +131,23 @@ if we can.
 > > !phandle is a bad name IMO. It assumes that the implementation is going
 > > to always be a cell integer containing a phandle. I think !ref is
 > > better.
-
-Uhh.. I don't understand your point here.  To output something the
-kernel will understand an integer phandle is exactly what the
-reference needs to expand to.
-
-I'm dubious about changing that implementation, but even if we did
-we'd still need a way to generate the current style for
-compatibility.  So !phandle or !phandlerref (to match the !pathref I
-think you already have) seems like a good name to me.
-
+> 
 > Sure, I'm fine with that
->=20
+> 
+
+Done.
+
 > > Note that we must come with a way to encode types in JSON, since
 > > they are not natively supported.
->=20
+> 
 > Agreed.
+> 
 
-I thought the YAML spec had some guidelines for flattening YAML to
-JSON.
+So, I've come up with a way ^^^
 
+Not very aesthetically pleasing though. I'm open to suggestions.
+
+> >
 > >> - At the top level, the yaml-encoded-dt needs to be structured as a
 > >> list, not a map.
 > >>   - Using a list will properly accounts for how multiple top level
@@ -129,63 +156,82 @@ JSON.
 > >
 > > This is true only for non-resolved files. Resolved files are going to
 > > be guaranteed a map. Does this cause problems for your validator?
->=20
+> 
 > Make the resolved file a list with only one entry at the top level,
 > then the problem goes away.
->=20
+> 
+
+Err, isn't that a bit of a hack? :)
+
 > Regardless, I'm finding that the validator needs to walk the tree(s)
 > and be able to apply a binding at any level, so driver bindings won't
 > be affected by the structure at the top level. Board and SoC bindings
 > might.
->=20
+> 
+
+Hmm, definitely for board and SoC bindings.
+
 > >>   - I'm using a $path property to encode the path of each top level
 > >> node. Again, I'm open to suggestions for a different approach
 > >>
 > >
 > > A bare scalar that starts with / can always be deduced to be a path.
->=20
+> 
 > I don't understand what you mean. That scalar still needs to be
 > encoded in some way.
->=20
+> 
+
+OK, let me explain.
+
+In yaml strings need not be quoted if they are 'simple'
+
+So:
+
+  property: "foo"
+  property: foo
+
+Are equivalent, but the first one is a quoted string while the second is
+a bare scalar that since it's not null, boolean, or a number, is a
+string.
+
+We can use this to deduce that a bare string that looks like a path is a
+path.
+
+  path-property: !path "/foo"
+  path-property: /foo
+
+We can safely deduce that these are equivalent.
+
+If you're doing this in JSON, then you have no other way than what
+you're using now.
+
 > > Can you share some examples about your usage?
->=20
+> 
 > Consider an unresolved tree that has successive trees applied to
 > different levels:
->=20
+> 
 > / { ... };
 > &etm0 { ... };
 > &etm1 { ... };
 > / { ... };
 > /aliases { ... };
->=20
+> 
 > To transcode this into YAML the path/reference needs to be stored
 > somewhere. As already discussed, it cannot be a map because keys can
 > appear more than once and order of application matters, so it must be
 > a list. Some possible options for storing the path/reference in the
 > array structure are:
-
-Seems to me you want a type-tagged map for each overlay component,
-something like
-
-!overlayfragment {
-	target-label =3D "etm0";
-	content =3D { /* the actual nodes */ };
-}
-
->=20
+> 
 > Store the path/tree pair as a tuple (an array of arrays)
 > - [ / , {...} ]
 > - [ &etm0, {...} ]
 > - [ &etm1 , {...} ]
 > - [ / , {...} ]
 > - [ /aliases , {...} ]
-
-Works for now, but limited if we ever need more metadata for an
-overlay/fragment.
-
+> 
 > Or it could be stored as a special property in the node, something
 > that doesn't collide with child/property names. An array of maps:
->=20
+> 
 > - $path: "/"
 >   ...
 > - $path: "&etm0"
@@ -196,39 +242,111 @@ overlay/fragment.
 >   ...
 > - $path: "/aliases"
 >   ...
->=20
+> 
 > Personally, I prefer embedding the path right into the node because it
 > drops a level of nesting.
+> 
 
-I dislike this because it mixes "in band" and "out of band" info,
-requiring more special handling in tools to separate them again.  I
-really think a type-tagged map is the right (and YAML-ish) way to do
-this.
+Expanding your example:
 
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
+/ {
+  one; 
+  etm0: etm0 { etm0_one; };
+  etm1: etm1 { etm1_one; };
+  aliases { nada; }
+};
+&etm0 { two; };
+&etm1 { three; };
+/ { four; };
+/aliases { five; }; 
 
---CGDBiGfvSTbxKZlW
-Content-Type: application/pgp-signature; name="signature.asc"
+For yamldt would encode it as:
 
------BEGIN PGP SIGNATURE-----
+one: true
+etm0: &etm0
+  etm0_one: true
+etm1: &etm1
+  etm1_one: true
+aliases:
+  nada: true
+*etm0:
+  two: true
+*etm1:
+  three: true
+four: true
+/aliases:
+  five: true
 
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAloD+k8ACgkQbDjKyiDZ
-s5IHLQ//WnXFPKyslEwt0cx+Ss5xNTCXoaBSm+8c6jPgtAwD28Kb2J5sJ8KFJwcg
-uWAeJOPwcFo5dCpCO64cnX+IUGA6QaSnsQTaPRQgTvC+coFi8b3LgqypkllpDyn4
-+QPAF8phD95K1rCgV5P8/5bLWA8LtjwwwpsYyD/6v4FCTJ8rgTgHcHM1wbHxjycJ
-h6D0RcNjG9SyaMDxpzpWeqjQncvxMEYrU9dOv8/XFpsyWf2wn6E7U0Un+RcV8xTP
-gCq3mkWWcZvLHriKvgpUISZLc2M/Oo0U4642HgBwLuSrKKlofakfeloquPqnZryt
-Gb60ZYHUgT+Sn4cXosKGLeOFzbxFA4nAtol8aCO+eZW6mzB8ZgVpPG6CB1oeS7Ff
-guJjvxxM13UpX/E+/HtD0BPAoe4zH7Ak+A3Mh/wFpfbc4ZAvRFNM0VuuluWRHH0Q
-egxvzksg4zNXr8e2OX2Y4drFKGXafLZq3PoAqVY4Cjuprl95sklx5dsUiJml7i+k
-eR+fhCTC5DGovgnl8umzimQ5SQutrzK4WOqKmwAw9qD0u+A6g62lwGEauZB2XDEe
-eU4yt2SCKVIpA0jfzYjTovcxGRflR306Gv/VuaIRflc6YJMVAe9AmFGRZ+pe5yrs
-yPMO+yTrbz4CowpR3jAWgwgpyTT7iWSgpmYZwxOlLuoh1ZvOmQU=
-=rqot
------END PGP SIGNATURE-----
+The resulting yaml output would be:
 
---CGDBiGfvSTbxKZlW--
+one: true
+four: true
+etm0:
+  etm0_one: true
+  two: true
+etm1:
+  etm1_one: true
+  three: true
+aliases:
+  nada: true
+  five: true
+
+Note that the output file is proper YAML, it's the source that we are
+talking about.
+
+I think a very simple way to encode it would be (using $ for ref and
+labels with the new style):
+
+- /:
+    one: true
+    etm0:
+      /label/: etm0
+      etm0_one: true
+    etm1:
+      /label/: etm1
+      etm1_one: true
+    aliases:
+      nada: true
+- $etm0:
+    two: true
+- $etm1:
+    three: true
+- /:
+    four: true
+- /aliases:
+    five: true
+
+You can even get rid of the sequence indicators and keep the first
+one if you're sure about indentation
+
+- /:
+    one: true
+    etm0:
+      /label/: etm0
+      etm0_one: true
+    etm1:
+      /label/: etm1
+      etm1_one: true
+    aliases:
+      nada: true
+  $etm0:
+    two: true
+  $etm1:
+    three: true
+  /:
+    four: true
+  /aliases:
+    five: true
+
+This is valid YAML AFAIKT.
+
+yamldt does not parse these forms yet, but it's not a big deal to
+support them since the bare sequences are only present in root.
+
+> Thoughts?
+> g.
+
+Regards
+
+-- Pantelis
+
