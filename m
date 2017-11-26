@@ -1,24 +1,24 @@
 From: Gimcuan Hui <gimcuan-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Subject: [PATCH] devicenodes.rst: fixes reg property value mistake
-Date: Sun, 26 Nov 2017 07:21:12 +0000
-Message-ID: <20171126072112.13678-1-gimcuan@gmail.com>
+Date: Sun, 26 Nov 2017 07:28:36 +0000
+Message-ID: <20171126072836.13935-1-gimcuan@gmail.com>
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id;
         bh=F/KdHaFx3eHHrcsO7tjP7w4O514kS0j534dX1Ip+xVU=;
-        b=F26em7OboLpCygxkhn/UWyLpTerh5BluajUsYve/qOKTKfFNctj653ORBfXR71FGu/
-         VUjs4fexwrhm89rv6hrERdqcXVBE9v3a7hR3DEm6yubInn3OJ0oECkoIt7rmJ0lEQRKA
-         ibrZi/ZpcF1zOlRBcnfxUL8dz7D5PV7N/cuTFtqN8653sGFGfxt11ZfwrujkmspfJBBF
-         DCxCJpG2jbqENkuVse5oAH1rBFJ9Vc6rGyZ1Wq5c26A5iNd8CnnxUuV7xpEigvqXTkC5
-         gHI5GeRISm031/M3js1qPHWHdeK8HXgjlAXvXB71Rj/EnVp0W56Jaul0mhCYk4vpmS6o
-         ZAUQ==
+        b=tEQYsQqOiUajR9d+vnaauhKEUU1TlicqJyylZWOLKeNIb69O5QUKq3SxysOni9PcTt
+         9g6KhO9LcA7W8f5Ch2u2oSiopn+ZvcHJgM8t/O8nyUqx11te5PotyBSlHuDqsHDgLPX0
+         nOgwOL/0a7sr871Hzj1SeKcqJtOkVVzsUJ92x0DfKpIb1v1tzgUwu61HTWi5exFYn5zV
+         oQnsikVzM0M0RMmHKoYEUjhxkUGgsiSXO9emXQzlvY98JL/WjtVzIk+1y9BS7rEmI4wz
+         E7ELUNTUYsMyxEPg1gzdulQO2Rr4dknfDRbmwRKFOnUhmOLN885Mmx3yXBc5OEXzDeAh
+         SPrg==
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Gimcuan Hui <gimcuan-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
 In cpu1 node of this example, the reg property's value should be 1.
