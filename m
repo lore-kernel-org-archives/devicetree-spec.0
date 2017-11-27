@@ -1,87 +1,98 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
 Subject: Re: [PATCH] Add description of labels to source format chapter
-Date: Mon, 27 Nov 2017 12:44:49 -0600
-Message-ID: <CAL_Jsq+eZ-=PoyWwpvTk+Urc4eYHfRyUiRQZ9_V6Z6UfLOfPNQ@mail.gmail.com>
-References: <20171127161401.20586-1-grant.likely@arm.com>
+Date: Mon, 27 Nov 2017 20:12:02 +0000
+Message-ID: <CACxGe6s7BfX525xn4_WCyxuLca4Y4HZ0XqFdNcsdD6fGyFoR3A@mail.gmail.com>
+References: <20171127161401.20586-1-grant.likely@arm.com> <CAL_Jsq+eZ-=PoyWwpvTk+Urc4eYHfRyUiRQZ9_V6Z6UfLOfPNQ@mail.gmail.com>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <20171127161401.20586-1-grant.likely-5wv7dgnIgG8@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:sender:in-reply-to:references:from:date:message-id
+         :subject:to:cc;
+        bh=Yq4wZ51TiVx+0v2jCM0GkMYtNi9VGOXCsAejUCSGt8A=;
+        b=c5ogz6GaATCAQq1UXxu+6k7qUXeb6Ao2WM7qbNjIePQ5LhA5u4QFCL3uFssoHsEOc0
+         TMTVTi+TLq3MgQf71BSqfDBhIVxjkjj8KEgkXVd+7dxUW3JyHmBdPb07cexamuQzqFxy
+         QigEE3BYjJS3eYA68PMHCPwFTKCbkOIXNYn/QjRfMdU4is8AfS+6ECGWDOrHhfLtKGkC
+         wclROoOta0mI91fTB6ofSzJ4lZSpiNp+BAOwEZP1WBkNGbrd7+oBJtEbPJLEUTMWe82P
+         /8GbC2roBCCETf1NPygCwJyaz1fP8oxZWo83fATledjc275uA+82oQKRGxLNQgPDRwP4
+         vZuw==
+In-Reply-To: <CAL_Jsq+eZ-=PoyWwpvTk+Urc4eYHfRyUiRQZ9_V6Z6UfLOfPNQ-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
 
-On Mon, Nov 27, 2017 at 10:14 AM, Grant Likely
-<grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
-> The source format chapter was missing details about the characters that
-> are valid for labels and what labels are for. Add a paragraph to cover
-> those details.
+On Mon, Nov 27, 2017 at 6:44 PM, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
+> On Mon, Nov 27, 2017 at 10:14 AM, Grant Likely
+> <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+>> The source format chapter was missing details about the characters that
+>> are valid for labels and what labels are for. Add a paragraph to cover
+>> those details.
+>>
+>> Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+>> ---
+>>  source/source-language.rst | 27 +++++++++++++++++++++++++++
+>>  1 file changed, 27 insertions(+)
+>>  mode change 100644 => 100755 source/source-language.rst
+>>
+>> diff --git a/source/source-language.rst b/source/source-language.rst
+>> old mode 100644
+>> new mode 100755
+>> index cefbbd8..c17aab0
+>> --- a/source/source-language.rst
+>> +++ b/source/source-language.rst
+>> @@ -22,6 +22,33 @@ additional files.
+>>
+>>      /include/ "FILE"
+>>
+>> +Labels
+>> +------
+>> +The source format support attaching labels to any node or property data in the device tree.
 >
-> Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
-> ---
->  source/source-language.rst | 27 +++++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
->  mode change 100644 => 100755 source/source-language.rst
+> s/support/supports/
+
+Got it, thanks.
+
 >
-> diff --git a/source/source-language.rst b/source/source-language.rst
-> old mode 100644
-> new mode 100755
-> index cefbbd8..c17aab0
-> --- a/source/source-language.rst
-> +++ b/source/source-language.rst
-> @@ -22,6 +22,33 @@ additional files.
+> What do you mean by property data? You can do:
+
+I should say "property value" here. Labels can be placed almost
+anywhere in the property data, but the only user of this is when
+emitting asm output.
+
+Here's the text from further down in that file:
+
+-  Labels may also appear before or after any component of a property
+   value, or between cells of a cell array, or between bytes of a
+   bytestring. Examples:
+
+::
+
+        reg = reglabel: <0 sizelabel: 0x1000000>;
+        prop = [ab cd ef byte4: 00 ff fe];
+        str = start: "string value" end: ;
+
+
 >
->      /include/ "FILE"
+> label: foo = "bar";
 >
-> +Labels
-> +------
-> +The source format support attaching labels to any node or property data in the device tree.
+> News to me if so. But how would one use that in a reference?
 
-s/support/supports/
+IIRC the intent was to allow dumb firmware to directly access part of
+the DT data when it is assembled and linked into the firmware binary.
 
-What do you mean by property data? You can do:
-
-label: foo = "bar";
-
-News to me if so. But how would one use that in a reference?
-
-> +Phandle and path references can be automatically generated by referencing the label instead of
-> +explicitly specifying the phandle value or the full path to a node.
-> +Labels are only used in the devicetree source format and are not encoded into the binary format.
-
-The last part is not true now with overlays (A mistake IMO, primarily
-because we have no standard around label names).
-
-> +
-> +A label shall be between 1 to 31 characters in length,
-> +be composed only of the characters in the set :numref:`label-characters`,
-> +and must not start with a number.
-> +
-> +Labels are created by appending a colon (':') to the label name.
-> +References are created by adding an ampersand ('&') suffix to the label name.
-> +
-> +.. tabularcolumns:: | c p{8cm} |
-> +.. _label-characters:
-> +.. table:: Valid characters for DTS labels
-> +
-> +   ========= ================
-> +   Character Description
-> +   ========= ================
-> +   ``0-9``   digit
-> +   ``a-z``   lowercase letter
-> +   ``A-Z``   uppercase letter
-> +   ``_``     underscore
-> +   ========= ================
-> +
->  Node and property definitions
->  -----------------------------
 >
-> --
-> 2.11.0
+>> +Phandle and path references can be automatically generated by referencing the label instead of
+>> +explicitly specifying the phandle value or the full path to a node.
+>> +Labels are only used in the devicetree source format and are not encoded into the binary format.
 >
-> --
-> To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
-> the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-> More majordomo info at  http://vger.kernel.org/majordomo-info.html
+> The last part is not true now with overlays (A mistake IMO, primarily
+> because we have no standard around label names).
+
+RIght. Would you be okay with leaving this as-is in this commit, to be
+rewritten when overlay support is added to the spec?
+
+Cheers,
+g.
