@@ -1,98 +1,146 @@
-From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
 Subject: Re: [PATCH] Add description of labels to source format chapter
-Date: Mon, 27 Nov 2017 20:12:02 +0000
-Message-ID: <CACxGe6s7BfX525xn4_WCyxuLca4Y4HZ0XqFdNcsdD6fGyFoR3A@mail.gmail.com>
-References: <20171127161401.20586-1-grant.likely@arm.com> <CAL_Jsq+eZ-=PoyWwpvTk+Urc4eYHfRyUiRQZ9_V6Z6UfLOfPNQ@mail.gmail.com>
+Date: Tue, 28 Nov 2017 10:54:28 +1100
+Message-ID: <20171127235428.GL11775@umbus.fritz.box>
+References: <20171127161401.20586-1-grant.likely@arm.com>
+ <CAL_Jsq+eZ-=PoyWwpvTk+Urc4eYHfRyUiRQZ9_V6Z6UfLOfPNQ@mail.gmail.com>
 Mime-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="1hVIwB4NpNcOOTEe"
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=Yq4wZ51TiVx+0v2jCM0GkMYtNi9VGOXCsAejUCSGt8A=;
-        b=c5ogz6GaATCAQq1UXxu+6k7qUXeb6Ao2WM7qbNjIePQ5LhA5u4QFCL3uFssoHsEOc0
-         TMTVTi+TLq3MgQf71BSqfDBhIVxjkjj8KEgkXVd+7dxUW3JyHmBdPb07cexamuQzqFxy
-         QigEE3BYjJS3eYA68PMHCPwFTKCbkOIXNYn/QjRfMdU4is8AfS+6ECGWDOrHhfLtKGkC
-         wclROoOta0mI91fTB6ofSzJ4lZSpiNp+BAOwEZP1WBkNGbrd7+oBJtEbPJLEUTMWe82P
-         /8GbC2roBCCETf1NPygCwJyaz1fP8oxZWo83fATledjc275uA+82oQKRGxLNQgPDRwP4
-         vZuw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+        d=gibson.dropbear.id.au; s=201602; t=1511828406;
+        bh=+gWbkWOcWoVU4iSBSMtfCEpOzWf+VoE+W6khrmNyGlM=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=o12azfQHo5CSCBTigAJtQjGfECakPeKn/opPhZ4oJgWs7SvzZG7gOua/QiZ6bfB3S
+         9tDXu3Ixo9ys/xSlLdIuejfbnFDPGZebBv7A5gP/d+73pKIys3Po/FwMYmEHo2iZnz
+         PycJZAfuxfmd6DiVO9/g/EaVDdOXWn7clQOr1BMc=
+Content-Disposition: inline
 In-Reply-To: <CAL_Jsq+eZ-=PoyWwpvTk+Urc4eYHfRyUiRQZ9_V6Z6UfLOfPNQ-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
 To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+Cc: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
 
-On Mon, Nov 27, 2017 at 6:44 PM, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
+
+--1hVIwB4NpNcOOTEe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Nov 27, 2017 at 12:44:49PM -0600, Rob Herring wrote:
 > On Mon, Nov 27, 2017 at 10:14 AM, Grant Likely
 > <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
->> The source format chapter was missing details about the characters that
->> are valid for labels and what labels are for. Add a paragraph to cover
->> those details.
->>
->> Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
->> ---
->>  source/source-language.rst | 27 +++++++++++++++++++++++++++
->>  1 file changed, 27 insertions(+)
->>  mode change 100644 => 100755 source/source-language.rst
->>
->> diff --git a/source/source-language.rst b/source/source-language.rst
->> old mode 100644
->> new mode 100755
->> index cefbbd8..c17aab0
->> --- a/source/source-language.rst
->> +++ b/source/source-language.rst
->> @@ -22,6 +22,33 @@ additional files.
->>
->>      /include/ "FILE"
->>
->> +Labels
->> +------
->> +The source format support attaching labels to any node or property data in the device tree.
->
+> > The source format chapter was missing details about the characters that
+> > are valid for labels and what labels are for. Add a paragraph to cover
+> > those details.
+> >
+> > Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+> > ---
+> >  source/source-language.rst | 27 +++++++++++++++++++++++++++
+> >  1 file changed, 27 insertions(+)
+> >  mode change 100644 =3D> 100755 source/source-language.rst
+> >
+> > diff --git a/source/source-language.rst b/source/source-language.rst
+> > old mode 100644
+> > new mode 100755
+> > index cefbbd8..c17aab0
+> > --- a/source/source-language.rst
+> > +++ b/source/source-language.rst
+> > @@ -22,6 +22,33 @@ additional files.
+> >
+> >      /include/ "FILE"
+> >
+> > +Labels
+> > +------
+> > +The source format support attaching labels to any node or property dat=
+a in the device tree.
+>=20
 > s/support/supports/
-
-Got it, thanks.
-
->
+>=20
 > What do you mean by property data? You can do:
+>=20
+> label: foo =3D "bar";
 
-I should say "property value" here. Labels can be placed almost
-anywhere in the property data, but the only user of this is when
-emitting asm output.
+Yes, you can.  Only really does anything if you're using -Oasm,
+though.
 
-Here's the text from further down in that file:
+In fact you can even put labels in the middle of property data, but
+again only useful if you're using -Oasm.
 
--  Labels may also appear before or after any component of a property
-   value, or between cells of a cell array, or between bytes of a
-   bytestring. Examples:
-
-::
-
-        reg = reglabel: <0 sizelabel: 0x1000000>;
-        prop = [ab cd ef byte4: 00 ff fe];
-        str = start: "string value" end: ;
-
-
->
-> label: foo = "bar";
->
 > News to me if so. But how would one use that in a reference?
 
-IIRC the intent was to allow dumb firmware to directly access part of
-the DT data when it is assembled and linked into the firmware binary.
+The idea came from an earlier time when I thought a more common option
+would be to use an essentially fixed device tree for a board, with
+only some "in place" changes of a few values.  The idea is you could
+use -Oasm to link the dtb right into your bootloader/kernel/whatever
+then use the labels to use update the few neccessary values as though
+they were variables.
 
->
->> +Phandle and path references can be automatically generated by referencing the label instead of
->> +explicitly specifying the phandle value or the full path to a node.
->> +Labels are only used in the devicetree source format and are not encoded into the binary format.
->
+> > +Phandle and path references can be automatically generated by referenc=
+ing the label instead of
+> > +explicitly specifying the phandle value or the full path to a node.
+> > +Labels are only used in the devicetree source format and are not encod=
+ed into the binary format.
+>=20
 > The last part is not true now with overlays (A mistake IMO, primarily
 > because we have no standard around label names).
+>=20
+> > +
+> > +A label shall be between 1 to 31 characters in length,
+> > +be composed only of the characters in the set :numref:`label-character=
+s`,
+> > +and must not start with a number.
+> > +
+> > +Labels are created by appending a colon (':') to the label name.
+> > +References are created by adding an ampersand ('&') suffix to the labe=
+l name.
+> > +
+> > +.. tabularcolumns:: | c p{8cm} |
+> > +.. _label-characters:
+> > +.. table:: Valid characters for DTS labels
+> > +
+> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> > +   Character Description
+> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> > +   ``0-9``   digit
+> > +   ``a-z``   lowercase letter
+> > +   ``A-Z``   uppercase letter
+> > +   ``_``     underscore
+> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> > +
+> >  Node and property definitions
+> >  -----------------------------
+> >
+> >
 
-RIght. Would you be okay with leaving this as-is in this commit, to be
-rewritten when overlay support is added to the spec?
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
 
-Cheers,
-g.
+--1hVIwB4NpNcOOTEe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAlocpbEACgkQbDjKyiDZ
+s5Jvfg/+OqmdCqeL1p4efq9wF+Do50bUfyp1T+SJIHysD1jZwLr+krjkgVPM0Pys
+zP8oY7V/9FMl3lC6Q5JZV/2GlCQQ+dApnkyUeOfgn62C2WuTbPl5MK1XRRwP0PHc
+To5rsEM8gFPSAfF9SBxdj3vD1sBS41gbZRUhsEIapO9ZD5foXqMFM/V4X4mbo/yM
+OL77NGgiSJgSWyK9yuPwwN9DFFJDaZNvQ434RrqSKQKxfkpSFZlaxFUZ/KuW7qO7
+7Q0N5KdfK6+04weHs0pQjgVr/8hI2qBrewmrbxkbmO9pwnMj906YHJ+YQywW1AHP
+V8pXqYhv5B39SA0sBI3ZLcEQg+QBcfq2sNiipcjrSwpE3P9cDWVuKONUbi1F7n/n
+p/wxfdw8KbndhMdyc4JxrSsg6YsIzs9WdsGqONSD0cp14KhSlTXtJxeAxQgJCzkx
++/TYk5B1e++DOQ26DFu8FX+YiPnN9/iNRcJYkclrLNoY+DefCyuUBgXOIq3vq6lC
+eqiZskt/j6efx0KYKP5TQIpj4IZEvh3xqM3076FLJG9F2f5f0nmnKZWvJU4pW33E
+1WRUICP30aREQc37woUQjyO1GIZlv/XXXEys/94Ttz4rkBDEKY4mTLF83rFSV7TL
+BKmeTyJgjBIDXXAZrx+Beu93EJqnXOW+rptRFt8t/pY1+rEWdpk=
+=oU0L
+-----END PGP SIGNATURE-----
+
+--1hVIwB4NpNcOOTEe--
