@@ -1,35 +1,157 @@
 From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
 Subject: Re: Next steps for schema language
-Date: Tue, 28 Nov 2017 13:58:36 +0000
-Message-ID: <CACxGe6tgdDm1oNNf0AFrdXK+fhoNxc-7yTO2hcQuCQ4wdeXY-w@mail.gmail.com>
+Date: Tue, 28 Nov 2017 15:45:16 +0000
+Message-ID: <CACxGe6uGjvi=VEHNaKUamz294Y=mGq7OPXfmzrkGHmCbjq-GGw@mail.gmail.com>
 References: <CACxGe6s98i_T_ehHihUow9OL513Oiaof2hPLyQRe2ELgkCTx=g@mail.gmail.com>
  <1509646427.5500.6.camel@hp800z> <CACxGe6vRSGbXAVo2TDvX0t+CiZFYcLfWTQsHt5LD3oaKL=4qew@mail.gmail.com>
- <20171109064850.GE7732@umbus.fritz.box>
+ <1510222587.5500.57.camel@hp800z>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
         h=mime-version:sender:in-reply-to:references:from:date:message-id
          :subject:to:cc;
-        bh=dZV2r6M2F+QDX7UjP1Hr7OKTGY5kvj8+g/jcPwtX+PM=;
-        b=vy8gSU/lx3ITidts3nsYIIxRUPiTXBybwoggOmtKEiC+gKjLZoWbie/HdFKGopJfKU
-         0A93PcS0GhseczW71ZWh/hfRW0hmbhoktlmxriTOCMkf6vZIWPxuugecUzUdk7fc6z51
-         ruzZluPaHiCy5MSvlpTnt8ILehOWnboggfg3WHoa0Ke3C10G32HFEfr49OXfIczlRSo2
-         G+Fu3XL88xrG75avv8KFgZ+MZUJUz01+PsZlRCJGY40UYb3Xy0SOaXYUnVe6tvhAhCFi
-         wPzz3GOH1UJFEUA3D0aBkVSFbRuy3nZfzn5xnSarBLI2jkjzIBqIPF+lsaDakyDtdQaQ
-         JTeg==
-In-Reply-To: <20171109064850.GE7732-K0bRW+63XPQe6aEkudXLsA@public.gmane.org>
+        bh=+wzvTRkPLh1JeggKkGn81JREvcGzxxLIujebaP7WOjU=;
+        b=2GwUq3dK5j0/5l5J2Wb+9qa9wV9scwYUbnJLILpz/ODTtVu85w/iSb85Z6+Egg9+dh
+         dNLVembUIxII25ptyibT/fKBGdedYZB678/nzPKODowpMttBSFdDhOIuNI2Uo8r0LyW8
+         l6n2Tww2q0Ugv8IGClNbs15tDcJXFESmKxUiCmkaNII98AHvv3+Vf3g0gmX4ecFDox3i
+         BDp0x8ArPSZcrUvwHeG1yW8KTx/xUv57ICnmmvjXkm+qpQgSFN9lC8x1LKAJ2jaFjzjP
+         4rEq9+dqDFvSWI5BVJLrS3hsLw8d9iX67GUNobPmu10fCSZ0q3xqGcStZtPlbVG6T1aa
+         ZU+g==
+In-Reply-To: <1510222587.5500.57.camel@hp800z>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
-Cc: Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+Cc: Rob Herring <rob.herring-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-On Thu, Nov 9, 2017 at 6:48 AM, David Gibson
-<david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org> wrote:
-> On Tue, Nov 07, 2017 at 02:14:06PM +0000, Grant Likely wrote:
+Hi Pantelis,
+
+Thanks for the update. Comments below...
+
+On Thu, Nov 9, 2017 at 10:16 AM, Pantelis Antoniou
+<pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
+> Hi Grant,
+>
+> Just pushed a few changes to yamldt which among other things enables
+> JSON support. Note that JSON is strictly an output format for now.
+>
+> Notable features are:
+>
+> - JSON output is now supported.
+>
+> - '$' is supported as well as a reference indicator on bare scalars
+> similar to '*'
+>
+>     property: *ref
+>     property: $ref
+>
+> are equivalent.
+>
+> - Labels can be declared using the /label/ special property.
+> The use of /label/ was used since it's similar to the way /memreserve/
+> is a special keyword. Internally it's the same as declaring an
+> anchor.
+
+I'm not a fan of the /.../ style for the yaml encoding. It was part of
+the tokenization in the .dts format, but is not necessary here. I
+prefer a simpler form like '$labels'. I think prefixing metadata
+property names with '$' because the YAML parser can handle $ without
+special escaping, and $ does not conflict with the DT node/property
+namespace.
+
+>
+>   foo: &label
+>   foo:
+>     /label/: label
+>
+> You can also use a sequence for multiple label declaration in one go.
+>
+>   foo:
+>     /label/: [ label1, label2 ]
+
+The $labels property should always be a sequence, regardless of if
+there is one or more labels. Otherwise a parser needs to know about
+both forms.
+
+> - !ref as a long form method for a reference:
+>
+>   foo: *label
+>   foo: $label
+>   foo: !ref label
+>
+> Are all equivalent.
+
+The *label and $label forms should be dropped entirely, and only the
+tagged !ref form be supported. *label is ambiguous for a reader as to
+whether it is a DT reference or an alias. $label doesn't differentiate
+between a reference and a string that just happens to start with '$'.
+The !ref form is unambiguous as to what it is for.
+
+>
+> - JSON does not support tags; so yaml tags are transformed to a tuple
+> sequence:
+>
+>   foo: !int16 10
+>
+>   foo: [ "\f!int16", 10 ]
+>
+> The form feed escape and ! at the start of a string scalar allows
+> detection that this is a type declaration. This is arguably ugly but
+> then again, JSON is not meant to be used as a source format.
+
+so... this is problematic because it makes the json data model
+different from the yaml one. The offsets to datum in a property array
+are different depending on if it is loaded from a json file or a yaml
+file. In the json case, because it is a simpler format which doesn't
+have the ability to specify type, I think integer data needs to be
+emitted as plain bytes because that is the lowest common denominator.
+
+If we're going through json, I don't think we need to try and preserve
+all the datatype information. It would only be for communicating with
+really-simple-software. (Yes, I know that's not the direction I was
+going before, but JSON just is too limited a format to consider
+anything other than a lossy output)
+
+>
+> On Tue, 2017-11-07 at 14:14 +0000, Grant Likely wrote:
 >> On Thu, Nov 2, 2017 at 6:13 PM, Pantelis Antoniou
+>> <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org> wrote:
+>> > Hi Grant,
+>> >
+>> > Mostly agree, some notes below.
+>> >
+>> > On Thu, 2017-11-02 at 16:44 +0000, Grant Likely wrote:
+>> >> Hi Pantelis and Rob,
+>> >>
+>> >> After the workshop next week, I'm trying to capture the direction
+>> >> we're going for the schema format. Roughly I think we're aiming
+>> >> towards:
+>> >>
+>> >> - Schema files to be written in YAML
+>> >> - DT files shall remain written in DTS for the foreseeable future.
+>> >> YAML will be treated as an intermediary format
+>> >>   - That said, we'll try to make design decisions that allow YAML to
+>> >> be used as a source format.
+>> >> - All schema files and yaml-encoded-dt files must be parsable by stock
+>> >> YAML parsers
+>> >> - Schema files to use the jsonschema vocabulary
+>> >>   - (jsonschema assumes json files, but YAML is a superset so this will be okay)
+>> >>   - Extended to add vocabulary for DT concepts (ignored by stock validators)
+>> >>     - C-like expressions as used in Pantelis' yamldt could be added in this way
+>> >>   - Need to write a jsonschema "metaschema" do define DT specific extensions
+>> >>     - metaschema will be used to validate format of schema files
+>> >>     - Existing tools can confirm is schema files are in the right format.
+>> >>     - will make review a lot easier.
+>> >>
+>> >> The yaml encoding produced by yamldt is a good start, but some changes
+>> >> need to be made from the current code to be workable:
+>> >> - The redefinition of the anchor/alias syntax needs to be dropped.
+>> >>   - We need a labels/reference syntax instead.
+>> >>   - I'm using a $labels property to contain a list of labels which is
+>> >> working for me, but I'm open to other suggestions
+>> >
 >> > I'm working on supporting just that. Should be ready for testing in a
 >> > couple of days. Do note that I think we should keep the old '*' usage
 >> > for supporting the binding files that are YAML.
@@ -40,30 +162,10 @@ On Thu, Nov 9, 2017 at 6:48 AM, David Gibson
 >> keyword for referencing other nodes. It's not quite as expressive as
 >> anchors/alias, but it is portable for anyone who needs to transcode
 >> into strict JSON.
+>>
 >
-> Yeah, I'm not sure what's meant here either.  I think the anchor alias
-> syntax should be supported in the standard YAML way, with the alias
-> expanding to the full object referenced.  It doesn't help us for
-> phandle/path references, but it's useful in its own right.
->
-> Note that the problem with using alias syntax for references is purely
-> on the alias side.  I don't see a reason we can't use standard YAML
-> anchor syntax then something else to construct a reference to that
-> anchor.
-
-The primary issue is that only one anchor can be applied to a node.
-We'd need to drop support for multiple labels on the same node. I'm
-not a fan of the trick of using a reference to a node in order to put
-another anchor on it. That's pretty nasty too.
-
->
-> The $labels magic property is pretty yucky, it'd be good to avoid it
-> if we can.
-
-I think it is a pretty clean way to add metadata to a node. It doesn't
-conflict with the node/property name namespace, and it is extensible
-for other kinds of metadata.
-
+> Sorry, didn't express my self clearly there. I meant using $ as a
+> reference prefix.
 >
 >> >>   - A YAML style !phandle or !path type definition would work for
 >> >> parsing references.
@@ -71,31 +173,104 @@ for other kinds of metadata.
 >> > !phandle is a bad name IMO. It assumes that the implementation is going
 >> > to always be a cell integer containing a phandle. I think !ref is
 >> > better.
+>>
+>> Sure, I'm fine with that
+>>
 >
-> Uhh.. I don't understand your point here.  To output something the
-> kernel will understand an integer phandle is exactly what the
-> reference needs to expand to.
+> Done.
 >
-> I'm dubious about changing that implementation, but even if we did
-> we'd still need a way to generate the current style for
-> compatibility.  So !phandle or !phandlerref (to match the !pathref I
-> think you already have) seems like a good name to me.
+>> > Note that we must come with a way to encode types in JSON, since
+>> > they are not natively supported.
+>>
+>> Agreed.
+>>
+>
+> So, I've come up with a way ^^^
+>
+> Not very aesthetically pleasing though. I'm open to suggestions.
+>
+>> >
+>> >> - At the top level, the yaml-encoded-dt needs to be structured as a
+>> >> list, not a map.
+>> >>   - Using a list will properly accounts for how multiple top level
+>> >> trees are overlayed to create the final tree.
+>> >
+>> >
+>> > This is true only for non-resolved files. Resolved files are going to
+>> > be guaranteed a map. Does this cause problems for your validator?
+>>
+>> Make the resolved file a list with only one entry at the top level,
+>> then the problem goes away.
+>>
+>
+> Err, isn't that a bit of a hack? :)
 
-I don't have any strong feelings about the name. As for format, I'm
-using the following for path and phandle references. In both cases the
-first example uses full path, the second a label, but in both cases
-the property is tagged as a reference to another node.
+Not really. Having the top level be a list of trees means the exact
+same structure is used regardless of whether it is a resolved or an
+unresolved tree. However, I have softened on this. The majority of the
+validator will work on a resolved tree. It will get passed just the
+tree portion, not the entire structure. Also, since yaml won't be the
+source format for the foreseeable future, any decision made now can be
+changed later.
 
-path:
-        s1: [!path "/memory@0"]
-        s1: [!path "memlabel"]
-phandle:
-        ref: [[!phandle "/memory@0"]]
-        ref: [[!phandle "memlabel"]]
+>> Regardless, I'm finding that the validator needs to walk the tree(s)
+>> and be able to apply a binding at any level, so driver bindings won't
+>> be affected by the structure at the top level. Board and SoC bindings
+>> might.
+>>
+>
+> Hmm, definitely for board and SoC bindings.
+>
+>> >>   - I'm using a $path property to encode the path of each top level
+>> >> node. Again, I'm open to suggestions for a different approach
+>> >>
+>> >
+>> > A bare scalar that starts with / can always be deduced to be a path.
+>>
+>> I don't understand what you mean. That scalar still needs to be
+>> encoded in some way.
+>>
+>
+> OK, let me explain.
+>
+> In yaml strings need not be quoted if they are 'simple'
+>
+> So:
+>
+>   property: "foo"
+>   property: foo
+>
+> Are equivalent, but the first one is a quoted string while the second is
+> a bare scalar that since it's not null, boolean, or a number, is a
+> string.
+>
+> We can use this to deduce that a bare string that looks like a path is a
+> path.
+>
+>   path-property: !path "/foo"
+>   path-property: /foo
+>
+> We can safely deduce that these are equivalent.
 
+No, we cannot because we don't know what it is a path for! Is it a
+Linux path or a devicetree path? Without knowing the binding for the
+property, we cannot deduce if the path refers to another node in the
+tree. It might just be data used by the driver that happens to start
+with a '/'.
 
+But regardless, that's not what I'm talking about with the $path
+property. I've been using $path as a way to encode where a top level
+node lives in the tree. This of course is only an issue for unresolved
+trees. Resolved trees only have one top level node, and we know it
+lives at "/". It is only when loading a .dts file with multiple top
+level nodes does the location of each node need to be stored in $path.
 
-
+>
+> If you're doing this in JSON, then you have no other way than what
+> you're using now.
+>
+>> > Can you share some examples about your usage?
+>>
 >> Consider an unresolved tree that has successive trees applied to
 >> different levels:
 >>
@@ -110,15 +285,6 @@ phandle:
 >> appear more than once and order of application matters, so it must be
 >> a list. Some possible options for storing the path/reference in the
 >> array structure are:
->
-> Seems to me you want a type-tagged map for each overlay component,
-> something like
->
-> !overlayfragment {
->         target-label = "etm0";
->         content = { /* the actual nodes */ };
-> }
->
 >>
 >> Store the path/tree pair as a tuple (an array of arrays)
 >> - [ / , {...} ]
@@ -126,10 +292,7 @@ phandle:
 >> - [ &etm1 , {...} ]
 >> - [ / , {...} ]
 >> - [ /aliases , {...} ]
->
-> Works for now, but limited if we ever need more metadata for an
-> overlay/fragment.
->
+>>
 >> Or it could be stored as a special property in the node, something
 >> that doesn't collide with child/property names. An array of maps:
 >>
@@ -146,33 +309,141 @@ phandle:
 >>
 >> Personally, I prefer embedding the path right into the node because it
 >> drops a level of nesting.
+>>
 >
-> I dislike this because it mixes "in band" and "out of band" info,
-> requiring more special handling in tools to separate them again.  I
-> really think a type-tagged map is the right (and YAML-ish) way to do
-> this.
+> Expanding your example:
+>
+> / {
+>   one;
+>   etm0: etm0 { etm0_one; };
+>   etm1: etm1 { etm1_one; };
+>   aliases { nada; }
+> };
+> &etm0 { two; };
+> &etm1 { three; };
+> / { four; };
+> /aliases { five; };
+>
+> For yamldt would encode it as:
+>
+> one: true
+> etm0: &etm0
+>   etm0_one: true
+> etm1: &etm1
+>   etm1_one: true
+> aliases:
+>   nada: true
+> *etm0:
+>   two: true
+> *etm1:
+>   three: true
+> four: true
+> /aliases:
+>   five: true
 
-Using the same argument, my first take on node format is to separate
-nodes and properties because theoretically they are in different
-namespaces. Something like this:
-node@0:
-    $props:
-        compatible: [ acme,toaster ]
-        reg: [ [0] ]
-    child1: { ... }
-    child2: { ... }
+> The resulting yaml output would be:
+>
+> one: true
+> four: true
+> etm0:
+>   etm0_one: true
+>   two: true
+> etm1:
+>   etm1_one: true
+>   three: true
+> aliases:
+>   nada: true
+>   five: true
 
-But I really dislike having the extra level of indentation, and it
-turns out it isn't difficult to parse & validate when only one level
-is used. Nodes are always maps, properties are always arrays, and the
-types do not overlap. (Besides, I think it is a good thing to stop
-allowing a node and a property to share the same name). So for this
-case, I think it is worth dropping $props to reduce the nesting level
-for properties.
+Yes, I have no issue with this yaml encoding of the resolved tree.
 
-For the metadata case, I've got the same leaning. Since there is no
-overlap between metadata properties ($...) and node/property
-properties (ugh, namespace clash between yaml & dt), I think it is
-better to have the metadata at the same level.
+> Note that the output file is proper YAML, it's the source that we are
+> talking about.
+>
+> I think a very simple way to encode it would be (using $ for ref and
+> labels with the new style):
+>
+> - /:
+>     one: true
+>     etm0:
+>       /label/: etm0
+>       etm0_one: true
+>     etm1:
+>       /label/: etm1
+>       etm1_one: true
+>     aliases:
+>       nada: true
+> - $etm0:
+>     two: true
+> - $etm1:
+>     three: true
+> - /:
+>     four: true
+> - /aliases:
+>     five: true
 
+I've been encoding the same structure like this:
+
+unresolved_tree:
+- $path: /
+  one: true
+  etm0:
+    $labels: [ etm0 ]
+    etm0_one: true
+  etm1:
+    $labels: [ etm1 ]
+    etm1_one: true
+ aliases:
+    nada: true
+- $path: !ref etm0
+  two: true
+- $path: !ref etm1
+  three: true
+- $path: /
+  four: true
+- $path: /aliases:
+  five: true
+
+The difference between our two approaches is:
+
+Your structure:
+  [ { (node ref/path): { prop1: val, prop2: val, ... } } ]
+My structure:
+  [ { $path: (node ref/path), prop1: val, prop2: val, ... } ]
+
+The difference is the amount of nesting. You're using two maps, and
+the outer one has only one key; the node ref. I'm using a single map
+and a special property to encode the node ref. Visually the two maps
+looks better, but in terms of accessing the data I far prefer the
+single map approach.
+
+>
+> You can even get rid of the sequence indicators and keep the first
+> one if you're sure about indentation
+> - /:
+>     one: true
+>     etm0:
+>       /label/: etm0
+>       etm0_one: true
+>     etm1:
+>       /label/: etm1
+>       etm1_one: true
+>     aliases:
+>       nada: true
+>   $etm0:
+>     two: true
+>   $etm1:
+>     three: true
+>   /:
+>     four: true
+>   /aliases:
+>     five: true
+
+This is where it falls down again. The sequence indicators must be
+there, otherwise it is just back to trying to use a map to encode
+ordered top level trees. The ordering is lost because yaml doesn't
+guarantee ordering in maps, which is needed in unresolved trees. While
+it works for you in yamldt, a generic yaml parser will mess it up.
+
+Cheers,
 g.
