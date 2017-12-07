@@ -1,79 +1,130 @@
 From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: [PATCH] Extract document version from git tag
-Date: Thu,  7 Dec 2017 16:33:06 +0000
-Message-ID: <20171207163306.24679-1-grant.likely@arm.com>
+Subject: [PATCH] Update copyright dates and revision history
+Date: Thu,  7 Dec 2017 16:51:41 +0000
+Message-ID: <20171207165141.8498-1-grant.likely@arm.com>
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
         h=sender:from:to:cc:subject:date:message-id;
-        bh=u9vpQjyBZyAttufka0OkvCTOw5yAeA+SNRQb/iRX1UI=;
-        b=hpzsLDf3WiLppMn9G7yZdVtsQ28HxUvv0PD4CBNFLNEctSsV820cj6XcLphUXJzYGe
-         rVBhOk0unH6tEDhj5OHPzDUD7NT9YBjK3O51PSKc0mPpwFmDqUzwWZLwSgh8I7/8ymG6
-         P6O0q5VBaj17YdjgB3EdAMuEbLG6R+8Ne8Gec5coi2pl7DU+/OCDN4E5iEhQEGO/TpXw
-         zW7uPD+SyEIrXJGu4jikecxTZrf8HB6Tb3JRcq2ydr6XOXaUbFdbHjuPat2KETvpaXbV
-         9qQd8NvnrX7SI9dkYQQ6U+zms2t7hbq5d5NH1HukUDGekaOCIbhW4Gbpo52hgS6OAMk+
-         YWwg==
+        bh=j7YeNhPA7bOFfjehGn+3RpRA+29KM+D9U98gEbsjpmk=;
+        b=Tf2aydz0nG70Jy6hPGZ2keJxjICZv5lreOweWoDSQAG+J8zQQ71e0tjP64RhYc6VVM
+         mUddaNYSi3PnB1qUBYMOKp92+DysMI/wrJpTzHIo0CQLV7E6fs2q8Xq6cGpI4YYnT7Hd
+         VzQJ9XTcWdHazK43BeBsSOtAY2bSF74/LzHh7B4uyq4SbfVj967WXj65+1NNbx8h4Rk7
+         bREXW54teffSbu5OaADEQVqWf+vRLfWbjwKk9g4Fboex8QfI9VKAe4VKFNu+r/rWICQ3
+         4vo1ycV7KdIACW5wgbtTHBqKk61bN75stMv8xY3/psJbA268d+mhXqt1nB59p3JFzClI
+         mhVA==
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 Cc: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
 
-Instead of hard coding the document version in the config file, use
-'git describe' to get the version number from the tags and use that.
-Just like before, if the version string contains a '-', then it is not
-an official release and a watermark will be added to the PDF. This
-catches prereleases "-pre*", untagged revisions "-g<hash>", and
-uncommitted changes "-dirty".
+Add revision history for v0.2-pre2 of the spec and add 2017 to the
+copyright dates for both Arm and Linaro.
 
 Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
 ---
- source/conf.py | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ LICENSE               |  3 ++-
+ NOTICE                |  7 ++++---
+ source/conf.py        |  2 +-
+ source/license.rst    |  4 ++--
+ source/revhistory.rst | 25 +++++++++++++++++--------
+ 5 files changed, 26 insertions(+), 15 deletions(-)
 
+diff --git a/LICENSE b/LICENSE
+index d27ab08..b2452fb 100644
+--- a/LICENSE
++++ b/LICENSE
+@@ -187,7 +187,8 @@
+       same "printed page" as the copyright notice for easier
+       identification within third-party archives.
+ 
+-   Copyright 2016 Linaro, Ltd.
++   Copyright 2016,2017 Arm, Ltd.
++   Copyright 2016,2017 Linaro, Ltd.
+    Copyright 2008,2011 Power.org, Inc
+    Copyright 2008,2011 Freescale Semiconductor, Inc.
+    Copyright 2008,2011 International Business Machines Corporation
+diff --git a/NOTICE b/NOTICE
+index ecca13d..ff772f8 100644
+--- a/NOTICE
++++ b/NOTICE
+@@ -3,9 +3,10 @@ Devicetree Specification
+ 
+ Portions of this specification were developed by the following companies and licensed under the Apache License, Version 2.0 
+ 
+-Copyright 2016 Linaro, Ltd.
++Copyright 2016,2017 Arm, Ltd.
++Copyright 2016,2017 Linaro, Ltd.
+ Copyright 2008,2011 Power.org, Inc
+-Copyright 2008,2011 Freescale Semiconductor, Inc. 
+-Copyright 2008,2011 International Business Machines Corporation 
++Copyright 2008,2011 Freescale Semiconductor, Inc.
++Copyright 2008,2011 International Business Machines Corporation
+ 
+ For more information, please see http://devicetree.org/
 diff --git a/source/conf.py b/source/conf.py
-index 54b87ef..6bb639c 100644
+index 6bb639c..e8a6627 100644
 --- a/source/conf.py
 +++ b/source/conf.py
-@@ -15,6 +15,7 @@
- import sys
- import os
- import time
-+import subprocess
+@@ -57,7 +57,7 @@ master_doc = 'index'
  
- # If extensions (or modules to document with autodoc) are in another directory,
- # add these directories to sys.path here. If the directory is relative to the
-@@ -64,7 +65,10 @@ author = u'devicetree.org'
- # built documents.
- #
- # The short X.Y version.
--version = u'0.2-pre2'
-+try:
-+    version = subprocess.check_output(["git", "describe", "--dirty"]).strip()
-+except:
-+    version = "unknown-rev"
- # The full version, including alpha/beta/rc tags.
- release = version
+ # General information about the project.
+ project = u'Devicetree Specification'
+-copyright = u'2016, devicetree.org'
++copyright = u'2016,2017, devicetree.org'
+ author = u'devicetree.org'
  
-@@ -79,7 +83,7 @@ language = None
- # non-false value, then it is used:
- #today = ''
- # Else, today_fmt is used as the format for a strftime call.
--today_fmt = '%d %B %Y'
-+today_fmt = '%d %b %Y'
+ # The version info for the project you're documenting, acts as replacement for
+diff --git a/source/license.rst b/source/license.rst
+index 2d9e95a..17a586f 100644
+--- a/source/license.rst
++++ b/source/license.rst
+@@ -4,8 +4,8 @@
+ | Copyright 2008,2011 Power.org, Inc.
+ | Copyright 2008,2011 Freescale Semiconductor, Inc.
+ | Copyright 2008,2011 International Business Machines Corporation.
+-| Copyright 2016 Linaro, Ltd.
+-| Copyright 2016 ARM Ltd.
++| Copyright 2016,2017 Linaro, Ltd.
++| Copyright 2016,2017 Arm, Ltd.
  
- # List of patterns, relative to source directory, that match files and
- # directories to ignore when looking for source files.
-@@ -253,7 +257,7 @@ latex_elements = {
+ The Linaro and devicetree.org word marks and the Linaro and
+ devicetree.org logos and related marks are trademarks and service marks
+diff --git a/source/revhistory.rst b/source/revhistory.rst
+index 9afd307..a800d26 100644
+--- a/source/revhistory.rst
++++ b/source/revhistory.rst
+@@ -1,11 +1,20 @@
+ .. _revision-history:
+-.. tabularcolumns:: | l l J |
++.. tabularcolumns:: | p{1.5cm} p{2.25cm} p{11.50cm} |
+ .. table:: Revision History
  
- # Release numbers with a qualifier (ex. '-rc', '-pre') get a watermark.
- if '-' in release:
--    latex_elements['preamble'] = '\\usepackage{draftwatermark}\\SetWatermarkScale{.45}\\SetWatermarkText{DRAFT v%s %s}' % (release, time.strftime(today_fmt))
-+    latex_elements['preamble'] = '\\usepackage{draftwatermark}\\SetWatermarkScale{.45}\\SetWatermarkText{%s}' % (release)
- 
- # Grouping the document tree into LaTeX files. List of tuples
- # (source start file, target name, title,
+-   =========== =========== ====================================================
+-   Revision    Date        Description
+-   =========== =========== ====================================================
+-   |spec| 0.1  2016-MAY-24 Initial prerelease version. Imported |epapr| text
+-                           into reStructured Text format and removed Power ISA
+-                           specific elements.
+-   =========== =========== ====================================================
++   ========= =========== ====================================================
++   Revision  Date        Description
++   ========= =========== ====================================================
++   0.1       2016-MAY-24 Initial prerelease version. Imported |epapr| text
++                         into reStructured Text format and removed Power ISA
++                         specific elements.
++   0.2-pre2  2017-DEC-07 Second prerelease version.
++
++                         * Added more recommended generic node names
++                         * Added interrupts-extended
++                         * Additional phy times
++                         * Filled out detail in source language chapter
++                         * Editorial changes
++
++   ========= =========== ====================================================
++
 -- 
 2.11.0
