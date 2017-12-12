@@ -1,166 +1,82 @@
-From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: Re: [PATCH] Add GPIO binding
-Date: Tue, 12 Dec 2017 12:44:20 +0000
-Message-ID: <CACxGe6tC7f20G4KEuzEfJNU__R+qPZKCOnSL3WQ+mZcPSD3yEg@mail.gmail.com>
-References: <20171207171059.24845-1-grant.likely@arm.com> <CAL_JsqJcCtAzV06BE_tuzQu6pz+3zNjfaE_EqU-5Ogw37WRLmg@mail.gmail.com>
- <CACRpkdbntaEysFnHxZ1mVAnGTagy8Ek=a7dL0r_ciXjGZJR4ZQ@mail.gmail.com> <CAL_JsqKLYe7e8kqXYWXXQ6mMY7CVXPDZYgCqZOfz3UCvUApkCg@mail.gmail.com>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: Re: [PATCH] Clarify DTB section preable
+Date: Tue, 12 Dec 2017 07:26:52 -0600
+Message-ID: <CAL_JsqKP+xRJN6ABaV63DzCUrFn4GmLbknLpXiZH59bp0itg2g@mail.gmail.com>
+References: <20171212110836.31537-1-grant.likely@arm.com> <CACxGe6v5uFLM5eAnFrRTP1z2+BaUHKaa98y29nZJTyP=Mw4OFg@mail.gmail.com>
 Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=o7XJA7Sf05iQe9at37S399KTbOaLmZC0Tw/4Eg8y1T8=;
-        b=qKLRTtDMNa+xA5bIuiZdzhGrVjlmkAg+ZF7l7nvlqZadn8WUnY/OxZTzzM9lOfqEY9
-         W5XaDXZvBJfKPtRe9Qaxw7WAM8KEgop/KUhTY2NtjtbHc87wXtGmK3bHr5RDAHEM5rUF
-         i3kWPTrOjtuRhOoJo4reN9BMfbyeESv4xO/fLVU0VFr6ADgk0H5Qib7zWFXoBp5KbKUe
-         JkwR9efdMwfLuK1FdJVS/BKg3Rd17gvwYCASTOUo95iocz98QPsKqDmWE+FJG2F2AQ9X
-         t4dKsEdDr+yCYC5RNxPz5Nc9lyYEDAlgoTalmjFgcUu2rnfgEAs7dr3QWu21nJcfZ9Ye
-         mS+w==
-In-Reply-To: <CAL_JsqKLYe7e8kqXYWXXQ6mMY7CVXPDZYgCqZOfz3UCvUApkCg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+In-Reply-To: <CACxGe6v5uFLM5eAnFrRTP1z2+BaUHKaa98y29nZJTyP=Mw4OFg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
 
-On Mon, Dec 11, 2017 at 3:46 PM, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
-> On Mon, Dec 11, 2017 at 3:07 AM, Linus Walleij <linus.walleij-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> wrote:
->> On Thu, Dec 7, 2017 at 9:51 PM, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
+On Tue, Dec 12, 2017 at 5:21 AM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+> On Tue, Dec 12, 2017 at 11:08 AM, Grant Likely
+> <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+>> The DTB chapter used to be titled the "Flattened Devicetree Structure"
+>> chapter, but that seems to be unclear when it is talking about a
+>> specific encoding of devicetree. In this case, the encoding is 'dtb'.
+>> The source format chapter specifies "DTS", so change the start of this
+>> chapter to line up with the DTS chapter.
 >>
->> I don't really know the context but I guess devicetree.org standards
->> document so I need to read it close :)
+>> At the same time, update the introduction to include the source format
+>> chapter.
 >>
->>> +Linus W
->>>
->>> On Thu, Dec 7, 2017 at 11:10 AM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
->>>> Add the GPIOs binding as described in the Linux kernel. All of the
->>>> binding except pinmux has been included. Pinmux is omitted until the
->>>> pinmux binding is similar transferred.
+>> Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+>> ---
+>>  source/flattened-format.rst | 17 ++++++++++++-----
+>>  source/source-language.rst  |  2 +-
+>>  2 files changed, 13 insertions(+), 6 deletions(-)
 >>
->> Two words: pin control - pin multiplexing is just half of the things
->> pin control does. It also does electrical configuration of pins
->> (pull ups etc) and that is not pinmux.
+>> diff --git a/source/flattened-format.rst b/source/flattened-format.rst
+>> index a1c358e..bd98891 100644
+>> --- a/source/flattened-format.rst
+>> +++ b/source/flattened-format.rst
+>> @@ -1,13 +1,20 @@
+>>  .. _chapter-fdt-structure:
 >>
->> But I get what you mean.
-
-I could use help with rewriting the section to properly reflect pin
-control. In this patch I've mostly just transcoding what has already
-been written.
-
-[...]
->>>> +General Purpose IO (GPIO)
->>>> +-------------------------
->>>> +
->>>> +GPIO signals are modelled in |spec| as a point to point connection between
->>>> +a GPIO controller node which provides the GPIO signal,
->>>> +and a GPIO consumer node.
->>>> +A connection is described with a ``single-gpio`` which is placed in the
->>>> +consumer node, and identifies a specific GPIO controller and signal.
+>> -Flat Devicetree Physical Structure
+>> +Flattened Devicetree (DTB) Format
+>>  ==================================
 >>
->> This reads like a textual form of the BNF-form specification that we have
->> in the kernel. I assume other resources such as interrupts, clocks, regulators
->> etc are described in similar wording so OK.
-
-Correct. The published document will probably continue to be formatted
-into something like BNF, but I want to move the source towards a
-usefully parseable syntax that can be used by tools
-
+>> -With the exception of platforms using IEEE1275 Open Firmware [IEEE1275], the
+>> -devicetree data is contained within a single, linear, pointerless data structure
+>> -known as the flattened devicetree or devicetree blob.
+>> +The Devicetree Blob (DTB) format is a flat binary encoding of devicetree data.
+>> +It used to exchange devicetree data between software programs.
+>> +For example, when booting an operating system, firmware will pass a DTB to the OS kernel.
 >>
->>>> +In this model, the purpose of a GPIO signal is determined by the GPIO consumer
->>>> +node, which is entirely dependant on what device the consumer node represents.
->>>> +The GPIO controller does not make any assumptions about how GPIOs will be used.
+>> -This data structure consists of a small header
+>> +.. note::
+>> +
+>> +   IEEE1275 Open Firmware [IEEE1275] does not define the DTB format.
+>> +   On most Open Firmware compliant platforms the devicetree is extracted by calling firmware methods
+>> +   to walk through the tree structure.
+>> +
+>> +The DTB format encodes the devicetree data within a single, linear, pointerless data structure.
+>> +It consists of a small header
+>>  (see section :ref:`sect-fdt-header`),
+>>  followed by three variable sized sections:
+>>  the memory reservation block (see section :ref:`sect-fdt-memory-reservation-block`),
+>> diff --git a/source/source-language.rst b/source/source-language.rst
+>> index fd6f8af..8dd9710 100755
+>> --- a/source/source-language.rst
+>> +++ b/source/source-language.rst
+>> @@ -1,6 +1,6 @@
+>>  .. _chapter-devicetree-source-format:
 >>
->> Good. That is a way of saying that when we say something is general purpose,
->> it is actually general purpose. Should be evident from the name, but given how
->> some electronics people call everything GPIO it needs to be pointed out
->> I guess.
-
-hahaha
-
+>> -Devicetree Source Format (version 1)
+>> +Devicetree Source (DTS) Format (version 1)
+>>  ================================================
 >>
->>>> +For example, an MMC controller may use a GPIO connection to communicate the RW/RO pin state.
->>>> +In this case the MMC controller node would identify the specific GPIO signal
->>>> +used to detect RW/RO state,
->>>> +and the MMC controller driver would know to configure it as an input.
->>>> +The GPIO controller node has no knowledge of how the pin should be used and
->>>> +merely provides a pin control interface to the MMC driver.
->>
->> This kind of mandates that the OS implementing GPIO must provide accessors
->> for setting pin direction and reading/writing lines. I guess mandating what an
->> OS driver "must do" is not the scope of the spec but it is kind of hard to avoid
->> it creeping in.
->>
->>>> +To conform to the generic GPIO binding, both the GPIO controller and consumer
->>>> +nodes must conform to this binding as detailed below.
->>>> +
->>>> +GPIO Definitions
->>>> +^^^^^^^^^^^^^^^^
->>>> +
->>>> +.. tabularcolumns:: | l l J |
->>>> +.. table:: GPIO Binding Datatype Definitions
->>>> +
->>>> +   =================== ============================== ================================================
->>>> +   Type                Definition                     Description
->>>> +   =================== ============================== ================================================
->>>> +   ``gpio-list``       ``single-gpio [gpio-list]``    Array of one or more ``gpio-single``.
->>
->> Should it be "single-gpio" in the end there?
-
-It's a recursive definition. :-)
-
-This was from the original text. It could be reworded.
-
->>
->> As it is named here:
->>
->>>> +   ``single-gpio``     ``<phandle> <gpio-specifier>`` Reference to a single GPIO signal specifying
->>>> +                                                      both GPIO controller (``phandle``) and GPIO
->>>> +                                                      signal from that controller (``gpio-specifier``)
->>>> +   ``gpio-specifier``  ``<u32>[0..#gpio-cells]``      Array of ``cells``. Array size defined by
->>>> +                                                      value of *#gpio-cells* in GPIO controller node.
->>>> +                                                      In other words, the size of a ``gpio-specifier``
->>>> +                                                      is dependent on the GPIO controller.
->>>> +   =================== ============================== ================================================
->>>> +
->>>> +A ``gpio-specifier`` is an array of 1 or more ``cells`` indicating the specific GPIO signal and configuration of that signal.
->>
->> I would prefer to hammer down the gpio-specifier to 2 cells where the
->> first cell specifies the line/signal and the second specifier electric
->> properties, such as active low, open drain etc.
-
-As Rob pointed out, this binding needs to account for more complicated
-scenarios, but it can be reworded to strongly recommend the 2-cell
-version.
-
-
->>>> +GPIO Hogging
->>>> +~~~~~~~~~~~~
->>>> +
->>>> +A GPIO controller may provide automatic configuration information for one or more GPIO
->>>> +signals by adding ``GPIO hog`` child nodes.
->>>> +GPIO hogging informs the GPIO controller driver that some pins must be configured in a
->>>> +particular way at driver initialization time, without requiring a reference from a GPIO
->>>> +consumer node.
->>
->> They even *MUST NOT* be referenced from consumer nodes.
->>
->> Hogs are hoggy hogs that hog around. Very greedily.
->>
->> So we need to say that hogs exclude a GPIO line from any use by
->> any consumer node.
->>
->> There has been a lot of back-and-forth of another type of self-reference
->> specifying initial values and/or directions to a GPIO line, later to be
->> taken (or not) by some consumer.
->>
->> These discussions have stalled. It didn't lead anywhere.
+>>  The Devicetree Source (DTS) format is a textual representation of a
+>> --
 >
-> I would suggest we leave hogs out for now. I think the above needs to
-> be resolved first. I'm not a fan of the gpio hogs binding so much, but
-> I don't really have a better suggestion on how to handle it.
+> Oops, this hunk got omitted from the patch:
 
-Okay, will drop
+With this hunk:
 
-g.
+Reviewed-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
