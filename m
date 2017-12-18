@@ -1,47 +1,32 @@
 From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: [PATCH] Revert abbreviation of month name
-Date: Mon, 18 Dec 2017 15:11:41 +0000
-Message-ID: <20171218151141.8019-1-grant.likely@arm.com>
+Subject: Devicetree spec v0.2-pre4 available for review
+Date: Mon, 18 Dec 2017 16:28:50 +0000
+Message-ID: <CACxGe6tUx-g=6BXPUsb_mo5PfOc3jgnoMMowSke7nDS44DuWDw@mail.gmail.com>
+Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=sender:from:to:cc:subject:date:message-id;
-        bh=4js3Sd9sigtYREFUqP+l7l2YYS6w3cu8NgsC9NKP7Qo=;
-        b=XwCK8bAOdJmForAtwUsZ1RGh0iVMsNgT1WOZUMvYfVKHjK20Ip3QREQt4g77RIxp9x
-         QfY0ahr0+CplGgbVucfbYnnbNEkQMrD6UgdYvKni6+jTDYPwduW7XghZ0UFUCZ4Sd+dH
-         klUmBeDgJHHBcyYDgmsSrZKrfSLEn+9Ch3DOf6iZa8krG8vNL5bQm/UtNMOQ2MjkKA64
-         CRWZo8MkjuZDZ75FgGY4WUW/BJDKhSwZFoytSIIwaisddKtnBq9JZLjYEGVbBk3YJaDm
-         sH9+Q2c7/SCzfR8B3LMa9rou2UamAxpXek6loyaCwKK1e6UyntTYo3rrqfcwKL9rz3wF
-         J5pw==
+        h=mime-version:sender:from:date:message-id:subject:to;
+        bh=SlmAGnhn7j80yBmSM/Jr5GTv3s13j2b2JujVQPl45ug=;
+        b=BCT0Zjh8p5R9c57kkB3qq5MWz/5MC2fosMg8yNzpo5vO5cjrQaxjZTM8wCcL8t+eZM
+         aDxGM7Rs4BrCbaSL76gk0SXSL/fkj/jQsgbYZWeYr3Yk9410K5bx960TnFC4Y4uUrlsY
+         Z1c1Bu1mylDsuNr55Shj9FkZ9TPnMwKTvMioT8VEQZMX5GaMtPgqBFOZtbWTi7V83zTn
+         xz8sQaI8MWWbGhU6P+sFFckfB1thIN44BHA48Lv4oNt1vDDkMpjR/NO+pdOvaS9TTUwZ
+         52PHd6BVLaDV6JflKH/XXJXXOjQU3TZu/OSoFG9WTEsvGxdfk4RdNMm87qABP6zocFcQ
+         A48g==
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-private-cunTk1MwBs8s++Sfvej+rw@public.gmane.org
 
-Commit 6a00ff2f, "Extract document version from git tag" changed the
-date annotation from full month to the abbreviation. Full month looks
-better on the title page, so revert that hunk of the change.
+Hi all,
 
-Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
----
- source/conf.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I tagged another pre-release for the Devicetree specification this
+morning. It is probably going to be the last before I do a release
+candidate and then a final release. Please review and comment.
 
-diff --git a/source/conf.py b/source/conf.py
-index e8a6627..3f5cc2c 100644
---- a/source/conf.py
-+++ b/source/conf.py
-@@ -83,7 +83,7 @@ language = None
- # non-false value, then it is used:
- #today = ''
- # Else, today_fmt is used as the format for a strftime call.
--today_fmt = '%d %b %Y'
-+today_fmt = '%d %B %Y'
- 
- # List of patterns, relative to source directory, that match files and
- # directories to ignore when looking for source files.
--- 
-2.11.0
+https://github.com/devicetree-org/devicetree-specification/releases/tag/v0.2-pre4
+
+Thanks,
+g.
