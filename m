@@ -1,102 +1,106 @@
-From: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [PATCH] Clarify DTB section preable
-Date: Fri, 15 Dec 2017 17:12:18 -0800
-Message-ID: <0c680c53-f9a8-186b-a319-458565fa2116@gmail.com>
-References: <20171212110836.31537-1-grant.likely@arm.com>
+From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+Subject: Re: [RFC PATCH 1/2] Preserve datatype information when parsing dts
+Date: Mon, 18 Dec 2017 15:34:52 +1100
+Message-ID: <20171218043452.GU7753@umbus.fritz.box>
+References: <20171128115710.9267-1-grant.likely@arm.com>
+ <20171128115710.9267-2-grant.likely@arm.com>
+ <20171212061409.GO2226@umbus.fritz.box>
+ <CACxGe6tyHMTH_jOkacqLwcu+GeiNhAu54Q2WqN=PC8P0P2qJ8Q@mail.gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=9I8Ie3N9mxkmB96q2Uvlc/bcr1eVss65LnQa6xERhmE=;
-        b=AgU1zcXjgvyPYLMPi5FCxSGM6sYPiDjeM15ReZarz60PtcseIP5QnzS8nQSCx3T5le
-         FaXa35kcBORX3xJNb4B2hA8E3FNZN3nS/4Rx1sXPAY2jJlncsyrr56Jzq1j9mfsKi864
-         e4KRLTpGUnp2tw1wEEy5gzr8Qvj8n4k42ZQ5e/T+aScdRjIYMXl93yN7W4YwNtEWiQsz
-         tjfc4QZoUDBgUeKTY9sxfNL80zag9kwDTZ6pTGzotCDpgHZmOYKUltKY5w1+Qu7cMDCb
-         UwjH4QewvnxgNzRaoMVyXCs7mbNIGiXVh/gt32lesUi5yGoRNlrV09TzGWif5LgcmWy1
-         6lQg==
-In-Reply-To: <20171212110836.31537-1-grant.likely-5wv7dgnIgG8@public.gmane.org>
-Content-Language: en-US
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="kSOhxpxUsM1s2qz/"
+Return-path: <devicetree-compiler-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+        d=gibson.dropbear.id.au; s=201602; t=1513571696;
+        bh=cPGohRASELdqX5L2PWjoXVRm/dqia1zBfL5Trz5SAEQ=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=OFWomotukDQbUoeWwX8qenmEoLz4qAVVFa5x4AsRqZ+IyyuQkVMMwDwPjqFpIYtNR
+         qyWSpl9Nac5+AWPOy0Sd7eoE4IOHeX+3Be4Rc+4Z+gK84JhviKkEGHUrIKWESXoKda
+         wkBUBpq596B35uqxXsr0SAhGI6T3KMY3WMJo3MNo=
+Content-Disposition: inline
+In-Reply-To: <CACxGe6tyHMTH_jOkacqLwcu+GeiNhAu54Q2WqN=PC8P0P2qJ8Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Sender: devicetree-compiler-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
-
-On 12/12/17 03:08, Grant Likely wrote:
-> The DTB chapter used to be titled the "Flattened Devicetree Structure"
-> chapter, but that seems to be unclear when it is talking about a
-> specific encoding of devicetree. In this case, the encoding is 'dtb'.
-> The source format chapter specifies "DTS", so change the start of this
-> chapter to line up with the DTS chapter.
-> 
-> At the same time, update the introduction to include the source format
-> chapter.
-> 
-> Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
-> ---
->  source/flattened-format.rst | 17 ++++++++++++-----
->  source/source-language.rst  |  2 +-
->  2 files changed, 13 insertions(+), 6 deletions(-)
-> 
-> diff --git a/source/flattened-format.rst b/source/flattened-format.rst
-> index a1c358e..bd98891 100644
-> --- a/source/flattened-format.rst
-> +++ b/source/flattened-format.rst
-> @@ -1,13 +1,20 @@
->  .. _chapter-fdt-structure:
->  
-> -Flat Devicetree Physical Structure
-> +Flattened Devicetree (DTB) Format
->  ==================================
->  
-> -With the exception of platforms using IEEE1275 Open Firmware [IEEE1275], the
-> -devicetree data is contained within a single, linear, pointerless data structure
-> -known as the flattened devicetree or devicetree blob.
-> +The Devicetree Blob (DTB) format is a flat binary encoding of devicetree data.
+To: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Cc: Devicetree Compiler <devicetree-compiler-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
 
 
-> +It used to exchange devicetree data between software programs.> +For example, when booting an operating system, firmware will pass a DTB to the OS kernel.
+--kSOhxpxUsM1s2qz/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-That wording is vague enough to allow the imaginative reader plenty of room
-to jump to false conclusions.  For example, someone with a BIOS background
-might assume that the kernel can use the blob to communicate to the boot loader.
+On Tue, Dec 12, 2017 at 12:48:10PM +0000, Grant Likely wrote:
+> On Tue, Dec 12, 2017 at 6:14 AM, David Gibson
+> <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org> wrote:
+> > On Tue, Nov 28, 2017 at 11:57:09AM +0000, Grant Likely wrote:
+> >> The current code throws away all the data type and grouping information
+> >> when parsing the DTS source file, which makes it difficult to
+> >> reconstruct the data format when emitting a format that can express da=
+ta
+> >> types (ie. dts and yaml). Use the marker list to mark the beginning and
+> >> end of each integer array block (<> and []), the datatype contained in
+> >> each (8, 16, 32 & 64 bit widths), and the start of each string.
+> >>
+> >> At the same time, factor out the heuristic code used to guess a proper=
+ty
+> >> type at emit time. It is a pretty well defined standalone block that
+> >> could be used elsewhere, for instance, when emitting YAML source. Fact=
+or
+> >> it out into a separate function so that it can be reused, and also to
+> >> simplify the write_propval() function.
+> >>
+> >> When emitting, group integer output back into the same groups as the
+> >> original source and use the REF_PATH and REF_PHANDLE markers to emit t=
+he
+> >> the node reference instead of a raw path or phandle.
+> >>
+> >> Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+> >
+> > I'm a bit dubious how well forcing the marker mechanism to do all this
+> > stuff it was never intended for can work in the long term.  Still,
+> > it's an interesting experiment.
+>=20
+> As long as the actual data is stored as flat buffer, the markers
+> mechanism works quite well for this. I tried doing something entirely
+> separate, and it turned out to be awful. Another alternative is to
+> break up the flat buffer into a chain of data blocks with attached
+> type information, but that is a very invasive change.
+>=20
+> This approach has the advantage of being robust on accepting both
+> typed and anonymous data. If the markers are not there then the
+> existing behaviour can be maintained, but otherwise it can emit a
+> higher fidelity of source language.
 
-The wording at the start of the 4th paragraph on p. 4 (the "Relationship to
-IEEE 1275 and ePAPR" section) is more clear and precise:
+Hm, true.  The approach is growing on me.  I guess what I'm still
+dubious about is how much this type annotation can get us to approach
+the YAML model.  For example, YAML can distinguish between [ [1, 2],
+[3, 4] ] and [1, 2, 3, 4] which isn't really feasible in dtc.
 
-"... concepts from the devicetree architecture by which a boot program can
-describe and communicate system hardware information to client program, thus eliminating the need for the client
-program to have hard-coded descriptions of system hardware."
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
 
-I would suggest to either not add the two sentences in the patch, or else to
-model them to be more like the wording on p. 4.
+--kSOhxpxUsM1s2qz/
+Content-Type: application/pgp-signature; name="signature.asc"
 
->  
-> -This data structure consists of a small header
-> +.. note::
-> +
-> +   IEEE1275 Open Firmware [IEEE1275] does not define the DTB format.
-> +   On most Open Firmware compliant platforms the devicetree is extracted by calling firmware methods
-> +   to walk through the tree structure.
-> +
-> +The DTB format encodes the devicetree data within a single, linear, pointerless data structure.
-> +It consists of a small header
->  (see section :ref:`sect-fdt-header`),
->  followed by three variable sized sections:
->  the memory reservation block (see section :ref:`sect-fdt-memory-reservation-block`),
-> diff --git a/source/source-language.rst b/source/source-language.rst
-> index fd6f8af..8dd9710 100755
-> --- a/source/source-language.rst
-> +++ b/source/source-language.rst
-> @@ -1,6 +1,6 @@
->  .. _chapter-devicetree-source-format:
->  
-> -Devicetree Source Format (version 1)
-> +Devicetree Source (DTS) Format (version 1)
->  ================================================
->  
->  The Devicetree Source (DTS) format is a textual representation of a
-> 
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAlo3RWcACgkQbDjKyiDZ
+s5JZYA//bauKxpNUpH5OVhUOwlIzJhEWTQS5Pqn5TQPwt6OpZ9lve/rDnov6o/rX
+LxQZvJWzmpFtE1l5YOVizaYH05dw7Z8gevDsJdFy5JmF7qcERJcDVzyahRE0dWvB
+aktBxhiDPvtWW+uOjHeOKQ240RbLCrcm4dt1bzKursBQDJACXwpfmT0K/MKsU9CQ
+z7SXcO2/YhFks0XechYBMWMBizgZJTDtH0MZnniKwmzo7VwJegmW3pOnswgBKL0V
+QWNOGqd9+iKp0MSR8kkJr490ODFNRKdl6D6D+/PlM502xwqOfHjMW3bEswphCX8T
+RGsMxqOnyqDHPJOIVPSwUxBoTILde2qdqrBIqki/xkWWArCLK49GdpGOf8DyVU0K
+mzQx/fzQAmKTOcqa3I90KcMBUv7WqY2xmXojYo07pxbzpasU5ZdBczyeen4elNqt
+WB2A4f0ZXA9fgBylN6/DeIQX0fk3eAn5vtsbyePD+qV/ZyiJWcXisrmrAqdWmSQp
+3Sil5HHKo9bR0mVW2wP8LXihlIQ3q2Ry17ydm1MzYpyRfDWEwf7YPTaOGRyUsuwW
+ANeuvL/i+zg/Qmvf1Xp0ipO8PWj+ZJNpjpoGwjkxe4VT8qW7C2QdvGMwJKVOiPET
+MTAmYTiZ3PefkYwThAL6hNPYD+OXLihP15sfBaBtJfpaO7osN94=
+=cYoq
+-----END PGP SIGNATURE-----
+
+--kSOhxpxUsM1s2qz/--
