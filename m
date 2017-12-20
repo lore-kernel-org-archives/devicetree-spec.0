@@ -1,66 +1,77 @@
 From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: Devicetree Specification 0.2
-Date: Wed, 20 Dec 2017 16:05:20 +0000
-Message-ID: <CACxGe6vqo3ZF9Ms_2zZTpHUx3qW6VZqDL1BstkX8uKBQWCMq-A@mail.gmail.com>
+Subject: Re: [PATCH] Revert change to fsl,mpc8641 example
+Date: Wed, 20 Dec 2017 16:54:56 +0000
+Message-ID: <CACxGe6vhkySi11o+jAEJFAjiA31QWQnEkggJpUvVNYVfWrquSw@mail.gmail.com>
+References: <20171220112024.12303-1-grant.likely@arm.com> <CAL_Jsq+dMY7kvoB6JbG0iKG1RmsSP-zPArL5oJuXO00MeXL=Og@mail.gmail.com>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:sender:from:date:message-id:subject:to;
-        bh=Q4wjHbxn89xvI7T5E8DX794uC72tI2XxAWbTpZdJL7o=;
-        b=167AtM7I6KDRy3Kl86tWjSfw0WVL+fBJ56gVEA6qQKyWagS5S02EKLZShLcX1MqELx
-         Cf24YXCB3U6cjAjJvOx1o71DuftHx+ujG2anbTT5rsYmBFqJTozSl74E6At/vNmmiRN9
-         CJ27qZTM8IxJZiBCenMvGjzBEPhQofnhP3k23xfnwud7OdR9QWE1vZ6+ZxfMBr8Zwzh5
-         gNcNEV+faRrR4LsjgT5Ei401Ef7dfdoqIaA0bpsTaxxW7wySVjMWUvrwDULkJp7rcbtl
-         CpLJuQ6Z7zJfi4A/9Dbpui8OD3TYwQFFOUxuZjXQWZweyARXLz7lxADVEnKRH1GFrkJh
-         hGYQ==
-Sender: devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+        h=mime-version:sender:in-reply-to:references:from:date:message-id
+         :subject:to:cc;
+        bh=c78GEnYpSCmPVgDaxqxUV8HIY9B1X24VrbLnZ7JS7bE=;
+        b=mA9ilZqncU5Rid8fJug0EO+9a35AiFsXzF5HP/xUh1UlZOCAg8r3f0afzDCh6PleXW
+         n6wRofUI9+fmHZ+qRWPr80SnP0YYGufaazl5gGk/EeQey3mZmcrfWVkozhUGvz1zBluh
+         elWQOnWBR4/Ad8UbNyWfLo2m/jC+O+gbr56s+25H+Opni5Kr1DDueVmgVh8IA2CakKA/
+         z+z9YX/0KloQc+qElKuGxNopknq9SXhd0bGt+JWK92JDEx2lqLFjVwYopGY375QteGQb
+         f5i3+3/duZpj2boxKvTKFu28q5GsMpWymetrihAXpExe5L9XBjzXmW2itqmYBlNHa1Bs
+         lCew==
+In-Reply-To: <CAL_Jsq+dMY7kvoB6JbG0iKG1RmsSP-zPArL5oJuXO00MeXL=Og-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>, "Robert P . J . Day" <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
 
-Hi all,
+On Wed, Dec 20, 2017 at 3:35 PM, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
+> On Wed, Dec 20, 2017 at 5:20 AM, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org> wrote:
+>> Commit 7d888a01, "Aesthetic/grammar fixes to first part of
+>> devicetree-basics.rst" changed one of the Freescale compatible examples
+>> from "fsl,mpc8641-uart" to "fsl,ns16550". However, there is value in
+>> using examples from real hardware when possible, and to also show that
+>> different strings (mpc8641-uart vs. ns16550) for a device is normal, so
+>> revert that hunk.
+>>
+>> Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+>> Cc: Robert P. J. Day <rpjday-L09J2beyid0N/H6P543EQg@public.gmane.org>
+>> ---
+>>  source/devicetree-basics.rst | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
+>> index f007a4b..1900cc8 100644
+>> --- a/source/devicetree-basics.rst
+>> +++ b/source/devicetree-basics.rst
+>> @@ -469,10 +469,10 @@ Description:
+>>
+>>  Example:
+>>
+>> -   ``compatible = "fsl,ns16550", "ns16550";``
+>> +   ``compatible = "fsl,mpc8641", "ns16550";``
+>
+> Missing the "-uart" part.
 
-I've just released v0.2 of the devicetree specification. You can find
-the prebuilt PDF on the release page here:
+Well, that's embarrassing, and I've already cut the v0.2 release. :-(
+That's what I get for trying to do last minute changes.
 
-https://github.com/devicetree-org/devicetree-specification/releases/tag/v0.2
-
-The document text is also published on readthedocs (unofficially; the
-pdf is considered authoritative):
-
-http://devicetree-specification.readthedocs.io/en/latest/
-
-Please go take a look. Comments can be made here, or posted as issues
-on the GitHub page. Or better yet, submit patches!
-
-https://github.com/devicetree-org/devicetree-specification/issues
+Oh well. I've posted a fixup and it will show up in v0.3
 
 Cheers,
 g.
 
----
-
-Mostly editorial changes from v0.1. Primary purpose for this release is to work
-through the mechanics of cutting a release. Right now it is more labour
-intensive than I would like for two reasons:
-
-- The GitHub OAuth key must be manually changed to the person cutting the
-  release. I would like it to be automatically selected based on who signed
-  the release tag
-- The pre-release flag needs to be manually changed between -pre/-rc and full
-  releases. This also should be automatically determined based on tag pattern
-  matching
-
-Content changes include:
-* Added more recommended generic node names
-* Added interrupts-extended
-* Additional phy times
-* Filled out detail in source language chapter
-* Editorial changes
-* Added changebar version to release documents
---
-To unsubscribe from this list: send the line "unsubscribe devicetree" in
-the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-More majordomo info at  http://vger.kernel.org/majordomo-info.html
+>
+>>
+>>     In this example, an operating system would first try to locate a device
+>> -   driver that supported fsl,ns16550. If a driver was not found, it
+>> +   driver that supported fsl,mpc8641. If a driver was not found, it
+>>     would then try to locate a driver that supported the more general
+>>     ns16550 device type.
+>>
+>> --
+>> 2.11.0
+>>
+>> --
+>> To unsubscribe from this list: send the line "unsubscribe devicetree-spec" in
+>> the body of a message to majordomo-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+>> More majordomo info at  http://vger.kernel.org/majordomo-info.html
