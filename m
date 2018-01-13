@@ -1,51 +1,51 @@
-From: Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
-Subject: [PATCH] Fix incorrect revert to uart example.
-Date: Wed, 20 Dec 2017 16:45:08 +0000
-Message-ID: <20171220164508.26486-1-grant.likely@arm.com>
+From: "M. A. Solhizadeh" <amin.solhizadeh-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: [PATCH] Fix README Markdown Format
+Date: Sun, 14 Jan 2018 00:57:40 +0330
+Message-ID: <73c3dd3c-63b8-4245-ca8f-80bff85b2092@gmail.com>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=secretlab-ca.20150623.gappssmtp.com; s=20150623;
-        h=sender:from:to:cc:subject:date:message-id;
-        bh=0S55fpSDgYqlw4hDd4koarGeaLgSFXjO86pRzMokg+A=;
-        b=xWYSxF3zn7nD/PXcqkn432nEKOzEltY7c2vfgkWkO89MCXKKWeYnB7ChkvkxoorCng
-         CLZcroKrTBTVDopnhviD2GSF1JtVMZoNIYZYcFD8qEJ3VSSKPIL7Em8Go+iREO+Wo89J
-         gLArZwF5Tk72CNnx4FTfGY2qg5dzw2huYB/mOP+AeWe0fDTScALaD166n5xf6mobHAs1
-         /zHNYfAdsXWL9Lt+fDcYIMJFzwa48xcApjjh3GF7/8Zbfr+kwQML+AzteJ5nZY21o4rV
-         B21Bv6jR5y739X8qmCMbHtBA7LtQ6YNkL4/zYX5BYLysPkY7Xrqfq1QD8xiX2jlZCfBP
-         +8tg==
+        d=gmail.com; s=20161025;
+        h=to:from:subject:message-id:date:user-agent:mime-version
+         :content-language:content-transfer-encoding;
+        bh=RVkA4PvI5C2zPP5wsDKrj0SXwUpI5OTpPUDpKQauzmA=;
+        b=IZZvnsSvUVcdRvI7F+oCH3SBsr3CsSfeZe50V2IgnTAtKv9gkn/OjdydZrR5LP3Yf1
+         UmZu+7zd93zdgUV9M9s8lZ9t9edzeub2AeNSpwrtDT6j6HWqcqUaD05rhmbKLPAQXf2P
+         G1i4t0PaXvp1iUTuNaqJWv/JNm2bBTO0J3Fa7HEb/jcYd9mSOfxweHUpczYs7Slb1vJK
+         Sr9cQu9/KpM+m/bzPrJsgXLIS7R++yo0rsCb7xH76k320q8OZtwnJnn0rpOcGyBYBuK7
+         tqePjJMxJbyA9oAd9Qc7HO29ck0Huxsv2hsHpbGK1p2Tkdzd2JY7FoMbZTeNPhc2vlLg
+         31OA==
+Content-Language: en-US
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 
-Commit 727c7fa9, "Revert change to fsl,mpc8641 example" flubbed the
-revert by omitting the -uart suffix. Add it back in.
+ From 308af038fc7343c7cce2f49b222f497d94263a33 Mon Sep 17 00:00:00 2001
+From: Amin Solhizadeh <amin.solhizadeh-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Date: Sun, 14 Jan 2018 00:43:52 +0330
+Subject: [PATCH] Fix README Markdown Format
 
-Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
-Cc: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Signed-off-by: Amin Solhizadeh <amin.solhizadeh-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 ---
- source/devicetree-basics.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+  README.md | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
-index 1900cc8..b18c2d8 100644
---- a/source/devicetree-basics.rst
-+++ b/source/devicetree-basics.rst
-@@ -469,10 +469,10 @@ Description:
- 
- Example:
- 
--   ``compatible = "fsl,mpc8641", "ns16550";``
-+   ``compatible = "fsl,mpc8641-uart", "ns16550";``
- 
-    In this example, an operating system would first try to locate a device
--   driver that supported fsl,mpc8641. If a driver was not found, it
-+   driver that supported fsl,mpc8641-uart. If a driver was not found, it
-    would then try to locate a driver that supported the more general
-    ns16550 device type.
- 
+diff --git a/README.md b/README.md
+index fa21ecf..a4f08c3 100644
+--- a/README.md
++++ b/README.md
+@@ -62,7 +62,7 @@ On Mac OS X:
+  >
+  >If you are using [brew](http://brew.sh) then you can install graphviz 
+like this:
+  >```
+-brew install graphviz
++>brew install graphviz
+  >```
+  >If you are using [macports](https://www.macports.org/) then you can 
+install graphviz like this:
+  >```
 -- 
-2.11.0
+2.15.1
