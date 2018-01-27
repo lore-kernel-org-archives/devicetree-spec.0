@@ -1,123 +1,89 @@
-From: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+From: Marek Vasut <marek.vasut-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Subject: Re: [RFC] devicetree: new FDT format version
-Date: Sat, 27 Jan 2018 19:56:56 +1100
-Message-ID: <20180127085656.GA12900@umbus>
+Date: Sat, 27 Jan 2018 21:30:11 +0100
+Message-ID: <5a943937-3b59-514b-3939-df25daea5470@gmail.com>
 References: <b96829f9-2e8b-fdc5-5090-58591e2260cf@gmail.com>
  <CAL_JsqJR2y7bMw_-9TBAGWZ_kf7_sZo5qvqvRowJ8jiy=4G0Bg@mail.gmail.com>
  <20180123124232.GA14832@umbus>
  <20328477-e511-e875-7dc4-253640f2219e@gmail.com>
- <CAL_Jsq+fvFrGhqO0zbEUE_i23FkU=G4Z1-e0vnXHi4KbS2oK0A@mail.gmail.com>
- <e1bec77d-4dac-200b-34be-23573bf738f0@gmail.com>
- <e986435b-481b-2629-7600-10d9e21ac58e@gmail.com>
- <20180125122912.GB2099@umbus>
- <CAMuHMdV0jdj90uzqMx_wtvz=-KaagJG2_UQTm1DW3gzt6cNG6A@mail.gmail.com>
+ <90983180-ae3b-5a31-9dc0-b62b978a0fba@gmail.com>
+ <20180125123734.GC2099@umbus>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-compiler-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-        d=gibson.dropbear.id.au; s=201602; t=1517043637;
-        bh=YzmTxb2Hpgz2xL9s+oNATaz+JZ2g/HG7egJ+NXhzlxM=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=Rghh47kib5u3fMJ3PdeVSlYL+gU4t2cAEWjZMI9Rpq6AAv9j5fX+/0l44rKDEz+Hc
-         TlOFMmQ6xE8n+PYBjzczam6cX8NS0X3Af9Zd3P4t+KCYb4eNbbL9RDu/dxZxUxyOh0
-         tAp7ZOtoaShNgu30X8PV7a4uyJeEDVxlD7FJTcQ8=
-Content-Disposition: inline
-In-Reply-To: <CAMuHMdV0jdj90uzqMx_wtvz=-KaagJG2_UQTm1DW3gzt6cNG6A-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:subject:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=cLSLN/bS25Sm4EQwnhU38ITz7OhaayuFqXZdwKWaJqE=;
+        b=RBScCgaauNl3B4FYWOhBQjeu6S59aU3r4O7rgNnzeM/qygQUqCcoI5Ek5zM43FcQ9q
+         3t5nAucRBQA4ZeaMHnkjzFc5phdZWlKRUF3qDsuOycd0NbNPFyjipSki6zBo5hZ5o37f
+         t8ZGLYF8Dw0tDsEWxXocp6O9PB81g681Acm9RcqYaF8aqlM0xWUPA/kgs10Ad+Q8n0zY
+         KC1+aLlsh1ShYkTbsTKkhB/5+TGxXRvCQyPK3I1BtKGOJAUlomXVJCzKWAp+ooKQcI+9
+         1y/DA32H51hXHU83y4gkQhfMfZfvm1Io2M4M+uFYBGGQ4eOoRjgr2ovNnYnUve9tpCVr
+         6Z3g==
+In-Reply-To: <20180125123734.GC2099@umbus>
+Content-Language: en-US
 Sender: devicetree-compiler-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>
-Cc: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Devicetree Compiler <devicetree-compiler-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jon Loeliger <jdl-CYoMK+44s/E@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, "Pantelis Antomarek.vasut-Re5JQEeQqe/2sr8fMPgRzw@public.gmane.org" <panto-wVdstyuyKrO8r51toPun2/C9HSW9iNxf@public.gmane.org>, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, Marek =?utf-8?B?VmHFoXV0?= <marek.vasut-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Kyle Evans <kevans-h+KGxgPPiopAfugRpC6u6w@public.gmane.org>, Alan Tull <atull-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Michael Ellerman <mpe-Gsx/Oe8HsFggBc27wqDAHg@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+To: David Gibson <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org>
+Cc: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Devicetree Compiler <devicetree-compiler-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Jon Loeliger <jdl-CYoMK+44s/E@public.gmane.org>, "devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Pantelis Antoniou <pantelis.antoniou-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, "Pantelis Antomarek.vasut-Re5JQEeQqe/2sr8fMPgRzw@public.gmane.org" <panto-wVdstyuyKrO8r51toPun2/C9HSW9iNxf@public.gmane.org>, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>, Tom Rini <trini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>, Kyle Evans <kevans-h+KGxgPPiopAfugRpC6u6w@public.gmane.org>, Geert Uytterhoeven <geert-Td1EMuHUCqxL1ZNQvxDV9g@public.gmane.org>, Alan Tull <atull-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Michael Ellerman <mpe-Gsx/Oe8HsFggBc27wqDAHg@public.gmane.org>
 
+On 01/25/2018 01:37 PM, David Gibson wrote:
+> On Thu, Jan 25, 2018 at 10:14:38AM +0100, Marek Vasut wrote:
+>> On 01/23/2018 10:17 PM, Frank Rowand wrote:
+>> [...]
+>>> My knowledge of bootloader use of the FDT is nearly non-existent, so
+>>> I'm on thin ice here.  But I am guessing that a lot of bootloader
+>>> processing of FDT data could be removed if the kernel would unflatten
+>>> a chained FDT and overlay FDT(s).
+>>>
+>>> Comments from the bootloader folks on this topic would be much
+>>> appreciated.
+>>
+>> U-Boot, when using DT as a hardware-description (rather than just
+>> passing it to Linux) usually operates on the FDT, unless explicitly
+>> configured to unflatten the tree. That later option is not enabled by
+>> default.
+>>
+>> The reason for that is so that the DT can be accessed very early on, at
+>> which point there may not be any other memory available than a very
+>> limited stack and the FDT blob can still be located in some read-only
+>> memory.
+> 
+> Right, this is exactly the reason that the fdt format is designed so
+> you can read thing from it directly.  If you're doing more than very
+> minor modifications, however, it does become worth unflattening.
 
---UlVJffcvxoiEqYs2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Right
 
-On Fri, Jan 26, 2018 at 09:56:21AM +0100, Geert Uytterhoeven wrote:
-> On Thu, Jan 25, 2018 at 1:29 PM, David Gibson
-> <david-xT8FGy+AXnRB3Ne2BGzF6laj5H9X9Tb+@public.gmane.org> wrote:
-> > On Wed, Jan 24, 2018 at 04:22:15PM -0800, Frank Rowand wrote:
-> >> On 01/24/18 13:16, Frank Rowand wrote:
-> >> > What you say makes sense.  So I'll reverse myself and say that for
-> >> > Linux, we should update the FDT read code to scan all chained
-> >> > overlay FDT(s) as well as the base FDT.
-> >>
-> >> < snip >
-> >>
-> >> What I wrote was somewhat ambiguous.  What I meant by "FDT read
-> >> code" was functions that check for existence of nodes in the
-> >> FDT or read property values from the FDT.
-> >
-> > Oh.. not just FDT unflattening code.
-> >
-> > The trouble with this is that scanning for a specific node or property
-> > in a set of chained overlays is highly nontrivial.  Even if you set
-> > aside the arguably self-imposed design constraints in libfdt, you
-> > can't just do the same lookup in each fragment: along the way you need
-> > to resolve the path at which each fragment applies.  That in itself is
-> > non-trivial.  If you have overlays applying on top of other overlays,
-> > that could involve recursive lookups of things from previous overlays.
-> > It's spectacularly complicated and we have to do it on *every single*
-> > read operation.
-> >
-> > Either fully applying the overlay in flattened form, or (even
->=20
-> Applying the overlays in flattened form sounds like a good idea to me.
-> It still adds complexity, but handling multiple overlays can be done by a
-> simple iteration, not recursion.
-> The end result will always consume less memory, and will thus fit in the
-> original block of memory allocated for base FDT and overlay FDTs, unless
-> the base FDT and overlay FDTs are in FLASH (this assumes chaining really
-> means appending, not using an external chaining mechanism).
+> Note that while unflatenning requires an allocator of sorts, it can be
+> a trivial one.  A bump allocator in a fixed buffer of reasonable size
+> would do fine.  You don't realy need a free(), since the bootloader
+> has limited lifetime you can just leak nodes until you throw the lot
+> away.
 
-You will require some temporary stprage though, because you'll need to
-expand the base tree enough to apply each overlay before you can
-discard it.
+There's a regular mallocator in later stages of u-boot and a small
+allocator for the early stages if needed. It's only the early one that
+doesn't implement free() and it's only used for a very short time when
+the system is still running from flash.
 
-> > temporarily) unflattening the tree are better solutions.
->=20
-> Temporary unflattening sounds like a waste to me:
+Thus far, I don't see a usecase for unflattening the tree that early,
+but maybe one will come in the future.In the later stages, the design is
+that you do unflatten only if you have a system which benefits from it
+and has the resources to do that. Modern systems usually do, but there
+are systems with weird limitations.
 
-A waste of what, exactly?  Neither flattening nor unflattening is
-terribly difficult or expensive.
+Since you can do a lot more than just booting with u-boot, leaking any
+memory is a really bad idea.
 
-> it must be redone again
-> later anyway. Applying the FDT overlays early on will make that later step
-> simpler (no more overlays to handle).
-> So if you need information from an FDT, you can help later steps by
-> applying the FDT overlays right away.
->=20
-> Gr{oetje,eeting}s,
->=20
->                         Geert
->=20
+> You can also use pointers into the flattened tree blob to avoid
+> allocating space for the actual property values (except for ones you
+> add later, obviously).  And if you make extensive enough changes that
+> leaked pieces really do become a problem, you could do a
+> flatten/unflatten pass to recompact everything.
 
---=20
-David Gibson			| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
-				| _way_ _around_!
-http://www.ozlabs.org/~dgibson
-
---UlVJffcvxoiEqYs2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAlpsPtgACgkQbDjKyiDZ
-s5KmSxAAk2TiRrvRH1cKYdKU9KLcXKky+QoUJ41s6TDOILVJJ5Qc0pDcMjh5tOYx
-bmHebBf4Eq/mLMl7NvC7a4nKQtXnFtVZ7XdzmzSHxYCvbNYYer/vLKXf8i4k6enE
-N/XSdi4vpNKLosIyMdmlY/B2FWu8F8/bvCyGqXcYMxTZvLYa7bu8R6yhLj7kLL6T
-amY+UtAg+V3MaMBXs6g5Q4EPGOl9KO6FzpRXGG0yWxp2VLX9O4GoIO8y7EKTOAxy
-ITnxhmPogL/91OBPqQLBib66GgOqfnSKST5IrAK1psWYQPaWbEB4g2Y+Ilpisir7
-oUyxpoD2/N7plfOamCePI/C/UjY1gAWDYS/uixgk8q8Xh2RFSAuZQu1vy+g/ztpJ
-Kzxe7jlpHBMBzsXAzkN0UrHSlpPsxMzssD/Yw4DEk4Rq5UWdyqeHAkZr57U5VpCc
-A+AdIW41IA+lXcHTylnaYCTPOg17Xn4MnavCqy47Mjc0W7tU3B+/TDNqr6GjCQ18
-9PTzWwz4TETr2bN9qmSUjq2fzrE9GSSYna3FKqN+XnKBySdv4i7Pxd/Jgq11Lgr8
-bHp669B8tkUj/cJwXPmXddPv1FPXD44YjUqatUUY8q9QL2Sn+CxCVHUjghv/Fk1Z
-AHPHziMiYh7kXT5z/J82FbpWWV2lSwMY1IeRc36Erg8sVWcxHgU=
-=rGJN
------END PGP SIGNATURE-----
-
---UlVJffcvxoiEqYs2--
+-- 
+Best regards,
+Marek Vasut
