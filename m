@@ -1,37 +1,200 @@
-From: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [PATCH v5 1/4] Document nexus nodes/specifier remapping
-Date: Fri, 2 Feb 2018 14:10:10 -0600
-Message-ID: <CAL_JsqJuFOR7-tH5Z2-Dd0Mgo1iJFcpPstN6qHFYCr9NXjnuEw@mail.gmail.com>
-References: <20180131023618.14292-1-stephen.boyd@linaro.org> <20180131023618.14292-2-stephen.boyd@linaro.org>
-Mime-Version: 1.0
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <20180131023618.14292-2-stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+From: Rob Herring <robh@kernel.org>
+Subject: [RFC PATCH] dt-bindings: add a jsonschema binding example
+Date: Wed, 18 Apr 2018 17:29:05 -0500
+Message-ID: <20180418222905.10414-1-robh@kernel.org>
+Return-path: <linux-kernel-owner@vger.kernel.org>
+Sender: linux-kernel-owner@vger.kernel.org
 List-ID: <devicetree-spec.vger.kernel.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Cc: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Russell King - ARM Linux <linux-I+IVW8TIWO2tmTQ+vhA3Yw@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: devicetree@vger.kernel.org, devicetree-spec@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc: grant.likely@arm.com, frowand.list@gmail.com, mark.rutland@arm.com, Geert Uytterhoeven <geert+renesas@glider.be>, Linus Walleij <linus.walleij@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Mark Brown <broonie@kernel.org>, shawnguo@kernel.org, Bjorn Andersson <bjorn.andersson@linaro.org>, Arnd Bergmann <arnd@arndb.de>, Stephen Boyd <sboyd@kernel.org>, Jonathan Cameron <jic23@kernel.org>
 
-On Tue, Jan 30, 2018 at 8:36 PM, Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> wrote:
-> Document the generic nexus node properties. This can be used by
-> any specifier that conforms to #<specifier>-cells where they
-> want to support remapping phandle lists through nexus nodes. This
-> is similar to interrupt remapping, but slightly different because
-> we don't consider unit addresses when doing mappings. This is
-> mostly a copy/paste of the interrupt specification, with the unit
-> address parts removed and generalized to any specifier. There's
-> also the addition of a pass through mechanism to make things more
-> compact if desired in the mapping table.
->
-> Signed-off-by: Stephen Boyd <stephen.boyd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-> ---
->  source/devicetree-basics.rst | 206 +++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 206 insertions(+)
+The current DT binding documentation format of freeform text is painful
+to write, review, validate and maintain.
 
-I've applied this. I'm considering in pending until we do another
-release if anyone cares to chime in on this.
+This is just an example of what a binding in the schema format looks
+like. It's using jsonschema vocabulary in a YAML encoded document. Using
+jsonschema gives us access to existing tooling. A YAML encoding gives us
+something easy to edit.
 
-I'll queue the rest to the kernel for 4.17.
+This example is just the tip of the iceberg, but it the part most
+developers writing bindings will interact with. Backing all this up
+are meta-schema (to validate the binding schemas), some DT core schema,
+YAML encoded DT output with dtc, and a small number of python scripts to
+run validation. The gory details including how to run end-to-end
+validation can be found here:
 
+https://www.spinics.net/lists/devicetree-spec/msg00649.html
+
+Signed-off-by: Rob Herring <robh@kernel.org>
+---
+Cc list,
+You all review and/or write lots of binding documents. I'd like some feedback
+on the format.
+
+Thanks,
 Rob
+
+ .../devicetree/bindings/example-schema.yaml        | 149 +++++++++++++++++++++
+ 1 file changed, 149 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/example-schema.yaml
+
+diff --git a/Documentation/devicetree/bindings/example-schema.yaml b/Documentation/devicetree/bindings/example-schema.yaml
+new file mode 100644
+index 000000000000..fe0a3bd1668e
+--- /dev/null
++++ b/Documentation/devicetree/bindings/example-schema.yaml
+@@ -0,0 +1,149 @@
++# SPDX-License-Identifier: BSD-2-Clause
++# Copyright 2018 Linaro Ltd.
++%YAML 1.2
++---
++# All the top-level keys are standard json-schema keywords except for
++# 'maintainers' and 'select'
++
++# $id is a unique idenifier based on the filename
++$id: "http://devicetree.org/schemas/example-schema.yaml#"
++$schema: "http://devicetree.org/meta-schemas/core.yaml#"
++
++# Only 1 version supported for now
++version: 1
++
++title: An example schema annotated with jsonschema details
++
++maintainers:
++  - Rob Herring <robh@kernel.org>
++
++description: |
++  A more detailed multi-line description of the binding.
++
++  Details about the hardware device and any links to datasheets can go here.
++
++  The end of the description is marked by indentation less than the first line
++  in the description.
++
++select: false
++  # 'select' is a schema applied to a DT node to determine if this binding
++  # schema should be applied to the node. It is optional and by default the
++  # possible compatible strings are extracted and used to match.
++
++properties:
++  # A dictionary of DT properties for this binding schema
++  compatible:
++    # More complicated schema can use oneOf (XOR), anyOf (OR), or allOf (AND)
++    # to handle different conditions.
++    # In this case, it's needed to handle a variable number of values as there
++    # isn't another way to express a constraint of the last string value.
++    # The boolean schema must be a list of schemas.
++    oneOf:
++      - items:
++          # items is a list of possible values for the property. The number of
++          # values is determined by the number of elements in the list.
++          # Order in lists is significant, order in dicts is not
++          # Must be one of the 1st enums followed by the 2nd enum
++          #
++          # Each element in items should be 'enum' or 'const'
++          - enum:
++              - vendor,soc4-ip
++              - vendor,soc3-ip
++              - vendor,soc2-ip
++          - enum:
++              - vendor,soc1-ip
++        # additionalItems being false is implied
++        # minItems/maxItems equal to 2 is implied
++      - items:
++          # 'const' is just a special case of an enum with a single possible value
++          - const: vendor,soc1-ip
++
++  reg:
++    # The description of each element defines the order and implicitly defines
++    # the number of reg entries
++    items:
++      - description: core registers
++      - description: aux registers
++    # minItems/maxItems equal to 2 is implied
++
++  reg-names:
++    # The core schema enforces this is a string array
++    items:
++      - const: core
++      - const: aux
++
++  clocks:
++    # Only a single entry, so just need to set the max number of items.
++    maxItems: 1
++
++  clock-names:
++    items:
++      - const: bus
++
++  interrupts:
++    # Either 1 or 2 interrupts can be present
++    minItems: 1
++    maxItems: 2
++    items:
++      - description: tx or combined interrupt
++      - description: rx interrupt
++
++    description: |
++      A variable number of interrupts warrants a description of what conditions
++      affect the number of interrupts. Otherwise, descriptions on standard
++      properties are not necessary.
++
++  interrupt-names:
++    # minItems must be specified here because the default would be 2
++    minItems: 1
++    items:
++      - const: "tx irq"
++      - const: "rx irq"
++
++  # Property names starting with '#' must be quoted
++  '#interrupt-cells':
++    # A simple case where the value must always be '2'.
++    # The core schema handles that this must be a single integer.
++    const: 2
++
++  interrupt-controller: {}
++    # The core checks this is a boolean, so just have to list it here to be
++    # valid for this binding.
++
++  clock-frequency:
++    # The type is set in the core schema. Per device schema only need to set
++    # constraints on the possible values.
++    minimum: 100
++    maximum: 400000
++    # The value that should be used if the property is not present
++    default: 200
++
++  foo-gpios:
++    maxItems: 1
++    description: A connection of the 'foo' gpio line.
++
++  vendor,int-property:
++    description: Vendor specific properties must have a description
++    type: integer # A type is also required
++    enum: [2, 4, 6, 8, 10]
++
++  vendor,bool-property:
++    description: Vendor specific properties must have a description
++    type: boolean
++
++required:
++  - compatible
++  - reg
++  - interrupts
++  - interrupt-controller
++
++examples:
++  - |
++    /{
++          compatible = "vendor,soc4-ip", "vendor,soc1-ip";
++          reg = <0x1000 0x80>,
++                <0x3000 0x80>;
++          reg-names = "core", "aux";
++          interrupts = <10>;
++          interrupt-controller;
++    };
+--
+2.14.1
