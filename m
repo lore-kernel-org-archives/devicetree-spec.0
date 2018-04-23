@@ -1,53 +1,84 @@
-From: Geert Uytterhoeven <geert@linux-m68k.org>
+From: Grant Likely <grant.likely@arm.com>
 Subject: Re: [RFC PATCH] dt-bindings: add a jsonschema binding example
-Date: Mon, 23 Apr 2018 09:25:05 +0200
-Message-ID: <CAMuHMdVG542FbRgrEnSa6TeiDxXDxB3Fh1ZFd8UGB2c4UxZUcg@mail.gmail.com>
-References: <20180418222905.10414-1-robh@kernel.org> <e7a2f4ca-40c2-05ef-097c-2cecd31fb731@gmail.com>
- <CAL_JsqKVCdk8nFwmtfNt4mMOVYFVxefgafP6JtXThvFhROFB8w@mail.gmail.com>
+Date: Mon, 23 Apr 2018 15:01:20 +0100
+Message-ID: <63a1c096-7d78-3850-83b7-94c6009e93f0@arm.com>
+References: <20180418222905.10414-1-robh@kernel.org>
+ <152424282214.46528.2511757264045171935@swboyd.mtv.corp.google.com>
+ <CAL_Jsq+1G61+E0wtVEkzann3Z=2Cr=2PkbDJ_OuaA5GysWZsXQ@mail.gmail.com>
+ <152426770474.46528.1592920281091105196@swboyd.mtv.corp.google.com>
 Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Return-path: <linux-kernel-owner@vger.kernel.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=N2pwRUl+8TYUe312Lg8uZWjdyZvogGEXHz9rvrRaqVE=;
-        b=h0/C50XrgOKYqBFBShGy+rsIXixSt163VzpYOC8ilwxIp+XtDoQASxmLS69qOUsxi+
-         r0xWq/D62G1J+CeXRKMwvVEnkAovxJKW6WH8Jn+Rd6e5ENE7HQq5Q9H8gvwXScKfgmRL
-         NZ1l0a9e4e6XTRZYI0KLdebJo2iHMqLtYEJ3QtYeHh6A/tCsIWIVGROlIKpBY1sXmiP9
-         I6OTDmE5Z3j0rEu5BvM/b+0SU4BFJehn9OZ19JsWqycmD+mwAqn2bcaG5zl+KG1oMVvz
-         At/n2f4pphhD8tAU+Kue1AJlzSQ6mv1zbcuqfNjtkx4trGpMOt8G+YG/VE3/D2oONtO8
-         pX8Q==
-In-Reply-To: <CAL_JsqKVCdk8nFwmtfNt4mMOVYFVxefgafP6JtXThvFhROFB8w@mail.gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector1-arm-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=EZad/NL9gxUxJWgFxo73KHHWmaYKtH9Nzw6wsDMavRE=;
+ b=n/NcB/si+hfs7er2Ia4hHUMYyMzz7V3DWgb733DqL8U0I8oOf7fZpm1rkDmQ7DDxiMVvGnTzvyXBQoH/hZDFQFQQF/fdx0Ng+EJzh3HDON/yatTHreZTpxLr4wmGNMa2r07Oj33XwbqnGRYAA+uXxA3NyGBqnfwyvaIiq4dNMao=
+In-Reply-To: <152426770474.46528.1592920281091105196@swboyd.mtv.corp.google.com>
+Content-Language: en-GB
 Sender: linux-kernel-owner@vger.kernel.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Rob Herring <robh@kernel.org>
-Cc: Frank Rowand <frowand.list@gmail.com>, "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, devicetree-spec@vger.kernel.org, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Grant Likely <grant.likely@arm.com>, Mark Rutland <mark.rutland@arm.com>, Geert Uytterhoeven <geert+renesas@glider.be>, Linus Walleij <linus.walleij@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Mark Brown <broonie@kernel.org>, Shawn Guo <shawnguo@kernel.org>, Bjorn Andersson <bjorn.andersson@linaro.org>, Arnd Bergmann <arnd@arndb.de>, Stephen Boyd <sboyd@kernel.org>, Jonathan Cameron <jic23@kernel.org>
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+To: Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>
+Cc: devicetree-spec@vger.kernel.org, devicetree@vger.kernel.org, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Frank Rowand <frowand.list@gmail.com>, Mark Rutland <mark.rutland@arm.com>, Geert Uytterhoeven <geert+renesas@glider.be>, Linus Walleij <linus.walleij@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Mark Brown <broonie@kernel.org>, Shawn Guo <shawnguo@kernel.org>, Bjorn Andersson <bjorn.andersson@linaro.org>, Arnd Bergmann <arnd@arndb.de>, Jonathan Cameron <jic23@kernel.org>
 
-Hi Rob,
-
-On Sat, Apr 21, 2018 at 3:28 AM, Rob Herring <robh@kernel.org> wrote:
-> On Fri, Apr 20, 2018 at 4:00 PM, Frank Rowand <frowand.list@gmail.com> wrote:
->> Others have already commented on a desire to have a way to specify that
->> number of interrupts should match number of interrupt-names.
+On 21/04/2018 00:41, Stephen Boyd wrote:
+> Quoting Rob Herring (2018-04-20 11:15:04)
+>> On Fri, Apr 20, 2018 at 11:47 AM, Stephen Boyd <sboyd@kernel.org> wrote:
+>>> Quoting Rob Herring (2018-04-18 15:29:05)
+>>>> diff --git a/Documentation/devicetree/bindings/example-schema.yaml b/D=
+ocumentation/devicetree/bindings/example-schema.yaml
+>>>> new file mode 100644
+>>>> index 000000000000..fe0a3bd1668e
+>>>> --- /dev/null
+>>>> +++ b/Documentation/devicetree/bindings/example-schema.yaml
+[...]
+>>>> +  interrupts:
+>>>> +    # Either 1 or 2 interrupts can be present
+>>>> +    minItems: 1
+>>>> +    maxItems: 2
+>>>> +    items:
+>>>> +      - description: tx or combined interrupt
+>>>> +      - description: rx interrupt
+>>>> +
+>>>> +    description: |
+>>>
+>>> The '|' is needed to make yaml happy?
+>>
+>> Yes, this is simply how you do literal text blocks in yaml.
+>>
+>> We don't really need for this one really, but for the top-level
+>> 'description' we do. The long term intent is 'description' would be
+>> written in sphinx/rst and can be extracted into the DT spec (for
+>> common bindings). Grant has experimented with that some.
 >
-> Yeah, but I don't see a way to do that. You could stick the array size
-> constraints in a common definition and have a $ref to that definition
-> from both, but that doesn't really save you too much.
+> Ok. That sounds cool. Then we could embed links to datasheets and SVGs
+> too.
 
-As Bjorn said, this could be handled in the validation tool, for the myriad of
-standard list properties that have an accompanying names property.
+I'd like it if we can define the description text blocks to be
+reStructeredText markup. That makes it even easier to integrate with the
+specification documentation.
 
-That avoids having to specify the relation in each and every binding document.
+[...]
+>>>> +  # Property names starting with '#' must be quoted
+>>>> +  '#interrupt-cells':
+>>>> +    # A simple case where the value must always be '2'.
+>>>> +    # The core schema handles that this must be a single integer.
+>>>> +    const: 2
+>>>> +
+>>>> +  interrupt-controller: {}
+>>>
+>>> Does '{}' mean nothing to see here?
+>>
+>> Yes. It's just an empty schema that's always valid.
 
-Gr{oetje,eeting}s,
+IIRC, in the current jsonschema draft-6 spec, the following also has the
+same behaviour, which I like slightly better:
+     interrupt-controller: true
 
-                        Geert
-
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+g.
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
