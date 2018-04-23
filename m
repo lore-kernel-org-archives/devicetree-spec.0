@@ -1,91 +1,150 @@
-From: Geert Uytterhoeven <geert@linux-m68k.org>
+From: Rob Herring <robh@kernel.org>
 Subject: Re: [RFC PATCH] dt-bindings: add a jsonschema binding example
-Date: Mon, 23 Apr 2018 18:49:59 +0200
-Message-ID: <CAMuHMdU8q0VUxw-EXDqjjYbjeCwCkKuDJUjO0vSaCVrYLXqX4A@mail.gmail.com>
-References: <20180418222905.10414-1-robh@kernel.org> <e7a2f4ca-40c2-05ef-097c-2cecd31fb731@gmail.com>
- <CAL_JsqKVCdk8nFwmtfNt4mMOVYFVxefgafP6JtXThvFhROFB8w@mail.gmail.com> <d2ed3578-ca09-15a6-e688-ffb9a097c2aa@arm.com>
+Date: Mon, 23 Apr 2018 11:51:52 -0500
+Message-ID: <CAL_JsqJRGBmjEoaaiPTuqqN=H3oF+VJXz=pbmkQSTZJisPB40w@mail.gmail.com>
+References: <20180418222905.10414-1-robh@kernel.org> <20180420214722.GA18510@minitux>
 Mime-Version: 1.0
 Return-path: <linux-kernel-owner@vger.kernel.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:sender:in-reply-to:references:from:date:message-id
-         :subject:to:cc;
-        bh=NhA6ZOGhT7JCXlaIi1e41SORkkocpsVIfMcmBZ3TFQE=;
-        b=SmH/Qh+YLRKYDpsbD4fdmAhNfHcSHh+Wp+8I9c8t4pdY6UXI/dffnRMkJkBsa1xiYs
-         vMxBOFX2e/+6dJKng2R40VxD8dwnCOJa1jP9WfCN7EP/mkGrAvfntvyVn5U3PBNKV/0R
-         gsis7Q6e7EwMdEa0kK56MKHb/C1/lo02aSc9O1YsK1wOubCk7kBn+dnEbeDzFlOp4ozM
-         i31uKSpeENXnEdkWXX8i7fxiQ/aRhNc1Ey+05+F8q1S1gh0KI/WKmW7j6d5kc6ULC1S0
-         CkFq0oi5Bm5+NlIw0C+kiBMkZsAf+ny8sZMCkfBLIRlbFc+IoMXIBbLk/Wrv3VtXiBXY
-         keog==
-In-Reply-To: <d2ed3578-ca09-15a6-e688-ffb9a097c2aa@arm.com>
+In-Reply-To: <20180420214722.GA18510@minitux>
 Sender: linux-kernel-owner@vger.kernel.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Grant Likely <grant.likely@arm.com>
-Cc: Rob Herring <robh@kernel.org>, Frank Rowand <frowand.list@gmail.com>, "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, devicetree-spec@vger.kernel.org, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Mark Rutland <mark.rutland@arm.com>, Geert Uytterhoeven <geert+renesas@glider.be>, Linus Walleij <linus.walleij@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Mark Brown <broonie@kernel.org>, Shawn Guo <shawnguo@kernel.org>, Bjorn Andersson <bjorn.andersson@linaro.org>, Arnd Bergmann <arnd@arndb.de>, Stephen Boyd <sboyd@kernel.org>, Jonathan Cameron <jic23@kernel.org>
+To: Bjorn Andersson <bjorn.andersson@linaro.org>
+Cc: devicetree@vger.kernel.org, devicetree-spec@vger.kernel.org, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Grant Likely <grant.likely@arm.com>, Frank Rowand <frowand.list@gmail.com>, Mark Rutland <mark.rutland@arm.com>, Geert Uytterhoeven <geert+renesas@glider.be>, Linus Walleij <linus.walleij@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Mark Brown <broonie@kernel.org>, Shawn Guo <shawnguo@kernel.org>, Arnd Bergmann <arnd@arndb.de>, Stephen Boyd <sboyd@kernel.org>, Jonathan Cameron <jic23@kernel.org>
 
-Hi Grant,
-
-On Mon, Apr 23, 2018 at 4:47 PM, Grant Likely <grant.likely@arm.com> wrote:
-> On 21/04/2018 02:28, Rob Herring wrote:
->> On Fri, Apr 20, 2018 at 4:00 PM, Frank Rowand <frowand.list@gmail.com>
->> wrote:
->>>> +  interrupts:
->>>> +    # Either 1 or 2 interrupts can be present
->>>> +    minItems: 1
->>>> +    maxItems: 2
->>>> +    items:
->>>> +      - description: tx or combined interrupt
->>>> +      - description: rx interrupt
->>>> +
->>>> +    description: |
->>>> +      A variable number of interrupts warrants a description of what
->>>> conditions
->>>> +      affect the number of interrupts. Otherwise, descriptions on
->>>> standard
->>>> +      properties are not necessary.
->>>> +
->>>> +  interrupt-names:
->>>> +    # minItems must be specified here because the default would be 2
->>>> +    minItems: 1
->>>
->>> Why the difference between the interrupts property and the
->>> interrupt-names
->>> property (specifying maxItems for interrupt, but not interrupt-names)?
+On Fri, Apr 20, 2018 at 4:47 PM, Bjorn Andersson
+<bjorn.andersson@linaro.org> wrote:
+> On Wed 18 Apr 15:29 PDT 2018, Rob Herring wrote:
+>
+>> The current DT binding documentation format of freeform text is painful
+>> to write, review, validate and maintain.
 >>
->> I should probably have maxItems here too.
+>> This is just an example of what a binding in the schema format looks
+>> like. It's using jsonschema vocabulary in a YAML encoded document. Using
+>> jsonschema gives us access to existing tooling. A YAML encoding gives us
+>> something easy to edit.
 >>
->>> Others have already commented on a desire to have a way to specify that
->>> number of interrupts should match number of interrupt-names.
+>> This example is just the tip of the iceberg, but it the part most
+>> developers writing bindings will interact with. Backing all this up
+>> are meta-schema (to validate the binding schemas), some DT core schema,
+>> YAML encoded DT output with dtc, and a small number of python scripts to
+>> run validation. The gory details including how to run end-to-end
+>> validation can be found here:
 >>
->> Yeah, but I don't see a way to do that. You could stick the array size
->> constraints in a common definition and have a $ref to that definition
->> from both, but that doesn't really save you too much.
+>> https://www.spinics.net/lists/devicetree-spec/msg00649.html
+>>
+>> Signed-off-by: Rob Herring <robh@kernel.org>
+>> ---
+>> Cc list,
+>> You all review and/or write lots of binding documents. I'd like some feedback
+>> on the format.
+>>
 >
+> I really like the idea of formalizing the binding document format and
+> the ability of validating a dtb is really nice.
 >
-> There has been discussions in the jsonschema community regarding
-> referencing data in the document when applying the schema.
+>> Thanks,
+>> Rob
+>>
+>>  .../devicetree/bindings/example-schema.yaml        | 149 +++++++++++++++++++++
+>>  1 file changed, 149 insertions(+)
+>>  create mode 100644 Documentation/devicetree/bindings/example-schema.yaml
+>>
+>> diff --git a/Documentation/devicetree/bindings/example-schema.yaml b/Documentation/devicetree/bindings/example-schema.yaml
+> [..]
+>> +  reg:
+>> +    # The description of each element defines the order and implicitly defines
+>> +    # the number of reg entries
+>> +    items:
+>> +      - description: core registers
+>> +      - description: aux registers
+>> +    # minItems/maxItems equal to 2 is implied
 >
-> https://github.com/json-schema-org/json-schema-spec/issues/549
+> I assume that a reg with variable number of entries would have
+> "description" for all of them and then a minItems that matches the
+> required ones and maxItems matching all of them?
+
+You could do that, but it doesn't really enforce which compatible(s)
+each size of reg is valid for. It would work okay when just the last N
+entries are variable, but it will break down if you have cases where
+essentially any subset is valid. For bindings with lots of conditional
+sizes for reg, clocks, resets, etc. based on compatible strings, I
+think we will need to split the binding into a schema per compatible.
+
+IMO, things like this are probably not going to be addressed at the
+start and may remain in the description (as we have today). I think we
+need to start with a base schema and can improve them over time.
+
+>> +
+>> +  reg-names:
+>> +    # The core schema enforces this is a string array
+>> +    items:
+>> +      - const: core
+>> +      - const: aux
 >
-> However, those discussions are ongoing and have been pushed back to
-> after draft-8 (the current release is draft-7). We can instead define
-> DT-specific keywords and extend the validator to make it do what we
-> want. We need to do something very similar to validate that the length
-> of tuples in 'reg', 'interrupts', and '*gpios' match the '#*-cells' values.
+> I presume validation based on this should check that there's equal
+> number of entries in reg-names as there where in reg. Should this
+> relationship be described in the schema?
 
-Checking that property lengths match the corresponding #*-cells cannot
-be done for a schema, but only for the final DTS, as #*-cells is a property
-of the target node, right?
+Yes, if we can figure out how. But I don't think it belongs in per
+device schema as it is a core requirement.
 
-Gr{oetje,eeting}s,
+>
+> [..]
+>> +  interrupts:
+>> +    # Either 1 or 2 interrupts can be present
+>> +    minItems: 1
+>> +    maxItems: 2
+>> +    items:
+>> +      - description: tx or combined interrupt
+>> +      - description: rx interrupt
+>> +
+>> +    description: |
+>> +      A variable number of interrupts warrants a description of what conditions
+>> +      affect the number of interrupts. Otherwise, descriptions on standard
+>> +      properties are not necessary.
+>
+> For validation purposes this could be interrupts with interrupt-parents
+> or a interrupts-extend, a fact that we probably don't want to duplicate
+> in every definition?
+>
+> Perhaps we should just do like you did here and define the "interrupts"
+> and then in the validation tool - where we need to encode the logic
+> behind this anyways - we support the different variants.
 
-                        Geert
+Yes, essentially as we do now where the binding just describes
+'interrupts' and 'interrupts-extended' is implicitly supported.
 
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+>> +
+>> +  interrupt-names:
+>> +    # minItems must be specified here because the default would be 2
+>> +    minItems: 1
+>
+> As with reg-names, it would be good to have the validator warn if this
+> is not the same number of items as entries in "interrupts".
+>
+>> +    items:
+>> +      - const: "tx irq"
+>> +      - const: "rx irq"
+>> +
+>> +  # Property names starting with '#' must be quoted
+>> +  '#interrupt-cells':
+>> +    # A simple case where the value must always be '2'.
+>> +    # The core schema handles that this must be a single integer.
+>> +    const: 2
+>
+> If this is specified then interrupt-controller should also be given, or
+> vise versa. How would we describe that?
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+The core meta-schema can check that with 'dependencies'. Here's gpio
+meta-schema for example:
+
+dependencies:
+  gpio-controller: ['#gpio-cells']
+  '#gpio-cells': [gpio-controller]
+  gpio-ranges: [gpio-controller]
+  ngpios: [gpio-controller]
+
+
+Rob
