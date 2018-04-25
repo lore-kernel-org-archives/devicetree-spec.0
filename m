@@ -1,98 +1,106 @@
-From: Frank Rowand <frowand.list@gmail.com>
+From: Grant Likely <grant.likely@arm.com>
 Subject: Re: [RFC PATCH] dt-bindings: add a jsonschema binding example
-Date: Tue, 24 Apr 2018 17:33:11 -0700
-Message-ID: <e7b7a2ce-9c5e-693b-34fc-db7a20e7b01b@gmail.com>
+Date: Wed, 25 Apr 2018 11:15:43 +0100
+Message-ID: <3a4299cf-b737-8e74-2e9e-994f5943d006@arm.com>
 References: <20180418222905.10414-1-robh@kernel.org>
  <e7a2f4ca-40c2-05ef-097c-2cecd31fb731@gmail.com>
  <CAL_JsqKVCdk8nFwmtfNt4mMOVYFVxefgafP6JtXThvFhROFB8w@mail.gmail.com>
+ <d2ed3578-ca09-15a6-e688-ffb9a097c2aa@arm.com>
+ <CAMuHMdU8q0VUxw-EXDqjjYbjeCwCkKuDJUjO0vSaCVrYLXqX4A@mail.gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 Return-path: <linux-kernel-owner@vger.kernel.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=jc8nWTFvXljjf/cEhq+4IHHPG/Y6O736MNAQuDGEBnQ=;
-        b=YK1nGv9WfhvN2VyoVkz6RykkW1cQNkjTwHAmRnmKwEPR/CA/aIBRMByFh+YVrWG3fF
-         Q0WMxSwyYQxwBVrMokvQEoxIZeMb86phxEyghwZdfPxk+c4Da+/rLm22NEebCVWzUdHa
-         uNj5y+IE4agC8GJ1dp6nrbuUWWKooZi2JfsgfbOLYz4dHZniszWsNl1OnTf4q+S6Zqot
-         7elP/WJkVt/oo7TUQb2URz4aMan2if8XbLn3AGH08G6prdK9HFSZFjlQqyjjnHxMbwEA
-         CCgg6I3/BRQDYipNg2kT0+ZiWnB0ZAcYZrU+4yngPf25WrpTV9s+CjDcUYsRZT7hD+3B
-         Ah6g==
-In-Reply-To: <CAL_JsqKVCdk8nFwmtfNt4mMOVYFVxefgafP6JtXThvFhROFB8w@mail.gmail.com>
-Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector1-arm-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=l1Y821XZKCKza52VDhSC5EMeC/aIg5j8OfNGmglLYeQ=;
+ b=VxvyeQnH902bjqw5gn9p1X5UGlzRpHwoZJM+LMU6n/v9SMioAIHNjzK1VLhpjDTmjvlN/1j9gA2fZe6m73drt0OTYG6d6y8YqZu9dDHoYcSc4ddUFO63xZx7aikC9k0GpENXBc4tKGQMIIe6iaA6YekivpoGDJ2TNdJwWD7vPZw=
+In-Reply-To: <CAMuHMdU8q0VUxw-EXDqjjYbjeCwCkKuDJUjO0vSaCVrYLXqX4A@mail.gmail.com>
+Content-Language: en-GB
 Sender: linux-kernel-owner@vger.kernel.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-To: Rob Herring <robh@kernel.org>
-Cc: devicetree@vger.kernel.org, devicetree-spec@vger.kernel.org, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Grant Likely <grant.likely@arm.com>, Mark Rutland <mark.rutland@arm.com>, Geert Uytterhoeven <geert+renesas@glider.be>, Linus Walleij <linus.walleij@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Mark Brown <broonie@kernel.org>, Shawn Guo <shawnguo@kernel.org>, Bjorn Andersson <bjorn.andersson@linaro.org>, Arnd Bergmann <arnd@arndb.de>, Stephen Boyd <sboyd@kernel.org>, Jonathan Cameron <jic23@kernel.org>
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+To: Geert Uytterhoeven <geert@linux-m68k.org>
+Cc: Rob Herring <robh@kernel.org>, Frank Rowand <frowand.list@gmail.com>, "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, devicetree-spec@vger.kernel.org, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Mark Rutland <mark.rutland@arm.com>, Geert Uytterhoeven <geert+renesas@glider.be>, Linus Walleij <linus.walleij@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Mark Brown <broonie@kernel.org>, Shawn Guo <shawnguo@kernel.org>, Bjorn Andersson <bjorn.andersson@linaro.org>, Arnd Bergmann <arnd@arndb.de>, Stephen Boyd <sboyd@kernel.org>, Jonathan Cameron <jic23@kernel.org>
 
-On 04/20/18 18:28, Rob Herring wrote:
-> On Fri, Apr 20, 2018 at 4:00 PM, Frank Rowand <frowand.list@gmail.com> wrote:
->> Hi Rob,
+On 23/04/2018 17:49, Geert Uytterhoeven wrote:
+> Hi Grant,
+>
+> On Mon, Apr 23, 2018 at 4:47 PM, Grant Likely <grant.likely@arm.com> wrot=
+e:
+>> On 21/04/2018 02:28, Rob Herring wrote:
+>>> On Fri, Apr 20, 2018 at 4:00 PM, Frank Rowand <frowand.list@gmail.com>
+>>> wrote:
+>>>>> +  interrupts:
+>>>>> +    # Either 1 or 2 interrupts can be present
+>>>>> +    minItems: 1
+>>>>> +    maxItems: 2
+>>>>> +    items:
+>>>>> +      - description: tx or combined interrupt
+>>>>> +      - description: rx interrupt
+>>>>> +
+>>>>> +    description: |
+>>>>> +      A variable number of interrupts warrants a description of what
+>>>>> conditions
+>>>>> +      affect the number of interrupts. Otherwise, descriptions on
+>>>>> standard
+>>>>> +      properties are not necessary.
+>>>>> +
+>>>>> +  interrupt-names:
+>>>>> +    # minItems must be specified here because the default would be 2
+>>>>> +    minItems: 1
+>>>>
+>>>> Why the difference between the interrupts property and the
+>>>> interrupt-names
+>>>> property (specifying maxItems for interrupt, but not interrupt-names)?
+>>>
+>>> I should probably have maxItems here too.
+>>>
+>>>> Others have already commented on a desire to have a way to specify tha=
+t
+>>>> number of interrupts should match number of interrupt-names.
+>>>
+>>> Yeah, but I don't see a way to do that. You could stick the array size
+>>> constraints in a common definition and have a $ref to that definition
+>>> from both, but that doesn't really save you too much.
 >>
->> Thanks for the example.  It was a good starting tutorial of sorts for me
->> to understand the format a bit.
 >>
+>> There has been discussions in the jsonschema community regarding
+>> referencing data in the document when applying the schema.
 >>
->> On 04/18/18 15:29, Rob Herring wrote:
->>> The current DT binding documentation format of freeform text is painful
->>> to write, review, validate and maintain.
->>>
->>> This is just an example of what a binding in the schema format looks
->>> like. It's using jsonschema vocabulary in a YAML encoded document. Using
->>> jsonschema gives us access to existing tooling. A YAML encoding gives us
->>> something easy to edit.
->>>
->>> This example is just the tip of the iceberg, but it the part most
->>> developers writing bindings will interact with. Backing all this up
->>> are meta-schema (to validate the binding schemas), some DT core schema,
->>> YAML encoded DT output with dtc, and a small number of python scripts to
->>> run validation. The gory details including how to run end-to-end
->>> validation can be found here:
->>>
->>> https://www.spinics.net/lists/devicetree-spec/msg00649.html
->>>
->>> Signed-off-by: Rob Herring <robh@kernel.org>
->>> ---
->>> Cc list,
->>> You all review and/or write lots of binding documents. I'd like some feedback
->>> on the format.
->>>
->>> Thanks,
->>> Rob
->>>
->>>  .../devicetree/bindings/example-schema.yaml        | 149 +++++++++++++++++++++
->>>  1 file changed, 149 insertions(+)
->>>  create mode 100644 Documentation/devicetree/bindings/example-schema.yaml
->>>
->>> diff --git a/Documentation/devicetree/bindings/example-schema.yaml b/Documentation/devicetree/bindings/example-schema.yaml
->>> new file mode 100644
->>> index 000000000000..fe0a3bd1668e
->>> --- /dev/null
->>> +++ b/Documentation/devicetree/bindings/example-schema.yaml
+>> https://github.com/json-schema-org/json-schema-spec/issues/549
 >>
->> I'm guessing by the path name that this is in the Linux kernel source tree.
-> 
-> Yes, well, my kernel tree. Most of the work still lives here:
-> 
-> https://github.com/robherring/yaml-bindings/
-> 
->>> @@ -0,0 +1,149 @@
->>> +# SPDX-License-Identifier: BSD-2-Clause
->>
->> If in the Linux kernel source tree, then allow gpl-v2 as a possible license.
-> 
-> Why? BSD is compatible. The license of the above repo is all BSD.
+>> However, those discussions are ongoing and have been pushed back to
+>> after draft-8 (the current release is draft-7). We can instead define
+>> DT-specific keywords and extend the validator to make it do what we
+>> want. We need to do something very similar to validate that the length
+>> of tuples in 'reg', 'interrupts', and '*gpios' match the '#*-cells' valu=
+es.
+>
+> Checking that property lengths match the corresponding #*-cells cannot
+> be done for a schema, but only for the final DTS, as #*-cells is a proper=
+ty
+> of the target node, right?
 
-I said __if__ in the Linux kernel source tree.  As my other comments
-indicated, I wasn't sure if this was intended to end up in the Linux
-kernel source tree.  __If__ in the Linux kernel source tree then it
-would be dual licensed, correct?  And thus the tag would reflect that?
+It can be done in the schema checking of the target node. For example,
+given a GPIO specifier of:
 
+gpios =3D <&gpio1 0> <&gpio2 4 1> <&gpio2 3 0>;
 
-> Of course there's all the existing docs which default to GPLv2 and
-> we'll probably have to maintain that.
-> 
+The validation engine could validate that the &gpio1 and &gpio2 targets
+have the same length as the associated gpio descriptor tuples. (ex.
+gpio1 needs #gpio-cells=3D<1>; and gpio2 needs #gpio-cells=3D<2>; If the
+tuples are the wrong size, then validation should fail.
 
-< snip >
+g.
+>
+> Gr{oetje,eeting}s,
+>
+>                          Geert
+>
+
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
