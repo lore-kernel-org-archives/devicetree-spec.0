@@ -1,106 +1,106 @@
-From: Grant Likely <grant.likely@arm.com>
-Subject: Re: [RFC PATCH] dt-bindings: add a jsonschema binding example
-Date: Wed, 25 Apr 2018 11:15:43 +0100
-Message-ID: <3a4299cf-b737-8e74-2e9e-994f5943d006@arm.com>
-References: <20180418222905.10414-1-robh@kernel.org>
- <e7a2f4ca-40c2-05ef-097c-2cecd31fb731@gmail.com>
- <CAL_JsqKVCdk8nFwmtfNt4mMOVYFVxefgafP6JtXThvFhROFB8w@mail.gmail.com>
- <d2ed3578-ca09-15a6-e688-ffb9a097c2aa@arm.com>
- <CAMuHMdU8q0VUxw-EXDqjjYbjeCwCkKuDJUjO0vSaCVrYLXqX4A@mail.gmail.com>
+From: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+Subject: EBBR v0.6 Release Announcement
+Date: Fri, 13 Jul 2018 23:34:26 +0100
+Message-ID: <be2fb34d-1813-a7e1-6ef0-4cfa7b135c39@arm.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Return-path: <linux-kernel-owner@vger.kernel.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector1-arm-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=l1Y821XZKCKza52VDhSC5EMeC/aIg5j8OfNGmglLYeQ=;
- b=VxvyeQnH902bjqw5gn9p1X5UGlzRpHwoZJM+LMU6n/v9SMioAIHNjzK1VLhpjDTmjvlN/1j9gA2fZe6m73drt0OTYG6d6y8YqZu9dDHoYcSc4ddUFO63xZx7aikC9k0GpENXBc4tKGQMIIe6iaA6YekivpoGDJ2TNdJwWD7vPZw=
-In-Reply-To: <CAMuHMdU8q0VUxw-EXDqjjYbjeCwCkKuDJUjO0vSaCVrYLXqX4A@mail.gmail.com>
+Content-Transfer-Encoding: base64
+Return-path: <boot-architecture-bounces-cunTk1MwBs8s++Sfvej+rw@public.gmane.org>
 Content-Language: en-GB
-Sender: linux-kernel-owner@vger.kernel.org
-List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-To: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: Rob Herring <robh@kernel.org>, Frank Rowand <frowand.list@gmail.com>, "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, devicetree-spec@vger.kernel.org, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Mark Rutland <mark.rutland@arm.com>, Geert Uytterhoeven <geert+renesas@glider.be>, Linus Walleij <linus.walleij@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Mark Brown <broonie@kernel.org>, Shawn Guo <shawnguo@kernel.org>, Bjorn Andersson <bjorn.andersson@linaro.org>, Arnd Bergmann <arnd@arndb.de>, Stephen Boyd <sboyd@kernel.org>, Jonathan Cameron <jic23@kernel.org>
+List-Id: <devicetree-spec.vger.kernel.org>
+List-Unsubscribe: <https://lists.linaro.org/mailman/options/boot-architecture>, 
+ <mailto:boot-architecture-request-cunTk1MwBs8s++Sfvej+rw@public.gmane.org?subject=unsubscribe>
+List-Archive: <http://lists.linaro.org/pipermail/boot-architecture/>
+List-Post: <mailto:boot-architecture-cunTk1MwBs8s++Sfvej+rw@public.gmane.org>
+List-Help: <mailto:boot-architecture-request-cunTk1MwBs8s++Sfvej+rw@public.gmane.org?subject=help>
+List-Subscribe: <https://lists.linaro.org/mailman/listinfo/boot-architecture>, 
+ <mailto:boot-architecture-request-cunTk1MwBs8s++Sfvej+rw@public.gmane.org?subject=subscribe>
+Errors-To: boot-architecture-bounces-cunTk1MwBs8s++Sfvej+rw@public.gmane.org
+Sender: "boot-architecture" <boot-architecture-bounces-cunTk1MwBs8s++Sfvej+rw@public.gmane.org>
+Content-Type: text/plain; charset="iso-8859-1"; format="flowed"
+To: "arm.ebbr-discuss" <arm.ebbr-discuss-5wv7dgnIgG8@public.gmane.org>, "boot-architecture-cunTk1MwBs8s++Sfvej+rw@public.gmane.org" <boot-architecture-cunTk1MwBs8s++Sfvej+rw@public.gmane.org>, Linux ARM <linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org>, uboot <u-boot-users-5NWGOfrQmneRv+LV9MX5uipxlwaOVQ5f@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-On 23/04/2018 17:49, Geert Uytterhoeven wrote:
-> Hi Grant,
->
-> On Mon, Apr 23, 2018 at 4:47 PM, Grant Likely <grant.likely@arm.com> wrot=
-e:
->> On 21/04/2018 02:28, Rob Herring wrote:
->>> On Fri, Apr 20, 2018 at 4:00 PM, Frank Rowand <frowand.list@gmail.com>
->>> wrote:
->>>>> +  interrupts:
->>>>> +    # Either 1 or 2 interrupts can be present
->>>>> +    minItems: 1
->>>>> +    maxItems: 2
->>>>> +    items:
->>>>> +      - description: tx or combined interrupt
->>>>> +      - description: rx interrupt
->>>>> +
->>>>> +    description: |
->>>>> +      A variable number of interrupts warrants a description of what
->>>>> conditions
->>>>> +      affect the number of interrupts. Otherwise, descriptions on
->>>>> standard
->>>>> +      properties are not necessary.
->>>>> +
->>>>> +  interrupt-names:
->>>>> +    # minItems must be specified here because the default would be 2
->>>>> +    minItems: 1
->>>>
->>>> Why the difference between the interrupts property and the
->>>> interrupt-names
->>>> property (specifying maxItems for interrupt, but not interrupt-names)?
->>>
->>> I should probably have maxItems here too.
->>>
->>>> Others have already commented on a desire to have a way to specify tha=
-t
->>>> number of interrupts should match number of interrupt-names.
->>>
->>> Yeah, but I don't see a way to do that. You could stick the array size
->>> constraints in a common definition and have a $ref to that definition
->>> from both, but that doesn't really save you too much.
->>
->>
->> There has been discussions in the jsonschema community regarding
->> referencing data in the document when applying the schema.
->>
->> https://github.com/json-schema-org/json-schema-spec/issues/549
->>
->> However, those discussions are ongoing and have been pushed back to
->> after draft-8 (the current release is draft-7). We can instead define
->> DT-specific keywords and extend the validator to make it do what we
->> want. We need to do something very similar to validate that the length
->> of tuples in 'reg', 'interrupts', and '*gpios' match the '#*-cells' valu=
-es.
->
-> Checking that property lengths match the corresponding #*-cells cannot
-> be done for a schema, but only for the final DTS, as #*-cells is a proper=
-ty
-> of the target node, right?
-
-It can be done in the schema checking of the target node. For example,
-given a GPIO specifier of:
-
-gpios =3D <&gpio1 0> <&gpio2 4 1> <&gpio2 3 0>;
-
-The validation engine could validate that the &gpio1 and &gpio2 targets
-have the same length as the associated gpio descriptor tuples. (ex.
-gpio1 needs #gpio-cells=3D<1>; and gpio2 needs #gpio-cells=3D<2>; If the
-tuples are the wrong size, then validation should fail.
-
-g.
->
-> Gr{oetje,eeting}s,
->
->                          Geert
->
-
-IMPORTANT NOTICE: The contents of this email and any attachments are confid=
-ential and may also be privileged. If you are not the intended recipient, p=
-lease notify the sender immediately and do not disclose the contents to any=
- other person, use it for any purpose, or store or copy the information in =
-any medium. Thank you.
+SSdtIHBsZWFzZWQgdG8gYW5ub3VuY2UgdGhlIHJlbGVhc2Ugb2YgdmVyc2lvbiAwLjYgb2YgdGhl
+IEVtYmVkZGVkIEJhc2UKQm9vdCBSZXF1aXJlbWVudHMgKEVCQlIpIHNwZWNpZmljYXRpb24uCgog
+ICAgIGh0dHBzOi8vZ2l0aHViLmNvbS9BUk0tc29mdHdhcmUvZWJici9yZWxlYXNlcy90YWcvdjAu
+NgoKRUJCUiBpcyBhIG5ldyBzcGVjaWZpY2F0aW9uIGRlZmluaW5nIGEgc3RhbmRhcmQgYm9vdCBl
+bnZpcm9ubWVudApzdWl0YWJsZSBmb3IgZnVsbCBmZWF0dXJlIG9wZXJhdGluZyBzeXN0ZW1zIHJ1
+bm5pbmcgb24gZW1iZWRkZWQgcGxhdGZvcm1zLi4uCgpXZWxsLCBpdCB3aWxsIHdoZW4gaXQncyBm
+aW5pc2hlZC4KCkl0IGlzIHdlbGwga25vdyB0aGF0IGZpcm13YXJlIGZvciBlbWJlZGRlZCBzeXN0
+ZW1zIGlzIGEgZnJhZ21lbnRlZCBhcmVhCndpdGggZWFjaCBwbGF0Zm9ybSBiZWhhdmluZyBpbiBz
+dWJ0bHkgaW5jb21wYXRpYmxlIHdheXMuIEl0IGlzIGFsc28KY29tcGxldGVseSBkaWZmZXJlbnQg
+ZnJvbSB0aGUgZmlybXdhcmUgaW50ZXJmYWNlIHVzZWQgb24gZ2VuZXJhbCBwdXJwb3NlCmRlc2t0
+b3BzIGFuZCBzZXJ2ZXJzLiBGb3IgT1NlcywgdGhpcyBtYWtlcyBzdXBwb3J0aW5nIG1vcmUgdGhh
+biBhCmhhbmRmdWwgb2YgcGxhdGZvcm1zIGEgbmVhcmx5IGltcG9zc2libGUgYWZmYWlyLiBFQkJS
+IGFpbXMgdG8gc29sdmUgdGhpcwpwcm9ibGVtIGJ5IGRlZmluaW5nIGEgc3RhbmRhcmQgYm9vdCBp
+bnRlcmZhY2UgdGhhdCBjYW4gZWFzaWx5IGJlCmltcGxlbWVudGVkIHVzaW5nIGVpdGhlciBVLUJv
+b3Qgb3IgVGlhbm9jb3JlLCBhbmQgaXMgYmFzZWQgb24gdGhlIHNhbWUKVUVGSSBzcGVjaWZpY2F0
+aW9uIHVzZWQgb24gZ2VuZXJhbCBwdXJwb3NlIGNvbXB1dGVycy4KCkJ5IGFkb3B0aW5nIEVCQlIs
+IHBsYXRmb3JtIHZlbmRvcnMgY2FuIHJlZHVjZSB0aGUgYW1vdW50IG9mIGVuZ2luZWVyaW5nCmVm
+Zm9ydCByZXF1aXJlZCB0byBzdXBwb3J0IHRoZWlyIHByb2R1Y3RzIGFuZCBtYWtlIHRoZW0gZWFz
+aWVyIHRvIHVzZS4KQXMgRUJCUiBpcyBiZWluZyBkZXZlbG9wZWQgaW4gY29uanVuY3Rpb24gd2l0
+aCB0aGUgVS1Cb290LCBUaWFub2NvcmUsCmFuZCBUcnVzdGVkIEZpcm13YXJlIHByb2plY3RzLCBt
+b3N0IG9mIHRoZSBmdW5jdGlvbmFsaXR5IHJlcXVpcmVkIGlzCmFscmVhZHkgaW1wbGVtZW50ZWQg
+YW5kIHJlYWR5IHRvIGJlIHVzZWQgaWYgb25lIHVzZXMgYW4gdXAgdG8gZGF0ZQpyZWxlYXNlIG9m
+IFUtQm9vdCBvciBUaWFub2NvcmUuCgpGb3IgT1MgdmVuZG9ycywgdGhpcyBtYWtlcyBmYXIgZWFz
+aWVyIHRvIHN1cHBvcnQgZW1iZWRkZWQgcGxhdGZvcm1zCmJlY2F1c2UgdGhleSBkb24ndCBuZWVk
+IHRvIHRhaWxvciB0aGUgYm9vdCBwcm9jZXNzIGZvciBlYWNoIHBsYXRmb3JtLgpUaGUgc2FtZSBi
+b290IGluZnJhc3RydWN0dXJlIHdvcmtzIG9uIGJvdGggZGVza3RvcC9zZXJ2ZXJzIGFuZCBvbiBF
+QkJSCmNvbXBsaWFudCBlbWJlZGRlZCBwbGF0Zm9ybXMuCgpBbmQgZmluYWxseSwgZm9yIGVuZCB1
+c2Vycywgd29ya2luZyB3aXRoIGFuIEVCQlIgY29tcGxpYW50IHBsYXRmb3JtCm1lYW5zIHRoZXkg
+Y2FuIGJvb3QgdGhlIE9TIG9mIHRoZWlyIGNob2ljZSB3aXRob3V0IG5lZWRpbmcgdG8gbGVhcm4g
+bG93CmxldmVsIGRldGFpbHMgb2YgdGhlIHBsYXRmb3JtIGZpcm13YXJlLgoKVGhpcyB2MC42IHJl
+bGVhc2Ugb2YgRUJCUiBpcyBhIHByZS1yZWxlYXNlIGRvY3VtZW50LiBUaGUgY29udGVudHMgYXJl
+Cm5vdCBmaW5hbC4gVGhlIHB1cnBvc2Ugb2YgdGhpcyByZWxlYXNlIGlzIHRvIHJhaXNlIGF3YXJl
+bmVzcyBvZiB0aGUgRUJCUgpwcm9qZWN0LCBhbmQgdG8gc29saWNpdCBmZWVkYmFjayBvbiB0aGUg
+Y3VycmVudCBkcmFmdC4gUGxlYXNlIGRvIHJlYWQKYW5kIHByb3ZpZGUgY29tbWVudHMgb24gdGhl
+IGJvb3QtYXJjaGl0ZWN0dXJlQGxpc3RzLmxpbmFyby5vcmcgbWFpbGluZyBsaXN0LgoKVGhlIHBs
+YW4gaXMgdG8gcmVsZWFzZSB2MS4wIGJlZm9yZSB0aGUgZW5kIG9mIHRoZSAyMDE4LgoKVGhhbmtz
+IHRvIHRoZSBFQkJSIGNvbW1pdHRlZSBtZW1iZXJzIHdobyBjb250cmlidXRlZCB0byB0aGlzIHJl
+bGVhc2U6CgogICBBbmRyZWFzIEbDpHJiZXIgKFNVU0UpCiAgIEFsZXggR3JhZiAoU1VTRSkKICAg
+UnlhbiBIYXJraW4gKExpbmFybykKICAgUm9iIEhlcnJpbmcgKExpbmFybykKICAgVWRpdCBLdW1h
+ciAoTlhQKQogICBMZWlmIExpbmRob2xtIChMaW5hcm8pCiAgIEJpbGwgTWlsbHMgKFRJKQogICBQ
+ZXRlciBSb2JpbnNvbiAoUmVkIEhhdCkKICAgVG9tIFJpbmkgKEtvbnN1bGtvKQogICBEYW5pZWwg
+VGhvbXBzb24gKExpbmFybykKICAgRG9uZyBXZWkgKEFybSkKClNpbmNlcmVseSwKR3JhbnQgTGlr
+ZWx5LCBFQkJSIGNvbW1pdHRlZSBjby1jaGFpcgoKCk5vdGUgb24gVS1Cb290IGltcGxlbWVudGF0
+aW9ucwotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KSXQgaXMgZXhwZWN0ZWQgdGhhdCBF
+QkJSIGNvbXBsaWFudCBjYW4gYmUgYWNoaWV2ZWQgYnkgdXNpbmcgYSByZWNlbnQKdmVyc2lvbiBv
+ZiBVLUJvb3Qgd2l0aCB0aGUgYXBwcm9wcmlhdGUgY29uZmlndXJhdGlvbiBvcHRpb25zLiBBbgpp
+bXBsZW1lbnRlcnMgZ3VpZGUgZm9yIFUtQm9vdCB3aWxsIGJlIHdyaXR0ZW4gYmVmb3JlIEVCQlIg
+djEuMCBpcyByZWxlYXNlZC4KClRoZXJlIGlzIGFsc28gd29yayBvbmdvaW5nIHRvIGdldCB0aGUg
+VUVGSSBTZWxmIENlcnRpZmljYXRpb24gVGVzdApydW5uaW5nIG9uIFUtQm9vdC4gT25jZSB3b3Jr
+aW5nLCB0aGlzIHdpbGwgYmUgYSB0b29sIGZvciB2ZW5kb3JzIHRvIHRlc3QKdGhlaXIgcGxhdGZv
+cm1zIGZvciBFQkJSIGNvbXBsaWFuY2UuCgpGQVEKLS0tCjEuIERvZXMgRUJCUiBkZWZpbmUgYSBu
+ZXcgaW50ZXJmYWNlPwoKICAgIE5vLiBFQkJSIGJ1aWxkcyBvbiB0aGUgZXhpc3RpbmcgVUVGSSBz
+cGVjIGJ5IHJlcXVpcmluZyBhIHNwZWNpZmljCnN1YnNldCB0aGF0IGNhbiBiZSBpbXBsZW1lbnRl
+ZCB0b2RheSB1c2luZyBVLUJvb3QsIGFuZCBlaXRoZXIgRGV2aWNldHJlZQpvciBBQ1BJLgoKMi4g
+RG9lcyBFQkJSIHJlcXVpcmUgRGV2aWNldHJlZT8gQUNQST8KCiAgICBFQkJSIGFsbG93cyBwbGF0
+Zm9ybXMgdG8gcHJvdmlkZSBlaXRoZXIgQUNQSSBvciBEZXZpY2V0cmVlLiBMaW51eApzdXBwb3J0
+cyBib3RoIHN5c3RlbSBkZXNjcmlwdGlvbiBsYW5ndWFnZXMgZXF1YWxseSB3ZWxsLCBhbmQgRGV2
+aWNldHJlZQppcyBpbiBjb21tb24gdXNlIG9uIGVtYmVkZGVkIHBsYXRmb3Jtcy4gQXMgbG9uZyBh
+cyB0aGUgcGxhdGZvcm0gc3VwcGxpZXMKYSBzeXN0ZW0gZGVzY3JpcHRpb24gdGhhdCBjYW4gYm9v
+dCBhIG1haW5saW5lIG9wZXJhdGluZyBzeXN0ZW0uCgogICAgRUJCUiBkb2VzIG5vdCBhdHRlbXB0
+IHRvIGRlZmluZSBhIGNvbW1vbiBiYXNlIHN0YW5kYXJkIGZvcgpEZXZpY2V0cmVlIHBsYXRmb3Jt
+cyBiZWNhdXNlIG9mIHRoZSB3aWRlIHZhcmlldHkgb2YgcGxhdGZvcm1zIG5lZWRlZCB0bwpiZSBz
+dXBwb3J0ZWQuIFRoZSBvbmUgYXNzdW1wdGlvbiBFQkJSIGRvZXMgbWFrZSBpcyB0aGF0IHRoZSB0
+YXJnZXQKb3BlcmF0aW5nIHN5c3RlbSBhbHJlYWR5IGhhcyBzdXBwb3J0IGZvciB0aGUgU29DIG9u
+IHRoZSBwbGF0Zm9ybS4KCjMuIElzIEVCQlIgb25seSBmb3IgVS1Cb290IGFuZCBMaW51eCBlbWJl
+ZGRlZCBzeXN0ZW1zPwoKICAgIE5vLiBXaGlsZSBVLUJvb3QrTGludXggcGxhdGZvcm1zIHdlcmUg
+Y2VydGFpbmx5IHRoZSBwcmltYXJ5IGF1ZGllbmNlCndoZW4gRUJCUiB3YXMgZmlyc3QgY29uY2Vp
+dmVkLCB0aGUgc3BlYyBpcyB2ZXJ5IHB1cnBvc2VmdWxseSB3cml0dGVuIHRvCmJlIE9TLWluZGVw
+ZW5kZW50LiBFQkJSIHJlcXVpcmVzIHNwZWNpZmljIGludGVyZmFjZXMsIGJ1dCB0aG9zZQppbnRl
+cmZhY2UgY2FuIGJlIGltcGxlbWVudGVkIGJ5IGFueSBmaXJtd2FyZSBwcm9qZWN0LgoKICAgIFdl
+IHdvdWxkIGFic29sdXRlbHkgbGlrZSB0byBoYXZlIHJldmlldywgZmVlZGJhY2sgYW5kIGNvbnRy
+aWJ1dGlvbnMKZnJvbSBub24tTGludXgsIG5vbi1VLUJvb3QgdXNlcnMuCgo0LiBDYW4gSSBjb250
+cmlidXRlIHRvIHRoZSBFQkJSIHNwZWNpZmljYXRpb24/CgogICAgWWVzLiBUaGUgRUJCUiBzb3Vy
+Y2UgZG9jdW1lbnQgaXMgb24gR2l0SHViLCBhbmQgd2UgdXNlIHRoZQpib290LWFyY2hpdGVjdHVy
+ZUBsaXN0cy5saW5hcm8ub3JnIG1haWxpbmcgbGlzdC4KCiAgICBodHRwczovL2dpdGh1Yi5jb20v
+QVJNLVNvZnR3YXJlL2ViYnIKSU1QT1JUQU5UIE5PVElDRTogVGhlIGNvbnRlbnRzIG9mIHRoaXMg
+ZW1haWwgYW5kIGFueSBhdHRhY2htZW50cyBhcmUgY29uZmlkZW50aWFsIGFuZCBtYXkgYWxzbyBi
+ZSBwcml2aWxlZ2VkLiBJZiB5b3UgYXJlIG5vdCB0aGUgaW50ZW5kZWQgcmVjaXBpZW50LCBwbGVh
+c2Ugbm90aWZ5IHRoZSBzZW5kZXIgaW1tZWRpYXRlbHkgYW5kIGRvIG5vdCBkaXNjbG9zZSB0aGUg
+Y29udGVudHMgdG8gYW55IG90aGVyIHBlcnNvbiwgdXNlIGl0IGZvciBhbnkgcHVycG9zZSwgb3Ig
+c3RvcmUgb3IgY29weSB0aGUgaW5mb3JtYXRpb24gaW4gYW55IG1lZGl1bS4gVGhhbmsgeW91Lgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpib290LWFyY2hp
+dGVjdHVyZSBtYWlsaW5nIGxpc3QKYm9vdC1hcmNoaXRlY3R1cmVAbGlzdHMubGluYXJvLm9yZwpo
+dHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9ib290LWFyY2hpdGVjdHVy
+ZQo=
