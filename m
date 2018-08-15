@@ -1,25 +1,26 @@
-From: Rob Herring <robh@kernel.org>
+From: Tom Rini <trini@konsulko.com>
 Subject: Re: [PATCH 01/10] dm: fdt: scan for devices under
-	/firmware too
-Date: Wed, 15 Aug 2018 09:31:30 -0600
-Message-ID: <CAL_JsqKTEgG7vV8PLzDkksQA8E60T6X6o1KT5_bD3m2S4P6WEA@mail.gmail.com>
+ /firmware too
+Date: Wed, 15 Aug 2018 11:43:27 -0400
+Message-ID: <20180815154327.GM30947@bill-the-cat>
 References: <20180813155347.13844-1-jens.wiklander@linaro.org>
  <20180813155347.13844-2-jens.wiklander@linaro.org>
  <20180815141726.GI30947@bill-the-cat>
  <edcdc49b-8fd0-8862-dc6d-8f66b04be4ba@xilinx.com>
  <20180815143422.GL30947@bill-the-cat>
  <86d61eb1-e038-622b-fe6b-d4a1345619da@xilinx.com>
+ <CAL_JsqKTEgG7vV8PLzDkksQA8E60T6X6o1KT5_bD3m2S4P6WEA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8095861445362737062=="
 Return-path: <u-boot-bounces@lists.denx.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1534347102;
- bh=cdSaH5tix+g/NjXy+DKlp2HAoNZ1za/wyGYQv0dVcJY=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=GC5cA7xFatHQw5qayPoW4zf6g8NcInSexG7/RwR1BE7zdSUEXBSCRCPKX5vFTQtZ9
- UW5KYKxkDSEHu8z9fBTXKNb7UwzBCKegS5jXex40jy0hoDZ0TIOdKlwCiFhYytAVbM
- Llh2FbUJtFKOtEbBiDpAwqVX4IL3q7zsy358/2nE=
-In-Reply-To: <86d61eb1-e038-622b-fe6b-d4a1345619da@xilinx.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=jAFr27qVUaZbASygjEjHwQDsIUEcHgY0lftESDhlH5M=;
+ b=Es9I8YjgkJdh+s4kU2H+9alZhLX4EVQ13ZscTIXVXe/uzemUwTTzrajrfZN6Of46cb
+ 0pDRnreZ9z7/o5R98t9tCuSI9IfrU+pqIeIWx7SOw3wdKNlgkVzO73b/F7op3UdZZ4Na
+ KjTtVQrAwCCo3r36rJTSpWjfmOKHLisTMYhas=
+In-Reply-To: <CAL_JsqKTEgG7vV8PLzDkksQA8E60T6X6o1KT5_bD3m2S4P6WEA@mail.gmail.com>
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Unsubscribe: <https://lists.denx.de/options/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=unsubscribe>
@@ -30,64 +31,139 @@ List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
-Content-Type: text/plain; charset="us-ascii"
-To: Michal Simek <michal.simek@xilinx.com>
-Cc: devicetree-spec@vger.kernel.org, Tom Rini <trini@konsulko.com>, p.aubert@staubli.com, U-Boot Mailing List <u-boot@lists.denx.de>
+To: Rob Herring <robh@kernel.org>
+Cc: devicetree-spec@vger.kernel.org, U-Boot Mailing List <u-boot@lists.denx.de>, p.aubert@staubli.com, Michal Simek <michal.simek@xilinx.com>
 
-T24gV2VkLCBBdWcgMTUsIDIwMTggYXQgODo1MSBBTSBNaWNoYWwgU2ltZWsgPG1pY2hhbC5zaW1l
-a0B4aWxpbnguY29tPiB3cm90ZToKPgo+IEhpIFJvYiwKPgo+IE9uIDE1LjguMjAxOCAxNjozNCwg
-VG9tIFJpbmkgd3JvdGU6Cj4gPiBPbiBXZWQsIEF1ZyAxNSwgMjAxOCBhdCAwNDozMDoxNVBNICsw
-MjAwLCBNaWNoYWwgU2ltZWsgd3JvdGU6Cj4gPj4gT24gMTUuOC4yMDE4IDE2OjE3LCBUb20gUmlu
-aSB3cm90ZToKPiA+Pj4gT24gTW9uLCBBdWcgMTMsIDIwMTggYXQgMDU6NTM6MzhQTSArMDIwMCwg
-SmVucyBXaWtsYW5kZXIgd3JvdGU6Cj4gPj4+Cj4gPj4+PiBKdXN0IGFzIC9jaG9zZW4gbWF5IGNv
-bnRhaW4gZGV2aWNlcyAvZmlybXdhcmUgbWF5IGNvbnRhaW4gZGV2aWNlcywgc2Nhbgo+ID4+Pj4g
-Zm9yIGRldmljZXMgdW5kZXIgL2Zpcm13YXJlIHRvby4KPiA+Pj4+Cj4gPj4+PiBTaWduZWQtb2Zm
-LWJ5OiBKZW5zIFdpa2xhbmRlciA8amVucy53aWtsYW5kZXJAbGluYXJvLm9yZz4KPiA+Pj4+IC0t
-LQo+ID4+Pj4gIGRyaXZlcnMvY29yZS9yb290LmMgfCAxNSArKysrKysrKysrLS0tLS0KPiA+Pj4+
-ICAxIGZpbGUgY2hhbmdlZCwgMTAgaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMoLSkKPiA+Pj4+
-Cj4gPj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9jb3JlL3Jvb3QuYyBiL2RyaXZlcnMvY29yZS9y
-b290LmMKPiA+Pj4+IGluZGV4IDcyYmNjN2Q3ZjJhMy4uMGRjYTUwN2UxMTg3IDEwMDY0NAo+ID4+
-Pj4gLS0tIGEvZHJpdmVycy9jb3JlL3Jvb3QuYwo+ID4+Pj4gKysrIGIvZHJpdmVycy9jb3JlL3Jv
-b3QuYwo+ID4+Pj4gQEAgLTI2NSw5ICsyNjUsMTUgQEAgc3RhdGljIGludCBkbV9zY2FuX2ZkdF9u
-b2RlKHN0cnVjdCB1ZGV2aWNlICpwYXJlbnQsIGNvbnN0IHZvaWQgKmJsb2IsCj4gPj4+PiAgICBm
-b3IgKG9mZnNldCA9IGZkdF9maXJzdF9zdWJub2RlKGJsb2IsIG9mZnNldCk7Cj4gPj4+PiAgICAg
-ICAgIG9mZnNldCA+IDA7Cj4gPj4+PiAgICAgICAgIG9mZnNldCA9IGZkdF9uZXh0X3N1Ym5vZGUo
-YmxvYiwgb2Zmc2V0KSkgewo+ID4+Pj4gLSAgICAgICAgICAvKiAiY2hvc2VuIiBub2RlIGlzbid0
-IGEgZGV2aWNlIGl0c2VsZiBidXQgbWF5IGNvbnRhaW4gc29tZTogKi8KPiA+Pj4+IC0gICAgICAg
-ICAgaWYgKCFzdHJjbXAoZmR0X2dldF9uYW1lKGJsb2IsIG9mZnNldCwgTlVMTCksICJjaG9zZW4i
-KSkgewo+ID4+Pj4gLSAgICAgICAgICAgICAgICAgIHByX2RlYnVnKCJwYXJzaW5nIHN1Ym5vZGVz
-IG9mIFwiY2hvc2VuXCJcbiIpOwo+ID4+Pj4gKyAgICAgICAgICBjb25zdCBjaGFyICpub2RlX25h
-bWUgPSBmZHRfZ2V0X25hbWUoYmxvYiwgb2Zmc2V0LCBOVUxMKTsKPiA+Pj4+ICsKPiA+Pj4+ICsg
-ICAgICAgICAgLyoKPiA+Pj4+ICsgICAgICAgICAgICogVGhlICJjaG9zZW4iIGFuZCAiZmlybXdh
-cmUiIG5vZGVzIGFyZW4ndCBkZXZpY2VzCj4gPj4+PiArICAgICAgICAgICAqIHRoZW1zZWx2ZXMg
-YnV0IG1heSBjb250YWluIHNvbWU6Cj4gPj4+PiArICAgICAgICAgICAqLwo+ID4+Pj4gKyAgICAg
-ICAgICBpZiAoIXN0cmNtcChub2RlX25hbWUsICJjaG9zZW4iKSB8fAo+ID4+Pj4gKyAgICAgICAg
-ICAgICAgIXN0cmNtcChub2RlX25hbWUsICJmaXJtd2FyZSIpKSB7Cj4gPj4+PiArICAgICAgICAg
-ICAgICAgICAgcHJfZGVidWcoInBhcnNpbmcgc3Vibm9kZXMgb2YgXCIlc1wiXG4iLCBub2RlX25h
-bWUpOwo+ID4+Pj4KPiA+Pj4+ICAgICAgICAgICAgICAgICAgICBlcnIgPSBkbV9zY2FuX2ZkdF9u
-b2RlKHBhcmVudCwgYmxvYiwgb2Zmc2V0LAo+ID4+Pj4gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcHJlX3JlbG9jX29ubHkpOwo+ID4+Pgo+ID4+PiBTbywgdGhlIC9m
-aXJtd2FyZSBub2RlIHNlZW1zIHNwZWNpYWwuICBIYXZlIHlvdSB0YWxrZWQgd2l0aCB0aGUKPiA+
-Pj4gZGV2aWNldHJlZSBmb2xrcyB0byBnZXQgaXQgbGlzdGVkIGluIHRoZSBzcGVjPyAgVGhhdCB3
-b3VsZCBzZWVtIHJhdGhlcgo+ID4+PiB2YWx1YWJsZSBmb3Igc29tZXRoaW5nIHVzZWQgYnkgbWFu
-eSBwYXJ0aWVzLiAgVGhhbmtzIQo+ID4+Pgo+ID4+Cj4gPj4gc29tZSBkYXlzIGFnbyB3ZSBoYXZl
-IHNlbnQgYSBwYXRjaCBmb3IgdGhpcyB0b28uCj4gPj4gaHR0cHM6Ly9saXN0cy5kZW54LmRlL3Bp
-cGVybWFpbC91LWJvb3QvMjAxOC1BdWd1c3QvMzM4MDQ5Lmh0bWwKPiA+Pgo+ID4+IEl0IGlzIHVz
-aW5nIGRpZmZlcmVudCB3YXkgYnV0IGl0IHNob3VsZCBkbyB0aGUgc2FtZSB0aGluZy4KPiA+Cj4g
-PiBPSywgc28gaXQgc291bmRzIGxpa2UgaW4gdGVybXMgb2YgY29kZSBjbGVhbi11cHMsIHdlIG5l
-ZWQgc29tZXRoaW5nIGxpa2UKPiA+IHdoYXQgeW91IHJlZmVyZW5jZSBhbmQgdGhlbiBzb21lIGZ1
-cnRoZXIgY2xlYW4tdXBzIG9uIHRvcCBvZiB0aGF0Cj4gPiBwZXJoYXBzIGZvciBvdGhlciBwbGFj
-ZXMgdG8gY2FsbCBkbV9zY2FuX2ZkdF9vZm5vZGVfcGF0aCgpIGZvciBzcGVjaWFsCj4gPiBjYXNl
-cy4gIEFuZCBpbiB0ZXJtcyBvZiBmb3JtYWxpemVkIHNwZWNpZmljYXRpb24gYml0cywgSSBkbyB0
-aGluawo+ID4gL2Zpcm13YXJlIHNob3VsZCBwZXJoYXBzIGdldCBraWNrZWQgdXAgdG8gdGhlIHNw
-ZWMgaXRzZWxmIHNvIHRoYXQgaXQncwo+ID4gdmVyeSBjbGVhciB0byBhbGwgY29uc3VtZXJzLgo+
-Cj4gSSB3YXMgYWxzbyBjaGVja2luZyBsYXRlc3QgZGV2aWNldHJlZSBzcGVjIGFuZCB0aGVyZSBp
-cyBubyByZWNvcmQgYWJvdXQKPiAvZmlybXdhcmUgbm9kZSBhbmQgaG93IGl0IGlzIHN1cHBvc2Vk
-IHRvIGJlIHVzZWQuCgpQYXRjaGVzIHdlbGNvbWUuIDopCgpJdCdzIHJlYWxseSBvbmx5IGEgY29u
-dGFpbmVyIHRvIGRlZmluZSBub24tZGlzY292ZXJhYmxlIGZpcm13YXJlCmludGVyZmFjZXMuIFR5
-cGljYWxseSBhY2Nlc3NlZCB0aHJ1IGEgc2VjdXJlIGNhbGwgKGZvciBBUk0pIG9yIGEKbWFpbGJv
-eC4gSXQgaXMgcHJpbWFyaWx5IGp1c3QgY29udmVudGlvbiByYXRoZXIgdGhhbiBhIHN0cmljdApy
-ZXF1aXJlbWVudC4gV2UgaGF2ZSB0byBzdXBwb3J0IGZpcm13YXJlIG5vZGVzIGF0IHRoZSB0b3At
-bGV2ZWwgdG9vCmFueXdheXMuCgpSb2IKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KVS1Cb290IG1haWxpbmcgbGlzdApVLUJvb3RAbGlzdHMuZGVueC5kZQpo
-dHRwczovL2xpc3RzLmRlbnguZGUvbGlzdGluZm8vdS1ib290Cg==
+
+--===============8095861445362737062==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="IJAclU0AInkryoed"
+Content-Disposition: inline
+
+
+--IJAclU0AInkryoed
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Aug 15, 2018 at 09:31:30AM -0600, Rob Herring wrote:
+> On Wed, Aug 15, 2018 at 8:51 AM Michal Simek <michal.simek@xilinx.com> wr=
+ote:
+> >
+> > Hi Rob,
+> >
+> > On 15.8.2018 16:34, Tom Rini wrote:
+> > > On Wed, Aug 15, 2018 at 04:30:15PM +0200, Michal Simek wrote:
+> > >> On 15.8.2018 16:17, Tom Rini wrote:
+> > >>> On Mon, Aug 13, 2018 at 05:53:38PM +0200, Jens Wiklander wrote:
+> > >>>
+> > >>>> Just as /chosen may contain devices /firmware may contain devices,=
+ scan
+> > >>>> for devices under /firmware too.
+> > >>>>
+> > >>>> Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+> > >>>> ---
+> > >>>>  drivers/core/root.c | 15 ++++++++++-----
+> > >>>>  1 file changed, 10 insertions(+), 5 deletions(-)
+> > >>>>
+> > >>>> diff --git a/drivers/core/root.c b/drivers/core/root.c
+> > >>>> index 72bcc7d7f2a3..0dca507e1187 100644
+> > >>>> --- a/drivers/core/root.c
+> > >>>> +++ b/drivers/core/root.c
+> > >>>> @@ -265,9 +265,15 @@ static int dm_scan_fdt_node(struct udevice *p=
+arent, const void *blob,
+> > >>>>    for (offset =3D fdt_first_subnode(blob, offset);
+> > >>>>         offset > 0;
+> > >>>>         offset =3D fdt_next_subnode(blob, offset)) {
+> > >>>> -          /* "chosen" node isn't a device itself but may contain =
+some: */
+> > >>>> -          if (!strcmp(fdt_get_name(blob, offset, NULL), "chosen")=
+) {
+> > >>>> -                  pr_debug("parsing subnodes of \"chosen\"\n");
+> > >>>> +          const char *node_name =3D fdt_get_name(blob, offset, NU=
+LL);
+> > >>>> +
+> > >>>> +          /*
+> > >>>> +           * The "chosen" and "firmware" nodes aren't devices
+> > >>>> +           * themselves but may contain some:
+> > >>>> +           */
+> > >>>> +          if (!strcmp(node_name, "chosen") ||
+> > >>>> +              !strcmp(node_name, "firmware")) {
+> > >>>> +                  pr_debug("parsing subnodes of \"%s\"\n", node_n=
+ame);
+> > >>>>
+> > >>>>                    err =3D dm_scan_fdt_node(parent, blob, offset,
+> > >>>>                                           pre_reloc_only);
+> > >>>
+> > >>> So, the /firmware node seems special.  Have you talked with the
+> > >>> devicetree folks to get it listed in the spec?  That would seem rat=
+her
+> > >>> valuable for something used by many parties.  Thanks!
+> > >>>
+> > >>
+> > >> some days ago we have sent a patch for this too.
+> > >> https://lists.denx.de/pipermail/u-boot/2018-August/338049.html
+> > >>
+> > >> It is using different way but it should do the same thing.
+> > >
+> > > OK, so it sounds like in terms of code clean-ups, we need something l=
+ike
+> > > what you reference and then some further clean-ups on top of that
+> > > perhaps for other places to call dm_scan_fdt_ofnode_path() for special
+> > > cases.  And in terms of formalized specification bits, I do think
+> > > /firmware should perhaps get kicked up to the spec itself so that it's
+> > > very clear to all consumers.
+> >
+> > I was also checking latest devicetree spec and there is no record about
+> > /firmware node and how it is supposed to be used.
+>=20
+> Patches welcome. :)
+>=20
+> It's really only a container to define non-discoverable firmware
+> interfaces. Typically accessed thru a secure call (for ARM) or a
+> mailbox. It is primarily just convention rather than a strict
+> requirement. We have to support firmware nodes at the top-level too
+> anyways.
+
+Right.  To be clear, I'm suggesting that someone (I was thinking Jens)
+pop over to the devicetree-spec list and ask about adding _something_
+there as "firmware" isn't even on the list of generic names and may even
+warrant something in section 3 under base device node types.
+
+--=20
+Tom
+
+--IJAclU0AInkryoed
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBAgAGBQJbdEofAAoJEIf59jXTHXZSdEUQAJtk7mLCjTNIOTwXHnmVtMHE
+pdvzler/l+UIthY16XUFeDDy6cwvhoxQLwP8JQl4rUKUVitHiaFfcGnRbi2xLmqX
+4kFTd/flE3NuZxDsZbIlXlUqMKop6H50fDpyz3mlD3d7br+eM0P8FdTQmsVlFTeh
+0Dr6l0/wWujq2tyv56DzsG7AoKuDnWQmksd6Rl7EDQYeuVVFNdf/fH10L9BEFei5
+aa8//7xzE5QlCi9IwkVGMXmls8Oc6r2p5SBUwaN1cjdfinbA48BvTSCdTfqteVtf
+5S7s9FVK0ofSySv7YFxUSdvw9qUa8Y42iBiAMG6a+6DnRpmeP3sddbYuCCfs9vIW
+6ZSPvRga0QngiaBQqZF0Ol1yRl+tm6eLpu0BhLGYI8PGyeShPgT6dPLwwMRcPgor
+TQZ0ktWDJtF3aFJZyFaEHapqZEiQrJDUopa1Xop8yaixS3dtbLwHlXaa36F2sEqo
+/5l1PZ/j24QmU+efll6T8qeuZXpDOmT40WYvKg44vxuC/8qTMfa7ml6Rkun+KAEi
+2NIDcQz4vNJeKbYLOFSiiaMgg7ZIFtrp0ptSlQ5Zo54oW4lCALj3l122MpiCe+wQ
+ti2pbzKyNo1im4OY/R9nvRgG/kxdAPszF05oMl+aHBWk88YvCwvVLyQK3hYIVLoF
+r1dqFipQAdbfGo0RxWsh
+=kSWe
+-----END PGP SIGNATURE-----
+
+--IJAclU0AInkryoed--
+
+--===============8095861445362737062==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVS1Cb290IG1h
+aWxpbmcgbGlzdApVLUJvb3RAbGlzdHMuZGVueC5kZQpodHRwczovL2xpc3RzLmRlbnguZGUvbGlz
+dGluZm8vdS1ib290Cg==
+
+--===============8095861445362737062==--
