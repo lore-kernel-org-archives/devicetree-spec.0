@@ -1,20 +1,23 @@
 From: Grant Likely <grant.likely@arm.com>
 Subject: Re: DT case sensitivity
-Date: Thu, 23 Aug 2018 10:02:38 +0100
-Message-ID: <13bf5b39-0461-351e-57e3-60264eaa374d@arm.com>
+Date: Thu, 23 Aug 2018 12:56:10 +0100
+Message-ID: <ffede83b-cdfe-7f96-3678-f63522c4ef40@arm.com>
 References: <CAL_Jsq+XacT2O15CQ=F_6dmWf6OqNf8_fKAOrMJNR79a6mORaw@mail.gmail.com>
  <3335cff2cc999c1dda58d75949ab3d12185fca79.camel@kernel.crashing.org>
  <CAL_JsqKqkO31ekVMFKs+osLvKdZyDzRowF1thWXn5=tWhrJgvw@mail.gmail.com>
  <18175413a0148f7859ab36ed9715dce7a598f318.camel@kernel.crashing.org>
+ <13bf5b39-0461-351e-57e3-60264eaa374d@arm.com>
+ <CAL_Jsq+1T8k5mtc-DgDBtX3Qco9sQG9RWv6FTZ8NXppNbNg3Ww@mail.gmail.com>
+ <e9009f6dd3aded2b9aa735973f4eed8386dd9afb.camel@kernel.crashing.org>
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Return-path: <linuxppc-dev-bounces+glppe-linuxppc-embedded-2=m.gmane.org@lists.ozlabs.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
  s=selector1-arm-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eiVzxIFABSbAaxOR6erM+PueY0iPaOY+b5DBPKAOzKo=;
- b=mPTwtdaFm1TLgS0wUTTNXNwfbtDqfKl9JnYuqZVD5Gc0QMyn0U0tcrJ3sG3a3PjxfqaVtauSQTV1PIYemYdA0pskDCaatrXrePniDnli3Abob2zNAOPfnqOltl9lSd5ih1/DWGBQR1OxFXVkxqfEWYm4CAbIJuvdikrqa2drr7w=
-In-Reply-To: <18175413a0148f7859ab36ed9715dce7a598f318.camel@kernel.crashing.org>
+ bh=JZ/A9SwZGhuV/IuIfvj152GmM+E87jIjFmPAd5X/yVY=;
+ b=i5AYhFK6lVh7uTd/EJHeAqmlx4jK+91ryoWkNCMmznXGw5vX7eeHs+zo7JNy1pc98y9qpMv0gpXYXRox7+W7FAQEhJVGi239+/EgwhyeSyNhizLdPqdO7BBhlgT/IL+xJqAek3K1df2KF0CTL5fId61Qi8W9w1Gwn0TA+o99NfY=
+In-Reply-To: <e9009f6dd3aded2b9aa735973f4eed8386dd9afb.camel@kernel.crashing.org>
 Content-Language: en-GB
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Unsubscribe: <https://lists.ozlabs.org/options/linuxppc-dev>,
@@ -31,54 +34,48 @@ Content-Type: text/plain; charset="us-ascii"; format="flowed"
 To: Benjamin Herrenschmidt <benh@kernel.crashing.org>, Rob Herring <robh@kernel.org>
 Cc: Stephen Rothwell <sfr@canb.auug.org.au>, Kumar Gala <kumar.gala@linaro.org>, devicetree@vger.kernel.org, devicetree-spec@vger.kernel.org, linuxppc-dev <linuxppc-dev@lists.ozlabs.org>, Frank Rowand <frowand.list@gmail.com>, David Gibson <david@gibson.dropbear.id.au>
 
-On 23/08/2018 02:29, Benjamin Herrenschmidt wrote:
-> On Wed, 2018-08-22 at 20:26 -0500, Rob Herring wrote:
->> On Wed, Aug 22, 2018 at 8:14 PM Benjamin Herrenschmidt
->> <benh@kernel.crashing.org> wrote:
+On 23/08/2018 12:47, Benjamin Herrenschmidt wrote:
+> On Thu, 2018-08-23 at 06:43 -0500, Rob Herring wrote:
+>> On Thu, Aug 23, 2018 at 4:02 AM Grant Likely <grant.likely@arm.com> wrot=
+e:
 >>>
->>> On Wed, 2018-08-22 at 19:47 -0500, Rob Herring wrote:
->>>> The default DT string handling in the kernel is node names and
->>>> compatibles are case insensitive and property names are case sensitive
->>>> (Sparc is the the only variation and is opposite). It seems only PPC
->>>> (and perhaps only Power Macs?) needs to support case insensitive
->>>> comparisons. It was probably a mistake to follow PPC for new arches
->>>> and we should have made everything case sensitive from the start. So I
->>>> have a few questions for the DT historians. :)
 >>>
->>> Open Firmware itself is insensitive.
+>>> What problem are you trying to solve?
 >>
->> Doesn't it depend on the implementation? Otherwise, how is Sparc differe=
-nt?
->
-> Not sure ... Forth itself is insensitive for words but maybe not for
-> string comparisons.
+>> I'm looking at removing device_node.name and using full_name instead
+>> (which now is only the local node name plus unit-address). This means
+>> replacing of_node_cmp() (and still some strcmp) calls in a lot of
+>> places. I need to use either strncmp or strncasecmp instead.
+Makes sense. Simplifies the code.
 
-What problem are you trying to solve? I would think making everything
-case insensitive would be the direction to go if you do anything. Least
-possibility of breaking existing platforms in that scenario.
+>>
+>>> I would think making everything
+>>> case insensitive would be the direction to go if you do anything. Least
+>>> possibility of breaking existing platforms in that scenario.
+>>
+>> Really? Even if all the "new" arches are effectively case sensitive?
+>> Anything using dtc and libfdt are (and json-schema certainly will be).
+>> But I frequently say the kernel's job is not DT validation, so you
+>> pass crap in, you get undefined results.
+>
+> I tend to agree with Grant. Let's put it this way:
+>
+> What is the drawback of being case insensitive ?
+>
+> Do we expect that there exist a case where we will want to distinguish
+> between nodes that have the same name with a different case ? >
+> If not, I don't see the point of being strict about it.
+
+I'd also add that any place where there are two nodes or props with the
+same name, but different case, then it is probably a bug (or a really
+bad design). Going the direction of case-insensitive eliminates the
+possibility.
+
+I do understand that that you'd like the kernel to be strict about what
+it accepts, but that strictness probably makes more sense back in DTC
+where it can also be checked against schema.
 
 g.
-
->
->>
->>>> What PPC systems are case insensitive? Can we limit that to certain sy=
-stems?
->>>
->>> All PowerMacs at least, the problem is that I don't have DT images or
->>> access to all the historical systems (and yes some people occasionally
->>> still use them) to properly test a change in that area.
->>
->> I'm temped to break them so I can find folks to provide me with DT dumps=
-. :)
->
-> I have a collection of DT dumps but I'm not sure about the legality of
-> publishing them...
->
-> Cheers,
-> Ben.
->
->
-
 IMPORTANT NOTICE: The contents of this email and any attachments are confid=
 ential and may also be privileged. If you are not the intended recipient, p=
 lease notify the sender immediately and do not disclose the contents to any=
