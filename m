@@ -1,11 +1,22 @@
-From: Michael Ellerman <mpe@ellerman.id.au>
+From: Rob Herring <robh@kernel.org>
 Subject: Re: DT case sensitivity
-Date: Fri, 24 Aug 2018 15:39:19 +1000
-Message-ID: <87tvnkjpbs.fsf@concordia.ellerman.id.au>
+Date: Fri, 24 Aug 2018 10:14:01 -0500
+Message-ID: <CAL_Jsq+VnhT_4H4yECWsuXnmpQRnSHNRXAohRYds1LxcRjUHkw@mail.gmail.com>
 References: <CAL_Jsq+XacT2O15CQ=F_6dmWf6OqNf8_fKAOrMJNR79a6mORaw@mail.gmail.com>
+ <3335cff2cc999c1dda58d75949ab3d12185fca79.camel@kernel.crashing.org>
+ <CAL_JsqKqkO31ekVMFKs+osLvKdZyDzRowF1thWXn5=tWhrJgvw@mail.gmail.com>
+ <18175413a0148f7859ab36ed9715dce7a598f318.camel@kernel.crashing.org>
+ <20180823123650.GT24439@gate.crashing.org>
 Mime-Version: 1.0
 Return-path: <linuxppc-dev-bounces+glppe-linuxppc-embedded-2=m.gmane.org@lists.ozlabs.org>
-In-Reply-To: <CAL_Jsq+XacT2O15CQ=F_6dmWf6OqNf8_fKAOrMJNR79a6mORaw@mail.gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1535123653;
+ bh=RvufNg6LKZcv34qa0QOlmfQEEOq2SdRXDgdRNVy9yhA=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=n0EWYC7y8Lkv1qzDqmSj6B8hayhBiP5ljLu/LCAw4v2FZ1u7eyxE9KnT1c9jXfL0A
+ B8MFGuT1nhhF0IHw/g3dRnamGJKHoSqWRZqB0joIreIN+2tuoS/EAMj+7ak3bKiLp4
+ EeKHQzBjKzOkcbdWSEavpvWh87h90oSOmDN9WcM4=
+In-Reply-To: <20180823123650.GT24439@gate.crashing.org>
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Unsubscribe: <https://lists.ozlabs.org/options/linuxppc-dev>,
  <mailto:linuxppc-dev-request@lists.ozlabs.org?subject=unsubscribe>
@@ -19,32 +30,67 @@ Sender: "Linuxppc-dev"
  <linuxppc-dev-bounces+glppe-linuxppc-embedded-2=m.gmane.org@lists.ozlabs.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Rob Herring <robh@kernel.org>, Stephen Rothwell <sfr@canb.auug.org.au>, Grant Likely <grant.likely@arm.com>, Benjamin Herrenschmidt <benh@kernel.crashing.org>, Kumar Gala <kumar.gala@linaro.org>, David Gibson <david@gibson.dropbear.id.au>, Frank Rowand <frowand.list@gmail.com>, devicetree-spec@vger.kernel.org, devicetree@vger.kernel.org, linuxppc-dev <linuxppc-dev@lists.ozlabs.org>
+To: segher@kernel.crashing.org
+Cc: devicetree@vger.kernel.org, Kumar Gala <kumar.gala@linaro.org>, Frank Rowand <frowand.list@gmail.com>, Stephen Rothwell <sfr@canb.auug.org.au>, devicetree-spec@vger.kernel.org, Grant Likely <grant.likely@arm.com>, linuxppc-dev <linuxppc-dev@lists.ozlabs.org>, David Gibson <david@gibson.dropbear.id.au>
 
-Rob Herring <robh@kernel.org> writes:
-
-> The default DT string handling in the kernel is node names and
-> compatibles are case insensitive and property names are case sensitive
-> (Sparc is the the only variation and is opposite). It seems only PPC
-> (and perhaps only Power Macs?) needs to support case insensitive
-> comparisons. It was probably a mistake to follow PPC for new arches
-> and we should have made everything case sensitive from the start. So I
-> have a few questions for the DT historians. :)
+On Thu, Aug 23, 2018 at 7:37 AM Segher Boessenkool
+<segher@kernel.crashing.org> wrote:
 >
-> What PPC systems are case insensitive? Can we limit that to certain systems?
+> On Thu, Aug 23, 2018 at 11:29:01AM +1000, Benjamin Herrenschmidt wrote:
+> > On Wed, 2018-08-22 at 20:26 -0500, Rob Herring wrote:
+> > > On Wed, Aug 22, 2018 at 8:14 PM Benjamin Herrenschmidt
+> > > <benh@kernel.crashing.org> wrote:
+> > > >
+> > > > On Wed, 2018-08-22 at 19:47 -0500, Rob Herring wrote:
+> > > > > The default DT string handling in the kernel is node names and
+> > > > > compatibles are case insensitive and property names are case sensitive
+> > > > > (Sparc is the the only variation and is opposite). It seems only PPC
+> > > > > (and perhaps only Power Macs?) needs to support case insensitive
+> > > > > comparisons. It was probably a mistake to follow PPC for new arches
+> > > > > and we should have made everything case sensitive from the start. So I
+> > > > > have a few questions for the DT historians. :)
+> > > >
+> > > > Open Firmware itself is insensitive.
+> > >
+> > > Doesn't it depend on the implementation? Otherwise, how is Sparc different?
+> >
+> > Not sure ...
 >
-> AFAICT, dtc at least (if not anything FDT based) has always been case
-> sensitive at least for node and property names. I'm not sure about
-> compatible strings?
+> The standard requires case-sensitive.
 >
-> Anyone see potential issues with switching all platforms except PPC
-> and Sparc to case sensitive comparisons?
+> > Forth itself is insensitive for words
+>
+> Not even.   http://forth.sourceforge.net/std/dpans/dpans3.htm#3.3.1.2
+>
+> (Most non-ancient implementations are though).
+>
+> > but maybe not for string comparisons.
+>
+> Only COMPARE is standardised, and that is case-sensitive comparison.  Many
+> systems have other words to do case-insensitive comparisons, or words where
+> some runtime flag determines the case-sensitivity.
+>
+> Btw.  A node name in Open Firmware is generically
+>   driver-name@unit-address:device-arguments
+> where driver-name is the part that is in the "name" property; this whole
+> case-sensitivity business is even worse for FDT, where you also treat the
+> unit address as part of the name.  In real Open Firmware the address is
+> compared *as a number* (or as a few numbers), so it is naturally case-
+> insensitive (it does not care if you write 01a0 or 01A0, or 1a0 or 000001a0
+> etc.)
 
-Looking at some old device trees, on ppc we do definitely have mixed
-case compatible strings, and I see a few hundred of those appear in the
-kernel source. So I think for us it's too late.
+True, but it is very rare at least in Linux to look at the
+unit-addresses. dtc now does some checking on unit-addresses too, so
+we should at least be consistent.
 
-But I don't see why that prevents other arches from switching to case
-sensitive, I don't think it really hurts us in any way.
+Another question: Is there ever a case where the node name in the path
+aka 'driver-name' doesn't match the 'name' property? I think this
+generally can't happen on FDT as the 'name' property is generated when
+we unflatten it though I suppose one could craft an FDT with name
+properties.
 
-cheers
+There's also various places in the kernel that check for a NULL name
+which doesn't seem like it could happen either other than the root
+node.
+
+Rob
