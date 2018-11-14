@@ -1,48 +1,55 @@
-From: Segher Boessenkool <segher@kernel.crashing.org>
-Subject: Re: DT case sensitivity
-Date: Fri, 24 Aug 2018 11:52:42 -0500
-Message-ID: <20180824165242.GW24439@gate.crashing.org>
-References: <CAL_Jsq+XacT2O15CQ=F_6dmWf6OqNf8_fKAOrMJNR79a6mORaw@mail.gmail.com>
- <3335cff2cc999c1dda58d75949ab3d12185fca79.camel@kernel.crashing.org>
- <CAL_JsqKqkO31ekVMFKs+osLvKdZyDzRowF1thWXn5=tWhrJgvw@mail.gmail.com>
- <18175413a0148f7859ab36ed9715dce7a598f318.camel@kernel.crashing.org>
- <20180823123650.GT24439@gate.crashing.org>
- <CAL_Jsq+VnhT_4H4yECWsuXnmpQRnSHNRXAohRYds1LxcRjUHkw@mail.gmail.com>
+From: "jonsmirl@gmail.com" <jonsmirl@gmail.com>
+Subject: Re: [RFC PATCH] dt-bindings: add a jsonschema binding example
+Date: Wed, 14 Nov 2018 14:39:29 -0500
+Message-ID: <CAKON4OxwAmmPv2+CEtT+eO3Uu8duCKD8OqyWj8+w2Y5SZ4bfOQ@mail.gmail.com>
+References: <20180418222905.10414-1-robh@kernel.org> <e7a2f4ca-40c2-05ef-097c-2cecd31fb731@gmail.com>
+ <CAL_JsqKVCdk8nFwmtfNt4mMOVYFVxefgafP6JtXThvFhROFB8w@mail.gmail.com>
 Mime-Version: 1.0
-Return-path: <linuxppc-dev-bounces+glppe-linuxppc-embedded-2=m.gmane.org@lists.ozlabs.org>
-Content-Disposition: inline
-In-Reply-To: <CAL_Jsq+VnhT_4H4yECWsuXnmpQRnSHNRXAohRYds1LxcRjUHkw@mail.gmail.com>
-List-Id: <devicetree-spec.vger.kernel.org>
-List-Unsubscribe: <https://lists.ozlabs.org/options/linuxppc-dev>,
- <mailto:linuxppc-dev-request@lists.ozlabs.org?subject=unsubscribe>
-List-Archive: <http://lists.ozlabs.org/pipermail/linuxppc-dev/>
-List-Post: <mailto:linuxppc-dev@lists.ozlabs.org>
-List-Help: <mailto:linuxppc-dev-request@lists.ozlabs.org?subject=help>
-List-Subscribe: <https://lists.ozlabs.org/listinfo/linuxppc-dev>,
- <mailto:linuxppc-dev-request@lists.ozlabs.org?subject=subscribe>
-Errors-To: linuxppc-dev-bounces+glppe-linuxppc-embedded-2=m.gmane.org@lists.ozlabs.org
-Sender: "Linuxppc-dev"
- <linuxppc-dev-bounces+glppe-linuxppc-embedded-2=m.gmane.org@lists.ozlabs.org>
+Return-path: <linux-kernel-owner@vger.kernel.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=azqJU8sLKCqUdcpTLYFdzT1D3gVaueehGjCTsxo/J7I=;
+        b=nb9yWuyL9zbRRaU8bJih2M3cf16d3bxuLapmZxZ7w5AX+gybIgWyyYnqmMMr9MT7aL
+         cMgyvLlDwMN23YefP7lgifmCtoz8x0Djo0GsoYw+0Diy7dToerFKnFim6XS5NPbr649b
+         G8pHuV969UKzkFPr3HCMoBQcbxKHEailsFY6KawEgFkD8z7MGdApjZG+vla23w1REf+K
+         h9axfVthSOWnq2QnCFX7+JhISf6Wbu8rz1CgCSIui2MhXUDKOszXWYvl4pOM2/dUfSVk
+         BugkQbI9aLOdgFg7hcuaItCOoRbNZQt6vI9P73WFJoeIO9uP4zBbw1mYIpkW2GMc61rO
+         9UDw==
+In-Reply-To: <CAL_JsqKVCdk8nFwmtfNt4mMOVYFVxefgafP6JtXThvFhROFB8w@mail.gmail.com>
+Sender: linux-kernel-owner@vger.kernel.org
+List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Rob Herring <robh@kernel.org>
-Cc: devicetree@vger.kernel.org, Kumar Gala <kumar.gala@linaro.org>, Frank Rowand <frowand.list@gmail.com>, Stephen Rothwell <sfr@canb.auug.org.au>, devicetree-spec@vger.kernel.org, Grant Likely <grant.likely@arm.com>, linuxppc-dev <linuxppc-dev@lists.ozlabs.org>, David Gibson <david@gibson.dropbear.id.au>
+To: robh@kernel.org
+Cc: frowand.list@gmail.com, devicetree@vger.kernel.org, devicetree-spec@vger.kernel.org, lkml <linux-kernel@vger.kernel.org>, grant.likely@arm.com, Mark Rutland <mark.rutland@arm.com>, geert+renesas@glider.be, Linus Walleij <linus.walleij@linaro.org>, Thierry Reding <thierry.reding@gmail.com>, Mark Brown <broonie@kernel.org>, shawnguo@kernel.org, bjorn.andersson@linaro.org, Arnd Bergmann <arnd@arndb.de>, sboyd@kernel.org, jic23@kernel.org
 
-On Fri, Aug 24, 2018 at 10:14:01AM -0500, Rob Herring wrote:
-> Another question: Is there ever a case where the node name in the path
-> aka 'driver-name' doesn't match the 'name' property? I think this
-> generally can't happen on FDT as the 'name' property is generated when
-> we unflatten it though I suppose one could craft an FDT with name
-> properties.
+On Fri, Apr 20, 2018 at 9:36 PM Rob Herring <robh@kernel.org> wrote:
+> I share the concern as I doubt most kernel developers don't know
+> jsonschema. But then the alternative is us defining and writing our
+> own thing which is C like 'cause that's what kernel developers
+> understand. My hope is to simplify and restrict things enough that it
+> writing a binding doc is straightforward without being jsonschema
+> experts. That was the intent of this patch without going into all the
+> details behind it.
 
-In Open Firmware, it *is* the "name" property :-)
+When schemas were first discussed long, long ago the idea was to have
+a n arbitrator who controls the schema (like Grant/Rob) so there is no
+need for general schema design knowledge in random kernel developers.
 
-> There's also various places in the kernel that check for a NULL name
-> which doesn't seem like it could happen either other than the root
-> node.
+First a developer should try and build their device tree using the
+existing schema. Then only if they find that impossible to do so
+should they propose schema changes. The schema arbitrator would then
+look at those changes and work them into the existing schemas as
+needed. Doing this via an arbitrator will ensure consistency in the
+overall schema design while eliminating redundancy with slight
+variations (like we have now).
 
-In Open Firmware the root node is required to have a "name" property, too.
-There are systems that violate that rule (as with most rules...)
+Another side effect of schemas is that as they evolve and enforce
+commonality among driver implementation it will become possible to
+turn those in-common pieces into driver libraries.
 
-
-Segher
+-- 
+Jon Smirl
+jonsmirl@gmail.com
