@@ -1,144 +1,84 @@
 From: Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: Device Tree Evolution Project - call notes - 29th January
-Date: Thu, 30 Jan 2020 13:56:17 +0000
-Message-ID: <20200130135605.GQ3697@linaro.org>
+Subject: System DT - thinking a sprint would help
+Date: Thu, 6 Feb 2020 15:59:07 +0000
+Message-ID: <20200206155907.GQ6796@tack.einval.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=date:from:to:cc:subject:message-id:mime-version:content-disposition
-         :content-transfer-encoding:user-agent;
-        bh=Lnf5FRVVNBexzgBv+pgwwWSQYnhtWwX3QZ+O26pOJv0=;
-        b=rt+Fy4H+i+ovLAE82z5USUtZ09cLi/sSMyFdXL5nrEvTd5Q+ieAswVejbanxK6srkg
-         7WWd7JJ5dYv8mPOQWJqBPuARKvxKtAelDHI8/E9yJL0BvIFOuspKNHhs0WuMD5MTM0ZV
-         p7ulSY9N1LnVc8S7S7l6ReCp6IvbU4F3LqZmaW5ujxj48LYeSegLOYWiEO3+ZcueMkGI
-         EwdOmrW9P4LO10o+aeYUH9LdHLBzQEiahNv1As9rq4wEAaOYIUxEY37UeqQ/OqdpltGQ
-         nLWTVf8rpGLlpQXfXNaCAYm7qYQ4WSiImZ1Zz0UegV+0iJM/8HJy4sAAyU68HFiCO/Y0
-         mdmA==
+         :user-agent;
+        bh=osoOsZ8FKK5zJM6gjdEibf1yKf6NjOVffyI/6NGN7wA=;
+        b=PIBIIgbjo9b6ScNLXzPtNPL9x2pXI8/skrgaIdBhQSD22y7pCKoJlxydGxsAvokecg
+         xPsT1aEOhB4nA/cvV+O/wMPIb+pGlBAv2tXFz3bsguN6TOsiaEGukFIiNIMg8aLIdDol
+         AYmXesL8UJq7Ar8cpCiq6o5TXANNoE6hP+VEIE65Sk2AFgsU7PGVzMf4nbzLrxH8s3I8
+         ourow7kQ9KOMIFkgxvHCPY1VG+HP+o/8I+5PEtpMSTbuCz0elB85HBgQssE7JsHdTYD5
+         keYWyxEoEAj1oBsbFx9QrTdhToGt2JhEEpJNgZPYri+mqZymSFlcBBBeGiXmDNaf7+Y9
+         0bbg==
 Content-Disposition: inline
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org, system-dt-ZwoEplunGu1b+pB8xrm1Mtaxn9tAw+E3@public.gmane.org
+Cc: Grant Likely <Grant.Likely-5wv7dgnIgG8@public.gmane.org>, Arnd Bergmann <arnd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Olof Johansson <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <Rob.Herring-5wv7dgnIgG8@public.gmane.org>, Mark Brown <mark.brown-5wv7dgnIgG8@public.gmane.org>, Stefano Stabellini <stefanos-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, Bruce Ashfield <bruce.ashfield-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, Benjamin Gaignard <benjamin.gaignard-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 
-Hi folks!
+Hi all!
 
-I'm sharing the notes from our regular meeting that was held
-yesterday. We had updates around several of our initiatives,
-particularly around System DT and runtime identification of DTB.
+[ tl;dr - we're trying to organise a sprint - see the end ]
 
-More details about the meeting etc. at the end.
+Due to the Linux on Arm meetup this week, quite a few of our DT
+community happened to be in Cambridge together last night. We took the
+opportunity to get together for food and beer, and we naturally ended
+up mulling over a whole range of things, not least the ongoing System
+DT design work.
 
-Attendees
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
+As is the nature of this kind of gathering, we had a whole range of
+opinions and ideas, much more than I can faithfully recall to share
+here in great detail. Grant has been keen to try and keep system-dt
+compatible with Linux DT usage if that's possible, and Stefano has
+been working with that in mind. Rob is concerned about how things
+might scale with lots of domains, for example. Olof is keen to talk
+about a higher-level design to make it easier to express complex
+layouts. And so on.
 
-SteveM - Arm
-GrantL - Arm
-MarkB - Arm
-RobH - Arm
-AlexandreT - ST
-BenjaminG - ST
-EricF - ST
-Lo=EFcP - ST
-BillM - TI
-FrankR - ??
-BruceA - Xilinx
-StefanoS - Xilinx
-MathieuP - Linaro
-BillF - Linaro
-KumarG - Linaro
-VincentG - Linaro
-TrilokS - Qualcomm
+There is one thing that *did* stand out: we agreed that it's probably
+time to try and get all of the interested people in a room together
+for a few days with a whiteboard, to really thrash out what's needed
+and how to achieve it. With the right people, we can go through all
+our needs, pick up the ideas we have and hopefully get some prototypes
+ready to evaluate.
 
-Notes
-=3D=3D=3D=3D=3D
+So, who's interested? I believe all the people in CC here are likely
+keen to be involved. Anybody else?
 
-1. DTE-18 - DTB runtime ID
-   a. Alexandre posted patches, went through review
-   b. v2 coming soon
-      1. Don't modify DTC directly, but tweak how things are built
-         slightly
-      2. ETA? maybe 3w
+Although we have Linaro Connect in Budapest at the end of March,
+that's really *not* a good place to try and meet up, for a couple of
+reasons: not everybody will be there, and we'll have too many
+distractions to be able to focus on this. Let's *not* do that.
 
-2. DTE-19 - working out what's changed since the DTB build
-   a. Time to talk on the list to see how to do this best
-      1. Checksum per node, one of 2 ways:
-         a. Modify the sources to include the checksum?
-         b. Update the DTB format to add support directly?
-      2. Discuss on-list
+AFAICS we're geographically roughly split between US/Canada and
+Europe, so I'm thinking a week in either the US or Europe, some time
+in the next 2-3 months:
 
-3. DTE-17: Arnd's prototype work for external DT repo
-   a. Status update? No Arnd this week, so not this time
-   b. Not everybody will be at FOSDEM or the Arm kernel summit in
-      Cambridge, so limited scope for discussion about this
-   c. SM will try to organise something for Cambridge next week
+ * Would a week before or after Connect work, in Europe (16th-20th
+   March, or 30th March to 3rd April)? I can look for options in the
+   UK easily, with maybe either Arm or Linaro hosting.
 
-4. DTE-2: System DT
-   a. Adding spec for new bindings is ok, but need to add more
-      explanation of how things should be used (e.g. how to map
-      interrupts to multiple domains, multiple controllers)
-   b. Stefano promises more docs soon to describe things
-   c. ETA for having a working demo?
-      1. Will change again before it heads upstream
-      2. Things work ok for a demo already! :-)
-      3. Just needs more docs to describe
+ * Alternatively, a week's meeting in the US, deliberately avoiding
+   the Connect week so we don't wipe people out with travel: Maybe 2-6
+   or 9-13 March? Or push back into April if that's too short notice,
+   of course. Would Xilinx be able to host something for us, maybe? Or
+   another possibility might be the Linaro office in Nashua?
 
-5. DTE-8: DTB lifecycle
-   a. Trying to get LEDGE group working on this, working on planning
-      meetings for next week
-   b. Interested parties - please say so and we'll try and include you
-      too
-   c. Specifically thinking about bootloader-applied overlays, not
-      dynamic stuff applied by kernel at runtime
-   d. TI really looking for a collaboration space here
-   e. ST interested in U-Boot starting with one DT, then applying an
-      overlay before passing it to kernel
-      1. Source-level problem here - whey do we have two different
-         (almost-complete) DTs in both U-Boot and Linux?
-      2. DTE-17 could help here
-
-6. Meetings at BUD20 Connect?
-   a. Let Steve know about availability and what you'd like to talk
-      about
-   b. Sessions in the BUD20 schedule:
-      1. Thu 11:00: System DT
-      2. Mon 15:30: New approach to dynamically manage hardware bus
-         firewalls
-
-7. Linux on Arm summit in Cambridge next week
-   a. Some of our group will be around and may have some informal
-      discussion
-   b. Not a formal DT sprint!
-
-
-Background information about DTE
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-
-Linaro engineers are working on a range of initiatives in the DT
-space, collected together as a project called Device Tree Evolution
-(DTE). We hold a discussion call every second Wednesday at=20
-1700 GMT / 1200 EST / 0900 PST. If you would like to be invited, please
-ask me (Steve McIntyre).
-
-This is a summary of the notes from the most recent meeting. I aim to
-tidy up and post the meeting notes shortly after each meeting. The raw
-notes are published at
-
-https://docs.google.com/document/d/e/2PACX-1vRVDrVFWjIOascqZFCO--T8pIqyFB_M=
-Dh9cvgyoqhI6Y0tqaA9TcCcvQhcmxi5IY7CG44JfIrCdAUDL/pub
-
-For more information about DTE, see:
-
- * https://www.linaro.org/engineering/core/devicetree-evolution/
- * https://www.linaro.org/assets/pdf/Linaro-White-Paper--Device-Tree-Evolut=
-ion.pdf
+I'm open to other suggestions for time and venue. Let's try to make
+something work here?
 
 Cheers,
---=20
-Steve McIntyre                                steve.mcintyre-QSEj5FYQhm4dnm=
-+yROfE0A@public.gmane.org
+
+Steve
+
+-- 
+Steve McIntyre                                steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org
 <http://www.linaro.org/> Linaro.org | Open source software for ARM SoCs
 
