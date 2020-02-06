@@ -1,99 +1,96 @@
-From: Francois Ozog <francois.ozog-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: Re: System DT - thinking a sprint would help
-Date: Thu, 6 Feb 2020 18:04:56 +0100
-Message-ID: <CAHFG_=Xtz6cZUUiSCCRLzhTEVmY-STZSKp6zTzDtcGj3svMAbg@mail.gmail.com>
+From: Nathalie Chan King Choy <nathalie-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>
+Subject: RE: [System-dt] System DT - thinking a sprint would help
+Date: Thu, 6 Feb 2020 17:48:11 +0000
+Message-ID: <BYAPR02MB5621F0DA2DA2C69C318DE8C0A51D0@BYAPR02MB5621.namprd02.prod.outlook.com>
 References: <20200206155907.GQ6796@tack.einval.com>
+ <010001701b769f8f-8cbe493b-840f-4055-a955-e7b1bebe87f6-000000@email.amazonses.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=okU+4suaoRbjuQgA/sfq9lj6rWCemMIvcjg8SeY57yU=;
-        b=b7MAvk/Fn4kMlxyycygtUBCpkWqVoom2vv/ry+q36/TZX5lcKr6HQpfaFqCGwKQLVL
-         3A7O1oYmlnU5fZ6kVDdoFyTXMFLkM9Jp8tU98hGcUBGE4Hr9qfTLz0mAl5Xe5RY9XyZI
-         kBYAua4aoUUhp9vkZhLHeNd1ItfsPEOy9NnpOME4KpeLS1g+6FKLzTFjFv70H08n0Oj8
-         pAbC+67EtNg80Ae0KxVBEArElSIKP+39y/rN9C9BanEJb2oG5TxQ/lLRXeoA6LU86x+x
-         UCk0Ml3fxMLSfBXRtf2Wgab2fvdzZstn3GJrof2J3nyvqPd8DTcs2MPZZAOjGRCzpAl1
-         L4mg==
-In-Reply-To: <20200206155907.GQ6796-RWaXQMOneMVkKwkEErXb8g@public.gmane.org>
+ d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PAbhO0nBCp4I+wKgnBfIH2ovSFjvlmLYqRk1m420afA=;
+ b=SRTf+YPDwB92dHc4CbDVYBbBz0K+xJrONj2Bksh9t4R/x/ttGw9qGDpjB2XF++/a9Bw3255LakGsw+cSH4PtORq+8Rf0UwEo6nfsUdnp6031SRqNMu1LNZbjO0vkv+qN7VSXGRq8B5AsmNw7jGlXykTosXRhBnbAdzEc8JljyJc=
+In-Reply-To: <010001701b769f8f-8cbe493b-840f-4055-a955-e7b1bebe87f6-000000-p/GC64/jrecnJqMo6gzdpkEOCMrvLtNR@public.gmane.org>
+Content-Language: en-US
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-To: Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org, system-dt-ZwoEplunGu1b+pB8xrm1Mtaxn9tAw+E3@public.gmane.org, Grant Likely <Grant.Likely-5wv7dgnIgG8@public.gmane.org>, Arnd Bergmann <arnd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Olof Johansson <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Rob Herring <Rob.Herring-5wv7dgnIgG8@public.gmane.org>, Mark Brown <mark.brown-5wv7dgnIgG8@public.gmane.org>, Stefano Stabellini <stefanos-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, Bruce Ashfield <bruce.ashfield-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, Benjamin Gaignard <benjamin.gaignard-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+To: Francois Ozog <francois.ozog-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Cc: Stefano Stabellini <stefanos-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, "dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org" <dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Bruce Ashfield <brucea-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Rob Herring <Rob.Herring-5wv7dgnIgG8@public.gmane.org>, Mark Brown <mark.brown-5wv7dgnIgG8@public.gmane.org>, Benjamin Gaignard <benjamin.gaignard-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Olof Johansson <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>, Arnd Bergmann <arnd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 
-count me in.
-
-
-On Thu, 6 Feb 2020 at 16:59, Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> wro=
-te:
->
-> Hi all!
->
-> [ tl;dr - we're trying to organise a sprint - see the end ]
->
-> Due to the Linux on Arm meetup this week, quite a few of our DT
-> community happened to be in Cambridge together last night. We took the
-> opportunity to get together for food and beer, and we naturally ended
-> up mulling over a whole range of things, not least the ongoing System
-> DT design work.
->
-> As is the nature of this kind of gathering, we had a whole range of
-> opinions and ideas, much more than I can faithfully recall to share
-> here in great detail. Grant has been keen to try and keep system-dt
-> compatible with Linux DT usage if that's possible, and Stefano has
-> been working with that in mind. Rob is concerned about how things
-> might scale with lots of domains, for example. Olof is keen to talk
-> about a higher-level design to make it easier to express complex
-> layouts. And so on.
->
-> There is one thing that *did* stand out: we agreed that it's probably
-> time to try and get all of the interested people in a room together
-> for a few days with a whiteboard, to really thrash out what's needed
-> and how to achieve it. With the right people, we can go through all
-> our needs, pick up the ideas we have and hopefully get some prototypes
-> ready to evaluate.
->
-> So, who's interested? I believe all the people in CC here are likely
-> keen to be involved. Anybody else?
->
-> Although we have Linaro Connect in Budapest at the end of March,
-> that's really *not* a good place to try and meet up, for a couple of
-> reasons: not everybody will be there, and we'll have too many
-> distractions to be able to focus on this. Let's *not* do that.
->
-> AFAICS we're geographically roughly split between US/Canada and
-> Europe, so I'm thinking a week in either the US or Europe, some time
-> in the next 2-3 months:
->
->  * Would a week before or after Connect work, in Europe (16th-20th
->    March, or 30th March to 3rd April)? I can look for options in the
->    UK easily, with maybe either Arm or Linaro hosting.
->
->  * Alternatively, a week's meeting in the US, deliberately avoiding
->    the Connect week so we don't wipe people out with travel: Maybe 2-6
->    or 9-13 March? Or push back into April if that's too short notice,
->    of course. Would Xilinx be able to host something for us, maybe? Or
->    another possibility might be the Linaro office in Nashua?
->
-> I'm open to other suggestions for time and venue. Let's try to make
-> something work here?
->
-> Cheers,
->
-> Steve
->
-> --
-> Steve McIntyre                                steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org
-> <http://www.linaro.org/> Linaro.org | Open source software for ARM SoCs
->
->
-
-
---=20
-Fran=C3=A7ois-Fr=C3=A9d=C3=A9ric Ozog | Director Linaro Edge & Fog Computin=
-g Group
-T: +33.67221.6485
-francois.ozog-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org | Skype: ffozog
+SGkgU3RldmUsDQoNCkFkZGl0aW9uYWwgZm9sa3Mgd2hvIHNwb2tlIGR1cmluZyB0aGUgbGFzdCBT
+eXN0ZW0gRFQgY2FsbCAmIG5vdCBzaG93biBvbiB0aGUgQ0MgbGlzdCB3ZXJlOg0KTG9pYyBmcm9t
+IFNUDQpFdHNhbSAmIERhbiBmcm9tIE1HQw0KVG9tYXMgZnJvbSBYaWxpbngNCg0KQExvaWMsIEV0
+c2FtLCBEYW4sIFRvbWFzOiBBcmUgeW91IGd1eXMgaW50ZXJlc3RlZD8NCg0KVGhhbmtzICYgcmVn
+YXJkcywNCk5hdGhhbGllDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTog
+U3lzdGVtLWR0IDxzeXN0ZW0tZHQtYm91bmNlc0BsaXN0cy5vcGVuYW1wcHJvamVjdC5vcmc+IE9u
+IEJlaGFsZg0KPiBPZiBGcmFuY29pcyBPem9nIHZpYSBTeXN0ZW0tZHQNCj4gU2VudDogVGh1cnNk
+YXksIEZlYnJ1YXJ5IDYsIDIwMjAgOTowNSBBTQ0KPiBUbzogU3RldmUgTWNJbnR5cmUgPHN0ZXZl
+Lm1jaW50eXJlQGxpbmFyby5vcmc+DQo+IENjOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHN0ZWZhbm9z
+QHhpbGlueC5jb20+OyBkdGUtYWxsQGxpbmFyby5vcmc7IEJydWNlDQo+IEFzaGZpZWxkIDxicnVj
+ZWFAeGlsaW54LmNvbT47IGRldmljZXRyZWUtc3BlY0B2Z2VyLmtlcm5lbC5vcmc7IFJvYg0KPiBI
+ZXJyaW5nIDxSb2IuSGVycmluZ0Bhcm0uY29tPjsgTWFyayBCcm93biA8bWFyay5icm93bkBhcm0u
+Y29tPjsNCj4gQmVuamFtaW4gR2FpZ25hcmQgPGJlbmphbWluLmdhaWduYXJkQGxpbmFyby5vcmc+
+OyBPbG9mIEpvaGFuc3Nvbg0KPiA8b2xvZkBsaXhvbS5uZXQ+OyBzeXN0ZW0tZHRAbGlzdHMub3Bl
+bmFtcHByb2plY3Qub3JnOyBBcm5kIEJlcmdtYW5uDQo+IDxhcm5kQGxpbmFyby5vcmc+DQo+IFN1
+YmplY3Q6IFJlOiBbU3lzdGVtLWR0XSBTeXN0ZW0gRFQgLSB0aGlua2luZyBhIHNwcmludCB3b3Vs
+ZCBoZWxwDQo+IA0KPiBFWFRFUk5BTCBFTUFJTA0KPiANCj4gY291bnQgbWUgaW4uDQo+IA0KPiAN
+Cj4gT24gVGh1LCA2IEZlYiAyMDIwIGF0IDE2OjU5LCBTdGV2ZSBNY0ludHlyZSA8c3RldmUubWNp
+bnR5cmVAbGluYXJvLm9yZz4NCj4gd3JvdGU6DQo+ID4NCj4gPiBIaSBhbGwhDQo+ID4NCj4gPiBb
+IHRsO2RyIC0gd2UncmUgdHJ5aW5nIHRvIG9yZ2FuaXNlIGEgc3ByaW50IC0gc2VlIHRoZSBlbmQg
+XQ0KPiA+DQo+ID4gRHVlIHRvIHRoZSBMaW51eCBvbiBBcm0gbWVldHVwIHRoaXMgd2VlaywgcXVp
+dGUgYSBmZXcgb2Ygb3VyIERUDQo+ID4gY29tbXVuaXR5IGhhcHBlbmVkIHRvIGJlIGluIENhbWJy
+aWRnZSB0b2dldGhlciBsYXN0IG5pZ2h0LiBXZSB0b29rIHRoZQ0KPiA+IG9wcG9ydHVuaXR5IHRv
+IGdldCB0b2dldGhlciBmb3IgZm9vZCBhbmQgYmVlciwgYW5kIHdlIG5hdHVyYWxseSBlbmRlZA0K
+PiA+IHVwIG11bGxpbmcgb3ZlciBhIHdob2xlIHJhbmdlIG9mIHRoaW5ncywgbm90IGxlYXN0IHRo
+ZSBvbmdvaW5nIFN5c3RlbQ0KPiA+IERUIGRlc2lnbiB3b3JrLg0KPiA+DQo+ID4gQXMgaXMgdGhl
+IG5hdHVyZSBvZiB0aGlzIGtpbmQgb2YgZ2F0aGVyaW5nLCB3ZSBoYWQgYSB3aG9sZSByYW5nZSBv
+Zg0KPiA+IG9waW5pb25zIGFuZCBpZGVhcywgbXVjaCBtb3JlIHRoYW4gSSBjYW4gZmFpdGhmdWxs
+eSByZWNhbGwgdG8gc2hhcmUNCj4gPiBoZXJlIGluIGdyZWF0IGRldGFpbC4gR3JhbnQgaGFzIGJl
+ZW4ga2VlbiB0byB0cnkgYW5kIGtlZXAgc3lzdGVtLWR0DQo+ID4gY29tcGF0aWJsZSB3aXRoIExp
+bnV4IERUIHVzYWdlIGlmIHRoYXQncyBwb3NzaWJsZSwgYW5kIFN0ZWZhbm8gaGFzDQo+ID4gYmVl
+biB3b3JraW5nIHdpdGggdGhhdCBpbiBtaW5kLiBSb2IgaXMgY29uY2VybmVkIGFib3V0IGhvdyB0
+aGluZ3MNCj4gPiBtaWdodCBzY2FsZSB3aXRoIGxvdHMgb2YgZG9tYWlucywgZm9yIGV4YW1wbGUu
+IE9sb2YgaXMga2VlbiB0byB0YWxrDQo+ID4gYWJvdXQgYSBoaWdoZXItbGV2ZWwgZGVzaWduIHRv
+IG1ha2UgaXQgZWFzaWVyIHRvIGV4cHJlc3MgY29tcGxleA0KPiA+IGxheW91dHMuIEFuZCBzbyBv
+bi4NCj4gPg0KPiA+IFRoZXJlIGlzIG9uZSB0aGluZyB0aGF0ICpkaWQqIHN0YW5kIG91dDogd2Ug
+YWdyZWVkIHRoYXQgaXQncyBwcm9iYWJseQ0KPiA+IHRpbWUgdG8gdHJ5IGFuZCBnZXQgYWxsIG9m
+IHRoZSBpbnRlcmVzdGVkIHBlb3BsZSBpbiBhIHJvb20gdG9nZXRoZXINCj4gPiBmb3IgYSBmZXcg
+ZGF5cyB3aXRoIGEgd2hpdGVib2FyZCwgdG8gcmVhbGx5IHRocmFzaCBvdXQgd2hhdCdzIG5lZWRl
+ZA0KPiA+IGFuZCBob3cgdG8gYWNoaWV2ZSBpdC4gV2l0aCB0aGUgcmlnaHQgcGVvcGxlLCB3ZSBj
+YW4gZ28gdGhyb3VnaCBhbGwNCj4gPiBvdXIgbmVlZHMsIHBpY2sgdXAgdGhlIGlkZWFzIHdlIGhh
+dmUgYW5kIGhvcGVmdWxseSBnZXQgc29tZSBwcm90b3R5cGVzDQo+ID4gcmVhZHkgdG8gZXZhbHVh
+dGUuDQo+ID4NCj4gPiBTbywgd2hvJ3MgaW50ZXJlc3RlZD8gSSBiZWxpZXZlIGFsbCB0aGUgcGVv
+cGxlIGluIENDIGhlcmUgYXJlIGxpa2VseQ0KPiA+IGtlZW4gdG8gYmUgaW52b2x2ZWQuIEFueWJv
+ZHkgZWxzZT8NCj4gPg0KPiA+IEFsdGhvdWdoIHdlIGhhdmUgTGluYXJvIENvbm5lY3QgaW4gQnVk
+YXBlc3QgYXQgdGhlIGVuZCBvZiBNYXJjaCwNCj4gPiB0aGF0J3MgcmVhbGx5ICpub3QqIGEgZ29v
+ZCBwbGFjZSB0byB0cnkgYW5kIG1lZXQgdXAsIGZvciBhIGNvdXBsZSBvZg0KPiA+IHJlYXNvbnM6
+IG5vdCBldmVyeWJvZHkgd2lsbCBiZSB0aGVyZSwgYW5kIHdlJ2xsIGhhdmUgdG9vIG1hbnkNCj4g
+PiBkaXN0cmFjdGlvbnMgdG8gYmUgYWJsZSB0byBmb2N1cyBvbiB0aGlzLiBMZXQncyAqbm90KiBk
+byB0aGF0Lg0KPiA+DQo+ID4gQUZBSUNTIHdlJ3JlIGdlb2dyYXBoaWNhbGx5IHJvdWdobHkgc3Bs
+aXQgYmV0d2VlbiBVUy9DYW5hZGEgYW5kDQo+ID4gRXVyb3BlLCBzbyBJJ20gdGhpbmtpbmcgYSB3
+ZWVrIGluIGVpdGhlciB0aGUgVVMgb3IgRXVyb3BlLCBzb21lIHRpbWUNCj4gPiBpbiB0aGUgbmV4
+dCAyLTMgbW9udGhzOg0KPiA+DQo+ID4gICogV291bGQgYSB3ZWVrIGJlZm9yZSBvciBhZnRlciBD
+b25uZWN0IHdvcmssIGluIEV1cm9wZSAoMTZ0aC0yMHRoDQo+ID4gICAgTWFyY2gsIG9yIDMwdGgg
+TWFyY2ggdG8gM3JkIEFwcmlsKT8gSSBjYW4gbG9vayBmb3Igb3B0aW9ucyBpbiB0aGUNCj4gPiAg
+ICBVSyBlYXNpbHksIHdpdGggbWF5YmUgZWl0aGVyIEFybSBvciBMaW5hcm8gaG9zdGluZy4NCj4g
+Pg0KPiA+ICAqIEFsdGVybmF0aXZlbHksIGEgd2VlaydzIG1lZXRpbmcgaW4gdGhlIFVTLCBkZWxp
+YmVyYXRlbHkgYXZvaWRpbmcNCj4gPiAgICB0aGUgQ29ubmVjdCB3ZWVrIHNvIHdlIGRvbid0IHdp
+cGUgcGVvcGxlIG91dCB3aXRoIHRyYXZlbDogTWF5YmUgMi02DQo+ID4gICAgb3IgOS0xMyBNYXJj
+aD8gT3IgcHVzaCBiYWNrIGludG8gQXByaWwgaWYgdGhhdCdzIHRvbyBzaG9ydCBub3RpY2UsDQo+
+ID4gICAgb2YgY291cnNlLiBXb3VsZCBYaWxpbnggYmUgYWJsZSB0byBob3N0IHNvbWV0aGluZyBm
+b3IgdXMsIG1heWJlPyBPcg0KPiA+ICAgIGFub3RoZXIgcG9zc2liaWxpdHkgbWlnaHQgYmUgdGhl
+IExpbmFybyBvZmZpY2UgaW4gTmFzaHVhPw0KPiA+DQo+ID4gSSdtIG9wZW4gdG8gb3RoZXIgc3Vn
+Z2VzdGlvbnMgZm9yIHRpbWUgYW5kIHZlbnVlLiBMZXQncyB0cnkgdG8gbWFrZQ0KPiA+IHNvbWV0
+aGluZyB3b3JrIGhlcmU/DQo+ID4NCj4gPiBDaGVlcnMsDQo+ID4NCj4gPiBTdGV2ZQ0KPiA+DQo+
+ID4gLS0NCj4gPiBTdGV2ZSBNY0ludHlyZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+c3RldmUubWNpbnR5cmVAbGluYXJvLm9yZw0KPiA+IDxodHRwOi8vd3d3LmxpbmFyby5vcmcvPiBM
+aW5hcm8ub3JnIHwgT3BlbiBzb3VyY2Ugc29mdHdhcmUgZm9yIEFSTQ0KPiA+IFNvQ3MNCj4gPg0K
+PiA+DQo+IA0KPiANCj4gLS0NCj4gRnJhbsOnb2lzLUZyw6lkw6lyaWMgT3pvZyB8IERpcmVjdG9y
+IExpbmFybyBFZGdlICYgRm9nIENvbXB1dGluZyBHcm91cA0KPiBUOiArMzMuNjcyMjEuNjQ4NQ0K
+PiBmcmFuY29pcy5vem9nQGxpbmFyby5vcmcgfCBTa3lwZTogZmZvem9nDQo+IC0tDQo+IFN5c3Rl
+bS1kdCBtYWlsaW5nIGxpc3QNCj4gU3lzdGVtLWR0QGxpc3RzLm9wZW5hbXBwcm9qZWN0Lm9yZw0K
+PiBodHRwczovL2xpc3RzLm9wZW5hbXBwcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3N5c3Rl
+bS1kdA0K
