@@ -1,121 +1,202 @@
-From: Loic PALLARDY <loic.pallardy-qxv4g6HH51o@public.gmane.org>
-Subject: RE: [System-dt] System DT - thinking a sprint would help
-Date: Fri, 7 Feb 2020 15:48:45 +0000
-Message-ID: <d276b22b6e8249bc9eda9f92f9f52f5f@SFHDAG7NODE2.st.com>
+From: Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Subject: Re: [System-dt] System DT - thinking a sprint would help
+Date: Fri, 7 Feb 2020 19:08:41 +0000
+Message-ID: <20200207190841.GE32331@linaro.org>
 References: <20200206155907.GQ6796@tack.einval.com>
  <010001701b769f8f-8cbe493b-840f-4055-a955-e7b1bebe87f6-000000@email.amazonses.com>
  <BYAPR02MB5621F0DA2DA2C69C318DE8C0A51D0@BYAPR02MB5621.namprd02.prod.outlook.com>
+ <d276b22b6e8249bc9eda9f92f9f52f5f@SFHDAG7NODE2.st.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com; h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=RwnqJGFoO9AOz+znUQ6lxe0D9lHkgX/LTBoY4yl2MmA=;
- b=u6f9pl58ibg+b8tTtzG6ov5zatzRUoTrxaJPcLG01T2SyR9sKx/Hjh+B1vhkgzg23WOK
- NWOEfABf7nGJp2r5mj9kI4LytjRzi5WDAw6oYew8cea+KtWkvf0gz2vg84jTn27mWv/S
- akk+M1t2Vqwiekr0bpufyvkNepToa4/dyzuckk5QutpFshATFRLylKMzbze9MUk6YnP0
- 0lmdmNlUvC+zmCpycIt18LIWVUHCUBYNJe8oZJaYtg7kr6lKTIZsO4EYoFCImb+ieDPL
- xWPG5NV/ZC2ePZjShwBslxK93na20VbdSLVUnlHwsylW5DMpf5vZXgZejWhQk9FJQ8gf sQ== 
-In-Reply-To: <BYAPR02MB5621F0DA2DA2C69C318DE8C0A51D0-JPgLbEBPuzqwE48iOvlP/6nrV9Ap65cLvxpqHgZTriW3zl9H0oFU5g@public.gmane.org>
-Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:content-transfer-encoding:in-reply-to
+         :user-agent;
+        bh=maEE82aOSPCrKhpjSsSrG1bpWBaQwfqxAI2uiDHRu1M=;
+        b=Ci3wfq14Eshgh+6GUP2ADqEinwKJoEU9AhMTThVimr4l8gQJGQV6ztLJ7+aHZmmUUK
+         EhINl1s3/GbTWrvUjf3wdtgEFxbv1h2Y+RA3ME+hoRV94cTQFuQ3zdV/JptrGsynjN58
+         jLrUEYszd5KeD4nw7y/JVgbD5ew16Bg6PzZtCn0EDJL0oQxUA9+ejawwDjw/ukPzyTlx
+         5sl/d56hQyCwl/WsbgYWsV5V/iEQDlfsm2pJsNZzUEzbfAGLj/FDOcDMM/1WLRuBvsan
+         6ntl8ZynnlNcNz8mkp1c6bKT4rPt8VzdP8CkcW4hyOrjlDh1Zlu1vLheCjd6Za8PLoSX
+         +EOw==
+Content-Disposition: inline
+In-Reply-To: <d276b22b6e8249bc9eda9f92f9f52f5f-GGltqRL9kSEdIAuSVraBWEEOCMrvLtNR@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Nathalie Chan King Choy <nathalie-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, Francois Ozog <francois.ozog-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Cc: Stefano Stabellini <stefanos-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, "dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org" <dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Bruce Ashfield <brucea-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Rob Herring <Rob.Herring-5wv7dgnIgG8@public.gmane.org>, Mark Brown <mark.brown-5wv7dgnIgG8@public.gmane.org>, Benjamin Gaignard <benjamin.gaignard-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Olof Johansson <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>, Arnd Bergmann <arnd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Content-Type: text/plain; charset="iso-8859-1"
+To: Loic PALLARDY <loic.pallardy-qxv4g6HH51o@public.gmane.org>
+Cc: Nathalie Chan King Choy <nathalie-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, Francois Ozog <francois.ozog-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Stefano Stabellini <stefanos-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, "dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org" <dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Bruce Ashfield <brucea-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Rob Herring <Rob.Herring-5wv7dgnIgG8@public.gmane.org>, Mark Brown <mark.brown-5wv7dgnIgG8@public.gmane.org>, Benjamin Gaignard <benjamin.gaignard-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Olof Johansson <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>, Arnd Bergmann <arnd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 
-SGkgU3RldmUsDQoNClN1cmUsIFNUIGlzIGludGVyZXN0ZWQgdG8gcGFydGljaXBhdGUgdG8gYSBz
-cHJpbnQgb24gU3lzdGVtIERldmljZSB0cmVlIGRlZmluaXRpb24uDQpJIGNhbiBwcm9wb3NlIFNU
-IExlIE1hbnMgb2ZmaWNlIHRvIGhvc3QgdGhpcyBldmVudCBpbiBFdXJvcGUgKERpcmVjdCB0cmFp
-biBhY2Nlc3MgZnJvbSBDREcgYWlycG9ydCwgb25seSA1bWluIGJ5IHdhbGsgZnJvbSB0cmFpbiBz
-dGF0aW9uKS4NCgkNClJlZ2FyZHMsDQpMb2ljDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0t
-LS0NCj4gRnJvbTogZHRlLWludGVyZXN0QGxpbmFyby5vcmcgPGR0ZS1pbnRlcmVzdEBsaW5hcm8u
-b3JnPiBPbiBCZWhhbGYgT2YNCj4gTmF0aGFsaWUgQ2hhbiBLaW5nIENob3kNCj4gU2VudDogamV1
-ZGkgNiBmw6l2cmllciAyMDIwIDE4OjQ4DQo+IFRvOiBGcmFuY29pcyBPem9nIDxmcmFuY29pcy5v
-em9nQGxpbmFyby5vcmc+OyBTdGV2ZSBNY0ludHlyZQ0KPiA8c3RldmUubWNpbnR5cmVAbGluYXJv
-Lm9yZz4NCj4gQ2M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFub3NAeGlsaW54LmNvbT47IGR0
-ZS1hbGxAbGluYXJvLm9yZzsgQnJ1Y2UNCj4gQXNoZmllbGQgPGJydWNlYUB4aWxpbnguY29tPjsg
-ZGV2aWNldHJlZS1zcGVjQHZnZXIua2VybmVsLm9yZzsgUm9iDQo+IEhlcnJpbmcgPFJvYi5IZXJy
-aW5nQGFybS5jb20+OyBNYXJrIEJyb3duIDxtYXJrLmJyb3duQGFybS5jb20+Ow0KPiBCZW5qYW1p
-biBHYWlnbmFyZCA8YmVuamFtaW4uZ2FpZ25hcmRAbGluYXJvLm9yZz47IE9sb2YgSm9oYW5zc29u
-DQo+IDxvbG9mQGxpeG9tLm5ldD47IEFybmQgQmVyZ21hbm4gPGFybmRAbGluYXJvLm9yZz4NCj4g
-U3ViamVjdDogUkU6IFtTeXN0ZW0tZHRdIFN5c3RlbSBEVCAtIHRoaW5raW5nIGEgc3ByaW50IHdv
-dWxkIGhlbHANCj4gDQo+IEhpIFN0ZXZlLA0KPiANCj4gQWRkaXRpb25hbCBmb2xrcyB3aG8gc3Bv
-a2UgZHVyaW5nIHRoZSBsYXN0IFN5c3RlbSBEVCBjYWxsICYgbm90IHNob3duIG9uIHRoZQ0KPiBD
-QyBsaXN0IHdlcmU6DQo+IExvaWMgZnJvbSBTVA0KPiBFdHNhbSAmIERhbiBmcm9tIE1HQw0KPiBU
-b21hcyBmcm9tIFhpbGlueA0KPiANCj4gQExvaWMsIEV0c2FtLCBEYW4sIFRvbWFzOiBBcmUgeW91
-IGd1eXMgaW50ZXJlc3RlZD8NCj4gDQo+IFRoYW5rcyAmIHJlZ2FyZHMsDQo+IE5hdGhhbGllDQo+
-IA0KPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gRnJvbTogU3lzdGVtLWR0IDxz
-eXN0ZW0tZHQtYm91bmNlc0BsaXN0cy5vcGVuYW1wcHJvamVjdC5vcmc+IE9uDQo+IEJlaGFsZg0K
-PiA+IE9mIEZyYW5jb2lzIE96b2cgdmlhIFN5c3RlbS1kdA0KPiA+IFNlbnQ6IFRodXJzZGF5LCBG
-ZWJydWFyeSA2LCAyMDIwIDk6MDUgQU0NCj4gPiBUbzogU3RldmUgTWNJbnR5cmUgPHN0ZXZlLm1j
-aW50eXJlQGxpbmFyby5vcmc+DQo+ID4gQ2M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFub3NA
-eGlsaW54LmNvbT47IGR0ZS1hbGxAbGluYXJvLm9yZzsgQnJ1Y2UNCj4gPiBBc2hmaWVsZCA8YnJ1
-Y2VhQHhpbGlueC5jb20+OyBkZXZpY2V0cmVlLXNwZWNAdmdlci5rZXJuZWwub3JnOyBSb2INCj4g
-PiBIZXJyaW5nIDxSb2IuSGVycmluZ0Bhcm0uY29tPjsgTWFyayBCcm93biA8bWFyay5icm93bkBh
-cm0uY29tPjsNCj4gPiBCZW5qYW1pbiBHYWlnbmFyZCA8YmVuamFtaW4uZ2FpZ25hcmRAbGluYXJv
-Lm9yZz47IE9sb2YgSm9oYW5zc29uDQo+ID4gPG9sb2ZAbGl4b20ubmV0Pjsgc3lzdGVtLWR0QGxp
-c3RzLm9wZW5hbXBwcm9qZWN0Lm9yZzsgQXJuZCBCZXJnbWFubg0KPiA+IDxhcm5kQGxpbmFyby5v
-cmc+DQo+ID4gU3ViamVjdDogUmU6IFtTeXN0ZW0tZHRdIFN5c3RlbSBEVCAtIHRoaW5raW5nIGEg
-c3ByaW50IHdvdWxkIGhlbHANCj4gPg0KPiA+IEVYVEVSTkFMIEVNQUlMDQo+ID4NCj4gPiBjb3Vu
-dCBtZSBpbi4NCj4gPg0KPiA+DQo+ID4gT24gVGh1LCA2IEZlYiAyMDIwIGF0IDE2OjU5LCBTdGV2
-ZSBNY0ludHlyZSA8c3RldmUubWNpbnR5cmVAbGluYXJvLm9yZz4NCj4gPiB3cm90ZToNCj4gPiA+
-DQo+ID4gPiBIaSBhbGwhDQo+ID4gPg0KPiA+ID4gWyB0bDtkciAtIHdlJ3JlIHRyeWluZyB0byBv
-cmdhbmlzZSBhIHNwcmludCAtIHNlZSB0aGUgZW5kIF0NCj4gPiA+DQo+ID4gPiBEdWUgdG8gdGhl
-IExpbnV4IG9uIEFybSBtZWV0dXAgdGhpcyB3ZWVrLCBxdWl0ZSBhIGZldyBvZiBvdXIgRFQNCj4g
-PiA+IGNvbW11bml0eSBoYXBwZW5lZCB0byBiZSBpbiBDYW1icmlkZ2UgdG9nZXRoZXIgbGFzdCBu
-aWdodC4gV2UgdG9vaw0KPiB0aGUNCj4gPiA+IG9wcG9ydHVuaXR5IHRvIGdldCB0b2dldGhlciBm
-b3IgZm9vZCBhbmQgYmVlciwgYW5kIHdlIG5hdHVyYWxseSBlbmRlZA0KPiA+ID4gdXAgbXVsbGlu
-ZyBvdmVyIGEgd2hvbGUgcmFuZ2Ugb2YgdGhpbmdzLCBub3QgbGVhc3QgdGhlIG9uZ29pbmcgU3lz
-dGVtDQo+ID4gPiBEVCBkZXNpZ24gd29yay4NCj4gPiA+DQo+ID4gPiBBcyBpcyB0aGUgbmF0dXJl
-IG9mIHRoaXMga2luZCBvZiBnYXRoZXJpbmcsIHdlIGhhZCBhIHdob2xlIHJhbmdlIG9mDQo+ID4g
-PiBvcGluaW9ucyBhbmQgaWRlYXMsIG11Y2ggbW9yZSB0aGFuIEkgY2FuIGZhaXRoZnVsbHkgcmVj
-YWxsIHRvIHNoYXJlDQo+ID4gPiBoZXJlIGluIGdyZWF0IGRldGFpbC4gR3JhbnQgaGFzIGJlZW4g
-a2VlbiB0byB0cnkgYW5kIGtlZXAgc3lzdGVtLWR0DQo+ID4gPiBjb21wYXRpYmxlIHdpdGggTGlu
-dXggRFQgdXNhZ2UgaWYgdGhhdCdzIHBvc3NpYmxlLCBhbmQgU3RlZmFubyBoYXMNCj4gPiA+IGJl
-ZW4gd29ya2luZyB3aXRoIHRoYXQgaW4gbWluZC4gUm9iIGlzIGNvbmNlcm5lZCBhYm91dCBob3cg
-dGhpbmdzDQo+ID4gPiBtaWdodCBzY2FsZSB3aXRoIGxvdHMgb2YgZG9tYWlucywgZm9yIGV4YW1w
-bGUuIE9sb2YgaXMga2VlbiB0byB0YWxrDQo+ID4gPiBhYm91dCBhIGhpZ2hlci1sZXZlbCBkZXNp
-Z24gdG8gbWFrZSBpdCBlYXNpZXIgdG8gZXhwcmVzcyBjb21wbGV4DQo+ID4gPiBsYXlvdXRzLiBB
-bmQgc28gb24uDQo+ID4gPg0KPiA+ID4gVGhlcmUgaXMgb25lIHRoaW5nIHRoYXQgKmRpZCogc3Rh
-bmQgb3V0OiB3ZSBhZ3JlZWQgdGhhdCBpdCdzIHByb2JhYmx5DQo+ID4gPiB0aW1lIHRvIHRyeSBh
-bmQgZ2V0IGFsbCBvZiB0aGUgaW50ZXJlc3RlZCBwZW9wbGUgaW4gYSByb29tIHRvZ2V0aGVyDQo+
-ID4gPiBmb3IgYSBmZXcgZGF5cyB3aXRoIGEgd2hpdGVib2FyZCwgdG8gcmVhbGx5IHRocmFzaCBv
-dXQgd2hhdCdzIG5lZWRlZA0KPiA+ID4gYW5kIGhvdyB0byBhY2hpZXZlIGl0LiBXaXRoIHRoZSBy
-aWdodCBwZW9wbGUsIHdlIGNhbiBnbyB0aHJvdWdoIGFsbA0KPiA+ID4gb3VyIG5lZWRzLCBwaWNr
-IHVwIHRoZSBpZGVhcyB3ZSBoYXZlIGFuZCBob3BlZnVsbHkgZ2V0IHNvbWUgcHJvdG90eXBlcw0K
-PiA+ID4gcmVhZHkgdG8gZXZhbHVhdGUuDQo+ID4gPg0KPiA+ID4gU28sIHdobydzIGludGVyZXN0
-ZWQ/IEkgYmVsaWV2ZSBhbGwgdGhlIHBlb3BsZSBpbiBDQyBoZXJlIGFyZSBsaWtlbHkNCj4gPiA+
-IGtlZW4gdG8gYmUgaW52b2x2ZWQuIEFueWJvZHkgZWxzZT8NCj4gPiA+DQo+ID4gPiBBbHRob3Vn
-aCB3ZSBoYXZlIExpbmFybyBDb25uZWN0IGluIEJ1ZGFwZXN0IGF0IHRoZSBlbmQgb2YgTWFyY2gs
-DQo+ID4gPiB0aGF0J3MgcmVhbGx5ICpub3QqIGEgZ29vZCBwbGFjZSB0byB0cnkgYW5kIG1lZXQg
-dXAsIGZvciBhIGNvdXBsZSBvZg0KPiA+ID4gcmVhc29uczogbm90IGV2ZXJ5Ym9keSB3aWxsIGJl
-IHRoZXJlLCBhbmQgd2UnbGwgaGF2ZSB0b28gbWFueQ0KPiA+ID4gZGlzdHJhY3Rpb25zIHRvIGJl
-IGFibGUgdG8gZm9jdXMgb24gdGhpcy4gTGV0J3MgKm5vdCogZG8gdGhhdC4NCj4gPiA+DQo+ID4g
-PiBBRkFJQ1Mgd2UncmUgZ2VvZ3JhcGhpY2FsbHkgcm91Z2hseSBzcGxpdCBiZXR3ZWVuIFVTL0Nh
-bmFkYSBhbmQNCj4gPiA+IEV1cm9wZSwgc28gSSdtIHRoaW5raW5nIGEgd2VlayBpbiBlaXRoZXIg
-dGhlIFVTIG9yIEV1cm9wZSwgc29tZSB0aW1lDQo+ID4gPiBpbiB0aGUgbmV4dCAyLTMgbW9udGhz
-Og0KPiA+ID4NCj4gPiA+ICAqIFdvdWxkIGEgd2VlayBiZWZvcmUgb3IgYWZ0ZXIgQ29ubmVjdCB3
-b3JrLCBpbiBFdXJvcGUgKDE2dGgtMjB0aA0KPiA+ID4gICAgTWFyY2gsIG9yIDMwdGggTWFyY2gg
-dG8gM3JkIEFwcmlsKT8gSSBjYW4gbG9vayBmb3Igb3B0aW9ucyBpbiB0aGUNCj4gPiA+ICAgIFVL
-IGVhc2lseSwgd2l0aCBtYXliZSBlaXRoZXIgQXJtIG9yIExpbmFybyBob3N0aW5nLg0KPiA+ID4N
-Cj4gPiA+ICAqIEFsdGVybmF0aXZlbHksIGEgd2VlaydzIG1lZXRpbmcgaW4gdGhlIFVTLCBkZWxp
-YmVyYXRlbHkgYXZvaWRpbmcNCj4gPiA+ICAgIHRoZSBDb25uZWN0IHdlZWsgc28gd2UgZG9uJ3Qg
-d2lwZSBwZW9wbGUgb3V0IHdpdGggdHJhdmVsOiBNYXliZSAyLTYNCj4gPiA+ICAgIG9yIDktMTMg
-TWFyY2g/IE9yIHB1c2ggYmFjayBpbnRvIEFwcmlsIGlmIHRoYXQncyB0b28gc2hvcnQgbm90aWNl
-LA0KPiA+ID4gICAgb2YgY291cnNlLiBXb3VsZCBYaWxpbnggYmUgYWJsZSB0byBob3N0IHNvbWV0
-aGluZyBmb3IgdXMsIG1heWJlPyBPcg0KPiA+ID4gICAgYW5vdGhlciBwb3NzaWJpbGl0eSBtaWdo
-dCBiZSB0aGUgTGluYXJvIG9mZmljZSBpbiBOYXNodWE/DQo+ID4gPg0KPiA+ID4gSSdtIG9wZW4g
-dG8gb3RoZXIgc3VnZ2VzdGlvbnMgZm9yIHRpbWUgYW5kIHZlbnVlLiBMZXQncyB0cnkgdG8gbWFr
-ZQ0KPiA+ID4gc29tZXRoaW5nIHdvcmsgaGVyZT8NCj4gPiA+DQo+ID4gPiBDaGVlcnMsDQo+ID4g
-Pg0KPiA+ID4gU3RldmUNCj4gPiA+DQo+ID4gPiAtLQ0KPiA+ID4gU3RldmUgTWNJbnR5cmUgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0ZXZlLm1jaW50eXJlQGxpbmFyby5vcmcNCj4g
-PiA+IDxodHRwOi8vd3d3LmxpbmFyby5vcmcvPiBMaW5hcm8ub3JnIHwgT3BlbiBzb3VyY2Ugc29m
-dHdhcmUgZm9yIEFSTQ0KPiA+ID4gU29Dcw0KPiA+ID4NCj4gPiA+DQo+ID4NCj4gPg0KPiA+IC0t
-DQo+ID4gRnJhbsOnb2lzLUZyw6lkw6lyaWMgT3pvZyB8IERpcmVjdG9yIExpbmFybyBFZGdlICYg
-Rm9nIENvbXB1dGluZyBHcm91cA0KPiA+IFQ6ICszMy42NzIyMS42NDg1DQo+ID4gZnJhbmNvaXMu
-b3pvZ0BsaW5hcm8ub3JnIHwgU2t5cGU6IGZmb3pvZw0KPiA+IC0tDQo+ID4gU3lzdGVtLWR0IG1h
-aWxpbmcgbGlzdA0KPiA+IFN5c3RlbS1kdEBsaXN0cy5vcGVuYW1wcHJvamVjdC5vcmcNCj4gPiBo
-dHRwczovL2xpc3RzLm9wZW5hbXBwcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3N5c3RlbS1k
-dA0KPiANCg0K
+Hey Loic,
+
+Cool, that's very helpful thanks! :-)
+
+I'm building a spreadsheet of possible dates now as people share their
+availability. </hint>
+
+Cheers,
+
+Steve
+
+On Fri, Feb 07, 2020 at 03:48:45PM +0000, Loic PALLARDY wrote:
+>Hi Steve,
+>
+>Sure, ST is interested to participate to a sprint on System Device tree de=
+finition.
+>I can propose ST Le Mans office to host this event in Europe (Direct train=
+ access from CDG airport, only 5min by walk from train station).
+>=09
+>Regards,
+>Loic
+>
+>> -----Original Message-----
+>> From: dte-interest-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org <dte-interest=
+-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org> On Behalf Of
+>> Nathalie Chan King Choy
+>> Sent: jeudi 6 f=E9vrier 2020 18:48
+>> To: Francois Ozog <francois.ozog-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org=
+>; Steve McIntyre
+>> <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+>> Cc: Stefano Stabellini <stefanos-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org=
+>; dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org; Bruce
+>> Ashfield <brucea-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>; devicetree-sp=
+ec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org; Rob
+>> Herring <Rob.Herring-5wv7dgnIgG8@public.gmane.org>; Mark Brown <mark.bro=
+wn-5wv7dgnIgG8@public.gmane.org>;
+>> Benjamin Gaignard <benjamin.gaignard-QSEj5FYQhm4dnm+yROfE0A@public.gmane=
+.org>; Olof Johansson
+>> <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>; Arnd Bergmann <arnd-QSEj=
+5FYQhm4dnm+yROfE0A@public.gmane.org>
+>> Subject: RE: [System-dt] System DT - thinking a sprint would help
+>>=20
+>> Hi Steve,
+>>=20
+>> Additional folks who spoke during the last System DT call & not shown on=
+ the
+>> CC list were:
+>> Loic from ST
+>> Etsam & Dan from MGC
+>> Tomas from Xilinx
+>>=20
+>> @Loic, Etsam, Dan, Tomas: Are you guys interested?
+>>=20
+>> Thanks & regards,
+>> Nathalie
+>>=20
+>> > -----Original Message-----
+>> > From: System-dt <system-dt-bounces-ZwoEplunGu1b+pB8xrm1Mtaxn9tAw+E3@pu=
+blic.gmane.org> On
+>> Behalf
+>> > Of Francois Ozog via System-dt
+>> > Sent: Thursday, February 6, 2020 9:05 AM
+>> > To: Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane=
+.org>
+>> > Cc: Stefano Stabellini <stefanos-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.o=
+rg>; dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org; Bruce
+>> > Ashfield <brucea-gjFFaj9aHVfQT0dZR+AlfA@public.gmane.org>; devicetree-=
+spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org; Rob
+>> > Herring <Rob.Herring-5wv7dgnIgG8@public.gmane.org>; Mark Brown <mark.b=
+rown-5wv7dgnIgG8@public.gmane.org>;
+>> > Benjamin Gaignard <benjamin.gaignard-QSEj5FYQhm4dnm+yROfE0A@public.gma=
+ne.org>; Olof Johansson
+>> > <olof-nZhT3qVonbNeoWH0uzbU5w@public.gmane.org>; system-dt-ZwoEplunGu1b=
++pB8xrm1Mtaxn9tAw+E3@public.gmane.org; Arnd Bergmann
+>> > <arnd-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+>> > Subject: Re: [System-dt] System DT - thinking a sprint would help
+>> >
+>> > EXTERNAL EMAIL
+>> >
+>> > count me in.
+>> >
+>> >
+>> > On Thu, 6 Feb 2020 at 16:59, Steve McIntyre <steve.mcintyre-QSEj5FYQhm=
+4dnm+yROfE0A@public.gmane.org>
+>> > wrote:
+>> > >
+>> > > Hi all!
+>> > >
+>> > > [ tl;dr - we're trying to organise a sprint - see the end ]
+>> > >
+>> > > Due to the Linux on Arm meetup this week, quite a few of our DT
+>> > > community happened to be in Cambridge together last night. We took
+>> the
+>> > > opportunity to get together for food and beer, and we naturally ended
+>> > > up mulling over a whole range of things, not least the ongoing System
+>> > > DT design work.
+>> > >
+>> > > As is the nature of this kind of gathering, we had a whole range of
+>> > > opinions and ideas, much more than I can faithfully recall to share
+>> > > here in great detail. Grant has been keen to try and keep system-dt
+>> > > compatible with Linux DT usage if that's possible, and Stefano has
+>> > > been working with that in mind. Rob is concerned about how things
+>> > > might scale with lots of domains, for example. Olof is keen to talk
+>> > > about a higher-level design to make it easier to express complex
+>> > > layouts. And so on.
+>> > >
+>> > > There is one thing that *did* stand out: we agreed that it's probably
+>> > > time to try and get all of the interested people in a room together
+>> > > for a few days with a whiteboard, to really thrash out what's needed
+>> > > and how to achieve it. With the right people, we can go through all
+>> > > our needs, pick up the ideas we have and hopefully get some prototyp=
+es
+>> > > ready to evaluate.
+>> > >
+>> > > So, who's interested? I believe all the people in CC here are likely
+>> > > keen to be involved. Anybody else?
+>> > >
+>> > > Although we have Linaro Connect in Budapest at the end of March,
+>> > > that's really *not* a good place to try and meet up, for a couple of
+>> > > reasons: not everybody will be there, and we'll have too many
+>> > > distractions to be able to focus on this. Let's *not* do that.
+>> > >
+>> > > AFAICS we're geographically roughly split between US/Canada and
+>> > > Europe, so I'm thinking a week in either the US or Europe, some time
+>> > > in the next 2-3 months:
+>> > >
+>> > >  * Would a week before or after Connect work, in Europe (16th-20th
+>> > >    March, or 30th March to 3rd April)? I can look for options in the
+>> > >    UK easily, with maybe either Arm or Linaro hosting.
+>> > >
+>> > >  * Alternatively, a week's meeting in the US, deliberately avoiding
+>> > >    the Connect week so we don't wipe people out with travel: Maybe 2=
+-6
+>> > >    or 9-13 March? Or push back into April if that's too short notice,
+>> > >    of course. Would Xilinx be able to host something for us, maybe? =
+Or
+>> > >    another possibility might be the Linaro office in Nashua?
+>> > >
+>> > > I'm open to other suggestions for time and venue. Let's try to make
+>> > > something work here?
+>> > >
+>> > > Cheers,
+>> > >
+>> > > Steve
+>> > >
+>> > > --
+>> > > Steve McIntyre                                steve.mcintyre-QSEj5FY=
+Qhm4dnm+yROfE0A@public.gmane.org
+>> > > <http://www.linaro.org/> Linaro.org | Open source software for ARM
+>> > > SoCs
+>> > >
+>> > >
+>> >
+>> >
+>> > --
+>> > Fran=E7ois-Fr=E9d=E9ric Ozog | Director Linaro Edge & Fog Computing Gr=
+oup
+>> > T: +33.67221.6485
+>> > francois.ozog-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org | Skype: ffozog
+>> > --
+>> > System-dt mailing list
+>> > System-dt-ZwoEplunGu1b+pB8xrm1Mtaxn9tAw+E3@public.gmane.org
+>> > https://lists.openampproject.org/mailman/listinfo/system-dt
+>>=20
+>
+Cheers,
+--=20
+Steve McIntyre                                steve.mcintyre-QSEj5FYQhm4dnm=
++yROfE0A@public.gmane.org
+<http://www.linaro.org/> Linaro.org | Open source software for ARM SoCs
+
