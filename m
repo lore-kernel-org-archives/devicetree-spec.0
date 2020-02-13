@@ -1,143 +1,201 @@
-From: Francois Ozog <francois.ozog-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: Re: Device Tree Evolution Project - call notes - 29th January
-Date: Wed, 12 Feb 2020 15:54:29 +0100
-Message-ID: <CAHFG_=VHWvJvroBJepfo9XH-DRuMjhzCcUYEb98MspeGMy_s0A@mail.gmail.com>
-References: <20200130135605.GQ3697@linaro.org> <3b257f2a0ccc4f9f9ca0be2de8c9e382@ti.com>
- <CAL_JsqLNHi0ac0E5k9-355vS_GObz7Tu5Av2FLKZ6b-1wjm1Jw@mail.gmail.com> <36cb9cd4-542e-c8da-9615-f26d6ee3e44e@gmail.com>
+From: Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Subject: Device Tree Evolution Project - call notes - 12th February
+Date: Thu, 13 Feb 2020 14:50:33 +0000
+Message-ID: <20200213145028.GR3697@linaro.org>
 Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Vpk9hZ4VflwuyXGNbL00FfFstZt3AoL1PQTMwcCORXU=;
-        b=qH4OU6qhhKrtqQgCiz3jy3UhY6RuEUzgiHYTA5Eck0/qNzgTPCg3e/TSOfVsRX6xDm
-         mqbM1L5AUWiTLNfBE6eWINp3IBP1/zfyuKuzlvgXymmG9naNjsjJfLuPJk8Ct6/3etLv
-         s6qkNY66tjlr4jaJFKp4peAScMJy4D+58iYqlwKDpicFCYn+CBu8mnNBnQzJ7bVQqTki
-         4fYb2EV415eIHKdIUeK5oYdUd4IX8UuW4BmweBcmD6OnZFUcEBWYCP/NRvvO6RpfHJq6
-         IIu4I9eDnZqxZqctefWRprgK68E8MP6ndrW8u05RfAU9xr/5Tm0C7x/Ep0Tt07lxIStI
-         MMUg==
-In-Reply-To: <36cb9cd4-542e-c8da-9615-f26d6ee3e44e-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+        h=date:from:to:cc:subject:message-id:mime-version:content-disposition
+         :content-transfer-encoding:user-agent;
+        bh=CPCBS7fzbO9EEBZNoGdI2nbVtLOgTKvSPUnOHgbv+vQ=;
+        b=kEd4c1fGvSpYO7t5G3lnUf6pupqgBihYKKN2FVis4xmzXxE/OZWDYboikuaCHMRJ29
+         e/1kUvL2W9ng6qm2+ftsqQVSCOVJP3bZ/ObBF55teIC0C2zrUuAfCDdifQOS8GgPO5DN
+         ftzXcaRbsuFqTFbZHinL/HUaUtPZFhQBLqgXFDVmQ02OoJQO86rnuD1OSuIcHDTQK+wb
+         nqh0Lc4M6mTWcQzAZtJwbg1ahELfAmorbaLNQfilnI1zWtQGNooBf8WBjs/3df1vNW/P
+         pOXfBvlgj8teksgWnv0RKKRqPFoidlq4lBugG9NeIj/ld2MJrW8dLDEnb8QFU2dfVZRT
+         cfPQ==
+Content-Disposition: inline
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, "Mills, William" <wmills-l0cyMroinI0@public.gmane.org>, Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, "dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org" <dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, "Kristo, Tero" <t-kristo-l0cyMroinI0@public.gmane.org>, "Valkeinen, Tomi" <tomi.valkeinen-l0cyMroinI0@public.gmane.org>, "Menon, Nishanth" <nm-l0cyMroinI0@public.gmane.org>, "Murphy, Dan" <dmurphy-l0cyMroinI0@public.gmane.org>, "tony-4v6yS6AI5VpBDgjK7y7TUQ@public.gmane.org" <tony-4v6yS6AI5VpBDgjK7y7TUQ@public.gmane.org>, "tom.rini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org" <tom.rini-OWPKS81ov/FWk0Htik3J/w@public.gmane.org>
+Content-Type: text/plain; charset="utf-8"
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org
 
-On Wed, 12 Feb 2020 at 03:49, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
->
-> On 2/11/20 10:31 AM, Rob Herring wrote:
-> > On Mon, Feb 10, 2020 at 10:58 AM Mills, William <wmills-l0cyMroinI0@public.gmane.org> wrote:
-> >>
-> >> Steve,
-> >>
-> >> Can TI get on the agenda for this week's meeting?
-> >>
-> >> We have a simple approach to make progress on boot loader applied overlays.
-> >> It is a small repo with just the overlays.
-> >> It builds the dtb's from the upstream kernel repo and the overlays from this repo.
-> >> We are going to do this at git.ti.com so we can make progress.
-> >> However we would like to suggest this as a simple way forward to collectively host things the kernel maintainers do not want in the kernel.
-> >
-> > For the record, I'm in favor of hosting overlays in the kernel (of
-> > course I have opinions on the details). Frank is not in favor IIRC,
-> > but Frank is only maintainer of 'drivers/of/' so ultimately not his
-> > decision.
->
-> I agree that the kernel is the place to host overlay sources.
->
+Hi folks!
 
-I would like to fully understand the *why* overlays before diving in the *how*.
-Even if addressed in previous calls or meeting minutes: it may be good
-to restate the use cases in the mail thread.
-Here are the ones I have been exposed to:
+I'm sharing the notes from our regular meeting that was held
+yesterday. We had updates around several of our initiatives, and
+discussion about trying to organise a DT sprint in the next few
+weeks/months.
 
-1) static hypervisor partitioning
-Some devices of the board may be under the control of an RTOS or even
-a bare metal app in a partition while most devices are under a Linux
-partition
-Hypervisor could be Xen, VMWare ESXi, Hafnium, Jailhouse.
+ADMIN: I forgot to mention yesterday, but I'll be away on vacation for
+the week of the next call (26th Feb). Obviously the call can happen
+without me if desired, but somebody else will need to deal with taking
+notes etc.
 
-2) driver isolation from main OS
-A kernel may run "driver-less" and have devices handled in isolated
-domains or VMs.
-Reasons for that many not be just about security but abstraction for instance.
+More details about the meeting etc. at the end.
 
-3) conditional parameters or device access
-Presence or Absence of OPTEE memory reservation is not an operating
-system selection.
-We may want to boot the same image regardless if OPTEE is activated or not.
-If we want to have embedded systems as easy as servers, we do not want
-to have a fixed assumption by
-distros providers. Boot loader can properly "decorate" the DT with
-memory reservations if OPTEE present.
-In addition, OPTEE could vouch for certain device access. It can give
-actual device access to kernel if validated.
-The BAR(s) may be actually be controlled by OPTEE.
-(2) and (3) may be combined
+Attendees
+=========
 
-4) Lego-style hardware
-hardware may come in pieces that are assembled at different moment of
-the product lifecycle:
-- dev board extensions with capes
-- composable products such as Insta360 configurable camara (or defunct
-Google project ARA)
-The running platform DT can only be a composition DTs either at runtime.
+SteveM - Arm
+GrantL - Arm
+RobH - Arm
+BenjaminG - ST
+EricF - ST
+LoïcP - ST
+BillM - TI
+TomiV - TI
+TomasE - Xilinx
+BruceA - Xilinx
+StefanoS - Xilinx
+ArndB - Linaro
+MathieuP - Linaro
+BillF - Linaro
+KumarG - Linaro
+VincentG - Linaro
+TrilokS - Qualcomm
 
-5) other cases?
+Notes
+=====
 
-Let's not talk about (4) for the moment. Are there other cases?
+1. Trying to arrange a sprint around System DT
+   a. Came from discussions at the Linux on Arm summit last week, more
+      on the lists
+      1. Became apparent that we need a few more people (Stefano,
+         Tomas, others) around a white board for a few days. Quite
+         slow back-and-forth by email.
+   b. Favourite option numerically is week after Connect BUD20, but
+      key people are not available
+      1. March 30-April 3rd. Rob and Stefano can’t make it. No point
+         if can’t get right people. Might end up pushing into May. Have
+         had several offers to host (Xilinx, ST, Arm/Linaro).
+      2. Please mail Steve with availability if haven’t already. 
+      3. BM: Is this a System Devicetree sprint or Devicetree sprint?
+      4. SM: System Devicetree …
+      5. GL: Should be scope to talk about more than System Device Tree.
+      6. SM: Attendee split is c.50/50 Europe and US (Iceland??)
 
-(1), (2) and (3) is all about correct chopping of a platform DT into
-meaningful and self-contained pieces.
-It is mandatory that, when fully assembled, it is a coherent and
-compliant entity that the kernel can use.
-Linux kernel should assume all devices for itself and hence all dtso
-should be present in the kernel for this "end-to-end" case.
+2. Bootloader applied overlays
+   a. https://github.com/wmamills/dt-overlays
+      1. BM: Good discussion on the list. Is this a new agreement on
+         accepting overlays in the kernel? Is there still a laundry
+         list of issues?
+      2. RH: Whilst we agree it’s the right place last time it was
+         submitted I gave feedback and it was never acted on. If
+         splitting to base and overlays need a way to get back to what
+         you previously had.
+      3. BM: Do you want to mash base and overlays together. I think
+         we tried to upstream that and it was rejected.
+      4. RH: Just need to change DTB format first … (Frank)
+      5. BM: Need to decide which way to pursue. 
+      6. RH: Think there are a few hurdles IMO. Can’t speak to
+         Frank. Make it a separate repo but a submodule. Maybe lower
+         hurdle for that.
+      7. GL: Most comprehensive use of overlays is RPi and those
+         aren’t upstream. Maybe they have their own repos for that
+      8. RH: Assumption some people have combined base and overlays
+         and sent upstream because overlays were rejected.
+      9. TV: In TI kernel don’t think we have changed base DTBs. Just
+         have overlays that are not upstream. Have DTBs that contain
+         things that should be in overlays.
+      10. BM: Rob raised good point. Things that worked upstream
+          before should continue to work.
+      11. RH: Any cases where an overlay is dependent on another
+          overlay applied
+      12. TV: Yes we have that
+      13. RH: Maybe avoid that initially. Need some may to know what
+          overlays are applied to.
+      14. TV: How to improve that?
+      15. RH: Maybe build rules.
+      16. TV: Still a problem for U-Boot or the user?
+      17. RH: Saying kernel builds should be able to validate them
+      18. TV: Was thinking about using them. Optimally U-Boot will
+          know what to apply. Unfortunately have some cases where
+          can’t detect HW and then it’s up to the user.
+      19. RH: Easy to have typo in overlay. Want to catch that at
+          build time.
+      20. BM: Can be tons of combinations - don’t want them laying
+          around. Keep any version that is the back compatibility
+          version
+      21. RH: Right.
+      22. TE: We are using overlays. Just as a general thing. 
+      23. RH: Generating overlay - not wanting to check in
+      24. TE: Yes.
+      25. RH: Arm32 stuff has everything in one directory. Would be
+          good to split this before adding overlays. Need to agree on
+          vendor names. Have script
+      26. AB: When discussed moving years ago - discussed to put in
+          separate directories out of tree. As long as still plan on
+          moving them out. Don’t want to move them twice. If around
+          the same time would do them together. First want to get
+          agreement on overlays. Takes half a year. how many files?
+      27. BM: think github is fairly complete or at least a good
+          estimate. Covers only the boards we actively support.
+      28. AB: RPi tree has around 300 overlays.
+      29. RH: For TI is 12. 
+      30. BM: Beaglebone capes are not overlays. If a customer of TI
+          invents own overlays - vendor should be “Customer X”, not
+          TI. Is that aligned with your thinking?
+      31. RH: Would align by SoC. 
+      32. BM: If there’s a strong standard for a subset could be its
+          own vendor.
+      33. SM: If 100s of new files, do we want in kernel or in a flat
+          tree?
+      34. BM: Let’s start with new files
+      35. RH: Not against it being in the kernel but doesn’t have to
+          be in the kernel.
+      36. BM: U-boot specific source, MCU DTs. If had a separate repo,
+          could be useful for U-boot and the kernel.
+      37. RH: U-boot and kernel are same but rebased at random
+          times. Did a diff on DTs in U-boot and kernel and a lot
+          hadn’t been synchronised.
+      38. BM: Single repo seems a “boil the ocean” problem.
+      39. SM: Is it a good time to start with that repo and put
+          overlays in. Can’t be the only vendor struggling to make it
+          work.
+      40. RH: Creatng a DT repo doesn’t mean that U-boot will use it.
+      41. SM: Is all work ad hoc by vendor?
+      42. BM: What is our ask of U-boot?
+      43. SM: Do we want U-boot people to take patches to use an
+          external DT repo rather than pulling in from kernel ad hoc.
+      44. SM: Might be able to find an engineer in Arm to put n
+          this. Will take an action. If can start showing progress
+          would that help?
 
-Now the origin of the pieces may be "upstream", meaning the Linux
-kernel would pull all pieces and assemble all of them at normal
-compilation time.
-Other components (bootloader, TEE, hypervisor, RTOS) can pull the
-dtsos and assemble them in different ways.
-The good thing is that slices are known a-priori. An OS driver making
-use of a DT element not in a single dtso may end-up having issues if
-used in (1) for instance.
+3. DTE-18 - DTB runtime ID
+   a. Alexandre still hacking on this
+   b. Found some issues with what was suggested in the first round of
+      discussion
+   c. Follow up on the list
 
-Those other components could "refer" to Linux kernel source for dtso
-origin. But it looks strange as the DT is describing hardware, not a
-Linux component...
+4. DTE-17: Arnd's prototype work for external DT repo
+   a. left the meeting already - next time?
 
-To conclude:
-- dtso are in a single multi-vendor repo
-- Linux pull them all and assemble them all so that it validates the
-end-to-end schema. drivers shall only deal with single dtso.
-- other OSes, bootloaders, hypervisors, TEE pull them and assemble
-them as they please
-- Linux receives the actual DT from whatever component loads it and
-know that the DT it deals with is made of the dtso it already knows
-and for which the drivers have been verified
+Background information about DTE
+================================
 
+Linaro engineers are working on a range of initiatives in the DT
+space, collected together as a project called Device Tree Evolution
+(DTE). We hold a discussion call every second Wednesday at 
+1700 GMT / 1200 EST / 0900 PST. If you would like to be invited, please
+ask me (Steve McIntyre).
 
-> -Frank
->
-> >
-> >> Does it make sense to host something like this in devicetree.org github account?
-> >
-> > Yes, but I would like to see this coordinated with hosting
-> > 'devicetree-rebasing' there. We should be able to use the same
-> > makefiles from it. Perhaps the overlay repo should work as a git
-> > submodule of it as well. That would help keep things in sync.
-> >
-> > A concern I have is what happens when someone wants to split some
-> > portions of an existing dts into an overlay? Then the base dts becomes
-> > incomplete. Users will have regressions from missing functionality if
-> > they don't know to apply some overlay. And how do we track what base
-> > DTs overlays apply to? Not that we have a solution when they are in
-> > one tree, but 2 trees makes that harder.
-> >
-> > Rob
-> >
->
->
+This is a summary of the notes from the most recent meeting. I aim to
+tidy up and post the meeting notes shortly after each meeting. The raw
+notes are published at
+
+https://docs.google.com/document/d/e/2PACX-1vRVDrVFWjIOascqZFCO--T8pIqyFB_MDh9cvgyoqhI6Y0tqaA9TcCcvQhcmxi5IY7CG44JfIrCdAUDL/pub
+
+For more information about DTE, see:
+
+ * https://www.linaro.org/engineering/core/devicetree-evolution/
+ * https://www.linaro.org/assets/pdf/Linaro-White-Paper--Device-Tree-Evolution.pdf
+
+Cheers,
+-- 
+Steve McIntyre                                steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org
+<http://www.linaro.org/> Linaro.org | Open source software for ARM SoCs
+
