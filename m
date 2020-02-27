@@ -1,42 +1,33 @@
-From: Arkadiusz Drabczyk <arkadiusz-42WfZ8EewN5g9hUCZPvPmw@public.gmane.org>
-Subject: [PATCH] Explain what kind of bitmask is used in masks
-Date: Thu, 20 Feb 2020 22:14:42 +0100
-Message-ID: <20200220211442.31214-1-arkadiusz@drabczyk.org>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: Re: [PATCH] Fix displaying GPIO_ACTIVE_LOW in devicetree-basics.rst
+Date: Thu, 27 Feb 2020 10:27:45 -0600
+Message-ID: <20200227162745.GA12232@bogus>
+References: <20200220201154.14207-1-arkadiusz@drabczyk.org>
+Mime-Version: 1.0
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Disposition: inline
+In-Reply-To: <20200220201154.14207-1-arkadiusz-42WfZ8EewN5g9hUCZPvPmw@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: Arkadiusz Drabczyk <arkadiusz-42WfZ8EewN5g9hUCZPvPmw@public.gmane.org>
+Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-Signed-off-by: Arkadiusz Drabczyk <arkadiusz-42WfZ8EewN5g9hUCZPvPmw@public.gmane.org>
----
- source/devicetree-basics.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Thu, Feb 20, 2020 at 09:11:54PM +0100, Arkadiusz Drabczyk wrote:
+>         expansion_device {
+>                 reset-gpios = <&connector 2 GPIO_ACTIVE_LOW>;
+> 		                            ^^^^^^^^^^^^^^^
+>         };
+> 
+> ^^... was shown in red boxes in the output PDF, HTML and possibly
+> everything else.
+> 
+> Signed-off-by: Arkadiusz Drabczyk <arkadiusz-42WfZ8EewN5g9hUCZPvPmw@public.gmane.org>
+> ---
+>  source/extensions/DtsLexer.py | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
-index 01b1958..bbb236a 100644
---- a/source/devicetree-basics.rst
-+++ b/source/devicetree-basics.rst
-@@ -1163,7 +1163,7 @@ Value type: ``<prop-encoded-array>`` encoded as a bit mask
- Description:
- 
-    An *interrupt-map-mask* property is specified for a nexus node in the
--   interrupt tree. This property specifies a mask that is applied to the
-+   interrupt tree. This property specifies a mask that is ANDed with the
-    incoming unit interrupt specifier being looked up in the table specified
-    in the *interrupt-map* property.
- 
-@@ -1366,7 +1366,7 @@ Value type: ``<prop-encoded-array>`` encoded as a bit mask
- Description:
- 
-    A *<specifier>-map-mask* property may be specified for a nexus node.
--   This property specifies a mask that is applied to the child unit
-+   This property specifies a mask that is ANDed with the child unit
-    specifier being looked up in the table specified in the *<specifier>-map*
-    property. If this property is not specified, the mask is assumed to be
-    a mask with all bits set.
--- 
-2.9.0
+4 patches applied, thanks.
 
+Rob
