@@ -1,7 +1,7 @@
 From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: [PATCH] Fix python3 compatibility for sphinx conf.py
-Date: Wed,  4 Mar 2020 18:36:16 -0600
-Message-ID: <20200305003616.3626-1-robh@kernel.org>
+Subject: [PATCH] Add 'serial-number' as a root node property
+Date: Wed,  4 Mar 2020 18:36:23 -0600
+Message-ID: <20200305003623.3828-1-robh@kernel.org>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
@@ -10,39 +10,27 @@ List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-In python3, subprocess.check_output() returns a bytearray. We need to
-encode this into a string type for 'version' and fix this error:
-
-Configuration error:
-There is a programmable error in your configuration file:
-
-Traceback (most recent call last):
-  File "/usr/lib/python3/dist-packages/sphinx/config.py", line 368, in eval_config_file
-    execfile_(filename, namespace)
-  File "/usr/lib/python3/dist-packages/sphinx/util/pycompat.py", line 150, in execfile_
-    exec_(code, _globals)
-  File "/home/rob/proj/git/devicetree-specification/source/conf.py", line 260, in <module>
-    if '-' in release:
-TypeError: a bytes-like object is required, not 'str'
+'serial-number' is a root node property originating from OpenFirmware and
+has been documented for a long time in Linux kernel's boot-without-of.txt.
 
 Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 ---
- source/conf.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ source/devicenodes.rst | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/source/conf.py b/source/conf.py
-index 3f5cc2c27538..c6cddb9afa3a 100644
---- a/source/conf.py
-+++ b/source/conf.py
-@@ -66,7 +66,7 @@ author = u'devicetree.org'
- #
- # The short X.Y version.
- try:
--    version = subprocess.check_output(["git", "describe", "--dirty"]).strip()
-+    version = subprocess.check_output(["git", "describe", "--dirty"]).strip().encode()
- except:
-     version = "unknown-rev"
- # The full version, including alpha/beta/rc tags.
+diff --git a/source/devicenodes.rst b/source/devicenodes.rst
+index 8825ad9add2d..519aa3776884 100644
+--- a/source/devicenodes.rst
++++ b/source/devicenodes.rst
+@@ -48,6 +48,8 @@ are descendants. The full path to the root node is ``/``.
+                                                For example:
+ 
+                                                ``compatible = "fsl,mpc8572ds"``
++   ``serial-number``   O     ``<string>``      Specifies a string representing the device's
++                                               serial number.
+    Usage legend: R=Required, O=Optional, OR=Optional but Recommended, SD=See Definition
+    ===========================================================================================
+ 
 -- 
 2.20.1
 
