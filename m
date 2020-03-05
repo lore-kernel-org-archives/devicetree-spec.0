@@ -1,7 +1,7 @@
 From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: [PATCH] Add 'hotpluggable' property for /memory nodes
-Date: Wed,  4 Mar 2020 18:36:27 -0600
-Message-ID: <20200305003627.3994-1-robh@kernel.org>
+Subject: [PATCH] Add 'dma-coherent' property as a standard property
+Date: Wed,  4 Mar 2020 18:36:31 -0600
+Message-ID: <20200305003631.4121-1-robh@kernel.org>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
@@ -10,34 +10,39 @@ List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-The 'hotpluggable' property has been documented and supported in the Linux
-kernel since 2016. Add the property to the spec so we can remove the kernel
-specific documentation.
+The 'dma-coherent' property was added for architectures which by default
+have non-coherent I/O (e.g. Arm) as a way to specify certain devices are
+coherent. It's been in use since 2012.
 
 Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 ---
- source/devicenodes.rst | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ source/devicetree-basics.rst | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/source/devicenodes.rst b/source/devicenodes.rst
-index 519aa3776884..3aa4650f6a59 100644
---- a/source/devicenodes.rst
-+++ b/source/devicenodes.rst
-@@ -151,6 +151,9 @@ If the VLE storage attribute is supported, with VLE=0.
-                                                            address, size). The effective and physical
-                                                            address shall each be 64-bit (``<u64>`` value),
-                                                            and the size shall be 32-bits (``<u32>`` value).
-+   ``hotpluggable``        O      ``<empty>``              Specifies an explicit hint to the operating
-+                                                           system that this memory may potentially be
-+                                                           removed later.
-    Usage legend: R=Required, O=Optional, OR=Optional but Recommended, SD=See Definition
-    =======================================================================================================
+diff --git a/source/devicetree-basics.rst b/source/devicetree-basics.rst
+index 8292a312ba5a..90d49a1835c7 100644
+--- a/source/devicetree-basics.rst
++++ b/source/devicetree-basics.rst
+@@ -804,6 +804,19 @@ Description:
+      from the *#size-cells* of this node (the node in which the dma-ranges
+      property appears).
  
-@@ -738,4 +741,3 @@ each with their own on-chip L2 and a shared L3.
-             };
-         };
-     };
--
++dma-coherent
++~~~~~~~~~~~~
++
++Property name: ``dma-coherent``
++
++Value type: ``<empty>``
++
++Description:
++   For architectures which are by default non-coherent for I/O, the
++   *dma-coherent* property is used to indicate a device is capable of
++   coherent DMA operations. Some architectures have coherent DMA by default
++   and this property is not applicable.
++
+ name (deprecated)
+ ~~~~~~~~~~~~~~~~~
+ 
 -- 
 2.20.1
 
