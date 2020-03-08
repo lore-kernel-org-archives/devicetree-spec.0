@@ -1,40 +1,35 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: [PATCH] references: Replace stale playground.sun.com links with devicetree.org mirror
-Date: Wed,  4 Mar 2020 18:36:48 -0600
-Message-ID: <20200305003648.4644-1-robh@kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Arkadiusz Drabczyk <arkadiusz-42WfZ8EewN5g9hUCZPvPmw@public.gmane.org>
+Subject: [PATCH] Fix spelling error
+Date: Sun,  8 Mar 2020 15:21:36 +0100
+Message-ID: <20200308142136.28168-1-arkadiusz@drabczyk.org>
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-playground.sun.com has been dead for a long time. Fix the links.
-
-Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Signed-off-by: Arkadiusz Drabczyk <arkadiusz-42WfZ8EewN5g9hUCZPvPmw@public.gmane.org>
 ---
- source/references.rst | 4 ++--
+ source/flattened-format.rst | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/source/references.rst b/source/references.rst
-index a37ded9ccade..961fa20532ab 100644
---- a/source/references.rst
-+++ b/source/references.rst
-@@ -6,11 +6,11 @@
+diff --git a/source/flattened-format.rst b/source/flattened-format.rst
+index bd98891..3185480 100644
+--- a/source/flattened-format.rst
++++ b/source/flattened-format.rst
+@@ -185,8 +185,8 @@ used, whether or not it is in the reserved areas.
  
- .. [b7] *Open Firmware Recommended Practice: Interrupt Mapping*, Version
-    0.9, Open Firmware Working Group, 1996
--   (http://playground.sun.com/1275/practice/imap/imap0_9d.pdf)
-+   (http://devicetree.org/open-firmware/practice/imap/imap0_9d.pdf)
+ Any memory that is declared in a memory node and is accessed by the boot
+ program or caused to be accessed by the boot program after client entry
+-must be reserved. Examples of this type of access include (e.g.,
+-speculative memory reads through a non-guarded virtual page).
++must be reserved. Examples of this type of access include speculative
++memory reads through a non-guarded virtual page.
  
- .. [CHRP] *PowerPC Microprocessor Common Hardware Reference Platform
-    (CHRP) Binding*, Version 1.8, Open Firmware Working Group, 1998
--   (http://playground.sun.com/1275/bindings/chrp/chrp1_8a.ps). This
-+   (http://devicetree.org/open-firmware/bindings/chrp/chrp1_8a.ps). This
-    document specifies the properties for Open PIC-compatible interrupt
-    controllers.
- 
+ This requirement is necessary because any memory that is not reserved
+ may be accessed by the client program with arbitrary storage attributes.
 -- 
-2.20.1
+2.9.0
 
