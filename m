@@ -1,7 +1,7 @@
 From: Steve McIntyre <steve.mcintyre-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: Device Tree Evolution Project - call notes - 11th March
-Date: Thu, 12 Mar 2020 17:10:26 +0000
-Message-ID: <20200312171021.GC11984@linaro.org>
+Subject: Device Tree Evolution Project - call notes - 8th April
+Date: Thu, 9 Apr 2020 19:24:59 +0100
+Message-ID: <20200409182448.GA10632@linaro.org>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
@@ -9,13 +9,13 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=date:from:to:cc:subject:message-id:mime-version:content-disposition
          :content-transfer-encoding:user-agent;
-        bh=NayanUliINfTa1h1CPTm4oIeIqhJSzWhxEK5RQWLfYc=;
-        b=GgJ+k42zrX7l8E328p97uJckS2VMrjotl81EYPn1uJgljaV3apF4gZ1uHl7nO0BTT/
-         7dsRStntgzTIlJTwASs5iQFwOLHlFbpIooKXPd7IwCkFGPxvOu1JAWNgi2q1jvzlkEMT
-         yNSGQhyPsDKl65ymznY1Q14ni9jLyUGikg0IUTYzyTiXYJcxEt5kfXbl2WQYzcqjAn3q
-         1SlVI/KQ+ePZODZSyBQcnzfYxEQ9Kssijb8qHraQeVKBStprtxw4tTb80Jn46S9AxzFw
-         sU/Elcw4QsLr0bhdJwnGdnHfwYtp7oWjtil80BgvIXj2ymD0GUNK6976deaeAgq+ojOp
-         SD8A==
+        bh=7sQdsURjxZtcQzqhZeuGbKUUsJVBjCXDy0IQ89dVAOM=;
+        b=ZAg+U0kXodiqPOaVRNF4twXneFcbA0FE7LxB0/SFjodebhtiAavZIttMsQtVoXnilv
+         tXs/ht8Ycfoobvc4Xy7k1fAu+hn7/nyBfkRyomsfnE43b53t+Pn5WIpYToDSFfSkIqPe
+         vx21coLx/LAHV/4EMUvhSxKlPH7BMgS/SKN6b4lZGG7jOBDulz+1iLRNkVYnR7gn53Dw
+         iYGAYi7U4rjaVnVnYJtK3JMJQQG7gNsKQi0ERHedCulsVdRuoBgI/VfC7zrPzpRzyVWS
+         ZnjT6xmiJ47k4LueWsau9pEIKcfgc6g+CRNWbNKdBOdVNSHhk7r9SPO0PqjwReu3ghTJ
+         PyaQ==
 Content-Disposition: inline
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
@@ -26,167 +26,124 @@ Cc: dte-all-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org
 Hi folks!
 
 I'm sharing the notes from our regular meeting that was held
-yesterday. We had updates around few of our initiatives, some
-discussion about our possible DT sprint and a lot of conversation
-around DT in U-Boot.
+yesterday. We had quite a lot of updates around what we're doing, as
+Linaro is just starting the new BUD20 cycle.
 
 More details about the meeting etc. at the end.
 
+Administrative note: as mentioned briefly in the notes here, I'm
+leaving my job at Arm and Linaro soon (May), so I'm not going to be
+doing this much longer. Somebody else will be picking up the DTE
+project work. More news on that soon I hope!
+
 Attendees
 =========
-
-GrantL - Arm
-MarkB - Arm 
 TomR - TI
-StefanoS - Xilinx
-BillF - Linaro
-VincentG - Linaro
-SaravanaK - Google
-TrilokS - Qualcomm
+JensW - Linaro
 FrancoisO - Linaro
-KumarG - Linaro
-ArndB - Linaro
-BenjaminG - ST
+BillF - Linaro
+JoakimB - Linaro
+FrancoisO - Linaro
+IliasA - Linaro
 SteveM - Arm
-FrankR - 
+StefanoS - Xilinx
+MarkB - Arm
+LoicP - ST
+RobH - Arm
+KumarG - Linaro
+EricF - ST
 
 Notes
 =====
 
-1. Sprint
+* New cycle in Linaro, with some change of focus
+* Not looking at removing stuff from kernel (DTE-5). But setting up a
+  new repository people can use for OP-TEE, TF, U-boot, etc.
+* FF and LEDGE team will be driving some of the lifecycle work
+  (DTE-8).
+* DTE-25 is a new initiative to describe some U-Boot work that Arnd
+  will be looking at. Expecting Arnd to talk to TomR and other U-Boot
+  developers. This is a container for the discussion and work.
+* DTE-26 is overlays, still an important piece for several Linaro
+  members
+* DTE-3 (Runtime identification): Hoping Alexander will complete his
+  patches there
+* Looking to help with CI. Doing testing for compatibility as changes
+  go into DT.
+* System DT discussions on-going
+  1. SS: Gave presentation at Tech Days. Rob and Grant spotted an
+     error in one example. Looking at bus driver
+     configurations. Bruce is sending the lopper codebase upstream.
+* Intro to Jens - hoping to do some work around OP-TEE and DT
+  1. RH: Summary of plans for TF-A and OP-TEE?
+  2. SM: Want to see if can get people sharing DTSs from the new
+     repository.
+* SM: Announcement - will be leaving Arm and Linaro soon, so not
+  involved here much longer
+* Votes on Linaro's PoR process expected to finish Friday
 
-   a. SM: No sign of this happening any time soon - obvious problems
-          with travel at the moment
-      a. AB: If Plumbers doesn’t get cancelled it’s likely that fewer
-             people will be there.
+Setting up a new repo, basing on the -rebasing tree
+---------------------------------------------------
 
-2. Updates
+* JB: Would like to continue the discussion about the new Devicetree
+  rebasing tree. Is it a good idea to start copying
+  everything. Suggest having a clean reference as an example.
+* FO: Yes, but with a few platforms to have some diversity to test,
+  but not a thousand interconnected platforms.
+* JB: What’s the current status?
+* RH: A lot of platforms are stable. Think important to take the tree
+  and filter it down, but automate it and not make changes downstream.
+* SM: Happening quite often at the moment. Arnd was suggesting take it
+  in sync with each of the release tags.
+* RH: Yes. DTs don’t change much after RC1.
+* JB: Maybe an opportunity to clean up things at the same time.
+* RH: Don’t think things are in bad shape.
+* FO: Questions to Stefano/Silicon vendors - what recommendations to
+  focus on for rebased tree?
+* LP: MP1 has multiple device trees (TF, OP-TEE, Linux, Zephyr) … and
+  also multiple (4) boards and also chip variants.
+* SS: Xilinx Zync MP seems a good candidate - would need to get back
+  on this. Same DT (at least very similar) as Ultra96
+* LP: These two mean have 1 64-bit and 1 32-bit platform.
+* JB: Adding FVP?
+* FO: What is FVP licensing situation now?
+* JB/JW: Foundation model is free to download and use.
+* SM: Will get together with Arnd and work through this (platform
+  selection?)
+* JB: checked - FVP download is free but have to register to login
+  https://developer.arm.com/tools-and-software/simulation-models/fixed-virtual-platforms
 
-   a. BG: RFC2 sent about Alexande's work putting date on
-          Devicetree. Simplified the code. Not a lot of comment on the
-          RFC. Maybe some issue for parallel building. Needs more time
-          to work on the preprocessing stuff. Propose to drop ‘RFC’
-          and go to a patch.
+systemd-boot
+------------
 
-   b. SM: Prototype work for external repo support?
-      1. AB: Haven’t done any new work on it. Most sensible approach
-             would be to start with a fork. Can move files
-             individually into that repository.
-      2. SM: If not a lot of work in the kernel anything stopping us
-             from moving ahead.
-      3. AB: One way to demonstrate it is if one of the external
-             projects starts using the fork of the rebasing tree. Or
-             if a distro (e.g. Debian) package takes DT files from
-             external tree
-
-3. SM: U-Boot? This is currently a bit ad hoc AIUI?
-
-   a. TR: For the base DT, if it’s a platform supported in Linux, take
-          latest upstream commit or next branch. Don’t regularly sync
-          - long term goal.
-   b. SM: How difficult to add support into U-Boot build to add
-          support for an external repo?
-   c. TR: Don’t want to add a submodule to the official tree. Would
-          just need to periodically sync
-   d. GL: How about having the ability to enable it? 
-   e. TR: Don’t see a big problem but would need to develop some logic.
-   f. GL: Would be base functionality that could be rolled out.
-   g. AB: One advantage of external repo is can have properties that
-          are not required by the kernel. What are currently adding in
-          U-Boot
-   h. TR: Details like what is needed before relocation. Not supposed
-          to put in Device Tree but how we solved the problem
-   i. BG: Need to take care of the size of the DT
-   j. FO: May want to standardize the binding in U-boot code -
-          generic/environment/U-boot/Xen - want to have this specified
-          in the external repo. Then number of dtsi for building
-          different device trees. Have a U-boot specific dtsi
-   k. TR: Normally need to strip things out of the Linux
-          DT. Conceptually agreeable to have bindings that are better
-          documented not just reusing Linux bindings. Not convinced
-          can have DT entirely somewhere else. Machine specific
-          information in kernel.
-   l. AB: Stripping down for size - similar to problem that System
-          Devicetree tries to solve by stripping out what is not
-          required for a specific DT.
-   m. SM: How space-limited is U-boot for DT?
-   n. TR: Hard to answer. Most limited case - some platforms have
-          12kbyte memory. Allwinner devices can be limited to 40-60
-          kbytes. Can process DT to generate defines at compile time
-          for constrained platform.
-   o. BG: Some bindings for example for display pipe are different in
-          DT for U-boot vs kernel. almost entirely different.
-   p. TR: In kernel, may have changed the way to describe a device
-          that takes more space.
-   q. KG: Code generation approach could be more interesting in this
-          case.
-   r. BG: In the kernel we describe the panel. In U-boot are hard
-          coding the resolution of the panel. Similar for audio.
-   s. FO: Binding is not clear
-   t. BG: Framework below doesn’t need the same information. U-boot
-          doesn’t need to manage all the resolution.
-   u. AB: Abstraction is leaky.
-   v. BG: Different way to give the information. no need to support
-          reconfigutration. Just describe what you want.
-   w. SM: Should be talking to the U-boot community about what could
-          be useful to them.
-   x. BG: Does U-boot plan to use yaml to check the bindings?
-   y. TR: Not planned at the moment. Are some DTs that are very far
-          behind the kernel. Lower hanging fruit. Aim to keep as many
-          of those DTs in sync as possible. Then look at how to
-          leverage tooling.
-   z. SM: What is typical story for DT for U-boot. Would it pass on
-          its DT to kernel on some platforms?
-   aa. TR: Depends on what the target wants to do. RPi given valid DT
-           from BCM firmware. Can then pass that on to the
-           kernel. Other platforms where we’re size constrained. Pare
-           it down. Use it for U-boot. Then know we need to load a DT
-           from wherever and pass it along.
-   bb. AB: In trimmed down case, how often need to resync that DT?
-   cc. TR: Will grab at some point in time. Will then only be updated
-           if new support needed or if there’s a new DT compiler that
-           generates more warnings. Do trimming down at build time.
-   dd. SM: Already have a programmatic way of doing this?
-   ee. TR: Yes. At build time we drop parts of the DT. At boot time
-           can’t access NAND or SSD. Later can load the full DT.
-   ff. TR: https://gitlab.denx.de/u-boot/u-boot/-/blob/master/scripts/Makefile.lib#L529
-           https://gitlab.denx.de/u-boot/u-boot/-/blob/master/tools/fdtgrep.c
-           There's most of the logic/tools around removing stuff from the dtb
-   gg. SK: Some way to have a minimal DTS file for a platform, and
-           then include more stuff for OS. Then U-bo ot wouldn’t need
-           to take a tree and drop it.
-   hh. TR: Would be an interesting application for overlay.
-   ii. SK: Not thinking in terms of overlay, just including a file at
-           compile time.
-   jj. TR: could be interesting.
-   kk. SK: Less nodes wouldn’t be a problem.
-   ll. TR: Not currently a maximal optimisation.
-   mm. FO: For display panel could use concept of namespace.
-   nn. SK: Not trying to solve it with concept of System
-           Devicetree. Just making a subset. Doing at a property level
-           would be too hairy. At least at the device level.
-   oo. TR: Question - is the incremental level useful vs solving
-           problems at a broader scope.?
-
-4. SS: System DT updates. 
-   a. Will have a session at the ‘Tech Days’ in Linaro. Plan to
-      address an FAQ.
-   b. Bruce pushed his code to GitHub. Under BSD license. It’s finally
-      out there. Will send out links shortly.
-   c. (info: ‘Tech Days’ are two days of remote presentations in lieu
-      of Connect. Agenda will be released at the end of this week.)
-   d. SS: Need to set up some meetings in Connect week because the
-      in-person meetings aren’t happening.
-
+* FO: Have seen systemd-boot having commands for Devicetree
+  overlays. Don’t know what they do. Related to RPi??
+* RH: Suggest to send out a link
+* FO: https://github.com/systemd/systemd/issues/13537
+* SM: Believe looking to replace Grub. Been going on for a while but
+  not the most commonly used thing. Only ever seen a few people
+  wanting to use it.
+* TR: Some usecases - getting system to boot quicker than it Grub did
+  it. Been used in AGL on x86 for a while.
+* FO: U-boot should be doing some DT ‘massaging’. If systemd is also
+  doing it - why?
+* TR: DTs do exist on x86, also need to support Armv8 systems that
+  don’t have U-boot. Accept that there are Armv8 systems not running
+  U-boot.
+* FO: If RPI guys did it prior to the OS, validates for me that
+  overlays are not done in the OS
+* LP: Had long discussion previously and agreed to aggregate them
+  before the OS (security concerns).
+* LP: TI have ‘cape’ (hat) with overlays.
 
 Background information about DTE
 ================================
 
 Linaro engineers are working on a range of initiatives in the DT
 space, collected together as a project called Device Tree Evolution
-(DTE). We hold a discussion call every second Wednesday at 
-1700 GMT / 1200 EST / 0900 PST. If you would like to be invited, please
-ask me (Steve McIntyre).
+(DTE). We hold a discussion call every second Wednesday at 1600 UTC /
+1700 BST / 1200 EDT / 0900 PDT. If you would like to be invited,
+please ask me (Steve McIntyre).
 
 This is a summary of the notes from the most recent meeting. I aim to
 tidy up and post the meeting notes shortly after each meeting. The raw
