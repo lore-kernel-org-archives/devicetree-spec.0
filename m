@@ -1,50 +1,54 @@
 From: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
-Subject: [PATCH 2/4] fix python3 compatibility
-Date: Tue, 15 Sep 2020 10:03:33 +0100
-Message-ID: <20200915090335.9167-3-grant.likely@arm.com>
-References: <20200915090335.9167-1-grant.likely@arm.com>
+Subject: [PATCH 0/4] Devicetree spec build environment changes
+Date: Tue, 15 Sep 2020 10:03:31 +0100
+Message-ID: <20200915090335.9167-1-grant.likely@arm.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ancZsqXWBpGKnAn3t+Y8Il2HzPG4lJndZCK2FJFX1zw=;
- b=a4Z9iluF11CIYAm0jSLCkbVkLGHfIDz/gMkf6enHRFA7F5VJLgPQCghuxRiYxGOPmnzco0yIeNJoZXr+AtGlKALw6lnev8SIjx84WS0VuHg3sBLN27pb6STYGwFL6zXMpjE7G7dsPciI0gO+oV4oVPW8uXh1tqrSAqmOh0AUeXg=
+ bh=h2mDydDF2D73CaUxSvNAF5pGBHkuPDVPqNCQ1s53p0o=;
+ b=co6/ovG0M8a0PP44AKbC2MNtizCtY05EEjqpoJJxd+G2JNXgOG3xH470urtyNz749tFtw7oOEp1k3+JkFdRCO/AdsSP0ZD0GRp4BQ3K0YcoEAt3noEzvkYk7TcdcWzRsrZZhMCMPqOIJSxhI++Dj/sYYrAXio/pUhuWbnQsblLk=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ancZsqXWBpGKnAn3t+Y8Il2HzPG4lJndZCK2FJFX1zw=;
- b=a4Z9iluF11CIYAm0jSLCkbVkLGHfIDz/gMkf6enHRFA7F5VJLgPQCghuxRiYxGOPmnzco0yIeNJoZXr+AtGlKALw6lnev8SIjx84WS0VuHg3sBLN27pb6STYGwFL6zXMpjE7G7dsPciI0gO+oV4oVPW8uXh1tqrSAqmOh0AUeXg=
-In-Reply-To: <20200915090335.9167-1-grant.likely-5wv7dgnIgG8@public.gmane.org>
+ bh=h2mDydDF2D73CaUxSvNAF5pGBHkuPDVPqNCQ1s53p0o=;
+ b=co6/ovG0M8a0PP44AKbC2MNtizCtY05EEjqpoJJxd+G2JNXgOG3xH470urtyNz749tFtw7oOEp1k3+JkFdRCO/AdsSP0ZD0GRp4BQ3K0YcoEAt3noEzvkYk7TcdcWzRsrZZhMCMPqOIJSxhI++Dj/sYYrAXio/pUhuWbnQsblLk=
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 Cc: nd-5wv7dgnIgG8@public.gmane.org, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
 
-Fix query of git commit tag to work with python3. The existing code
-falls over when using Sphinx on Python 3 due to the string datatype
-changes. Fix the code to be more robust.
+Non-content changes. This series renames the source files to be easier
+to navigate and updates the build to match templates from an earlier
+version of Sphinx which will make it easier to track changes for newer
+versions of sphinx.
 
-Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
----
- source/conf.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Grant Likely (4):
+  trivial: Add chapter number to source files
+  fix python3 compatibility
+  Update Makefile to newer Sphinx 'minimal' style
+  Updates to match Sphinx templates
 
-diff --git a/source/conf.py b/source/conf.py
-index c6cddb9..c84edc3 100644
---- a/source/conf.py
-+++ b/source/conf.py
-@@ -66,7 +66,7 @@ author = u'devicetree.org'
- #
- # The short X.Y version.
- try:
--    version = subprocess.check_output(["git", "describe", "--dirty"]).strip().encode()
-+    version = str(subprocess.check_output(["git", "describe", "--dirty"]), 'utf-8').strip()
- except:
-     version = "unknown-rev"
- # The full version, including alpha/beta/rc tags.
+ Makefile                                      | 232 +---------------
+ ...oduction.rst => chapter1-introduction.rst} |   0
+ ...ics.rst => chapter2-devicetree-basics.rst} |   0
+ ...vicenodes.rst => chapter3-devicenodes.rst} |   0
+ ...dings.rst => chapter4-device-bindings.rst} |   0
+ ...rmat.rst => chapter5-flattened-format.rst} |   0
+ ...guage.rst => chapter6-source-language.rst} |   0
+ source/conf.py                                | 255 ++++++------------
+ source/index.rst                              |  12 +-
+ 9 files changed, 103 insertions(+), 396 deletions(-)
+ rename source/{introduction.rst => chapter1-introduction.rst} (100%)
+ rename source/{devicetree-basics.rst => chapter2-devicetree-basics.rst} (100%)
+ rename source/{devicenodes.rst => chapter3-devicenodes.rst} (100%)
+ rename source/{device-bindings.rst => chapter4-device-bindings.rst} (100%)
+ rename source/{flattened-format.rst => chapter5-flattened-format.rst} (100%)
+ rename source/{source-language.rst => chapter6-source-language.rst} (100%)
+
 -- 
 2.20.1
 
