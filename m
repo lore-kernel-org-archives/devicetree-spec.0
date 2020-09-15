@@ -1,108 +1,264 @@
 From: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
-Subject: [PATCH 3/3] Add details of UEFI interaction with /memory and /reserved-memory
-Date: Tue, 15 Sep 2020 18:04:56 +0100
-Message-ID: <20200915170455.32520-3-grant.likely@arm.com>
+Subject: [PATCH 2/3] Import /reserved-memory specification text
+Date: Tue, 15 Sep 2020 18:04:55 +0100
+Message-ID: <20200915170455.32520-2-grant.likely@arm.com>
 References: <20200915170455.32520-1-grant.likely@arm.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3TpH/XqEqwHK3gl5oZQP2KQVrqrPJcrMIRHQI8gr3Ks=;
- b=WaYU15gaVgKXa4yvRhInW0LP/GBtsUiwgGhvGITI/nIgtgfzWUxrBq6177yRrIVacYWSsdGJ7azQO3IIn9a6Z2iMR19PKAFQP8947ADShdNwL999SDHuMVL/RcrTwnD47ezBcCnIy5BJvYJVlWWwthw2vaHNytVK3G2aDmrGsMc=
+ bh=XvoxDDq5lKZM89kRZo/PYofr3eNklg+eo6GN72Vrjcg=;
+ b=rgiZzrtYODmVtNqZ9XFU+7WFs61sdchL2yHfXpDYc7OLm0PfTHBpCDKV5lJhaNQacCXfb8I7v7L0+6Cld5rHN+MeOhmg87wkhHVMk2NGhm2hW+Xx2465eLAn5ojW38hUK0MUInohAHjjBcwx+697VHU/NwprZrxKJzW6+hpIPhs=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3TpH/XqEqwHK3gl5oZQP2KQVrqrPJcrMIRHQI8gr3Ks=;
- b=WaYU15gaVgKXa4yvRhInW0LP/GBtsUiwgGhvGITI/nIgtgfzWUxrBq6177yRrIVacYWSsdGJ7azQO3IIn9a6Z2iMR19PKAFQP8947ADShdNwL999SDHuMVL/RcrTwnD47ezBcCnIy5BJvYJVlWWwthw2vaHNytVK3G2aDmrGsMc=
+ bh=XvoxDDq5lKZM89kRZo/PYofr3eNklg+eo6GN72Vrjcg=;
+ b=rgiZzrtYODmVtNqZ9XFU+7WFs61sdchL2yHfXpDYc7OLm0PfTHBpCDKV5lJhaNQacCXfb8I7v7L0+6Cld5rHN+MeOhmg87wkhHVMk2NGhm2hW+Xx2465eLAn5ojW38hUK0MUInohAHjjBcwx+697VHU/NwprZrxKJzW6+hpIPhs=
 In-Reply-To: <20200915170455.32520-1-grant.likely-5wv7dgnIgG8@public.gmane.org>
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="tis-620"
+Content-Type: text/plain; charset="us-ascii"
 To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: nd-5wv7dgnIgG8@public.gmane.org, Ard Biesheuvel <ardb-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Leif Lindholm <leif-e2DmVA6dwcVWk0Htik3J/w@public.gmane.org>, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>, Heinrich Schuchardt <xypron.glpk-Mmb7MZpHnFY@public.gmane.org>
+Cc: nd-5wv7dgnIgG8@public.gmane.org, Ard Biesheuvel <ardb-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Leif Lindholm <leif-e2DmVA6dwcVWk0Htik3J/w@public.gmane.org>, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Heinrich Schuchardt <xypron.glpk-Mmb7MZpHnFY@public.gmane.org>
 
-T3V0cHV0IGZyb20gZGlzY3Vzc2lvbiBvbiBFQkJSIGlzc3VlOgpodHRwczovL2dpdGh1Yi5jb20v
-QVJNLXNvZnR3YXJlL2ViYnIvaXNzdWVzLzUyCgpXaGVuIHVzaW5nIHRoZSBVRUZJIEFCSSBmb3Ig
-Ym9vdGluZywgdGhlIERUIG1lbW9yeSBtYXAgaXMgaWdub3JlZCBhbmQKaW5zdGVhZCBVRUZJIEdl
-dE1lbW9yeU1hcCgpIGlzIHVzZWQgdG8gZmluZCBzeXN0ZW0gbWVtb3J5LiBBbHNvLCByZWdpb25z
-CmRlc2NyaWJlZCBpbiAvcmVzZXJ2ZWQtbWVtb3J5IG5lZWQgdG8gYWxzbyBiZSBhZGRlZCB0byB0
-aGUgVUVGSSBtZW1vcnkKbWFwIHRvIHByb3RlY3QgYWdhaW5zdCBvdmVybGFwcGluZyBhbGxvY2F0
-aW9ucy4gVGhlIHBhdGNoIGFkZHMgbGFuZ3VhZ2UKdG8gY292ZXIgYm90aCBvZiB0aG9zZSBjYXNl
-cy4KClNpZ25lZC1vZmYtYnk6IEdyYW50IExpa2VseSA8Z3JhbnQubGlrZWx5LTV3djdkZ25JZ0c4
-QHB1YmxpYy5nbWFuZS5vcmc+CkNjOiBIZWlucmljaCBTY2h1Y2hhcmR0IDx4eXByb24uZ2xway1N
-bWI3TVpwSG5GWUBwdWJsaWMuZ21hbmUub3JnPgpDYzogQXJkIEJpZXNoZXV2ZWwgPGFyZGItRGdF
-alQrQWkyeWdkbm0reVJPZkUwQUBwdWJsaWMuZ21hbmUub3JnPgotLS0KIHNvdXJjZS9jaGFwdGVy
-My1kZXZpY2Vub2Rlcy5yc3QgICAgICB8IDI2ICsrKysrKysrKysrKysrKysrKysrKysrLS0tCiBz
-b3VyY2UvY2hhcHRlcjUtZmxhdHRlbmVkLWZvcm1hdC5yc3QgfCAxMCArKysrKysrKysrCiBzb3Vy
-Y2UvcmVmZXJlbmNlcy5yc3QgICAgICAgICAgICAgICAgfCAgNCArKysrCiAzIGZpbGVzIGNoYW5n
-ZWQsIDM3IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvc291cmNl
-L2NoYXB0ZXIzLWRldmljZW5vZGVzLnJzdCBiL3NvdXJjZS9jaGFwdGVyMy1kZXZpY2Vub2Rlcy5y
-c3QKaW5kZXggMzA0M2I4YS4uYTc4YTc0MiAxMDA2NDQKLS0tIGEvc291cmNlL2NoYXB0ZXIzLWRl
-dmljZW5vZGVzLnJzdAorKysgYi9zb3VyY2UvY2hhcHRlcjMtZGV2aWNlbm9kZXMucnN0CkBAIC0x
-NjAsNiArMTYwLDEyIEBAIElmIHRoZSBWTEUgc3RvcmFnZSBhdHRyaWJ1dGUgaXMgc3VwcG9ydGVk
-LCB3aXRoIFZMRT0wLgogLi4gbm90ZTo6IEFsbCBvdGhlciBzdGFuZGFyZCBwcm9wZXJ0aWVzIChz
-ZWN0aW9uCiAgICA6cmVmOmBzZWN0LXN0YW5kYXJkLXByb3BlcnRpZXNgKSBhcmUgYWxsb3dlZCBi
-dXQgYXJlIG9wdGlvbmFsLgogCitgYC9tZW1vcnlgYCBub2RlIGFuZCBVRUZJCit+fn5+fn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fgorCitXaGVuIGJvb3RpbmcgdmlhIFtVRUZJXV8sIHRoZSBzeXN0ZW0g
-bWVtb3J5IG1hcCBpcyBvYnRhaW5lZCB2aWEgdGhlCitHZXRNZW1vcnlNYXAoKSBVRUZJIGJvb3Qg
-dGltZSBzZXJ2aWNlIGFzIGRlZmluZWQgaW4gW1VFRkldXyDCpyA3LjIsCithbmQgaWYgcHJlc2Vu
-dCwgdGhlIE9TIG11c3QgaWdub3JlIGFueSBgYC9tZW1vcnlgYCBub2Rlcy4KIAogYGAvbWVtb3J5
-YGAgRXhhbXBsZXMKIH5+fn5+fn5+fn5+fn5+fn5+fn5+CkBAIC0zMDgsMTIgKzMxNCwxMiBAQCBp
-cyBpZ25vcmVkLgogICAgVXNhZ2UgbGVnZW5kOiBSPVJlcXVpcmVkLCBPPU9wdGlvbmFsLCBPUj1P
-cHRpb25hbCBidXQgUmVjb21tZW5kZWQsIFNEPVNlZSBEZWZpbml0aW9uCiAgICA9PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAKLS4uIG5vdGU6OiBBbGwgb3Ro
-ZXIgc3RhbmRhcmQgcHJvcGVydGllcyAoc2VjdGlvbgotICAgOnJlZjpgc2VjdC1zdGFuZGFyZC1w
-cm9wZXJ0aWVzYCkgYXJlIGFsbG93ZWQgYnV0IGFyZSBvcHRpb25hbC4KLQogVGhlIGBgbm8tbWFw
-YGAgYW5kIGBgcmV1c2FibGVgYCBwcm9wZXJ0aWVzIGFyZSBtdXR1YWxseSBleGNsdXNpdmUgYW5k
-IGJvdGggbXVzdAogbm90IGJlIHVzZWQgdG9nZXRoZXIgaW4gdGhlIHNhbWUgbm9kZS4KIAorRHlu
-YW1pYyByZXNlcnZlZCBtZW1vcnkgcmVnaW9ucyBtdXN0IG5vdCBiZSBsaXN0ZWQgaW4gdGhlIFtV
-RUZJXV8gbWVtb3J5IG1hcAorYmVjYXVzZSB0aGV5IGFyZSBhbGxvY2F0ZWQgYnkgdGhlIE9TIGFm
-dGVyIGV4aXRpbmcgZmlybXdhcmUgYm9vdCBzZXJ2aWNlcy4KKwogTGludXggaW1wbGVtZW50YXRp
-b24gbm90ZXM6CiAKIC0gSWYgYSBgYGxpbnV4LGNtYS1kZWZhdWx0YGAgcHJvcGVydHkgaXMgcHJl
-c2VudCwgdGhlbiBMaW51eCB3aWxsIHVzZSB0aGUKQEAgLTM0MSw2ICszNDcsMjAgQEAgbm9kZXMg
-YnkgYWRkaW5nIGEgYGBtZW1vcnktcmVnaW9uYGAgcHJvcGVydHkgdG8gdGhlIGRldmljZSBub2Rl
-LgogICAgVXNhZ2UgbGVnZW5kOiBSPVJlcXVpcmVkLCBPPU9wdGlvbmFsLCBPUj1PcHRpb25hbCBi
-dXQgUmVjb21tZW5kZWQsIFNEPVNlZSBEZWZpbml0aW9uCiAgICA9PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAKKy4uIF9zZWN0LXJlc2VydmVkLW1lbW9yeS11
-ZWZpOgorCitgYC9yZXNlcnZlZC1tZW1vcnlgYCBhbmQgVUVGSQorfn5+fn5+fn5+fn5+fn5+fn5+
-fn5+fn5+fn5+fn4KK1doZW4gYm9vdGluZyB2aWEgW1VFRkldXywgc3RhdGljIGBgL3Jlc2VydmVk
-LW1lbW9yeWBgIHJlZ2lvbnMgbXVzdAorYWxzbyBiZSBsaXN0ZWQgaW4gdGhlIHN5c3RlbSBtZW1v
-cnkgbWFwIG9idGFpbmVkIHZpYSB0aGUgR2V0TWVtb3J5TWFwKCkKK1VFRkkgYm9vdCB0aW1lIHNl
-cnZpY2UgYXMgZGVmaW5lZCBpbiBbVUVGSV1fIMKnIDcuMi4KK1RoZSByZXNlcnZlZCBtZW1vcnkg
-cmVnaW9ucyBuZWVkIHRvIGJlIGluY2x1ZGVkIGluIHRoZSBVRUZJIG1lbW9yeSBtYXAgdG8KK3By
-b3RlY3QgYWdhaW5zdCBhbGxvY2F0aW9ucyBieSBVRUZJIGFwcGxpY2F0aW9ucy4KKworUmVzZXJ2
-ZWQgcmVnaW9ucyB3aXRoIHRoZSBgYG5vLW1hcGBgIHByb3BlcnR5IG11c3QgYmUgbGlzdGVkIGlu
-IHRoZSBtZW1vcnkKK21hcCB3aXRoIHR5cGUgYGBFZmlSZXNlcnZlZE1lbW9yeVR5cGVgYC4KK0Fs
-bCBvdGhlciByZXNlcnZlZCByZWdpb25zIG11c3QgYmUgbGlzdGVkIHdpdGggdHlwZSBgYEVmaUJv
-b3RTZXJ2aWNlc0RhdGFgYC4KKwogYGAvcmVzZXJ2ZWQtbWVtb3J5YGAgRXhhbXBsZQogfn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgogCmRpZmYgLS1naXQgYS9zb3VyY2UvY2hhcHRlcjUtZmxh
-dHRlbmVkLWZvcm1hdC5yc3QgYi9zb3VyY2UvY2hhcHRlcjUtZmxhdHRlbmVkLWZvcm1hdC5yc3QK
-aW5kZXggMjhlNWJkNC4uYjFlMmI4YiAxMDA2NDQKLS0tIGEvc291cmNlL2NoYXB0ZXI1LWZsYXR0
-ZW5lZC1mb3JtYXQucnN0CisrKyBiL3NvdXJjZS9jaGFwdGVyNS1mbGF0dGVuZWQtZm9ybWF0LnJz
-dApAQCAtMjM0LDYgKzIzNCwxNiBAQCByZXNlcnZhdGlvbiBibG9jayBhcyBhIHdob2xlLCBzaGFs
-bCBiZSBsb2NhdGVkIGF0IGFuIDgtYnl0ZSBhbGlnbmVkCiBvZmZzZXQgZnJvbSB0aGUgYmVnaW5u
-aW5nIG9mIHRoZSBkZXZpY2V0cmVlIGJsb2IgKHNlZSBzZWN0aW9uCiA6cmVmOmBzZWN0LWZkdC1h
-bGlnbm1lbnRgKS4KIAorTWVtb3J5IFJlc2VydmF0aW9uIEJsb2NrIGFuZCBVRUZJCit+fn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KKworQXMgd2l0aCB0aGUgYGAvcmVzZXJ2ZWQtbWVt
-b3J5YGAgbm9kZSAoc2VjdGlvbiA6cmVmOmBzZWN0LXJlc2VydmVkLW1lbW9yeS11ZWZpYCksCit3
-aGVuIGJvb3RpbmcgdmlhIFtVRUZJXV8gZW50cmllcyBpbiB0aGUgTWVtb3J5IFJlc2VydmF0aW9u
-IEJsb2NrIG11c3QgYWxzbyBiZQorbGlzdGVkIGluIHRoZSBzeXN0ZW0gbWVtb3J5IG1hcCBvYnRh
-aW5lZCB2aWEgdGhlIEdldE1lbW9yeU1hcCgpIHRvIHByb3RlY3QgYWdhaW5zdAorYWxsb2NhdGlv
-bnMgYnkgVUVGSSBhcHBsaWNhdGlvbnMuCitUaGUgbWVtb3J5IHJlc2VydmF0aW9uIGJsb2NrIGVu
-dHJpZXMgc2hvdWxkIGJlIGxpc3RlZCB3aXRoIHR5cGUKK2BgRWZpQm9vdFNlcnZpY2VzRGF0YWBg
-LgorCiAuLiBfc2VjdC1mZHQtc3RydWN0dXJlLWJsb2NrOgogCiBTdHJ1Y3R1cmUgQmxvY2sKZGlm
-ZiAtLWdpdCBhL3NvdXJjZS9yZWZlcmVuY2VzLnJzdCBiL3NvdXJjZS9yZWZlcmVuY2VzLnJzdApp
-bmRleCA5NjFmYTIwLi44NDAwZTk2IDEwMDY0NAotLS0gYS9zb3VyY2UvcmVmZXJlbmNlcy5yc3QK
-KysrIGIvc291cmNlL3JlZmVyZW5jZXMucnN0CkBAIC0yMywzICsyMyw3IEBACiAuLiBbRVBBUFJd
-ICpQb3dlci5vcmcgU3RhbmRhcmQgZm9yIEVtYmVkZGVkIFBvd2VyIEFyY2hpdGVjdHVyZQogICAg
-UGxhdGZvcm0gUmVxdWlyZW1lbnRzKiwgcG93ZXIub3JnLCAyMDExLAogICAgaHR0cHM6Ly93d3cu
-cG93ZXIub3JnL2RvY3VtZW50YXRpb24vcG93ZXItb3JnLXN0YW5kYXJkLWZvci1lbWJlZGRlZC1w
-b3dlci1hcmNoaXRlY3R1cmUtcGxhdGZvcm0tcmVxdWlyZW1lbnRzLWVwYXByLXYxLTEtMi8KKwor
-Li4gW1VFRkldIGBVbmlmaWVkIEV4dGVuc2FibGUgRmlybXdhcmUgSW50ZXJmYWNlIFNwZWNpZmlj
-YXRpb24gdjIuOCBFcnJhdGEgQQorICAgPGh0dHBzOi8vdWVmaS5vcmcvc2l0ZXMvZGVmYXVsdC9m
-aWxlcy9yZXNvdXJjZXMvVUVGSV9TcGVjXzJfOF9BX0ZlYjE0LnBkZj5gXywKKyAgIEZlYnJ1YXJ5
-IDIwMjAsIGBVRUZJIEZvcnVtIDxodHRwOi8vd3d3LnVlZmkub3JnPmBfCi0tIAoyLjIwLjEKCg==
+Imported from linux kernel source:
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
+
+Very minor editorial changes made while importing, with one exception.
+Added clause that the 'no-map' and 'reusable' properties are mutually
+exclusive.
+
+Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+Cc: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Cc: Heinrich Schuchardt <xypron.glpk-Mmb7MZpHnFY@public.gmane.org>
+Cc: Ard Biesheuvel <ardb-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+---
+ source/chapter3-devicenodes.rst | 203 +++++++++++++++++++++++++++++++-
+ 1 file changed, 202 insertions(+), 1 deletion(-)
+
+diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenodes.rst
+index 3aa4650..3043b8a 100644
+--- a/source/chapter3-devicenodes.rst
++++ b/source/chapter3-devicenodes.rst
+@@ -161,7 +161,8 @@ If the VLE storage attribute is supported, with VLE=0.
+    :ref:`sect-standard-properties`) are allowed but are optional.
+ 
+ 
+-**Examples**
++``/memory`` Examples
++~~~~~~~~~~~~~~~~~~~~
+ 
+ Given a 64-bit Power system with the following physical memory layout:
+ 
+@@ -200,6 +201,206 @@ memory ranges. The 2 GB I/O region is skipped. Note that the
+ value of 2, which means that two 32-bit cells are required to define the
+ address and length for the ``reg`` property of the memory node.
+ 
++``/reserved-memory`` Node
++-------------------------
++
++Reserved memory is specified as a node under the ``/reserved-memory`` node.
++The operating system shall exclude reserved memory from normal usage
++one can create child nodes describing particular reserved (excluded from
++normal use) memory regions.
++Such memory regions are usually designed for the special usage by various
++device drivers.
++
++Parameters for each memory region can be encoded into the device tree
++with the following nodes:
++
++/reserved-memory parent node
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
++.. table:: /reserved-memory Parent Node Properties
++
++   =================== ===== ================= ===============================================
++   Property Name       Usage Value Type        Definition
++   =================== ===== ================= ===============================================
++   ``#address-cells``  R     ``<u32>``         Specifies the number of ``<u32>`` cells to
++                                               represent the address in the ``reg`` property in
++                                               children of root.
++   ``#size-cells``     R     ``<u32>``         Specifies the number of ``<u32>`` cells to
++                                               represent the size in the ``reg`` property in
++                                               children of root.
++   ``ranges``          R     ``<prop encoded   This property represents the mapping between
++                             array>``          parent address to child address spaces (see
++                                               section :ref:`sect-standard-properties-ranges`,
++                                               ranges).
++   Usage legend: R=Required, O=Optional, OR=Optional but Recommended, SD=See Definition
++   ===========================================================================================
++
++``#address-cells`` and ``#size-cells`` should use the same values as for the root node,
++and ``ranges`` should be empty so that address translation logic works correctly.
++
++/reserved-memory/ child nodes
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++Each child of the reserved-memory node specifies one or more regions of
++reserved memory. Each child node may either use a ``reg`` property to
++specify a specific range of reserved memory, or a ``size`` property with
++optional constraints to request a dynamically allocated block of memory.
++
++Following the generic-names recommended practice, node names should
++reflect the purpose of the node (ie. "*framebuffer*" or "*dma-pool*").
++Unit address (``@<address>``) should be appended to the name if the node
++is a static allocation.
++
++A reserved memory node requires either a ``reg`` property for static
++allocations, or a ``size`` property for dynamics allocations.
++Dynamic allocations may use ``alignment`` and ``alloc-ranges`` properties
++to constrain where the memory is allocated from.
++If both ``reg`` and ``size`` are present, then the region is treated as a
++static allocation with the ``reg`` property taking precedence and ``size``
++is ignored.
++
++.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
++.. table:: ``/reserved-memory/`` Child Node Properties
++
++   ======================= ===== ========================= ===============================================
++   Property Name           Usage Value Type                Definition
++   ======================= ===== ========================= ===============================================
++   ``reg``                 O      ``<prop-encoded-array>`` Consists of an arbitrary number of address and
++                                                           size pairs that specify the physical address
++                                                           and size of the memory ranges.
++   ``size``                O      ``<prop-encoded-array>`` Size in bytes of memory to reserve for
++                                                           dynamically allocated regions.
++                                                           Size of this property is based on parent node's
++                                                           ``#size-cells`` property.
++   ``alignment``           O      ``<prop-encoded-array>`` Address boundary for alignment of allocation.
++                                                           Size of this property is based on parent node's
++                                                           ``#size-cells`` property.
++   ``alloc-ranges``        O      ``<prop-encoded-array>`` Specifies regions of memory that are acceptable
++                                                           to allocate from.
++                                                           Format is (address, length pairs) tuples in
++                                                           same format as for ``reg`` properties.
++   ``compatible``          O      ``<stringlist>``         May contain the following strings:
++
++                                                           - ``shared-dma-pool``: This indicates a region of
++                                                             memory meant to be used as a shared pool of DMA
++                                                             buffers for a set of devices.
++                                                             It can be used by an operating system to
++                                                             instantiate the necessary pool management
++                                                             subsystem if necessary.
++
++                                                           - vendor specific string in the form
++                                                             ``<vendor>,[<device>-]<usage>``
++   ``no-map``              O      ``<empty>``              If present, indicates the operating system must
++                                                           not create a virtual mapping of the region as
++                                                           part of its standard mapping of system memory,
++                                                           nor permit speculative access to it under any
++                                                           circumstances other than under the control of
++                                                           the device driver using the region.
++   ``reusable``            O      ``<empty>``              The operating system can use the memory in this
++                                                           region with the limitation that the device
++                                                           driver(s) owning the region need to be able to
++                                                           reclaim it back.
++                                                           Typically that means that the operating system
++                                                           can use that region to store volatile or cached
++                                                           data that can be otherwise regenerated or
++                                                           migrated elsewhere.
++   Usage legend: R=Required, O=Optional, OR=Optional but Recommended, SD=See Definition
++   =======================================================================================================
++
++.. note:: All other standard properties (section
++   :ref:`sect-standard-properties`) are allowed but are optional.
++
++The ``no-map`` and ``reusable`` properties are mutually exclusive and both must
++not be used together in the same node.
++
++Linux implementation notes:
++
++- If a ``linux,cma-default`` property is present, then Linux will use the
++  region for the default pool of the contiguous memory allocator.
++
++- If a ``linux,dma-default`` property is present, then Linux will use the
++  region for the default pool of the consistent DMA allocator.
++
++Device node references to reserved memory
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++Regions in the ``/reserved-memory`` node may be referenced by other device
++nodes by adding a ``memory-region`` property to the device node.
++
++.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
++.. table:: Properties for referencing reserved-memory regions
++
++   ======================= ===== ========================= ===============================================
++   Property Name           Usage Value Type                Definition
++   ======================= ===== ========================= ===============================================
++   ``memory-region``       O     ``<prop-encoded-array>``  phandle, specifier pairs to children of
++                                                           ``/reserved-memory``
++   ``memory-region-names`` O     ``<stringlist>>``         A list of names, one for each corresponding
++                                                           entry in the ``memory-region`` property
++   Usage legend: R=Required, O=Optional, OR=Optional but Recommended, SD=See Definition
++   =======================================================================================================
++
++``/reserved-memory`` Example
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++This example defines 3 contiguous regions are defined for Linux kernel:
++one default of all device drivers (named ``linux,cma@72000000`` and 64MiB in size),
++one dedicated to the framebuffer device (named ``framebuffer@78000000``, 8MiB), and
++one for multimedia processing (named ``multimedia-memory@77000000``, 64MiB).
++
++.. code-block:: dts
++
++   / {
++      #address-cells = <1>;
++      #size-cells = <1>;
++
++      memory {
++         reg = <0x40000000 0x40000000>;
++      };
++
++      reserved-memory {
++         #address-cells = <1>;
++         #size-cells = <1>;
++         ranges;
++
++         /* global autoconfigured region for contiguous allocations */
++         linux,cma {
++            compatible = "shared-dma-pool";
++            reusable;
++            size = <0x4000000>;
++            alignment = <0x2000>;
++            linux,cma-default;
++         };
++
++         display_reserved: framebuffer@78000000 {
++            reg = <0x78000000 0x800000>;
++         };
++
++         multimedia_reserved: multimedia@77000000 {
++            compatible = "acme,multimedia-memory";
++            reg = <0x77000000 0x4000000>;
++         };
++      };
++
++      /* ... */
++
++      fb0: video@12300000 {
++         memory-region = <&display_reserved>;
++         /* ... */
++      };
++
++      scaler: scaler@12500000 {
++         memory-region = <&multimedia_reserved>;
++         /* ... */
++      };
++
++      codec: codec@12600000 {
++         memory-region = <&multimedia_reserved>;
++         /* ... */
++      };
++   };
++
+ ``/chosen`` Node
+ ----------------
+ 
+-- 
+2.20.1
+
