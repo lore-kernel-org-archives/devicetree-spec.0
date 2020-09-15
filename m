@@ -1,82 +1,108 @@
-From: Heinrich Schuchardt <xypron.glpk-Mmb7MZpHnFY@public.gmane.org>
-Subject: Re: [PATCH 1/3] Clarify language on /memreserve/
-Date: Tue, 15 Sep 2020 22:45:21 +0200
-Message-ID: <389c3f6b-dc39-2b12-ebd4-034dc274e2f6@gmx.de>
+From: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+Subject: [PATCH 3/3] Add details of UEFI interaction with /memory and /reserved-memory
+Date: Tue, 15 Sep 2020 18:04:56 +0100
+Message-ID: <20200915170455.32520-3-grant.likely@arm.com>
 References: <20200915170455.32520-1-grant.likely@arm.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-        s=badeba3b8450; t=1600202726;
-        bh=PMD+rAXq8DFs8A7JbnA1ruEYouJA2SLxs8Qhfljewfo=;
-        h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
-        b=Rzsb1zVUNl9nEc+XN6qy02yf4Zrt2+4YCNQNL/GkYRALhvVhjHoXz5e782QLq2X21
-         UPUQTEgRQYaidN1q9fmVTSGNhz4O/g2I27mojVEVkxkuOdH6bkbhi3NFCReq6d4/Gh
-         0qohQ8J9AaLBHapNOLhklM/+lWxV8FnC54/VdgCk=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3TpH/XqEqwHK3gl5oZQP2KQVrqrPJcrMIRHQI8gr3Ks=;
+ b=WaYU15gaVgKXa4yvRhInW0LP/GBtsUiwgGhvGITI/nIgtgfzWUxrBq6177yRrIVacYWSsdGJ7azQO3IIn9a6Z2iMR19PKAFQP8947ADShdNwL999SDHuMVL/RcrTwnD47ezBcCnIy5BJvYJVlWWwthw2vaHNytVK3G2aDmrGsMc=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3TpH/XqEqwHK3gl5oZQP2KQVrqrPJcrMIRHQI8gr3Ks=;
+ b=WaYU15gaVgKXa4yvRhInW0LP/GBtsUiwgGhvGITI/nIgtgfzWUxrBq6177yRrIVacYWSsdGJ7azQO3IIn9a6Z2iMR19PKAFQP8947ADShdNwL999SDHuMVL/RcrTwnD47ezBcCnIy5BJvYJVlWWwthw2vaHNytVK3G2aDmrGsMc=
 In-Reply-To: <20200915170455.32520-1-grant.likely-5wv7dgnIgG8@public.gmane.org>
-Content-Language: en-US
 Sender: devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="windows-1252"
-To: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: nd-5wv7dgnIgG8@public.gmane.org, Ard Biesheuvel <ardb-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Leif Lindholm <leif-e2DmVA6dwcVWk0Htik3J/w@public.gmane.org>
+Content-Type: text/plain; charset="tis-620"
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: nd-5wv7dgnIgG8@public.gmane.org, Ard Biesheuvel <ardb-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Leif Lindholm <leif-e2DmVA6dwcVWk0Htik3J/w@public.gmane.org>, Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>, Heinrich Schuchardt <xypron.glpk-Mmb7MZpHnFY@public.gmane.org>
 
-On 9/15/20 7:04 PM, Grant Likely wrote:
-> The language was ambiguous. Rephrase and reformat to be more readable.
->
-> Co-authored-by: Heinrich Schuchardt <xypron.glpk-Mmb7MZpHnFY@public.gmane.org>
-> Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
-> Cc: Heinrich Schuchardt <xypron.glpk-Mmb7MZpHnFY@public.gmane.org>
-> ---
->  source/chapter6-source-language.rst | 20 ++++++++++++++------
->  1 file changed, 14 insertions(+), 6 deletions(-)
->
-> diff --git a/source/chapter6-source-language.rst b/source/chapter6-sourc=
-e-language.rst
-> index ed4e234..295fcd6 100755
-> --- a/source/chapter6-source-language.rst
-> +++ b/source/chapter6-source-language.rst
-> @@ -233,15 +233,23 @@ File layout
->              [child nodes]
->          };
->
-> -The /dts-v1/; shall be present to identify the file as a version 1 DTS
-> +``/dts-v1/;`` shall be present to identify the file as a version 1 DTS
->  (dts files without this tag will be treated by dtc as being in the
->  obsolete version 0, which uses a different format for integers in
->  addition to other small but incompatible changes).
->
-> -Memory reservations define an entry for the devicetree blob=E2=80=99s m=
-emory
-> -reservation table. They have the form: e.g., /memreserve/ <address>
-> -<length>; Where <address> and <length> are 64-bit C-style integers.
-> +Memory reservations (see section :ref:`sect-fdt-memory-reservation-bloc=
-k`)
-> +are represented by lines in the form::
->
-> -*  The / { }; section defines the root node of the devicetree.
-> +   /memreserve/ <address> <length>;
->
-> -*  C style (/* ... \*/) and C++ style (//) comments are supported.
-> +Where ``<address>`` and ``<length>`` are 64-bit C-style integers, e.g.,
-> +
-> +.. code-block:: dts
-> +
-> +   /memreserve/ 0x10000000 0x0004000;
-
-+   /memreserve/ 0x10000000 0x00004000;
-
-The 28bit number looks strange here. Let's add another zero so that the
-number formats match (or remove the leading zeros).
-
-Best regards
-
-Heinrich
-
-> +
-> +The ``/ { ... };`` section defines the root node of the devicetree, and
-> +all the device tree data is contained within it.
-> +
-> +C style (``/* ... \*/``) and C++ style (``//``) comments are supported.
->
-
+T3V0cHV0IGZyb20gZGlzY3Vzc2lvbiBvbiBFQkJSIGlzc3VlOgpodHRwczovL2dpdGh1Yi5jb20v
+QVJNLXNvZnR3YXJlL2ViYnIvaXNzdWVzLzUyCgpXaGVuIHVzaW5nIHRoZSBVRUZJIEFCSSBmb3Ig
+Ym9vdGluZywgdGhlIERUIG1lbW9yeSBtYXAgaXMgaWdub3JlZCBhbmQKaW5zdGVhZCBVRUZJIEdl
+dE1lbW9yeU1hcCgpIGlzIHVzZWQgdG8gZmluZCBzeXN0ZW0gbWVtb3J5LiBBbHNvLCByZWdpb25z
+CmRlc2NyaWJlZCBpbiAvcmVzZXJ2ZWQtbWVtb3J5IG5lZWQgdG8gYWxzbyBiZSBhZGRlZCB0byB0
+aGUgVUVGSSBtZW1vcnkKbWFwIHRvIHByb3RlY3QgYWdhaW5zdCBvdmVybGFwcGluZyBhbGxvY2F0
+aW9ucy4gVGhlIHBhdGNoIGFkZHMgbGFuZ3VhZ2UKdG8gY292ZXIgYm90aCBvZiB0aG9zZSBjYXNl
+cy4KClNpZ25lZC1vZmYtYnk6IEdyYW50IExpa2VseSA8Z3JhbnQubGlrZWx5LTV3djdkZ25JZ0c4
+QHB1YmxpYy5nbWFuZS5vcmc+CkNjOiBIZWlucmljaCBTY2h1Y2hhcmR0IDx4eXByb24uZ2xway1N
+bWI3TVpwSG5GWUBwdWJsaWMuZ21hbmUub3JnPgpDYzogQXJkIEJpZXNoZXV2ZWwgPGFyZGItRGdF
+alQrQWkyeWdkbm0reVJPZkUwQUBwdWJsaWMuZ21hbmUub3JnPgotLS0KIHNvdXJjZS9jaGFwdGVy
+My1kZXZpY2Vub2Rlcy5yc3QgICAgICB8IDI2ICsrKysrKysrKysrKysrKysrKysrKysrLS0tCiBz
+b3VyY2UvY2hhcHRlcjUtZmxhdHRlbmVkLWZvcm1hdC5yc3QgfCAxMCArKysrKysrKysrCiBzb3Vy
+Y2UvcmVmZXJlbmNlcy5yc3QgICAgICAgICAgICAgICAgfCAgNCArKysrCiAzIGZpbGVzIGNoYW5n
+ZWQsIDM3IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvc291cmNl
+L2NoYXB0ZXIzLWRldmljZW5vZGVzLnJzdCBiL3NvdXJjZS9jaGFwdGVyMy1kZXZpY2Vub2Rlcy5y
+c3QKaW5kZXggMzA0M2I4YS4uYTc4YTc0MiAxMDA2NDQKLS0tIGEvc291cmNlL2NoYXB0ZXIzLWRl
+dmljZW5vZGVzLnJzdAorKysgYi9zb3VyY2UvY2hhcHRlcjMtZGV2aWNlbm9kZXMucnN0CkBAIC0x
+NjAsNiArMTYwLDEyIEBAIElmIHRoZSBWTEUgc3RvcmFnZSBhdHRyaWJ1dGUgaXMgc3VwcG9ydGVk
+LCB3aXRoIFZMRT0wLgogLi4gbm90ZTo6IEFsbCBvdGhlciBzdGFuZGFyZCBwcm9wZXJ0aWVzIChz
+ZWN0aW9uCiAgICA6cmVmOmBzZWN0LXN0YW5kYXJkLXByb3BlcnRpZXNgKSBhcmUgYWxsb3dlZCBi
+dXQgYXJlIG9wdGlvbmFsLgogCitgYC9tZW1vcnlgYCBub2RlIGFuZCBVRUZJCit+fn5+fn5+fn5+
+fn5+fn5+fn5+fn5+fn5+fgorCitXaGVuIGJvb3RpbmcgdmlhIFtVRUZJXV8sIHRoZSBzeXN0ZW0g
+bWVtb3J5IG1hcCBpcyBvYnRhaW5lZCB2aWEgdGhlCitHZXRNZW1vcnlNYXAoKSBVRUZJIGJvb3Qg
+dGltZSBzZXJ2aWNlIGFzIGRlZmluZWQgaW4gW1VFRkldXyDCpyA3LjIsCithbmQgaWYgcHJlc2Vu
+dCwgdGhlIE9TIG11c3QgaWdub3JlIGFueSBgYC9tZW1vcnlgYCBub2Rlcy4KIAogYGAvbWVtb3J5
+YGAgRXhhbXBsZXMKIH5+fn5+fn5+fn5+fn5+fn5+fn5+CkBAIC0zMDgsMTIgKzMxNCwxMiBAQCBp
+cyBpZ25vcmVkLgogICAgVXNhZ2UgbGVnZW5kOiBSPVJlcXVpcmVkLCBPPU9wdGlvbmFsLCBPUj1P
+cHRpb25hbCBidXQgUmVjb21tZW5kZWQsIFNEPVNlZSBEZWZpbml0aW9uCiAgICA9PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAKLS4uIG5vdGU6OiBBbGwgb3Ro
+ZXIgc3RhbmRhcmQgcHJvcGVydGllcyAoc2VjdGlvbgotICAgOnJlZjpgc2VjdC1zdGFuZGFyZC1w
+cm9wZXJ0aWVzYCkgYXJlIGFsbG93ZWQgYnV0IGFyZSBvcHRpb25hbC4KLQogVGhlIGBgbm8tbWFw
+YGAgYW5kIGBgcmV1c2FibGVgYCBwcm9wZXJ0aWVzIGFyZSBtdXR1YWxseSBleGNsdXNpdmUgYW5k
+IGJvdGggbXVzdAogbm90IGJlIHVzZWQgdG9nZXRoZXIgaW4gdGhlIHNhbWUgbm9kZS4KIAorRHlu
+YW1pYyByZXNlcnZlZCBtZW1vcnkgcmVnaW9ucyBtdXN0IG5vdCBiZSBsaXN0ZWQgaW4gdGhlIFtV
+RUZJXV8gbWVtb3J5IG1hcAorYmVjYXVzZSB0aGV5IGFyZSBhbGxvY2F0ZWQgYnkgdGhlIE9TIGFm
+dGVyIGV4aXRpbmcgZmlybXdhcmUgYm9vdCBzZXJ2aWNlcy4KKwogTGludXggaW1wbGVtZW50YXRp
+b24gbm90ZXM6CiAKIC0gSWYgYSBgYGxpbnV4LGNtYS1kZWZhdWx0YGAgcHJvcGVydHkgaXMgcHJl
+c2VudCwgdGhlbiBMaW51eCB3aWxsIHVzZSB0aGUKQEAgLTM0MSw2ICszNDcsMjAgQEAgbm9kZXMg
+YnkgYWRkaW5nIGEgYGBtZW1vcnktcmVnaW9uYGAgcHJvcGVydHkgdG8gdGhlIGRldmljZSBub2Rl
+LgogICAgVXNhZ2UgbGVnZW5kOiBSPVJlcXVpcmVkLCBPPU9wdGlvbmFsLCBPUj1PcHRpb25hbCBi
+dXQgUmVjb21tZW5kZWQsIFNEPVNlZSBEZWZpbml0aW9uCiAgICA9PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAKKy4uIF9zZWN0LXJlc2VydmVkLW1lbW9yeS11
+ZWZpOgorCitgYC9yZXNlcnZlZC1tZW1vcnlgYCBhbmQgVUVGSQorfn5+fn5+fn5+fn5+fn5+fn5+
+fn5+fn5+fn5+fn4KK1doZW4gYm9vdGluZyB2aWEgW1VFRkldXywgc3RhdGljIGBgL3Jlc2VydmVk
+LW1lbW9yeWBgIHJlZ2lvbnMgbXVzdAorYWxzbyBiZSBsaXN0ZWQgaW4gdGhlIHN5c3RlbSBtZW1v
+cnkgbWFwIG9idGFpbmVkIHZpYSB0aGUgR2V0TWVtb3J5TWFwKCkKK1VFRkkgYm9vdCB0aW1lIHNl
+cnZpY2UgYXMgZGVmaW5lZCBpbiBbVUVGSV1fIMKnIDcuMi4KK1RoZSByZXNlcnZlZCBtZW1vcnkg
+cmVnaW9ucyBuZWVkIHRvIGJlIGluY2x1ZGVkIGluIHRoZSBVRUZJIG1lbW9yeSBtYXAgdG8KK3By
+b3RlY3QgYWdhaW5zdCBhbGxvY2F0aW9ucyBieSBVRUZJIGFwcGxpY2F0aW9ucy4KKworUmVzZXJ2
+ZWQgcmVnaW9ucyB3aXRoIHRoZSBgYG5vLW1hcGBgIHByb3BlcnR5IG11c3QgYmUgbGlzdGVkIGlu
+IHRoZSBtZW1vcnkKK21hcCB3aXRoIHR5cGUgYGBFZmlSZXNlcnZlZE1lbW9yeVR5cGVgYC4KK0Fs
+bCBvdGhlciByZXNlcnZlZCByZWdpb25zIG11c3QgYmUgbGlzdGVkIHdpdGggdHlwZSBgYEVmaUJv
+b3RTZXJ2aWNlc0RhdGFgYC4KKwogYGAvcmVzZXJ2ZWQtbWVtb3J5YGAgRXhhbXBsZQogfn5+fn5+
+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgogCmRpZmYgLS1naXQgYS9zb3VyY2UvY2hhcHRlcjUtZmxh
+dHRlbmVkLWZvcm1hdC5yc3QgYi9zb3VyY2UvY2hhcHRlcjUtZmxhdHRlbmVkLWZvcm1hdC5yc3QK
+aW5kZXggMjhlNWJkNC4uYjFlMmI4YiAxMDA2NDQKLS0tIGEvc291cmNlL2NoYXB0ZXI1LWZsYXR0
+ZW5lZC1mb3JtYXQucnN0CisrKyBiL3NvdXJjZS9jaGFwdGVyNS1mbGF0dGVuZWQtZm9ybWF0LnJz
+dApAQCAtMjM0LDYgKzIzNCwxNiBAQCByZXNlcnZhdGlvbiBibG9jayBhcyBhIHdob2xlLCBzaGFs
+bCBiZSBsb2NhdGVkIGF0IGFuIDgtYnl0ZSBhbGlnbmVkCiBvZmZzZXQgZnJvbSB0aGUgYmVnaW5u
+aW5nIG9mIHRoZSBkZXZpY2V0cmVlIGJsb2IgKHNlZSBzZWN0aW9uCiA6cmVmOmBzZWN0LWZkdC1h
+bGlnbm1lbnRgKS4KIAorTWVtb3J5IFJlc2VydmF0aW9uIEJsb2NrIGFuZCBVRUZJCit+fn5+fn5+
+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KKworQXMgd2l0aCB0aGUgYGAvcmVzZXJ2ZWQtbWVt
+b3J5YGAgbm9kZSAoc2VjdGlvbiA6cmVmOmBzZWN0LXJlc2VydmVkLW1lbW9yeS11ZWZpYCksCit3
+aGVuIGJvb3RpbmcgdmlhIFtVRUZJXV8gZW50cmllcyBpbiB0aGUgTWVtb3J5IFJlc2VydmF0aW9u
+IEJsb2NrIG11c3QgYWxzbyBiZQorbGlzdGVkIGluIHRoZSBzeXN0ZW0gbWVtb3J5IG1hcCBvYnRh
+aW5lZCB2aWEgdGhlIEdldE1lbW9yeU1hcCgpIHRvIHByb3RlY3QgYWdhaW5zdAorYWxsb2NhdGlv
+bnMgYnkgVUVGSSBhcHBsaWNhdGlvbnMuCitUaGUgbWVtb3J5IHJlc2VydmF0aW9uIGJsb2NrIGVu
+dHJpZXMgc2hvdWxkIGJlIGxpc3RlZCB3aXRoIHR5cGUKK2BgRWZpQm9vdFNlcnZpY2VzRGF0YWBg
+LgorCiAuLiBfc2VjdC1mZHQtc3RydWN0dXJlLWJsb2NrOgogCiBTdHJ1Y3R1cmUgQmxvY2sKZGlm
+ZiAtLWdpdCBhL3NvdXJjZS9yZWZlcmVuY2VzLnJzdCBiL3NvdXJjZS9yZWZlcmVuY2VzLnJzdApp
+bmRleCA5NjFmYTIwLi44NDAwZTk2IDEwMDY0NAotLS0gYS9zb3VyY2UvcmVmZXJlbmNlcy5yc3QK
+KysrIGIvc291cmNlL3JlZmVyZW5jZXMucnN0CkBAIC0yMywzICsyMyw3IEBACiAuLiBbRVBBUFJd
+ICpQb3dlci5vcmcgU3RhbmRhcmQgZm9yIEVtYmVkZGVkIFBvd2VyIEFyY2hpdGVjdHVyZQogICAg
+UGxhdGZvcm0gUmVxdWlyZW1lbnRzKiwgcG93ZXIub3JnLCAyMDExLAogICAgaHR0cHM6Ly93d3cu
+cG93ZXIub3JnL2RvY3VtZW50YXRpb24vcG93ZXItb3JnLXN0YW5kYXJkLWZvci1lbWJlZGRlZC1w
+b3dlci1hcmNoaXRlY3R1cmUtcGxhdGZvcm0tcmVxdWlyZW1lbnRzLWVwYXByLXYxLTEtMi8KKwor
+Li4gW1VFRkldIGBVbmlmaWVkIEV4dGVuc2FibGUgRmlybXdhcmUgSW50ZXJmYWNlIFNwZWNpZmlj
+YXRpb24gdjIuOCBFcnJhdGEgQQorICAgPGh0dHBzOi8vdWVmaS5vcmcvc2l0ZXMvZGVmYXVsdC9m
+aWxlcy9yZXNvdXJjZXMvVUVGSV9TcGVjXzJfOF9BX0ZlYjE0LnBkZj5gXywKKyAgIEZlYnJ1YXJ5
+IDIwMjAsIGBVRUZJIEZvcnVtIDxodHRwOi8vd3d3LnVlZmkub3JnPmBfCi0tIAoyLjIwLjEKCg==
