@@ -1,408 +1,248 @@
-From: Thierry Reding <treding-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>
-Subject: Re: [PATCH 2/3] Import /reserved-memory specification text
-Date: Thu, 17 Sep 2020 11:09:19 +0200
-Message-ID: <20200917090919.GA3511606@ulmo>
-References: <20200915170455.32520-1-grant.likely@arm.com>
- <20200915170455.32520-2-grant.likely@arm.com>
- <17b980e5-97e7-8afa-3d51-c462f2fe91ff@arm.com>
+From: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+Subject: Re: [PATCH] Trivia: Add SPDX tags to source files
+Date: Thu, 17 Sep 2020 15:14:27 +0100
+Message-ID: <c36f53db-c8fc-962c-ce70-829f1c9f354b@arm.com>
+References: <20200917141259.13432-1-grant.likely@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="oyUTqETQ0mS9luUI"
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <17b980e5-97e7-8afa-3d51-c462f2fe91ff-5wv7dgnIgG8@public.gmane.org>
-Content-Disposition: inline
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
-        t=1600333724; bh=64pBnAgP7m/ouLsulacS1qOSNusPfBWQUq36oaYpmBU=;
-        h=X-PGP-Universal:Date:From:To:CC:Subject:Message-ID:References:
-         MIME-Version:In-Reply-To:X-NVConfidentiality:User-Agent:
-         X-Originating-IP:X-ClientProxiedBy:Content-Type:
-         Content-Disposition;
-        b=gHP0gzLROwoppYjIkzU2LNQO4NqOTJ5RInX6ZLz4REZY1tEHP+U/2verTYUmXZKmZ
-         bTJDC2DZ194aD123TsiyLRpBxSo4/qRGfHPnJKhlMPjpGgp6rWpoIyT/RO2mPG1rMy
-         B41x4BPu+I/2kTuY5+CLmnBbwGxh78tSrpdZc8Qs/eVNK80IDcgWVLp1jcSOdxvgru
-         u1bYujpJoalW5wEQ29Kq/k7nPxCPQIekY0SGF8NYlf07CslXCJwawucRsHFQV5nflX
-         j5IueIYA0ZoOw1CJxPxK3E5XaqdL99fXTl9cxLNXiVdXRcM/st3Utum/U1PSHg6hM6
-         WPuIvPypU7fXA==
-List-ID: <devicetree-spec.vger.kernel.org>
-To: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
-Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, nd-5wv7dgnIgG8@public.gmane.org, Ard Biesheuvel <ardb-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Leif Lindholm <leif-e2DmVA6dwcVWk0Htik3J/w@public.gmane.org>, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Heinrich Schuchardt <xypron.glpk-Mmb7MZpHnFY@public.gmane.org>
-
---oyUTqETQ0mS9luUI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/mzR1tz9u6jaAztm/6u17PPnZkt+qfe2ptXfVVlnNJo=;
+ b=77ktoqRO7JUFKjssgnAKTdnxkxVeK8T+F0s4goIs6lKnZffSpTB2/3DbcVrqQbBm8tNfwa1HbGy8ZfmS4B0ECrG3JgsreVJR+HhLZo15Sn1WhGzQBAgc/7mJgnoAod2H8LUhYV1riHtj24tMqEssh7DJ0SCv0Y5Vj5b7DA5WKI8=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/mzR1tz9u6jaAztm/6u17PPnZkt+qfe2ptXfVVlnNJo=;
+ b=77ktoqRO7JUFKjssgnAKTdnxkxVeK8T+F0s4goIs6lKnZffSpTB2/3DbcVrqQbBm8tNfwa1HbGy8ZfmS4B0ECrG3JgsreVJR+HhLZo15Sn1WhGzQBAgc/7mJgnoAod2H8LUhYV1riHtj24tMqEssh7DJ0SCv0Y5Vj5b7DA5WKI8=
+In-Reply-To: <20200917141259.13432-1-grant.likely-5wv7dgnIgG8@public.gmane.org>
+Content-Language: en-US
+List-ID: <devicetree-spec.vger.kernel.org>
+Content-Type: text/plain; charset="windows-1252"; format="flowed"
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: nd-5wv7dgnIgG8@public.gmane.org
 
-On Thu, Sep 17, 2020 at 10:00:35AM +0100, Grant Likely wrote:
-> [+Thierry]
+*trivial
+
+On 17/09/2020 15:12, Grant Likely wrote:
+> Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
+> ---
+>   FAQ.md                                | 2 ++
+>   Makefile                              | 2 ++
+>   README.md                             | 1 +
+>   linux-doc-removal-schedule.rst        | 2 ++
+>   source/acknowledgements.rst           | 2 ++
+>   source/chapter1-introduction.rst      | 1 +
+>   source/chapter2-devicetree-basics.rst | 2 +-
+>   source/chapter3-devicenodes.rst       | 2 ++
+>   source/chapter4-device-bindings.rst   | 2 ++
+>   source/chapter5-flattened-format.rst  | 2 ++
+>   source/chapter6-source-language.rst   | 2 ++
+>   source/conf.py                        | 1 +
+>   source/index.rst                      | 2 ++
+>   source/license.rst                    | 1 +
+>   source/references.rst                 | 1 +
+>   source/revhistory.rst                 | 2 ++
+>   source/rst_prolog                     | 2 ++
+>   writers-guide.rst                     | 2 ++
+>   18 files changed, 30 insertions(+), 1 deletion(-)
 >=20
-> Thierry, earlier this year you added the memory-region-names property to =
-the
-> reserved-memory binding. I'd like to move the whole binding into the
-> devicetree specification (the patch below). Since you're one of the people
-> who touched this document, can I get an 'Acked-by' from you to confirm I =
-can
-> copy your text over into a CC-BY-SA licensed document?
-
-Acked-by: Thierry Reding <treding-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>
-
-> On 15/09/2020 18:04, Grant Likely wrote:
-> > Imported from linux kernel source:
-> > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree=
-/Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
-> >=20
-> > Very minor editorial changes made while importing, with one exception.
-> > Added clause that the 'no-map' and 'reusable' properties are mutually
-> > exclusive.
-> >=20
-> > Signed-off-by: Grant Likely <grant.likely-5wv7dgnIgG8@public.gmane.org>
-> > Cc: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-> > Cc: Heinrich Schuchardt <xypron.glpk-Mmb7MZpHnFY@public.gmane.org>
-> > Cc: Ard Biesheuvel <ardb-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-> > ---
-> >   source/chapter3-devicenodes.rst | 203 +++++++++++++++++++++++++++++++-
-> >   1 file changed, 202 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-deviceno=
-des.rst
-> > index 3aa4650..3043b8a 100644
-> > --- a/source/chapter3-devicenodes.rst
-> > +++ b/source/chapter3-devicenodes.rst
-> > @@ -161,7 +161,8 @@ If the VLE storage attribute is supported, with VLE=
-=3D0.
-> >      :ref:`sect-standard-properties`) are allowed but are optional.
-> > -**Examples**
-> > +``/memory`` Examples
-> > +~~~~~~~~~~~~~~~~~~~~
-> >   Given a 64-bit Power system with the following physical memory layout:
-> > @@ -200,6 +201,206 @@ memory ranges. The 2 GB I/O region is skipped. No=
-te that the
-> >   value of 2, which means that two 32-bit cells are required to define =
-the
-> >   address and length for the ``reg`` property of the memory node.
-> > +``/reserved-memory`` Node
-> > +-------------------------
-> > +
-> > +Reserved memory is specified as a node under the ``/reserved-memory`` =
-node.
-> > +The operating system shall exclude reserved memory from normal usage
-> > +one can create child nodes describing particular reserved (excluded fr=
-om
-> > +normal use) memory regions.
-> > +Such memory regions are usually designed for the special usage by vari=
-ous
-> > +device drivers.
-> > +
-> > +Parameters for each memory region can be encoded into the device tree
-> > +with the following nodes:
-> > +
-> > +/reserved-memory parent node
-> > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > +
-> > +.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
-> > +.. table:: /reserved-memory Parent Node Properties
-> > +
-> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=
-=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=
+> diff --git a/FAQ.md b/FAQ.md
+> index 0d8a032..c1a470e 100644
+> --- a/FAQ.md
+> +++ b/FAQ.md
+> @@ -43,3 +43,5 @@ only and not with Linaro membership.
+>   The membership proceeds go towards the defraying of Linaro=E2=80=99s co=
+sts for hosting devicetree.org.
+>  =20
+>   If you have useful FAQs you would like to see here, please contact us t=
+hrough the mailing list
+> +
+> +<!-- SPDX-License-Identifier: Apache-2.0 -->
+> diff --git a/Makefile b/Makefile
+> index 8e5475d..33446b0 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -1,3 +1,5 @@
+> +# SPDX-License-Identifier: Apache-2.0
+> +#
+>   # Minimal makefile for Sphinx documentation
+>   #
+>  =20
+> diff --git a/README.md b/README.md
+> index fa21ecf..57b16d8 100644
+> --- a/README.md
+> +++ b/README.md
+> @@ -136,3 +136,4 @@ By making a contribution to this project, I certify t=
+hat:
+>       this project or the open source license(s) involved.
+>   ```
+>  =20
+> +<!-- SPDX-License-Identifier: Apache-2.0 -->
+> diff --git a/linux-doc-removal-schedule.rst b/linux-doc-removal-schedule.=
+rst
+> index 90eeed0..b0ae9b1 100644
+> --- a/linux-doc-removal-schedule.rst
+> +++ b/linux-doc-removal-schedule.rst
+> @@ -8,3 +8,5 @@ The content of the following files have been imported int=
+o the spec from the Lin
+>            bindings/
+>               reserved-memory/
+>                  reserved-memory.txt     # Added commit 841c0878
+> +
+> +.. SPDX-License-Identifier: Apache-2.0
+> diff --git a/source/acknowledgements.rst b/source/acknowledgements.rst
+> index a02e0aa..5e768d4 100644
+> --- a/source/acknowledgements.rst
+> +++ b/source/acknowledgements.rst
+> @@ -1,3 +1,5 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+> +
+>   **Acknowledgements**
+>  =20
+>   The devicetree.org Technical Steering Committee would like to
+> diff --git a/source/chapter1-introduction.rst b/source/chapter1-introduct=
+ion.rst
+> index f50e6b5..6c806af 100644
+> --- a/source/chapter1-introduction.rst
+> +++ b/source/chapter1-introduction.rst
+> @@ -1,3 +1,4 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+>  =20
+>   .. _chapter-introduction:
+>  =20
+> diff --git a/source/chapter2-devicetree-basics.rst b/source/chapter2-devi=
+cetree-basics.rst
+> index f782137..50a6a86 100644
+> --- a/source/chapter2-devicetree-basics.rst
+> +++ b/source/chapter2-devicetree-basics.rst
+> @@ -1,4 +1,4 @@
+> -
+> +.. SPDX-License-Identifier: Apache-2.0
+>  =20
+>   .. _chapter-devicetree:
+>  =20
+> diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenode=
+s.rst
+> index c248f53..b731b8f 100644
+> --- a/source/chapter3-devicenodes.rst
+> +++ b/source/chapter3-devicenodes.rst
+> @@ -1,3 +1,5 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+> +
+>   .. _chapter-device-node-requirements:
+>  =20
+>   Device Node Requirements
+> diff --git a/source/chapter4-device-bindings.rst b/source/chapter4-device=
+-bindings.rst
+> index 7e1a0f4..6e481f1 100644
+> --- a/source/chapter4-device-bindings.rst
+> +++ b/source/chapter4-device-bindings.rst
+> @@ -1,3 +1,5 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+> +
+>   .. _chapter-device-bindings:
+>  =20
+>   Device Bindings
+> diff --git a/source/chapter5-flattened-format.rst b/source/chapter5-flatt=
+ened-format.rst
+> index 6b1e182..26efe6e 100644
+> --- a/source/chapter5-flattened-format.rst
+> +++ b/source/chapter5-flattened-format.rst
+> @@ -1,3 +1,5 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+> +
+>   .. _chapter-fdt-structure:
+>  =20
+>   Flattened Devicetree (DTB) Format
+> diff --git a/source/chapter6-source-language.rst b/source/chapter6-source=
+-language.rst
+> index 61d05d4..7b74846 100755
+> --- a/source/chapter6-source-language.rst
+> +++ b/source/chapter6-source-language.rst
+> @@ -1,3 +1,5 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+> +
+>   .. _chapter-devicetree-source-format:
+>  =20
+>   Devicetree Source (DTS) Format (version 1)
+> diff --git a/source/conf.py b/source/conf.py
+> index 1803dfa..51ffa2b 100644
+> --- a/source/conf.py
+> +++ b/source/conf.py
+> @@ -1,3 +1,4 @@
+> +# SPDX-License-Identifier: Apache-2.0
+>   # -*- coding: utf-8 -*-
+>   #
+>   # Devicetree Specification documentation build configuration file, crea=
+ted by
+> diff --git a/source/index.rst b/source/index.rst
+> index 568e72b..120c991 100644
+> --- a/source/index.rst
+> +++ b/source/index.rst
+> @@ -3,6 +3,8 @@
+>      You can adapt this file completely to your liking, but it should at =
+least
+>      contain the root `toctree` directive.
+>  =20
+> +   SPDX-License-Identifier: Apache-2.0
+> +
+>   Welcome to Devicetree Specification's documentation!
+>   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +   Property Name       Usage Value Type        Definition
-> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=
-=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +   ``#address-cells``  R     ``<u32>``         Specifies the number of=
- ``<u32>`` cells to
-> > +                                               represent the address i=
-n the ``reg`` property in
-> > +                                               children of root.
-> > +   ``#size-cells``     R     ``<u32>``         Specifies the number of=
- ``<u32>`` cells to
-> > +                                               represent the size in t=
-he ``reg`` property in
-> > +                                               children of root.
-> > +   ``ranges``          R     ``<prop encoded   This property represent=
-s the mapping between
-> > +                             array>``          parent address to child=
- address spaces (see
-> > +                                               section :ref:`sect-stan=
-dard-properties-ranges`,
-> > +                                               ranges).
-> > +   Usage legend: R=3DRequired, O=3DOptional, OR=3DOptional but Recomme=
-nded, SD=3DSee Definition
-> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +``#address-cells`` and ``#size-cells`` should use the same values as f=
-or the root node,
-> > +and ``ranges`` should be empty so that address translation logic works=
- correctly.
-> > +
-> > +/reserved-memory/ child nodes
-> > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > +
-> > +Each child of the reserved-memory node specifies one or more regions of
-> > +reserved memory. Each child node may either use a ``reg`` property to
-> > +specify a specific range of reserved memory, or a ``size`` property wi=
-th
-> > +optional constraints to request a dynamically allocated block of memor=
-y.
-> > +
-> > +Following the generic-names recommended practice, node names should
-> > +reflect the purpose of the node (ie. "*framebuffer*" or "*dma-pool*").
-> > +Unit address (``@<address>``) should be appended to the name if the no=
-de
-> > +is a static allocation.
-> > +
-> > +A reserved memory node requires either a ``reg`` property for static
-> > +allocations, or a ``size`` property for dynamics allocations.
-> > +Dynamic allocations may use ``alignment`` and ``alloc-ranges`` propert=
-ies
-> > +to constrain where the memory is allocated from.
-> > +If both ``reg`` and ``size`` are present, then the region is treated a=
-s a
-> > +static allocation with the ``reg`` property taking precedence and ``si=
-ze``
-> > +is ignored.
-> > +
-> > +.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
-> > +.. table:: ``/reserved-memory/`` Child Node Properties
-> > +
-> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D =3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-> > +   Property Name           Usage Value Type                Definition
-> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D =3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-> > +   ``reg``                 O      ``<prop-encoded-array>`` Consists of=
- an arbitrary number of address and
-> > +                                                           size pairs =
-that specify the physical address
-> > +                                                           and size of=
- the memory ranges.
-> > +   ``size``                O      ``<prop-encoded-array>`` Size in byt=
-es of memory to reserve for
-> > +                                                           dynamically=
- allocated regions.
-> > +                                                           Size of thi=
-s property is based on parent node's
-> > +                                                           ``#size-cel=
-ls`` property.
-> > +   ``alignment``           O      ``<prop-encoded-array>`` Address bou=
-ndary for alignment of allocation.
-> > +                                                           Size of thi=
-s property is based on parent node's
-> > +                                                           ``#size-cel=
-ls`` property.
-> > +   ``alloc-ranges``        O      ``<prop-encoded-array>`` Specifies r=
-egions of memory that are acceptable
-> > +                                                           to allocate=
- from.
-> > +                                                           Format is (=
-address, length pairs) tuples in
-> > +                                                           same format=
- as for ``reg`` properties.
-> > +   ``compatible``          O      ``<stringlist>``         May contain=
- the following strings:
-> > +
-> > +                                                           - ``shared-=
-dma-pool``: This indicates a region of
-> > +                                                             memory me=
-ant to be used as a shared pool of DMA
-> > +                                                             buffers f=
-or a set of devices.
-> > +                                                             It can be=
- used by an operating system to
-> > +                                                             instantia=
-te the necessary pool management
-> > +                                                             subsystem=
- if necessary.
-> > +
-> > +                                                           - vendor sp=
-ecific string in the form
-> > +                                                             ``<vendor=
->,[<device>-]<usage>``
-> > +   ``no-map``              O      ``<empty>``              If present,=
- indicates the operating system must
-> > +                                                           not create =
-a virtual mapping of the region as
-> > +                                                           part of its=
- standard mapping of system memory,
-> > +                                                           nor permit =
-speculative access to it under any
-> > +                                                           circumstanc=
-es other than under the control of
-> > +                                                           the device =
-driver using the region.
-> > +   ``reusable``            O      ``<empty>``              The operati=
-ng system can use the memory in this
-> > +                                                           region with=
- the limitation that the device
-> > +                                                           driver(s) o=
-wning the region need to be able to
-> > +                                                           reclaim it =
-back.
-> > +                                                           Typically t=
-hat means that the operating system
-> > +                                                           can use tha=
-t region to store volatile or cached
-> > +                                                           data that c=
-an be otherwise regenerated or
-> > +                                                           migrated el=
-sewhere.
-> > +   Usage legend: R=3DRequired, O=3DOptional, OR=3DOptional but Recomme=
-nded, SD=3DSee Definition
-> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-> > +
-> > +.. note:: All other standard properties (section
-> > +   :ref:`sect-standard-properties`) are allowed but are optional.
-> > +
-> > +The ``no-map`` and ``reusable`` properties are mutually exclusive and =
-both must
-> > +not be used together in the same node.
-> > +
-> > +Linux implementation notes:
-> > +
-> > +- If a ``linux,cma-default`` property is present, then Linux will use =
-the
-> > +  region for the default pool of the contiguous memory allocator.
-> > +
-> > +- If a ``linux,dma-default`` property is present, then Linux will use =
-the
-> > +  region for the default pool of the consistent DMA allocator.
-> > +
-> > +Device node references to reserved memory
-> > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > +
-> > +Regions in the ``/reserved-memory`` node may be referenced by other de=
-vice
-> > +nodes by adding a ``memory-region`` property to the device node.
-> > +
-> > +.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
-> > +.. table:: Properties for referencing reserved-memory regions
-> > +
-> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D =3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-> > +   Property Name           Usage Value Type                Definition
-> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D =3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-> > +   ``memory-region``       O     ``<prop-encoded-array>``  phandle, sp=
-ecifier pairs to children of
-> > +                                                           ``/reserved=
--memory``
-> > +   ``memory-region-names`` O     ``<stringlist>>``         A list of n=
-ames, one for each corresponding
-> > +                                                           entry in th=
-e ``memory-region`` property
-> > +   Usage legend: R=3DRequired, O=3DOptional, OR=3DOptional but Recomme=
-nded, SD=3DSee Definition
-> > +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-> > +
-> > +``/reserved-memory`` Example
-> > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > +
-> > +This example defines 3 contiguous regions are defined for Linux kernel:
-> > +one default of all device drivers (named ``linux,cma@72000000`` and 64=
-MiB in size),
-> > +one dedicated to the framebuffer device (named ``framebuffer@78000000`=
-`, 8MiB), and
-> > +one for multimedia processing (named ``multimedia-memory@77000000``, 6=
-4MiB).
-> > +
-> > +.. code-block:: dts
-> > +
-> > +   / {
-> > +      #address-cells =3D <1>;
-> > +      #size-cells =3D <1>;
-> > +
-> > +      memory {
-> > +         reg =3D <0x40000000 0x40000000>;
-> > +      };
-> > +
-> > +      reserved-memory {
-> > +         #address-cells =3D <1>;
-> > +         #size-cells =3D <1>;
-> > +         ranges;
-> > +
-> > +         /* global autoconfigured region for contiguous allocations */
-> > +         linux,cma {
-> > +            compatible =3D "shared-dma-pool";
-> > +            reusable;
-> > +            size =3D <0x4000000>;
-> > +            alignment =3D <0x2000>;
-> > +            linux,cma-default;
-> > +         };
-> > +
-> > +         display_reserved: framebuffer@78000000 {
-> > +            reg =3D <0x78000000 0x800000>;
-> > +         };
-> > +
-> > +         multimedia_reserved: multimedia@77000000 {
-> > +            compatible =3D "acme,multimedia-memory";
-> > +            reg =3D <0x77000000 0x4000000>;
-> > +         };
-> > +      };
-> > +
-> > +      /* ... */
-> > +
-> > +      fb0: video@12300000 {
-> > +         memory-region =3D <&display_reserved>;
-> > +         /* ... */
-> > +      };
-> > +
-> > +      scaler: scaler@12500000 {
-> > +         memory-region =3D <&multimedia_reserved>;
-> > +         /* ... */
-> > +      };
-> > +
-> > +      codec: codec@12600000 {
-> > +         memory-region =3D <&multimedia_reserved>;
-> > +         /* ... */
-> > +      };
-> > +   };
-> > +
-> >   ``/chosen`` Node
-> >   ----------------
-> >=20
-
---oyUTqETQ0mS9luUI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAl9jJ7wACgkQ3SOs138+
-s6HopQ//W/xqRFWD9z3B1PT1v63/ntRxPPSxDpQuW6EhSATVlNFWJVqjP4RLNhZy
-nC2R770/+kzLuZfRS/zziQlYxOgHC6BrqTJf1XsYiKAapYhH7x9CYRW7Pj23WMcX
-T2r9G0K/nGh8p/Wu5/ZWn2UnQdJl5YKtdbL6Id6HZijFkD/kTsJ4/SvGUnlJfxJ1
-szQtRxd1DY1r17k4sP5QYrKC70KoBThOVwqsEYEmXIexE1MoDKJqrPJduoQR/xnd
-r6R9IqwoCUnK/EnbjqKc7PrIctK6XHhIQV7r8nxpoc/9sLJ5bSR40nLaq5T8FJcJ
-sUWTzOk29vb2fDQ0FRTN5hSrfJX6iwBcW9h4+Z7s8daPDuRbkL4cNXaJywfBoaNL
-3mWoCARaE2XENqLK5Ax2HQvUAvtqBXeoDwDAL6pxe6t9SqxayJdWzySMsDJu5aQL
-LvkpD5u3x7ZLioUxCmb695i2NDDJ+eFTAcI5fcUPY/IfbZMNBob4YMPFB9rhPZKn
-09gIsATolWkomiPw1+05Xc27X2N1lmY9u3OlAzVIc9Ux7Jm0eTIOeE5ebrY7Npof
-51DTmuLXqd4AY18uwJ99ai9x9fa+8RpOR3QfVOCdVE+vy+m1St7e5yLjMwjbJW5d
-hEI11M49cn5c7YWtkifepHwvkwtIX1l4bvg0Lc9tX4zI8a6YuiY=
-=z2/P
------END PGP SIGNATURE-----
-
---oyUTqETQ0mS9luUI--
+=3D=3D=3D=3D
+>  =20
+> diff --git a/source/license.rst b/source/license.rst
+> index 17a586f..b480895 100644
+> --- a/source/license.rst
+> +++ b/source/license.rst
+> @@ -1,3 +1,4 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+>  =20
+>   **Copyright**
+>  =20
+> diff --git a/source/references.rst b/source/references.rst
+> index 8400e96..8d8708d 100644
+> --- a/source/references.rst
+> +++ b/source/references.rst
+> @@ -1,3 +1,4 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+>  =20
+>   .. [IEEE1275] *Boot (Initialization Configuration) Firmware: Core Requi=
+rements
+>      and Practices*, 1994, This is the core standard (also known as IEEE
+> diff --git a/source/revhistory.rst b/source/revhistory.rst
+> index e302093..81b71f2 100644
+> --- a/source/revhistory.rst
+> +++ b/source/revhistory.rst
+> @@ -1,3 +1,5 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+> +
+>   .. _revision-history:
+>   .. tabularcolumns:: | p{1.5cm} p{2.25cm} p{11.50cm} |
+>   .. table:: Revision History
+> diff --git a/source/rst_prolog b/source/rst_prolog
+> index 6cee60e..2854cc8 100644
+> --- a/source/rst_prolog
+> +++ b/source/rst_prolog
+> @@ -1,3 +1,5 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+> +
+>   .. Revision of the specification
+>  =20
+>   .. |dtspec-major| replace:: 0
+> diff --git a/writers-guide.rst b/writers-guide.rst
+> index 75c291a..fde76a4 100644
+> --- a/writers-guide.rst
+> +++ b/writers-guide.rst
+> @@ -1,3 +1,5 @@
+> +.. SPDX-License-Identifier: Apache-2.0
+> +
+>   This document uses the Sphinx implementation of reStructured Text (RST)=
+. RST is
+>   a flexible markup language with lots of options for laying out text. To=
+ keep
+>   thinks simple, this file describes the conventions used by this project=
+. As
+>=20
