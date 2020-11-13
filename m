@@ -1,44 +1,53 @@
-From: Bill Mills <bill.mills-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: DTE Call: DTB ABI vs OS loader
-Date: Wed, 28 Oct 2020 08:21:45 -0400
-Message-ID: <06a3720a-46ac-7fd3-9ed2-97727d1d5c0a@linaro.org>
+From: KwangDeok Son <kdson@zinitix.com>
+Subject: [PATCH] dt-bindings: input: Document the Zinitix Touchpad bindigns.
+Date: Fri, 13 Nov 2020 19:24:36 +0900
+Message-ID: <20201113192436.54e2f2a6@zinitix-H370AORUSGAMING3>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=to:from:subject:message-id:date:user-agent:mime-version
-         :content-language:content-transfer-encoding;
-        bh=vcB4RtshSU4zCL+BZha3q6ejCTNgn0OfknfJeVQi8CE=;
-        b=RnSwdC0NFrWx/hwUpo0ThkkibS000+Rs/i1pl6txC2teBSPKvXz9NB6360n6bGFT4/
-         G8WtdHXwT5alkbDhhT8BGxu85MsUZSHn6Q1rK/PgpF84qeq5zfvTUoASwfemMQ9U4F9m
-         nSiTc5hyGEUT1i4B7Km5vgSwPpIuYbK6ryXEjJ36qvdnuhL5gDOdy77igMMfezfFBZyi
-         U/llTbmbhImcvfPVttEXpoVV6w+278/PXOeBkj2sZ9FiewV7i6oupS4n9rpnqQ3SeLjn
-         EeUa0f1/4g4Xe8ybxeoiS24Wl90seL8LYxT1eUIFiwneX6CVDTjt6Myd4NIVHbMYFS+C
-         9OIA==
-Content-Language: en-US
+Return-path: <linux-input-owner@vger.kernel.org>
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Content-Type: text/plain; charset="us-ascii"
+To: devicetree-spec@vger.kernel.org
+Cc: linux-input@vger.kernel.org, dmitry.torokhov@gmail.com, kdson@zinitix.com
 
-Hello,
+Add DT bindings documentation for Zinitix I2C Touchpad.
 
-The DT Evolution call will be in ~1.5 hours.
-Assuming we have quorum*, I would like to discuss the issues with DTB 
-ABI (current lack there of) when we have an OS loader in the path (like 
-GRUB).
+Signed-off-by: KwangDeok Son <kdson@zinitix.com>
 
-I made these slides to frame the conversation:
-https://docs.google.com/presentation/d/1Hq7-42EfM4xC_1N1HMO20vXVKSpkA_S-LosSYp4l9Ik/edit?usp=sharing
+---
+diff --git a/Documentation/devicetree/bindings/input/zinitix-touchpad.txt b/Documentation/devicetree/bindings/input/zinitix-touchpad.txt
+index e69de29bb2d1..29a3fe9b58cb 100644
+--- a/Documentation/devicetree/bindings/input/zinitix-touchpad.txt
++++ b/Documentation/devicetree/bindings/input/zinitix-touchpad.txt
+@@ -0,0 +1,28 @@
++Zinitix I2C Touchpad
++
++
++Required properties:
++- compatible: must be "zinitix,zntxtp".
++- reg: I2C address of the chip.
++- interrupts: interrupt to which the chip is connected (see interrupt
++  binding[0]).
++
++
++Optional properties:
++- wakeup-source: touchpad can be used as a wakeup source.
++- vcc-supply: a phandle for the regulator supplying 2.7V to 3.6V power.
++
++[0]: Documentation/devicetree/bindings/interrupt-controller/interrupts.txt
++[1]: Documentation/devicetree/bindings/pinctrl/pinctrl-bindings.txt
++
++
++Example:
++	&i2c0 {
++		touchpad@40 {
++			compatible = "zinitix,zntxtp";
++			reg = <0x40>;
++			interrupt-parent = <&gpio>;
++			interrupts = <0 IRQ_TYPE_EDGE_FALLING>;
++			wakeup-source;
++		};
++	};
 
-* I know ELC is going on also.  Lets see how we do.
 
-Thanks,
-Bill
 
--- 
-Bill Mills
-Principal Technical Consultant, Linaro
-+1-240-643-0836
-TZ: US Eastern
-Work Schedule:  Tues/Wed/Thur
