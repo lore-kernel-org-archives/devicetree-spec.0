@@ -1,44 +1,37 @@
-From: Wei Ming Chen <jj251510319013-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: [PATCH] Fix format in README
-Date: Sat, 27 Feb 2021 11:17:36 +0800
-Message-ID: <20210227031736.3422-1-jj251510319013@gmail.com>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: [ANNOUNCE] dtschema 2021.5 release
+Date: Thu, 6 May 2021 13:52:25 -0500
+Message-ID: <CAL_JsqJ3tThskW5birkReLo10K7+YrkBr0BAwOTx+GrnrW3QTA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NqeyhvYh6L1mMAA5kWkM8a4NM/+hKIXqaxa6FIrBFbU=;
-        b=Grf7fewW1z8XzAmuz6QIC1wfhxPJnl1r7ZxTwGfzG3VJgPbLTefo9IWXcyM0O2lBN6
-         BnYeST9LyL3Vz4Q7bweNECT3CzEP+MIeSq9GqWHhBuQv3X+73C2QWyiG290uRLDXz+rc
-         KkgUxI7CSYKs9Pc38x9N9nyN9QR9BJ+uLHDLtHVWo1PGGZiPXgZFKmtw8R7CaqC8qXrD
-         xpIn+7caqy9jHiTYxyYTmWIQZGJhe3et/OM9A+cUWU6/zQzqfqpZ/JUSLLU+0LTz4eUa
-         tdf2L4GJRkkEDuNmwyYiT9Z8s4/qQToVxTG6/QUWE5gQGSGEI9echqZaJxcSJB9yJ141
-         fgJw==
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1620327158;
+        bh=yiVGmX4sP7Bfubik8i5v4TvkRUWih83CNcAAuSpmeIY=;
+        h=From:Date:Subject:To:From;
+        b=Ft5bDWsX+Wicvrl3xl0mczEhOkGBWDZeJkrmGCZnFcSK2T25FX41/J6VKTvtNFi7j
+         jg3TOcF/jwNOS98NPNwXk6sf3wAz1+ifcgzysKkWue0G/IiPtG3qAiB+uHdOdiTgsy
+         g2CrRg5jpmrMCAOCA9cAXkfsUkmRo0IAiG1NoTn4FhFOxg/vZosDBb+vyd0njBXdA9
+         A/FOgj0niAnNkUSYmG6DfRHXSVV1/H4V0CabZB/StZPODyk0ndlnalvJvu1b6oGG82
+         BDoDCNlqg2OXQ+s/NGScJCXC9vwHhRt7dhnJA5KIQPm6wGibNutC+tvOg2rAQeIHqZ
+         son6OwT0BtThg==
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: Wei Ming Chen <jj251510319013-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Content-Transfer-Encoding: 7bit
+To: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-Signed-off-by: Wei Ming Chen <jj251510319013-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
----
- README.md | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I don't normally announce releases, but I've tagged a new dtschema
+release. There's exactly one new feature in this release: improved
+warning messages for binding schema warnings.
 
-diff --git a/README.md b/README.md
-index 57b16d8..e654a6f 100644
---- a/README.md
-+++ b/README.md
-@@ -62,7 +62,7 @@ On Mac OS X:
- >
- >If you are using [brew](http://brew.sh) then you can install graphviz like this:
- >```
--brew install graphviz
-+>brew install graphviz
- >```
- >If you are using [macports](https://www.macports.org/) then you can install graphviz like this:
- >```
--- 
-2.25.1
+The default error messages come from the jsonschema module. For
+anything beyond simple errors, figuring out where in the meta-schemas
+the error came from and how the schema needs to be changed are not
+obvious. This should now be much better as the nearest 'description'
+in the meta-schema and the '$id' of the failing meta-schema will be
+printed. I've added some descriptions which cover the most common
+cases. I'm sure there's still more descriptions to add, so let me know
+or send me patches.
 
+The release is available on PyPI: https://pypi.org/project/dtschema/
+
+Rob
