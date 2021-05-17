@@ -1,37 +1,41 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: [ANNOUNCE] dtschema 2021.5 release
-Date: Thu, 6 May 2021 13:52:25 -0500
-Message-ID: <CAL_JsqJ3tThskW5birkReLo10K7+YrkBr0BAwOTx+GrnrW3QTA@mail.gmail.com>
+From: "Bolivar, Marti" <Marti.Bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
+Subject: [PATCH] Add note about the initial character in a compatible
+Date: Mon, 17 May 2021 15:23:13 +0000
+Message-ID: <20210517152256.451270-1-marti.bolivar@nordicsemi.no>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1620327158;
-        bh=yiVGmX4sP7Bfubik8i5v4TvkRUWih83CNcAAuSpmeIY=;
-        h=From:Date:Subject:To:From;
-        b=Ft5bDWsX+Wicvrl3xl0mczEhOkGBWDZeJkrmGCZnFcSK2T25FX41/J6VKTvtNFi7j
-         jg3TOcF/jwNOS98NPNwXk6sf3wAz1+ifcgzysKkWue0G/IiPtG3qAiB+uHdOdiTgsy
-         g2CrRg5jpmrMCAOCA9cAXkfsUkmRo0IAiG1NoTn4FhFOxg/vZosDBb+vyd0njBXdA9
-         A/FOgj0niAnNkUSYmG6DfRHXSVV1/H4V0CabZB/StZPODyk0ndlnalvJvu1b6oGG82
-         BDoDCNlqg2OXQ+s/NGScJCXC9vwHhRt7dhnJA5KIQPm6wGibNutC+tvOg2rAQeIHqZ
-         son6OwT0BtThg==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=nordicsemi.onmicrosoft.com; s=selector2-nordicsemi-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oE7LRBsSD1SPrHMyvIUJSsLPk+4tiJO90wODoxRiZs4=;
+ b=tymSXoRNPhd3alm+2Ga+C/g9MpgVpI/oeaLZnKOF/gzuCR0/7QJSGifKsNas7Omj0ohBc5p7eXhqy6DXIN2NQSUnBxyTsSHq9sx40zRvDMj8BkMxL90joAeZc5/W9R5S0wW5W3w53xD+rfmfWjxbahD0cgginw1kY3tEqrmkyOs=
+Content-Language: en-US
+Content-ID: <AD3233AE2F150B4BB5C6D03EE37F590B-wNKe6lTLrGecE4WynfumptQqCkab/8FMAL8bYrjMMd8@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Cc: "Bolivar, Marti" <Marti.Bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
 
-I don't normally announce releases, but I've tagged a new dtschema
-release. There's exactly one new feature in this release: improved
-warning messages for binding schema warnings.
-
-The default error messages come from the jsonschema module. For
-anything beyond simple errors, figuring out where in the meta-schemas
-the error came from and how the schema needs to be changed are not
-obvious. This should now be much better as the nearest 'description'
-in the meta-schema and the '$id' of the failing meta-schema will be
-printed. I've added some descriptions which cover the most common
-cases. I'm sure there's still more descriptions to add, so let me know
-or send me patches.
-
-The release is available on PyPI: https://pypi.org/project/dtschema/
-
-Rob
+Q29tbWl0IDA1YTM0ODE5ZTUgKCJBZGQgbW9yZSByZXN0cmljdGlvbnMgb24gY29tcGF0aWJsZSBz
+dHJpbmdzIikNCnN0YXJ0ZWQgdG8gYWRkIHJlY29tbWVuZGF0aW9ucyBvbiB0aGUgY29udGVudHMg
+b2YgY29tcGF0aWJsZSBzdHJpbmdzLg0KDQpBZGQgYW4gYWRkaXRpb25hbCByZWNvbW1lbmRhdGlv
+biB0aGF0IGNvbXBhdGlibGVzIHNob3VsZCBzdGFydCB3aXRoIGENCmxldHRlci4gSW4gcGFydGlj
+dWxhciwgdGhpcyBtYXRjaGVzIHdoYXQgZHQtc2NoZW1hIGlzIGRvaW5nLg0KDQpTaWduZWQtb2Zm
+LWJ5OiBNYXJ0w60gQm9sw612YXIgPG1hcnRpLmJvbGl2YXJAbm9yZGljc2VtaS5ubz4NCi0tLQ0K
+IHNvdXJjZS9jaGFwdGVyMi1kZXZpY2V0cmVlLWJhc2ljcy5yc3QgfCA2ICsrKy0tLQ0KIDEgZmls
+ZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQoNCmRpZmYgLS1naXQg
+YS9zb3VyY2UvY2hhcHRlcjItZGV2aWNldHJlZS1iYXNpY3MucnN0IGIvc291cmNlL2NoYXB0ZXIy
+LWRldmljZXRyZWUtYmFzaWNzLnJzdA0KaW5kZXggZmEzOTYyNS4uNDBiZTIyMSAxMDA2NDQNCi0t
+LSBhL3NvdXJjZS9jaGFwdGVyMi1kZXZpY2V0cmVlLWJhc2ljcy5yc3QNCisrKyBiL3NvdXJjZS9j
+aGFwdGVyMi1kZXZpY2V0cmVlLWJhc2ljcy5yc3QNCkBAIC00ODQsOSArNDg0LDkgQEAgRGVzY3Jp
+cHRpb246DQogICAgKHN1Y2ggYXMgYSBzdG9jayB0aWNrZXIgc3ltYm9sKSwgYW5kIGBgbW9kZWxg
+YCBzcGVjaWZpZXMgdGhlIG1vZGVsDQogICAgbnVtYmVyLg0KIA0KLSAgIFRoZSBjb21wYXRpYmxl
+IHN0cmluZyBzaG91bGQgY29uc2lzdCBvbmx5IG9mIGxvd2VyY2FzZSBsZXR0ZXJzLCBkaWdpdHMN
+Ci0gICBhbmQgZGFzaGVzLiBBIHNpbmdsZSBjb21tYSBpcyB0eXBpY2FsbHkgb25seSB1c2VkIGZv
+bGxvd2luZyBhIHZlbmRvcg0KLSAgIHByZWZpeC4gVW5kZXJzY29yZXMgc2hvdWxkIG5vdCBiZSB1
+c2VkLg0KKyAgIFRoZSBjb21wYXRpYmxlIHN0cmluZyBzaG91bGQgY29uc2lzdCBvbmx5IG9mIGxv
+d2VyY2FzZSBsZXR0ZXJzLCBkaWdpdHMgYW5kDQorICAgZGFzaGVzLCBhbmQgc2hvdWxkIHN0YXJ0
+IHdpdGggYSBsZXR0ZXIuIEEgc2luZ2xlIGNvbW1hIGlzIHR5cGljYWxseSBvbmx5DQorICAgdXNl
+ZCBmb2xsb3dpbmcgYSB2ZW5kb3IgcHJlZml4LiBVbmRlcnNjb3JlcyBzaG91bGQgbm90IGJlIHVz
+ZWQuDQogDQogRXhhbXBsZToNCiANCi0tIA0KMi4zMS4xDQo=
