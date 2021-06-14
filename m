@@ -1,41 +1,96 @@
-From: "Bolivar, Marti" <Marti.Bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
-Subject: [PATCH] Add note about the initial character in a compatible
-Date: Mon, 17 May 2021 15:23:13 +0000
-Message-ID: <20210517152256.451270-1-marti.bolivar@nordicsemi.no>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: [PATCH] Add Github Action CI workflow
+Date: Mon, 14 Jun 2021 11:36:23 -0600
+Message-ID: <20210614173623.1125220-1-robh@kernel.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nordicsemi.onmicrosoft.com; s=selector2-nordicsemi-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oE7LRBsSD1SPrHMyvIUJSsLPk+4tiJO90wODoxRiZs4=;
- b=tymSXoRNPhd3alm+2Ga+C/g9MpgVpI/oeaLZnKOF/gzuCR0/7QJSGifKsNas7Omj0ohBc5p7eXhqy6DXIN2NQSUnBxyTsSHq9sx40zRvDMj8BkMxL90joAeZc5/W9R5S0wW5W3w53xD+rfmfWjxbahD0cgginw1kY3tEqrmkyOs=
-Content-Language: en-US
-Content-ID: <AD3233AE2F150B4BB5C6D03EE37F590B-wNKe6lTLrGecE4WynfumptQqCkab/8FMAL8bYrjMMd8@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
-To: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-Cc: "Bolivar, Marti" <Marti.Bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: Bill Mills <bill.mills-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 
-Q29tbWl0IDA1YTM0ODE5ZTUgKCJBZGQgbW9yZSByZXN0cmljdGlvbnMgb24gY29tcGF0aWJsZSBz
-dHJpbmdzIikNCnN0YXJ0ZWQgdG8gYWRkIHJlY29tbWVuZGF0aW9ucyBvbiB0aGUgY29udGVudHMg
-b2YgY29tcGF0aWJsZSBzdHJpbmdzLg0KDQpBZGQgYW4gYWRkaXRpb25hbCByZWNvbW1lbmRhdGlv
-biB0aGF0IGNvbXBhdGlibGVzIHNob3VsZCBzdGFydCB3aXRoIGENCmxldHRlci4gSW4gcGFydGlj
-dWxhciwgdGhpcyBtYXRjaGVzIHdoYXQgZHQtc2NoZW1hIGlzIGRvaW5nLg0KDQpTaWduZWQtb2Zm
-LWJ5OiBNYXJ0w60gQm9sw612YXIgPG1hcnRpLmJvbGl2YXJAbm9yZGljc2VtaS5ubz4NCi0tLQ0K
-IHNvdXJjZS9jaGFwdGVyMi1kZXZpY2V0cmVlLWJhc2ljcy5yc3QgfCA2ICsrKy0tLQ0KIDEgZmls
-ZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQoNCmRpZmYgLS1naXQg
-YS9zb3VyY2UvY2hhcHRlcjItZGV2aWNldHJlZS1iYXNpY3MucnN0IGIvc291cmNlL2NoYXB0ZXIy
-LWRldmljZXRyZWUtYmFzaWNzLnJzdA0KaW5kZXggZmEzOTYyNS4uNDBiZTIyMSAxMDA2NDQNCi0t
-LSBhL3NvdXJjZS9jaGFwdGVyMi1kZXZpY2V0cmVlLWJhc2ljcy5yc3QNCisrKyBiL3NvdXJjZS9j
-aGFwdGVyMi1kZXZpY2V0cmVlLWJhc2ljcy5yc3QNCkBAIC00ODQsOSArNDg0LDkgQEAgRGVzY3Jp
-cHRpb246DQogICAgKHN1Y2ggYXMgYSBzdG9jayB0aWNrZXIgc3ltYm9sKSwgYW5kIGBgbW9kZWxg
-YCBzcGVjaWZpZXMgdGhlIG1vZGVsDQogICAgbnVtYmVyLg0KIA0KLSAgIFRoZSBjb21wYXRpYmxl
-IHN0cmluZyBzaG91bGQgY29uc2lzdCBvbmx5IG9mIGxvd2VyY2FzZSBsZXR0ZXJzLCBkaWdpdHMN
-Ci0gICBhbmQgZGFzaGVzLiBBIHNpbmdsZSBjb21tYSBpcyB0eXBpY2FsbHkgb25seSB1c2VkIGZv
-bGxvd2luZyBhIHZlbmRvcg0KLSAgIHByZWZpeC4gVW5kZXJzY29yZXMgc2hvdWxkIG5vdCBiZSB1
-c2VkLg0KKyAgIFRoZSBjb21wYXRpYmxlIHN0cmluZyBzaG91bGQgY29uc2lzdCBvbmx5IG9mIGxv
-d2VyY2FzZSBsZXR0ZXJzLCBkaWdpdHMgYW5kDQorICAgZGFzaGVzLCBhbmQgc2hvdWxkIHN0YXJ0
-IHdpdGggYSBsZXR0ZXIuIEEgc2luZ2xlIGNvbW1hIGlzIHR5cGljYWxseSBvbmx5DQorICAgdXNl
-ZCBmb2xsb3dpbmcgYSB2ZW5kb3IgcHJlZml4LiBVbmRlcnNjb3JlcyBzaG91bGQgbm90IGJlIHVz
-ZWQuDQogDQogRXhhbXBsZToNCiANCi0tIA0KMi4zMS4xDQo=
+Travis-ci.org is going away and moving to Travis-ci.com requires some
+work. It would probably involve fixing authentication issues yet again.
+Instead, let's just move to a GH actions job which is fairly trivial to
+setup. This has the side benefit of CI will run on anyone's fork without
+further setup.
+
+As part of this, the specification file name gains a 'git-describe'
+based version number.
+
+Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+---
+ .github/workflows/ci.yml | 60 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
+ create mode 100644 .github/workflows/ci.yml
+
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+new file mode 100644
+index 000000000000..f8fe08d52cb0
+--- /dev/null
++++ b/.github/workflows/ci.yml
+@@ -0,0 +1,60 @@
++name: Github Action CI
++
++on:
++  push:
++    branches: 
++    - '*'
++    tags:
++    - 'v*'
++  pull_request:
++    branches: 
++      master
++
++jobs:
++  build:
++    runs-on: ubuntu-latest
++
++    steps:
++    - uses: actions/checkout@v2
++      with:
++        fetch-depth: 0
++
++    - name: install
++      run: |
++        sudo apt-get update
++        sudo apt-get install latexmk libalgorithm-diff-perl texlive texlive-latex-extra texlive-humanities graphviz
++        pip3 install --user mako
++        pip3 install --user typing
++        pip3 install --user Sphinx
++        pip3 install --user codespell
++
++    - name: build pdf
++      run: |
++        make latexpdf
++        git fetch --tags --force # Needed to make git-describe work
++        mv build/latex/devicetree-specification.pdf build/latex/devicetree-specification-$(git describe).pdf
++    - name: build html
++      run: make html
++    - name: build singlehtml
++      run: make singlehtml
++
++    - name: upload
++      uses: actions/upload-artifact@v2
++      with:
++        name: artifacts
++        path: |
++          build/latex/devicetree-specification-*.pdf
++
++    - name: deploy
++      uses: peaceiris/actions-gh-pages@v3
++      with:
++        github_token: ${{ secrets.GITHUB_TOKEN }}
++        publish_dir: ./build/singlehtml
++
++    - name: release
++      uses: softprops/action-gh-release@v1
++      if: startsWith(github.ref, 'refs/tags/')
++      with:
++        files: build/latex/devicetree-specification-*.pdf
++      env:
++        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+-- 
+2.27.0
+
