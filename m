@@ -1,65 +1,56 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+From: "Bolivar, Marti" <Marti.Bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
 Subject: Re: [PATCH] Add note about the initial character in a compatible
-Date: Mon, 14 Jun 2021 11:49:58 -0600
-Message-ID: <CAL_JsqLuJ9ddE+9nNjjjtwoWZCRnnvPr73wAN7hZtk83NsFZQg@mail.gmail.com>
+Date: Mon, 14 Jun 2021 20:37:06 +0000
+Message-ID: <8735tki3o1.fsf@scarlet.i-did-not-set--mail-host-address--so-tickle-me>
 References: <20210517152256.451270-1-marti.bolivar@nordicsemi.no>
+ <CAL_JsqLuJ9ddE+9nNjjjtwoWZCRnnvPr73wAN7hZtk83NsFZQg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1623693012;
-        bh=ZGyKIioNU8Pkff+ia0Z5O5K0MUz+tiprE9TSZaOLpl4=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=fDp/vF6fPB/uZzrEkRgmV8nPDyVz6xdGjNLUo/XSLryE64ulj/7EIqiGB4zBDGYqd
-         cSX0Bzjn9BAwqew3QJ3+mdUBwmVrC29Y6nwK8095Hbf6fClqDHdRL9BQXGLg+FCFnY
-         UElh+1/lB/spnWH2WfDUIDRxFWP4wKDMxqUVSQhQXR2R8YN1AsUipDIjTV8nHg39gM
-         HE1rMXg/UIK1supy0Y4xCuXCkQX2JpQyARllJsomiBf9/y8lNRQA+dDx4G220H7Emj
-         oHqrLHIoJsGnr5AP8ZhIDXnWMm9tvP/2TtbFWmC8K0j8lQKMk6T5RF1M0MPhz8xvXm
-         mWQ53un2A41iw==
-In-Reply-To: <20210517152256.451270-1-marti.bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
-List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="utf-8"
-To: "Bolivar, Marti" <Marti.Bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
+Content-Transfer-Encoding: base64
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=nordicsemi.onmicrosoft.com; s=selector2-nordicsemi-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yHfJegAy73cGZ0ATM/3FuPqab8XU5LRaYTtwT8S7460=;
+ b=uFoOTM3elCg8NU8yK0EWfd9ard2HD/44pdxmE6YqMcHVK10/NkaMnisL/3ubjrrXK3pW2076qgu0P9xrYdO+JbuIdkE3m8Fy7+eomeYun2Xho+41dGNKDxapprUpCmFAA5uqTs8GdWR3yXHTTOdonSYOLx5Qo7YlFRP8YYmvmtI=
+In-Reply-To: <CAL_JsqLuJ9ddE+9nNjjjtwoWZCRnnvPr73wAN7hZtk83NsFZQg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Content-Language: en-US
+Content-ID: <D9BABC49E5160C478C406FAA9010971D-wNKe6lTLrGecE4WynfumptQqCkab/8FMAL8bYrjMMd8@public.gmane.org>
+List-ID: <devicetree-spec.vger.kernel.org>
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-On Mon, May 17, 2021 at 9:25 AM Bolivar, Marti
-<Marti.Bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org> wrote:
->
-> Commit 05a34819e5 ("Add more restrictions on compatible strings")
-> started to add recommendations on the contents of compatible strings.
->
-> Add an additional recommendation that compatibles should start with a
-> letter. In particular, this matches what dt-schema is doing.
->
-> Signed-off-by: Mart=C3=AD Bol=C3=ADvar <marti.bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
-> ---
->  source/chapter2-devicetree-basics.rst | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-
-I can't get this to apply. I'm not really sure what the issue is, but
-can you resend without base64 encoding or send a GH PR.
-
->
-> diff --git a/source/chapter2-devicetree-basics.rst b/source/chapter2-devi=
-cetree-basics.rst
-> index fa39625..40be221 100644
-> --- a/source/chapter2-devicetree-basics.rst
-> +++ b/source/chapter2-devicetree-basics.rst
-> @@ -484,9 +484,9 @@ Description:
->     (such as a stock ticker symbol), and ``model`` specifies the model
->     number.
->
-> -   The compatible string should consist only of lowercase letters, digit=
-s
-> -   and dashes. A single comma is typically only used following a vendor
-> -   prefix. Underscores should not be used.
-> +   The compatible string should consist only of lowercase letters, digit=
-s and
-> +   dashes, and should start with a letter. A single comma is typically o=
-nly
-> +   used following a vendor prefix. Underscores should not be used.
->
->  Example:
->
-> --
-> 2.31.1
+Um9iIEhlcnJpbmcgPHJvYmhAa2VybmVsLm9yZz4gd3JpdGVzOg0KDQo+IE9uIE1vbiwgTWF5IDE3
+LCAyMDIxIGF0IDk6MjUgQU0gQm9saXZhciwgTWFydGkNCj4gPE1hcnRpLkJvbGl2YXJAbm9yZGlj
+c2VtaS5ubz4gd3JvdGU6DQo+Pg0KPj4gQ29tbWl0IDA1YTM0ODE5ZTUgKCJBZGQgbW9yZSByZXN0
+cmljdGlvbnMgb24gY29tcGF0aWJsZSBzdHJpbmdzIikNCj4+IHN0YXJ0ZWQgdG8gYWRkIHJlY29t
+bWVuZGF0aW9ucyBvbiB0aGUgY29udGVudHMgb2YgY29tcGF0aWJsZSBzdHJpbmdzLg0KPj4NCj4+
+IEFkZCBhbiBhZGRpdGlvbmFsIHJlY29tbWVuZGF0aW9uIHRoYXQgY29tcGF0aWJsZXMgc2hvdWxk
+IHN0YXJ0IHdpdGggYQ0KPj4gbGV0dGVyLiBJbiBwYXJ0aWN1bGFyLCB0aGlzIG1hdGNoZXMgd2hh
+dCBkdC1zY2hlbWEgaXMgZG9pbmcuDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogTWFydMOtIEJvbMOt
+dmFyIDxtYXJ0aS5ib2xpdmFyQG5vcmRpY3NlbWkubm8+DQo+PiAtLS0NCj4+ICBzb3VyY2UvY2hh
+cHRlcjItZGV2aWNldHJlZS1iYXNpY3MucnN0IHwgNiArKystLS0NCj4+ICAxIGZpbGUgY2hhbmdl
+ZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQ0KPg0KPiBJIGNhbid0IGdldCB0aGlz
+IHRvIGFwcGx5LiBJJ20gbm90IHJlYWxseSBzdXJlIHdoYXQgdGhlIGlzc3VlIGlzLCBidXQNCj4g
+Y2FuIHlvdSByZXNlbmQgd2l0aG91dCBiYXNlNjQgZW5jb2Rpbmcgb3Igc2VuZCBhIEdIIFBSLg0K
+DQpTb3JyeSBhYm91dCB0aGF0LiBJIHVzZWQgZ2l0IHNlbmQtZW1haWwsIGJ1dCBJIGhhdmUgdG8g
+anVtcCB0aHJvdWdoIHNvbWUNCmhvb3BzIHRvIGdldCB0aHJvdWdoIHRoZSBjb3JwIGVtYWlsIHNl
+cnZlcnMgYW5kIEknbSBndWVzc2luZyB0aGVyZSdzIGFuDQppc3N1ZSBzb21ld2hlcmUgYWxvbmcg
+dGhlIHdheS4NCg0KSSBzZW50IGEgUFI6DQoNCmh0dHBzOi8vZ2l0aHViLmNvbS9kZXZpY2V0cmVl
+LW9yZy9kZXZpY2V0cmVlLXNwZWNpZmljYXRpb24vcHVsbC80NA0KDQpUaGFua3MgZm9yIGxlYXZp
+bmcgdGhhdCBkb29yIG9wZW4uDQoNCk1hcnTDrQ0KDQo+DQo+Pg0KPj4gZGlmZiAtLWdpdCBhL3Nv
+dXJjZS9jaGFwdGVyMi1kZXZpY2V0cmVlLWJhc2ljcy5yc3QgYi9zb3VyY2UvY2hhcHRlcjItZGV2
+aWNldHJlZS1iYXNpY3MucnN0DQo+PiBpbmRleCBmYTM5NjI1Li40MGJlMjIxIDEwMDY0NA0KPj4g
+LS0tIGEvc291cmNlL2NoYXB0ZXIyLWRldmljZXRyZWUtYmFzaWNzLnJzdA0KPj4gKysrIGIvc291
+cmNlL2NoYXB0ZXIyLWRldmljZXRyZWUtYmFzaWNzLnJzdA0KPj4gQEAgLTQ4NCw5ICs0ODQsOSBA
+QCBEZXNjcmlwdGlvbjoNCj4+ICAgICAoc3VjaCBhcyBhIHN0b2NrIHRpY2tlciBzeW1ib2wpLCBh
+bmQgYGBtb2RlbGBgIHNwZWNpZmllcyB0aGUgbW9kZWwNCj4+ICAgICBudW1iZXIuDQo+Pg0KPj4g
+LSAgIFRoZSBjb21wYXRpYmxlIHN0cmluZyBzaG91bGQgY29uc2lzdCBvbmx5IG9mIGxvd2VyY2Fz
+ZSBsZXR0ZXJzLCBkaWdpdHMNCj4+IC0gICBhbmQgZGFzaGVzLiBBIHNpbmdsZSBjb21tYSBpcyB0
+eXBpY2FsbHkgb25seSB1c2VkIGZvbGxvd2luZyBhIHZlbmRvcg0KPj4gLSAgIHByZWZpeC4gVW5k
+ZXJzY29yZXMgc2hvdWxkIG5vdCBiZSB1c2VkLg0KPj4gKyAgIFRoZSBjb21wYXRpYmxlIHN0cmlu
+ZyBzaG91bGQgY29uc2lzdCBvbmx5IG9mIGxvd2VyY2FzZSBsZXR0ZXJzLCBkaWdpdHMgYW5kDQo+
+PiArICAgZGFzaGVzLCBhbmQgc2hvdWxkIHN0YXJ0IHdpdGggYSBsZXR0ZXIuIEEgc2luZ2xlIGNv
+bW1hIGlzIHR5cGljYWxseSBvbmx5DQo+PiArICAgdXNlZCBmb2xsb3dpbmcgYSB2ZW5kb3IgcHJl
+Zml4LiBVbmRlcnNjb3JlcyBzaG91bGQgbm90IGJlIHVzZWQuDQo+Pg0KPj4gIEV4YW1wbGU6DQo+
+Pg0KPj4gLS0NCj4+IDIuMzEuMQ==
