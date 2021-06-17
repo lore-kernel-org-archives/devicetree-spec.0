@@ -1,56 +1,128 @@
-From: "Bolivar, Marti" <Marti.Bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
-Subject: Re: [PATCH] Add note about the initial character in a compatible
-Date: Mon, 14 Jun 2021 20:37:06 +0000
-Message-ID: <8735tki3o1.fsf@scarlet.i-did-not-set--mail-host-address--so-tickle-me>
-References: <20210517152256.451270-1-marti.bolivar@nordicsemi.no>
- <CAL_JsqLuJ9ddE+9nNjjjtwoWZCRnnvPr73wAN7hZtk83NsFZQg@mail.gmail.com>
+From: Simon Glass <sjg-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
+Subject: Re: [PATCH] Add Github Action CI workflow
+Date: Thu, 17 Jun 2021 13:18:46 -0600
+Message-ID: <CAPnjgZ27P9mXRBzcHeoVHF1OyLqS95NnJQ7dAvNnhMf-6XUa-w@mail.gmail.com>
+References: <20210614173623.1125220-1-robh@kernel.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nordicsemi.onmicrosoft.com; s=selector2-nordicsemi-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yHfJegAy73cGZ0ATM/3FuPqab8XU5LRaYTtwT8S7460=;
- b=uFoOTM3elCg8NU8yK0EWfd9ard2HD/44pdxmE6YqMcHVK10/NkaMnisL/3ubjrrXK3pW2076qgu0P9xrYdO+JbuIdkE3m8Fy7+eomeYun2Xho+41dGNKDxapprUpCmFAA5uqTs8GdWR3yXHTTOdonSYOLx5Qo7YlFRP8YYmvmtI=
-In-Reply-To: <CAL_JsqLuJ9ddE+9nNjjjtwoWZCRnnvPr73wAN7hZtk83NsFZQg-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Content-Language: en-US
-Content-ID: <D9BABC49E5160C478C406FAA9010971D-wNKe6lTLrGecE4WynfumptQqCkab/8FMAL8bYrjMMd8@public.gmane.org>
+        d=chromium.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=agbMLXMUgqzgl7+u3lVBgiVR1AM9TeVLyuh5KH08Zhg=;
+        b=CQRZEMXFQPCZqR1D5Hf8rny1JsFIp8bjAenqkUR7iOKWbyV+w7wh4tQsb27bbXsyXg
+         em627C6hli9YDSnZXpjjvavH0SH+90RWShKF4mLqoFc3RBVPE3AauT287o1uvaiNBneH
+         vki7lwXECnaEgrbPquIw8EA6Tme1/MdFQ4IuM=
+In-Reply-To: <20210614173623.1125220-1-robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Bill Mills <bill.mills-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 
-Um9iIEhlcnJpbmcgPHJvYmhAa2VybmVsLm9yZz4gd3JpdGVzOg0KDQo+IE9uIE1vbiwgTWF5IDE3
-LCAyMDIxIGF0IDk6MjUgQU0gQm9saXZhciwgTWFydGkNCj4gPE1hcnRpLkJvbGl2YXJAbm9yZGlj
-c2VtaS5ubz4gd3JvdGU6DQo+Pg0KPj4gQ29tbWl0IDA1YTM0ODE5ZTUgKCJBZGQgbW9yZSByZXN0
-cmljdGlvbnMgb24gY29tcGF0aWJsZSBzdHJpbmdzIikNCj4+IHN0YXJ0ZWQgdG8gYWRkIHJlY29t
-bWVuZGF0aW9ucyBvbiB0aGUgY29udGVudHMgb2YgY29tcGF0aWJsZSBzdHJpbmdzLg0KPj4NCj4+
-IEFkZCBhbiBhZGRpdGlvbmFsIHJlY29tbWVuZGF0aW9uIHRoYXQgY29tcGF0aWJsZXMgc2hvdWxk
-IHN0YXJ0IHdpdGggYQ0KPj4gbGV0dGVyLiBJbiBwYXJ0aWN1bGFyLCB0aGlzIG1hdGNoZXMgd2hh
-dCBkdC1zY2hlbWEgaXMgZG9pbmcuDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogTWFydMOtIEJvbMOt
-dmFyIDxtYXJ0aS5ib2xpdmFyQG5vcmRpY3NlbWkubm8+DQo+PiAtLS0NCj4+ICBzb3VyY2UvY2hh
-cHRlcjItZGV2aWNldHJlZS1iYXNpY3MucnN0IHwgNiArKystLS0NCj4+ICAxIGZpbGUgY2hhbmdl
-ZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQ0KPg0KPiBJIGNhbid0IGdldCB0aGlz
-IHRvIGFwcGx5LiBJJ20gbm90IHJlYWxseSBzdXJlIHdoYXQgdGhlIGlzc3VlIGlzLCBidXQNCj4g
-Y2FuIHlvdSByZXNlbmQgd2l0aG91dCBiYXNlNjQgZW5jb2Rpbmcgb3Igc2VuZCBhIEdIIFBSLg0K
-DQpTb3JyeSBhYm91dCB0aGF0LiBJIHVzZWQgZ2l0IHNlbmQtZW1haWwsIGJ1dCBJIGhhdmUgdG8g
-anVtcCB0aHJvdWdoIHNvbWUNCmhvb3BzIHRvIGdldCB0aHJvdWdoIHRoZSBjb3JwIGVtYWlsIHNl
-cnZlcnMgYW5kIEknbSBndWVzc2luZyB0aGVyZSdzIGFuDQppc3N1ZSBzb21ld2hlcmUgYWxvbmcg
-dGhlIHdheS4NCg0KSSBzZW50IGEgUFI6DQoNCmh0dHBzOi8vZ2l0aHViLmNvbS9kZXZpY2V0cmVl
-LW9yZy9kZXZpY2V0cmVlLXNwZWNpZmljYXRpb24vcHVsbC80NA0KDQpUaGFua3MgZm9yIGxlYXZp
-bmcgdGhhdCBkb29yIG9wZW4uDQoNCk1hcnTDrQ0KDQo+DQo+Pg0KPj4gZGlmZiAtLWdpdCBhL3Nv
-dXJjZS9jaGFwdGVyMi1kZXZpY2V0cmVlLWJhc2ljcy5yc3QgYi9zb3VyY2UvY2hhcHRlcjItZGV2
-aWNldHJlZS1iYXNpY3MucnN0DQo+PiBpbmRleCBmYTM5NjI1Li40MGJlMjIxIDEwMDY0NA0KPj4g
-LS0tIGEvc291cmNlL2NoYXB0ZXIyLWRldmljZXRyZWUtYmFzaWNzLnJzdA0KPj4gKysrIGIvc291
-cmNlL2NoYXB0ZXIyLWRldmljZXRyZWUtYmFzaWNzLnJzdA0KPj4gQEAgLTQ4NCw5ICs0ODQsOSBA
-QCBEZXNjcmlwdGlvbjoNCj4+ICAgICAoc3VjaCBhcyBhIHN0b2NrIHRpY2tlciBzeW1ib2wpLCBh
-bmQgYGBtb2RlbGBgIHNwZWNpZmllcyB0aGUgbW9kZWwNCj4+ICAgICBudW1iZXIuDQo+Pg0KPj4g
-LSAgIFRoZSBjb21wYXRpYmxlIHN0cmluZyBzaG91bGQgY29uc2lzdCBvbmx5IG9mIGxvd2VyY2Fz
-ZSBsZXR0ZXJzLCBkaWdpdHMNCj4+IC0gICBhbmQgZGFzaGVzLiBBIHNpbmdsZSBjb21tYSBpcyB0
-eXBpY2FsbHkgb25seSB1c2VkIGZvbGxvd2luZyBhIHZlbmRvcg0KPj4gLSAgIHByZWZpeC4gVW5k
-ZXJzY29yZXMgc2hvdWxkIG5vdCBiZSB1c2VkLg0KPj4gKyAgIFRoZSBjb21wYXRpYmxlIHN0cmlu
-ZyBzaG91bGQgY29uc2lzdCBvbmx5IG9mIGxvd2VyY2FzZSBsZXR0ZXJzLCBkaWdpdHMgYW5kDQo+
-PiArICAgZGFzaGVzLCBhbmQgc2hvdWxkIHN0YXJ0IHdpdGggYSBsZXR0ZXIuIEEgc2luZ2xlIGNv
-bW1hIGlzIHR5cGljYWxseSBvbmx5DQo+PiArICAgdXNlZCBmb2xsb3dpbmcgYSB2ZW5kb3IgcHJl
-Zml4LiBVbmRlcnNjb3JlcyBzaG91bGQgbm90IGJlIHVzZWQuDQo+Pg0KPj4gIEV4YW1wbGU6DQo+
-Pg0KPj4gLS0NCj4+IDIuMzEuMQ==
+Hi Rob,
+
+On Mon, 14 Jun 2021 at 11:36, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
+>
+> Travis-ci.org is going away and moving to Travis-ci.com requires some
+> work. It would probably involve fixing authentication issues yet again.
+> Instead, let's just move to a GH actions job which is fairly trivial to
+> setup. This has the side benefit of CI will run on anyone's fork without
+> further setup.
+>
+> As part of this, the specification file name gains a 'git-describe'
+> based version number.
+>
+> Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+> ---
+>  .github/workflows/ci.yml | 60 ++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 60 insertions(+)
+>  create mode 100644 .github/workflows/ci.yml
+
+Reviewed-by: Simon Glass <sjg-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
+
+Questions below
+
+>
+> diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+> new file mode 100644
+> index 000000000000..f8fe08d52cb0
+> --- /dev/null
+> +++ b/.github/workflows/ci.yml
+> @@ -0,0 +1,60 @@
+> +name: Github Action CI
+> +
+> +on:
+> +  push:
+> +    branches:
+> +    - '*'
+> +    tags:
+> +    - 'v*'
+> +  pull_request:
+> +    branches:
+> +      master
+> +
+> +jobs:
+> +  build:
+> +    runs-on: ubuntu-latest
+> +
+> +    steps:
+> +    - uses: actions/checkout@v2
+> +      with:
+> +        fetch-depth: 0
+> +
+> +    - name: install
+> +      run: |
+> +        sudo apt-get update
+> +        sudo apt-get install latexmk libalgorithm-diff-perl texlive texlive-latex-extra texlive-humanities graphviz
+> +        pip3 install --user mako
+> +        pip3 install --user typing
+> +        pip3 install --user Sphinx
+
+Does this need the capital S ? Can we use apt install instead?
+
+> +        pip3 install --user codespell
+> +
+> +    - name: build pdf
+> +      run: |
+> +        make latexpdf
+> +        git fetch --tags --force # Needed to make git-describe work
+> +        mv build/latex/devicetree-specification.pdf build/latex/devicetree-specification-$(git describe).pdf
+> +    - name: build html
+> +      run: make html
+> +    - name: build singlehtml
+> +      run: make singlehtml
+> +
+> +    - name: upload
+> +      uses: actions/upload-artifact@v2
+> +      with:
+> +        name: artifacts
+> +        path: |
+> +          build/latex/devicetree-specification-*.pdf
+> +
+> +    - name: deploy
+> +      uses: peaceiris/actions-gh-pages@v3
+> +      with:
+> +        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+What do the spaces instead the {} do? From the docs it looks like this
+is a quirk of github?
+
+> +        publish_dir: ./build/singlehtml
+> +
+> +    - name: release
+> +      uses: softprops/action-gh-release@v1
+> +      if: startsWith(github.ref, 'refs/tags/')
+
+So we don't need ${{}} around this one?
+
+> +      with:
+> +        files: build/latex/devicetree-specification-*.pdf
+> +      env:
+> +        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+> --
+> 2.27.0
+>
+
+Regards,
+Simon
