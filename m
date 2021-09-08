@@ -1,64 +1,72 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: Voltage and current regulator: usage of 'regulators' parent node
+From: "embedded (VIVAVIS AG)" <embedded-dQ8pE230Wp9BDgjK7y7TUQ@public.gmane.org>
+Subject: AW: Voltage and current regulator: usage of 'regulators' parent node
  in device tree
-Date: Tue, 7 Sep 2021 13:16:51 -0500
-Message-ID: <CAL_JsqLBiq0+MnYQ0=vMEDe_n+gHAT8PP6VO=Quj-A4yOCu_6w@mail.gmail.com>
+Date: Wed, 8 Sep 2021 08:38:17 +0000
+Message-ID: <824234b4ec764eb3a5daf70c0efd09ef@vivavis.com>
 References: <809518e1649a469cb4fc6fffd9bf427c@vivavis.com>
+ <CAL_JsqLBiq0+MnYQ0=vMEDe_n+gHAT8PP6VO=Quj-A4yOCu_6w@mail.gmail.com>
 Mime-Version: 1.0
+Content-Transfer-Encoding: base64
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1631038625;
-        bh=dtQgrqO/X05cjuR0wIhoEvBCO0QPLSYZrC7C6hMSAIY=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=k69HzNNGsBwer1sSFyYSsq/WDR1wSaNySk4qM06ewIeaAiDkz9T3NBXf4W/Kp2f/L
-         30zBH3PVTHCHz2HwARcu9Sx+UxNWUMhP57OQpUSVmVi8Km8QzBFPyANPWvawP0kn2B
-         NP3PuGzCbYWznQMc9FxkMVfhqcmPb4tfsVTPJpzXlYOEgkx5n37vcWM8nnDdqLyOep
-         LXg1tz/D32eF8SNdIGlB2iVZH+8uUX1ro93y19UbxS0w0Gtxx1eAanXXWSIAXR/o+m
-         lE3jkP4Gh2bNzANzOxunsmTF2hCGKbIMyZdJefEN1IXJzPVjuT3efcmMI3b8yhE4DV
-         d/08Z5SNcuMfA==
-In-Reply-To: <809518e1649a469cb4fc6fffd9bf427c-dQ8pE230Wp9BDgjK7y7TUQ@public.gmane.org>
+In-Reply-To: <CAL_JsqLBiq0+MnYQ0=vMEDe_n+gHAT8PP6VO=Quj-A4yOCu_6w-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Content-Language: de-DE
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: "embedded (VIVAVIS AG)" <embedded-dQ8pE230Wp9BDgjK7y7TUQ@public.gmane.org>
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 
-On Mon, Aug 23, 2021 at 7:59 AM embedded (VIVAVIS AG)
-<embedded-dQ8pE230Wp9BDgjK7y7TUQ@public.gmane.org> wrote:
->
-> Dear maintainer,
->
-> I see a lot of Device trees wrapping the regulator nodes within a parent node
-> like this
->
-> regulators {
->     compatible = "simple-bus";
->     #address-cells = <1>;
->     #size-cells = <0>;
->     reg_p3v3: regulator@0 {
->         compatible = "regulator-fixed";
->         [...]
->         regulator-always-on;
->     };
->     [...]
->
-> Contrary to that, patches exist removing the 'regulators' node, because the 'simple-bus'
-> doesn't really exist in hardware. Unfortunately, the documentation is unclear about
-> wrapping regulator nodes like shown above.
->
-> Should I avoid the parent 'regulators' node and why?
-
-Yes and no. Yes, in the above case as there is no bus nor grouping of
-fixed regulators. For a MFD that includes regulators, then a child
-'regulators' node is appropriate. To put it another way, if you have a
-schema defining a 'regulators' node, then it probably is appropriate.
-
-> Is the given naming schema in fixed-regulator.yaml best practice to follow?
->
->     reg_xyz: regulator-xyz {
->       compatible = "regulator-fixed";
->       regulator-name = "xyz";
-
-Yes, pretty much.
-
-Rob
+SGkgUm9iLA0KDQo+IE9uIE1vbiwgQXVnIDIzLCAyMDIxIGF0IDc6NTkgQU0gZW1iZWRkZWQgKFZJ
+VkFWSVMgQUcpDQo+IDxlbWJlZGRlZEB2aXZhdmlzLmNvbT4gd3JvdGU6DQo+ID4NCj4gPiBEZWFy
+IG1haW50YWluZXIsDQo+ID4NCj4gPiBJIHNlZSBhIGxvdCBvZiBEZXZpY2UgdHJlZXMgd3JhcHBp
+bmcgdGhlIHJlZ3VsYXRvciBub2RlcyB3aXRoaW4gYSBwYXJlbnQgbm9kZQ0KPiA+IGxpa2UgdGhp
+cw0KPiA+DQo+ID4gcmVndWxhdG9ycyB7DQo+ID4gICAgIGNvbXBhdGlibGUgPSAic2ltcGxlLWJ1
+cyI7DQo+ID4gICAgICNhZGRyZXNzLWNlbGxzID0gPDE+Ow0KPiA+ICAgICAjc2l6ZS1jZWxscyA9
+IDwwPjsNCj4gPiAgICAgcmVnX3AzdjM6IHJlZ3VsYXRvckAwIHsNCj4gPiAgICAgICAgIGNvbXBh
+dGlibGUgPSAicmVndWxhdG9yLWZpeGVkIjsNCj4gPiAgICAgICAgIFsuLi5dDQo+ID4gICAgICAg
+ICByZWd1bGF0b3ItYWx3YXlzLW9uOw0KPiA+ICAgICB9Ow0KPiA+ICAgICBbLi4uXQ0KPiA+DQo+
+ID4gQ29udHJhcnkgdG8gdGhhdCwgcGF0Y2hlcyBleGlzdCByZW1vdmluZyB0aGUgJ3JlZ3VsYXRv
+cnMnIG5vZGUsIGJlY2F1c2UgdGhlICdzaW1wbGUtYnVzJw0KPiA+IGRvZXNuJ3QgcmVhbGx5IGV4
+aXN0IGluIGhhcmR3YXJlLiBVbmZvcnR1bmF0ZWx5LCB0aGUgZG9jdW1lbnRhdGlvbiBpcyB1bmNs
+ZWFyIGFib3V0DQo+ID4gd3JhcHBpbmcgcmVndWxhdG9yIG5vZGVzIGxpa2Ugc2hvd24gYWJvdmUu
+DQo+ID4NCj4gPiBTaG91bGQgSSBhdm9pZCB0aGUgcGFyZW50ICdyZWd1bGF0b3JzJyBub2RlIGFu
+ZCB3aHk/DQo+DQo+IFllcyBhbmQgbm8uIFllcywgaW4gdGhlIGFib3ZlIGNhc2UgYXMgdGhlcmUg
+aXMgbm8gYnVzIG5vciBncm91cGluZyBvZg0KPiBmaXhlZCByZWd1bGF0b3JzLiBGb3IgYSBNRkQg
+dGhhdCBpbmNsdWRlcyByZWd1bGF0b3JzLCB0aGVuIGEgY2hpbGQNCj4gJ3JlZ3VsYXRvcnMnIG5v
+ZGUgaXMgYXBwcm9wcmlhdGUuIFRvIHB1dCBpdCBhbm90aGVyIHdheSwgaWYgeW91IGhhdmUgYQ0K
+PiBzY2hlbWEgZGVmaW5pbmcgYSAncmVndWxhdG9ycycgbm9kZSwgdGhlbiBpdCBwcm9iYWJseSBp
+cyBhcHByb3ByaWF0ZS4NCj4NCj4gPiBJcyB0aGUgZ2l2ZW4gbmFtaW5nIHNjaGVtYSBpbiBmaXhl
+ZC1yZWd1bGF0b3IueWFtbCBiZXN0IHByYWN0aWNlIHRvIGZvbGxvdz8NCj4gPg0KPiA+ICAgICBy
+ZWdfeHl6OiByZWd1bGF0b3IteHl6IHsNCj4gPiAgICAgICBjb21wYXRpYmxlID0gInJlZ3VsYXRv
+ci1maXhlZCI7DQo+ID4gICAgICAgcmVndWxhdG9yLW5hbWUgPSAieHl6IjsNCj4NCj4gWWVzLCBw
+cmV0dHkgbXVjaC4NCj4gDQo+IFJvYg0KDQpUaGluayBJIHVuZGVyc3RhbmQuDQpNRkQgbWlnaHQg
+YmUgYW4gaW50ZWdyYXRlZCBwb3dlciBtYW5hZ2VtZW50IGNvbnRyb2xsZXIgY29ubmVjdGVkIHRv
+IGFuIEkyQyBidXMgb3Iga2luZCBvZiBHUElPLg0KSW4gdGhpcyBjYXNlIHRoZSByZWd1bGF0b3Jz
+IG5vZGUgaXMgdXNlZCBhcyBjaGlsZCBub2RlIHVuZGVyIHRoZSBub2RlIGRlc2NyaWJpbmcgdGhl
+IFBNSUMuDQpGb3VuZCB0aGlzIGJpbmRpbmcgZXhhbXBsZSBmb3IgTUFYODk5NyAvZGV2aWNldHJl
+ZS9iaW5kaW5ncy9yZWd1bGF0b3IvbWF4ODk5Ny1yZWd1bGF0b3IudHh0Lg0KDQptYXg4OTk3X3Bt
+aWNANjYgew0KICAgIGNvbXBhdGlibGUgPSAibWF4aW0sbWF4ODk5Ny1wbWljIjsNCiAgICA8c25p
+cD4NCiAgICByZWd1bGF0b3JzOiB7ICAvLyBjaGlsZCBub2RlIGhlcmUNCiAgICAgICAgcmVndWxh
+dG9ycyB7DQogICAgICAgICAgICBsZG8xX3JlZzogTERPMSB7IA0KICAgICAgICAgICAgcmVndWxh
+dG9yLW5hbWUgPSAiVkREX0FCQl8zLjNWIjsNCiAgICAgICAgICAgIHJlZ3VsYXRvci1taW4tbWlj
+cm92b2x0ID0gPDMzMDAwMDA+Ow0KICAgICAgICAgICAgcmVndWxhdG9yLW1heC1taWNyb3ZvbHQg
+PSA8MzMwMDAwMD47DQogICAgICAgIH07DQogICAgICAgIGxkbzJfcmVnOiBMRE8yIHsNCiAgICAg
+ICAgICAgIHJlZ3VsYXRvci1uYW1lID0gIlZERF9BTElWRV8xLjFWIjsNCiAgICAgICAgICAgIHJl
+Z3VsYXRvci1taW4tbWljcm92b2x0ID0gPDExMDAwMDA+Ow0KICAgICAgICAgICAgcmVndWxhdG9y
+LW1heC1taWNyb3ZvbHQgPSA8MTEwMDAwMD47DQogICAgICAgICAgICByZWd1bGF0b3ItYWx3YXlz
+LW9uOw0KICAgICAgICB9Ow0KICAgICAgICBidWNrMV9yZWc6IEJVQ0sxIHsNCiAgICAgICAgICAg
+IHJlZ3VsYXRvci1uYW1lID0gIlZERF9BUk1fMS4yViI7DQogICAgICAgICAgICByZWd1bGF0b3It
+bWluLW1pY3Jvdm9sdCA9IDw5NTAwMDA+Ow0KICAgICAgICAgICAgcmVndWxhdG9yLW1heC1taWNy
+b3ZvbHQgPSA8MTM1MDAwMD47DQogICAgICAgICAgICByZWd1bGF0b3ItYWx3YXlzLW9uOw0KICAg
+ICAgICAgICAgcmVndWxhdG9yLWJvb3Qtb247DQogICAgICAgIH07DQogICAgfTsNCn07DQoNClRv
+IGRlc2NyaWJlIG15IHNpbXBsZSAzLjNWIGFuZCA1LjBWIHZvbHRhZ2UgcmVndWxhdG9ycyBvbiB0
+aGUgYm9hcmQgKG5vdCBpbnRlZ3JhdGVkDQppbiBhIFBNSUMgbm9yIGNvbm5lY3RlZCB0byBhIGJ1
+cyksIEkgc2hvdWxkIG5vdCB1c2UgdGhlIHJlZ3VsYXRvcnMgbm9kZSBhbmQgcHV0IHRoZWlyDQpk
+ZXNjcmlwdGlvbnMgdG8gdGhlIHJvb3Qgbm9kZS4NCg0KcmVnXzN2MzogcmVndWxhdG9yLTN2MyB7
+DQogICAgY29tcGF0aWJsZSA9ICJyZWd1bGF0b3ItZml4ZWQiOw0KICAgIHJlZ3VsYXRvci1uYW1l
+ID0gIjN2MyI7DQogICAgcmVndWxhdG9yLW1pbi1taWNyb3ZvbHQgPSA8MzMwMDAwMD47DQogICAg
+cmVndWxhdG9yLW1heC1taWNyb3ZvbHQgPSA8MzMwMDAwMD47DQogICAgcmVndWxhdG9yLWFsd2F5
+cy1vbjsNCn07DQpyZWdfNXYwOiByZWd1bGF0b3ItNXYwIHsNCiAgICBjb21wYXRpYmxlID0gInJl
+Z3VsYXRvci1maXhlZCI7DQogICAgcmVndWxhdG9yLW5hbWUgPSAiNXYwIjsNCiAgICByZWd1bGF0
+b3ItbWluLW1pY3Jvdm9sdCA9IDw1MDAwMDAwPjsNCiAgICByZWd1bGF0b3ItbWF4LW1pY3Jvdm9s
+dCA9IDw1MDAwMDAwPjsNCiAgICByZWd1bGF0b3ItYWx3YXlzLW9uOw0KfTsNCg0KVGhhbmsgeW91
+IHZlcnkgbXVjaC4NCg0KQ2Fyc3Rlbg0K
