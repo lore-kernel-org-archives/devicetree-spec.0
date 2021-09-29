@@ -1,109 +1,52 @@
-From: Matthias Schiffer <matthias.schiffer-W3o+9BuWjQaZox4op4iWzw@public.gmane.org>
-Subject: [PATCH] Describe "fail" status for /cpus/cpu* nodes
-Date: Thu, 16 Sep 2021 16:10:28 +0200
-Message-ID: <20210916141028.32058-1-matthias.schiffer@ew.tq-group.com>
+From: Sai Prakash Ranjan <saiprakash.ranjan-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>
+Subject: [PATCH] Add system-cache-controller to the list of generic node names
+Date: Wed, 29 Sep 2021 10:56:13 +0530
+Message-ID: <20210929052613.8589-1-saiprakash.ranjan@codeaurora.org>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1631801870; x=1663337870;
-  h=from:to:cc:subject:date:message-id;
-  bh=dOgeBqtvYoPkwhYwKn27jZiFVVGxnvMt1CPZbfX0Ssw=;
-  b=C90yxuxBhilEWgStg3HzvmI6nLTa16CYRoybPxPuNqyJ2QzSpKN5/a29
-   LA2jJRADnhn2kJYSxIiCHLWfk5/JFVwSn08eJaOv8/7su60rh9BsOvhLk
-   R3ZWMtkJzZbP1SRyiG3M/PjDBRvCQZDt2Hc5ylFoPLz61VfsowLH5N0NL
-   bdoDIderqxFHfhJZy7Ke1ju1gshTzrDSlebwQPALeJAWTy2OwpFWZxF8N
-   FOUGb2W2Zc2laygAF4SchmkmYk01BKuv42s4HKTtzE8KCOTP+eYXY4R1q
-   siVGhhmrStMbGFb3ZjD/2qE9GKESa4Fgv8XbwqWdt2D9M7C52OTjc2nt0
-   Q==;
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1631801440; x=1663337440;
-  h=from:to:cc:subject:date:message-id;
-  bh=dOgeBqtvYoPkwhYwKn27jZiFVVGxnvMt1CPZbfX0Ssw=;
-  b=JMLEwCZFt+dIK9bBWpm8w1nrBHcsnrEuPOzwwDXKsTsBJSntM9k69c6p
-   wnHiGYc3bKapSI5Jae4i3+bvWxrKYLdwcOfLtL5yafl6n6b7mVEcjRcj6
-   wjSulU1JcZC46owkFXPrllud9cvzqgLSeoncEyiqAISlAJzOcxkPQb2mq
-   IQuMsgTQRlzncB1dux8on+2eit9elHCF4qdZQXQNDAP7W3I/44L0YzNu8
-   kp5+hAfseSXXlqEJt7P+27trM+LN6PQBchKWnm+NXnTA/SbtcmKUla+Ux
-   EBEFniFmxJMXV19nbp1zyikK6pwzvFJl+OroTJW8iCA4pkt3TElPWhyNd
-   Q==;
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
+ s=smtp; t=1632893207; h=Content-Transfer-Encoding: MIME-Version:
+ Message-Id: Date: Subject: Cc: To: From: Sender;
+ bh=XJku7DsamK/yH+GUuMagqg2jHBKxw+t3hZfxo2lrDos=; b=sJi9BECKhv7HGmZxskbP0HVaPkhXhlKwxYxSKQIz9WItw+lLXyyW6evSFOr8Ql2+CmMna/ZX
+ RgBjNk4quQ+zYhb+Cae1uirV84kpOjbkuzqy9Zy0fYhcBPfpj65eRKEvuiVeWZwZ4D5FhD2C
+ lUGW9ZESaDuhOib2y3BYe0r2+vE=
+Sender: saiprakash.ranjan=codeaurora.org-qLvOmUbifpzLzYW4gMljz9i2O/JbrIOy@public.gmane.org
 List-ID: <devicetree-spec.vger.kernel.org>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Matthias Schiffer <matthias.schiffer-W3o+9BuWjQaZox4op4iWzw@public.gmane.org>
+To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Sai Prakash Ranjan <saiprakash.ranjan-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Stephen Boyd <swboyd-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>, Bjorn Andersson <bjorn.andersson-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Rajendra Nayak <rnayak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>
 
-There are situations where it is desirable to use the same base Device
-Tree for devices with a different number of CPUs: There may be CPU
-variants with different numbers of cores that can be used interchangably
-on the same mainboard, or there are multiple CPU sockets. Not needing to
-explicitly build a device tree for each such variant can make
-maintenance significantly easier.
+System Cache Controller (Last Level Cache Controller/LLCC) does not
+have a cache-level associated with it as enforced by the already
+existing 'cache-controller' node name, so add system-cache-controller
+to the list of generic node names as decided on the lkml in [1][2]
+and already being used in the dts for sometime now.
 
-For this to work, a system firmware / bootloader needs to adjust the
-Device Tree by removing or disabling the excess CPU nodes. However, this
-is currently not easily possible due to the special meaning of the
-"disabled" status for CPU nodes:
+[1] https://lore.kernel.org/lkml/5dcd8588.1c69fb81.2528a.3460-ATjtLOhZ0NVl57MIdRCFDg@public.gmane.org/
+[2] https://lore.kernel.org/lkml/cover.1573814758.git.saiprakash.ranjan-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org/
 
-- A "disabled" CPU node is interpreted as inactive, but existent. The
-  Linux kernel will attempt to enable such CPUs on boot, which will
-  obviously fail for non-existent CPUs
-- Removing the CPU node altogether from a Device Tree is much more
-  complex than setting a single property, as it may leave dangling
-  phandle references, often requiring specific knowledge of other nodes'
-  structure to deal with them.
-
-In the discussion [1] it was suggested to introduce a new status value
-for CPUs that should really not be used at all. Rob proposed to use the
-value "fail", which already exists in the generic definitions of the
-status property.
-
-[1] https://www.lkml.org/lkml/2020/8/26/1237
-
-Suggested-by: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Signed-off-by: Matthias Schiffer <matthias.schiffer-W3o+9BuWjQaZox4op4iWzw@public.gmane.org>
+Cc: Stephen Boyd <swboyd-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
+Cc: Bjorn Andersson <bjorn.andersson-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Cc: Rajendra Nayak <rnayak-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>
+Signed-off-by: Sai Prakash Ranjan <saiprakash.ranjan-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>
 ---
- source/chapter3-devicenodes.rst | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ source/chapter2-devicetree-basics.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenodes.rst
-index 1cea148..9d8ef6e 100644
---- a/source/chapter3-devicenodes.rst
-+++ b/source/chapter3-devicenodes.rst
-@@ -614,8 +614,8 @@ standard properties with specific applicable detail.
-                                                    CPU. This property shall be present for nodes
-                                                    representing CPUs in a symmetric
-                                                    multiprocessing (SMP) configuration. For a CPU
--                                                   node the meaning of the ``"okay"`` and
--                                                   ``"disabled"`` values are as follows:
-+                                                   node the meaning of the ``"okay"``, ``"disabled"``
-+                                                   and ``"fail"`` values are as follows:
- 
-                                                    ``"okay"`` :
-                                                       The CPU is running.
-@@ -623,6 +623,9 @@ standard properties with specific applicable detail.
-                                                    ``"disabled"`` :
-                                                       The CPU is in a quiescent state.
- 
-+                                                   ``"fail"`` :
-+                                                      The CPU is not operational or does not exist.
-+
-                                                    A quiescent CPU is in a state where it cannot
-                                                    interfere with the normal operation of other
-                                                    CPUs, nor can its state be affected by the
-@@ -639,6 +642,11 @@ standard properties with specific applicable detail.
-                                                    loop, held in reset, and electrically isolated
-                                                    from the system bus or in another
-                                                    implementation dependent state.
-+
-+                                                   A CPU with ``"fail"`` status does not affect the
-+                                                   system in any way.
-+                                                   The status is assigned to nodes for which no
-+                                                   corresponding CPU exists.
-    ``enable-method``      | SD  | ``<stringlist>`` Describes the method by which a CPU in a
-                                                    disabled state is enabled. This property is
-                                                    required for CPUs with a status property with
+diff --git a/source/chapter2-devicetree-basics.rst b/source/chapter2-devicetree-basics.rst
+index 40be22192b2f..c06c5063c68b 100644
+--- a/source/chapter2-devicetree-basics.rst
++++ b/source/chapter2-devicetree-basics.rst
+@@ -276,6 +276,7 @@ name should be one of the following choices:
+    * sram-controller
+    * ssi-controller
+    * syscon
++   * system-cache-controller
+    * temperature-sensor
+    * timer
+    * touchscreen
 -- 
-2.17.1
+QUALCOMM INDIA, on behalf of Qualcomm Innovation Center, Inc. is a member
+of Code Aurora Forum, hosted by The Linux Foundation
 
