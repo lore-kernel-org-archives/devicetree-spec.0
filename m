@@ -1,50 +1,59 @@
-From: Hsin-Yi Wang <hsinyi-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
-Subject: [PATCH 3/3] arm64: dts: mt8183: use restricted swiotlb for scp mem
-Date: Tue, 23 Nov 2021 19:21:04 +0800
-Message-ID: <20211123112104.3530135-4-hsinyi@chromium.org>
+From: Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>
+Subject: Re: [PATCH 0/3] Allow restricted-dma-pool to customize IO_TLB_SEGSIZE
+Date: Tue, 23 Nov 2021 11:58:47 +0000
+Message-ID: <75ea1026-63e5-165a-9e07-27b5ac4c7579@arm.com>
 References: <20211123112104.3530135-1-hsinyi@chromium.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=mq8nc34v9wy9BHUcdNCchv5TcJtzwaMW4yDN1UOKTXs=;
-        b=JpDT/+FDBCbI5IBaWeaKfzyOwUUOyTt+Vw1ovqm0zuzKZZrjqWO3dJqGL1pzmsZRcz
-         WEzphSwzny6i8imySPh8owk0bZ7mV09ROF7m2cIZELwxwLD3zWFbiIveEf0Sy/YacdFK
-         n/sQubJ/NkmPIgp5pbeN1xtI08xQWQungcwqY=
+Content-Transfer-Encoding: 7bit
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Language: en-GB
 In-Reply-To: <20211123112104.3530135-1-hsinyi-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-To: Christoph Hellwig <hch-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>
-Cc: Marek Szyprowski <m.szyprowski-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>, iommu-cunTk1MwBs9QetFLy7KEm3xJsTq8ys+cHZ5vskTnxNA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Maxime Ripard <maxime-R63rPqgGiG5yDzI6CaY1VQ@public.gmane.org>, - <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Matthias Brugger <matthias.bgg-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, linux-mediatek-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, senozhatsky-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org, tfiga-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+To: Hsin-Yi Wang <hsinyi-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>, Christoph Hellwig <hch-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>
+Cc: Marek Szyprowski <m.szyprowski-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, iommu-cunTk1MwBs9QetFLy7KEm3xJsTq8ys+cHZ5vskTnxNA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Maxime Ripard <maxime-R63rPqgGiG5yDzI6CaY1VQ@public.gmane.org>, - <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Matthias Brugger <matthias.bgg-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, linux-mediatek-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, senozhatsky-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org, tfiga-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org
 
-Use restricted-dma-pool for mtk_scp's reserved memory. And set the
-io-tlb-segsize to 4096 since the driver needs at least 2560 slabs to
-allocate memory.
+On 2021-11-23 11:21, Hsin-Yi Wang wrote:
+> Default IO_TLB_SEGSIZE (128) slabs may be not enough for some use cases.
+> This series adds support to customize io_tlb_segsize for each
+> restricted-dma-pool.
+> 
+> Example use case:
+> 
+> mtk-isp drivers[1] are controlled by mtk-scp[2] and allocate memory through
+> mtk-scp. In order to use the noncontiguous DMA API[3], we need to use
+> the swiotlb pool. mtk-scp needs to allocate memory with 2560 slabs.
+> mtk-isp drivers also needs to allocate memory with 200+ slabs. Both are
+> larger than the default IO_TLB_SEGSIZE (128) slabs.
 
-Signed-off-by: Hsin-Yi Wang <hsinyi-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
----
- arch/arm64/boot/dts/mediatek/mt8183-kukui.dtsi | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Are drivers really doing streaming DMA mappings that large? If so, that 
+seems like it might be worth trying to address in its own right for the 
+sake of efficiency - allocating ~5MB of memory twice and copying it back 
+and forth doesn't sound like the ideal thing to do.
 
-diff --git a/arch/arm64/boot/dts/mediatek/mt8183-kukui.dtsi b/arch/arm64/boot/dts/mediatek/mt8183-kukui.dtsi
-index 94c13c45919445..de94b2fd7f33e7 100644
---- a/arch/arm64/boot/dts/mediatek/mt8183-kukui.dtsi
-+++ b/arch/arm64/boot/dts/mediatek/mt8183-kukui.dtsi
-@@ -109,9 +109,9 @@ reserved_memory: reserved-memory {
- 		ranges;
- 
- 		scp_mem_reserved: scp_mem_region {
--			compatible = "shared-dma-pool";
-+			compatible = "restricted-dma-pool";
- 			reg = <0 0x50000000 0 0x2900000>;
--			no-map;
-+			io-tlb-segsize = <4096>;
- 		};
- 	};
- 
--- 
-2.34.0.rc2.393.gf8c9666880-goog
+If it's really about coherent DMA buffer allocation, I thought the plan 
+was that devices which expect to use a significant amount and/or size of 
+coherent buffers would continue to use a shared-dma-pool for that? It's 
+still what the binding implies. My understanding was that 
+swiotlb_alloc() is mostly just a fallback for the sake of drivers which 
+mostly do streaming DMA but may allocate a handful of pages worth of 
+coherent buffers here and there. Certainly looking at the mtk_scp 
+driver, that seems like it shouldn't be going anywhere near SWIOTLB at all.
 
+Robin.
+
+> [1] (not in upstream) https://patchwork.kernel.org/project/linux-media/cover/20190611035344.29814-1-jungo.lin-NuS5LvNUpcJWk0Htik3J/w@public.gmane.org/
+> [2] https://elixir.bootlin.com/linux/latest/source/drivers/remoteproc/mtk_scp.c
+> [3] https://patchwork.kernel.org/project/linux-media/cover/20210909112430.61243-1-senozhatsky-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org/
+> 
+> Hsin-Yi Wang (3):
+>    dma: swiotlb: Allow restricted-dma-pool to customize IO_TLB_SEGSIZE
+>    dt-bindings: Add io-tlb-segsize property for restricted-dma-pool
+>    arm64: dts: mt8183: use restricted swiotlb for scp mem
+> 
+>   .../reserved-memory/shared-dma-pool.yaml      |  8 +++++
+>   .../arm64/boot/dts/mediatek/mt8183-kukui.dtsi |  4 +--
+>   include/linux/swiotlb.h                       |  1 +
+>   kernel/dma/swiotlb.c                          | 34 ++++++++++++++-----
+>   4 files changed, 37 insertions(+), 10 deletions(-)
+> 
