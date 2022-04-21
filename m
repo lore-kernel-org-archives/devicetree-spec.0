@@ -1,32 +1,36 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [PATCH v2] dt-bindings: reserved-memory: Add restricted-dma-pool
- constraints
-Date: Thu, 24 Feb 2022 16:32:32 -0600
-Message-ID: <YhgHgP1x31hVBolM@robh.at.kernel.org>
-References: <a4f3d4e2feef008d1236ebc3f5f0c46360f20c60.1645119806.git.robin.murphy@arm.com>
+From: Ramon Fried <rfried.dev-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: Memory aliasing and nodes
+Date: Thu, 21 Apr 2022 13:33:10 +0300
+Message-ID: <CAGi-RUL4FJBXYUMbpdMo=XNd7DE1wD6aUqXUt5Y+5BY1KO-FYg@mail.gmail.com>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-Content-Disposition: inline
-In-Reply-To: <a4f3d4e2feef008d1236ebc3f5f0c46360f20c60.1645119806.git.robin.murphy-5wv7dgnIgG8@public.gmane.org>
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=jfeQyd0xvVPJrQCfj9I1r976Q1mVgnaHdgkwLKs6So8=;
+        b=Zr06bN3NgGdXd7IUwxK1jaZhcQ3tLG9vw5XExrMkPY6K+I9kpaZht5sGPTI1sXNzus
+         AFv6KgdKikNQ6lp34mjguw/cHLnxPMcQnPjP64NV3ulq5juKeI6WbwQPJ3pvC7rRTcz1
+         wG0EP989VENFO28kXrF8RuisGOlWCHrXWBQx7XtYLsQNkXlnRugrYBW716e4/YRQKwbz
+         cAQQZnlq/DxzMymtcNrEZVmqzjrNTYr9oLQDvT7oHI29fa3GOpNOrsvqbydmy72z6+P6
+         QGXUJxCh//iFXj52ZYZUevPg6PJr5pq1No43f912TKPtCEaMAETO+uhm+cKsEDewtasK
+         24Kg==
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>
-Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, maxime-R63rPqgGiG5yDzI6CaY1VQ@public.gmane.org, robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-On Thu, 17 Feb 2022 17:47:14 +0000, Robin Murphy wrote:
-> The "restricted-dma-pool" definition prohibits combination with either
-> of the "no-map" and "reusable" properties, but this is only stated in
-> the description text. Add those constraints to the schema so we can
-> properly validate them.
-> 
-> Signed-off-by: Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>
-> ---
-> 
-> v2: Simplify with "properties:...:false" vs. "not:required:..."
-> 
->  .../bindings/reserved-memory/shared-dma-pool.yaml      | 10 ++++++++++
->  1 file changed, 10 insertions(+)
-> 
+Hi all,
+This is the second time in my career that I've stumbled upon a SOC
+which has 32bit memory aliasing for high memory for the usage of
+drivers that can only address 32bit address space.
 
-Applied, thanks!
+Basically, a subset of a memory higher than 4GB can be accessed also
+through a range in the low 4GB addresses.
+
+I didn't see any support for this neither Linux kernel nor in device
+tree. I'm wondering if you considered adding a way to describe such
+addressing in the device tree, and maybe later Linux can add support
+for it.
+
+Thanks,
+Ramon
