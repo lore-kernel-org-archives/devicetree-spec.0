@@ -1,50 +1,79 @@
-From: Matt Johnston <matt-KrQt6mEI6EMUxA4j4dw1vfQIK84fMopw@public.gmane.org>
-Subject: Re: [dtschema PATCH] schemas: i2c: Add missing properties and
- descriptions
-Date: Thu, 28 Apr 2022 17:11:13 +0800
-Message-ID: <176814ee51d7f238e5137606f50a99904e9017cb.camel@codeconstruct.com.au>
-References: <20220427175956.362987-1-robh@kernel.org>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: [PATCH] schemas: clock: Add assigned-clocks description
+Date: Thu, 28 Apr 2022 10:26:33 -0500
+Message-ID: <20220428152633.2261979-1-robh@kernel.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=codeconstruct.com.au; s=2022a; t=1651137075;
-        bh=r9m7rv7lfE3EHiTyUyYvwKe0vUFfozsaK1tPrKsB9Rs=;
-        h=Subject:From:To:Cc:Date:In-Reply-To:References;
-        b=NO48EukKOgboE5Bo0Xy43GxN0KspOHsoGvSYZIHnVW3GTKzOA8SY7nbVs+/YyVfXd
-         lQirDyLs/CMzav3FIpaEi5Gw95SoI2zVGg2m2NaIZsm0SkxHNuQ8eMgERGDfF5MSJa
-         MLwCBXlDrCFcYh2KhQYqPXqh1Hs2dE/iYOXcA1HkE3k+d8eLMut7ZC2dIeEruhK9eV
-         UaUtdGdpKeniBmFo6TEhqHGDrgxrAzzBY5jIvHvunlibcKg7Z+bErc0HwXLQET5Phx
-         zilrvT8Etxw53Yq8KLHmcaPBioOBViXzqmF2iFIHCb9BNKwP7SxS6QX9I1IO6sVd2q
-         xb1HXEzRittnA==
-In-Reply-To: <20220427175956.362987-1-robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Content-Transfer-Encoding: 8bit
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: Wolfram Sang <wsa+renesas-jBu1N2QxHDJrcw3mvpCnnVaTQe2KTcn/@public.gmane.org>, Eugen Hristev <eugen.hristev-UWL1GkI3JZL3oGB3hsPCZA@public.gmane.org>, Dmitry Torokhov <dmitry.torokhov-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Codrin Ciubotariu <codrin.ciubotariu-UWL1GkI3JZL3oGB3hsPCZA@public.gmane.org>, Jon Hunter <jonathanh-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Alain Volmat <alain.volmat-rj0Iel/JR4NBDgjK7y7TUQ@public.gmane.org>
+To: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: Stephen Boyd <sboyd-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Sylwester Nawrocki <s.nawrocki-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, Stephen Boyd <swboyd-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
 
-On Wed, 2022-04-27 at 12:59 -0500, Rob Herring wrote:
-> Add remaining properties and descriptions from i2c.txt binding in Linux
-> kernel tree. The Cc list are the authors of i2c.txt.
-> 
-> Cc: Wolfram Sang <wsa+renesas-jBu1N2QxHDJrcw3mvpCnnVaTQe2KTcn/@public.gmane.org>
-> Cc: Eugen Hristev <eugen.hristev-UWL1GkI3JZL3oGB3hsPCZA@public.gmane.org>
-> Cc: Dmitry Torokhov <dmitry.torokhov-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-> Cc: Codrin Ciubotariu <codrin.ciubotariu-UWL1GkI3JZL3oGB3hsPCZA@public.gmane.org>
-> Cc: Jon Hunter <jonathanh-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>
-> Cc: Alain Volmat <alain.volmat-rj0Iel/JR4NBDgjK7y7TUQ@public.gmane.org>
-> Cc: Matt Johnston <matt-KrQt6mEI6EMUxA4j4dw1vfQIK84fMopw@public.gmane.org>
-> Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-> ---
-> Cc list, 
-> 
-> I need your or your company's permission to relicense i2c.txt contents 
-> (used in 'description') to BSD-2-Clause. Please ack and provide a 
-> copyright if desired.
+Add description for assigned-clocks properties from clock-binding.txt in
+the Linux kernel.
 
-Acked-by: Matt Johnston <matt-KrQt6mEI6EMUxA4j4dw1vfQIK84fMopw@public.gmane.org>
+This is relicensed from GPL-2.0 (the default) to BSD-2-Clause. The Cc list
+are the original authors.
 
-Cheers,
-Matt
+Cc: Sylwester Nawrocki <s.nawrocki-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>
+Cc: Stephen Boyd <swboyd-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
+Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+---
+Please ack for the license change.
 
+ dtschema/schemas/clock/clock.yaml | 38 +++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+
+diff --git a/dtschema/schemas/clock/clock.yaml b/dtschema/schemas/clock/clock.yaml
+index 2416d046087c..5299653b80b6 100644
+--- a/dtschema/schemas/clock/clock.yaml
++++ b/dtschema/schemas/clock/clock.yaml
+@@ -19,6 +19,44 @@ description: |
+   output on a device.  The length of a clock specifier is defined by the
+   value of a #clock-cells property in the clock provider node.
+ 
++  Assigned clock parents and rates
++  --------------------------------
++
++  Some platforms may require initial configuration of default parent clocks
++  and clock frequencies. Such a configuration can be specified in a device tree
++  node through assigned-clocks, assigned-clock-parents and assigned-clock-rates
++  properties. The assigned-clock-parents property should contain a list of parent
++  clocks in the form of a phandle and clock specifier pair and the
++  assigned-clock-rates property should contain a list of frequencies in Hz. Both
++  these properties should correspond to the clocks listed in the assigned-clocks
++  property.
++
++  To skip setting parent or rate of a clock its corresponding entry should be
++  set to 0, or can be omitted if it is not followed by any non-zero entry.
++
++      serial@a000 {
++          compatible = "fsl,imx-uart";
++          reg = <0xa000 0x1000>;
++          ...
++          clocks = <&osc 0>, <&pll 1>;
++          clock-names = "baud", "register";
++
++          assigned-clocks = <&clkcon 0>, <&pll 2>;
++          assigned-clock-parents = <&pll 2>;
++          assigned-clock-rates = <0>, <460800>;
++      };
++
++  In this example the <&pll 2> clock is set as parent of clock <&clkcon 0> and
++  the <&pll 2> clock is assigned a frequency value of 460800 Hz.
++
++  Configuring a clock's parent and rate through the device node that consumes
++  the clock can be done only for clocks that have a single user. Specifying
++  conflicting parent or rate configuration in multiple consumer nodes for
++  a shared clock is forbidden.
++
++  Configuration of common clocks, which affect multiple consumer devices can
++  be similarly specified in the clock provider node.
++
+ # always select the core schema
+ select: true
+ 
+-- 
+2.34.1
 
