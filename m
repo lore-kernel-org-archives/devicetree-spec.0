@@ -1,58 +1,38 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: [dtschema PATCH] schemas: clock: Add example for 'clock-indices'
-Date: Thu, 28 Apr 2022 10:27:19 -0500
-Message-ID: <20220428152719.2263164-1-robh@kernel.org>
+From: Sylwester Nawrocki <s.nawrocki-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>
+Subject: Re: [PATCH] schemas: clock: Add assigned-clocks description
+Date: Fri, 29 Apr 2022 17:24:17 +0200
+Message-ID: <d9dfd712-45f6-2fac-4cbc-dd0a12f564e8@samsung.com>
+References: <CGME20220428152638eucas1p11b7bbe5bcb8d36641b8328057a248789@eucas1p1.samsung.com>
+        <20220428152633.2261979-1-robh@kernel.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Content-Transfer-Encoding: 7bit
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20220429152419euoutp01bdfb11b90c56ee390adf91b311b672e2~qZ1wxugyc0764707647euoutp018
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+        s=mail20170921; t=1651245859;
+        bh=to37rMSP/G4CXEYIvomZmetr3C+P2P4ivMTn6xRdbsg=;
+        h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+        b=s+mnha8h73OcVdNiAiuyusAWF20b5DDiAQCsuEn81J9QVa+BMxE79dYNeECBZQ0kh
+         dhmD/Jyy2rls8nGL+PPE4RN3QHek3bNxU4unNKaD7jS6jW3/++DEqH7ZxxIGxMr0tZ
+         0bNru8lQkuXJ/DbXgLscwAZFzZSBm8iFhdMkGVOo=
+Content-Language: en-US
+In-Reply-To: <20220428152633.2261979-1-robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: Stephen Boyd <sboyd-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Ben Dooks <ben.dooks-4yDnlxn2s6sWdaTGBSpHTA@public.gmane.org>
+To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: Stephen Boyd <sboyd-sgV2jX0FEOL9JmXXK+q4OQ@public.gmane.org>, Stephen Boyd <swboyd-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
 
-Add description for assigned-clocks properties from clock-binding.txt in
-the Linux kernel.
+On 28.04.2022 17:26, Rob Herring wrote:
+> Add description for assigned-clocks properties from clock-binding.txt in
+> the Linux kernel.
+> 
+> This is relicensed from GPL-2.0 (the default) to BSD-2-Clause. The Cc list
+> are the original authors.
+> 
+> Cc: Sylwester Nawrocki <s.nawrocki-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>
+> Cc: Stephen Boyd <swboyd-F7+t8E8rja9g9hUCZPvPmw@public.gmane.org>
+> Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+> ---
+> Please ack for the license change.
 
-This is relicensed from GPL-2.0 (the default) to BSD-2-Clause. The Cc list
-are the original authors.
-
-Cc: Ben Dooks <ben.dooks-4yDnlxn2s6sWdaTGBSpHTA@public.gmane.org>
-Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
----
-Please ack the license change.
-
- dtschema/schemas/clock/clock.yaml | 18 +++++++++++++++---
- 1 file changed, 15 insertions(+), 3 deletions(-)
-
-diff --git a/dtschema/schemas/clock/clock.yaml b/dtschema/schemas/clock/clock.yaml
-index 5299653b80b6..433a858ef31e 100644
---- a/dtschema/schemas/clock/clock.yaml
-+++ b/dtschema/schemas/clock/clock.yaml
-@@ -94,9 +94,21 @@ properties:
- 
-   clock-indices:
-     $ref: "/schemas/types.yaml#/definitions/uint32-array"
--    description: If the identifying number for the clocks in the node
--      is not linear from zero, then this allows the mapping of identifiers
--      into the clock-output-names array.
-+    description: |
-+      If the identifying number for the clocks in the node is not linear from
-+      zero, then this allows the mapping of identifiers into the
-+      clock-output-names array.
-+
-+      For example, if we have two clocks <&oscillator 1> and <&oscillator 3>:
-+
-+        oscillator {
-+            compatible = "myclocktype";
-+            #clock-cells = <1>;
-+            clock-indices = <1>, <3>;
-+            clock-output-names = "clka", "clkb";
-+        }
-+
-+      This ensures we do not have any empty strings in clock-output-names
- 
-   # Consumer properties
-   clocks:
--- 
-2.34.1
-
+Acked-by: Sylwester Nawrocki <s.nawrocki-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>
