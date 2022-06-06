@@ -1,56 +1,75 @@
-From: Wolfram Sang <wsa+renesas-jBu1N2QxHDJrcw3mvpCnnVaTQe2KTcn/@public.gmane.org>
-Subject: Re: [dtschema PATCH] schemas: i2c: Add missing properties and
- descriptions
-Date: Fri, 3 Jun 2022 20:27:30 +0200
-Message-ID: <YppSksFcCE7HNJeL@shikoro>
-References: <20220427175956.362987-1-robh@kernel.org>
- <YpouYnc6ctdHx3Vk@shikoro>
- <CAL_JsqJEFs5EyzCGHaaC6S=9mfDf9jbo+4=NKh2DO49+RUjBjw@mail.gmail.com>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: Re: [dtschema PATCH] schemas: clock: Add example for 'clock-indices'
+Date: Mon, 6 Jun 2022 15:04:45 -0500
+Message-ID: <CAL_JsqK4Z0QBowJrFWbWPyfWZyxqNtDV7_QwfubNYCCuMPVkUQ@mail.gmail.com>
+References: <20220428152719.2263164-1-robh@kernel.org>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="fN5Eq2w0AnbzvjX3"
 Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=simple; d=sang-engineering.com; h=
-        date:from:to:cc:subject:message-id:references:mime-version
-        :content-type:in-reply-to; s=k1; bh=JOZl1+ZD+0r+kKRl/S9IXEfqJ755
-        0sz1DkeeE2RUI18=; b=AtsyRe57/8NCrq2GZqm6shtZjGG1fM4rtrc0DEqy5JHb
-        brWPR9x9JOVYLzGqB3a2Mt4rKJOj5pN9yIfURu2gSAuuV2PlvV0H+PlUUuDUcZaa
-        vNYu8r9yCUSDUyTB7lMvYAAXjPqu9loQ7QiD1Du+8C2OhsfSeppnyXTkSP/6BtM=
-Content-Disposition: inline
-In-Reply-To: <CAL_JsqJEFs5EyzCGHaaC6S=9mfDf9jbo+4=NKh2DO49+RUjBjw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1654545897;
+        bh=5aJVFO/sTJdAi2jLXXYvc/yW2UHoYPJFra6Dk2+5WnY=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=DoWVmVRitvCQobQsuicMy8434K/lq8spTm2sWnLfgdsHiJevDQ28W1DoCgKSob46v
+         dw6X+QZDY/TbkLozRcaeTjqwluLR9kRbm/PWOFp7qau3Vev6o+g4BUppTjAS4rKA8m
+         NHUoHhVvaNGazdIZVU7shHYqM9I/n+GDK/Nw7cBUFNJxGur/41BUJGHVfmKzzWbbwi
+         sZpjlPocVIIfxvtF/E85c+OmxxZqEwxs7zSXLgzqmtxjwx13Nfi9XjtMmamIHfSrlc
+         LRjvcxE8AneSuGu3SNi0idVNg6+CAyrNkESdBaDSY61oPKtGWHzrGiFL8H2xM9pJik
+         ijGOCU7XVAjjA==
+In-Reply-To: <20220428152719.2263164-1-robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Eugen Hristev <eugen.hristev-UWL1GkI3JZL3oGB3hsPCZA@public.gmane.org>, Dmitry Torokhov <dmitry.torokhov-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Codrin Ciubotariu <codrin.ciubotariu-UWL1GkI3JZL3oGB3hsPCZA@public.gmane.org>, Jon Hunter <jonathanh-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Alain Volmat <alain.volmat-rj0Iel/JR4NBDgjK7y7TUQ@public.gmane.org>, Matt Johnston <matt-KrQt6mEI6EMUxA4j4dw1vfQIK84fMopw@public.gmane.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: Ben Dooks <ben.dooks-4yDnlxn2s6sWdaTGBSpHTA@public.gmane.org>
+Cc: Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Stephen Boyd <sboyd-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 
+On Thu, Apr 28, 2022 at 10:27 AM Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org> wrote:
+>
+> Add description for assigned-clocks properties from clock-binding.txt in
+> the Linux kernel.
+>
+> This is relicensed from GPL-2.0 (the default) to BSD-2-Clause. The Cc list
+> are the original authors.
+>
+> Cc: Ben Dooks <ben.dooks-4yDnlxn2s6sWdaTGBSpHTA@public.gmane.org>
+> Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+> ---
+> Please ack the license change.
 
---fN5Eq2w0AnbzvjX3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Ben, need your ack on this please.
 
-
-> Copyright 2015,2020 Wolfram Sang <wsa-jBu1N2QxHDJrcw3mvpCnnVaTQe2KTcn/@public.gmane.org>
-
-Perfect! Thank you.
-
-
---fN5Eq2w0AnbzvjX3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmKaUo4ACgkQFA3kzBSg
-KbYiDw//a9kw1vhHvrd565s9vXG+j4+7wWWxvSQKZfuztFu0DKenAfA1UUPhwJ5R
-6Jt0l+VrVx3uz85+Kap7BYD8GZIH8tW3u7Bw32SNctRcXDTVkzdFVdeIDqucPhg1
-5LuOwIse7oSJcbVxBWZPzD6BVbDWArVnTKbWwqJNaNB/OqAOW92Xlsd4LJfI4y/L
-vC3IcsgoZBYnoGA2r2G2+tiGiMKUHOYFihTjpFCTp6wHOh/g6hsnQxsOXQQgSj/X
-gB+ifwoeVWnaqPNBXFzlNAvnvLSeuha/7GwKWn7qg/855XUR0u8Dscdix31oqrqH
-JiegE47Fclbm2CMkGfd+eX3l6oXP/Ab0kelmhyQfk0f+mjxwkHopq+qg7E/HwSL5
-fZn0px9mz4gz6TI06efD66czZAM9/3Vvc6tnuGSin7g6lp5deS7voXUKwvoTKSo1
-1Y9Hbdb7Oi6eMJ8vONwV1H95ydVONe8+BY/QwZDflV5uA41P6ugrVxaysZgCPj07
-D2PRYe+jEpNgXF2viHAclTB+YgLE6LMR8g+L+xZgvYcfL2hysZlYaPxoD5JN0Hdd
-WLOh8G2Tf4cU1TExwZyZHufDPYnOdM6Sk9VofJAQqKzkr6FcDLN4bUhZgBzHhQ0v
-9iRvIJ8HaV4qCcDsgUt/Lw6AhOfcC4WVYqxgA0mLWYFWwmhvlYY=
-=AfBS
------END PGP SIGNATURE-----
-
---fN5Eq2w0AnbzvjX3--
+>
+>  dtschema/schemas/clock/clock.yaml | 18 +++++++++++++++---
+>  1 file changed, 15 insertions(+), 3 deletions(-)
+>
+> diff --git a/dtschema/schemas/clock/clock.yaml b/dtschema/schemas/clock/clock.yaml
+> index 5299653b80b6..433a858ef31e 100644
+> --- a/dtschema/schemas/clock/clock.yaml
+> +++ b/dtschema/schemas/clock/clock.yaml
+> @@ -94,9 +94,21 @@ properties:
+>
+>    clock-indices:
+>      $ref: "/schemas/types.yaml#/definitions/uint32-array"
+> -    description: If the identifying number for the clocks in the node
+> -      is not linear from zero, then this allows the mapping of identifiers
+> -      into the clock-output-names array.
+> +    description: |
+> +      If the identifying number for the clocks in the node is not linear from
+> +      zero, then this allows the mapping of identifiers into the
+> +      clock-output-names array.
+> +
+> +      For example, if we have two clocks <&oscillator 1> and <&oscillator 3>:
+> +
+> +        oscillator {
+> +            compatible = "myclocktype";
+> +            #clock-cells = <1>;
+> +            clock-indices = <1>, <3>;
+> +            clock-output-names = "clka", "clkb";
+> +        }
+> +
+> +      This ensures we do not have any empty strings in clock-output-names
+>
+>    # Consumer properties
+>    clocks:
+> --
+> 2.34.1
+>
