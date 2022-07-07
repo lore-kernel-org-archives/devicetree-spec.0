@@ -1,49 +1,30 @@
-From: Heiko Stuebner <heiko-4mtYJXux2i+zQB+pC5nmwQ@public.gmane.org>
-Subject: Re: [PATCH] Add 'dma-noncoherent' property as a standard property
-Date: Sat, 02 Jul 2022 11:30:20 +0200
-Message-ID: <4344746.jZfb76A358@phil>
-References: <20220619203719.3604757-1-heiko@sntech.de> <3674511.kQq0lBPeGt@diego> <1729137.VLH7GnMWUR@diego>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
+From: Kumar Gala <galak.kernel-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Subject: UART map / multiple uart connections
+Date: Thu, 7 Jul 2022 12:56:24 -0500
+Message-ID: <A6CFEC90-1DB9-419C-A9C6-4F490B06F015@kernel.org>
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3696.100.31\))
 Content-Transfer-Encoding: quoted-printable
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <1729137.VLH7GnMWUR@diego>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:content-transfer-encoding:mime-version:subject:message-id:date
+         :cc:to;
+        bh=EzvqZ4jZIqf8mL51dlQRwvYG9ckjg1kqwY5dHIO3Ja4=;
+        b=CsQlIGNybkGQ/aDIFNrH3AHAzEC8DcVeTDp0DWZzGi2AOlHvlakKar7PlyRiMObean
+         rD7dcjib4ci0j/tMPUZ32+G4Hv1u/wrqNXe5kIkrWHoY1krHO9TCp46E0MuNKojiRF6i
+         sTgXUdM3sYMNDAjpOMdX9aG0bp5FSgd99gjK/ni6Hlppne8bJCAjgbQAF8yXQHE4fYCk
+         zfTnK04MEzXuxcH5oTHyhy64XjLUz4leYSudYm1F9/VMclnrhxyYexasCKaTrt7Si0A5
+         auIL4+DbOOx0zL1P28z++2or4jYud3oQm94cr4nFpVFSV5d5db5Jut1Y2/FoO7Xeeroq
+         oo0A==
 List-ID: <devicetree-spec.vger.kernel.org>
+Content-Type: text/plain; charset="utf-8"
 To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Grant Likely <grant.likely-s3s/WqlpOiPyB63q8FvJNQ@public.gmane.org>
+Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-Hi Rob,
+Wondering if your aware of any examples of how to describe a modem with =
+multiple UART connections.  Normally we have the =E2=80=9Cmodem=E2=80=9D =
+as a child of the UART node.  So that would work for one connection, but =
+not sure how we=E2=80=99d describe a second UART connection.  Some kinda =
+of =E2=80=9Cuart-map=E2=80=9D?
 
-Am Dienstag, 28. Juni 2022, 13:22:31 CEST schrieb Heiko St=FCbner:
-> Am Montag, 27. Juni 2022, 17:51:51 CEST schrieb Heiko St=FCbner:
-> > Am Montag, 27. Juni 2022, 17:14:45 CEST schrieb Rob Herring:
-> > > On Sun, Jun 19, 2022 at 2:37 PM Heiko Stuebner <heiko-4mtYJXux2i+zQB+=
-pC5nmwQ@public.gmane.org> wrote:
-> > > >
-> > > > Similar to the 'dma-coherent' property, some architectures may be c=
-oherent
-> > > > by default with some devices being non-coherent. Add a property for=
- this
-> > > > case tool.
-> > >=20
-> > > Looks fine, but I also need a schema.
-> > >=20
-> > > Yeah, that's redundant unfortunately. Maybe someday someone will care
-> > > enough to generate the spec from the schemas.
-> >=20
-> > No worries and sorry I didn't think of where the schema comes from
-> > in the first place. I'll do the relevant schema work as well.
->=20
-> Done in https://github.com/devicetree-org/dt-schema/pull/78 .
->=20
-> I wasn't sure about the "development model" of dt-schema [0] but there
-> were already github pull-requests pending, so I've added another one
-> for the new property :-) .
-
-so as the dt-schema patch did go through the github-pull,. I've converted
-this patch as well, so there is now a matching pull-request on github for
-the spec addition.
-
-Heiko
-
-
+- k=
