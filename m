@@ -1,44 +1,34 @@
-From: Bill Mills <bill.mills-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: No DT meeting Sept 5
-Date: Sun, 4 Sep 2022 20:06:14 -0400
-Message-ID: <b422c2d6-c7e3-bdd2-f58a-b74464d9d8bc@linaro.org>
+From: Marti Bolivar <marti.bolivar-hR+23Fw+YnFSHonuZl5R5Q@public.gmane.org>
+Subject: Intended use of "model" property?
+Date: Mon, 12 Sep 2022 13:18:08 -0700
+Message-ID: <dfc5b413eba67844ae65b27e0f926451.marti.bolivar@nordicsemi.no>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date;
-        bh=HOrfDhRgwFkMS2xj4mgVrDUnrRAVy3StlvNlnnaUytw=;
-        b=gLwuvZQe5vurTLtm13dz2irOUyDgD9q7ooPPrjd3mwrmkoJt1Faf/PodPBGpCu3iFz
-         wYvD28ElJHQ7EpvBjrnm0Sakv5sXuBbNAo1mXh6GuoxjgaCJdiOKsGlzC4Vo2xBSWzcG
-         1/mA9xRKZ/bv48G6xjMfy1eLsYOsHTy+7iGRZISRyBZcO6K1wgv1cvFBKFPNupWdUJyL
-         qHAWqkdlNMKYvk5DK3oyknq18Coqm0zH+crDNYBpWfsNi3sLUUqMvGgoIFO01xDgYtOn
-         6Oz3DL00w7ympEH0tnvvmR48At8VX+cgOq7j1VNxjo0ue15+DV9XsbEKPqsicvsbdGLM
-         HU+g==
-Content-Language: en-US
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nordicsemi.no;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TriZbwGALvGUuba0D7PGEFrdYCS4cB/Rql2JnLcBS3o=;
+ b=V7mrunl9WyoHufN2qXO5gSgqaThsjj0esKNBX5ARrqLME0hubRiYDFLYpgKIBytwsFOkG9IesfFaxLSuoHbURpPI2okbI0Fyu77Y5HwYJTnqFRy3UJRbx/tJD5q6KgT0ErAWseOyItfqzn7fUBDcF5SFNcGkeNsVk2ONPdQJuow=
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="tis-620"
 To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: galak-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org
 
-All,
+I'm trying to understand the intended use of the model property
+in DT spec v0.4-rc1 =C2=A72.3.2.
 
-Summer is over and the kids are back in school so we should restart the 
-DT Meetings.
+Specifically, can "model" be a property in any node of the devicetree?
+The spec seems to indicate so, but grepping around the DTS files in
+Linux, it seems to be primarily used as a property of the root node, as
+a model name for the entire device.
 
-However, tomorrow is Labor Day in the US so I will cancel this one.
+There are a few exceptions in Documentation/devicetree/bindings/, but
+they are mostly in sound/, so it's not clear to me whether this is the
+"model" I'm referring to here, especially since that isn't present next
+to "compatible", "reg", and friends in dt-schema/meta-schemas/core.yaml.
 
-I have also already had several declines for Sept 19th.
-I presume with conflicts with ELC etc.
+Is "model" in the =C2=A72.3.2 sense meant to be a property of the root node
+only, or can it appear anywhere with the meaning defined there?
 
-I will look for a slot with fewer conflicts.
-
-Thanks,
-Bill
-
--- 
-Bill Mills
-Principal Technical Consultant, Linaro
-+1-240-643-0836
-TZ: US Eastern
-Work Schedule:  Tues/Wed/Thur
+Thanks.
