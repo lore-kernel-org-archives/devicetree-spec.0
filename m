@@ -1,99 +1,39 @@
-From: Doug Berger <opendmb@gmail.com>
-Subject: [PATCH 21/21] mm/hugetlb: introduce hugetlb_dmb
-Date: Tue, 13 Sep 2022 12:55:08 -0700
-Message-ID: <20220913195508.3511038-22-opendmb@gmail.com>
+From: Matthew Wilcox <willy-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>
+Subject: Re: [PATCH 03/21] mm/hugetlb: correct demote page offset logic
+Date: Wed, 14 Sep 2022 00:34:16 +0100
+Message-ID: <YyETeBdbldnoRZ+x@casper.infradead.org>
 References: <20220913195508.3511038-1-opendmb@gmail.com>
+ <20220913195508.3511038-4-opendmb@gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Return-path: <linux-doc-owner@vger.kernel.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=koBwJdR4HF2Mh9OkMa3nN+ZpGb/cJotv47IHPg3aLjM=;
-        b=H9fVlQTVY6EaU+njTimAq+ibJtvJjx2vWGkJikgtxKpK4lpRvh7Gs0dhq+SfYU7Y1l
-         ol227J1p7+D7fHpafEcMsArwK6zpQesHNLeCyw8pBBnlfTeZXRH0gTB01wVhDLo6ZqZ0
-         2mt9ehwJJq5f5bEntKn/0aquyhMi35hMoNg4MgcTAFw56eJYhoioxREYotQhcXVzv4ef
-         26N8v6sdGt7Ksl3t6WmZRbYcEffyv4LTbLh0c7Zn4Y23wzA2w1INQgl13/vOL+Z8k7Uy
-         rhOg4rC2RHnt2n62JjXnioNT4+kK415lG500sJWQkISGfWvSLQb972JndYtjJi8pBB0H
-         qioA==
-In-Reply-To: <20220913195508.3511038-1-opendmb@gmail.com>
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=/9i0RT8xYnvhhYLydSNCy5w2V2bVU0zcdBS2b/Mx3KU=; b=t4p3qotLpiXBOK695FV6Av3c7P
+        V9ch6wXoz1ze/fCRWkrmnKtiyv6PaIrGIqra//NJzO/QtAuQ55T8o35R8QevMFZ/1RRuhOIdBe0Pb
+        avPTqmgXSgQ1OqwAURW4GVR+y4TIRhuAIq14QtDmIXoVDxzd3jv5vBBLC5789Wo00msxADOfYqo6d
+        IP7LviZekrBf8W8u1g4RbQ1Bpc1F0suAv1V7jHk0oBFLZ2XyQNjY80HoVM4apaNTL112jO+GQTaU6
+        lzWwjEfT/q37SX/2QQDb5Eon30dK0Xg8IzwevJjJleospvIdLzX/LFXnkA3JNVm5WeLcfH8+OuinY
+        ThNQ8k1A==;
+Content-Disposition: inline
+In-Reply-To: <20220913195508.3511038-4-opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Frank Rowand <frowand.list@gmail.com>, Mike Kravetz <mike.kravetz@oracle.com>, Muchun Song <songmuchun@bytedance.com>, Mike Rapoport <rppt@kernel.org>, Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>, Robin Murphy <robin.murphy@arm.com>, Borislav Petkov <bp@suse.de>, "Paul E. McKenney" <paulmck@kernel.org>, Neeraj Upadhyay <quic_neeraju@quicinc.com>, Randy Dunlap <rdunlap@infradead.org>, Damien Le Moal <damien.lemoal@opensource.wdc.com>, Doug Berger <opendmb@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>, David Hildenbrand <david@redhat.com>, Zi Yan <ziy@nvidia.com>, Oscar Salvador <osalvador@su>
+Content-Transfer-Encoding: 7bit
+To: Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Cc: Andrew Morton <akpm-de/tnXTf+JLsfHDXvbKv3WD2FQJk+8+b@public.gmane.org>, Jonathan Corbet <corbet-T1hC0tSOHrs@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Mike Kravetz <mike.kravetz-QHcLZuEGTsvQT0dZR+AlfA@public.gmane.org>, Muchun Song <songmuchun-EC8Uxl6Npydl57MIdRCFDg@public.gmane.org>, Mike Rapoport <rppt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Christoph Hellwig <hch-jcswGhMUV9g@public.gmane.org>, Marek Szyprowski <m.szyprowski-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>, Borislav Petkov <bp-l3A5Bk7waGM@public.gmane.org>, "Paul E. McKenney" <paulmck-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Neeraj Upadhyay <quic_neeraju-jfJNa2p1gH1BDgjK7y7TUQ@public.gmane.org>, Randy Dunlap <rdunlap-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, Damien Le Moal <damien.lemoal-yzvPICuk2AC/Fx7ZUtofftBPR1lH4CV8@public.gmane.org>, Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, David Hildenbrand <david-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Zi Yan <ziy-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Oscar
 
-If specified on the kernel command line the hugetlb_dmb parameter
-modifies the behavior of the hugetlb_cma parameter to use the
-Contiguous Memory Allocator within Designated Movable Blocks for
-gigantic page allocation.
+On Tue, Sep 13, 2022 at 12:54:50PM -0700, Doug Berger wrote:
+> With gigantic pages it may not be true that struct page structures
+> are contiguous across the entire gigantic page. The mem_map_offset
+> function is used here in place of direct pointer arithmetic to
+> correct for this.
 
-This allows the kernel page allocator to use the memory more
-agressively than traditional CMA memory pools at the cost of
-potentially increased allocation latency.
+We're just eliminating mem_map_offset().  Please use nth_page()
+instead.
 
-Signed-off-by: Doug Berger <opendmb@gmail.com>
----
- Documentation/admin-guide/kernel-parameters.txt |  3 +++
- mm/hugetlb.c                                    | 16 +++++++++++++---
- 2 files changed, 16 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 8141fac7c7cb..b29d1fa253d6 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -1732,6 +1732,9 @@
- 			hugepages using the CMA allocator. If enabled, the
- 			boot-time allocation of gigantic hugepages is skipped.
- 
-+	hugetlb_dmb	[HW,CMA] Causes hugetlb_cma to use Designated Movable
-+			Blocks for any CMA areas it reserves.
-+
- 	hugetlb_free_vmemmap=
- 			[KNL] Reguires CONFIG_HUGETLB_PAGE_OPTIMIZE_VMEMMAP
- 			enabled.
-diff --git a/mm/hugetlb.c b/mm/hugetlb.c
-index 2f354423f50f..d3fb8b1f443f 100644
---- a/mm/hugetlb.c
-+++ b/mm/hugetlb.c
-@@ -54,6 +54,7 @@ struct hstate hstates[HUGE_MAX_HSTATE];
- #ifdef CONFIG_CMA
- static struct cma *hugetlb_cma[MAX_NUMNODES];
- static unsigned long hugetlb_cma_size_in_node[MAX_NUMNODES] __initdata;
-+static bool hugetlb_dmb __initdata;
- static bool hugetlb_cma_page(struct page *page, unsigned int order)
- {
- 	return cma_pages_valid(hugetlb_cma[page_to_nid(page)], page,
-@@ -7321,6 +7322,14 @@ static int __init cmdline_parse_hugetlb_cma(char *p)
- 
- early_param("hugetlb_cma", cmdline_parse_hugetlb_cma);
- 
-+static int __init cmdline_parse_hugetlb_dmb(char *p)
-+{
-+	hugetlb_dmb = true;
-+	return 0;
-+}
-+
-+early_param("hugetlb_dmb", cmdline_parse_hugetlb_dmb);
-+
- void __init hugetlb_cma_reserve(int order)
- {
- 	unsigned long size, reserved, per_node;
-@@ -7396,10 +7405,11 @@ void __init hugetlb_cma_reserve(int order)
- 		 * may be returned to CMA allocator in the case of
- 		 * huge page demotion.
- 		 */
--		res = cma_declare_contiguous_nid(0, size, 0,
-+		res = __cma_declare_contiguous_nid(0, size, 0,
- 						PAGE_SIZE << HUGETLB_PAGE_ORDER,
--						 0, false, name,
--						 &hugetlb_cma[nid], nid);
-+						0, false, name,
-+						&hugetlb_cma[nid], nid,
-+						hugetlb_dmb);
- 		if (res) {
- 			pr_warn("hugetlb_cma: reservation failed: err %d, node %d",
- 				res, nid);
--- 
-2.25.1
-
+>  	for (i = 0; i < pages_per_huge_page(h);
+>  				i += pages_per_huge_page(target_hstate)) {
+> +		subpage = mem_map_offset(page, i);
+>  		if (hstate_is_gigantic(target_hstate))
