@@ -1,136 +1,99 @@
-From: Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: [PATCH 20/21] mm/cma: introduce rmem shared-dmb-pool
-Date: Tue, 13 Sep 2022 12:55:07 -0700
-Message-ID: <20220913195508.3511038-21-opendmb@gmail.com>
+From: Doug Berger <opendmb@gmail.com>
+Subject: [PATCH 21/21] mm/hugetlb: introduce hugetlb_dmb
+Date: Tue, 13 Sep 2022 12:55:08 -0700
+Message-ID: <20220913195508.3511038-22-opendmb@gmail.com>
 References: <20220913195508.3511038-1-opendmb@gmail.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Return-path: <linux-doc-owner@vger.kernel.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=lc6C5FZ3R6bpGdrTQfUMqHUthTTami+g742/pfBsTic=;
-        b=RlsLmEiP3JVWhyXjCMSzF7A4AVjyq1jRjWCW9x5GNVTee31Y+zsIXxNeUFqHaiWHyg
-         8J6hP8RFMjTeETwSHV9ENC6pqQalmeYj6JweS9Tsv7OxuqvPlsMarmRSfwGBaWF+XcBE
-         la0+kyQTMUqV4xn7LwqYCphDGQkUMF9O3ZqeG7FJEIlcBtt95RRsh5UONSCeySm6f9no
-         qWos+YkhM9jVDPaT5oAH5RbFh07TQsfPjWCoTiWZNYZktg0UxgNqKCsIm4np7G5/9pqK
-         Gqu0dk9U2X717zjfg5WZXwdvFki/e2iGeK+mAGJNsof/XN1i9elvjnIO7qYgQkqpgSuo
-         A90g==
-In-Reply-To: <20220913195508.3511038-1-opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+        bh=koBwJdR4HF2Mh9OkMa3nN+ZpGb/cJotv47IHPg3aLjM=;
+        b=H9fVlQTVY6EaU+njTimAq+ibJtvJjx2vWGkJikgtxKpK4lpRvh7Gs0dhq+SfYU7Y1l
+         ol227J1p7+D7fHpafEcMsArwK6zpQesHNLeCyw8pBBnlfTeZXRH0gTB01wVhDLo6ZqZ0
+         2mt9ehwJJq5f5bEntKn/0aquyhMi35hMoNg4MgcTAFw56eJYhoioxREYotQhcXVzv4ef
+         26N8v6sdGt7Ksl3t6WmZRbYcEffyv4LTbLh0c7Zn4Y23wzA2w1INQgl13/vOL+Z8k7Uy
+         rhOg4rC2RHnt2n62JjXnioNT4+kK415lG500sJWQkISGfWvSLQb972JndYtjJi8pBB0H
+         qioA==
+In-Reply-To: <20220913195508.3511038-1-opendmb@gmail.com>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Andrew Morton <akpm-de/tnXTf+JLsfHDXvbKv3WD2FQJk+8+b@public.gmane.org>
-Cc: Jonathan Corbet <corbet-T1hC0tSOHrs@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Mike Kravetz <mike.kravetz-QHcLZuEGTsvQT0dZR+AlfA@public.gmane.org>, Muchun Song <songmuchun-EC8Uxl6Npydl57MIdRCFDg@public.gmane.org>, Mike Rapoport <rppt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Christoph Hellwig <hch-jcswGhMUV9g@public.gmane.org>, Marek Szyprowski <m.szyprowski-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>, Borislav Petkov <bp-l3A5Bk7waGM@public.gmane.org>, "Paul E. McKenney" <paulmck-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Neeraj Upadhyay <quic_neeraju-jfJNa2p1gH1BDgjK7y7TUQ@public.gmane.org>, Randy Dunlap <rdunlap-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, Damien Le Moal <damien.lemoal-yzvPICuk2AC/Fx7ZUtofftBPR1lH4CV8@public.gmane.org>, Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, David Hildenbrand <david-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Zi Yan <ziy-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Oscar Salvador <osalvador@su>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Frank Rowand <frowand.list@gmail.com>, Mike Kravetz <mike.kravetz@oracle.com>, Muchun Song <songmuchun@bytedance.com>, Mike Rapoport <rppt@kernel.org>, Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>, Robin Murphy <robin.murphy@arm.com>, Borislav Petkov <bp@suse.de>, "Paul E. McKenney" <paulmck@kernel.org>, Neeraj Upadhyay <quic_neeraju@quicinc.com>, Randy Dunlap <rdunlap@infradead.org>, Damien Le Moal <damien.lemoal@opensource.wdc.com>, Doug Berger <opendmb@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>, David Hildenbrand <david@redhat.com>, Zi Yan <ziy@nvidia.com>, Oscar Salvador <osalvador@su>
 
-A 'shared-dmb-pool' reserved-memory device tree node defines a
-Designated Movable Block for use by an associated Contiguous
-Memory Allocator.
+If specified on the kernel command line the hugetlb_dmb parameter
+modifies the behavior of the hugetlb_cma parameter to use the
+Contiguous Memory Allocator within Designated Movable Blocks for
+gigantic page allocation.
 
-Devices access the CMA region in the same manner as a 'shared-
-dma-pool', but the kernel page allocator is free to use the
-memory like any other ZONE_MOVABLE memory.
+This allows the kernel page allocator to use the memory more
+agressively than traditional CMA memory pools at the cost of
+potentially increased allocation latency.
 
-Signed-off-by: Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Signed-off-by: Doug Berger <opendmb@gmail.com>
 ---
- drivers/of/of_reserved_mem.c |  5 +++++
- kernel/dma/contiguous.c      | 33 ++++++++++++++++++++++++++++-----
- 2 files changed, 33 insertions(+), 5 deletions(-)
+ Documentation/admin-guide/kernel-parameters.txt |  3 +++
+ mm/hugetlb.c                                    | 16 +++++++++++++---
+ 2 files changed, 16 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/of/of_reserved_mem.c b/drivers/of/of_reserved_mem.c
-index 0eb9e8898d7b..700c0dc0d3b6 100644
---- a/drivers/of/of_reserved_mem.c
-+++ b/drivers/of/of_reserved_mem.c
-@@ -123,6 +123,11 @@ static int __init __reserved_mem_alloc_size(unsigned long node,
- 		   && !nomap) {
- 		/* Need adjust the alignment to satisfy the CMA requirement */
- 		align = max_t(phys_addr_t, align, CMA_MIN_ALIGNMENT_BYTES);
-+	} else if (IS_ENABLED(CONFIG_CMA)
-+		   && of_flat_dt_is_compatible(node, "shared-dmb-pool")) {
-+		/* Need adjust the alignment to satisfy CMA/DMB requirements */
-+		align = max_t(phys_addr_t, align, CMA_MIN_ALIGNMENT_BYTES);
-+		align = max_t(phys_addr_t, align, DMB_MIN_ALIGNMENT_BYTES);
- 	}
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 8141fac7c7cb..b29d1fa253d6 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -1732,6 +1732,9 @@
+ 			hugepages using the CMA allocator. If enabled, the
+ 			boot-time allocation of gigantic hugepages is skipped.
  
- 	prop = of_get_flat_dt_prop(node, "alloc-ranges", &len);
-diff --git a/kernel/dma/contiguous.c b/kernel/dma/contiguous.c
-index 6ea80ae42622..65dda12752a7 100644
---- a/kernel/dma/contiguous.c
-+++ b/kernel/dma/contiguous.c
-@@ -50,6 +50,7 @@
- #include <linux/sizes.h>
- #include <linux/dma-map-ops.h>
- #include <linux/cma.h>
-+#include <linux/dmb.h>
- 
- #ifdef CONFIG_CMA_SIZE_MBYTES
- #define CMA_SIZE_MBYTES CONFIG_CMA_SIZE_MBYTES
-@@ -397,10 +398,11 @@ static const struct reserved_mem_ops rmem_cma_ops = {
- 	.device_release = rmem_cma_device_release,
- };
- 
--static int __init rmem_cma_setup(struct reserved_mem *rmem)
-+static int __init _rmem_cma_setup(struct reserved_mem *rmem, bool in_dmb)
++	hugetlb_dmb	[HW,CMA] Causes hugetlb_cma to use Designated Movable
++			Blocks for any CMA areas it reserves.
++
+ 	hugetlb_free_vmemmap=
+ 			[KNL] Reguires CONFIG_HUGETLB_PAGE_OPTIMIZE_VMEMMAP
+ 			enabled.
+diff --git a/mm/hugetlb.c b/mm/hugetlb.c
+index 2f354423f50f..d3fb8b1f443f 100644
+--- a/mm/hugetlb.c
++++ b/mm/hugetlb.c
+@@ -54,6 +54,7 @@ struct hstate hstates[HUGE_MAX_HSTATE];
+ #ifdef CONFIG_CMA
+ static struct cma *hugetlb_cma[MAX_NUMNODES];
+ static unsigned long hugetlb_cma_size_in_node[MAX_NUMNODES] __initdata;
++static bool hugetlb_dmb __initdata;
+ static bool hugetlb_cma_page(struct page *page, unsigned int order)
  {
- 	unsigned long node = rmem->fdt_node;
- 	bool default_cma = of_get_flat_dt_prop(node, "linux,cma-default", NULL);
-+	phys_addr_t align = CMA_MIN_ALIGNMENT_BYTES;
- 	struct cma *cma;
- 	int err;
+ 	return cma_pages_valid(hugetlb_cma[page_to_nid(page)], page,
+@@ -7321,6 +7322,14 @@ static int __init cmdline_parse_hugetlb_cma(char *p)
  
-@@ -414,16 +416,25 @@ static int __init rmem_cma_setup(struct reserved_mem *rmem)
- 	    of_get_flat_dt_prop(node, "no-map", NULL))
- 		return -EINVAL;
+ early_param("hugetlb_cma", cmdline_parse_hugetlb_cma);
  
--	if (!IS_ALIGNED(rmem->base | rmem->size, CMA_MIN_ALIGNMENT_BYTES)) {
-+	if (in_dmb) {
-+		if (default_cma) {
-+			pr_err("Reserved memory: cma-default cannot be DMB\n");
-+			return -EINVAL;
-+		}
-+		align = max_t(phys_addr_t, align, DMB_MIN_ALIGNMENT_BYTES);
-+	}
-+	if (!IS_ALIGNED(rmem->base | rmem->size, align)) {
- 		pr_err("Reserved memory: incorrect alignment of CMA region\n");
- 		return -EINVAL;
- 	}
- 
--	err = cma_init_reserved_mem(rmem->base, rmem->size, 0, rmem->name, &cma);
-+	err = __cma_init_reserved_mem(rmem->base, rmem->size, 0, rmem->name,
-+				      &cma, in_dmb);
- 	if (err) {
- 		pr_err("Reserved memory: unable to setup CMA region\n");
- 		return err;
- 	}
-+
- 	/* Architecture specific contiguous memory fixup. */
- 	dma_contiguous_early_fixup(rmem->base, rmem->size);
- 
-@@ -433,10 +444,22 @@ static int __init rmem_cma_setup(struct reserved_mem *rmem)
- 	rmem->ops = &rmem_cma_ops;
- 	rmem->priv = cma;
- 
--	pr_info("Reserved memory: created CMA memory pool at %pa, size %ld MiB\n",
--		&rmem->base, (unsigned long)rmem->size / SZ_1M);
-+	pr_info("Reserved memory: created %s memory pool at %pa, size %ld MiB\n",
-+		in_dmb ? "DMB" : "CMA", &rmem->base,
-+		(unsigned long)rmem->size / SZ_1M);
- 
- 	return 0;
- }
-+
-+static int __init rmem_cma_setup(struct reserved_mem *rmem)
++static int __init cmdline_parse_hugetlb_dmb(char *p)
 +{
-+	return _rmem_cma_setup(rmem, false);
++	hugetlb_dmb = true;
++	return 0;
 +}
- RESERVEDMEM_OF_DECLARE(cma, "shared-dma-pool", rmem_cma_setup);
 +
-+static int __init rmem_cma_in_dmb_setup(struct reserved_mem *rmem)
-+{
-+	return _rmem_cma_setup(rmem, true);
-+}
-+RESERVEDMEM_OF_DECLARE(cma_in_dmb, "shared-dmb-pool", rmem_cma_in_dmb_setup);
- #endif
++early_param("hugetlb_dmb", cmdline_parse_hugetlb_dmb);
++
+ void __init hugetlb_cma_reserve(int order)
+ {
+ 	unsigned long size, reserved, per_node;
+@@ -7396,10 +7405,11 @@ void __init hugetlb_cma_reserve(int order)
+ 		 * may be returned to CMA allocator in the case of
+ 		 * huge page demotion.
+ 		 */
+-		res = cma_declare_contiguous_nid(0, size, 0,
++		res = __cma_declare_contiguous_nid(0, size, 0,
+ 						PAGE_SIZE << HUGETLB_PAGE_ORDER,
+-						 0, false, name,
+-						 &hugetlb_cma[nid], nid);
++						0, false, name,
++						&hugetlb_cma[nid], nid,
++						hugetlb_dmb);
+ 		if (res) {
+ 			pr_warn("hugetlb_cma: reservation failed: err %d, node %d",
+ 				res, nid);
 -- 
 2.25.1
 
