@@ -1,7 +1,7 @@
 From: Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: [PATCH 06/21] mm/hugetlb: add hugepage isolation support
-Date: Tue, 13 Sep 2022 12:54:53 -0700
-Message-ID: <20220913195508.3511038-7-opendmb@gmail.com>
+Subject: [PATCH 07/21] lib/show_mem.c: display MovableOnly
+Date: Tue, 13 Sep 2022 12:54:54 -0700
+Message-ID: <20220913195508.3511038-8-opendmb@gmail.com>
 References: <20220913195508.3511038-1-opendmb@gmail.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -10,60 +10,53 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=5478I3WyUfDJcI1zhJnzCnFwBV1ia1XR+sLHu3XJI6Q=;
-        b=ngWpsEYVUBqyRCK+w+5Ame50HZp1DYM8gstxDexc5gHtIO2fEu4wX/+7Noqq7EWBX5
-         SX4JOXX5B1E8Qf1s/pvzk9Bz2iJJBgv4Hk3Ull+tKjmtldfM+s3z+vbM1B3di5w6gxjz
-         dcVCWO2NZ50adOCK8bPYxw3tCqWOsDx7M7cTAjTnYf/V4tSaPDhi8fqtVljCEiP5o1JE
-         EBkXOKZZNuxNzz6s5U3pOqHYezTLOaL4mQLClkKUJN8hT0raCVH32ZKrxQcROVGentqi
-         38kFA0gMphAG/6qqKzQ2VCttdNXcqVd0gmzjLhB0hmlMfPBCKPcE2Rytw17lBrFXHH3/
-         rqCA==
+        bh=hB/8CHaP3epa66ZDI7eIxcYHinx9lai7E+SzdR8JK34=;
+        b=DH5wOpdpiHaFFXY8TAT3JRecX64XiPNxiR/CcG1LrVu07Readvn0PWViKgBmDA60Pb
+         UBITk9aWlYro2ikNI4WmLJPOCXwQOqtprdUB0CzoJZ72kknTQx9o/RitCRSffQDxQ5Q6
+         VTZyKVoIHd28mrFZHIQl9dz1uLmu560sdtEcQWDtP1q9dt0hIGQCuqCTjE9fttuhjONt
+         0HIT34gX8eS66xaVSIttBxYAN/YQSf5UtfsLj6aZ6r0xFgT3C7geS9uBf8xzXOro8Ch1
+         QuB8O5yFa+P3URJ5XpTXammfwNsUv1UpGQMU/vjO4KV44uIZqk+ZBhqofvaHP1BLFOQP
+         ilEQ==
 In-Reply-To: <20220913195508.3511038-1-opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 To: Andrew Morton <akpm-de/tnXTf+JLsfHDXvbKv3WD2FQJk+8+b@public.gmane.org>
 Cc: Jonathan Corbet <corbet-T1hC0tSOHrs@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Mike Kravetz <mike.kravetz-QHcLZuEGTsvQT0dZR+AlfA@public.gmane.org>, Muchun Song <songmuchun-EC8Uxl6Npydl57MIdRCFDg@public.gmane.org>, Mike Rapoport <rppt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Christoph Hellwig <hch-jcswGhMUV9g@public.gmane.org>, Marek Szyprowski <m.szyprowski-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>, Borislav Petkov <bp-l3A5Bk7waGM@public.gmane.org>, "Paul E. McKenney" <paulmck-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Neeraj Upadhyay <quic_neeraju-jfJNa2p1gH1BDgjK7y7TUQ@public.gmane.org>, Randy Dunlap <rdunlap-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, Damien Le Moal <damien.lemoal-yzvPICuk2AC/Fx7ZUtofftBPR1lH4CV8@public.gmane.org>, Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, David Hildenbrand <david-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Zi Yan <ziy-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Oscar Salvador <osalvador@su>
 
-When a range of pageblocks is isolated there is at most one
-hugepage that has only tail pages overlapping that range (i.e.
-a hugepage that overlaps the beginning of the range).
+The comment for commit c78e93630d15 ("mm: do not walk all of
+system memory during show_mem") indicates it "also corrects the
+reporting of HighMem as HighMem/MovableOnly as ZONE_MOVABLE has
+similar problems to HighMem with respect to lowmem/highmem
+exhaustion."
 
-However, that hugepage is the first migration target for an
-alloc_contig_range() attempt so it already receives special
-attention.
+Presuming the similar problems are with regard to the general
+exclusion of kernel allocations from either zone, I believe it
+makes sense to include all ZONE_MOVABLE memory even on systems
+without HighMem.
 
-Checking whether the pageblock containing the head of a hugepage
-is isolated is an inexpensive way to avoid hugepage allocations
-from isolated pageblocks which makes alloc_contig_range() more
-efficient.
+To the extent that this was the intent of the original commit I
+have included a "Fixes" tag, but it seems unnecessary to submit
+to linux-stable.
 
+Fixes: c78e93630d15 ("mm: do not walk all of system memory during show_mem")
 Signed-off-by: Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 ---
- mm/hugetlb.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ lib/show_mem.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/mm/hugetlb.c b/mm/hugetlb.c
-index da80889e1436..2f354423f50f 100644
---- a/mm/hugetlb.c
-+++ b/mm/hugetlb.c
-@@ -33,6 +33,7 @@
- #include <linux/migrate.h>
- #include <linux/nospec.h>
- #include <linux/delayacct.h>
-+#include <linux/page-isolation.h>
+diff --git a/lib/show_mem.c b/lib/show_mem.c
+index 1c26c14ffbb9..337c870a5e59 100644
+--- a/lib/show_mem.c
++++ b/lib/show_mem.c
+@@ -27,7 +27,7 @@ void show_mem(unsigned int filter, nodemask_t *nodemask)
+ 			total += zone->present_pages;
+ 			reserved += zone->present_pages - zone_managed_pages(zone);
  
- #include <asm/page.h>
- #include <asm/pgalloc.h>
-@@ -1135,6 +1136,10 @@ static struct page *dequeue_huge_page_node_exact(struct hstate *h, int nid)
- 		if (PageHWPoison(page))
- 			continue;
- 
-+		/* Check head pageblock isolation */
-+		if (is_migrate_isolate_page(page))
-+			continue;
-+
- 		list_move(&page->lru, &h->hugepage_activelist);
- 		set_page_refcounted(page);
- 		ClearHPageFreed(page);
+-			if (is_highmem_idx(zoneid))
++			if (zoneid == ZONE_MOVABLE || is_highmem_idx(zoneid))
+ 				highmem += zone->present_pages;
+ 		}
+ 	}
 -- 
 2.25.1
 
