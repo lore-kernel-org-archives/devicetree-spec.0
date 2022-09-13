@@ -1,71 +1,133 @@
-From: Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: [PATCH 10/21] mm/page_alloc.c: allow oversized movablecore
-Date: Tue, 13 Sep 2022 12:54:57 -0700
-Message-ID: <20220913195508.3511038-11-opendmb@gmail.com>
+From: Doug Berger <opendmb@gmail.com>
+Subject: [PATCH 11/21] mm/page_alloc: introduce init_reserved_pageblock()
+Date: Tue, 13 Sep 2022 12:54:58 -0700
+Message-ID: <20220913195508.3511038-12-opendmb@gmail.com>
 References: <20220913195508.3511038-1-opendmb@gmail.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Return-path: <linux-doc-owner@vger.kernel.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=bjPZ9urefAsJcftBbAgQB1diXayOj809VCbylW0WU+4=;
-        b=ElB8vGfwnTgMrOHPV8jOPMjX9e4dyOnpsA/daCy84nADITgBEDs0AWwUlYd7LmzJ4R
-         Fd+wihlwr+eHGiOYJevIadmukrrhPQQQbV14He/EgVL8UId/ZjEQspu78E84lCBkqAk3
-         9AGpDbnJvnF63g83iAedqf+9zINjZ62a64qbSfO2T1vB7Ckgl7brAPRPzZAIUuLk9YsF
-         YnnaDAUhOF2TFJBs1+hdGFIi2/6/xETSCDXaO1b95XuqZwbhceSd0bqWp4uVAOWzs4lk
-         zAxkAToGZXGzD1zml0W1YllS9/kHr+k5y9Z8yZENt9c1+33raLf8akoDdgYfGMOxfC4A
-         ITFg==
-In-Reply-To: <20220913195508.3511038-1-opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+        bh=KeLoRQJB3eAOdyXC4NTd1TP4on3QCykrOlScFxq8ZPE=;
+        b=FeFlqfsiEQU3HSeYb1n4gkpg1qmnB5WeDR3FybX0zPrw0OvjL/48yUYTNjXdAaMlAU
+         JdyQzl2XCc8s8RP5OO/H5J7S/0xDcSLDPZ/g9EIPbcsw9LhFgl8pcNCL7ia4xS0HbBWk
+         UrWVqsTOfQjwUdrXVkxZ/eY8sVsnX0gm6/fSQE07CBzEH1IsIWTpZVsPIgNRukD5QnzD
+         c6mLxWXf85eq1Q9U3EFaUBdh/wEyMg/Ynk1wbDDmvjWml5kn5SQbnOB+ZusyeRT2gzZB
+         30p18F8NjILejz6FdnbFmeCsFxJLxim3pDKbO19ZAHgQZI8N1Ooww3p9oQH3KqqVXxOk
+         7Eog==
+In-Reply-To: <20220913195508.3511038-1-opendmb@gmail.com>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Andrew Morton <akpm-de/tnXTf+JLsfHDXvbKv3WD2FQJk+8+b@public.gmane.org>
-Cc: Jonathan Corbet <corbet-T1hC0tSOHrs@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Mike Kravetz <mike.kravetz-QHcLZuEGTsvQT0dZR+AlfA@public.gmane.org>, Muchun Song <songmuchun-EC8Uxl6Npydl57MIdRCFDg@public.gmane.org>, Mike Rapoport <rppt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Christoph Hellwig <hch-jcswGhMUV9g@public.gmane.org>, Marek Szyprowski <m.szyprowski-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>, Borislav Petkov <bp-l3A5Bk7waGM@public.gmane.org>, "Paul E. McKenney" <paulmck-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Neeraj Upadhyay <quic_neeraju-jfJNa2p1gH1BDgjK7y7TUQ@public.gmane.org>, Randy Dunlap <rdunlap-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, Damien Le Moal <damien.lemoal-yzvPICuk2AC/Fx7ZUtofftBPR1lH4CV8@public.gmane.org>, Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, David Hildenbrand <david-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Zi Yan <ziy-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Oscar Salvador <osalvador@su>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Frank Rowand <frowand.list@gmail.com>, Mike Kravetz <mike.kravetz@oracle.com>, Muchun Song <songmuchun@bytedance.com>, Mike Rapoport <rppt@kernel.org>, Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>, Robin Murphy <robin.murphy@arm.com>, Borislav Petkov <bp@suse.de>, "Paul E. McKenney" <paulmck@kernel.org>, Neeraj Upadhyay <quic_neeraju@quicinc.com>, Randy Dunlap <rdunlap@infradead.org>, Damien Le Moal <damien.lemoal@opensource.wdc.com>, Doug Berger <opendmb@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>, David Hildenbrand <david@redhat.com>, Zi Yan <ziy@nvidia.com>, Oscar Salvador <osalvador@su>
 
-Now that the error in computation of corepages has been corrected
-by commit 9fd745d450e7 ("mm: fix overflow in
-find_zone_movable_pfns_for_nodes()"), oversized specifications of
-movablecore will result in a zero value for required_kernelcore if
-it is not also specified.
+Most of the implementation of init_cma_reserved_pageblock() is
+common to the initialization of any reserved pageblock for use
+by the page allocator.
 
-It is unintuitive for such a request to lead to no ZONE_MOVABLE
-memory when the kernel parameters are clearly requesting some.
+This commit breaks that functionality out into the new common
+function init_reserved_pageblock() for use by code other than
+CMA. The CMA specific code is relocated from page_alloc to the
+point where init_cma_reserved_pageblock() was invoked and the
+new function is used there instead. The error path is also
+updated to use the function to operate on pageblocks rather
+than pages.
 
-The current behavior when requesting an oversized kernelcore is to
-classify all of the pages in movable_zone as kernelcore. The new
-behavior when requesting an oversized movablecore (when not also
-specifying kernelcore) is to similarly classify all of the pages
-in movable_zone as movablecore.
-
-Signed-off-by: Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+Signed-off-by: Doug Berger <opendmb@gmail.com>
 ---
- mm/page_alloc.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ include/linux/gfp.h |  5 +----
+ mm/cma.c            | 15 +++++++++++----
+ mm/page_alloc.c     |  8 ++------
+ 3 files changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-index b6074961fb59..ad38a81203e5 100644
---- a/mm/page_alloc.c
-+++ b/mm/page_alloc.c
-@@ -8041,13 +8041,13 @@ static void __init find_zone_movable_pfns_for_nodes(void)
- 		corepages = totalpages - required_movablecore;
+diff --git a/include/linux/gfp.h b/include/linux/gfp.h
+index f314be58fa77..71ed687be406 100644
+--- a/include/linux/gfp.h
++++ b/include/linux/gfp.h
+@@ -367,9 +367,6 @@ extern struct page *alloc_contig_pages(unsigned long nr_pages, gfp_t gfp_mask,
+ #endif
+ void free_contig_range(unsigned long pfn, unsigned long nr_pages);
  
- 		required_kernelcore = max(required_kernelcore, corepages);
-+	} else if (!required_kernelcore) {
-+		/* If kernelcore was not specified, there is no ZONE_MOVABLE */
-+		goto out;
+-#ifdef CONFIG_CMA
+-/* CMA stuff */
+-extern void init_cma_reserved_pageblock(struct page *page);
+-#endif
++extern void init_reserved_pageblock(struct page *page);
+ 
+ #endif /* __LINUX_GFP_H */
+diff --git a/mm/cma.c b/mm/cma.c
+index 4a978e09547a..6208a3e1cd9d 100644
+--- a/mm/cma.c
++++ b/mm/cma.c
+@@ -31,6 +31,7 @@
+ #include <linux/highmem.h>
+ #include <linux/io.h>
+ #include <linux/kmemleak.h>
++#include <linux/page-isolation.h>
+ #include <trace/events/cma.h>
+ 
+ #include "cma.h"
+@@ -116,8 +117,13 @@ static void __init cma_activate_area(struct cma *cma)
  	}
  
--	/*
--	 * If kernelcore was not specified or kernelcore size is larger
--	 * than totalpages, there is no ZONE_MOVABLE.
--	 */
--	if (!required_kernelcore || required_kernelcore >= totalpages)
-+	/* If kernelcore size exceeds totalpages, there is no ZONE_MOVABLE */
-+	if (required_kernelcore >= totalpages)
- 		goto out;
+ 	for (pfn = base_pfn; pfn < base_pfn + cma->count;
+-	     pfn += pageblock_nr_pages)
+-		init_cma_reserved_pageblock(pfn_to_page(pfn));
++	     pfn += pageblock_nr_pages) {
++		struct page *page = pfn_to_page(pfn);
++
++		set_pageblock_migratetype(page, MIGRATE_CMA);
++		init_reserved_pageblock(page);
++		page_zone(page)->cma_pages += pageblock_nr_pages;
++	}
  
- 	/* usable_startpfn is the lowest possible pfn ZONE_MOVABLE can be at */
+ 	spin_lock_init(&cma->lock);
+ 
+@@ -133,8 +139,9 @@ static void __init cma_activate_area(struct cma *cma)
+ out_error:
+ 	/* Expose all pages to the buddy, they are useless for CMA. */
+ 	if (!cma->reserve_pages_on_error) {
+-		for (pfn = base_pfn; pfn < base_pfn + cma->count; pfn++)
+-			free_reserved_page(pfn_to_page(pfn));
++		for (pfn = base_pfn; pfn < base_pfn + cma->count;
++		     pfn += pageblock_nr_pages)
++			init_reserved_pageblock(pfn_to_page(pfn));
+ 	}
+ 	totalcma_pages -= cma->count;
+ 	cma->count = 0;
+diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+index ad38a81203e5..1682d8815efa 100644
+--- a/mm/page_alloc.c
++++ b/mm/page_alloc.c
+@@ -2302,9 +2302,8 @@ void __init page_alloc_init_late(void)
+ 		set_zone_contiguous(zone);
+ }
+ 
+-#ifdef CONFIG_CMA
+-/* Free whole pageblock and set its migration type to MIGRATE_CMA. */
+-void __init init_cma_reserved_pageblock(struct page *page)
++/* Free whole pageblock */
++void __init init_reserved_pageblock(struct page *page)
+ {
+ 	unsigned i = pageblock_nr_pages;
+ 	struct page *p = page;
+@@ -2314,14 +2313,11 @@ void __init init_cma_reserved_pageblock(struct page *page)
+ 		set_page_count(p, 0);
+ 	} while (++p, --i);
+ 
+-	set_pageblock_migratetype(page, MIGRATE_CMA);
+ 	set_page_refcounted(page);
+ 	__free_pages(page, pageblock_order);
+ 
+ 	adjust_managed_page_count(page, pageblock_nr_pages);
+-	page_zone(page)->cma_pages += pageblock_nr_pages;
+ }
+-#endif
+ 
+ /*
+  * The order of subdivision here is critical for the IO subsystem.
 -- 
 2.25.1
 
