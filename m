@@ -1,49 +1,129 @@
-From: Mike Kravetz <mike.kravetz-QHcLZuEGTsvQT0dZR+AlfA@public.gmane.org>
-Subject: Re: [PATCH 03/21] mm/hugetlb: correct demote page offset logic
-Date: Wed, 14 Sep 2022 10:08:00 -0700
-Message-ID: <YyIKcNRP+Q0Vt3CT@monkey>
+From: Doug Berger <opendmb@gmail.com>
+Subject: Re: [PATCH 16/21] dt-bindings: reserved-memory: introduce
+ designated-movable-block
+Date: Wed, 14 Sep 2022 10:13:51 -0700
+Message-ID: <57f19774-39a1-03a6-fe68-83d7e4b16521@gmail.com>
 References: <20220913195508.3511038-1-opendmb@gmail.com>
- <20220913195508.3511038-4-opendmb@gmail.com>
- <YyETeBdbldnoRZ+x@casper.infradead.org>
- <33ff9543-3396-7609-3865-7eed20b853f5@gmail.com>
+ <20220913195508.3511038-17-opendmb@gmail.com>
+ <20220914145506.GA2149379-robh@kernel.org>
 Mime-Version: 1.0
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
- : subject : message-id : references : content-type : in-reply-to :
- mime-version; s=corp-2022-7-12;
- bh=sxnu/ud7okUwTaP46Kbo7izmkdpc98GY1qFcrzjoz/o=;
- b=CgNZ129BvNhr4mdfBI0Y0V0IwktRbmgKG6Zezu9xrai+jmtzNMlCJHxiCEiLxj4qAcl7
- fbSM2M2/MY39hL11XI+8pSxixu8gJfbtQiqH905Hti0zIxvzJaHI6u8re71Oy0CP4BJR
- Ie2jTAtZvwAXfvkLht+KoLDYuQqlrorJrewkDoIoV2JHNUQfIpRu2PwVulS8iNNj+amd
- XvwOUGULX45LH39K+up9UVVa4ay5r9DdsFZ2u5mHnKtju1zxgGm58g9KDKvuX2DkD7R8
- 9apuKqqtt2ZBIKpcTOVog9QMUpk6vI4ZM/eFa+gVyK28/UkeTfoQ88M6Ay6bX+cHfXvc rg== 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sxnu/ud7okUwTaP46Kbo7izmkdpc98GY1qFcrzjoz/o=;
- b=MABD7BPzAQNXEBC/+ZTwgalgAGGP1xVBdPHlu8KOZNqkbJr5N8ttWbTGAJDIq0LNOwRv9Dx8oMQmFUcs0d1zdpMVZe6vkQems5gGnHPW5SZx0pTeqor4X8J16Khro9nSD6+xfMLrI2/m7uJqPjzfroV4VBztCisjVyd7RaoT11I=
-Content-Disposition: inline
-In-Reply-To: <33ff9543-3396-7609-3865-7eed20b853f5-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-To: Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Matthew Wilcox <willy-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, Andrew Morton <akpm-de/tnXTf+JLsfHDXvbKv3WD2FQJk+8+b@public.gmane.org>, Jonathan Corbet <corbet-T1hC0tSOHrs@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Muchun Song <songmuchun-EC8Uxl6Npydl57MIdRCFDg@public.gmane.org>, Mike Rapoport <rppt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Christoph Hellwig <hch-jcswGhMUV9g@public.gmane.org>, Marek Szyprowski <m.szyprowski-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>, Borislav Petkov <bp-l3A5Bk7waGM@public.gmane.org>, "Paul E. McKenney" <paulmck-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Neeraj Upadhyay <quic_neeraju-jfJNa2p1gH1BDgjK7y7TUQ@public.gmane.org>, Randy Dunlap <rdunlap-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, Damien Le Moal <damien.lemoal-yzvPICuk2AC/Fx7ZUtofftBPR1lH4CV8@public.gmane.org>, Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, David Hildenbrand <david-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Zi Yan <ziy-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Oscar
+Return-path: <linux-doc-owner@vger.kernel.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date;
+        bh=IYYxWUkQ4C0EsxoWOU79iFj20ViO8vkpHbae7xo5rcs=;
+        b=Na0/xpW50l0p2LWBaIM/XHkvizf5pdNgEm4MPvDGNs4tfXsVzy3nI2WggDrVrrfbfR
+         8vmNnBl+TiJloFytXKKx8ij7l7JHUAO5qqumCGMHz6gej+TwY2yY1uOnd6rQDW/onfEy
+         mhfMenDe81IYCFu4mQwRrjZDNi+aIw2ZMXMs+lAyEOjSqv3xEgtOBhmny+WULZS0YZpw
+         ZcZTsS7nWNzFQLBA2LcSPlF+DsEm3gxpzQ/M7fhQy4+5Bt/EF4tS+d1c9J4vprzq2WbL
+         WOk5WKySaKYD+sBXvttDusj4zJ0fsKNQJHk9ppoZkcp4ZXt4nHQMWhY5rTa+LYvW5jK+
+         LGIA==
+Content-Language: en-US
+In-Reply-To: <20220914145506.GA2149379-robh@kernel.org>
+List-ID: <devicetree-spec.vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+To: Rob Herring <robh@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>, Jonathan Corbet <corbet@lwn.net>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Frank Rowand <frowand.list@gmail.com>, Mike Kravetz <mike.kravetz@oracle.com>, Muchun Song <songmuchun@bytedance.com>, Mike Rapoport <rppt@kernel.org>, Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>, Robin Murphy <robin.murphy@arm.com>, Borislav Petkov <bp@suse.de>, "Paul E. McKenney" <paulmck@kernel.org>, Neeraj Upadhyay <quic_neeraju@quicinc.com>, Randy Dunlap <rdunlap@infradead.org>, Damien Le Moal <damien.lemoal@opensource.wdc.com>, Florian Fainelli <f.fainelli@gmail.com>, David Hildenbrand <david@redhat.com>, Zi Yan <ziy@nvidia.com>, Oscar Salvador <osalvador@suse.de>, Hari
 
-On 09/13/22 18:07, Doug Berger wrote:
-> On 9/13/2022 4:34 PM, Matthew Wilcox wrote:
-> > On Tue, Sep 13, 2022 at 12:54:50PM -0700, Doug Berger wrote:
-> > > With gigantic pages it may not be true that struct page structures
-> > > are contiguous across the entire gigantic page. The mem_map_offset
-> > > function is used here in place of direct pointer arithmetic to
-> > > correct for this.
-> > 
-> > We're just eliminating mem_map_offset().  Please use nth_page()
-> > instead.That's good to know. I will include that in v2.
+On 9/14/2022 7:55 AM, Rob Herring wrote:
+> On Tue, Sep 13, 2022 at 12:55:03PM -0700, Doug Berger wrote:
+>> Introduce designated-movable-block.yaml to document the
+>> devicetree binding for Designated Movable Block children of the
+>> reserved-memory node.
+> 
+> What is a Designated Movable Block? This patch needs to stand on its
+> own.
+As noted in my reply to your [PATCH 00/21] comment, my intention in 
+submitting the entire patch set (and specifically PATCH 00/21]) was to 
+communicate this context. Now that I believe I understand that only this 
+patch should have been submitted to the devicetree-spec mailing list, I 
+will strive harder to make it more self contained.
 
-Thanks Doug and Matthew.  I will take a closer look at this series soon.
+> 
+> Why does this belong or need to be in DT?
+While my preferred method of declaring Designated Movable Blocks is 
+through the movablecore kernel parameter, I can conceive that others may 
+wish to take advantage of the reserved-memory DT nodes. In particular, 
+it has the advantage that a device can claim ownership of the 
+reserved-memory via device tree, which is something that has yet to be 
+implemented for DMBs defined with movablecore.
 
-It seems like this patch is a fix independent of the series.  If so, I
-would suggest sending separate to make it easy for backports to stable.
--- 
-Mike Kravetz
+> 
+>>
+>> Signed-off-by: Doug Berger <opendmb@gmail.com>
+>> ---
+>>   .../designated-movable-block.yaml             | 51 +++++++++++++++++++
+>>   1 file changed, 51 insertions(+)
+>>   create mode 100644 Documentation/devicetree/bindings/reserved-memory/designated-movable-block.yaml
+>>
+>> diff --git a/Documentation/devicetree/bindings/reserved-memory/designated-movable-block.yaml b/Documentation/devicetree/bindings/reserved-memory/designated-movable-block.yaml
+>> new file mode 100644
+>> index 000000000000..42f846069a2e
+>> --- /dev/null
+>> +++ b/Documentation/devicetree/bindings/reserved-memory/designated-movable-block.yaml
+>> @@ -0,0 +1,51 @@
+>> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/reserved-memory/designated-movable-block.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>> +
+>> +title: /reserved-memory Designated Movable Block node binding
+>> +
+>> +maintainers:
+>> +  - devicetree-spec@vger.kernel.org
+>> +
+>> +allOf:
+>> +  - $ref: "reserved-memory.yaml"
+>> +
+>> +properties:
+>> +  compatible:
+>> +    const: designated-movable-block
+>> +    description:
+>> +      This indicates a region of memory meant to be placed into
+>> +      ZONE_MOVABLE.
+> 
+> Don't put Linuxisms into bindings.
+I will avoid ZONE_MOVABLE if this commit is included in V2 of this patch 
+set.
+> 
+>> +
+>> +unevaluatedProperties: false
+>> +
+>> +required:
+>> +  - compatible
+>> +  - reusable
+>> +
+>> +examples:
+>> +  - |
+>> +      reserved-memory {
+>> +          #address-cells = <0x2>;
+>> +          #size-cells = <0x2>;
+>> +
+>> +          DMB0@10800000 {
+>> +               compatible = "designated-movable-block";
+>> +               reusable;
+>> +               reg = <0x0 0x10800000 0x0 0x2d800000>;
+>> +          };
+>> +
+>> +          DMB1@40000000 {
+>> +               compatible = "designated-movable-block";
+>> +               reusable;
+>> +               reg = <0x0 0x40000000 0x0 0x30000000>;
+>> +          };
+>> +
+>> +          DMB2@80000000 {
+>> +               compatible = "designated-movable-block";
+>> +               reusable;
+>> +               reg = <0x0 0x80000000 0x0 0x2fc00000>;
+>> +          };
+>> +      };
+>> -- 
+>> 2.25.1
+>>
+>>
+Thank you for the review!
+-Doug
