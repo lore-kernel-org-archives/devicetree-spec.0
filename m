@@ -1,75 +1,202 @@
-From: Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Subject: Re: [PATCH 00/21] mm: introduce Designated Movable Blocks
-Date: Wed, 14 Sep 2022 09:57:35 -0700
-Message-ID: <1825234b-f17a-dea4-38f6-ba5881ab9a3d@gmail.com>
-References: <20220913195508.3511038-1-opendmb@gmail.com>
- <CAL_JsqLmJcLHViPaBPvkBhR4xi+ZQuAJQpXoiJLVRW9EH4EX0Q@mail.gmail.com>
+From: kernel test robot <lkp@intel.com>
+Subject: Re: [PATCH 18/21] mm/cma: support CMA in Designated Movable Blocks
+Date: Thu, 15 Sep 2022 01:07:22 +0800
+Message-ID: <202209150009.PoWlLoNu-lkp@intel.com>
+References: <20220913195508.3511038-19-opendmb@gmail.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date;
-        bh=UWYZ+LvZVhpAV6ZQBWEOlqo/TbgQPhE93gUN5h4Opa4=;
-        b=lBXUbs9pZpO+yTmR2jdfhmRm/kBSeGhEo/6IKheeNxrOaZ+SSStX4UyGbG7noCTZnL
-         lp4GNVPC+yuVX066hyg9SZyWVQUc+v0zWdguOY/nmscUyeDVvKy5jSWZaO+xzphOdvAQ
-         aTsC9QANMQ3cKIIiE6++nnjm/oB7778JyBSse4UwGosbGCTpuV7jvDE16vVWkNMCWqqr
-         paslr3euDOvfLPglAFtll6BbrIEH7G9dDqqDsbt8U2peyjwbTzpRL2hP2NTerae1SkXT
-         SVn4fudGRJTBSCtwGh1X5bX9nACK+SBbNtTAxaGYxsK9dZyA1/5h4e4DVMpUTdy67eBY
-         DA4w==
-Content-Language: en-US
-In-Reply-To: <CAL_JsqLmJcLHViPaBPvkBhR4xi+ZQuAJQpXoiJLVRW9EH4EX0Q-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Return-path: <linux-doc-owner@vger.kernel.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1663175292; x=1694711292;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=H3Q2dCshLHXiyNfBuzyi9AzD37fPh22mEf4ZIc/U4Oc=;
+  b=e39atokjhvmGl5BBN/vdY9VJGPnkpBoib7p0SRw/H+Xs4Cur0VlDjti8
+   A2NHhd5VsNTPlzRNXeStipQ+JLdYLqXZwItqM79rU7btwBIEb4QhV5pDx
+   ZwLyJ1FsM3tybhDY3amUzPo0YWRfjbDyWaU2FSjDL2tY5svKzeVhtJdGM
+   jLnUT06b0/1RQoSZcLaQgR3rN+ErcBmkExXSjKTGpR+R4QIru/xc1RUyH
+   u2DRlSAi0QAujjeelqcIu1XU54r7RjYdgcC1jxqSzdC1/ZVxg3+oqypP/
+   11fE8vAFdiDumlI5AD0Vn96fSyqaNQjqUkhKjSCrFBhXSyfKjE8UGhMkV
+   g==;
+Content-Disposition: inline
+In-Reply-To: <20220913195508.3511038-19-opendmb@gmail.com>
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Andrew Morton <akpm-de/tnXTf+JLsfHDXvbKv3WD2FQJk+8+b@public.gmane.org>, Jonathan Corbet <corbet-T1hC0tSOHrs@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Mike Kravetz <mike.kravetz-QHcLZuEGTsvQT0dZR+AlfA@public.gmane.org>, Muchun Song <songmuchun-EC8Uxl6Npydl57MIdRCFDg@public.gmane.org>, Mike Rapoport <rppt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Christoph Hellwig <hch-jcswGhMUV9g@public.gmane.org>, Marek Szyprowski <m.szyprowski-Sze3O3UU22JBDgjK7y7TUQ@public.gmane.org>, Robin Murphy <robin.murphy-5wv7dgnIgG8@public.gmane.org>, Borislav Petkov <bp-l3A5Bk7waGM@public.gmane.org>, "Paul E. McKenney" <paulmck-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Neeraj Upadhyay <quic_neeraju-jfJNa2p1gH1BDgjK7y7TUQ@public.gmane.org>, Randy Dunlap <rdunlap-wEGCiKHe2LqWVfeAwA7xHQ@public.gmane.org>, Damien Le Moal <damien.lemoal-yzvPICuk2AC/Fx7ZUtofftBPR1lH4CV8@public.gmane.org>, Florian Fainelli <f.fainelli-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, David Hildenbrand <david-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Zi Yan <ziy-DDmLM1+adcrQT0dZR+AlfA@public.gmane.org>, Oscar Salvador <osalvador-l3A5Bk7waGM@public.gmane.org>, Hari
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+To: Doug Berger <opendmb@gmail.com>, Andrew Morton <akpm@linux-foundation.org>
+Cc: llvm@lists.linux.dev, kbuild-all@lists.01.org, Linux Memory Management List <linux-mm@kvack.org>, Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>, Frank Rowand <frowand.list@gmail.com>, Mike Kravetz <mike.kravetz@oracle.com>, Muchun Song <songmuchun@bytedance.com>, Mike Rapoport <rppt@kernel.org>, Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>, Robin Murphy <robin.murphy@arm.com>, Borislav Petkov <bp@suse.de>, "Paul E. McKenney" <paulmck@kernel.org>, Neeraj Upadhyay <quic_neeraju@quicinc.com>, Randy Dunlap <rdunlap@infradead.org>, Damien Le Moal <damien.lemoal@opensource.wdc.com>, Doug Berger <opendmb@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>
 
-On 9/14/2022 6:21 AM, Rob Herring wrote:
-> On Tue, Sep 13, 2022 at 2:57 PM Doug Berger <opendmb-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org> wrote:
->>
->> MOTIVATION:
->> Some Broadcom devices (e.g. 7445, 7278) contain multiple memory
->> controllers with each mapped in a different address range within
->> a Uniform Memory Architecture. Some users of these systems have
->> expressed the desire to locate ZONE_MOVABLE memory on each
->> memory controller to allow user space intensive processing to
->> make better use of the additional memory bandwidth.
->> Unfortunately, the historical monotonic layout of zones would
->> mean that if the lowest addressed memory controller contains
->> ZONE_MOVABLE memory then all of the memory available from
->> memory controllers at higher addresses must also be in the
->> ZONE_MOVABLE zone. This would force all kernel memory accesses
->> onto the lowest addressed memory controller and significantly
->> reduce the amount of memory available for non-movable
->> allocations.
-> 
-> Why are you sending kernel patches to the Devicetree specification list?
-> 
-> Rob
-My apologies if this is a problem. No offense was intended.
+Hi Doug,
 
-My process has been to run my patches through get_maintainers.pl to get 
-the list of addresses to copy on submissions and my 
-0016-dt-bindings-reserved-memory-introduce-designated-mov.patch 
-solicited the
-'- <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>' address.
+I love your patch! Perhaps something to improve:
 
-My preference when reviewing is to receive an entire patch set to 
-understand the context of an individual commit, but I can certainly 
-understand that others may have different preferences.
+[auto build test WARNING on robh/for-next]
+[also build test WARNING on linus/master v6.0-rc5]
+[cannot apply to akpm-mm/mm-everything next-20220914]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-It was my understanding that the Devicetree specification list was part 
-of the kernel (e.g. @vger.kernel.org) and would be willing to receive 
-patches that might be of relevance to it.
+url:    https://github.com/intel-lab-lkp/linux/commits/Doug-Berger/mm-introduce-Designated-Movable-Blocks/20220914-040216
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/robh/linux.git for-next
+config: i386-randconfig-a002 (https://download.01.org/0day-ci/archive/20220915/202209150009.PoWlLoNu-lkp@intel.com/config)
+compiler: clang version 14.0.6 (https://github.com/llvm/llvm-project f28c006a5895fc0e329fe15fead81e37457cb1d1)
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/635e919c92ca242c4b900bdfc7e21529e76f2f8e
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Doug-Berger/mm-introduce-Designated-Movable-Blocks/20220914-040216
+        git checkout 635e919c92ca242c4b900bdfc7e21529e76f2f8e
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 SHELL=/bin/bash
 
-I am inexperienced with yaml and devicetree processes in general so I 
-have tried to lean on the examples of other reserved-memory node 
-bindings for help.
+If you fix the issue, kindly add following tag where applicable
+Reported-by: kernel test robot <lkp@intel.com>
 
-There is much to learn and I am happy to modify my process to better 
-accommodate your needs.
+All warnings (new ones prefixed by >>):
 
-Regards,
-     Doug
+>> mm/page_alloc.c:9236:5: warning: no previous prototype for function '_alloc_contig_range' [-Wmissing-prototypes]
+   int _alloc_contig_range(unsigned long start, unsigned long end,
+       ^
+   mm/page_alloc.c:9236:1: note: declare 'static' if the function is not intended to be used outside of this translation unit
+   int _alloc_contig_range(unsigned long start, unsigned long end,
+   ^
+   static 
+   1 warning generated.
+
+
+vim +/_alloc_contig_range +9236 mm/page_alloc.c
+
+  9235	
+> 9236	int _alloc_contig_range(unsigned long start, unsigned long end,
+  9237				unsigned int migratetype, gfp_t gfp_mask)
+  9238	{
+  9239		unsigned long outer_start, outer_end;
+  9240		int order;
+  9241		int ret = 0;
+  9242	
+  9243		struct compact_control cc = {
+  9244			.nr_migratepages = 0,
+  9245			.order = -1,
+  9246			.zone = page_zone(pfn_to_page(start)),
+  9247			.mode = MIGRATE_SYNC,
+  9248			.ignore_skip_hint = true,
+  9249			.no_set_skip_hint = true,
+  9250			.gfp_mask = current_gfp_context(gfp_mask),
+  9251			.alloc_contig = true,
+  9252		};
+  9253		INIT_LIST_HEAD(&cc.migratepages);
+  9254	
+  9255		/*
+  9256		 * What we do here is we mark all pageblocks in range as
+  9257		 * MIGRATE_ISOLATE.  Because pageblock and max order pages may
+  9258		 * have different sizes, and due to the way page allocator
+  9259		 * work, start_isolate_page_range() has special handlings for this.
+  9260		 *
+  9261		 * Once the pageblocks are marked as MIGRATE_ISOLATE, we
+  9262		 * migrate the pages from an unaligned range (ie. pages that
+  9263		 * we are interested in). This will put all the pages in
+  9264		 * range back to page allocator as MIGRATE_ISOLATE.
+  9265		 *
+  9266		 * When this is done, we take the pages in range from page
+  9267		 * allocator removing them from the buddy system.  This way
+  9268		 * page allocator will never consider using them.
+  9269		 *
+  9270		 * This lets us mark the pageblocks back as
+  9271		 * MIGRATE_CMA/MIGRATE_MOVABLE so that free pages in the
+  9272		 * aligned range but not in the unaligned, original range are
+  9273		 * put back to page allocator so that buddy can use them.
+  9274		 */
+  9275	
+  9276		ret = start_isolate_page_range(start, end, migratetype, 0, gfp_mask);
+  9277		if (ret)
+  9278			goto done;
+  9279	
+  9280		drain_all_pages(cc.zone);
+  9281	
+  9282		/*
+  9283		 * In case of -EBUSY, we'd like to know which page causes problem.
+  9284		 * So, just fall through. test_pages_isolated() has a tracepoint
+  9285		 * which will report the busy page.
+  9286		 *
+  9287		 * It is possible that busy pages could become available before
+  9288		 * the call to test_pages_isolated, and the range will actually be
+  9289		 * allocated.  So, if we fall through be sure to clear ret so that
+  9290		 * -EBUSY is not accidentally used or returned to caller.
+  9291		 */
+  9292		ret = __alloc_contig_migrate_range(&cc, start, end);
+  9293		if (ret && ret != -EBUSY)
+  9294			goto done;
+  9295		ret = 0;
+  9296		sync_hugetlb_dissolve();
+  9297	
+  9298		/*
+  9299		 * Pages from [start, end) are within a pageblock_nr_pages
+  9300		 * aligned blocks that are marked as MIGRATE_ISOLATE.  What's
+  9301		 * more, all pages in [start, end) are free in page allocator.
+  9302		 * What we are going to do is to allocate all pages from
+  9303		 * [start, end) (that is remove them from page allocator).
+  9304		 *
+  9305		 * The only problem is that pages at the beginning and at the
+  9306		 * end of interesting range may be not aligned with pages that
+  9307		 * page allocator holds, ie. they can be part of higher order
+  9308		 * pages.  Because of this, we reserve the bigger range and
+  9309		 * once this is done free the pages we are not interested in.
+  9310		 *
+  9311		 * We don't have to hold zone->lock here because the pages are
+  9312		 * isolated thus they won't get removed from buddy.
+  9313		 */
+  9314	
+  9315		order = 0;
+  9316		outer_start = start;
+  9317		while (!PageBuddy(pfn_to_page(outer_start))) {
+  9318			if (++order >= MAX_ORDER) {
+  9319				outer_start = start;
+  9320				break;
+  9321			}
+  9322			outer_start &= ~0UL << order;
+  9323		}
+  9324	
+  9325		if (outer_start != start) {
+  9326			order = buddy_order(pfn_to_page(outer_start));
+  9327	
+  9328			/*
+  9329			 * outer_start page could be small order buddy page and
+  9330			 * it doesn't include start page. Adjust outer_start
+  9331			 * in this case to report failed page properly
+  9332			 * on tracepoint in test_pages_isolated()
+  9333			 */
+  9334			if (outer_start + (1UL << order) <= start)
+  9335				outer_start = start;
+  9336		}
+  9337	
+  9338		/* Make sure the range is really isolated. */
+  9339		if (test_pages_isolated(outer_start, end, 0)) {
+  9340			ret = -EBUSY;
+  9341			goto done;
+  9342		}
+  9343	
+  9344		/* Grab isolated pages from freelists. */
+  9345		outer_end = isolate_freepages_range(&cc, outer_start, end);
+  9346		if (!outer_end) {
+  9347			ret = -EBUSY;
+  9348			goto done;
+  9349		}
+  9350	
+  9351		/* Free head and tail (if any) */
+  9352		if (start != outer_start)
+  9353			free_contig_range(outer_start, start - outer_start);
+  9354		if (end != outer_end)
+  9355			free_contig_range(end, outer_end - end);
+  9356	
+  9357	done:
+  9358		undo_isolate_page_range(start, end, migratetype);
+  9359		return ret;
+  9360	}
+  9361	
+
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
