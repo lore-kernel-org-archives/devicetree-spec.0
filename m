@@ -1,71 +1,44 @@
-From: WeiLiang Lim <weiliang.lim-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
-Subject: RE: [PATCH] schemas: chosen: Add 'boot-hart-id' property
-Date: Thu, 5 Jan 2023 02:06:59 +0000
-Message-ID: <f16051eb110446c8b0cea2e83b418253@EXMBX063.cuchost.com>
-References: <20230103032522.36353-1-weiliang.lim@starfivetech.com>
- <CAL_JsqLaSS=TG23Xh1gPR1ooGBmAgia1c-p7JtAdvsUZskiqNw@mail.gmail.com>
+From: Wei Liang Lim <weiliang.lim-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
+Subject: [PATCH v2] schemas: chosen: Add 'boot-hart-id' property
+Date: Thu, 5 Jan 2023 10:23:38 +0800
+Message-ID: <20230105022338.562824-1-weiliang.lim@starfivetech.com>
 Mime-Version: 1.0
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8BIT
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-In-Reply-To: <CAL_JsqLaSS=TG23Xh1gPR1ooGBmAgia1c-p7JtAdvsUZskiqNw-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
-Content-Language: en-US
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: "devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org" <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Cheehong Ang <cheehong.ang-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>, JunLiang Tan <junliang.tan-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: cheehong.ang-bONrM45KWFOXmMXjJBpWqg@public.gmane.org, junliang.tan-bONrM45KWFOXmMXjJBpWqg@public.gmane.org, weiliang.lim-bONrM45KWFOXmMXjJBpWqg@public.gmane.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBSb2IgSGVycmluZyA8cm9iaEBr
-ZXJuZWwub3JnPg0KPiBTZW50OiBUdWVzZGF5LCBKYW51YXJ5IDMsIDIwMjMgMTE6MjIgUE0NCj4g
-VG86IFdlaUxpYW5nIExpbSA8d2VpbGlhbmcubGltQHN0YXJmaXZldGVjaC5jb20+DQo+IENjOiBk
-ZXZpY2V0cmVlLXNwZWNAdmdlci5rZXJuZWwub3JnOyBDaGVlaG9uZyBBbmcNCj4gPGNoZWVob25n
-LmFuZ0BzdGFyZml2ZXRlY2guY29tPjsgSnVuTGlhbmcgVGFuDQo+IDxqdW5saWFuZy50YW5Ac3Rh
-cmZpdmV0ZWNoLmNvbT4NCj4gU3ViamVjdDogUmU6IFtQQVRDSF0gc2NoZW1hczogY2hvc2VuOiBB
-ZGQgJ2Jvb3QtaGFydC1pZCcgcHJvcGVydHkNCj4gDQo+IE9uIE1vbiwgSmFuIDIsIDIwMjMgYXQg
-OToyNSBQTSBXZWkgTGlhbmcgTGltDQo+IDx3ZWlsaWFuZy5saW1Ac3RhcmZpdmV0ZWNoLmNvbT4g
-d3JvdGU6DQo+ID4NCj4gPiBBZGQgJ2Jvb3QtaGFydC1pZCcgcHJvcGVydHkgdG8gYWxsb3cgdXNl
-ciB0byBzcGVjaWZ5IHByZWZlcnJlZCBjb2xkIGJvb3QgSEFSVA0KPiBpbiBPcGVuU0JJIGZvciBT
-dGFyRml2ZSBKSDcxMTAgcGxhdGZvcm0uDQo+IA0KPiBUaGUgY29tbWl0IG1lc3NhZ2Ugc2hvdWxk
-IGFuc3dlciB3aHkgaXMgdGhpcyBuZWVkZWQsIG5vdCB3aGF0IGlzIHRoZQ0KPiBjaGFuZ2UuIFBy
-ZXNlbnQgdGhlIHByb2JsZW0geW91IGFyZSB0cnlpbmcgdG8gc29sdmUgd2l0aCB0aGlzIGNoYW5n
-ZSwgbm90IGp1c3QNCj4gdGhlIHNvbHV0aW9uIHlvdSBjYW1lIHVwIHdpdGguDQo+IA0KPiA+IFNp
-Z25lZC1vZmYtYnk6IFdlaSBMaWFuZyBMaW0gPHdlaWxpYW5nLmxpbUBzdGFyZml2ZXRlY2guY29t
-Pg0KPiA+IFJldmlld2VkLWJ5OiBDaGVlIEhvbmcgQW5nIDxjaGVlaG9uZy5hbmdAc3RhcmZpdmV0
-ZWNoLmNvbT4NCj4gPiBSZXZpZXdlZC1ieTogSnVuIExpYW5nIFRhbiA8anVubGlhbmcudGFuQHN0
-YXJmaXZldGVjaC5jb20+DQo+ID4gLS0tDQo+ID4gIGR0c2NoZW1hL3NjaGVtYXMvY2hvc2VuLnlh
-bWwgfCAxMyArKysrKysrKysrKysrDQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxMyBpbnNlcnRpb25z
-KCspDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvZHRzY2hlbWEvc2NoZW1hcy9jaG9zZW4ueWFtbA0K
-PiA+IGIvZHRzY2hlbWEvc2NoZW1hcy9jaG9zZW4ueWFtbCBpbmRleCA4NjE5NGRkLi5mODhmZWI1
-IDEwMDY0NA0KPiA+IC0tLSBhL2R0c2NoZW1hL3NjaGVtYXMvY2hvc2VuLnlhbWwNCj4gPiArKysg
-Yi9kdHNjaGVtYS9zY2hlbWFzL2Nob3Nlbi55YW1sDQo+ID4gQEAgLTMxLDYgKzMxLDE5IEBAIHBy
-b3BlcnRpZXM6DQo+ID4NCj4gPiAgICBib290YXJnczoNCj4gPiAgICAgICRyZWY6IHR5cGVzLnlh
-bWwjL2RlZmluaXRpb25zL3N0cmluZw0KPiA+ICsNCj4gPiArICAgYm9vdC1oYXJ0LWlkOg0KPiA+
-ICsgICAgdHlwZTogaW50ZWdlcg0KPiANCj4gTmV2ZXIgdGhlIHJpZ2h0IHR5cGUgZm9yIGEgcHJv
-cGVydHkuDQo+IA0KPiA+ICsgICAgZGVzY3JpcHRpb246DQo+ID4gKyAgICAgIFRoaXMgcHJvcGVy
-dHkgYWxsb3dzIHVzZXIgdG8gc3BlY2lmeSBwcmVmZXJyZWQgY29sZCBib290IEhBUlQgaW4NCj4g
-T3BlblNCSQ0KPiA+ICsgICAgICBmb3IgU3RhckZpdmUgSkg3MTEwIHBsYXRmb3JtLiBJZiB1bnNw
-ZWNpZmllZCwgdGhlIGV4aXN0aW5nDQo+ID4gKyBsb3R0ZXJ5IG1lY2hhbmlzbQ0KPiANCj4gU3Bl
-Y2lmaWMgdG8gU3RhckZpdmUgSkg3MTEwPw0KPiANCj4gQSBIQVJUIGluIERUIHRlcm1zIGlzIGp1
-c3QgYSBDUFUsIHNvIEkgdGhpbmsgd2hhdGV2ZXIgd2UgaGF2ZSBzaG91bGQgYmUNCj4gZ2VuZXJp
-Yy4gUG9zc2libHkgb3RoZXIgYXJjaGVzIGNvdWxkIHVzZSB0aGlzLg0KPiANCj4gV2hvIGNvbnN1
-bWVzIHRoaXM/IC9jaG9zZW4gaXMgY29uc3VtZWQgYnkgdGhlIE9TLiBXaGVuIHlvdSBib290IGlu
-dG8gdGhlDQo+IE9TLCB5b3UgYWxyZWFkeSBrbm93IHRoZSBib290IENQVSBiZWNhdXNlIGl0IGlz
-IHRoZSBvbmUgeW91IGFyZSBydW5uaW5nIG9uLg0KPiBTbyB0aGlzIGlzIG1lYW50IHRvIGJlIGNv
-bnN1bWVkIGJ5IE9wZW5TQkkgZmlybXdhcmU/DQo+IA0KPiBBbHNvLCByZWFkIGhvdyAnc3RhdHVz
-JyBpcyBzdXBwb3NlZCB0byB3b3JrIGZvciBDUFVzIGluIHRoZSBEVCBzcGVjLg0KPiBUaGF0IGRp
-ZG4ndCBnZXQgZm9sbG93ZWQgZm9yIEFybSwgYnV0IGNvdWxkIHBvc3NpYmx5IHdvcmsgaGVyZS4g
-VGhlIERUIHBhc3NlZA0KPiB0byBPcGVuU0JJIGhhcyBhbGwgYnV0IHRoZSBib290IENQVSBkaXNh
-YmxlZCBhbmQgT3BlblNCSSBjYW4gZW5hYmxlIHRoZQ0KPiBvdGhlciBDUFVzLiBKdXN0IGd1ZXNz
-aW5nIHNpbmNlIHlvdSd2ZSBnaXZlbiBubyBkZXRhaWxzIG9mIHRoZSBwcm9ibGVtIHRoaXMNCj4g
-c29sdmVzLi4uDQo+IA0KDQpUaGlzIGNoYW5nZSBpcyB0YXJnZXRlZCBmb3IgUklTQy1WIHBsYXRm
-b3JtIHdoaWNoIHRoZSBib290IGhhcnQgaXMgcmFuZG9tbHkgc2VsZWN0ZWQgdGhyb3VnaCBhIGxv
-dHRlcnkgbWVjaGFuaXNtIGJ5IGRlZmF1bHQgaW4gT3BlblNCSSAoVEYtQSBlcXVpdmFsZW50IG9u
-IEFSTSBwbGF0Zm9ybSkuIFRoaXMgcHJvcGVydHkgaXMgYW4gb3B0aW9uIGZvciB1c2VyIHRvIHNl
-bGVjdCBwcmVmZXJyZWQgY29sZCBib290IGhhcnQuIElmIHVuc3BlY2lmaWVkLCB0aGUgZGVmYXVs
-dCBsb3R0ZXJ5IG1lY2hhbmlzbSB3aWxsIGJlIHVzZWQuDQpUaGlzIGlzIG1haW5seSB0byBzb2x2
-ZSBzb21lIHByb2R1Y3QgcmVxdWlyZW1lbnRzIHdoaWNoIGEgcHJlZmVycmVkIGNvbGQgYm9vdCBo
-YXJ0IGlzIHJlcXVpcmVkLg0KDQo+ID4gKyAgICAgIHdpbGwgYmUgdXNlZC4gZS5nLg0KPiA+ICsN
-Cj4gPiArICAgICAgL3sNCj4gPiArICAgICAgICAgICAgICBjaG9zZW4gew0KPiA+ICsgICAgICAg
-ICAgICAgICAgICAgICAgYm9vdC1oYXJ0LWlkID0gPDE+Ow0KPiA+ICsgICAgICAgICAgICAgIH07
-DQo+ID4gKyAgICAgIH07DQo+IA0KPiBEcm9wIHRoZSBleGFtcGxlLg0KPiANCj4gPg0KPiA+ICAg
-IGthc2xyLXNlZWQ6DQo+ID4gICAgICAkcmVmOiB0eXBlcy55YW1sIy9kZWZpbml0aW9ucy91aW50
-NjQNCj4gPiAtLQ0KPiA+IDIuMjUuMQ0KPiA+DQo=
+Add 'boot-hart-id' property to allow user to specify preferred cold boot HART for RISCV architecture in OpenSBI firmware.
+If unspecified, the default lottery mechanism will be used to randomly select the cold boot hart.
+This is mainly to solve some product requirements which a preferred cold boot hart is required.
+
+Signed-off-by: Wei Liang Lim <weiliang.lim-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
+Reviewed-by: Chee Hong Ang <cheehong.ang-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
+Reviewed-by: Jun Liang Tan <junliang.tan-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
+---
+ dtschema/schemas/chosen.yaml | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/dtschema/schemas/chosen.yaml b/dtschema/schemas/chosen.yaml
+index 86194dd..ead3691 100644
+--- a/dtschema/schemas/chosen.yaml
++++ b/dtschema/schemas/chosen.yaml
+@@ -31,6 +31,13 @@ properties:
+ 
+   bootargs:
+     $ref: types.yaml#/definitions/string
++    
++  boot-hart-id:
++    $ref: types.yaml#/definitions/uint32
++    description:
++      This property is an option for user to specify the preferred cold boot
++      HART for RISCV architecture in OpenSBI firmware. If unspecified, the
++      default lottery mechanism will be used.
+ 
+   kaslr-seed:
+     $ref: types.yaml#/definitions/uint64
+-- 
+2.25.1
+
