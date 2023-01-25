@@ -1,44 +1,51 @@
-From: Wei Liang Lim <weiliang.lim-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
-Subject: [PATCH v2] schemas: chosen: Add 'boot-hart-id' property
-Date: Thu, 5 Jan 2023 10:23:38 +0800
-Message-ID: <20230105022338.562824-1-weiliang.lim@starfivetech.com>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: [PATCH] dt-bindings: reserved-memory: Refine 'size' and 'alignment' types
+Date: Wed, 25 Jan 2023 16:14:50 -0600
+Message-ID: <20230125221450.3058762-1-robh@kernel.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 8BIT
+Content-Transfer-Encoding: 8bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: cheehong.ang-bONrM45KWFOXmMXjJBpWqg@public.gmane.org, junliang.tan-bONrM45KWFOXmMXjJBpWqg@public.gmane.org, weiliang.lim-bONrM45KWFOXmMXjJBpWqg@public.gmane.org
+To: Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, - <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-Add 'boot-hart-id' property to allow user to specify preferred cold boot HART for RISCV architecture in OpenSBI firmware.
-If unspecified, the default lottery mechanism will be used to randomly select the cold boot hart.
-This is mainly to solve some product requirements which a preferred cold boot hart is required.
+Both 'size' and 'alignment' are single values, but can be 32 or 64 bits.
+Use the precise types rather than the 2 32-bit cell encoding.
 
-Signed-off-by: Wei Liang Lim <weiliang.lim-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
-Reviewed-by: Chee Hong Ang <cheehong.ang-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
-Reviewed-by: Jun Liang Tan <junliang.tan-bONrM45KWFOXmMXjJBpWqg@public.gmane.org>
+Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 ---
- dtschema/schemas/chosen.yaml | 7 +++++++
- 1 file changed, 7 insertions(+)
+ .../bindings/reserved-memory/reserved-memory.yaml    | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/dtschema/schemas/chosen.yaml b/dtschema/schemas/chosen.yaml
-index 86194dd..ead3691 100644
---- a/dtschema/schemas/chosen.yaml
-+++ b/dtschema/schemas/chosen.yaml
-@@ -31,6 +31,13 @@ properties:
+diff --git a/Documentation/devicetree/bindings/reserved-memory/reserved-memory.yaml b/Documentation/devicetree/bindings/reserved-memory/reserved-memory.yaml
+index 44f72bcf1782..b205215b130d 100644
+--- a/Documentation/devicetree/bindings/reserved-memory/reserved-memory.yaml
++++ b/Documentation/devicetree/bindings/reserved-memory/reserved-memory.yaml
+@@ -31,17 +31,17 @@ properties:
+   reg: true
  
-   bootargs:
-     $ref: types.yaml#/definitions/string
-+    
-+  boot-hart-id:
-+    $ref: types.yaml#/definitions/uint32
-+    description:
-+      This property is an option for user to specify the preferred cold boot
-+      HART for RISCV architecture in OpenSBI firmware. If unspecified, the
-+      default lottery mechanism will be used.
+   size:
+-    $ref: /schemas/types.yaml#/definitions/uint32-array
+-    minItems: 1
+-    maxItems: 2
++    oneOf:
++      - $ref: /schemas/types.yaml#/definitions/uint32
++      - $ref: /schemas/types.yaml#/definitions/uint64
+     description: >
+       Length based on parent's \#size-cells. Size in bytes of memory to
+       reserve.
  
-   kaslr-seed:
-     $ref: types.yaml#/definitions/uint64
+   alignment:
+-    $ref: /schemas/types.yaml#/definitions/uint32-array
+-    minItems: 1
+-    maxItems: 2
++    oneOf:
++      - $ref: /schemas/types.yaml#/definitions/uint32
++      - $ref: /schemas/types.yaml#/definitions/uint64
+     description: >
+       Length based on parent's \#size-cells. Address boundary for
+       alignment of allocation.
 -- 
-2.25.1
+2.39.0
 
