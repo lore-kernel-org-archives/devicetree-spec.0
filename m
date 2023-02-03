@@ -1,29 +1,126 @@
-From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [PATCH] dt-bindings: reserved-memory: Refine 'size' and
- 'alignment' types
-Date: Tue, 31 Jan 2023 17:40:40 -0600
-Message-ID: <167520843972.2162817.14937783775593918446.robh@kernel.org>
-References: <20230125221450.3058762-1-robh@kernel.org>
+From: Janne Grunau <j@jannau.net>
+Subject: [PATCH RFC 1/3] dt-bindings: net: Add network-class schema for
+ mac-address properties
+Date: Fri, 03 Feb 2023 14:56:26 +0100
+Message-ID: <20230203-dt-bindings-network-class-v1-1-452e0375200d@jannau.net>
+References: <20230203-dt-bindings-network-class-v1-0-452e0375200d@jannau.net>
 Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-Content-Disposition: inline
-In-Reply-To: <20230125221450.3058762-1-robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+In-Reply-To: <20230203-dt-bindings-network-class-v1-0-452e0375200d-w2YMFpIX6D+sTnJN9+BGXg@public.gmane.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3851; i=j@jannau.net;
+ h=from:subject:message-id; bh=yMGAL+QzO91nZgA/hAW/ks707rvfOrRSu4uh4kEKZwQ=;
+ b=owGbwMvMwCG2UNrmdq9+ahrjabUkhuS7QhO4FF7sYJDV3GLdWfh7dun71QFHf+jfrf33UudGp
+ PnUlB0dHaUsDGIcDLJiiixJ2i87GFbXKMbUPgiDmcPKBDKEgYtTACayl5nhnyJbH3u9c8bJlHuP
+ fh3J96zhubFS/EZsnV+e3vPQDdk7bjMyzOy8skp+1bkdMy/GvJzwcEX0aQ1jbcfwBY/ZHhZcOap
+ jzQ0A
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, - <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: "David S. Miller" <davem-fT/PcQaiUtIeIZ0/mPfg9Q@public.gmane.org>, Eric Dumazet <edumazet-hpIqsD4AKlfQT0dZR+AlfA@public.gmane.org>, Jakub Kicinski <kuba-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Paolo Abeni <pabeni-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Kalle Valo <kvalo-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, van Spriel <arend-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>, =?utf-8?q?J=C3=A9r=C3=B4me_Pouiller?= <jerome.pouiller-S6d6foEdJf7QT0dZR+AlfA@public.gmane.org>
+Cc: netdev-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-wireless-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Janne Grunau <j@jannau.net>
 
+The ethernet-controller schema specifies "mac-address" and
+"local-mac-address" but other network devices such as wireless network
+adapters use mac addresses as well.
+The Devicetree Specification, Release v0.3 specifies in section 4.3.1
+a generic "Network Class Binding" with "address-bits", "mac-address",
+"local-mac-address" and "max-frame-size". This schema specifies the
+"address-bits" property and moves "local-mac-address" and "mac-address"
+over from ethernet-controller.yaml.
+The schema currently does not restrict MAC address size based on
+address-bits.
 
-On Wed, 25 Jan 2023 16:14:50 -0600, Rob Herring wrote:
-> Both 'size' and 'alignment' are single values, but can be 32 or 64 bits.
-> Use the precise types rather than the 2 32-bit cell encoding.
-> 
-> Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-> ---
->  .../bindings/reserved-memory/reserved-memory.yaml    | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
-> 
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ .../bindings/net/ethernet-controller.yaml          | 18 +---------
+ .../devicetree/bindings/net/network-class.yaml     | 40 ++++++++++++++++++++++
+ 2 files changed, 41 insertions(+), 17 deletions(-)
 
-Applied, thanks!
+diff --git a/Documentation/devicetree/bindings/net/ethernet-controller.yaml b/Documentation/devicetree/bindings/net/ethernet-controller.yaml
+index 00be387984ac..a5f6a09dfdea 100644
+--- a/Documentation/devicetree/bindings/net/ethernet-controller.yaml
++++ b/Documentation/devicetree/bindings/net/ethernet-controller.yaml
+@@ -17,23 +17,6 @@ properties:
+     $ref: /schemas/types.yaml#/definitions/string
+     description: Human readable label on a port of a box.
+ 
+-  local-mac-address:
+-    description:
+-      Specifies the MAC address that was assigned to the network device.
+-    $ref: /schemas/types.yaml#/definitions/uint8-array
+-    minItems: 6
+-    maxItems: 6
+-
+-  mac-address:
+-    description:
+-      Specifies the MAC address that was last used by the boot
+-      program; should be used in cases where the MAC address assigned
+-      to the device by the boot program is different from the
+-      local-mac-address property.
+-    $ref: /schemas/types.yaml#/definitions/uint8-array
+-    minItems: 6
+-    maxItems: 6
+-
+   max-frame-size:
+     $ref: /schemas/types.yaml#/definitions/uint32
+     description:
+@@ -226,6 +209,7 @@ dependencies:
+   pcs-handle-names: [pcs-handle]
+ 
+ allOf:
++  - $ref: /schemas/net/network-class.yaml#
+   - if:
+       properties:
+         phy-mode:
+diff --git a/Documentation/devicetree/bindings/net/network-class.yaml b/Documentation/devicetree/bindings/net/network-class.yaml
+new file mode 100644
+index 000000000000..676aec1c458e
+--- /dev/null
++++ b/Documentation/devicetree/bindings/net/network-class.yaml
+@@ -0,0 +1,40 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/net/network-class.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Network Class Bindings
++
++maintainers:
++  - Devicetree Specification Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
++
++properties:
++  address-bits:
++    description:
++      Specifies number of address bits required to address the device described
++      by this node. This property specifies number of bits in MAC address.
++      If unspecified, the default value is 48.
++    default: 48
++    enum: [48, 64]
++
++  local-mac-address:
++    description:
++      Specifies MAC address that was assigned to the network device described by
++      the node containing this property.
++    $ref: /schemas/types.yaml#/definitions/uint8-array
++    minItems: 6
++    maxItems: 8
++
++  mac-address:
++    description:
++      Specifies the MAC address that was last used by the boot program. This
++      property should be used in cases where the MAC address assigned to the
++      device by the boot program is different from the
++      local-mac-address property. This property shall be used only if the value
++      differs from local-mac-address property value.
++    $ref: /schemas/types.yaml#/definitions/uint8-array
++    minItems: 6
++    maxItems: 8
++
++additionalProperties: true
+
+-- 
+2.39.1
 
