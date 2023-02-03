@@ -1,22 +1,21 @@
 From: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [PATCH RFC 1/3] dt-bindings: net: Add network-class schema for
- mac-address properties
-Date: Fri, 3 Feb 2023 08:25:37 -0600
-Message-ID: <CAL_Jsq+kJA0VS-SF67mhQFg0dS9KcQ-36ctGVsD78=wkrM7GUw@mail.gmail.com>
-References: <20230203-dt-bindings-network-class-v1-0-452e0375200d@jannau.net> <20230203-dt-bindings-network-class-v1-1-452e0375200d@jannau.net>
+Subject: Re: [PATCH RFC 0/3] dt-bindings: net: Add network-class.yaml schema
+Date: Fri, 3 Feb 2023 08:41:28 -0600
+Message-ID: <CAL_JsqKD7gD86_B93M19rBCWn+rmSw24vOGEhqi9Nvne1Xixwg@mail.gmail.com>
+References: <20230203-dt-bindings-network-class-v1-0-452e0375200d@jannau.net>
 Mime-Version: 1.0
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1675434354;
-        bh=FnFLurR6aD/mKesWSxbnPpuvd9h9JjFxABX7sLbaerw=;
+        s=k20201202; t=1675435301;
+        bh=aSsCAsgpLn8Nh2RoLgCu1FwifDval96mr38LdqDofP4=;
         h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=LypUN7+vWTtApRbYwlIRwDyFFUy4NZfOQX3n4Iuc7sKfAAyX+lrYAykQjof2WQrTW
-         FRndf+FaBC4flW6GXdwnFCabsdlzw0ruzcqCfo9eYXUoT25pm89haMBSj+tcZJ+Ahc
-         7mCedUfjlFNh2R3b/ygk0eY0cW42Eprn0lrRNc3R2LVvN8AHa8Xrdo8rmjyTi67WdV
-         G7N5EdVyS2NX9kLAWWCPiyKx86qzeUlEDH0p/yeNkZOvSeQ/tO7AYn2sow9d+SrJmg
-         MK/jS54K0tyRnxC+jicY7BuKH6vSICoRU8ISslV8k95A1xryDrohtcZPM+EjEgYf4p
-         2ARiXfjvlybkg==
-In-Reply-To: <20230203-dt-bindings-network-class-v1-1-452e0375200d-w2YMFpIX6D+sTnJN9+BGXg@public.gmane.org>
+        b=lQARH19+JJc/qQ657fHWRjoOsZ7uM7xGiTACSr4Z7TpaOID0SQHPeDW1QSfCSSE+y
+         a7bvfj0+8l0DsbwuGhkXfD6tLSaqmaapz01S1pmZeBEzDTxoLUaWXrDIoLXfSjBN1u
+         SEInskwTuXKoSXMlk5EkrMREPMPc0BkoN/609UxQYw4JQaBy/5+J3AlbBZWXlrBq9v
+         MaDKx8xxgipmb23CH6Qp5lITlrfLoMdfZ3hrxaWijHjU/N6z+E+oqrrRXDBazAvz5s
+         HYsR/VzG4OSByOG/aDq9RSIKohWhmqU2Lhsv08cHrA6ll/XsfyGCdukZmgZlOK+0ZA
+         9NNAmk+GRo9Fw==
+In-Reply-To: <20230203-dt-bindings-network-class-v1-0-452e0375200d-w2YMFpIX6D+sTnJN9+BGXg@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -25,92 +24,38 @@ Cc: "David S. Miller" <davem-fT/PcQaiUtIeIZ0/mPfg9Q@public.gmane.org>, Eric Duma
 
 On Fri, Feb 3, 2023 at 7:56 AM Janne Grunau <j@jannau.net> wrote:
 >
-> The ethernet-controller schema specifies "mac-address" and
-> "local-mac-address" but other network devices such as wireless network
-> adapters use mac addresses as well.
 > The Devicetree Specification, Release v0.3 specifies in section 4.3.1
-> a generic "Network Class Binding" with "address-bits", "mac-address",
-> "local-mac-address" and "max-frame-size". This schema specifies the
-> "address-bits" property and moves "local-mac-address" and "mac-address"
-> over from ethernet-controller.yaml.
-> The schema currently does not restrict MAC address size based on
-> address-bits.
->
-> Signed-off-by: Janne Grunau <j@jannau.net>
-> ---
->  .../bindings/net/ethernet-controller.yaml          | 18 +---------
->  .../devicetree/bindings/net/network-class.yaml     | 40 ++++++++++++++++++++++
->  2 files changed, 41 insertions(+), 17 deletions(-)
->
-> diff --git a/Documentation/devicetree/bindings/net/ethernet-controller.yaml b/Documentation/devicetree/bindings/net/ethernet-controller.yaml
-> index 00be387984ac..a5f6a09dfdea 100644
-> --- a/Documentation/devicetree/bindings/net/ethernet-controller.yaml
-> +++ b/Documentation/devicetree/bindings/net/ethernet-controller.yaml
-> @@ -17,23 +17,6 @@ properties:
->      $ref: /schemas/types.yaml#/definitions/string
->      description: Human readable label on a port of a box.
->
-> -  local-mac-address:
-> -    description:
-> -      Specifies the MAC address that was assigned to the network device.
-> -    $ref: /schemas/types.yaml#/definitions/uint8-array
-> -    minItems: 6
-> -    maxItems: 6
-> -
-> -  mac-address:
-> -    description:
-> -      Specifies the MAC address that was last used by the boot
-> -      program; should be used in cases where the MAC address assigned
-> -      to the device by the boot program is different from the
-> -      local-mac-address property.
-> -    $ref: /schemas/types.yaml#/definitions/uint8-array
-> -    minItems: 6
-> -    maxItems: 6
-> -
->    max-frame-size:
->      $ref: /schemas/types.yaml#/definitions/uint32
->      description:
-> @@ -226,6 +209,7 @@ dependencies:
->    pcs-handle-names: [pcs-handle]
->
->  allOf:
-> +  - $ref: /schemas/net/network-class.yaml#
->    - if:
->        properties:
->          phy-mode:
-> diff --git a/Documentation/devicetree/bindings/net/network-class.yaml b/Documentation/devicetree/bindings/net/network-class.yaml
-> new file mode 100644
-> index 000000000000..676aec1c458e
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/net/network-class.yaml
-> @@ -0,0 +1,40 @@
-> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/net/network-class.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Network Class Bindings
-> +
-> +maintainers:
-> +  - Devicetree Specification Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-> +
-> +properties:
-> +  address-bits:
-> +    description:
-> +      Specifies number of address bits required to address the device described
-> +      by this node. This property specifies number of bits in MAC address.
-> +      If unspecified, the default value is 48.
+> a "Network Class Binding". This covers MAC address and maximal frame
+> size properties. "local-mac-address" and "mac-address" with a fixed
+> address-size of 48 bits is already in the ethernet-controller.yaml
+> schema so move those over.
+> I think the only commonly used values for address-size are 48 and 64
+> bits (EUI-48 and EUI-64). Unfortunately I was not able to restrict the
+> mac-address size based on the address-size. This seems to be an side
+> effect of the array definition and I was not able to restrict "minItems"
+> or "maxItems" based on the address-size value in an "if"-"then"-"else"
+> block.
+> An easy way out would be to restrict address-size to 48-bits for now.
 
-You can drop the last sentence.
+I've never seen 64-bits used...
 
-> +    default: 48
-> +    enum: [48, 64]
+> I've ignored "max-frame-size" since the description in
+> ethernet-controller.yaml claims there is a contradiction in the
+> Devicetree specification. I suppose it is describing the property
+> "max-frame-size" with "Specifies maximum packet length ...".
 
-I wonder if we should just deprecate this property. I see 1 occurrence
-and no consumer in the kernel tree at least. I guess one could set the
-length, but not have mac addresses in the DT. Otherwise you could just
-infer the length from the property length. Anyways, a conversation for
-another time I guess.
+Please include it and we'll fix the spec. It is clearly wrong. 2 nios
+boards use 1518 and the consumer for them says it is MTU. Everything
+else clearly uses mtu with 1500 or 9000.
+
+> My understanding from the dt-schema README is that network-class.yaml
+> should live in the dt-schema repository since it describes properties
+> from the Devicetree specification. How is the synchronization handled in
+> this case? The motivation for this series is to fix dtbs_check failures
+> for Apple silicon devices both in the tree and upcoming ones.
+
+Let's add it to the kernel, then later we can copy it to dtschema,
+bump the minimum version the kernel requires, and delete the kernel
+copy.
 
 Rob
