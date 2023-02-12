@@ -1,80 +1,64 @@
 From: Janne Grunau <j@jannau.net>
-Subject: Re: [PATCH RFC 0/3] dt-bindings: net: Add network-class.yaml schema
-Date: Tue, 7 Feb 2023 08:10:09 +0100
-Message-ID: <20230207071009.GB9004@jannau.net>
-References: <20230203-dt-bindings-network-class-v1-0-452e0375200d@jannau.net>
- <CAL_JsqKD7gD86_B93M19rBCWn+rmSw24vOGEhqi9Nvne1Xixwg@mail.gmail.com>
- <20230206163154.GA9004@jannau.net>
- <Y+GqsTLXRKyg0BdV@lunn.ch>
+Subject: [PATCH v2 4/4] nios2: dts: Fix tse_mac "max-frame-size" property
+Date: Sun, 12 Feb 2023 13:16:32 +0100
+Message-ID: <20230203-dt-bindings-network-class-v2-4-499686795073@jannau.net>
+References: <20230203-dt-bindings-network-class-v2-0-499686795073@jannau.net>
 Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-Content-Disposition: inline
-In-Reply-To: <Y+GqsTLXRKyg0BdV-g2DYL2Zd6BY@public.gmane.org>
+In-Reply-To: <20230203-dt-bindings-network-class-v2-0-499686795073-w2YMFpIX6D+sTnJN9+BGXg@public.gmane.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1609; i=j@jannau.net;
+ h=from:subject:message-id; bh=uWSEYKB7li7fZFeyFFAr5iOwvcAG0u54TSff/HhFETY=;
+ b=owGbwMvMwCG2UNrmdq9+ahrjabUkhuQXN+ZNYed9b6O9jTP29ZQXij7nE82O7uadl5nw7cQ57
+ 6aoNY7qHaUsDGIcDLJiiixJ2i87GFbXKMbUPgiDmcPKBDKEgYtTACZy/C3DP4WASfu19at0E0sY
+ FS2si9Vmb8+Q+GdmqLm8rEWK9XeSPMP/qgXTfRV6i368/r3zYfGxBxt44lbc0BFtMNL+zn3Q1j+
+ VGQA=
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-To: Andrew Lunn <andrew-g2DYL2Zd6BY@public.gmane.org>
-Cc: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, "David S. Miller" <davem-fT/PcQaiUtIeIZ0/mPfg9Q@public.gmane.org>, Eric Dumazet <edumazet-hpIqsD4AKlfQT0dZR+AlfA@public.gmane.org>, Jakub Kicinski <kuba-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Paolo Abeni <pabeni-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Kalle Valo <kvalo-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, van Spriel <arend-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>, =?iso-8859-1?B?Suly9G1l?= Pouiller <jerome.pouiller-S6d6foEdJf7QT0dZR+AlfA@public.gmane.org>, netdev-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-wireless-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: "David S. Miller" <davem-fT/PcQaiUtIeIZ0/mPfg9Q@public.gmane.org>, Eric Dumazet <edumazet-hpIqsD4AKlfQT0dZR+AlfA@public.gmane.org>, Jakub Kicinski <kuba-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Paolo Abeni <pabeni-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Kalle Valo <kvalo-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, van Spriel <arend-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>, =?utf-8?q?J=C3=A9r=C3=B4me_Pouiller?= <jerome.pouiller-S6d6foEdJf7QT0dZR+AlfA@public.gmane.org>, Dinh Nguyen <dinguyen-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Ley Foon Tan <lftan-EIB2kfCEclfQT0dZR+AlfA@public.gmane.org>, Chee Nouk Phoon <cnphoon-EIB2kfCEclfQT0dZR+AlfA@public.gmane.org>
+Cc: netdev-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-wireless-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Janne Grunau <j@jannau.net>
 
-On 2023-02-07 02:34:41 +0100, Andrew Lunn wrote:
-> > > > I've ignored "max-frame-size" since the description in
-> > > > ethernet-controller.yaml claims there is a contradiction in the
-> > > > Devicetree specification. I suppose it is describing the property
-> > > > "max-frame-size" with "Specifies maximum packet length ...".
-> > > 
-> > > Please include it and we'll fix the spec. It is clearly wrong. 2 nios
-> > > boards use 1518 and the consumer for them says it is MTU. Everything
-> > > else clearly uses mtu with 1500 or 9000.
-> > 
-> > Ok, the example in the pdf is 'max-frame-size = <1518>;'. I'll include 
-> > it with the description of ethernet-controller.yaml which specifies it 
-> > as MTU.
-> 
-> You need to be careful here. Frame and MTU are different things.
+The given value of 1518 seems to refer to the layer 2 ethernet frame
+size without 802.1Q tag. Actual use of the "max-frame-size" including in
+the consumer of the "altr,tse-1.0" compatible is the MTU.
 
-yes, we are aware. The description in of the property in
-Documentation/devicetree/bindings/net/ethernet-controller.yaml is:
+Fixes: 95acd4c7b69c ("nios2: Device tree support")
+Fixes: 61c610ec61bb ("nios2: Add Max10 device tree")
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ arch/nios2/boot/dts/10m50_devboard.dts | 2 +-
+ arch/nios2/boot/dts/3c120_devboard.dts | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-| Maximum transfer unit (IEEE defined MTU), rather than the
-| maximum frame size (there\'s contradiction in the Devicetree
-| Specification).
+diff --git a/arch/nios2/boot/dts/10m50_devboard.dts b/arch/nios2/boot/dts/10m50_devboard.dts
+index 56339bef3247..0e7e5b0dd685 100644
+--- a/arch/nios2/boot/dts/10m50_devboard.dts
++++ b/arch/nios2/boot/dts/10m50_devboard.dts
+@@ -97,7 +97,7 @@ rgmii_0_eth_tse_0: ethernet@400 {
+ 			rx-fifo-depth = <8192>;
+ 			tx-fifo-depth = <8192>;
+ 			address-bits = <48>;
+-			max-frame-size = <1518>;
++			max-frame-size = <1500>;
+ 			local-mac-address = [00 00 00 00 00 00];
+ 			altr,has-supplementary-unicast;
+ 			altr,enable-sup-addr = <1>;
+diff --git a/arch/nios2/boot/dts/3c120_devboard.dts b/arch/nios2/boot/dts/3c120_devboard.dts
+index d10fb81686c7..3ee316906379 100644
+--- a/arch/nios2/boot/dts/3c120_devboard.dts
++++ b/arch/nios2/boot/dts/3c120_devboard.dts
+@@ -106,7 +106,7 @@ tse_mac: ethernet@4000 {
+ 				interrupt-names = "rx_irq", "tx_irq";
+ 				rx-fifo-depth = <8192>;
+ 				tx-fifo-depth = <8192>;
+-				max-frame-size = <1518>;
++				max-frame-size = <1500>;
+ 				local-mac-address = [ 00 00 00 00 00 00 ];
+ 				phy-mode = "rgmii-id";
+ 				phy-handle = <&phy0>;
 
-The description for the property in the Devicetree is:
+-- 
+2.39.1
 
-| Specifies maximum packet length in bytes that the physical interface
-| can send and receive.
-
-While the "packet length" in the description is a little confusing this 
-seems to refer to the ethernet frame size.
-
-> The IEEE 802.3 standard says nothing about MTU. I believe MTU is an IP
-> concept. It is the size of the SDU an Ethernet PDU can carry. This is
-> typically 1500.
-> 
-> Historically, the max Ethernet frame size was 1518. But with 802.1Q
-> which added the VLAN header, all modern hardware actual uses 1522 to
-> accommodate the extra 4 bytes VLAN header. So i would not actually put
-> max-frame-size = <1518> anywhere, because it will get copy/pasted and
-> break VLAN setups.
-> 
-> It looks like the ibm,emac.txt makes this error, max-frame-size =
-> <5dc>; 0x5dc is 1500. And there are a few powerpc .dtc using
-> 1500/0x5dc, which are probably broken.
-
-I would not say it is an error. The specification/name and use of 
-"max-frame-size" has clearly diverged. All 4 in-tree users of this 
-property interpret it as MTU. With the exception of the 2 nios2 boards 
-Rob found all device trees use either 1500, 3800 or 9000 as 
-'max-frame-size'.
-
-I think Rob's plan to deal with this conflict between specification and 
-actual use is to accept the use and update the description in the 
-specification. This results in a "max-frame-size" property which 
-describes the maximal payload / MTU. The upside of this is that we can 
-leave all devicetrees and drivers unchanged and avoid breaking 
-out-of-tree users.
-
-I'll fix the 2 nios2 boards since those currently end up with a MTU of 
-1518 in altera_tse_main.c.
-
-Janne
