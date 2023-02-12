@@ -1,68 +1,35 @@
-From: Janne Grunau <j@jannau.net>
-Subject: [PATCH v2 0/4] dt-bindings: net: Add network-class.yaml schema
-Date: Sun, 12 Feb 2023 13:16:28 +0100
-Message-ID: <20230203-dt-bindings-network-class-v2-0-499686795073@jannau.net>
+From: Andrew Lunn <andrew-g2DYL2Zd6BY@public.gmane.org>
+Subject: Re: [PATCH v2 1/4] dt-bindings: net: Add network-class schema for
+ mac-address properties
+Date: Sun, 12 Feb 2023 16:39:26 +0100
+Message-ID: <Y+kILknqMmR6+GXO@lunn.ch>
+References: <20230203-dt-bindings-network-class-v2-0-499686795073@jannau.net>
+ <20230203-dt-bindings-network-class-v2-1-499686795073@jannau.net>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Return-path: <netdev-owner@vger.kernel.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2214; i=j@jannau.net;
- h=from:subject:message-id; bh=y7QrjK1UKfIGXPczHYVce0GeZzI5ACPm72GbLe9dHPc=;
- b=owGbwMvMwCG2UNrmdq9+ahrjabUkhuQXN+atn7qg2jhxduj922unGymYVfUGnlw5RaUwdDuTT
- aK6UHRRRykLgxgHg6yYIkuS9ssOhtU1ijG1D8Jg5rAygQxh4OIUgImIizAynGqae35x2N7/ospc
- n1dGJhTnhh5h3Hmk9uKZ/JbpYnHHbBj+Sm9y+8fyXrj49t6J4dw+cqnPxUvz1vzhYs3I2rJznZU
- qDwA=
-X-Developer-Key: i=j@jannau.net; a=openpgp;
- fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+        s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+        Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+        Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+        bh=6O+UuieJiqrqN8b+Jb4GL1MHOB3Fu+wejYkm3MKiKZs=; b=zVqRPIHa7Fd8aBKSeDGdpJrwuU
+        nnpM2/LLxyc0jo150A976XoGkGIxo/Uf0HLi4TmqXPAIgnmkxe9ElLSPRjfuwbTF0dJPRAv7Ypvm4
+        hktdh6pFGaDcHi1g6EYBPP0IV1BSyvZ74CW4F2SYfyEC2Iz/PlMxUecV2fM9AZype0fo=;
+Content-Disposition: inline
+In-Reply-To: <20230203-dt-bindings-network-class-v2-1-499686795073-w2YMFpIX6D+sTnJN9+BGXg@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Mailing List <devicetree-spec@vger.kernel.org>, Kalle Valo <kvalo@kernel.org>, van Spriel <arend@broadcom.com>, =?utf-8?q?J=C3=A9r=C3=B4me_Pouiller?= <jerome.pouiller@silabs.com>, Dinh Nguyen <dinguyen@kernel.org>, Ley Foon Tan <lftan@altera.com>, Chee Nouk Phoon <cnphoon@altera.com>
-Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org, Janne Grunau <j@jannau.net>
+Content-Transfer-Encoding: 7bit
+To: Janne Grunau <j@jannau.net>
+Cc: "David S. Miller" <davem-fT/PcQaiUtIeIZ0/mPfg9Q@public.gmane.org>, Eric Dumazet <edumazet-hpIqsD4AKlfQT0dZR+AlfA@public.gmane.org>, Jakub Kicinski <kuba-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Paolo Abeni <pabeni-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Kalle Valo <kvalo-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, van Spriel <arend-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>, =?iso-8859-1?B?Suly9G1l?= Pouiller <jerome.pouiller-S6d6foEdJf7QT0dZR+AlfA@public.gmane.org>, Dinh Nguyen <dinguyen-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Ley Foon Tan <lftan-EIB2kfCEclfQT0dZR+AlfA@public.gmane.org>, Chee Nouk Phoon <cnphoon-EIB2kfCEclfQT0dZR+AlfA@public.gmane.org>, netdev-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-wireless-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-The Devicetree Specification, Release v0.3 specifies in section 4.3.1
-a "Network Class Binding". This covers MAC address and maximal frame
-size properties. "local-mac-address" and "mac-address" with a fixed
-"address-size" of 48 bits are already in the ethernet-controller.yaml
-schema so move those over.
+> +  max-frame-size:
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    description:
+> +      Maximum transfer unit (IEEE defined MTU).
 
-Keep "address-size" fixed to 48 bits as it's unclear if network protocols
-using 64-bit mac addresses like ZigBee, 6LoWPAN and others are relevant for
-this binding. This allows mac address array size validation for ethernet
-and wireless lan devices.
+Do you have a reference you can include here to a clause in an IEEE
+802 document? We need this unambiguously defined otherwise more DT
+blobs are going to use the wrong value.
 
-"max-frame-size" in the Devicetree Specification is written to cover the
-whole layer 2 ethernet frame but actual use for this property is the
-payload size. Keep the description from ethernet-controller.yaml which
-specifies the property as MTU.
-
-Signed-off-by: Janne Grunau <j@jannau.net>
----
-Changes in v2:
-- Added "max-frame-size" with the description from ethernet-controller.yaml
-- Restrict "address-size" to 48-bits
-- Fix the mac-address array size to 6 bytes
-- Drop duplicate default value from "max-frame-size" description
-- Fix 2 nios2 dts files which incorrectly use the ethernet frame size of 1518
-- Link to v1: https://lore.kernel.org/r/20230203-dt-bindings-network-class-v1-0-452e0375200d@jannau.net
-
----
-Janne Grunau (4):
-      dt-bindings: net: Add network-class schema for mac-address properties
-      dt-bindings: wireless: bcm4329-fmac: Use network-class.yaml schema
-      dt-bindings: wireless: silabs,wfx: Use network-class.yaml
-      nios2: dts: Fix tse_mac "max-frame-size" property
-
- .../bindings/net/ethernet-controller.yaml          | 25 +-----------
- .../devicetree/bindings/net/network-class.yaml     | 44 ++++++++++++++++++++++
- .../bindings/net/wireless/brcm,bcm4329-fmac.yaml   |  5 ++-
- .../bindings/net/wireless/silabs,wfx.yaml          |  5 +--
- arch/nios2/boot/dts/10m50_devboard.dts             |  2 +-
- arch/nios2/boot/dts/3c120_devboard.dts             |  2 +-
- 6 files changed, 52 insertions(+), 31 deletions(-)
----
-base-commit: 1b929c02afd37871d5afb9d498426f83432e71c2
-change-id: 20230203-dt-bindings-network-class-8367edd679d2
-
-Best regards,
--- 
-Janne Grunau <j@jannau.net>
-
+      Andrew
