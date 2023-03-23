@@ -1,33 +1,66 @@
-From: Jakub Kicinski <kuba-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [PATCH v2 0/4] dt-bindings: net: Add network-class.yaml schema
-Date: Mon, 20 Feb 2023 14:02:01 -0800
-Message-ID: <20230220140201.20450889@kernel.org>
-References: <20230203-dt-bindings-network-class-v2-0-499686795073@jannau.net>
-        <20230220114016.71628270@kernel.org>
-        <CAL_Jsq+2_gQzAjAZQVux1GOff5ocdSz5qQMhjRzvtyD+9C-TQQ@mail.gmail.com>
+From: Serge Semin <Sergey.Semin-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>
+Subject: [PATCH] meta-schemas: Allow 'not' keyword
+Date: Thu, 23 Mar 2023 18:09:47 +0300
+Message-ID: <20230323150947.947-1-Sergey.Semin@baikalelectronics.ru>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1676930523;
-        bh=fQRoiH/vfT+YhxHdQBo3IjRJtBv45VLnzgTpqQ2GMnY=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=ktZMNexkwbQT7SSP4qmLKo8Uvlirzq4lFcth9KK5SGKvDKCcvZDxPyAWicz0jb+qp
-         2Xs1MYD2YHUHUvHDDxuYSrbKfvvz0baUTb/A51kevnKuvdUw/HMTT8UspZVONCOAEK
-         M1vEVzt/sJ7RZ5/w/SEKo02Z9sdhqRT3C7TmNhWX6ScUwa/8+bPuva1AXSLLtb9YDl
-         Zezp7qA6+jG2r2Ml1zOA6ENCb1Qe+T1yM80YYHmjnEVhdhypUJd+SzJkJThC8+qaBr
-         KMxMrLjO51IH3JsJUtWJ2FKSTY0nglSR9vbNaVvvgjvk+lXVSBHFooFxgFrjEpQp4P
-         qrI242eJkucqA==
-In-Reply-To: <CAL_Jsq+2_gQzAjAZQVux1GOff5ocdSz5qQMhjRzvtyD+9C-TQQ-JsoAwUIsXosN+BqQ9rBEUg@public.gmane.org>
+Content-Transfer-Encoding: 8bit
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        baikalelectronics.ru; h=cc:cc:content-transfer-encoding
+        :content-type:content-type:date:from:from:message-id
+        :mime-version:reply-to:subject:subject:to:to; s=post; bh=aF+lFCa
+        CJ1EkuIJXyiQSJlqA7NWC417mOVvyKrKtFmw=; b=nUKQf1oUcuWZHGAfMMcR6A6
+        IN3Y/NnC8jN1cg9q//3gDpAXFU12w8+azm2bm0JDV3taPwAq4euF+ZzPXlhOJPpU
+        G70aphhLXSIChlO/d52fNFHutotrsp48uVggMzC6YRw+fmMK4a7P6bSKuVnUbXt/
+        Xir++++gYdrHiRfdTztw=
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Cc: Janne Grunau <j@jannau.net>, "David S. Miller" <davem-fT/PcQaiUtIeIZ0/mPfg9Q@public.gmane.org>, Eric Dumazet <edumazet-hpIqsD4AKlfQT0dZR+AlfA@public.gmane.org>, Paolo Abeni <pabeni-H+wXaHxf7aLQT0dZR+AlfA@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Kalle Valo <kvalo-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, van Spriel <arend-dY08KVG/lbpWk0Htik3J/w@public.gmane.org>, =?UTF-8?B?SsOpcsO0bWU=?= Pouiller <jerome.pouiller-S6d6foEdJf7QT0dZR+AlfA@public.gmane.org>, Dinh Nguyen <dinguyen-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Ley Foon Tan <lftan-EIB2kfCEclfQT0dZR+AlfA@public.gmane.org>, Chee Nouk Phoon <cnphoon-EIB2kfCEclfQT0dZR+AlfA@public.gmane.org>, netdev-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-wireless-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Cc: Serge Semin <Sergey.Semin-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>, Serge Semin <fancer.lancer-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Alexey Malahov <Alexey.Malahov-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>, Pavel Parkhomenko <Pavel.Parkhomenko-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-On Mon, 20 Feb 2023 15:49:44 -0600 Rob Herring wrote:
-> > Rob, Krzysztof - is this one on your todo list? It's been hanging
-> > around in my queue, I'm worried I missed some related conversation.  
-> 
-> Andrew suggested changes on 1 and 2 which seem reasonable to me.
+Root- and sub-node schemas are supposed to be allowed to use the 'not'
+keyword directly to express a schema against which the instance isn't
+supposed to be successfully validated. It shall work in the same way as
+the allOf, anyOf, oneOf-based validation except the keyword implies a
+single sub-schema against which an instance will be anti-evaluated.
 
-Ah, thank you! I see them in lore but not in my MUA.
+Signed-off-by: Serge Semin <Sergey.Semin-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>
+
+---
+
+Please see the next email message for the patch context:
+Link: https://lore.kernel.org/netdev/20230313225103.30512-16-Sergey.Semin-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org
+---
+ dtschema/meta-schemas/base.yaml  | 2 +-
+ dtschema/meta-schemas/nodes.yaml | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/dtschema/meta-schemas/base.yaml b/dtschema/meta-schemas/base.yaml
+index 1dd005c53467..96d0a82febc6 100644
+--- a/dtschema/meta-schemas/base.yaml
++++ b/dtschema/meta-schemas/base.yaml
+@@ -50,7 +50,7 @@ properties:
+ propertyNames:
+   enum: [ $id, $schema, title, description, examples, required, allOf, anyOf, oneOf,
+           definitions, $defs, additionalProperties, dependencies, dependentRequired,
+-          dependentSchemas, patternProperties, properties, if, then, else,
++          dependentSchemas, patternProperties, properties, not, if, then, else,
+           unevaluatedProperties, deprecated, maintainers, select, $ref ]
+ 
+ required:
+diff --git a/dtschema/meta-schemas/nodes.yaml b/dtschema/meta-schemas/nodes.yaml
+index 7568169a7907..0b2c8f750624 100644
+--- a/dtschema/meta-schemas/nodes.yaml
++++ b/dtschema/meta-schemas/nodes.yaml
+@@ -26,6 +26,7 @@ propertyNames:
+     - unevaluatedProperties
+     - deprecated
+     - required
++    - not
+     - allOf
+     - anyOf
+     - oneOf
+-- 
+2.39.2
+
+
