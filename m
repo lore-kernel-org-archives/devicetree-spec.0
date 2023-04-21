@@ -1,100 +1,158 @@
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
-Subject: [RFC PATCH] Describe chosen modules for hypervisor booting
-Date: Fri, 21 Apr 2023 17:40:12 +0100
-Message-ID: <20230421164012.2867267-1-alex.bennee@linaro.org>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: Re: [RFC PATCH] Describe chosen modules for hypervisor booting
+Date: Fri, 21 Apr 2023 14:32:52 -0500
+Message-ID: <CAL_JsqJmtcmsqRB_oiFm-cx8KU-4FgywHxK+qUn=-FvKz1d0xw@mail.gmail.com>
+References: <20230421164012.2867267-1-alex.bennee@linaro.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1682095220; x=1684687220;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=MNLTXgOx38Dp8CuuTcsHh2Nve4qiocWuCSOV/Vr0dUs=;
-        b=FQjihZYs2eD55gKB2aDV/qrE8ZaEaagyhjK7Hn+y544RBxpG7D+eqVFKndOSpGoR2m
-         AfWBiFpH5491ud7voKsONwBZuOKUTdZV9LOHWJQzogj0uPWZEspIHwMuSgvgdeGQsIu2
-         xKyRipK2aGpBerXRRniDE8scUh/bhODCKddWS1j1XwsN45/JCIBU4FeT7jrWsNyqNZlS
-         NHhu4z7cchpNi9Zb66DNjChPTXRC0ITKMo2UhUJNOCqQZK/ZQx0lcPbrTLXCzmT5zmDt
-         lUUP2aiCNiF/ETOThffHTOL3AP7PFrmluRRaHh/mC3jcWgFDo0/e+rWluxkdwzxZ2Mhi
-         2V1w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1682105584;
+        bh=pXkjE1u7CFcM0xiEw9b1NDf7e9x1trafwdAdlMYb7f8=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=ZFUqeZ5Ug8gVKAtuUtD636AIfd7E+t8k1wpNScpZwaKQefq1j2y6dFbdiYT/6s4Uc
+         I1xA56ffO31OHNI5sfTvXjrye5b4Bfuho9lFw0VI4KxJQ0ixzNFhQ3jbNo0hjs3T9C
+         w0N7ONLITS04E0Gmjb3svIvPKBV8YaREA0K/47elONYQZscgm0IgnQ4EGf2TySJbBd
+         /UpOotJzdUUhx1+Q3KppMwsoqooTCXFQ0vPiBHnTLZfH1WNZTohvqgjX4fcDV7hMHF
+         r+KR6IQG2rVkv6Iyun3Pdu/7zXNyiCCT1RBwi+WiPVbiVA9fFEESD8o/oLlj1JzGPa
+         qoA75Q+4TJd8g==
+In-Reply-To: <20230421164012.2867267-1-alex.bennee-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="macroman"
-To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
-Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Julien Grall <julien-LM2mM/qkH7s@public.gmane.org>, Stefano Stabellini <sstabellini-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Carl van Schaik <cvanscha-Rm6X0d1/PG5y9aJCnZT0Uw@public.gmane.org>
+Content-Type: text/plain; charset="utf-8"
+To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Cc: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Julien Grall <julien-LM2mM/qkH7s@public.gmane.org>, Stefano Stabellini <sstabellini-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Carl van Schaik <cvanscha-Rm6X0d1/PG5y9aJCnZT0Uw@public.gmane.org>
 
-V2hlbiBib290aW5nIHNvbWV0aGluZyBsaWtlIGEgaHlwZXJ2aXNvciB0aGVyZSBpcyBuZWVkIHRv
-IGNvbW11bmljYXRlCnRvIGl0IGhvdyB0aGUgZmlyc3QgZ3Vlc3Qgd2lsbCBiZSBsb2FkZWQuIFR5
-cGljYWxseSB0aGUgZmlybXdhcmUgb3IKYm9vdCBsb2FkZXIgd2lsbCBwdXQgdGhlIGtlcm5lbCBh
-bmQgcmFtZGlzayBpbiBtZW1vcnkgYW5kIHBhc3MgdGhlCmluZm9ybWF0aW9uIHRvIHRoZSBoeXBl
-cnZpc29ycyBib290IGNvZGUuIFRoaXMgbWVjaGFuaXNtIGN1cnJlbnRseQp3b3JrcyB3aXRoIFhl
-biBvbiB0aGUgQXJtIHBsYXRmb3JtIGFuZCB3b3VsZCBiZSBlcXVhbGx5IGFwcGxpY2FibGUgdG8K
-b3RoZXIgc3VjaCBoeXBlcnZpc29ycy4KCkhvd2V2ZXIgdGhpcyBzcGVjaWZpY2F0aW9uIGRvZXNu
-J3QgYWRkcmVzcyB0aGUgbmVlZHMgb2YgYSBkb20wbGVzcwpzeXN0ZW0gKHdoZXJlIHRoZXJlIGlz
-IG5vICJyb290IiBndWVzdCB0byBsYXVuY2ggdGhlIG90aGVycykgc28gaXMKY3VycmVudGx5IHZl
-cnkgbXVjaCBhbiBSRkMuCgpTaWduZWQtb2ZmLWJ5OiBBbGV4IEJlbm7DqWUgPGFsZXguYmVubmVl
-LVFTRWo1RllRaG00ZG5tK3lST2ZFMEFAcHVibGljLmdtYW5lLm9yZz4KQ2M6IEp1bGllbiBHcmFs
-bCA8anVsaWVuLUxNMm1NL3FrSDdzQHB1YmxpYy5nbWFuZS5vcmc+CkNjOiBTdGVmYW5vIFN0YWJl
-bGxpbmkgPHNzdGFiZWxsaW5pLURnRWpUK0FpMnlnZG5tK3lST2ZFMEFAcHVibGljLmdtYW5lLm9y
-Zz4KQ2M6IENhcmwgdmFuIFNjaGFpayA8Y3ZhbnNjaGEtUm02WDBkMS9QRzV5OWFKQ25aVDBVd0Bw
-dWJsaWMuZ21hbmUub3JnPgotLS0KIHNvdXJjZS9jaGFwdGVyMy1kZXZpY2Vub2Rlcy5yc3QgfCA1
-NSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKIDEgZmlsZSBjaGFuZ2VkLCA1NSBp
-bnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvc291cmNlL2NoYXB0ZXIzLWRldmljZW5vZGVzLnJz
-dCBiL3NvdXJjZS9jaGFwdGVyMy1kZXZpY2Vub2Rlcy5yc3QKaW5kZXggOTU4MjU3ZS4uM2MwMjFh
-NCAxMDA2NDQKLS0tIGEvc291cmNlL2NoYXB0ZXIzLWRldmljZW5vZGVzLnJzdAorKysgYi9zb3Vy
-Y2UvY2hhcHRlcjMtZGV2aWNlbm9kZXMucnN0CkBAIC00ODgsNiArNDg4LDYxIEBAIEZvciBjb21w
-YXRpYmlsaXR5LCBhIGNsaWVudCBwcm9ncmFtIG1pZ2h0IHdhbnQgdG8gc3VwcG9ydAogKmxpbnV4
-LHN0ZG91dC1wYXRoKiBpZiBhICpzdGRvdXQtcGF0aCogcHJvcGVydHkgaXMgbm90IHByZXNlbnQu
-IFRoZSBtZWFuaW5nCiBhbmQgdXNlIG9mIHRoZSB0d28gcHJvcGVydGllcyBpcyBpZGVudGljYWwu
-CiAKK2BgY2hvc2VuYGAgbW9kdWxlcworfn5+fn5+fn5+fn5+fn5+fn5+CisKK0luIGEgbXVsdGkt
-c3RhZ2UgYm9vdCwgZm9yIGV4YW1wbGUgYm9vdGluZyBhIGh5cGVydmlzb3IgZGlyZWN0bHksIHRo
-ZQorZmlybXdhcmUgbWF5IG5lZWQgdG8gZGVzY3JpYmUgd2hlcmUgdGhlIGJvb3Rpbmcgc3RhZ2Ug
-Y2FuIGZpbmQgdGhlCituZXh0IGJpdCBvZiBzb2Z0d2FyZS4gVGhlc2UgYXJlIGRlc2NyaWJlZCB3
-aXRoIG9uZSBvciBtb3JlIGBgbW9kdWxlYGAKK25vZGVzIHdoaWNoIGRlc2NyaWJlIHdoZXJlIGlu
-IG1lbW9yeSB0aGUgbW9kdWxlIGNhbiBiZSBmb3VuZCBhbmQgaG93Cit0byBib290IGl0LiBUaGUg
-YGBtb2R1bGVgYCBub2RlcyBzaG91bGQgYmUgZmlsdGVyZWQgb3V0IGZyb20gdGhlIERUCitwYXNz
-ZWQgdG8gdGhlIG5leHQgc3RhZ2UuCisKKy4uIHRhYnVsYXJjb2x1bW5zOjogfCBwezRjbX0gcHsw
-Ljc1Y219IHB7NGNtfSBwezYuNWNtfSB8CisuLiB0YWJsZTo6IGBgL2Nob3Nlbi9tb2R1bGVgYCBO
-b2RlIFByb3BlcnRpZXMKKworICAgPT09PT09PT09PT09PT09PT09PT09PT0gPT09PT0gPT09PT09
-PT09PT09PT09PT09PT09ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09CisgICBQcm9wZXJ0eSBOYW1lICAgICAgICAgICBVc2FnZSBWYWx1ZSBUeXBlICAgICAg
-ICAgICAgRGVmaW5pdGlvbgorICAgPT09PT09PT09PT09PT09PT09PT09PT0gPT09PT0gPT09PT09
-PT09PT09PT09PT09PT09ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09CisgICBgYGJvb3RhcmdzYGAgICAgICAgICAgICBPICAgICBgYDxzdHJpbmc+YGAgICAg
-ICAgICAgQSBzdHJpbmcgdGhhdCBzcGVjaWZpZXMgdGhlIGJvb3QgYXJndW1lbnRzIGZvcgorICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRoZSBj
-bGllbnQgcHJvZ3JhbS4gVGhlIHZhbHVlIGNvdWxkCisgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcG90ZW50aWFsbHkgYmUgYSBudWxsIHN0cmlu
-ZyBpZiBubyBib290CisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgYXJndW1lbnRzIGFyZSByZXF1aXJlZC4KKyAgIGBgY29tcGF0aWJsZWBgICAg
-ICAgICAgIE9SICAgIGBgPHN0cmluZz5gYCAgICAgICAgICBEZXNjcmliZXMgdGhlIG1vZHVsZSwg
-bWF5IGNvbnRhaW4gdGhlIGZvbGxvd2luZworICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHN0cmluZ3M6CisKKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAtIGBgbXVsdGlib290LGtlcm5lbGBg
-OiBUaGlzIGluZGljYXRlcyB0aGUKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIG1vZHVsZSBpcyBhIG11bHRpYm9vdCBjb21wYXRpYmxlCisg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBr
-ZXJuZWwgaW1hZ2UKKworICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIC0gYGBtdWx0aWJvb3QscmFtZGlza2BgOgorICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgVGhpcyBpbmRpY2F0ZXMgdGhl
-IG1vZHVsZSBpcyBhIHJhbWRpc2sKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGltYWdlLiBLZXJuZWxzIGNvbmZpcm1pbmcgdG8gdGhlCisg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBt
-dWx0aWJvb3Qgc3BlYyB3aWxsIGV4cGVjdCB0byBiZQorICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcG9pbnRlZCB0byB0aGUgcmFtZGlzayBh
-cyBwYXJ0IG9mCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICB0aGUgYm9vdCBpbmZvcm1hdGlvbgorICAgVXNhZ2UgbGVnZW5kOiBSPVJlcXVp
-cmVkLCBPPU9wdGlvbmFsLCBPUj1PcHRpb25hbCBidXQgUmVjb21tZW5kZWQsIFNEPVNlZSBEZWZp
-bml0aW9uCisgICA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KKwor
-KipFeGFtcGxlKioKKworLi4gY29kZS1ibG9jazo6IGR0cworCisgICAgY2hvc2VuIHsKKyAgICAg
-ICAgICAgIGJvb3RhcmdzID0gImRvbTBfbWVtPTEyOE0gbG9nbHZsPWFsbCBndWVzdF9sb2dsdmw9
-YWxsIjsKKyAgICAgICAgICAgIHN0ZG91dC1wYXRoID0gIi9wbDAxMUA5MDAwMDAwIjsKKworICAg
-ICAgICAgICAgbW9kdWxlQDB4NDcwMDAwMDAgeworICAgICAgICAgICAgICAgICAgICBib290YXJn
-cyA9ICJjb25zb2xlPWh2YzAiOworICAgICAgICAgICAgICAgICAgICBjb21wYXRpYmxlID0gIm11
-bHRpYm9vdCxtb2R1bGVcMG11bHRpYm9vdCxrZXJuZWwiOworICAgICAgICAgICAgICAgICAgICBy
-ZWcgPSA8MHgwMCAweDQ3MDAwMDAwIDB4MDAgMHhlNDdhMDA+OworICAgICAgICAgICAgfTsKKyAg
-ICB9OworCitJbiB0aGlzIGV4YW1wbGUgdGhlIHJvb3QgYm9vdGFyZ3MgYXJlIHBhc3NlZCB0byB0
-aGUgZmlyc3Qgc3RhZ2UgYW5kCitjb25maWd1cmUgdGhlIGh5cGVydmlzb3Igd2l0aCB0aGUgbW9k
-dWxlIGJlaW5nIGEga2VybmVsIGltYWdlIHRoYXQgdGhlCitoeXBlcnZpc29yIHdpbGwgYm9vdCB3
-aXRoIHNwZWNpZmljIGFyZ3VtZW50cyBmb3IgdGhlIGd1ZXN0cyBrZXJuZWwuCisKIGBgL2NwdXNg
-YCBOb2RlIFByb3BlcnRpZXMKIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIAotLSAKMi4zOS4y
-Cgo=
+On Fri, Apr 21, 2023 at 11:40=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@lina=
+ro.org> wrote:
+>
+> When booting something like a hypervisor there is need to communicate
+> to it how the first guest will be loaded. Typically the firmware or
+> boot loader will put the kernel and ramdisk in memory and pass the
+> information to the hypervisors boot code. This mechanism currently
+> works with Xen on the Arm platform and would be equally applicable to
+> other such hypervisors.
+
+This is probably something to discuss on the boot-architecture list.
+
+>
+> However this specification doesn't address the needs of a dom0less
+> system (where there is no "root" guest to launch the others) so is
+> currently very much an RFC.
+
+In the end, whatever you want to add will need a DT schema. Really,
+just a schema would be fine. Much of /chosen is not in the spec.
+
+> Signed-off-by: Alex Benn=C3=A9e <alex.bennee-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+> Cc: Julien Grall <julien-LM2mM/qkH7s@public.gmane.org>
+> Cc: Stefano Stabellini <sstabellini-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+> Cc: Carl van Schaik <cvanscha-Rm6X0d1/PG5y9aJCnZT0Uw@public.gmane.org>
+> ---
+>  source/chapter3-devicenodes.rst | 55 +++++++++++++++++++++++++++++++++
+>  1 file changed, 55 insertions(+)
+>
+> diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenode=
+s.rst
+> index 958257e..3c021a4 100644
+> --- a/source/chapter3-devicenodes.rst
+> +++ b/source/chapter3-devicenodes.rst
+> @@ -488,6 +488,61 @@ For compatibility, a client program might want to su=
+pport
+>  *linux,stdout-path* if a *stdout-path* property is not present. The mean=
+ing
+>  and use of the two properties is identical.
+>
+> +``chosen`` modules
+> +~~~~~~~~~~~~~~~~~~
+> +
+> +In a multi-stage boot, for example booting a hypervisor directly, the
+> +firmware may need to describe where the booting stage can find the
+> +next bit of software. These are described with one or more ``module``
+> +nodes which describe where in memory the module can be found and how
+> +to boot it. The ``module`` nodes should be filtered out from the DT
+> +passed to the next stage.
+
+I think 'image' would be a bit clearer than 'module'.
+
+> +
+> +.. tabularcolumns:: | p{4cm} p{0.75cm} p{4cm} p{6.5cm} |
+> +.. table:: ``/chosen/module`` Node Properties
+> +
+> +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+ =3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +   Property Name           Usage Value Type            Definition
+> +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+ =3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +   ``bootargs``            O     ``<string>``          A string that spe=
+cifies the boot arguments for
+> +                                                       the client progra=
+m. The value could
+> +                                                       potentially be a =
+null string if no boot
+> +                                                       arguments are req=
+uired.
+> +   ``compatible``          OR    ``<string>``          Describes the mod=
+ule, may contain the following
+> +                                                       strings:
+> +
+> +                                                       - ``multiboot,ker=
+nel``: This indicates the
+> +                                                         module is a mul=
+tiboot compatible
+> +                                                         kernel image
+
+What does "multiboot compatible" mean?
+
+> +
+> +                                                       - ``multiboot,ram=
+disk``:
+> +                                                         This indicates =
+the module is a ramdisk
+> +                                                         image. Kernels =
+confirming to the
+> +                                                         multiboot spec =
+will expect to be
+> +                                                         pointed to the =
+ramdisk as part of
+> +                                                         the boot inform=
+ation
+
+Why don't the existing initrd properties work?
+
+> +   Usage legend: R=3DRequired, O=3DOptional, OR=3DOptional but Recommend=
+ed, SD=3DSee Definition
+> +   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+> +
+> +**Example**
+> +
+> +.. code-block:: dts
+> +
+> +    chosen {
+> +            bootargs =3D "dom0_mem=3D128M loglvl=3Dall guest_loglvl=3Dal=
+l";
+> +            stdout-path =3D "/pl011@9000000";
+> +
+> +            module@0x47000000 {
+> +                    bootargs =3D "console=3Dhvc0";
+> +                    compatible =3D "multiboot,module\0multiboot,kernel";
+> +                    reg =3D <0x00 0x47000000 0x00 0xe47a00>;
+> +            };
+> +    };
+> +
+> +In this example the root bootargs are passed to the first stage and
+> +configure the hypervisor with the module being a kernel image that the
+> +hypervisor will boot with specific arguments for the guests kernel.
+> +
+>  ``/cpus`` Node Properties
+>  -------------------------
+>
+> --
+> 2.39.2
+>
