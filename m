@@ -1,46 +1,100 @@
-From: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
-Subject: Re: [PATCH] meta-schemas: Allow 'not' keyword
-Date: Thu, 23 Mar 2023 11:13:21 -0500
-Message-ID: <CAL_Jsq+nSSMSuOqRzfBiNL4LkxCpcuuNRMOHLeF_LoMO8EYH6w@mail.gmail.com>
-References: <20230323150947.947-1-Sergey.Semin@baikalelectronics.ru>
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>
+Subject: [RFC PATCH] Describe chosen modules for hypervisor booting
+Date: Fri, 21 Apr 2023 17:40:12 +0100
+Message-ID: <20230421164012.2867267-1-alex.bennee@linaro.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
 Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1679588014;
-        bh=5p5jko5qjoF+tKuSX7AnTA3OpiS7U0Mmzwp1aEbFZkE=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=PEr+h6MogRMQdBM8/UuyikzM2Wn02gGt/DZun3TJ0nwwk74VV0aSYB8zzR4MXfqar
-         1nTzMqK0SWF++bCYE2ufXYqPC7TBUmcSU85zgfozLIHQZ73hViP4Kr9MniO/g3PdQN
-         5S2a10XzahIHRkyd999V3NMnxHNtN3egknrrW2lncVtZJ01rns8Zzq1QN6IJIMJoya
-         SyjbqVfaT7QibgVVq9qBJhApK8NIWJ/tG8HTds5mljl6LjA71An//x4yPVvZhe/wDH
-         SrVKpFn1tSRZ3ftY8T+WPmFk2i8ub6ViNmIndEzcDzW0Vfhdlz/BnZvjbEH0zfjNVn
-         DjEmWcDeQKMbg==
-In-Reply-To: <20230323150947.947-1-Sergey.Semin-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1682095220; x=1684687220;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=MNLTXgOx38Dp8CuuTcsHh2Nve4qiocWuCSOV/Vr0dUs=;
+        b=FQjihZYs2eD55gKB2aDV/qrE8ZaEaagyhjK7Hn+y544RBxpG7D+eqVFKndOSpGoR2m
+         AfWBiFpH5491ud7voKsONwBZuOKUTdZV9LOHWJQzogj0uPWZEspIHwMuSgvgdeGQsIu2
+         xKyRipK2aGpBerXRRniDE8scUh/bhODCKddWS1j1XwsN45/JCIBU4FeT7jrWsNyqNZlS
+         NHhu4z7cchpNi9Zb66DNjChPTXRC0ITKMo2UhUJNOCqQZK/ZQx0lcPbrTLXCzmT5zmDt
+         lUUP2aiCNiF/ETOThffHTOL3AP7PFrmluRRaHh/mC3jcWgFDo0/e+rWluxkdwzxZ2Mhi
+         2V1w==
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="windows-1252"
-To: Serge Semin <Sergey.Semin-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Serge Semin <fancer.lancer-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Alexey Malahov <Alexey.Malahov-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>, Pavel Parkhomenko <Pavel.Parkhomenko-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Content-Type: text/plain; charset="macroman"
+To: devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
+Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Julien Grall <julien-LM2mM/qkH7s@public.gmane.org>, Stefano Stabellini <sstabellini-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Carl van Schaik <cvanscha-Rm6X0d1/PG5y9aJCnZT0Uw@public.gmane.org>
 
-On Thu, Mar 23, 2023 at 10:12=E2=80=AFAM Serge Semin
-<Sergey.Semin-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org> wrote:
->
-> Root- and sub-node schemas are supposed to be allowed to use the 'not'
-> keyword directly to express a schema against which the instance isn't
-> supposed to be successfully validated. It shall work in the same way as
-> the allOf, anyOf, oneOf-based validation except the keyword implies a
-> single sub-schema against which an instance will be anti-evaluated.
->
-> Signed-off-by: Serge Semin <Sergey.Semin-UN2wsyeM1qLJ45LvJ/SUn8gurn75+9Lz@public.gmane.org>
->
-> ---
->
-> Please see the next email message for the patch context:
-> Link: https://lore.kernel.org/netdev/20230313225103.30512-16-Sergey.Semin=
-@baikalelectronics.ru
-> ---
->  dtschema/meta-schemas/base.yaml  | 2 +-
->  dtschema/meta-schemas/nodes.yaml | 1 +
->  2 files changed, 2 insertions(+), 1 deletion(-)
-
-Applied, thanks.
+V2hlbiBib290aW5nIHNvbWV0aGluZyBsaWtlIGEgaHlwZXJ2aXNvciB0aGVyZSBpcyBuZWVkIHRv
+IGNvbW11bmljYXRlCnRvIGl0IGhvdyB0aGUgZmlyc3QgZ3Vlc3Qgd2lsbCBiZSBsb2FkZWQuIFR5
+cGljYWxseSB0aGUgZmlybXdhcmUgb3IKYm9vdCBsb2FkZXIgd2lsbCBwdXQgdGhlIGtlcm5lbCBh
+bmQgcmFtZGlzayBpbiBtZW1vcnkgYW5kIHBhc3MgdGhlCmluZm9ybWF0aW9uIHRvIHRoZSBoeXBl
+cnZpc29ycyBib290IGNvZGUuIFRoaXMgbWVjaGFuaXNtIGN1cnJlbnRseQp3b3JrcyB3aXRoIFhl
+biBvbiB0aGUgQXJtIHBsYXRmb3JtIGFuZCB3b3VsZCBiZSBlcXVhbGx5IGFwcGxpY2FibGUgdG8K
+b3RoZXIgc3VjaCBoeXBlcnZpc29ycy4KCkhvd2V2ZXIgdGhpcyBzcGVjaWZpY2F0aW9uIGRvZXNu
+J3QgYWRkcmVzcyB0aGUgbmVlZHMgb2YgYSBkb20wbGVzcwpzeXN0ZW0gKHdoZXJlIHRoZXJlIGlz
+IG5vICJyb290IiBndWVzdCB0byBsYXVuY2ggdGhlIG90aGVycykgc28gaXMKY3VycmVudGx5IHZl
+cnkgbXVjaCBhbiBSRkMuCgpTaWduZWQtb2ZmLWJ5OiBBbGV4IEJlbm7DqWUgPGFsZXguYmVubmVl
+LVFTRWo1RllRaG00ZG5tK3lST2ZFMEFAcHVibGljLmdtYW5lLm9yZz4KQ2M6IEp1bGllbiBHcmFs
+bCA8anVsaWVuLUxNMm1NL3FrSDdzQHB1YmxpYy5nbWFuZS5vcmc+CkNjOiBTdGVmYW5vIFN0YWJl
+bGxpbmkgPHNzdGFiZWxsaW5pLURnRWpUK0FpMnlnZG5tK3lST2ZFMEFAcHVibGljLmdtYW5lLm9y
+Zz4KQ2M6IENhcmwgdmFuIFNjaGFpayA8Y3ZhbnNjaGEtUm02WDBkMS9QRzV5OWFKQ25aVDBVd0Bw
+dWJsaWMuZ21hbmUub3JnPgotLS0KIHNvdXJjZS9jaGFwdGVyMy1kZXZpY2Vub2Rlcy5yc3QgfCA1
+NSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKIDEgZmlsZSBjaGFuZ2VkLCA1NSBp
+bnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvc291cmNlL2NoYXB0ZXIzLWRldmljZW5vZGVzLnJz
+dCBiL3NvdXJjZS9jaGFwdGVyMy1kZXZpY2Vub2Rlcy5yc3QKaW5kZXggOTU4MjU3ZS4uM2MwMjFh
+NCAxMDA2NDQKLS0tIGEvc291cmNlL2NoYXB0ZXIzLWRldmljZW5vZGVzLnJzdAorKysgYi9zb3Vy
+Y2UvY2hhcHRlcjMtZGV2aWNlbm9kZXMucnN0CkBAIC00ODgsNiArNDg4LDYxIEBAIEZvciBjb21w
+YXRpYmlsaXR5LCBhIGNsaWVudCBwcm9ncmFtIG1pZ2h0IHdhbnQgdG8gc3VwcG9ydAogKmxpbnV4
+LHN0ZG91dC1wYXRoKiBpZiBhICpzdGRvdXQtcGF0aCogcHJvcGVydHkgaXMgbm90IHByZXNlbnQu
+IFRoZSBtZWFuaW5nCiBhbmQgdXNlIG9mIHRoZSB0d28gcHJvcGVydGllcyBpcyBpZGVudGljYWwu
+CiAKK2BgY2hvc2VuYGAgbW9kdWxlcworfn5+fn5+fn5+fn5+fn5+fn5+CisKK0luIGEgbXVsdGkt
+c3RhZ2UgYm9vdCwgZm9yIGV4YW1wbGUgYm9vdGluZyBhIGh5cGVydmlzb3IgZGlyZWN0bHksIHRo
+ZQorZmlybXdhcmUgbWF5IG5lZWQgdG8gZGVzY3JpYmUgd2hlcmUgdGhlIGJvb3Rpbmcgc3RhZ2Ug
+Y2FuIGZpbmQgdGhlCituZXh0IGJpdCBvZiBzb2Z0d2FyZS4gVGhlc2UgYXJlIGRlc2NyaWJlZCB3
+aXRoIG9uZSBvciBtb3JlIGBgbW9kdWxlYGAKK25vZGVzIHdoaWNoIGRlc2NyaWJlIHdoZXJlIGlu
+IG1lbW9yeSB0aGUgbW9kdWxlIGNhbiBiZSBmb3VuZCBhbmQgaG93Cit0byBib290IGl0LiBUaGUg
+YGBtb2R1bGVgYCBub2RlcyBzaG91bGQgYmUgZmlsdGVyZWQgb3V0IGZyb20gdGhlIERUCitwYXNz
+ZWQgdG8gdGhlIG5leHQgc3RhZ2UuCisKKy4uIHRhYnVsYXJjb2x1bW5zOjogfCBwezRjbX0gcHsw
+Ljc1Y219IHB7NGNtfSBwezYuNWNtfSB8CisuLiB0YWJsZTo6IGBgL2Nob3Nlbi9tb2R1bGVgYCBO
+b2RlIFByb3BlcnRpZXMKKworICAgPT09PT09PT09PT09PT09PT09PT09PT0gPT09PT0gPT09PT09
+PT09PT09PT09PT09PT09ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09CisgICBQcm9wZXJ0eSBOYW1lICAgICAgICAgICBVc2FnZSBWYWx1ZSBUeXBlICAgICAg
+ICAgICAgRGVmaW5pdGlvbgorICAgPT09PT09PT09PT09PT09PT09PT09PT0gPT09PT0gPT09PT09
+PT09PT09PT09PT09PT09ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09CisgICBgYGJvb3RhcmdzYGAgICAgICAgICAgICBPICAgICBgYDxzdHJpbmc+YGAgICAg
+ICAgICAgQSBzdHJpbmcgdGhhdCBzcGVjaWZpZXMgdGhlIGJvb3QgYXJndW1lbnRzIGZvcgorICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRoZSBj
+bGllbnQgcHJvZ3JhbS4gVGhlIHZhbHVlIGNvdWxkCisgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcG90ZW50aWFsbHkgYmUgYSBudWxsIHN0cmlu
+ZyBpZiBubyBib290CisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgYXJndW1lbnRzIGFyZSByZXF1aXJlZC4KKyAgIGBgY29tcGF0aWJsZWBgICAg
+ICAgICAgIE9SICAgIGBgPHN0cmluZz5gYCAgICAgICAgICBEZXNjcmliZXMgdGhlIG1vZHVsZSwg
+bWF5IGNvbnRhaW4gdGhlIGZvbGxvd2luZworICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHN0cmluZ3M6CisKKyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAtIGBgbXVsdGlib290LGtlcm5lbGBg
+OiBUaGlzIGluZGljYXRlcyB0aGUKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIG1vZHVsZSBpcyBhIG11bHRpYm9vdCBjb21wYXRpYmxlCisg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBr
+ZXJuZWwgaW1hZ2UKKworICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIC0gYGBtdWx0aWJvb3QscmFtZGlza2BgOgorICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgVGhpcyBpbmRpY2F0ZXMgdGhl
+IG1vZHVsZSBpcyBhIHJhbWRpc2sKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGltYWdlLiBLZXJuZWxzIGNvbmZpcm1pbmcgdG8gdGhlCisg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBt
+dWx0aWJvb3Qgc3BlYyB3aWxsIGV4cGVjdCB0byBiZQorICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcG9pbnRlZCB0byB0aGUgcmFtZGlzayBh
+cyBwYXJ0IG9mCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB0aGUgYm9vdCBpbmZvcm1hdGlvbgorICAgVXNhZ2UgbGVnZW5kOiBSPVJlcXVp
+cmVkLCBPPU9wdGlvbmFsLCBPUj1PcHRpb25hbCBidXQgUmVjb21tZW5kZWQsIFNEPVNlZSBEZWZp
+bml0aW9uCisgICA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KKwor
+KipFeGFtcGxlKioKKworLi4gY29kZS1ibG9jazo6IGR0cworCisgICAgY2hvc2VuIHsKKyAgICAg
+ICAgICAgIGJvb3RhcmdzID0gImRvbTBfbWVtPTEyOE0gbG9nbHZsPWFsbCBndWVzdF9sb2dsdmw9
+YWxsIjsKKyAgICAgICAgICAgIHN0ZG91dC1wYXRoID0gIi9wbDAxMUA5MDAwMDAwIjsKKworICAg
+ICAgICAgICAgbW9kdWxlQDB4NDcwMDAwMDAgeworICAgICAgICAgICAgICAgICAgICBib290YXJn
+cyA9ICJjb25zb2xlPWh2YzAiOworICAgICAgICAgICAgICAgICAgICBjb21wYXRpYmxlID0gIm11
+bHRpYm9vdCxtb2R1bGVcMG11bHRpYm9vdCxrZXJuZWwiOworICAgICAgICAgICAgICAgICAgICBy
+ZWcgPSA8MHgwMCAweDQ3MDAwMDAwIDB4MDAgMHhlNDdhMDA+OworICAgICAgICAgICAgfTsKKyAg
+ICB9OworCitJbiB0aGlzIGV4YW1wbGUgdGhlIHJvb3QgYm9vdGFyZ3MgYXJlIHBhc3NlZCB0byB0
+aGUgZmlyc3Qgc3RhZ2UgYW5kCitjb25maWd1cmUgdGhlIGh5cGVydmlzb3Igd2l0aCB0aGUgbW9k
+dWxlIGJlaW5nIGEga2VybmVsIGltYWdlIHRoYXQgdGhlCitoeXBlcnZpc29yIHdpbGwgYm9vdCB3
+aXRoIHNwZWNpZmljIGFyZ3VtZW50cyBmb3IgdGhlIGd1ZXN0cyBrZXJuZWwuCisKIGBgL2NwdXNg
+YCBOb2RlIFByb3BlcnRpZXMKIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIAotLSAKMi4zOS4y
+Cgo=
