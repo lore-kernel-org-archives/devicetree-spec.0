@@ -1,79 +1,71 @@
 From: Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
-Subject: [PATCH 0/5] of: reserved_mem: Provide more control about
- allocation behavior
-Date: Mon, 15 May 2023 12:12:15 +0200
-Message-ID: <20230510-dt-resv-bottom-up-v1-0-3bf68873dbed@gerhold.net>
+Subject: [PATCH 3/5] of: reserved_mem: Use stable allocation order
+Date: Mon, 15 May 2023 12:12:18 +0200
+Message-ID: <20230510-dt-resv-bottom-up-v1-3-3bf68873dbed@gerhold.net>
+References: <20230510-dt-resv-bottom-up-v1-0-3bf68873dbed@gerhold.net>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1684145543;
+Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1684145544;
     s=strato-dkim-0002; d=gerhold.net;
-    h=Cc:To:Message-Id:Date:Subject:From:Cc:Date:From:Subject:Sender;
-    bh=zv1egBp4VF43Uy3k9TsxyBgv1FbKom8ab/az0E+stOE=;
-    b=imfAJaU/zyCIj2aNmPHz+L0wMpozqF4Kf0qRiMUbyl6cxspTG6BvDfetN7+zUAcgar
-    uW3tBTZGlugGeFhFKTVTgLDoWghi+sGxtr8SmiS2lDvyM/jGJloI76G3+8gBCntHn/Lh
-    4rcSYau61EKSwfLu9NnrNAdb9uD3pHIHx4cbZvywF+tQyyyvGK0BSy+KLelwxxWDTJVY
-    CgznmnZnLpLoaH+Q1uYtdSRn5jlbRyeUWrsvlehe2ttumpSKCMIO+2xyJn9COB0YP2Eb
-    MRIaXIEOk0x5yavD6NNLecKG2Gd3sUFVUT+nlGoG8ptBFKOHk0pReUViYkMr9AX6+mfJ
-    0raA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1684145543;
+    h=Cc:To:In-Reply-To:References:Message-Id:Subject:Date:From:Cc:Date:
+    From:Subject:Sender;
+    bh=DNTC0U3plBj7cthESRLpCld4G4lr+3CgqNixMQWGBow=;
+    b=op7/C51ozPARSOEyrMPwMTrmQQgjf+W/Gx3IIhxw7EY8aDIImpixNrB6PSIS2YAZXY
+    40c5+jU2bqPIKPwlhcf/8ua+4uttvlmm/Z0/UTxvg8f2ViJEY7u0OTzNUk2ZYM57ckr2
+    UxRbDawLu/LFc5R4r0PjCd1MlaX2+ncl70AdCmc6cgIHzC1n4bR1zQUBYlOtAjUHo18d
+    lLO/Zc/p0ewSGPnRhZ1WbvI23htdtVmVzKiodXnNdfdJeK8ro8ttLYam85ebX+6eRD5b
+    jRERkKUE+s13J+91vGLuX9gB7Fh4OL3RJUvznHHi0j5w6JZ0xq2LAkW+UbhSGwojrSUf
+    tW8Q==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1684145544;
     s=strato-dkim-0003; d=gerhold.net;
-    h=Cc:To:Message-Id:Date:Subject:From:Cc:Date:From:Subject:Sender;
-    bh=zv1egBp4VF43Uy3k9TsxyBgv1FbKom8ab/az0E+stOE=;
-    b=73WOrUXfKDQ/beydx/HNIClkP/a39K12oD4b+YJigg6F4OLW1QjxVN6v7Z2a64biwI
-    4ukV4J9P0bsa2OXseuAg==
+    h=Cc:To:In-Reply-To:References:Message-Id:Subject:Date:From:Cc:Date:
+    From:Subject:Sender;
+    bh=DNTC0U3plBj7cthESRLpCld4G4lr+3CgqNixMQWGBow=;
+    b=gMMt+EFdTB5ds3J1kxDXQo7JfoVyAQx2QRs1dmiW5lPRexdNCZs/JQvvOFUBF4781W
+    MEy3TBDkmpRCfTcEnkBQ==
+In-Reply-To: <20230510-dt-resv-bottom-up-v1-0-3bf68873dbed-3XONVrnlUWDR7s880joybQ@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Conor Dooley <conor+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
 Cc: Andy Gross <agross-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Bjorn Andersson <andersson-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Konrad Dybcio <konrad.dybcio-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-arm-msm-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
 
-Provide more control about the allocation behavior for dynamically 
-allocated reserved memory by adding a "alloc-bottom-up" and 
-"alloc-top-down" option and by making the allocation order 
-deterministic.
+sort() in Linux is based on heapsort which is not a stable sort
+algorithm - equal elements are being reordered. For reserved memory in
+the device tree this happens mainly for dynamic allocations: They do not
+have an address to sort with, so they are reordered somewhat randomly
+when adding/removing other unrelated reserved memory nodes.
 
-The motivation for this patch series are the many different reserved 
-firmware regions on Qualcomm platforms. Currently it is often necessary 
-to duplicate them into each board DT, because minor differences for 
-some of the firmware regions (e.g. the firmware size) requires shifting
-the base address of all following firmware regions as well.
+Functionally this is not a big problem, but it's confusing during
+development when all the addresses change after adding unrelated
+reserved memory nodes.
 
-I propose describing the actual requirements (size, alignment, 
-alloc-ranges) instead and allocating the reserved regions at runtime. 
-This allows defining only the actual device-specific part in the board 
-DT and having everything else shared in the SoC.dtsi.
-
-The series starts with two minor additions to the of_reserved_mem code. 
-The last two patches are examples that are meant to show the motivation
-more clearly for the MSM8916 SoC. PATCH 4/5 shows the current (static) 
-approach, then PATCH 5/5 switches to the dynamic allocation based on
-the first 3 patches.
-
-If the first 3 patches are accepted I would send the full MSM8916 DT
-changes in a separate series.
+Make the order stable by sorting dynamic allocations according to
+the node order in the device tree. Static allocations are not affected
+by this because they are still sorted by their (fixed) address.
 
 Signed-off-by: Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
 ---
-Stephan Gerhold (5):
-      dt-bindings: reserved-memory: Add alloc-{bottom-up,top-down}
-      of: reserved_mem: Implement alloc-{bottom-up,top-down}
-      of: reserved_mem: Use stable allocation order
-      [RFC] arm64: dts: qcom: msm8916: Enable modem on two phones
-      [RFC] arm64: dts: qcom: msm8916: Reserve firmware memory dynamically
+ drivers/of/of_reserved_mem.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
- .../bindings/reserved-memory/reserved-memory.yaml  | 39 ++++++++++++++++++++
- arch/arm64/boot/dts/qcom/apq8016-sbc.dts           | 13 +++++++
- .../boot/dts/qcom/msm8916-longcheer-l8150.dts      | 31 ++++++++++++++--
- .../boot/dts/qcom/msm8916-samsung-serranove.dts    | 21 +++++++++++
- arch/arm64/boot/dts/qcom/msm8916-ufi.dtsi          | 29 ++++++++-------
- arch/arm64/boot/dts/qcom/msm8916.dtsi              | 42 ++++++++++++++++------
- drivers/of/of_reserved_mem.c                       | 14 +++++++-
- 7 files changed, 163 insertions(+), 26 deletions(-)
----
-base-commit: 715abedee4cd660ad390659aefa7482f05275bbd
-change-id: 20230510-dt-resv-bottom-up-68d71ff6628f
+diff --git a/drivers/of/of_reserved_mem.c b/drivers/of/of_reserved_mem.c
+index 6443140deacf..f6d14354a534 100644
+--- a/drivers/of/of_reserved_mem.c
++++ b/drivers/of/of_reserved_mem.c
+@@ -224,6 +224,11 @@ static int __init __rmem_cmp(const void *a, const void *b)
+ 	if (ra->size > rb->size)
+ 		return 1;
+ 
++	if (ra->fdt_node < rb->fdt_node)
++		return -1;
++	if (ra->fdt_node > rb->fdt_node)
++		return 1;
++
+ 	return 0;
+ }
+ 
 
-Best regards,
 -- 
-Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
+2.40.1
 
