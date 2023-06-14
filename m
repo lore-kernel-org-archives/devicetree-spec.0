@@ -1,62 +1,71 @@
-From: Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
-Subject: [PATCH v2 0/2] of: reserved_mem: Improve range allocations
-Date: Wed, 14 Jun 2023 21:20:41 +0200
-Message-ID: <20230510-dt-resv-bottom-up-v2-0-aeb2afc8ac25@gerhold.net>
+From: Stephan Gerhold <stephan@gerhold.net>
+Subject: [PATCH v2 2/2] of: reserved_mem: Use stable allocation order
+Date: Wed, 14 Jun 2023 21:20:43 +0200
+Message-ID: <20230510-dt-resv-bottom-up-v2-2-aeb2afc8ac25@gerhold.net>
+References: <20230510-dt-resv-bottom-up-v2-0-aeb2afc8ac25@gerhold.net>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Return-path: <linux-arm-msm-owner@vger.kernel.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1686770450;
     s=strato-dkim-0002; d=gerhold.net;
-    h=Cc:To:Message-Id:Date:Subject:From:Cc:Date:From:Subject:Sender;
-    bh=neT+DUbNGXFd7YKRPRpjpjhGQIXjCgnsy9pZLG/vLm4=;
-    b=X7KvdbOmhGO+0OOTZWBq8HzMelMX9FHmfXUKM6CfQ3t5F/J/VndmrOSTAGVYMgIqe6
-    xUO4SrOnM9Ky1QpPmhosywor8AgUWa0F0H/aCkB8CVzyk0o9uf2Csp7KsGcWB3RZAFIH
-    fX3PbDJRotywZpqrlvFJMUmqJLVuu3C/y6OHQKl5TLC3IN7HW67uhQQIjF9fEDmubRyS
-    DOLUY4U+Hh79fkxCF4eRsW0miUOC6aAOO2ms6vrvWXGmSDMhiL2gHrKBMO+Xexl8CRYW
-    81pfuxYTX/ycWKW15I6Nb2rWeZj0UR/0jvGAAYTUfA6FE4nXvgraH9fG9S4oZMi33jJf
-    r05w==
+    h=Cc:To:In-Reply-To:References:Message-Id:Subject:Date:From:Cc:Date:
+    From:Subject:Sender;
+    bh=UluM9+M229bqxNKRVyMbYxl7B1w1kAZMQitydXUBD28=;
+    b=g7syv8W2y35nAZX50kYrrm3tfoG++XJKz8f5p/rigy3BltRtK4vL5TMuYszF1dwtse
+    RufMsgIOEic/qkcj6bnu/5hJXDfChbQ1YUtMoyNbp5ZbOGjpxd9OkZtet9ivIrGu06eb
+    FAx4KHKGXyBQu369DaIsfZlL1KsfTSfwpA9+UktwehWNVeMpZgOTCEqi4fEyz3yF90gF
+    mn9vzsuG8Lo03aO7gBQTBYwvHyKOqF7znjlsZXi4dMnHw6dLt5YODu/4Ud3sU031qvFM
+    noCiVSW28yZqX/KCbbRKSsYpRfBFcf6wrhB72V2IzBcJFU23AHCT/BNL9KnsEFcQuyrq
+    JBdw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1686770450;
     s=strato-dkim-0003; d=gerhold.net;
-    h=Cc:To:Message-Id:Date:Subject:From:Cc:Date:From:Subject:Sender;
-    bh=neT+DUbNGXFd7YKRPRpjpjhGQIXjCgnsy9pZLG/vLm4=;
-    b=EXiQ/bZ71kQlrQ1nP9Wlb1U+xaTpZLk10kg7vn6/CPmKDd7sflwoq70S0zKMiYgwg1
-    rzIfypzsPp7K0ZYIYHAA==
+    h=Cc:To:In-Reply-To:References:Message-Id:Subject:Date:From:Cc:Date:
+    From:Subject:Sender;
+    bh=UluM9+M229bqxNKRVyMbYxl7B1w1kAZMQitydXUBD28=;
+    b=uujPduChBqw6UvhU+5eAOYzjNxBJui7UDaUDKg+a75Nab4ET2EAVTkP7v98EF9QCQf
+    hOP/8HcWMipJCyuAnwCw==
+In-Reply-To: <20230510-dt-resv-bottom-up-v2-0-aeb2afc8ac25@gerhold.net>
 List-ID: <devicetree-spec.vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
-To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Conor Dooley <conor+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Andy Gross <agross-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Bjorn Andersson <andersson-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Konrad Dybcio <konrad.dybcio-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-arm-msm-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
+To: Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Frank Rowand <frowand.list@gmail.com>
+Cc: Andy Gross <agross@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konrad.dybcio@linaro.org>, devicetree@vger.kernel.org, devicetree-spec@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, Stephan Gerhold <stephan@gerhold.net>
 
-Try to allocate dynamic reserved memory regions with "alloc-ranges" 
-close to other static regions by choosing between allocating them 
-bottom-up or top-down. This keeps the reserved memory regions closer 
-together rather than potentially having them spread all over the RAM.
+sort() in Linux is based on heapsort which is not a stable sort
+algorithm - equal elements are being reordered. For reserved memory in
+the device tree this happens mainly for dynamic allocations: They do not
+have an address to sort with, so they are reordered somewhat randomly
+when adding/removing other unrelated reserved memory nodes.
 
-Also make the allocation order of dynamic reserved memory regions 
-deterministic so it doesn't change randomly when adding unrelated 
-reserved memory regions.
+Functionally this is not a big problem, but it's confusing during
+development when all the addresses change after adding unrelated
+reserved memory nodes.
 
-Signed-off-by: Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
+Make the order stable by sorting dynamic allocations according to
+the node order in the device tree. Static allocations are not affected
+by this because they are still sorted by their (fixed) address.
+
+Signed-off-by: Stephan Gerhold <stephan@gerhold.net>
 ---
-Changes in v2:
-- Drop explicit "allocate-bottom-up"/"allocate-top-down" properties
-  Instead, try to guess in the implementation based on the already 
-  available information in the DT. (Rob)
-- Drop examples that were just included to show the motivation.
-  They are still available on v1 if needed.
-- Link to v1: https://lore.kernel.org/r/20230510-dt-resv-bottom-up-v1-0-3bf68873dbed-3XONVrnlUWDR7s880joybQ@public.gmane.org
+ drivers/of/of_reserved_mem.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
----
-Stephan Gerhold (2):
-      of: reserved_mem: Try to keep range allocations contiguous
-      of: reserved_mem: Use stable allocation order
+diff --git a/drivers/of/of_reserved_mem.c b/drivers/of/of_reserved_mem.c
+index 7f892c3dcc63..7ec94cfcbddb 100644
+--- a/drivers/of/of_reserved_mem.c
++++ b/drivers/of/of_reserved_mem.c
+@@ -268,6 +268,11 @@ static int __init __rmem_cmp(const void *a, const void *b)
+ 	if (ra->size > rb->size)
+ 		return 1;
+ 
++	if (ra->fdt_node < rb->fdt_node)
++		return -1;
++	if (ra->fdt_node > rb->fdt_node)
++		return 1;
++
+ 	return 0;
+ }
+ 
 
- drivers/of/of_reserved_mem.c | 60 ++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 58 insertions(+), 2 deletions(-)
----
-base-commit: b16049b21162bb649cdd8519642a35972b7910fe
-change-id: 20230510-dt-resv-bottom-up-68d71ff6628f
-
-Best regards,
 -- 
-Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
+2.40.1
 
