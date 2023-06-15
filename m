@@ -1,136 +1,96 @@
-From: Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
-Subject: [PATCH v2 1/2] of: reserved_mem: Try to keep range allocations
- contiguous
-Date: Wed, 14 Jun 2023 21:20:42 +0200
-Message-ID: <20230510-dt-resv-bottom-up-v2-1-aeb2afc8ac25@gerhold.net>
-References: <20230510-dt-resv-bottom-up-v2-0-aeb2afc8ac25@gerhold.net>
+From: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: [PATCH] dt-bindings: Remove last usage of "binding" or "schema" in titles
+Date: Thu, 15 Jun 2023 15:31:54 -0600
+Message-ID: <20230615213154.1753313-1-robh@kernel.org>
 Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Return-path: <devicetree-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1686770450;
-    s=strato-dkim-0002; d=gerhold.net;
-    h=Cc:To:In-Reply-To:References:Message-Id:Subject:Date:From:Cc:Date:
-    From:Subject:Sender;
-    bh=LdeZ5ShzM18y4oy4q0pM7ga3Ybusf7cQdOu55GJ4/fM=;
-    b=RDIc6K+fuXpn+9U5xbQluGWN1tgqNZJYFYq4GDD0iS3/xDUUFGzInbbvzPajYjB73X
-    l2DFMTkStTsx+PL8CM6AtcKiaxcWDRBYfp8JuHyxoS3b8qAyI3FU7xF20N3LgN+g0fHD
-    3QjAkWZo0Osgpw8PVDsXPd/bTu1yCT7TGBIUzdTdwDPDmXD40tOKyxS1aggktUombb8v
-    64uOcLHy/PeP4J01/bPiumT0NACjWecbgBMoT+kow05FaR51v0jJY10Aq8W1H572TWi+
-    nF1pe6nC75hQkW7GgsKvGdsvEK1j3/49DTvE/Tww1abEjKyDXKhxSFJkdJJoWbUD9kC9
-    nqpQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1686770450;
-    s=strato-dkim-0003; d=gerhold.net;
-    h=Cc:To:In-Reply-To:References:Message-Id:Subject:Date:From:Cc:Date:
-    From:Subject:Sender;
-    bh=LdeZ5ShzM18y4oy4q0pM7ga3Ybusf7cQdOu55GJ4/fM=;
-    b=59cCZ4+6c3YKIGO5o78XtZ1x4mwKdt3EUHOR88YMGTRprtTBgUWfX3GIK4tenqjbTP
-    aa/Rbkx//GSW5G0FNSAA==
-In-Reply-To: <20230510-dt-resv-bottom-up-v2-0-aeb2afc8ac25-3XONVrnlUWDR7s880joybQ@public.gmane.org>
+Content-Transfer-Encoding: 8bit
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-To: Rob Herring <robh+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Conor Dooley <conor+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Frank Rowand <frowand.list-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
-Cc: Andy Gross <agross-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Bjorn Andersson <andersson-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Konrad Dybcio <konrad.dybcio-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-arm-msm-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
+Content-Type: text/plain; charset="utf-8"
+To: Michael Turquette <mturquette-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, Stephen Boyd <sboyd-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Conor Dooley <conor+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Abel Vesa <abelvesa-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Peng Fan <peng.fan-3arQi8VN3Tc@public.gmane.org>, Shawn Guo <shawnguo-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Sascha Hauer <s.hauer-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Pengutronix Kernel Team <kernel-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Fabio Estevam <festevam-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, NXP Linux Team <linux-imx-3arQi8VN3Tc@public.gmane.org>, Sebastian Reichel <sre-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Bjorn Andersson <andersson-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Mathieu Poirier <mathieu.poirier-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, =?UTF-8?q?Fern=C3=A1ndez=20Rojas?= <noltari-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Marek Vasut <marex-ynQEQJNshbs@public.gmane.org>, Suman Anna <s-anna-l0cyMroinI0@public.gmane.org>, - <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+Cc: linux-clk-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, linux-pm-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-remoteproc-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-Right now dynamic reserved memory regions are allocated either
-bottom-up or top-down, depending on the memblock setting of the
-architecture. This is fine when the address is arbitrary. However,
-when using "alloc-ranges" the regions are often placed somewhere
-in the middle of (free) RAM, even if the range starts or ends next
-to another (static) reservation.
+The Devicetree bindings document does not have to say in the title that
+it is a "Devicetree binding", but instead just describe the hardware.
 
-Try to detect this situation, and choose explicitly between bottom-up
-or top-down to allocate the memory close to the other reservations:
+Most of these have been fixed already, so fix the handful that snuck in.
+With this, a meta-schema check can be enabled to catch these
+automatically.
 
-  1. If the "alloc-range" starts at the end or inside an existing
-     reservation, use bottom-up.
-  2. If the "alloc-range" ends at the start or inside an existing
-     reservation, use top-down.
-  3. If both or none is the case, keep the current
-     (architecture-specific) behavior.
-
-There are plenty of edge cases where only a more complex algorithm
-would help, but even this simple approach helps in many cases to keep
-the reserved memory (and therefore also the free memory) contiguous.
-
-Signed-off-by: Stephan Gerhold <stephan-3XONVrnlUWDR7s880joybQ@public.gmane.org>
+Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 ---
- drivers/of/of_reserved_mem.c | 55 ++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 53 insertions(+), 2 deletions(-)
+ .../devicetree/bindings/clock/brcm,bcm63268-timer-clocks.yaml   | 2 +-
+ Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml    | 2 +-
+ .../devicetree/bindings/power/reset/restart-handler.yaml        | 2 +-
+ .../devicetree/bindings/remoteproc/ti,pru-consumer.yaml         | 2 +-
+ .../devicetree/bindings/reserved-memory/framebuffer.yaml        | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/of/of_reserved_mem.c b/drivers/of/of_reserved_mem.c
-index 948efa9f99e3..7f892c3dcc63 100644
---- a/drivers/of/of_reserved_mem.c
-+++ b/drivers/of/of_reserved_mem.c
-@@ -77,6 +77,57 @@ void __init fdt_reserved_mem_save_node(unsigned long node, const char *uname,
- 	return;
- }
+diff --git a/Documentation/devicetree/bindings/clock/brcm,bcm63268-timer-clocks.yaml b/Documentation/devicetree/bindings/clock/brcm,bcm63268-timer-clocks.yaml
+index 199818b2fb6d..cd0d763ce2f3 100644
+--- a/Documentation/devicetree/bindings/clock/brcm,bcm63268-timer-clocks.yaml
++++ b/Documentation/devicetree/bindings/clock/brcm,bcm63268-timer-clocks.yaml
+@@ -4,7 +4,7 @@
+ $id: http://devicetree.org/schemas/clock/brcm,bcm63268-timer-clocks.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
  
-+/*
-+ * __reserved_mem_alloc_in_range() - allocate reserved memory described with
-+ *	'alloc-ranges'. Choose bottom-up/top-down depending on nearby existing
-+ *	reserved regions to keep the reserved memory contiguous if possible.
-+ */
-+static int __init __reserved_mem_alloc_in_range(phys_addr_t size,
-+	phys_addr_t align, phys_addr_t start, phys_addr_t end, bool nomap,
-+	phys_addr_t *res_base)
-+{
-+	bool prev_bottom_up = memblock_bottom_up();
-+	bool bottom_up = false, top_down = false;
-+	int ret, i;
-+
-+	for (i = 0; i < reserved_mem_count; i++) {
-+		struct reserved_mem *rmem = &reserved_mem[i];
-+
-+		/* Skip regions that were not reserved yet */
-+		if (rmem->size == 0)
-+			continue;
-+
-+		/*
-+		 * If range starts next to an existing reservation, use bottom-up:
-+		 *	|....RRRR................RRRRRRRR..............|
-+		 *	       --RRRR------
-+		 */
-+		if (start >= rmem->base && start <= (rmem->base + rmem->size))
-+			bottom_up = true;
-+
-+		/*
-+		 * If range ends next to an existing reservation, use top-down:
-+		 *	|....RRRR................RRRRRRRR..............|
-+		 *	              -------RRRR-----
-+		 */
-+		if (end >= rmem->base && end <= (rmem->base + rmem->size))
-+			top_down = true;
-+	}
-+
-+	/* Change setting only if either bottom-up or top-down was selected */
-+	if (bottom_up != top_down)
-+		memblock_set_bottom_up(bottom_up);
-+
-+	ret = early_init_dt_alloc_reserved_memory_arch(size, align,
-+			start, end, nomap, res_base);
-+
-+	/* Restore old setting if needed */
-+	if (bottom_up != top_down)
-+		memblock_set_bottom_up(prev_bottom_up);
-+
-+	return ret;
-+}
-+
- /*
-  * __reserved_mem_alloc_size() - allocate reserved memory described by
-  *	'size', 'alignment'  and 'alloc-ranges' properties.
-@@ -137,8 +188,8 @@ static int __init __reserved_mem_alloc_size(unsigned long node,
- 			end = start + dt_mem_next_cell(dt_root_size_cells,
- 						       &prop);
+-title: Broadcom BCM63268 Timer Clock and Reset Device Tree Bindings
++title: Broadcom BCM63268 Timer Clock and Reset
  
--			ret = early_init_dt_alloc_reserved_memory_arch(size,
--					align, start, end, nomap, &base);
-+			ret = __reserved_mem_alloc_in_range(size, align,
-+					start, end, nomap, &base);
- 			if (ret == 0) {
- 				pr_debug("allocated memory for '%s' node: base %pa, size %lu MiB\n",
- 					uname, &base,
-
+ maintainers:
+   - Álvaro Fernández Rojas <noltari-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>
+diff --git a/Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml b/Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml
+index ff9600474df2..0a6dc1a6e122 100644
+--- a/Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml
++++ b/Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml
+@@ -4,7 +4,7 @@
+ $id: http://devicetree.org/schemas/clock/imx8mp-audiomix.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
+ 
+-title: NXP i.MX8MP AudioMIX Block Control Binding
++title: NXP i.MX8MP AudioMIX Block Control
+ 
+ maintainers:
+   - Marek Vasut <marex-ynQEQJNshbs@public.gmane.org>
+diff --git a/Documentation/devicetree/bindings/power/reset/restart-handler.yaml b/Documentation/devicetree/bindings/power/reset/restart-handler.yaml
+index 1f9a2aac53c0..f2ffdd29d52a 100644
+--- a/Documentation/devicetree/bindings/power/reset/restart-handler.yaml
++++ b/Documentation/devicetree/bindings/power/reset/restart-handler.yaml
+@@ -4,7 +4,7 @@
+ $id: http://devicetree.org/schemas/power/reset/restart-handler.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
+ 
+-title: Restart and shutdown handler generic binding
++title: Restart and shutdown handler Common Properties
+ 
+ maintainers:
+   - Sebastian Reichel <sre-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+diff --git a/Documentation/devicetree/bindings/remoteproc/ti,pru-consumer.yaml b/Documentation/devicetree/bindings/remoteproc/ti,pru-consumer.yaml
+index c6d86964b72a..35f0bb38f7b2 100644
+--- a/Documentation/devicetree/bindings/remoteproc/ti,pru-consumer.yaml
++++ b/Documentation/devicetree/bindings/remoteproc/ti,pru-consumer.yaml
+@@ -4,7 +4,7 @@
+ $id: http://devicetree.org/schemas/remoteproc/ti,pru-consumer.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
+ 
+-title: Common TI PRU Consumer Binding
++title: TI PRU Consumer Common Properties
+ 
+ maintainers:
+   - Suman Anna <s-anna-l0cyMroinI0@public.gmane.org>
+diff --git a/Documentation/devicetree/bindings/reserved-memory/framebuffer.yaml b/Documentation/devicetree/bindings/reserved-memory/framebuffer.yaml
+index 05b6648b3458..851ec24d6142 100644
+--- a/Documentation/devicetree/bindings/reserved-memory/framebuffer.yaml
++++ b/Documentation/devicetree/bindings/reserved-memory/framebuffer.yaml
+@@ -4,7 +4,7 @@
+ $id: http://devicetree.org/schemas/reserved-memory/framebuffer.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
+ 
+-title: /reserved-memory framebuffer node bindings
++title: /reserved-memory framebuffer node
+ 
+ maintainers:
+   - devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 -- 
-2.40.1
+2.39.2
 
