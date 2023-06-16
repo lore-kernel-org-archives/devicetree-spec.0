@@ -1,125 +1,36 @@
-From: Mathieu Poirier <mathieu.poirier@linaro.org>
-Subject: Re: [PATCH] dt-bindings: Remove last usage of "binding" or "schema"
- in titles
-Date: Fri, 16 Jun 2023 09:20:45 -0600
-Message-ID: <CANLsYkx_cd7QxMpE8OKe+jJT-tSt23Ub0p8ceAuKbchLtQmKcg@mail.gmail.com>
+From: Stephen Boyd <sboyd-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
+Subject: Re: [PATCH] dt-bindings: Remove last usage of "binding" or "schema" in titles
+Date: Fri, 16 Jun 2023 11:34:03 -0700
+Message-ID: <6f5220ef3ec3c05f32b5d6085d2e8adf.sboyd@kernel.org>
 References: <20230615213154.1753313-1-robh@kernel.org>
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-Return-path: <linux-clk-owner@vger.kernel.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1686928856; x=1689520856;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nwl0LNhJUMmewFF0gr0xbjGPARcgwNZ+TwWnvyZN5TM=;
-        b=y6d7G/bcZeVfhtOwzWnupZfcpOIbpWqUETtVqEcRoO7agztBlbsJ6YPPP9rYTnGqzZ
-         GaMK7QstokUuhf97rxF7jzZwOYgriGRPuzTUvT48ELnphBNOYsBb9D1DTICnOs6M8OKE
-         afYvikew/Y7RqAZhLpRwdqewU9DxCRMUyvx1k9copwZaX3/AxPMwFqa4eAl8AmUC6O/L
-         MYjLAIxrTSG/+UJT2GjtFggqqIRQGnBl/iecVw42bxB5r48bywnIAXXWp/0rTY8uKtm7
-         ke1QekA/keSjnmIm/uc4gQQ3Nlc4tvOymz/gtGs1v9pBcUMWaFozL8jLveLpXomgA4m+
-         ONAw==
-In-Reply-To: <20230615213154.1753313-1-robh@kernel.org>
+Return-path: <devicetree-spec-owner-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1686940446;
+        bh=UmQb6FNQc3kZycxaRrEf208LD6H0d3VHH/7wjn/eZgs=;
+        h=In-Reply-To:References:Subject:From:Cc:To:Date:From;
+        b=sSoW856XRyhhdpubOu3eCtjd9oQuJCLRRSOTHJ64BN7eYjN110eUBx5J29lBoRd6v
+         VdB7I6tExsuxllymfO3U9Z8/PTbOP34HVvgN5JJqS7sB77KgUrmZfzXWkHA5cLqFXQ
+         63Wl7L4yiHa3u7Hw1du1K5igyEh2uvZXsvhKOfu8a+BTc4OH2cCswgcZZLrP23DH/Y
+         QtZSmuhMbDgzrtCN8u8IIfOh7P1Xbym/QN+md+32n2KnvCbmDZ6wboNmch1SckcLB6
+         fxaHWx+Ns4yZGnRwnVJWmkE4qpjUQLCFpsUMON+lAhPy8/x73cR8gqaMLwnENSAYyw
+         hBL9QTb9Hza+A==
+In-Reply-To: <20230615213154.1753313-1-robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 List-ID: <devicetree-spec.vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-To: Rob Herring <robh@kernel.org>
-Cc: Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Peng Fan <peng.fan@nxp.com>, Shawn Guo <shawnguo@kernel.org>, Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, NXP Linux Team <linux-imx@nxp.com>, Sebastian Reichel <sre@kernel.org>, Bjorn Andersson <andersson@kernel.org>, =?UTF-8?Q?Fern=C3=A1ndez_Rojas?= <noltari@gmail.com>, Marek Vasut <marex@denx.de>, Suman Anna <s-anna@ti.com>, - <devicetree-spec@vger.kernel.org>, linux-clk@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.
+Content-Type: text/plain; charset="us-ascii"
+To: - <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Abel Vesa <abelvesa-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Bjorn Andersson <andersson-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Conor Dooley <conor+dt-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Fabio Estevam <festevam-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, =?utf-8?q?Fern=C3=A1ndez?= Rojas <noltari-Re5JQEeQqe8AvxtiuMwx3w@public.gmane.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Marek Vasut <marex-ynQEQJNshbs@public.gmane.org>, Mathieu Poirier <mathieu.poirier-QSEj5FYQhm4dnm+yROfE0A@public.gmane.org>, Michael Turquette <mturquette-rdvid1DuHRBWk0Htik3J/w@public.gmane.org>, NXP Linux Team <linux-imx-3arQi8VN3Tc@public.gmane.org>, Peng Fan <peng.fan-3arQi8VN3Tc@public.gmane.org>, Pengutronix Kernel Team <kernel-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Sascha Hauer <s.hauer-bIcnvbaLZ9MEGnE8C9+IrQ@public.gmane.org>, Sebastian Reichel <sre-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Shawn Guo <shawnguo-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>, Suman Anna <s-anna-l0cyMroinI0@public.gmane.org>
+Cc: linux-clk-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, devicetree-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-kernel-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-arm-kernel-IAPFreCvJWM7uuMidbF8XUB+6BGkLq7r@public.gmane.org, linux-pm-u79uwXL29TY76Z2rM5mHXA@public.gmane.org, linux-remoteproc-u79uwXL29TY76Z2rM5mHXA@public.gmane.org
 
-On Thu, 15 Jun 2023 at 15:32, Rob Herring <robh@kernel.org> wrote:
->
+Quoting Rob Herring (2023-06-15 14:31:54)
 > The Devicetree bindings document does not have to say in the title that
 > it is a "Devicetree binding", but instead just describe the hardware.
->
+>=20
 > Most of these have been fixed already, so fix the handful that snuck in.
 > With this, a meta-schema check can be enabled to catch these
 > automatically.
->
-> Signed-off-by: Rob Herring <robh@kernel.org>
+>=20
+> Signed-off-by: Rob Herring <robh-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
 > ---
->  .../devicetree/bindings/clock/brcm,bcm63268-timer-clocks.yaml   | 2 +-
->  Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml    | 2 +-
->  .../devicetree/bindings/power/reset/restart-handler.yaml        | 2 +-
->  .../devicetree/bindings/remoteproc/ti,pru-consumer.yaml         | 2 +-
->  .../devicetree/bindings/reserved-memory/framebuffer.yaml        | 2 +-
->  5 files changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/Documentation/devicetree/bindings/clock/brcm,bcm63268-timer-=
-clocks.yaml b/Documentation/devicetree/bindings/clock/brcm,bcm63268-timer-c=
-locks.yaml
-> index 199818b2fb6d..cd0d763ce2f3 100644
-> --- a/Documentation/devicetree/bindings/clock/brcm,bcm63268-timer-clocks.=
-yaml
-> +++ b/Documentation/devicetree/bindings/clock/brcm,bcm63268-timer-clocks.=
-yaml
-> @@ -4,7 +4,7 @@
->  $id: http://devicetree.org/schemas/clock/brcm,bcm63268-timer-clocks.yaml=
-#
->  $schema: http://devicetree.org/meta-schemas/core.yaml#
->
-> -title: Broadcom BCM63268 Timer Clock and Reset Device Tree Bindings
-> +title: Broadcom BCM63268 Timer Clock and Reset
->
->  maintainers:
->    - =C3=81lvaro Fern=C3=A1ndez Rojas <noltari@gmail.com>
-> diff --git a/Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml=
- b/Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml
-> index ff9600474df2..0a6dc1a6e122 100644
-> --- a/Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml
-> +++ b/Documentation/devicetree/bindings/clock/imx8mp-audiomix.yaml
-> @@ -4,7 +4,7 @@
->  $id: http://devicetree.org/schemas/clock/imx8mp-audiomix.yaml#
->  $schema: http://devicetree.org/meta-schemas/core.yaml#
->
-> -title: NXP i.MX8MP AudioMIX Block Control Binding
-> +title: NXP i.MX8MP AudioMIX Block Control
->
->  maintainers:
->    - Marek Vasut <marex@denx.de>
-> diff --git a/Documentation/devicetree/bindings/power/reset/restart-handle=
-r.yaml b/Documentation/devicetree/bindings/power/reset/restart-handler.yaml
-> index 1f9a2aac53c0..f2ffdd29d52a 100644
-> --- a/Documentation/devicetree/bindings/power/reset/restart-handler.yaml
-> +++ b/Documentation/devicetree/bindings/power/reset/restart-handler.yaml
-> @@ -4,7 +4,7 @@
->  $id: http://devicetree.org/schemas/power/reset/restart-handler.yaml#
->  $schema: http://devicetree.org/meta-schemas/core.yaml#
->
-> -title: Restart and shutdown handler generic binding
-> +title: Restart and shutdown handler Common Properties
->
->  maintainers:
->    - Sebastian Reichel <sre@kernel.org>
-> diff --git a/Documentation/devicetree/bindings/remoteproc/ti,pru-consumer=
-.yaml b/Documentation/devicetree/bindings/remoteproc/ti,pru-consumer.yaml
-> index c6d86964b72a..35f0bb38f7b2 100644
-> --- a/Documentation/devicetree/bindings/remoteproc/ti,pru-consumer.yaml
-> +++ b/Documentation/devicetree/bindings/remoteproc/ti,pru-consumer.yaml
-> @@ -4,7 +4,7 @@
->  $id: http://devicetree.org/schemas/remoteproc/ti,pru-consumer.yaml#
->  $schema: http://devicetree.org/meta-schemas/core.yaml#
->
-> -title: Common TI PRU Consumer Binding
-> +title: TI PRU Consumer Common Properties
->
 
-Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
-
->  maintainers:
->    - Suman Anna <s-anna@ti.com>
-> diff --git a/Documentation/devicetree/bindings/reserved-memory/framebuffe=
-r.yaml b/Documentation/devicetree/bindings/reserved-memory/framebuffer.yaml
-> index 05b6648b3458..851ec24d6142 100644
-> --- a/Documentation/devicetree/bindings/reserved-memory/framebuffer.yaml
-> +++ b/Documentation/devicetree/bindings/reserved-memory/framebuffer.yaml
-> @@ -4,7 +4,7 @@
->  $id: http://devicetree.org/schemas/reserved-memory/framebuffer.yaml#
->  $schema: http://devicetree.org/meta-schemas/core.yaml#
->
-> -title: /reserved-memory framebuffer node bindings
-> +title: /reserved-memory framebuffer node
->
->  maintainers:
->    - devicetree-spec@vger.kernel.org
-> --
-> 2.39.2
->
+Acked-by: Stephen Boyd <sboyd-DgEjT+Ai2ygdnm+yROfE0A@public.gmane.org>
