@@ -1,42 +1,59 @@
 Received: from lindbergh.monkeyblade.net (lindbergh.monkeyblade.net [23.128.96.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 589E338DC3
-	for <devicetree-spec@vger.kernel.org>; Thu,  9 Nov 2023 23:12:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; dkim=none
-Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
-	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5EB84239
-	for <devicetree-spec@vger.kernel.org>; Thu,  9 Nov 2023 15:12:36 -0800 (PST)
-Received: by mail-oi1-f170.google.com with SMTP id 5614622812f47-3b566ee5f1dso808941b6e.0
-        for <devicetree-spec@vger.kernel.org>; Thu, 09 Nov 2023 15:12:36 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C42F538F
+	for <devicetree-spec@vger.kernel.org>; Fri, 10 Nov 2023 06:19:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="fSCdj3uS"
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com [IPv6:2607:f8b0:4864:20::133])
+	by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7D3D56583
+	for <devicetree-spec@vger.kernel.org>; Thu,  9 Nov 2023 22:19:37 -0800 (PST)
+Received: by mail-il1-x133.google.com with SMTP id e9e14a558f8ab-357cc880bd8so6482655ab.0
+        for <devicetree-spec@vger.kernel.org>; Thu, 09 Nov 2023 22:19:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1699597177; x=1700201977; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=41hoSxaBjemT+Wb7P21DcL3c/Tlaphxmd9ccjMboL/w=;
+        b=fSCdj3uSm9ejdD5z5/d5yrlO2OQwu7cy9KzfOhuppzT6AcsclcCg2NyjWSg/nyixfR
+         laIfz4Yf+MtkUeKzACwF5X8nzonXnVlV8SmNQknEL4f0lRs3/XxTWufrl69163Z1MLQY
+         CEspmULVdXGlSkyern6uBg9gFAHZ2S2CEpfH4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699571555; x=1700176355;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=YgW8bPv0dE+He+bFx8Q4eFDgd3YPzWtDTJu32GYC/DI=;
-        b=XP0HCbOmmYrwRWln577mVBDZvWOOkFopz6Y2s5IBRVr/nlsEC7o+lnR0AO+/Qmyznm
-         xH7WjIugc7eg85DGBOMkxA3s5LnJDS7kj7J0Klajxlkn8E9u9sz+XOilmzaMnoBxMTah
-         k82m5AFgMW3tr3MkFBqn2MQBow+96AOHcDNMlXgOnMVhiNIC07IT2yScxsrqG80QrVf9
-         PLXwXJl06Yw+ozag3Z9Fx+anVq82dp7HswD6DHMpPtH/U/NM5jrcFk1iah0p7dv4wP8P
-         MbRL0zWS06nVqoYEvEsG8TMe3MWZcxr2ZBd0AmPteQDMBqTBV+rbkhtlbv6Aa1STmSVE
-         fdgQ==
-X-Gm-Message-State: AOJu0YyiLs6i7oCTAyNf/pKy5mRGolJVNycjvpe/N9kmhvkUa5Uo9DBS
-	uZ4cewlbuP03KDlPSPVTAmeqWkigOA==
-X-Google-Smtp-Source: AGHT+IFzXZchtxzWHfqy5hmxj72v354UK0FtIRQhWxRdQHV1GKXRWnf32jJ6PaEMQhWNxQmpEmCXXA==
-X-Received: by 2002:a05:6808:f8a:b0:3a7:6b1c:8142 with SMTP id o10-20020a0568080f8a00b003a76b1c8142mr3850916oiw.25.1699571554775;
-        Thu, 09 Nov 2023 15:12:34 -0800 (PST)
-Received: from herring.priv (66-90-144-107.dyn.grandenetworks.net. [66.90.144.107])
-        by smtp.gmail.com with ESMTPSA id 24-20020aca0918000000b003b2ef9778absm137464oij.46.2023.11.09.15.12.33
+        d=1e100.net; s=20230601; t=1699597177; x=1700201977;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=41hoSxaBjemT+Wb7P21DcL3c/Tlaphxmd9ccjMboL/w=;
+        b=JZHUQf3sJAcibewNnUOe8HI6O6F6VUbHohFPPridmwDynsRFkIdRPNDKhCWnG2sPSx
+         g60/gvyC3FPpcAk8oGT+9NDF67cCdjKBdvQehACW5yvbYH0OaNjCHMe5Y80QDmX+Mo5b
+         j8nzDwSANZund2r5nDDDPqOHoQSzPoZRwM6JCDwPYDahX5ByL/pQlY6l+NHHsX4Zh+IA
+         1CvEzjVunCD3NQCcTInJ2PZzuM7FaD1kLaJV0VCRtsTDp+Iomq9ob2JdMg+90SoeF8c0
+         GBzQN24fvkZMD48/wzgeCGb33qKecMo2ncD2s8bGippyDHQu9xTtUxffYr9JbbM6GvV1
+         XdJg==
+X-Gm-Message-State: AOJu0Yywq+y95IMsttoYaJGZpWu26uxmIvW8lVeJXs/QQg6DMUlGUDXy
+	+0s9VF5GVwRA4UAJ/4fs32ypd1QY5K4pqVhEOf0=
+X-Google-Smtp-Source: AGHT+IGgtl5uX6fMkIsp2oQqmtN+/hnxRzYJEDjorxnSn2mRvTlU+bozKpwJTjp8ll3XEjCVdJ9LzA==
+X-Received: by 2002:a17:902:e74c:b0:1cc:1e16:e998 with SMTP id p12-20020a170902e74c00b001cc1e16e998mr7965082plf.51.1699590792784;
+        Thu, 09 Nov 2023 20:33:12 -0800 (PST)
+Received: from yich.tpe.corp.google.com ([2401:fa00:1:17:5d14:4ecf:470d:a34e])
+        by smtp.gmail.com with ESMTPSA id q6-20020a170902dac600b001ca86a9caccsm4344522plx.228.2023.11.09.20.33.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Nov 2023 15:12:34 -0800 (PST)
-Received: (nullmailer pid 2426727 invoked by uid 1000);
-	Thu, 09 Nov 2023 23:12:33 -0000
-From: Rob Herring <robh@kernel.org>
-To: devicetree-spec@vger.kernel.org
-Subject: [dtschema PATCH] tools: Add tool to compare schemas for ABI changes
-Date: Thu,  9 Nov 2023 17:12:33 -0600
-Message-ID: <20231109231233.2426715-1-robh@kernel.org>
-X-Mailer: git-send-email 2.42.0
+        Thu, 09 Nov 2023 20:33:12 -0800 (PST)
+From: Yi Chou <yich@chromium.org>
+To: Rob Herring <robh@kernel.org>
+Cc: jkardatzke@google.com,
+	yich@google.com,
+	krzysztof.kozlowski+dt@linaro.org,
+	devicetree-spec@vger.kernel.org,
+	chenyian@google.com,
+	sjg@chromium.org,
+	jwerner@chromium.org,
+	jens.wiklander@linaro.org,
+	Yi Chou <yich@chromium.org>
+Subject: [PATCH] schemas: Add Google Widevine initialization parameters
+Date: Fri, 10 Nov 2023 12:32:31 +0800
+Message-ID: <20231110043241.2920553-1-yich@chromium.org>
+X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -45,184 +62,99 @@ List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a new tool which compares 2 sets of schemas for possible ABI changes.
-It's not complete nor 100% accurate, but it's a start.
+The necessary fields to initialize the widevine related functions in
+OP-TEE.
 
-This checks for the following kinds of changes:
+Signed-off-by: Yi Chou <yich@chromium.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-- New required properties
-- Minimum number of entries required increased
-- Removed properties
-
-Limitations:
-
-Restructuring of schemas may result in false positives or missed ABI
-changes. There's some support if a property moves from a schema to a
-referenced schema.
-
-Schemas underneath logic keywords (allOf, oneOf, anyOf) or if/then/else schemas
-are not handled.
-
-Signed-off-by: Rob Herring <robh@kernel.org>
 ---
- pyproject.toml      |   1 +
- tools/dt-cmp-schema | 135 ++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 136 insertions(+)
- create mode 100755 tools/dt-cmp-schema
+There's no plan to add more optee stuff now.
+This is it.
 
-diff --git a/pyproject.toml b/pyproject.toml
-index 6fc9bb7ae4b9..da5fcca421ce 100644
---- a/pyproject.toml
-+++ b/pyproject.toml
-@@ -36,6 +36,7 @@ Source="https://github.com/devicetree-org/dt-schema"
- 
- [tool.setuptools]
- script-files = [
-+    'tools/dt-cmp-schema',
-     'tools/dt-check-compatible',
-     'tools/dt-validate',
-     'tools/dt-doc-validate',
-diff --git a/tools/dt-cmp-schema b/tools/dt-cmp-schema
-new file mode 100755
-index 000000000000..25ac3dd05274
+ dtschema/schemas/options/op-tee/widevine.yaml | 73 +++++++++++++++++++
+ 1 file changed, 73 insertions(+)
+ create mode 100644 dtschema/schemas/options/op-tee/widevine.yaml
+
+diff --git a/dtschema/schemas/options/op-tee/widevine.yaml b/dtschema/schemas/options/op-tee/widevine.yaml
+new file mode 100644
+index 0000000..925c214
 --- /dev/null
-+++ b/tools/dt-cmp-schema
-@@ -0,0 +1,135 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: BSD-2-Clause
-+# Copyright 2023 Arm Ltd.
++++ b/dtschema/schemas/options/op-tee/widevine.yaml
+@@ -0,0 +1,73 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/options/op-tee/widevine.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+import sys
-+import argparse
-+import signal
-+import urllib
++title: Google Widevine initialization parameters
 +
-+import dtschema
++maintainers:
++  - Jeffrey Kardatzke <jkardatzke@chromium.org>
++  - Yi Chou <yich@chromium.org>
 +
++description:
++  The necessary fields to initialize the widevine related functions in
++  OP-TEE. This node does not represent a real device, but serves as a
++  place for passing data between firmware and OP-TEE.
 +
-+def _sigint_handler(signum, frame):
-+    sys.exit(-2)
++properties:
++  google,optee-hardware-unique-key:
++    $ref: /schemas/types.yaml#/definitions/uint8-array
++    maxItems: 32
++    description: |
++      The hardware-unique key of the Widevine OP-TEE. It will be used
++      to derive the secure storage key.
++      For more information, please reference:
++      https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html#hardware-unique-key
++  google,tcg-tpm-auth-public-key:
++    $ref: /schemas/types.yaml#/definitions/uint8-array
++    maxItems: 1024
++    description: |
++      The TPM auth public key. Used to communicate the TPM from OP-TEE.
++      The format of data should be TPM2B_PUBLIC.
++      For more information, please reference the 12.2.5 section:
++      https://trustedcomputinggroup.org/wp-content/uploads/TCG_TPM2_r1p59_Part2_Structures_pub.pdf
++  google,widevine-root-of-trust-ecc-p256:
++    $ref: /schemas/types.yaml#/definitions/uint8-array
++    maxItems: 32
++    description: |
++      The Widevine root of trust secret. Used to sign the widevine
++      request in OP-TEE. The value is an ECC NIST P-256 scalar.
++      For more information, please reference the G.1.2 section:
++      https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-186.pdf
++required:
++  - google,optee-hardware-unique-key
++  - google,tcg-tpm-auth-public-key
++  - google,widevine-root-of-trust-ecc-p256
 +
++additionalProperties: false
 +
-+signal.signal(signal.SIGINT, _sigint_handler)
-+
-+
-+def path_list_to_str(path):
-+    return '/' + '/'.join(path)
-+
-+
-+def prop_generator(schema, path=[]):
-+    if not isinstance(schema, dict):
-+        return
-+    for prop_key in ['properties', 'patternProperties']:
-+        if prop_key in schema:
-+            for p, sch in schema[prop_key].items():
-+                yield path + [prop_key, p], sch
-+                yield from prop_generator(sch, path=path + [prop_key, p])
-+
-+
-+def _ref_to_id(id, ref):
-+    ref = urllib.parse.urljoin(id, ref)
-+    if '#/' not in ref:
-+        ref += '#'
-+    return ref
-+
-+
-+def _prop_in_schema(prop, schema, schemas):
-+    for p, sch in prop_generator(schema):
-+        if p[1] == prop:
-+            return True
-+
-+    if 'allOf' in schema:
-+        for e in schema['allOf']:
-+            if '$ref' in e:
-+                ref_id = _ref_to_id(schema['$id'], e['$ref'])
-+                if ref_id in schemas:
-+                    if _prop_in_schema(prop, schemas[ref_id], schemas):
-+                        return True
-+
-+    if '$ref' in schema:
-+        ref_id = _ref_to_id(schema['$id'], schema['$ref'])
-+        if ref_id in schemas and _prop_in_schema(prop, schemas[ref_id], schemas):
-+            return True
-+
-+    return False
-+
-+
-+def check_removed_property(id, base, schemas):
-+    for p, sch in prop_generator(base):
-+        if not _prop_in_schema(p[1], schemas[id], schemas):
-+            print(f'{id}{path_list_to_str(p)}: existing property removed\n', file=sys.stderr)
-+
-+
-+def schema_get_from_path(sch, path):
-+    for p in path:
-+        try:
-+            sch = sch[p]
-+        except:
-+            return None
-+    return sch
-+
-+
-+def check_new_items(id, base, new, path=[]):
-+    for p, sch in prop_generator(new):
-+        if not isinstance(sch, dict) or 'minItems' not in sch:
-+            continue
-+
-+        min = sch['minItems']
-+        base_min = schema_get_from_path(base, p + ['minItems'])
-+
-+        if base_min and min > base_min:
-+            print(f'{id}{path_list_to_str(p)}: new required entry added\n', file=sys.stderr)
-+
-+
-+def _check_required(id, base, new, path=[]):
-+    if not isinstance(base, dict) or not isinstance(new, dict):
-+        return
-+
-+    if 'required' not in new:
-+        return
-+
-+    if 'required' not in base:
-+        print(f'{id}{path_list_to_str(path)}: new required properties added: {", ".join(new["required"])}\n', file=sys.stderr)
-+        return
-+
-+    diff = set(new['required']) - set(base['required'])
-+    if diff:
-+        print(f'{id}{path_list_to_str(path)}: new required properties added: {", ".join(diff)}\n', file=sys.stderr)
-+        return
-+
-+
-+def check_required(id, base, new):
-+    _check_required(id, base, new)
-+
-+    for p, sch in prop_generator(new):
-+        _check_required(id, schema_get_from_path(base, p), sch, path=p)
-+
-+
-+if __name__ == "__main__":
-+    ap = argparse.ArgumentParser(description="Compare 2 sets of schemas for possible ABI differences")
-+    ap.add_argument("baseline", type=str,
-+                    help="Baseline schema directory or preprocessed schema file")
-+    ap.add_argument("new", type=str,
-+                    help="New schema directory or preprocessed schema file")
-+    ap.add_argument('-V', '--version', help="Print version number",
-+                    action="version", version=dtschema.__version__)
-+    args = ap.parse_args()
-+
-+    base_schemas = dtschema.DTValidator([args.baseline]).schemas
-+    schemas = dtschema.DTValidator([args.new]).schemas
-+
-+    if not schemas or not base_schemas:
-+        sys.exit(-1)
-+
-+    for id, sch in schemas.items():
-+        if id not in base_schemas or 'generated' in id:
-+            continue
-+
-+        check_required(id, base_schemas[id], sch)
-+        check_removed_property(id, base_schemas[id], schemas)
-+        check_new_items(id, base_schemas[id], sch)
++examples:
++  - |
++    options {
++      widevine {
++        google,optee-hardware-unique-key = [
++          12 f7 98 d2 0e d2 85 92 a5 82 bf 98 b8 99 2b c0
++          c6 6f 19 85 79 86 65 18 55 eb ff 9b 6c c0 ac 27
++        ];
++        google,tcg-tpm-auth-public-key = [
++          00 76 00 23 00 0b 00 02 04 b2 00 20 e1 47 bf 27
++          e1 74 30 c8 16 ab 72 4d 5c 77 e1 5c 61 2d 56 81
++          b3 35 cd 9d eb 67 41 37 69 f0 32 41 00 10 00 10
++          00 03 00 10 00 20 70 9a df 50 f9 0f d5 f4 40 e0
++          ea 2c e8 f2 26 9f 0e 5c 02 70 16 c3 6c c1 83 03
++          2d 04 10 bd 85 7a 00 20 83 03 c2 66 6e 01 32 34
++          5c 5e 80 22 c7 48 24 3c 70 6b b8 e4 24 42 74 a9
++          cf fc ab f8 30 e9 de 51
++        ];
++        google,widevine-root-of-trust-ecc-p256 = [
++          ac 0d 86 c3 d7 b5 b7 a2 6f c3 d9 93 f7 de bc bb
++          d5 c4 25 9b 21 5f 36 af b5 dd 6d 29 9d 08 c0 10
++        ];
++      };
++    };
 -- 
-2.42.0
+2.42.0.869.gea05f2083d-goog
 
