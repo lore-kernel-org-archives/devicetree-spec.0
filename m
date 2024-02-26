@@ -1,101 +1,133 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A12D54CB31;
-	Mon, 22 Jan 2024 17:50:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87B0E58ABD;
+	Mon, 26 Feb 2024 10:08:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1705945811; cv=none; b=RNm/R1UrxoS2Kaort5y+6ghPKQJVvrctR00aBGvPW9JL9OnqunfqwblBdTs8kY1YEb8Ez7s1U6ht1ITv2qTaxuIBlxSw7t2CEox/HuWXOlRf4JYPwoICRLRBO3ES/CExCszCv7ewQ+U4Rk/lpBbizDcga4wy3rvMjNItH7VubaM=
+	t=1708942110; cv=none; b=MT2pCWooWqtSpTWKY19IrWRbRQqXiClbds78XNFFRYLIMrq/WREEdaoVD7k1cT29KG3Kxsd2m7ibd/iUiaNcacgrauzfQOO301SUZ4g3yjCaJ2Q18/0qzSuMTtrwkPcIiBRUZzEEjPfurqxNqx/ZuCo6UoGM8ezBu45WqHbs0Ko=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1705945811; c=relaxed/simple;
-	bh=nrjMhgFBwkaAZ6DvfofhjPey8YCxeJKDIVmE6A5ckUE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=lWq4UjQ8NadYmJonOlC0UCkj6p6Vw4wb56QzF+TSaXYAylt0GC+OwXuccK+ehnlGwji5pF37o9a/missZcfRJ9QYiDuP1lpvtunSzw2VPVdse1as0H29W5REaC0Qiwy5E5gXxc18/+KHgsaSP+80ELKjxNLDmpEXqIbqXQjLXvc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=HSbkB7nq; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+	s=arc-20240116; t=1708942110; c=relaxed/simple;
+	bh=TfgcSNSKFYSQfL8EY/ScOd5VbPJoZVWAaTWe+zodz7s=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=D3r2FCxmMZNeVmnCfV9bASLxEgh9+KQLGigF23M0QtljoOFbEz4EnKQuMRCxXHTb9+g/Bw90qGEnSKtCwhucYY8Ka7+oNnP+hz6z8pbekOpbX0M9Z7e0qOf3kK62h3o0vaGeAEmmSsJdc8ouHtb/17C5B6bNfWDOoMv5vvQaTz4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EGyUF2Yx; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="HSbkB7nq"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 40MDaFQe003288;
-	Mon, 22 Jan 2024 17:50:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	message-id:date:mime-version:subject:to:cc:references:from
-	:in-reply-to:content-type:content-transfer-encoding; s=
-	qcppdkim1; bh=gmrF2yQZXmlhVvRx/bjIoxB2JXFJsegupGpfsEiApCE=; b=HS
-	bkB7nqo1xBBC828dhvRL3EKRNeEZuF4dpKmSxLV03TYc6SmwvkB5qas1x4ku/w0F
-	a2j4WQUEvZPjzrBA1Mkyd/b3vWuJFus9Y144+eGU9ptly4gv5gX0N4kyUB9r0A9S
-	OhVDV4xOOjG2rv4xA5ZwHsXtF7XQUXZM2ceEgobPGg7wJBIXxJjWNxkI72VXhsHM
-	T61mqykPZORWX3qOV2mgRIsODFVqkA1Tsw4TnTLv3DhpjyICPuV3OISf0G5175+p
-	4gIkx7gGMmmDNmucn5N9EkjpdqMNyn9PohAHtH9TLcWGvah2HxH4CKGSdLIw1aPz
-	AUq72JIUdCB7WJTAhaog==
-Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3vspw8s4hf-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 22 Jan 2024 17:50:05 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com [10.46.141.250])
-	by NASANPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 40MHo4ED020349
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 22 Jan 2024 17:50:04 GMT
-Received: from [10.110.104.139] (10.80.80.8) by nasanex01b.na.qualcomm.com
- (10.46.141.250) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Mon, 22 Jan
- 2024 09:50:00 -0800
-Message-ID: <dff70941-709c-4043-802a-16bfeb8ba4f8@quicinc.com>
-Date: Mon, 22 Jan 2024 09:50:00 -0800
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EGyUF2Yx"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B40D2C433C7;
+	Mon, 26 Feb 2024 10:08:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1708942110;
+	bh=TfgcSNSKFYSQfL8EY/ScOd5VbPJoZVWAaTWe+zodz7s=;
+	h=Date:From:To:Cc:Subject:From;
+	b=EGyUF2Yx0jx/47MnKEIV1YbpWeiy9khQZuYd2onoel+TX4B7kcAL25k7iGZOBEc3y
+	 1t0J+4K79AAUQ0gexZmSp+Tf6Iu/WBc4AOiYarl0zZOB83gtLh2xO2oBirskyWxsew
+	 RIumZ/kpH8ymun2/yZf/W1RsLUXOEDiUQXMBkTwQTmzl0hGVlpWfLd5C3LxsWbOOkP
+	 B9M4XBWi9Yu0unbAlJpO4716HirRBtzOyfZGJgw6c6rc7mk7Y7xjqbx4+/3pE1NaUZ
+	 KVi8vnT19tDC83Xcu/TGqu5rDeCXukinflyLU5nXcvoPBUDghD9tMBmHLCbVpYNK46
+	 yjxOF12ukbmJQ==
+Date: Mon, 26 Feb 2024 11:08:27 +0100
+From: Wolfram Sang <wsa@kernel.org>
+To: linux-i2c@vger.kernel.org, devicetree-spec@vger.kernel.org
+Cc: Andi Shyti <andi.shyti@kernel.org>, Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Chris Packham <chris.packham@alliedtelesis.co.nz>
+Subject: dtschema: i2c: messy situation about timeouts
+Message-ID: <ZdxjGwvGXlDGkYs0@shikoro>
+Mail-Followup-To: Wolfram Sang <wsa@kernel.org>, linux-i2c@vger.kernel.org,
+	devicetree-spec@vger.kernel.org, Andi Shyti <andi.shyti@kernel.org>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Chris Packham <chris.packham@alliedtelesis.co.nz>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] Add board-id support for multiple DT selection
-To: Konrad Dybcio <konrad.dybcio@linaro.org>,
-        Amrit Anand
-	<quic_amrianan@quicinc.com>, <robh+dt@kernel.org>,
-        <krzysztof.kozlowski+dt@linaro.org>, <conor+dt@kernel.org>,
-        <agross@kernel.org>, <andersson@kernel.org>
-CC: <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-msm@vger.kernel.org>, <kernel@quicinc.com>,
-        <devicetree-spec@vger.kernel.org>
-References: <1705749649-4708-1-git-send-email-quic_amrianan@quicinc.com>
- <6ceb3c5d-4171-4f0e-a1c0-22a8488ea2bc@linaro.org>
-Content-Language: en-US
-From: Elliot Berman <quic_eberman@quicinc.com>
-In-Reply-To: <6ceb3c5d-4171-4f0e-a1c0-22a8488ea2bc@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: 00ZgLwGHbsDfPXQ8AKTa0gTrYi7OTktY
-X-Proofpoint-ORIG-GUID: 00ZgLwGHbsDfPXQ8AKTa0gTrYi7OTktY
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-22_07,2024-01-22_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 malwarescore=0
- adultscore=0 mlxscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0
- clxscore=1011 suspectscore=0 impostorscore=0 mlxlogscore=601
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2311290000 definitions=main-2401220124
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="xZIGOEhcG+EUssnZ"
+Content-Disposition: inline
 
-+devicetree-spec
 
-On 1/20/2024 5:04 AM, Konrad Dybcio wrote:
-> On 20.01.2024 12:20, Amrit Anand wrote:
->> Device manufacturers frequently ship multiple boards or SKUs under a
->> single software package. These software packages will ship multiple
->> devicetree blobs and require some mechanism to pick the correct DTB for
->> the board the software package was deployed. Introduce a common
->> definition for adding board identifiers to device trees. board-id
->> provides a mechanism for bootloaders to select the appropriate DTB which
->> is vendor/OEM-agnostic.
-> 
-> Maybe it'd be a good idea to add it to the base spec!
-> 
-> https://github.com/devicetree-org/devicetree-specification
-> 
+--xZIGOEhcG+EUssnZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I agree. Rob, what do you think?
+Hey guys,
+
+we have quite a messy situation regarding I2C timeouts in the dtschema.
+Partly because I was too busy to pay detailed attention, partly because
+reviewing dtschema changes happen on Github which I totally missed. No
+complaining, though, here are my observations and suggestions to get it
+straight. Comments are more than welcome.
+
+- "i2c-transfer-timeout-us"
+
+Description says "Number of microseconds to wait before considering an
+I2C transfer has failed."
+
+To me, this binding is very descriptive and makes sense. We should keep
+it. Sadly, it is the newest one and we already have others.
+
+
+- "i2c-scl-has-clk-low-timeout"
+
+AFAIU this binding tells that the controller can do clock stretching.
+But what for? I don't see why this is important for clients. If
+anything, then it would be interesting if the *client* can do clock
+stretching and if the controller can actually handle that. But no need
+to describe it in DT, we have this as an adapter quirk already
+'I2C_AQ_NO_CLK_STRETCH'. Two controllers use it, but no client checks
+for it so far. Coming back to this binding, it is also unused in the
+kernel.
+
+Suggestion: let's remove it
+
+
+- "i2c-scl-clk-low-timeout-us"
+
+The description says "Number of microseconds the clock line needs to be
+pulled down in order to force a waiting state." What does "forcing a
+waiting state" mean here? I don't understand this description.
+
+It is used in the i2c-mpc driver. The use case is simply to put it into
+the 'struct i2c_adapter.timeout' member. That timeout is used to
+determine if a transfer failed. So, to me, "i2c-transfer-timeout-us"
+makes a lot more sense to use here.
+
+Suggestion: let's remove this binding and conver i2c-mpc to
+"i2c-transfer-timeout-us". Yes, not nice to have two deprecated
+bindings, but things happened.
+
+
+So, these are my thoughts about the current situation. I might have
+missed something, so if you have anything to add, I am all ears.
+Comments really welcome!
+
+Happy hacking,
+
+   Wolfram
+
+
+--xZIGOEhcG+EUssnZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmXcYxcACgkQFA3kzBSg
+KbazcA/9FdG/a6oj1Ahq2MW9uT2iS/32c248QKavvuk4+DakyDmNwkCGgz+LJkeU
+gkpWjCyrEBJqIZEuOjmTJ6fW9gRercffLeu7a9Cq/U6XN4foGudN38y9ou5sfikq
+uCyCKbVok919aiPczJbnm4IhyG+wp4+isxXZWpLd7zUQezgGC/4RCi1ifwW7LQ6d
+3Caobc5O5na6En9+xeEDyKf1iC0ymU3hVaXKIrIGEts9SKtGfCht//HvCuLs2pWg
+YAv+pUFSCFUBn1zGzj31CO3RKAFkVZSn0IWBqdqub6/oFh6+GsKCQ6ZdkFgQQtmL
+O3Mtaw9SjBw48e9frh2rpbdZHJO1+ovSOu7JG3YyZ516dtaVCLa+Ze0oePQi3H6C
+zbpDi2azM8kqW9zVqZhYVLd2TyT4xS6jfaYmoUY3eDSzH/U/cMEq4+bot8ZQXMBG
+yJRLV4l84PpHD+Duf3/kEG8I+/yMom6VHBNQKexuMOZjUpYJSYWoQd5Cs3VYR/oD
+97kkm1xnNBteKA7qaFkcFIEQ/mjfY4bctLiyNusfgKSjzrKu/5uRlqyIboDAMEO7
+3roJyes3F18Vt5wB8x3cIhuF0qCk6dx/ZRPSEeT9QX2AIw0kRKi091O5SQmDTlpq
+c3BXsgELnazLw4fYYTJqEzNOa4jHazYIp6Jqo3HfXRczcL6uefM=
+=9Gr2
+-----END PGP SIGNATURE-----
+
+--xZIGOEhcG+EUssnZ--
