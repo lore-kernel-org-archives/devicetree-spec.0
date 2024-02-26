@@ -1,125 +1,124 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz [202.36.163.20])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6206B12C521;
-	Mon, 26 Feb 2024 14:45:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DF367F7EC
+	for <devicetree-spec@vger.kernel.org>; Mon, 26 Feb 2024 20:20:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.36.163.20
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708958718; cv=none; b=mSc/GN4HN2eJfPLm+nergrLYlyT9oBiLyyMeMKeFuEh/il0aWuc8TGqALJ/JNWx0Ha81LXlDVZj4t4JSWeiDuxqchmHqsmDKxRs6mXYErEOKu3BCAAiymKyMyIrhNr9ruNE9BgTahfE59DYT1fyk7vGKVPdM5/FFMPcO4Aa9jl8=
+	t=1708978834; cv=none; b=nAyWMFVioV1EnGszkGPnVZPIBg6sVfl3BKqV5oHvZMDrWsNbRfFUFb4cFvGdg338jXEVeiX2CEmG1iRNrLUW30nBs1hxdkC/6xit0r/UZ0L22JkqCaePqYm7H3RJS41zNkk+K0GIbJ7ue5Y1PFkw9voSTGFM67u4yasygf6u2gc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708958718; c=relaxed/simple;
-	bh=qqBpgIJh+XSrGEenVQxqM7Ai4RpcSrHI+XiY6MqjRI4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Content-Type; b=dC91PcGrd8xrgzJ1UrdXTyiJtBgrtipzuq0TpnjYtm6gxno1QD8/1hs951pVvDaZqpljjP3/JZm8hlhPTExWbb1u1Wkri3TiYX9yJhPzZUKbtoGgMzI/90tovRHaxUeLO2eYNNVYFecgBmmHtZUcJ51HhrmO2FBgsGxwxwvWjF8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qvO8bHcS; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1708978834; c=relaxed/simple;
+	bh=eeyyePzAcRyfPyMQ0qx2GLi/jnbTg2jTyBTddGvFstc=;
+	h=From:To:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=Yd1ufR8F3c6RzeD5rmYerXpBGffvSl5T4nR5f9jrRMyHnLiaK4AH/Ug/2973OFQqGkPkb4dw6HQeMAInRz4IHs5paZPVIrs45Nkek/ILkLmQf1+/GYowDMzI36GuPULAz9N0ukgebeXtYWcWgsGRRYZPN+28bhWtLtNs2z23Xy0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz; spf=pass smtp.mailfrom=alliedtelesis.co.nz; dkim=pass (2048-bit key) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b=HEKEP5zn; arc=none smtp.client-ip=202.36.163.20
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alliedtelesis.co.nz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qvO8bHcS"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EEF31C433F1;
-	Mon, 26 Feb 2024 14:45:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1708958718;
-	bh=qqBpgIJh+XSrGEenVQxqM7Ai4RpcSrHI+XiY6MqjRI4=;
-	h=References:In-Reply-To:From:Date:Subject:To:From;
-	b=qvO8bHcSVs3P73AkcBDMkN5iF1BfOBxkL5fHqBKxPZkao9X6lGDBXMhmLtB57J2Y1
-	 iERQ5c+3MGGWNKbDvYvj3ZXUSqyD78xc+RL8M26ZW1UXbcEcn4Hlrm//BWSo180Hxh
-	 CmGEvWTe2yi/DqpPd0tpzvH/ODLbfi5YaAl6yP/QxSKcTQ6FaNYwxKwgDYLveXwai/
-	 5NSP1cpAYRFNa7P1UrKDHXgJvXtCHVsajQOerQOhyE23VRUpRjte8PGsGeSEMpz6kn
-	 MmbiE9jiVOKz3+bZ6Tqv1mXxNmZMoDNRjogMACKyA8Rgv/wUKPGcHYJBF7h/2fLuCL
-	 JA2fuvRIju8SA==
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-512d6bcd696so2834282e87.1;
-        Mon, 26 Feb 2024 06:45:17 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCXf+lfaObK+bGKjMnRk3VfUxx7dzAoxBcDmk32NJ/JymghAIerj6gPMBtIOH7EFiI9M1QF573h5YcNcnL4nxCh+PA0BVBEQtC9oKuEX6vls0AziEDpPO7rf4+xV0iX6NQUhO2XZ69G+IUaS
-X-Gm-Message-State: AOJu0YxaFy0asMg/L6Z+zdDN3EL8eUpnC+hwQdly15zecnaLvfXy2avM
-	xB/yOv4N5qb7LsJKlQCfqydJzzeLsb+0kyPHfkhm7v3FhWHAIlqwTDdDhZXSrPHOTI6SN1+/Jj7
-	h8WJmV/sQ7oX5Q0EeaU4ohQf/tg==
-X-Google-Smtp-Source: AGHT+IGwZvqcMQ2VeEJa09jEXyJRGq3iKl/QPO2dyxhsCm21aP3ssF40pH2Oh/jmbIsOkgjDmh+iZFbB55/98CBniNg=
-X-Received: by 2002:a05:6512:48da:b0:512:ed31:3cdd with SMTP id
- er26-20020a05651248da00b00512ed313cddmr2174968lfb.18.1708958716153; Mon, 26
- Feb 2024 06:45:16 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="HEKEP5zn"
+Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 5003E2C0546;
+	Tue, 27 Feb 2024 09:20:30 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
+	s=mail181024; t=1708978830;
+	bh=eeyyePzAcRyfPyMQ0qx2GLi/jnbTg2jTyBTddGvFstc=;
+	h=From:To:Subject:Date:References:In-Reply-To:From;
+	b=HEKEP5zndgnrMUCE1YR3MSiSjs37fZd+W8dkubZM88yRIQ/yiSCQXKFjQ4THZ24Ok
+	 s2jkmJ3KZq9kwJv4P6snAN3KAsTE/7Tv5nOiLZ2rGZ70Qj3PmjyyJnLy+TLmQZTyJT
+	 RPGC7EbKVAIUvaD4WI+930xV+APpggFpS52p8cjlXwx3tO9Nyzg3H3TSaVZs51/2ul
+	 Lbgm930tHurqY8x8GE1QFsnwiBPsAP6YMG+GyLXS4NcETU9Z/eMqD+H28QRk82dB/R
+	 bleG9PzZ0Oie0FQGKNdiZidlFT82vwa5lQeXWgboQQ7QNb1/7vswNvQuKHe20H+1GD
+	 +ke2ghuE7OK7g==
+Received: from svr-chch-ex2.atlnz.lc (Not Verified[2001:df5:b000:bc8::76]) by svr-chch-seg1.atlnz.lc with Trustwave SEG (v8,2,6,11305)
+	id <B65dcf28e0001>; Tue, 27 Feb 2024 09:20:30 +1300
+Received: from svr-chch-ex1.atlnz.lc (2001:df5:b000:bc8::77) by
+ svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8::76) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.2.1118.40; Tue, 27 Feb 2024 09:20:30 +1300
+Received: from svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8::76) by
+ svr-chch-ex1.atlnz.lc (2001:df5:b000:bc8::77) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.48; Tue, 27 Feb 2024 09:20:29 +1300
+Received: from svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567]) by
+ svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567%15]) with mapi id
+ 15.02.1118.040; Tue, 27 Feb 2024 09:20:29 +1300
+From: Chris Packham <Chris.Packham@alliedtelesis.co.nz>
+To: Wolfram Sang <wsa@kernel.org>, "linux-i2c@vger.kernel.org"
+	<linux-i2c@vger.kernel.org>, "devicetree-spec@vger.kernel.org"
+	<devicetree-spec@vger.kernel.org>, Andi Shyti <andi.shyti@kernel.org>, "Rob
+ Herring" <robh+dt@kernel.org>, Krzysztof Kozlowski
+	<krzysztof.kozlowski+dt@linaro.org>
+Subject: Re: dtschema: i2c: messy situation about timeouts
+Thread-Topic: dtschema: i2c: messy situation about timeouts
+Thread-Index: AQHaaJvCKHBBBoL76kSB/VWxr+DQa7EcN1WA
+Date: Mon, 26 Feb 2024 20:20:29 +0000
+Message-ID: <ccb58633-5981-4b91-a6ca-a57ea1ce5e40@alliedtelesis.co.nz>
+References: <ZdxjGwvGXlDGkYs0@shikoro>
+In-Reply-To: <ZdxjGwvGXlDGkYs0@shikoro>
+Accept-Language: en-NZ, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <FBB2453B9C729143AB91DB57748C88BA@atlnz.lc>
+Content-Transfer-Encoding: base64
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <ZdxjGwvGXlDGkYs0@shikoro>
-In-Reply-To: <ZdxjGwvGXlDGkYs0@shikoro>
-From: Rob Herring <robh+dt@kernel.org>
-Date: Mon, 26 Feb 2024 08:45:03 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqKPofALm60XpexAVXj-cYZXyqo-eY0Z+Sx5q4QV0193hw@mail.gmail.com>
-Message-ID: <CAL_JsqKPofALm60XpexAVXj-cYZXyqo-eY0Z+Sx5q4QV0193hw@mail.gmail.com>
-Subject: Re: dtschema: i2c: messy situation about timeouts
-To: Wolfram Sang <wsa@kernel.org>, linux-i2c@vger.kernel.org, 
-	devicetree-spec@vger.kernel.org, Andi Shyti <andi.shyti@kernel.org>, 
-	Rob Herring <robh+dt@kernel.org>, 
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
-	Chris Packham <chris.packham@alliedtelesis.co.nz>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-SEG-SpamProfiler-Analysis: v=2.4 cv=BKkQr0QG c=1 sm=1 tr=0 ts=65dcf28e a=Xf/6aR1Nyvzi7BryhOrcLQ==:117 a=xqWC_Br6kY4A:10 a=75chYTbOgJ0A:10 a=IkcTkHD0fZMA:10 a=k7vzHIieQBIA:10 a=vU4aOG_U7roDcmFACGEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-SEG-SpamProfiler-Score: 0
 
-On Mon, Feb 26, 2024 at 4:08=E2=80=AFAM Wolfram Sang <wsa@kernel.org> wrote=
-:
->
-> Hey guys,
->
-> we have quite a messy situation regarding I2C timeouts in the dtschema.
-> Partly because I was too busy to pay detailed attention, partly because
-> reviewing dtschema changes happen on Github which I totally missed. No
-> complaining, though, here are my observations and suggestions to get it
-> straight. Comments are more than welcome.
->
-> - "i2c-transfer-timeout-us"
->
-> Description says "Number of microseconds to wait before considering an
-> I2C transfer has failed."
->
-> To me, this binding is very descriptive and makes sense. We should keep
-> it. Sadly, it is the newest one and we already have others.
->
->
-> - "i2c-scl-has-clk-low-timeout"
->
-> AFAIU this binding tells that the controller can do clock stretching.
-> But what for? I don't see why this is important for clients. If
-> anything, then it would be interesting if the *client* can do clock
-> stretching and if the controller can actually handle that. But no need
-> to describe it in DT, we have this as an adapter quirk already
-> 'I2C_AQ_NO_CLK_STRETCH'. Two controllers use it, but no client checks
-> for it so far. Coming back to this binding, it is also unused in the
-> kernel.
->
-> Suggestion: let's remove it
-
-Seems like it can be implied by compatible... I'll defer to Andi.
-
->
->
-> - "i2c-scl-clk-low-timeout-us"
->
-> The description says "Number of microseconds the clock line needs to be
-> pulled down in order to force a waiting state." What does "forcing a
-> waiting state" mean here? I don't understand this description.
-
-Does the commit msg or PR help?:
-https://github.com/devicetree-org/dt-schema/pull/103
-
->
-> It is used in the i2c-mpc driver. The use case is simply to put it into
-> the 'struct i2c_adapter.timeout' member. That timeout is used to
-> determine if a transfer failed. So, to me, "i2c-transfer-timeout-us"
-> makes a lot more sense to use here.
->
-> Suggestion: let's remove this binding and conver i2c-mpc to
-> "i2c-transfer-timeout-us". Yes, not nice to have two deprecated
-> bindings, but things happened.
-
-Maybe the core code should read it instead?
-
-I think we should mark as deprecated rather than remove unless we can
-just remove the properties from the kernel. The reason being that
-every property the kernel accesses should be documented. I might start
-actually checking that. That's already done for compatible strings,
-but those are mostly defined by a common pattern we can extract while
-properties are less so.
-
-Rob
+DQpPbiAyNi8wMi8yNCAyMzowOCwgV29sZnJhbSBTYW5nIHdyb3RlOg0KPiBIZXkgZ3V5cywNCj4N
+Cj4gd2UgaGF2ZSBxdWl0ZSBhIG1lc3N5IHNpdHVhdGlvbiByZWdhcmRpbmcgSTJDIHRpbWVvdXRz
+IGluIHRoZSBkdHNjaGVtYS4NCj4gUGFydGx5IGJlY2F1c2UgSSB3YXMgdG9vIGJ1c3kgdG8gcGF5
+IGRldGFpbGVkIGF0dGVudGlvbiwgcGFydGx5IGJlY2F1c2UNCj4gcmV2aWV3aW5nIGR0c2NoZW1h
+IGNoYW5nZXMgaGFwcGVuIG9uIEdpdGh1YiB3aGljaCBJIHRvdGFsbHkgbWlzc2VkLiBObw0KPiBj
+b21wbGFpbmluZywgdGhvdWdoLCBoZXJlIGFyZSBteSBvYnNlcnZhdGlvbnMgYW5kIHN1Z2dlc3Rp
+b25zIHRvIGdldCBpdA0KPiBzdHJhaWdodC4gQ29tbWVudHMgYXJlIG1vcmUgdGhhbiB3ZWxjb21l
+Lg0KPg0KPiAtICJpMmMtdHJhbnNmZXItdGltZW91dC11cyINCj4NCj4gRGVzY3JpcHRpb24gc2F5
+cyAiTnVtYmVyIG9mIG1pY3Jvc2Vjb25kcyB0byB3YWl0IGJlZm9yZSBjb25zaWRlcmluZyBhbg0K
+PiBJMkMgdHJhbnNmZXIgaGFzIGZhaWxlZC4iDQo+DQo+IFRvIG1lLCB0aGlzIGJpbmRpbmcgaXMg
+dmVyeSBkZXNjcmlwdGl2ZSBhbmQgbWFrZXMgc2Vuc2UuIFdlIHNob3VsZCBrZWVwDQo+IGl0LiBT
+YWRseSwgaXQgaXMgdGhlIG5ld2VzdCBvbmUgYW5kIHdlIGFscmVhZHkgaGF2ZSBvdGhlcnMuDQo+
+DQo+DQo+IC0gImkyYy1zY2wtaGFzLWNsay1sb3ctdGltZW91dCINCj4NCj4gQUZBSVUgdGhpcyBi
+aW5kaW5nIHRlbGxzIHRoYXQgdGhlIGNvbnRyb2xsZXIgY2FuIGRvIGNsb2NrIHN0cmV0Y2hpbmcu
+DQo+IEJ1dCB3aGF0IGZvcj8gSSBkb24ndCBzZWUgd2h5IHRoaXMgaXMgaW1wb3J0YW50IGZvciBj
+bGllbnRzLiBJZg0KPiBhbnl0aGluZywgdGhlbiBpdCB3b3VsZCBiZSBpbnRlcmVzdGluZyBpZiB0
+aGUgKmNsaWVudCogY2FuIGRvIGNsb2NrDQo+IHN0cmV0Y2hpbmcgYW5kIGlmIHRoZSBjb250cm9s
+bGVyIGNhbiBhY3R1YWxseSBoYW5kbGUgdGhhdC4gQnV0IG5vIG5lZWQNCj4gdG8gZGVzY3JpYmUg
+aXQgaW4gRFQsIHdlIGhhdmUgdGhpcyBhcyBhbiBhZGFwdGVyIHF1aXJrIGFscmVhZHkNCj4gJ0ky
+Q19BUV9OT19DTEtfU1RSRVRDSCcuDQoNCkhtbSBJIGtub3cgb2YgYSBmZXcgYWRhcHRlcnMgdGhh
+dCBzaG91bGQgcHJvYmFibHkgc2V0IA0KSTJDX0FRX05PX0NMS19TVFJFVENIIGJhc2VkIG9uIHNv
+bWUgRXJyYXRhLiBQcm9iYWJseSBqdXN0IGEgDQpkb2N1bWVudGF0aW9uIGV4ZXJjaXNlLiBJdCB3
+b3VsZCBiZSBuaWNlIHRvIHJlamVjdCBjbGllbnRzIHRoYXQgbmVlZCB0byANCmRvIGNsb2NrIHN0
+cmV0Y2hpbmcgYnV0IG9mdGVuIGl0IGhhcHBlbnMgYXMgYSBzaWRlIGVmZmVjdCByYXRoZXIgdGhh
+biANCmJlaW5nIGludGVudGlvbmFsIChJJ3ZlIHNlZW4gdGhpcyB3aXRoIGkyYyBjbGllbnRzIGlt
+cGxlbWVudGVkIGluIA0KbWljcm9jb250cm9sbGVycykuDQoNCj4gICBUd28gY29udHJvbGxlcnMg
+dXNlIGl0LCBidXQgbm8gY2xpZW50IGNoZWNrcw0KPiBmb3IgaXQgc28gZmFyLiBDb21pbmcgYmFj
+ayB0byB0aGlzIGJpbmRpbmcsIGl0IGlzIGFsc28gdW51c2VkIGluIHRoZQ0KPiBrZXJuZWwuDQo+
+DQo+IFN1Z2dlc3Rpb246IGxldCdzIHJlbW92ZSBpdA0KPg0KPg0KPiAtICJpMmMtc2NsLWNsay1s
+b3ctdGltZW91dC11cyINCj4NCj4gVGhlIGRlc2NyaXB0aW9uIHNheXMgIk51bWJlciBvZiBtaWNy
+b3NlY29uZHMgdGhlIGNsb2NrIGxpbmUgbmVlZHMgdG8gYmUNCj4gcHVsbGVkIGRvd24gaW4gb3Jk
+ZXIgdG8gZm9yY2UgYSB3YWl0aW5nIHN0YXRlLiIgV2hhdCBkb2VzICJmb3JjaW5nIGENCj4gd2Fp
+dGluZyBzdGF0ZSIgbWVhbiBoZXJlPyBJIGRvbid0IHVuZGVyc3RhbmQgdGhpcyBkZXNjcmlwdGlv
+bi4NCj4NCj4gSXQgaXMgdXNlZCBpbiB0aGUgaTJjLW1wYyBkcml2ZXIuIFRoZSB1c2UgY2FzZSBp
+cyBzaW1wbHkgdG8gcHV0IGl0IGludG8NCj4gdGhlICdzdHJ1Y3QgaTJjX2FkYXB0ZXIudGltZW91
+dCcgbWVtYmVyLiBUaGF0IHRpbWVvdXQgaXMgdXNlZCB0bw0KPiBkZXRlcm1pbmUgaWYgYSB0cmFu
+c2ZlciBmYWlsZWQuIFNvLCB0byBtZSwgImkyYy10cmFuc2Zlci10aW1lb3V0LXVzIg0KPiBtYWtl
+cyBhIGxvdCBtb3JlIHNlbnNlIHRvIHVzZSBoZXJlLg0KPg0KPiBTdWdnZXN0aW9uOiBsZXQncyBy
+ZW1vdmUgdGhpcyBiaW5kaW5nIGFuZCBjb252ZXIgaTJjLW1wYyB0bw0KPiAiaTJjLXRyYW5zZmVy
+LXRpbWVvdXQtdXMiLiBZZXMsIG5vdCBuaWNlIHRvIGhhdmUgdHdvIGRlcHJlY2F0ZWQNCj4gYmlu
+ZGluZ3MsIGJ1dCB0aGluZ3MgaGFwcGVuZWQuDQoNClNvdW5kcyBsaWtlIGEgZ29vZCBpZGVhLiBX
+ZSdkIG9idmlvdXNseSBuZWVkIHRvIGtlZXAgc3VwcG9ydCBmb3IgdGhlIA0KZXhpc3RpbmcgcHJv
+cGVydHkgYnV0IGl0IHdvdWxkbid0IGJlIGhhcmQgdG8gYWRkIA0KImkyYy10cmFuc2Zlci10aW1l
+b3V0LXVzIi4gSSdsbCB0cnkgdG8gd2hpcCB1cCBhIHBhdGNoIGZvciB0aGF0IHNvbWV0aW1lIA0K
+dGhpcyB3ZWVrLCBqdXN0IG5lZWQgdG8gZHVzdCBvZmYgbXkgRnJlZXNjYWxlIGJvYXJkcy4NCg0K
+PiBTbywgdGhlc2UgYXJlIG15IHRob3VnaHRzIGFib3V0IHRoZSBjdXJyZW50IHNpdHVhdGlvbi4g
+SSBtaWdodCBoYXZlDQo+IG1pc3NlZCBzb21ldGhpbmcsIHNvIGlmIHlvdSBoYXZlIGFueXRoaW5n
+IHRvIGFkZCwgSSBhbSBhbGwgZWFycy4NCj4gQ29tbWVudHMgcmVhbGx5IHdlbGNvbWUhDQo+DQo+
+IEhhcHB5IGhhY2tpbmcsDQo+DQo+ICAgICBXb2xmcmFtDQo+
