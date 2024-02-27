@@ -1,79 +1,114 @@
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEED656458
-	for <devicetree-spec@vger.kernel.org>; Tue, 27 Feb 2024 09:59:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.27.42.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAD5413AA41;
+	Tue, 27 Feb 2024 12:57:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709027946; cv=none; b=okfsQvNvPdnb0GEdRZgHl9DO7A6koMJEm+8Tu3sjuLgq6lpfcnua+OeFj/tjv6XHn+KdyIf6onBeLzXNkQoVUurkZKHBKp4J4IQAJm1eZHiBxDRr7sMHH9X9nmGocB3Y1zdIngm/HpFsXNKalJv2Q9BtnAgJTTzAkPxHf0mE3CM=
+	t=1709038676; cv=none; b=ByceTqKRSgF0Tqv+JZNLerIt4td7Q4WG3EkIPTVBKRM80j1g4igwl/sak8BzMfEjooMngWTufa+sBIyrsESMyhhlov+tfoeYjnDeNAr2t0vPdMGKOK598m6AnFfpYhey/OdyCBgY6/WpZw5WYH3NV3P7wygjzY/mKySwkvLfwMU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709027946; c=relaxed/simple;
-	bh=kLtkdKzs02s+iS8m74tchSxsMGBDiqvghfIqLUrU+xE=;
-	h=MIME-Version:Date:From:To:Subject:Message-ID:Content-Type; b=cF7UtTXMLaV30x6FLf197ZcZwRawSgWubHj2zMjX6yXGcF62mRD+YMvfd7Q6R9ESHAsrDcVW4rYOJz3dERuTAXQl8J9jv0Ey2ZZiujnLnF2WJSV+8v78d5bUENaC0Dbq/z806hSCa+EWxEegPiysJH9zTpRoeH13iHSu/J8Qcao=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=free.fr; spf=pass smtp.mailfrom=free.fr; dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.b=rXYzTCQY; arc=none smtp.client-ip=212.27.42.2
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=free.fr
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=free.fr
+	s=arc-20240116; t=1709038676; c=relaxed/simple;
+	bh=tbfKlNGs1QVBMBXcmvRcsmKNsP0qMZgurrAk/JiojBQ=;
+	h=Date:From:To:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=T22TFZWn3t+9lHNY+dXE4Q056MM9hlihov/O/kq2l2v7PNsu8BplrA6dK//5tBuL4FIXae0OXkoCOzsqZ4ZI0Tm9kGrnZ0/rwVNkuskhPMu+2ohCl5AeLbCs0ovOPvCyMwON25sDq9V7Gbe1D7MhfoPqw9SyMl6TwR/bSJTxEUY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UYD8xPb9; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.b="rXYzTCQY"
-Received: from webmail.free.fr (unknown [172.20.246.3])
-	(Authenticated sender: sylvain.saboua@free.fr)
-	by smtp2-g21.free.fr (Postfix) with ESMTPA id AAA9A2003F3
-	for <devicetree-spec@vger.kernel.org>; Tue, 27 Feb 2024 10:58:56 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
-	s=smtp-20201208; t=1709027936;
-	bh=kLtkdKzs02s+iS8m74tchSxsMGBDiqvghfIqLUrU+xE=;
-	h=Date:From:To:Subject:From;
-	b=rXYzTCQY/ovy+s7aHrRNg2vEEWWTZtyWoPF3GNVc8xf6BHdpASRdCXzJ2CF8MzbFf
-	 2pQD/PGTz7wRw+b6YAO4BLNa48nIzYrXz/Po8IkvA4lN+S1NoVog6LSt8AeB4+mXGk
-	 flSpTT+Hd4nBEeQ6RmPNb8I571abRUfGC1+bFnwgMli9NZKCMyq3sn2Ynq2Z6ZEx8o
-	 l4M7QHxy1n1UD5p5JctHxWDcrmNyPVGAVRlACGmtLmek6+5yY0GkioJkl9a0OhSNCy
-	 XmXRTmfDJwaVjES5i/tcv4COlYD6iLfSCn4QywHkus9GkJA80wsCbYbkl2DsRoMfLD
-	 KhTwW9zMqXjbg==
-Received: from 2001:861:2c20:70:9990:9da1:3cd7:ba56
- via 2001:861:2c20:70:9990:9da1:3cd7:ba56
- by webmail.free.fr
- with HTTP (HTTP/1.0 POST); Tue, 27 Feb 2024 10:58:56 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UYD8xPb9"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 148A0C433C7;
+	Tue, 27 Feb 2024 12:57:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1709038675;
+	bh=tbfKlNGs1QVBMBXcmvRcsmKNsP0qMZgurrAk/JiojBQ=;
+	h=Date:From:To:Subject:References:In-Reply-To:From;
+	b=UYD8xPb9N7w4Vo7PedVTKTFd/tzQpeceNX0F4+/Es7UIV8aEfrjX+WhBdUTFED1L4
+	 ynVxfjFL8QKIkGSKM6nOn2kTlfDWW2cpalI2qckezrxKR98GdZ/0NFH58qctQry3iG
+	 0j1myIQaN9HY+88GBU8tKfPz9NmoGVBSleGFiazQtkjEExAYhXSdzAszzNGf2X+rNH
+	 MWCFayiGX4i74iH+3Pbj9B3lzXQqbAaTDyy7mbnvJZ0XWeC+U7tJBAPAI3fU5JFit+
+	 RWKlV0XET8FA3fIDb/5cbjbFQeClRqxiwEFRURhRe0fzx5RhsuOjhWkN6X1Le2bLI1
+	 OYexDxQ2gP0yQ==
+Date: Tue, 27 Feb 2024 13:57:52 +0100
+From: Wolfram Sang <wsa@kernel.org>
+To: Andi Shyti <andi.shyti@kernel.org>, linux-i2c@vger.kernel.org,
+	devicetree-spec@vger.kernel.org, Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Chris Packham <chris.packham@alliedtelesis.co.nz>
+Subject: Re: dtschema: i2c: messy situation about timeouts
+Message-ID: <Zd3cUKCHnn9n57pD@shikoro>
+Mail-Followup-To: Wolfram Sang <wsa@kernel.org>,
+	Andi Shyti <andi.shyti@kernel.org>, linux-i2c@vger.kernel.org,
+	devicetree-spec@vger.kernel.org, Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Chris Packham <chris.packham@alliedtelesis.co.nz>
+References: <ZdxjGwvGXlDGkYs0@shikoro>
+ <c6yyhxzqfavqjphumemgjn7ick4ddjzhlxfjb6wtgsfvdetdqt@radooxy4o4mx>
+ <Zd2LT-OM4KkUXCXn@ninjato>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Tue, 27 Feb 2024 10:58:56 +0100
-From: Sylvain Saboua <sylvain.saboua@free.fr>
-To: devicetree-spec@vger.kernel.org
-Subject: =?UTF-8?Q?Firefly_RK3399_=E2=80=9CInvalid_device_tree=2C_expect_?=
- =?UTF-8?Q?boot_to_fail=E2=80=9D_=28openbsd-current=29?=
-User-Agent: Webmail Free/1.6.5
-Message-ID: <1a9657a715f2929793c1687baf80129d@free.fr>
-X-Sender: sylvain.saboua@free.fr
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="rmZo/KOIoI01PeJJ"
+Content-Disposition: inline
+In-Reply-To: <Zd2LT-OM4KkUXCXn@ninjato>
 
-Hello,
 
-I am trying to boot and install openbsd on my Firefly RK3399 ARM SoC.
+--rmZo/KOIoI01PeJJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-With the latest packages I get the following error :
-WARNING: Invalid device tree, expect boot to fail
-(line n° 152 in the full output https://pastebin.com/5gsrd5Jz)
 
-And the boot indeed fails.
-This is very strange, given that using the same method and dtb file
-a few years ago circa 2019, at the time when obsd support was minimal,
-I managed to boot and install it on the very same card.
-What could have gone wrong ?
+> > > - "i2c-scl-clk-low-timeout-us"
+> > >=20
+> > > The description says "Number of microseconds the clock line needs to =
+be
+> > > pulled down in order to force a waiting state." What does "forcing a
+> > > waiting state" mean here? I don't understand this description.
+> >=20
+> > It comes from the specification. The clock stretching is given as
+> > an interval that can be tweaked depending on the hardware.
+>=20
+> You mean the maximum clock stretching is tweakable? That, in deed, could
+> be a binding in the future, in theory. Yet, it would need support in the
+> client drivers. Like a touchscreen driver which assumes a reset after a
+> certain time of inactivity.
 
-The incrimined file is 
-/usr/local/share/dtb/arm64/rockchip/rk3399-firefly.dtb
-provided by the dtb package : https://openports.pl/path/sysutils/dtb
+To sum it up: a binding defining the maximum time for clock stretching
+makes sense in theory. I am currently not aware of a controller where
+this could be used (but I surely don't know them all). Most of them keep
+SCL low as long as they are busy internally. Not tweakable. So, we defer
+this until there is a usecase.
 
-I also mailed the openbsd-arm mailing list earlier when trying to boot
-from SD card and am now stuck there
-https://marc.info/?l=openbsd-arm&m=170836038500353&w=2
+If we ever add it, the above name of the binding cannot be used anymore
+because i2c-mpc used it with a different purpose. Not so bad IMO because
+"scl-clk" is a pleonasm anyway. I'd suggest "i2c-scl-max-stretch-us" but
+am open for suggestions then.
 
-Thank you
--- 
-Sylvain Saboua
-www.saboua.xyz
+This one can just be deprecated, I'd say.
+
+Happy hacking!
+
+
+--rmZo/KOIoI01PeJJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmXd3EwACgkQFA3kzBSg
+KbYBhBAArD6p5Di885LK1miM1NVqc0cc9V7Ug9qaeGp/6uNs555QfG9iyC5Mab+S
+MYcLNTA2EfKchsPFMo/+guQXIFHs5alzu2TO7bHq9IeuPMpZco4FADxM1h5mnswR
+LktpTlxjXc9DFOswbGFMEuBlSCpELp529Mi4ZmYUjsDRlKP+LLofEQa3Qu5EX5S2
+AemRAg0id2KQdqswNZm2PJjTvWybcoDi4ycRUxbTjy7+67CiU66UfGWhsYDxE/rn
+F0TJ7GYuBOqRga7SUx5f3lfYYpwajR8X4qJms9sYdjtOtMVKRu1zVKdco8bIjlwM
+vqkx6mYqnfgv1jdrABiuNqv+uii2wUKAPVcJrg07/M/9q3KCTF9ceH6Zl28y9fWH
+tsiE6JNkzMLJVOcELMjSHEBJcDxW9lUPAWCo6jDNkUjqwJv4FoZn0w5Oa/Q6mzYu
+QgHYs1VEffMafh1VFOpdiMrnaxUn5778gtqwzHX6lKjYjmLVyZ7LaRMI5d51r399
+5vFO6HdBpxIO6TViDGMV7J5HbGAY9k5id11NRc0VE6yCyeY5F/oazHoZHgJDwHGj
+aJgB5wJlmzGw/5spMz6LcXUlD3k0mJsM6uknKPKV9/ATEBzOzhuIOqrvXKXKy2nD
+MtdzD1+seoT2eN8439ORxQE85lm1TQ1XLBP5G25EgOrFI+LEkkA=
+=t+gF
+-----END PGP SIGNATURE-----
+
+--rmZo/KOIoI01PeJJ--
