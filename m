@@ -1,132 +1,60 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from c.mail.sonic.net (c.mail.sonic.net [64.142.111.80])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 446A31366;
-	Tue, 27 Feb 2024 00:03:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E5801E4AE;
+	Tue, 27 Feb 2024 06:52:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=64.142.111.80
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708992232; cv=none; b=o4SajGRy9EB4dLBYIuWsoT6elxm6e4XiHhpEM/d3oU/CJZBBTXpo9YQqC/yBVbv29YHcpOGR1ttYNWyaw2gQNcg3SDb6JluzQuCa2FwQ8PAy5ll4qzL55et+vj+hvX5h6TW7ngxKejqi9uglyzCh7Kpm8A7OoH/5i692mbi6LdI=
+	t=1709016744; cv=none; b=r2Pg7mDacyK/GEWZ08OucnXwP7FrHc15fVtsmvv26iE70/xm7+unOT9L2w6lnl/OW47r8p4i8UuwtX/LYghRR8VfEWjwysrBAq+kkbjKYEVF0zsz4nI0CKozF1gGSIkTXch+p1MLy+dby8EwQSXY5dHjynw0RuV2MOXHo99RAKs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708992232; c=relaxed/simple;
-	bh=9wVs0aKYTFlakXRhBSb/pGMVjRFLxQlTpXtbal+hpxE=;
-	h=Date:From:To:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pxIu1GzfWBkm+MMMUj8GcKymf5gjuEMBgkmZpA+s+I0UdHrBfZy/hyvhzSdNbGrPqqG3qtPtjZqZ8b7K3asppc/z/5pjzFcslqVGn/6ojjJFpm95CGXSBpxt0u1RJ4hCb1XrGiZoowDfB2JRUzmJUuZkKiPKnFE/85c3CK2Do5I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iiEmc0Ld; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1709016744; c=relaxed/simple;
+	bh=bIkL3j1SUti+mxRknWXsGzjEHfZ++LfAOrCAj6OvBfk=;
+	h=From:To:Date:MIME-Version:Subject:Message-ID:Content-type; b=O64syhZNym7LsxdYksAm38oa0a2YTW3ieA6kxEYsnFLdWsf3tVZuE0ICQuwtNdUlyXTjXzZENAw3HG9SN6bfXyWz18E5aWMtsrKQg8OrX08nGXk2rkSNHsdy89GSTCBq00cBqTbHHgt4pZbI2VdqVt2ZKUGBrDQhBvckrZLrlQc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sonic.net; spf=pass smtp.mailfrom=sonic.net; dkim=pass (2048-bit key) header.d=sonic.net header.i=@sonic.net header.b=aIzL09UB; arc=none smtp.client-ip=64.142.111.80
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sonic.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sonic.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iiEmc0Ld"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D22FC433F1;
-	Tue, 27 Feb 2024 00:03:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1708992231;
-	bh=9wVs0aKYTFlakXRhBSb/pGMVjRFLxQlTpXtbal+hpxE=;
-	h=Date:From:To:Subject:References:In-Reply-To:From;
-	b=iiEmc0Ldus6MpMGdon7NguRIEq3LkMcp7ImTX1xNRVSUnQQcdAqT5P9fPHtAkGoVG
-	 cJwlqPICOWDG5MFdZftyz7IJRBEEAc0L5T4vKfpqGKwS05r4eoZQM0/8TLInsKM6ak
-	 n12tRTFzk9rgO5ssya1IHwvg+vAEasFNQ3UJOFfZ+Xu/+wuNReyqP9hfc3XdqwoBiI
-	 6XvhWWaizUIVJK2BkHy/ZLTnRIQ/fBwyPTu5wZ3Wde+yxbFmTQNHIzqfY2q51GJnoG
-	 pjSe0FVd9xmwdH9mu1NYnFOncx89A2ypNONmXGjk/yJp/bjcdt/a8Wlw2XsyM86g7O
-	 6rp1+3MHGRIGw==
-Date: Tue, 27 Feb 2024 01:03:47 +0100
-From: Andi Shyti <andi.shyti@kernel.org>
-To: Wolfram Sang <wsa@kernel.org>, linux-i2c@vger.kernel.org, 
-	devicetree-spec@vger.kernel.org, Rob Herring <robh+dt@kernel.org>, 
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Chris Packham <chris.packham@alliedtelesis.co.nz>
-Subject: Re: dtschema: i2c: messy situation about timeouts
-Message-ID: <c6yyhxzqfavqjphumemgjn7ick4ddjzhlxfjb6wtgsfvdetdqt@radooxy4o4mx>
-References: <ZdxjGwvGXlDGkYs0@shikoro>
+	dkim=pass (2048-bit key) header.d=sonic.net header.i=@sonic.net header.b="aIzL09UB"
+Received: from [192.168.1.94] (45-23-117-7.lightspeed.livnmi.sbcglobal.net [45.23.117.7])
+	(authenticated bits=0)
+	by c.mail.sonic.net (8.16.1/8.16.1) with ESMTPSA id 41R6qJT0030968
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Mon, 26 Feb 2024 22:52:21 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sonic.net; s=net23;
+	t=1709016742; bh=bIkL3j1SUti+mxRknWXsGzjEHfZ++LfAOrCAj6OvBfk=;
+	h=From:To:Date:MIME-Version:Subject:Message-ID:From:Subject;
+	b=aIzL09UBo6WZuOOi05cac9INBg4UZ2lS0I5Er43k8oWia8XW3LuR0k43cJAlUJequ
+	 C7ep900tsEVbjXDROo3D2Q/Kkg37trB5y7gBz7y/duBhZoz6rd7h3Cxg6p74G1x5mU
+	 Fj5PgtgpB40cm6X0hzqr/eDQhbDfEtCknrIt97z44aQ9hB47E0vR3p7RjaitqQVmO5
+	 jxgDNPFLsGvpUFTaG4g6M9HIWo+P529+7qoPwLm5aL6DpOMoBetIGu/nTXUmqC3blJ
+	 qRAF2l7yQSlagk2bZ/6ctg9BDKArKzNdn8FPO2UShOMuagVryll30OrxJaP1LeNpcK
+	 SEncqoL4Z4GCA==
+From: delyan@sonic.net
+To: devicetree-spec+unsubscribe@vger.kernel.org,
+        devicetree-spec@vger.kernel.org, dmaengine+subscribe@vger.kernel.org,
+        dmaengine+unsubscribe@vger.kernel.org, dmaengine@vger.kernel.org,
+        dwarves+subscribe@vger.kernel.org, dwarves+unsubscribe@vger.kernel.org,
+        dwarves@vger.kernel.org, ecryptfs+subscribe@vger.kernel.org,
+        ecryptfs+unsubscribe@vger.kernel.org, ecryptfs@vger.kernel.org,
+        fio+subscribe@vger.kernel.org, fio+unsubscribe@vger.kernel.org,
+        fio@vger.kernel.org, fstests+subscribe@vger.kernel.org
+Date: Tue, 27 Feb 2024 01:52:18 -0500
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ZdxjGwvGXlDGkYs0@shikoro>
+Subject: subscribe
+Message-ID: <65DD86A2.17414.445FAC2F@delyan.sonic.net>
+Priority: normal
+X-mailer: Pegasus Mail for Windows (4.80.1028)
+Content-type: text/plain; charset=US-ASCII
+Content-transfer-encoding: 7BIT
+Content-description: Mail message body
+X-Sonic-CAuth: UmFuZG9tSVaRmDnAe7qtFHsZVmHzmJDjNevSWY0HV8jKPtCRUAwJ+TCTxvo2u3K9QUnWHsh5kPTFmtp1BqTK3JZAz6HvHW69
+X-Sonic-ID: C;Cr9LwDzV7hGbeC5nR+6Zsg== M;+qk9wTzV7hGbeC5nR+6Zsg==
+X-Spam-Flag: Unknown
+X-Sonic-Spam-Details: not scanned (too big) by cerberusd
 
-Hi Wolfram,
-
-On Mon, Feb 26, 2024 at 11:08:27AM +0100, Wolfram Sang wrote:
-> Hey guys,
-> 
-> we have quite a messy situation regarding I2C timeouts in the dtschema.
-> Partly because I was too busy to pay detailed attention, partly because
-> reviewing dtschema changes happen on Github which I totally missed. No
-> complaining, though, here are my observations and suggestions to get it
-> straight. Comments are more than welcome.
-> 
-> - "i2c-transfer-timeout-us"
-> 
-> Description says "Number of microseconds to wait before considering an
-> I2C transfer has failed."
-> 
-> To me, this binding is very descriptive and makes sense. We should keep
-> it. Sadly, it is the newest one and we already have others.
-> 
-> 
-> - "i2c-scl-has-clk-low-timeout"
-> 
-> AFAIU this binding tells that the controller can do clock stretching.
-> But what for?
-
-One of the controllers that was sent a while back required some
-hardware description because, in some versions, clock stretching
-was supported in the hardware.
-
-Depending on this, the driver could either use it or force the
-clock GPIO value down.
-
-That's why I made this change.
-
-The naming is a bit fancy, but it depends on the spec used as a
-reference; smbus, i2c or specific drivers often call it in a
-different way.
-
-The naming is a bit fancy, but it depends on the specification
-used as a reference; SMBus, I2C, or specific drivers often refer
-to it differently.
-
-> I don't see why this is important for clients. If
-> anything, then it would be interesting if the *client* can do clock
-> stretching and if the controller can actually handle that. But no need
-> to describe it in DT, we have this as an adapter quirk already
-> 'I2C_AQ_NO_CLK_STRETCH'. Two controllers use it, but no client checks
-> for it so far. Coming back to this binding, it is also unused in the
-> kernel.
-> 
-> Suggestion: let's remove it
-> 
-> 
-> - "i2c-scl-clk-low-timeout-us"
-> 
-> The description says "Number of microseconds the clock line needs to be
-> pulled down in order to force a waiting state." What does "forcing a
-> waiting state" mean here? I don't understand this description.
-
-It comes from the specification. The clock stretching is given as
-an interval that can be tweaked depending on the hardware.
-
-So far I haven't seen anyone using it, though.
-
-Andi
-
-> It is used in the i2c-mpc driver. The use case is simply to put it into
-> the 'struct i2c_adapter.timeout' member. That timeout is used to
-> determine if a transfer failed. So, to me, "i2c-transfer-timeout-us"
-> makes a lot more sense to use here.
-> 
-> Suggestion: let's remove this binding and conver i2c-mpc to
-> "i2c-transfer-timeout-us". Yes, not nice to have two deprecated
-> bindings, but things happened.
-> 
-> 
-> So, these are my thoughts about the current situation. I might have
-> missed something, so if you have anything to add, I am all ears.
-> Comments really welcome!
-> 
-> Happy hacking,
-> 
->    Wolfram
-> 
-
-
+subscribe
