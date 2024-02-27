@@ -1,128 +1,79 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4495953E02;
-	Tue, 27 Feb 2024 07:12:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEED656458
+	for <devicetree-spec@vger.kernel.org>; Tue, 27 Feb 2024 09:59:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.27.42.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709017939; cv=none; b=H+dEXSsORHuYz+udsQo8cTC2i6OlHc+w1JccDlSBdxVGgImB/zq3jZB88uRkvTtNV00WX+27gPS9H6MYEljbMGRLdVkUFVeSdf6ehDntnr5Ud+rD/HO00AKkgNcCCBdxD399CX+QrIpGVtIywFHCbGumUQ4ZYCl6JS8Pp47x+Wc=
+	t=1709027946; cv=none; b=okfsQvNvPdnb0GEdRZgHl9DO7A6koMJEm+8Tu3sjuLgq6lpfcnua+OeFj/tjv6XHn+KdyIf6onBeLzXNkQoVUurkZKHBKp4J4IQAJm1eZHiBxDRr7sMHH9X9nmGocB3Y1zdIngm/HpFsXNKalJv2Q9BtnAgJTTzAkPxHf0mE3CM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709017939; c=relaxed/simple;
-	bh=/ZlS3JVss0ofKLJzt6zCP6bT652Dlj49VoFRn7/lXnE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=PbUpVsQeEI6dPixfy2Bc5iMKTyqszaI4VydqYP09e8olYreJX6fcGylQfFpAXxAkqj8RYglBhnZPBQDBPJ49a7W6XkpYOMJVZUHFZP47mmBDGgUhhGi7d8QpgYpgEIzivjMg2hUVZAfGEloMcY/pHkP2Tb9L8fdZ0M2fxcDMSZ0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y4lMkKQn; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1709027946; c=relaxed/simple;
+	bh=kLtkdKzs02s+iS8m74tchSxsMGBDiqvghfIqLUrU+xE=;
+	h=MIME-Version:Date:From:To:Subject:Message-ID:Content-Type; b=cF7UtTXMLaV30x6FLf197ZcZwRawSgWubHj2zMjX6yXGcF62mRD+YMvfd7Q6R9ESHAsrDcVW4rYOJz3dERuTAXQl8J9jv0Ey2ZZiujnLnF2WJSV+8v78d5bUENaC0Dbq/z806hSCa+EWxEegPiysJH9zTpRoeH13iHSu/J8Qcao=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=free.fr; spf=pass smtp.mailfrom=free.fr; dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.b=rXYzTCQY; arc=none smtp.client-ip=212.27.42.2
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=free.fr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=free.fr
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Y4lMkKQn"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73704C433F1;
-	Tue, 27 Feb 2024 07:12:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1709017938;
-	bh=/ZlS3JVss0ofKLJzt6zCP6bT652Dlj49VoFRn7/lXnE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Y4lMkKQnJoH3dc2QJdgSIcV8tRagsw9X3GtjKarMRVzh0NfAbiHhAXIx95CwjAQbu
-	 Xo9fTbI7XkMMP7U0GpkJ9D18u0NzQTOmLHVE6h/TJX9gzjAdyn62TB2jTZOElu/10A
-	 d3jHvt8X9/oMhmGyL7jKzwYG4nPEYpwom66yLihfDB5XJ15oz/jqE7cLH082aToFKb
-	 Y8VQnxNhq1j3zlor4KQH8YQPQ4kDKe+gktWH2FrUzl/gVeocEWjxcFEjTJGGNIpFYE
-	 LKBqRws57JSaIFkY5KaFZ/SSFLx5/HaTKzo21i9AFwG2CIq7Cj7aZZUHF1teZsoN1o
-	 P1r08YcKMGE0A==
-Date: Tue, 27 Feb 2024 08:12:15 +0100
-From: Wolfram Sang <wsa@kernel.org>
-To: Andi Shyti <andi.shyti@kernel.org>
-Cc: linux-i2c@vger.kernel.org, devicetree-spec@vger.kernel.org,
-	Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Chris Packham <chris.packham@alliedtelesis.co.nz>
-Subject: Re: dtschema: i2c: messy situation about timeouts
-Message-ID: <Zd2LT-OM4KkUXCXn@ninjato>
-Mail-Followup-To: Wolfram Sang <wsa@kernel.org>,
-	Andi Shyti <andi.shyti@kernel.org>, linux-i2c@vger.kernel.org,
-	devicetree-spec@vger.kernel.org, Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
-	Chris Packham <chris.packham@alliedtelesis.co.nz>
-References: <ZdxjGwvGXlDGkYs0@shikoro>
- <c6yyhxzqfavqjphumemgjn7ick4ddjzhlxfjb6wtgsfvdetdqt@radooxy4o4mx>
+	dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.b="rXYzTCQY"
+Received: from webmail.free.fr (unknown [172.20.246.3])
+	(Authenticated sender: sylvain.saboua@free.fr)
+	by smtp2-g21.free.fr (Postfix) with ESMTPA id AAA9A2003F3
+	for <devicetree-spec@vger.kernel.org>; Tue, 27 Feb 2024 10:58:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+	s=smtp-20201208; t=1709027936;
+	bh=kLtkdKzs02s+iS8m74tchSxsMGBDiqvghfIqLUrU+xE=;
+	h=Date:From:To:Subject:From;
+	b=rXYzTCQY/ovy+s7aHrRNg2vEEWWTZtyWoPF3GNVc8xf6BHdpASRdCXzJ2CF8MzbFf
+	 2pQD/PGTz7wRw+b6YAO4BLNa48nIzYrXz/Po8IkvA4lN+S1NoVog6LSt8AeB4+mXGk
+	 flSpTT+Hd4nBEeQ6RmPNb8I571abRUfGC1+bFnwgMli9NZKCMyq3sn2Ynq2Z6ZEx8o
+	 l4M7QHxy1n1UD5p5JctHxWDcrmNyPVGAVRlACGmtLmek6+5yY0GkioJkl9a0OhSNCy
+	 XmXRTmfDJwaVjES5i/tcv4COlYD6iLfSCn4QywHkus9GkJA80wsCbYbkl2DsRoMfLD
+	 KhTwW9zMqXjbg==
+Received: from 2001:861:2c20:70:9990:9da1:3cd7:ba56
+ via 2001:861:2c20:70:9990:9da1:3cd7:ba56
+ by webmail.free.fr
+ with HTTP (HTTP/1.0 POST); Tue, 27 Feb 2024 10:58:56 +0100
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="KbqwGrd1llsCvBnc"
-Content-Disposition: inline
-In-Reply-To: <c6yyhxzqfavqjphumemgjn7ick4ddjzhlxfjb6wtgsfvdetdqt@radooxy4o4mx>
+Date: Tue, 27 Feb 2024 10:58:56 +0100
+From: Sylvain Saboua <sylvain.saboua@free.fr>
+To: devicetree-spec@vger.kernel.org
+Subject: =?UTF-8?Q?Firefly_RK3399_=E2=80=9CInvalid_device_tree=2C_expect_?=
+ =?UTF-8?Q?boot_to_fail=E2=80=9D_=28openbsd-current=29?=
+User-Agent: Webmail Free/1.6.5
+Message-ID: <1a9657a715f2929793c1687baf80129d@free.fr>
+X-Sender: sylvain.saboua@free.fr
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
 
+Hello,
 
---KbqwGrd1llsCvBnc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I am trying to boot and install openbsd on my Firefly RK3399 ARM SoC.
 
-Hi Andi,
+With the latest packages I get the following error :
+WARNING: Invalid device tree, expect boot to fail
+(line n° 152 in the full output https://pastebin.com/5gsrd5Jz)
 
-> > - "i2c-scl-has-clk-low-timeout"
-> >=20
-> > AFAIU this binding tells that the controller can do clock stretching.
-> > But what for?
->=20
-> One of the controllers that was sent a while back required some
-> hardware description because, in some versions, clock stretching
-> was supported in the hardware.
+And the boot indeed fails.
+This is very strange, given that using the same method and dtb file
+a few years ago circa 2019, at the time when obsd support was minimal,
+I managed to boot and install it on the very same card.
+What could have gone wrong ?
 
-I see. Still, I think this can (and should be handled) with
-I2C_AQ_NO_CLK_STRETCH.
+The incrimined file is 
+/usr/local/share/dtb/arm64/rockchip/rk3399-firefly.dtb
+provided by the dtb package : https://openports.pl/path/sysutils/dtb
 
-> The naming is a bit fancy, but it depends on the specification
-> used as a reference; SMBus, I2C, or specific drivers often refer
-> to it differently.
+I also mailed the openbsd-arm mailing list earlier when trying to boot
+from SD card and am now stuck there
+https://marc.info/?l=openbsd-arm&m=170836038500353&w=2
 
-Yes. I'd give I2C specs most importance, controller documentation least.
-And probably a salt of personal preference :)
-
-> > - "i2c-scl-clk-low-timeout-us"
-> >=20
-> > The description says "Number of microseconds the clock line needs to be
-> > pulled down in order to force a waiting state." What does "forcing a
-> > waiting state" mean here? I don't understand this description.
->=20
-> It comes from the specification. The clock stretching is given as
-> an interval that can be tweaked depending on the hardware.
-
-You mean the maximum clock stretching is tweakable? That, in deed, could
-be a binding in the future, in theory. Yet, it would need support in the
-client drivers. Like a touchscreen driver which assumes a reset after a
-certain time of inactivity.
-
-> So far I haven't seen anyone using it, though.
-
-The MPC driver used it, just for a different purpose.  It was used for a
-timeout of the total transfer. That's a different thing. So, I suggested
-the conversion.
-
-Happy hacking,
-
-   Wolfram
-
-
---KbqwGrd1llsCvBnc
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmXdi0wACgkQFA3kzBSg
-KbZOehAAl2QMPUg3dviQislT/+HYpnK5WKVFXRt5/KzfdI/nKY5U/c+mcjLxtEcV
-3i9jctgQ6v0Ww/8eOj419UDjcUe/FEd9EknmiAngT5vEMMMvRiJI9DlkA3NxtMaz
-2tcpYlpZWmnrR2eyvkiHPKascOEM/igjiZl3ThP84TjxeWC+XmxiY5GhrM4DoN9R
-/B7nhmJT3P330Zrdet770nRv7IbwfzFxKORjRMJKsCYbT0fE/0YS9kSOsUmJSEUQ
-BAZrJ73mllsj+sSKQHey1Xf8bpofSinnsPKnDZ6QLZfG36Goie1kuGsTZZYRQ9HS
-vSStpb4nZhCouEQlrmWMGB+FLmLfdS/wkMdw90qaHPR9Nh6IphDB8xxGS6GmZwAk
-6oiMgAo6ApVx7t0NaetIVlOphdDV+71vmx/ahmC1irtM/9RKBQ42c88L3qAEFnA/
-RHQsLtxiE79HfjOCoLA/5NMAdxkWjGWSniYQkOFlgZDDvvsmNdkdKOdXJjm8Iaua
-jID81NOOnv9nnb5hJxkqiH0lUTwgClD2D6uOIufVXR0VlmNMUJOMZ63l5LjsJS39
-St8b3qvs7b6bSTL2VJ6XNISAV4B6dMZbY0o8SA/D4luUVnC0tiyMjG5ttiIkn/O+
-jb4sPpZgodGU9Kwu+KdrYAhoQrmDyScKL1tsXgfjcE62xxaD81Q=
-=OLtv
------END PGP SIGNATURE-----
-
---KbqwGrd1llsCvBnc--
+Thank you
+-- 
+Sylvain Saboua
+www.saboua.xyz
