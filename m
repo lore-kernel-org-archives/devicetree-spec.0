@@ -1,134 +1,132 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 090C21CA91;
-	Mon, 26 Feb 2024 21:24:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 446A31366;
+	Tue, 27 Feb 2024 00:03:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1708982697; cv=none; b=dMHCP3JLo4tu2UVidCljDv8qOpeN5Z0MyRxsmxBa5V0izGS9etOXrspW/pLfnJRB8IKLXCEOq84XPuBEz9OuqLixEtlSUpYCKSNn9pLjuT8WYVHzASELbnYzu+tcKvYsH54eROVlKTXiJDhjG4EaHyYwocnHdIJ05xWXuT8TJSg=
+	t=1708992232; cv=none; b=o4SajGRy9EB4dLBYIuWsoT6elxm6e4XiHhpEM/d3oU/CJZBBTXpo9YQqC/yBVbv29YHcpOGR1ttYNWyaw2gQNcg3SDb6JluzQuCa2FwQ8PAy5ll4qzL55et+vj+hvX5h6TW7ngxKejqi9uglyzCh7Kpm8A7OoH/5i692mbi6LdI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1708982697; c=relaxed/simple;
-	bh=J8rnf5NHkC26worjsY8jvbTZZZ7pAOtwnba2Nt05aqA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=P3W4yLX3zpItUy4VOQCqdcipgJY1rW0iK49dhGwLnfH8K7DID0P39UxXwPZq7oRXdU7bnAzeFjQ/0dSDry/WliN576X3pniZXS3heT8L6TcF9DSjhijVMtqcGj7bgjSOcDtp3fPCLuW+YwrtZ46UK2eq4XyeaNDcqIgqwah+K6k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=htjkCQYF; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1708992232; c=relaxed/simple;
+	bh=9wVs0aKYTFlakXRhBSb/pGMVjRFLxQlTpXtbal+hpxE=;
+	h=Date:From:To:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=pxIu1GzfWBkm+MMMUj8GcKymf5gjuEMBgkmZpA+s+I0UdHrBfZy/hyvhzSdNbGrPqqG3qtPtjZqZ8b7K3asppc/z/5pjzFcslqVGn/6ojjJFpm95CGXSBpxt0u1RJ4hCb1XrGiZoowDfB2JRUzmJUuZkKiPKnFE/85c3CK2Do5I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iiEmc0Ld; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="htjkCQYF"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 30A73C433F1;
-	Mon, 26 Feb 2024 21:24:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iiEmc0Ld"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D22FC433F1;
+	Tue, 27 Feb 2024 00:03:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1708982696;
-	bh=J8rnf5NHkC26worjsY8jvbTZZZ7pAOtwnba2Nt05aqA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=htjkCQYFx/AxoxJBMHA/AkBnVJXJr8BMNkuGK/1PZYsxmemAATJUDM7vQsqd3C528
-	 4CRZT+Afp1edyQccyjwn03zj2rJfr5/ZvTSe4fEZKXbh8sr+aNTRY0wT0XJwj6TMUC
-	 yOM+zQSOCctcY1rJoSMyWDPpK5oNw6Sq/zOmKVKTMXOrudE/wIWIgsujmFtSzIxjfQ
-	 etJGysq3WYwD9ibeRwtC8U7j6KWf0CdTYIWawQyVo7Hxg18Yez4C5Z0IRDh9HqAulh
-	 WEyshJcBIz6YthDxq0w0vpSbjxIGeXpknhFW0PJPaITdoVKaICyyiJXRGveFL6sxFy
-	 7YuHHN3XlNjSw==
-Date: Mon, 26 Feb 2024 22:24:53 +0100
-From: Wolfram Sang <wsa@kernel.org>
-To: Chris Packham <Chris.Packham@alliedtelesis.co.nz>
-Cc: "linux-i2c@vger.kernel.org" <linux-i2c@vger.kernel.org>,
-	"devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+	s=k20201202; t=1708992231;
+	bh=9wVs0aKYTFlakXRhBSb/pGMVjRFLxQlTpXtbal+hpxE=;
+	h=Date:From:To:Subject:References:In-Reply-To:From;
+	b=iiEmc0Ldus6MpMGdon7NguRIEq3LkMcp7ImTX1xNRVSUnQQcdAqT5P9fPHtAkGoVG
+	 cJwlqPICOWDG5MFdZftyz7IJRBEEAc0L5T4vKfpqGKwS05r4eoZQM0/8TLInsKM6ak
+	 n12tRTFzk9rgO5ssya1IHwvg+vAEasFNQ3UJOFfZ+Xu/+wuNReyqP9hfc3XdqwoBiI
+	 6XvhWWaizUIVJK2BkHy/ZLTnRIQ/fBwyPTu5wZ3Wde+yxbFmTQNHIzqfY2q51GJnoG
+	 pjSe0FVd9xmwdH9mu1NYnFOncx89A2ypNONmXGjk/yJp/bjcdt/a8Wlw2XsyM86g7O
+	 6rp1+3MHGRIGw==
+Date: Tue, 27 Feb 2024 01:03:47 +0100
+From: Andi Shyti <andi.shyti@kernel.org>
+To: Wolfram Sang <wsa@kernel.org>, linux-i2c@vger.kernel.org, 
+	devicetree-spec@vger.kernel.org, Rob Herring <robh+dt@kernel.org>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Chris Packham <chris.packham@alliedtelesis.co.nz>
 Subject: Re: dtschema: i2c: messy situation about timeouts
-Message-ID: <Zd0Bpa2ciMHmSQrS@shikoro>
-Mail-Followup-To: Wolfram Sang <wsa@kernel.org>,
-	Chris Packham <Chris.Packham@alliedtelesis.co.nz>,
-	"linux-i2c@vger.kernel.org" <linux-i2c@vger.kernel.org>,
-	"devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Rob Herring <robh+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+Message-ID: <c6yyhxzqfavqjphumemgjn7ick4ddjzhlxfjb6wtgsfvdetdqt@radooxy4o4mx>
 References: <ZdxjGwvGXlDGkYs0@shikoro>
- <ccb58633-5981-4b91-a6ca-a57ea1ce5e40@alliedtelesis.co.nz>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="sAM/eDtNldzBf9Nw"
-Content-Disposition: inline
-In-Reply-To: <ccb58633-5981-4b91-a6ca-a57ea1ce5e40@alliedtelesis.co.nz>
-
-
---sAM/eDtNldzBf9Nw
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <ZdxjGwvGXlDGkYs0@shikoro>
 
-Hi Chris,
+Hi Wolfram,
 
-> > - "i2c-scl-has-clk-low-timeout"
-> >
-> > AFAIU this binding tells that the controller can do clock stretching.
-> > But what for? I don't see why this is important for clients. If
-> > anything, then it would be interesting if the *client* can do clock
-> > stretching and if the controller can actually handle that. But no need
-> > to describe it in DT, we have this as an adapter quirk already
-> > 'I2C_AQ_NO_CLK_STRETCH'.
->=20
-> Hmm I know of a few adapters that should probably set=20
-> I2C_AQ_NO_CLK_STRETCH based on some Errata. Probably just a=20
+On Mon, Feb 26, 2024 at 11:08:27AM +0100, Wolfram Sang wrote:
+> Hey guys,
+> 
+> we have quite a messy situation regarding I2C timeouts in the dtschema.
+> Partly because I was too busy to pay detailed attention, partly because
+> reviewing dtschema changes happen on Github which I totally missed. No
+> complaining, though, here are my observations and suggestions to get it
+> straight. Comments are more than welcome.
+> 
+> - "i2c-transfer-timeout-us"
+> 
+> Description says "Number of microseconds to wait before considering an
+> I2C transfer has failed."
+> 
+> To me, this binding is very descriptive and makes sense. We should keep
+> it. Sadly, it is the newest one and we already have others.
+> 
+> 
+> - "i2c-scl-has-clk-low-timeout"
+> 
+> AFAIU this binding tells that the controller can do clock stretching.
+> But what for?
 
-That would be helpful if you could add that. I always guessed there
-should be more controllers needing the flag but never encountered them
-personally.
+One of the controllers that was sent a while back required some
+hardware description because, in some versions, clock stretching
+was supported in the hardware.
 
-> documentation exercise. It would be nice to reject clients that need to=
-=20
-> do clock stretching but often it happens as a side effect rather than=20
-> being intentional (I've seen this with i2c clients implemented in=20
-> microcontrollers).
+Depending on this, the driver could either use it or force the
+clock GPIO value down.
 
-I guess the way forward with that is we add a flag like
-I2C_CLIENT_CLK_STRETCH and let the core figure out if controller and
-client are compatible. Dunno what to do if not, though. Reject? Throw a
-warning that there might be problems? Probably reject by default unless
-overridden by something-meaning-i-know-the-risks.
+That's why I made this change.
 
-> > Suggestion: let's remove this binding and conver i2c-mpc to
-> > "i2c-transfer-timeout-us". Yes, not nice to have two deprecated
-> > bindings, but things happened.
->=20
-> Sounds like a good idea. We'd obviously need to keep support for the=20
-> existing property but it wouldn't be hard to add=20
-> "i2c-transfer-timeout-us". I'll try to whip up a patch for that sometime=
-=20
-> this week, just need to dust off my Freescale boards.
+The naming is a bit fancy, but it depends on the spec used as a
+reference; smbus, i2c or specific drivers often call it in a
+different way.
 
-Please wait a little with the implementation. I want to try Rob's idea
-to let the core set the timeout flag initially. Dusting off the boards
-for testing would be awesome, though :)
+The naming is a bit fancy, but it depends on the specification
+used as a reference; SMBus, I2C, or specific drivers often refer
+to it differently.
 
-Happy hacking,
+> I don't see why this is important for clients. If
+> anything, then it would be interesting if the *client* can do clock
+> stretching and if the controller can actually handle that. But no need
+> to describe it in DT, we have this as an adapter quirk already
+> 'I2C_AQ_NO_CLK_STRETCH'. Two controllers use it, but no client checks
+> for it so far. Coming back to this binding, it is also unused in the
+> kernel.
+> 
+> Suggestion: let's remove it
+> 
+> 
+> - "i2c-scl-clk-low-timeout-us"
+> 
+> The description says "Number of microseconds the clock line needs to be
+> pulled down in order to force a waiting state." What does "forcing a
+> waiting state" mean here? I don't understand this description.
 
-   Wolfram
+It comes from the specification. The clock stretching is given as
+an interval that can be tweaked depending on the hardware.
+
+So far I haven't seen anyone using it, though.
+
+Andi
+
+> It is used in the i2c-mpc driver. The use case is simply to put it into
+> the 'struct i2c_adapter.timeout' member. That timeout is used to
+> determine if a transfer failed. So, to me, "i2c-transfer-timeout-us"
+> makes a lot more sense to use here.
+> 
+> Suggestion: let's remove this binding and conver i2c-mpc to
+> "i2c-transfer-timeout-us". Yes, not nice to have two deprecated
+> bindings, but things happened.
+> 
+> 
+> So, these are my thoughts about the current situation. I might have
+> missed something, so if you have anything to add, I am all ears.
+> Comments really welcome!
+> 
+> Happy hacking,
+> 
+>    Wolfram
+> 
 
 
---sAM/eDtNldzBf9Nw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmXdAaUACgkQFA3kzBSg
-KbZPyA//XSbRCB1slX3Xmfov7xqA8M6nGOeSvzxmYQOi3xrus0GTAtNocz9YveSb
-BGeC4cRDqb1G2l7vJWDkkhAxImlHZfDA3nIg+04ch9VacrpQsisHR7yoTwCURxm5
-VtMnCh+2l4/fPTMAZS/l0IHwxsBKZRocP2QG7kEGRkMA58HvTfW97kYzqYorumX0
-spzXl+3uqsC4hj1IBY6xNxOBz7Vg8GH1hmcXxX1siLQNoOAenpiIzyn6gZicgQYU
-tB1TwMHj4PDVsXKuMG5oEXIuXPThPXqH2gHUzHq/g0iXOESxOIavNS7wbFFrZAyG
-ix3xksfRrEw+h4gD91K3OXPGxc5pCB4zM8g9mY7PFsV7ezbZd6XCE7lgORembH2M
-gaTL/L3srqfdr/EaPiOzayvzteEYpCSusk3Sp2ZTDC36TKmWJlorJSRhtqKC+iif
-yFqEFo1j8XfeBuLUNXc8mP2M5IuPYelzPt/PCN2yoy8BA3OST0+tkMky6XG5PHMP
-5yywSbcEqsRyt9hJZ17ClYSoKKriPU9OuvpffjJrmmOHKSjX0JB2PZXuAlgEyGEF
-RG/1lpbC0ksXvbzwTZwgTMK+gcAsxEUfHRV5jr5AhxH8Z3RpT0oAmVEzhZqTBCZd
-eQAh6RyEzp2udlJWwUIJgLkHMtpPPLA4XFkfDi1kpIzcsAnjES4=
-=ifnO
------END PGP SIGNATURE-----
-
---sAM/eDtNldzBf9Nw--
