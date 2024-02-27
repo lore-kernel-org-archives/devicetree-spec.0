@@ -1,60 +1,128 @@
-Received: from c.mail.sonic.net (c.mail.sonic.net [64.142.111.80])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E5801E4AE;
-	Tue, 27 Feb 2024 06:52:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=64.142.111.80
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4495953E02;
+	Tue, 27 Feb 2024 07:12:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709016744; cv=none; b=r2Pg7mDacyK/GEWZ08OucnXwP7FrHc15fVtsmvv26iE70/xm7+unOT9L2w6lnl/OW47r8p4i8UuwtX/LYghRR8VfEWjwysrBAq+kkbjKYEVF0zsz4nI0CKozF1gGSIkTXch+p1MLy+dby8EwQSXY5dHjynw0RuV2MOXHo99RAKs=
+	t=1709017939; cv=none; b=H+dEXSsORHuYz+udsQo8cTC2i6OlHc+w1JccDlSBdxVGgImB/zq3jZB88uRkvTtNV00WX+27gPS9H6MYEljbMGRLdVkUFVeSdf6ehDntnr5Ud+rD/HO00AKkgNcCCBdxD399CX+QrIpGVtIywFHCbGumUQ4ZYCl6JS8Pp47x+Wc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709016744; c=relaxed/simple;
-	bh=bIkL3j1SUti+mxRknWXsGzjEHfZ++LfAOrCAj6OvBfk=;
-	h=From:To:Date:MIME-Version:Subject:Message-ID:Content-type; b=O64syhZNym7LsxdYksAm38oa0a2YTW3ieA6kxEYsnFLdWsf3tVZuE0ICQuwtNdUlyXTjXzZENAw3HG9SN6bfXyWz18E5aWMtsrKQg8OrX08nGXk2rkSNHsdy89GSTCBq00cBqTbHHgt4pZbI2VdqVt2ZKUGBrDQhBvckrZLrlQc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sonic.net; spf=pass smtp.mailfrom=sonic.net; dkim=pass (2048-bit key) header.d=sonic.net header.i=@sonic.net header.b=aIzL09UB; arc=none smtp.client-ip=64.142.111.80
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sonic.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sonic.net
+	s=arc-20240116; t=1709017939; c=relaxed/simple;
+	bh=/ZlS3JVss0ofKLJzt6zCP6bT652Dlj49VoFRn7/lXnE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PbUpVsQeEI6dPixfy2Bc5iMKTyqszaI4VydqYP09e8olYreJX6fcGylQfFpAXxAkqj8RYglBhnZPBQDBPJ49a7W6XkpYOMJVZUHFZP47mmBDGgUhhGi7d8QpgYpgEIzivjMg2hUVZAfGEloMcY/pHkP2Tb9L8fdZ0M2fxcDMSZ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y4lMkKQn; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sonic.net header.i=@sonic.net header.b="aIzL09UB"
-Received: from [192.168.1.94] (45-23-117-7.lightspeed.livnmi.sbcglobal.net [45.23.117.7])
-	(authenticated bits=0)
-	by c.mail.sonic.net (8.16.1/8.16.1) with ESMTPSA id 41R6qJT0030968
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Mon, 26 Feb 2024 22:52:21 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sonic.net; s=net23;
-	t=1709016742; bh=bIkL3j1SUti+mxRknWXsGzjEHfZ++LfAOrCAj6OvBfk=;
-	h=From:To:Date:MIME-Version:Subject:Message-ID:From:Subject;
-	b=aIzL09UBo6WZuOOi05cac9INBg4UZ2lS0I5Er43k8oWia8XW3LuR0k43cJAlUJequ
-	 C7ep900tsEVbjXDROo3D2Q/Kkg37trB5y7gBz7y/duBhZoz6rd7h3Cxg6p74G1x5mU
-	 Fj5PgtgpB40cm6X0hzqr/eDQhbDfEtCknrIt97z44aQ9hB47E0vR3p7RjaitqQVmO5
-	 jxgDNPFLsGvpUFTaG4g6M9HIWo+P529+7qoPwLm5aL6DpOMoBetIGu/nTXUmqC3blJ
-	 qRAF2l7yQSlagk2bZ/6ctg9BDKArKzNdn8FPO2UShOMuagVryll30OrxJaP1LeNpcK
-	 SEncqoL4Z4GCA==
-From: delyan@sonic.net
-To: devicetree-spec+unsubscribe@vger.kernel.org,
-        devicetree-spec@vger.kernel.org, dmaengine+subscribe@vger.kernel.org,
-        dmaengine+unsubscribe@vger.kernel.org, dmaengine@vger.kernel.org,
-        dwarves+subscribe@vger.kernel.org, dwarves+unsubscribe@vger.kernel.org,
-        dwarves@vger.kernel.org, ecryptfs+subscribe@vger.kernel.org,
-        ecryptfs+unsubscribe@vger.kernel.org, ecryptfs@vger.kernel.org,
-        fio+subscribe@vger.kernel.org, fio+unsubscribe@vger.kernel.org,
-        fio@vger.kernel.org, fstests+subscribe@vger.kernel.org
-Date: Tue, 27 Feb 2024 01:52:18 -0500
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Y4lMkKQn"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73704C433F1;
+	Tue, 27 Feb 2024 07:12:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1709017938;
+	bh=/ZlS3JVss0ofKLJzt6zCP6bT652Dlj49VoFRn7/lXnE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Y4lMkKQnJoH3dc2QJdgSIcV8tRagsw9X3GtjKarMRVzh0NfAbiHhAXIx95CwjAQbu
+	 Xo9fTbI7XkMMP7U0GpkJ9D18u0NzQTOmLHVE6h/TJX9gzjAdyn62TB2jTZOElu/10A
+	 d3jHvt8X9/oMhmGyL7jKzwYG4nPEYpwom66yLihfDB5XJ15oz/jqE7cLH082aToFKb
+	 Y8VQnxNhq1j3zlor4KQH8YQPQ4kDKe+gktWH2FrUzl/gVeocEWjxcFEjTJGGNIpFYE
+	 LKBqRws57JSaIFkY5KaFZ/SSFLx5/HaTKzo21i9AFwG2CIq7Cj7aZZUHF1teZsoN1o
+	 P1r08YcKMGE0A==
+Date: Tue, 27 Feb 2024 08:12:15 +0100
+From: Wolfram Sang <wsa@kernel.org>
+To: Andi Shyti <andi.shyti@kernel.org>
+Cc: linux-i2c@vger.kernel.org, devicetree-spec@vger.kernel.org,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Chris Packham <chris.packham@alliedtelesis.co.nz>
+Subject: Re: dtschema: i2c: messy situation about timeouts
+Message-ID: <Zd2LT-OM4KkUXCXn@ninjato>
+Mail-Followup-To: Wolfram Sang <wsa@kernel.org>,
+	Andi Shyti <andi.shyti@kernel.org>, linux-i2c@vger.kernel.org,
+	devicetree-spec@vger.kernel.org, Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+	Chris Packham <chris.packham@alliedtelesis.co.nz>
+References: <ZdxjGwvGXlDGkYs0@shikoro>
+ <c6yyhxzqfavqjphumemgjn7ick4ddjzhlxfjb6wtgsfvdetdqt@radooxy4o4mx>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: subscribe
-Message-ID: <65DD86A2.17414.445FAC2F@delyan.sonic.net>
-Priority: normal
-X-mailer: Pegasus Mail for Windows (4.80.1028)
-Content-type: text/plain; charset=US-ASCII
-Content-transfer-encoding: 7BIT
-Content-description: Mail message body
-X-Sonic-CAuth: UmFuZG9tSVaRmDnAe7qtFHsZVmHzmJDjNevSWY0HV8jKPtCRUAwJ+TCTxvo2u3K9QUnWHsh5kPTFmtp1BqTK3JZAz6HvHW69
-X-Sonic-ID: C;Cr9LwDzV7hGbeC5nR+6Zsg== M;+qk9wTzV7hGbeC5nR+6Zsg==
-X-Spam-Flag: Unknown
-X-Sonic-Spam-Details: not scanned (too big) by cerberusd
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="KbqwGrd1llsCvBnc"
+Content-Disposition: inline
+In-Reply-To: <c6yyhxzqfavqjphumemgjn7ick4ddjzhlxfjb6wtgsfvdetdqt@radooxy4o4mx>
 
-subscribe
+
+--KbqwGrd1llsCvBnc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi Andi,
+
+> > - "i2c-scl-has-clk-low-timeout"
+> >=20
+> > AFAIU this binding tells that the controller can do clock stretching.
+> > But what for?
+>=20
+> One of the controllers that was sent a while back required some
+> hardware description because, in some versions, clock stretching
+> was supported in the hardware.
+
+I see. Still, I think this can (and should be handled) with
+I2C_AQ_NO_CLK_STRETCH.
+
+> The naming is a bit fancy, but it depends on the specification
+> used as a reference; SMBus, I2C, or specific drivers often refer
+> to it differently.
+
+Yes. I'd give I2C specs most importance, controller documentation least.
+And probably a salt of personal preference :)
+
+> > - "i2c-scl-clk-low-timeout-us"
+> >=20
+> > The description says "Number of microseconds the clock line needs to be
+> > pulled down in order to force a waiting state." What does "forcing a
+> > waiting state" mean here? I don't understand this description.
+>=20
+> It comes from the specification. The clock stretching is given as
+> an interval that can be tweaked depending on the hardware.
+
+You mean the maximum clock stretching is tweakable? That, in deed, could
+be a binding in the future, in theory. Yet, it would need support in the
+client drivers. Like a touchscreen driver which assumes a reset after a
+certain time of inactivity.
+
+> So far I haven't seen anyone using it, though.
+
+The MPC driver used it, just for a different purpose.  It was used for a
+timeout of the total transfer. That's a different thing. So, I suggested
+the conversion.
+
+Happy hacking,
+
+   Wolfram
+
+
+--KbqwGrd1llsCvBnc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmXdi0wACgkQFA3kzBSg
+KbZOehAAl2QMPUg3dviQislT/+HYpnK5WKVFXRt5/KzfdI/nKY5U/c+mcjLxtEcV
+3i9jctgQ6v0Ww/8eOj419UDjcUe/FEd9EknmiAngT5vEMMMvRiJI9DlkA3NxtMaz
+2tcpYlpZWmnrR2eyvkiHPKascOEM/igjiZl3ThP84TjxeWC+XmxiY5GhrM4DoN9R
+/B7nhmJT3P330Zrdet770nRv7IbwfzFxKORjRMJKsCYbT0fE/0YS9kSOsUmJSEUQ
+BAZrJ73mllsj+sSKQHey1Xf8bpofSinnsPKnDZ6QLZfG36Goie1kuGsTZZYRQ9HS
+vSStpb4nZhCouEQlrmWMGB+FLmLfdS/wkMdw90qaHPR9Nh6IphDB8xxGS6GmZwAk
+6oiMgAo6ApVx7t0NaetIVlOphdDV+71vmx/ahmC1irtM/9RKBQ42c88L3qAEFnA/
+RHQsLtxiE79HfjOCoLA/5NMAdxkWjGWSniYQkOFlgZDDvvsmNdkdKOdXJjm8Iaua
+jID81NOOnv9nnb5hJxkqiH0lUTwgClD2D6uOIufVXR0VlmNMUJOMZ63l5LjsJS39
+St8b3qvs7b6bSTL2VJ6XNISAV4B6dMZbY0o8SA/D4luUVnC0tiyMjG5ttiIkn/O+
+jb4sPpZgodGU9Kwu+KdrYAhoQrmDyScKL1tsXgfjcE62xxaD81Q=
+=OLtv
+-----END PGP SIGNATURE-----
+
+--KbqwGrd1llsCvBnc--
