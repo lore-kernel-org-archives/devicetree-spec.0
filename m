@@ -1,307 +1,191 @@
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+Received: from mail-yb1-f202.google.com (mail-yb1-f202.google.com [209.85.219.202])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FAF32E3E4
-	for <devicetree-spec@vger.kernel.org>; Fri,  8 Mar 2024 06:48:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 548C0E555
+	for <devicetree-spec@vger.kernel.org>; Fri,  8 Mar 2024 06:56:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.202
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1709880521; cv=none; b=FaRgbgTOM5zRHXt+AJH4cyIf/iCo+3b+RczSOiY4DO4VUt2Dji/CEc5XanrvbRXfvnh0Y0YO0quNcikYM2at8D1W9k23HWBRjUBbrLGu3lkVGzn4sLIHmsin1ojTRqLZwJa/1n62gj5Xtrtmw/QxeJ2+4G7e6FhWl+CUP9qBiBE=
+	t=1709881001; cv=none; b=YgET6b3RKB2ymmqMmXFUS9bPgAr3F15DYORlTAa0YYpPCLFil2JRnpHcLunPExYttAhSzmzA5lBriPrn58rRV5eHvRAfEXGzbb8p+4mHY4DwiC4c5rtDS+djyjn9vzQ/ufq5aXzwA00tViqTO5PmhaHp2trbGs4C6NWmDyDKXGA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1709880521; c=relaxed/simple;
-	bh=2PSIS8/zpn1NPe7iwWkZ85TCIOrC7g8jmlo3T4LVRqs=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=B1jztmTrsi7jV5YZSvCNvAqrbN6ttcWji9qrdERCCs9KUYAAaFcFoeBxjhtuqZzQzMcnpzKeG3NprJFERhD54d2wotH8jPqxk/SnhvpEAqCGk0NGUdfRuipgeHOFewlIEDm0yyN7gtHHpedQj0HGqAlfAs3ZYF24up8EXN/siGM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Z/SseqO0; arc=none smtp.client-ip=209.85.160.174
+	s=arc-20240116; t=1709881001; c=relaxed/simple;
+	bh=y/CuXsopRTc6Go2gYFSfbcLU4/65wcOPQcN09s1NBzo=;
+	h=Date:Message-Id:Mime-Version:Subject:From:To:Cc:Content-Type; b=JO4aNOxx1ikQU6A+zWExup4smX9OwKLHMQTrEOUT5bRqyVSNyuLVwLt9M7UicROWLCmYjrhwN+uEO+t6Wm6mtmJuc2lFXkzF+PEUNj2fYMoJtFNsGTIseugMQHlSzeRumICZW+H4hBxbxxKYMOPC7kd8Spq4X/gWC276Mkhd7VE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--saravanak.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=VobY7I1D; arc=none smtp.client-ip=209.85.219.202
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--saravanak.bounces.google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Z/SseqO0"
-Received: by mail-qt1-f174.google.com with SMTP id d75a77b69052e-428405a0205so158091cf.1
-        for <devicetree-spec@vger.kernel.org>; Thu, 07 Mar 2024 22:48:38 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="VobY7I1D"
+Received: by mail-yb1-f202.google.com with SMTP id 3f1490d57ef6-dc693399655so3432350276.1
+        for <devicetree-spec@vger.kernel.org>; Thu, 07 Mar 2024 22:56:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1709880518; x=1710485318; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=SCnLrWBatKoUpa6EytxdL1Bgtat5S5FcJysXLqiSztQ=;
-        b=Z/SseqO0mtDuH/FUgsL68aXwoTJEoZp0YZUZhR5FOIUoS+mgTlNhRjKesLQcBTBHjF
-         Voa9YAtvtRmSpIltN57Wb5il3Qe++Pl27xwDcuzY5c81deCYJA6F4siu8/L/bPf7vfDZ
-         3xZIoUzybc7ltuFcgm/SyqRE9rYucbARdwGzZfolNH12QWlgDoJWV20666JcnW+XXXDF
-         eQUwwjCHjZgIYQLwP6Y+cDR738vYbFsqpu/0knNBGJ261GJX3W+hovEHGCSRSDIl+h9K
-         P5qqnY+2XfFltfUTkEqggEuPJXHJlP7XAhFvFkENeY6TV38ggowENfgd/wxmuqOdflmR
-         plGQ==
+        d=google.com; s=20230601; t=1709880998; x=1710485798; darn=vger.kernel.org;
+        h=cc:to:from:subject:mime-version:message-id:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=RCQf2CkKBjxotP1Z2eR/fCTAhxpwkY9xv1PrfXteT6s=;
+        b=VobY7I1DbbMKaxAuHWCBRJa9qzufM0CodE76bjWJ8fMZHiebhjpHF48QPAhEk3MoPx
+         jJmkkeRH2AETqHYGxU9LrxqICNzzDSqR2C2kDQdwjbZN9piO+9h90AXB1kdosSAKo9ta
+         AaAQ9hxUUhCTx+kjP0rWPfr5B3tJjhaH44FWT72SXXEv7gm7xrhhqVNaVDYSMynCNjS5
+         Fc96/h1zSEnxI2MtFZC2vmEPAvl6mGdijSOE86dAoKJz8EvEKCZj21cSzr2zGmE7kqPW
+         zn0U5XWagiDGy8BoCfYQ8cp5TRfU4YQulIldMktU7LY5jbv5APyXKXZLC8rgYnRLSwgr
+         BaFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709880518; x=1710485318;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SCnLrWBatKoUpa6EytxdL1Bgtat5S5FcJysXLqiSztQ=;
-        b=d2+vkiWtX3j/zBCqfk8yaW4TGjeCdi+GT7HDVPgiJVVjSY0ZNevDgSpv1xyUzeLUHW
-         IGOVDioRD9ebQYnH9cNAIpH+LSasS5i3y+XhInacGPnV4GILQsca+6K2OprVGf8kYWEA
-         I5/dIQBHqgSXFYZ7cRfK2deYvNiYWP9X6Q0COcZP7UBrUaSh/eeOvfTx8wUNGBr/P+ng
-         H2Uhx/v7Y/v2yqt5UVHy5lA2IvDG5KK8CJ/IeU8t8iHL5l6L0MIQA6BHV7Awijmb3TsA
-         KHvGjZj0a5GMmWOFIgzvzzJeipRo/Kdgjl3DyklFdyYZR1XKwxw2R/pu0QJ7+n2HugJS
-         kM9Q==
-X-Forwarded-Encrypted: i=1; AJvYcCVjY99yGhk+PaCDQjijXo5CRqXkK3wFGtGyiNX3bMv+FXYzXAajc0TXOTB+2Ep0jXMp+arbXKHhA+ByoO85tFT/QVID8MO8Qz8K0nrWdzY3
-X-Gm-Message-State: AOJu0YxjXjK84iHHVKdlTWC3lcXnqHbmZahXqoxyQ3CUnRgttjzZBml1
-	HYTQEzQ5qORWJLZPWKcug4ped16REtjdjT/uo7Tp4C+jjdf/zaApoECQ4ByuM8UyRHVCldUnmya
-	SciLaZfwjImf8a/fWaJoSNwX8AmlS9PIoBSSH
-X-Google-Smtp-Source: AGHT+IHtS9oZ0cGF0MOJRfR1gGJw3jTr8K4yx3dwdF6W4ACWDd/lEWEjCXpsUvsyiGYyZYhWtm7rjPVSEATMnLX61fA=
-X-Received: by 2002:a05:622a:1ba4:b0:42f:a3c:2d4d with SMTP id
- bp36-20020a05622a1ba400b0042f0a3c2d4dmr654295qtb.14.1709880517835; Thu, 07
- Mar 2024 22:48:37 -0800 (PST)
+        d=1e100.net; s=20230601; t=1709880998; x=1710485798;
+        h=cc:to:from:subject:mime-version:message-id:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=RCQf2CkKBjxotP1Z2eR/fCTAhxpwkY9xv1PrfXteT6s=;
+        b=bru1240B52cvJv+Sm6zp8P1uKiNMcZ25EHX/I4UpN16kPkycGLnAoXJKbWhLIHOCxZ
+         R1QkeKKPTIFjWp1/ePaRalSCjoow9gTE8jXlqo/RY8jaWkPiVvFW0X7Z7eyPOijmzepL
+         PLZ7F964PUhPGh0l/qdXnkJ3Loj/7UFoSPH5xdSlpXS3tgTY+/qo0ITZ96jA3WYyroxz
+         p9oOEZczJqLKxe4uSOlV+f7gW0Inq3YKJjoZ0128qhFp1Xmcs/4wVV2LFZxcT6Qo56ph
+         pDfmQoPIo9QzHjDdB7oYlmHi8XJ1NEIuurZ1i3VorgX/Gd4hcaFeqElWintScmlsxN5b
+         5csA==
+X-Forwarded-Encrypted: i=1; AJvYcCVeJUpAfQTr+LUbEzpSu73m2dFaELVyOIilDjnbKJj5u8MHF4Erv8Drz6QYWddy97uXWPq/P+ObA6GuAtkz17VlWifRmyJt7KF/xIXxvHZ4
+X-Gm-Message-State: AOJu0Yy4GNs3ytsVriiIB7g4vCeY9yvILHb+2eANrt9peBngE2O3CSTJ
+	gePQsYOqGG13/yXOawXDqR06bhTgqPW1VmzM+M2eLvNnl3Gyofd6w8DBixPMmkYtsa+3b7ZEYEQ
+	EXCmv7gniLZS1jw==
+X-Google-Smtp-Source: AGHT+IHt/B+lV3GkKb3ikN36rtmKUFzGwcx6fKeBeVQ1Pn0nKsp+ezBxvZKbYd8R4qamlR0YElAKsZPzL6c+678=
+X-Received: from saravanak.san.corp.google.com ([2620:15c:2d:3:d8cf:a5f8:feb1:8d50])
+ (user=saravanak job=sendgmr) by 2002:a05:6902:1004:b0:dc7:48ce:d17f with SMTP
+ id w4-20020a056902100400b00dc748ced17fmr5161990ybt.10.1709880998470; Thu, 07
+ Mar 2024 22:56:38 -0800 (PST)
+Date: Thu,  7 Mar 2024 22:56:33 -0800
+Message-Id: <20240308065633.2180623-1-saravanak@google.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-References: <20240306002951.1601630-1-saravanak@google.com>
- <CAFLszTiv7bHumx7T2y3CNaWPE=tkttQU2Uak-uu1foeZZr+KEw@mail.gmail.com>
- <CAL_JsqLueXDRS7LPr3gHGSc4vYmt2TeteAm9d=wiO4kWEe3G6g@mail.gmail.com> <CAFLszThOtKK43RGmyYCvd0+pQB8fby9Bsv_tX4jNuMi3L91AnQ@mail.gmail.com>
-In-Reply-To: <CAFLszThOtKK43RGmyYCvd0+pQB8fby9Bsv_tX4jNuMi3L91AnQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.44.0.278.ge034bb2e1d-goog
+Subject: [PATCH v2] schemas: Add schema for post-init-providers
 From: Saravana Kannan <saravanak@google.com>
-Date: Thu, 7 Mar 2024 22:47:58 -0800
-Message-ID: <CAGETcx8cNP-xYFKbjvUnRgm7vPP9iHEqOUAhQBG+V8axOKVB4A@mail.gmail.com>
-Subject: Re: [PATCH v1] schemas: Add schema for post-init-providers
-To: Simon Glass <sjg@chromium.org>
-Cc: Rob Herring <robh@kernel.org>, devicetree-spec@vger.kernel.org, 
+To: Rob Herring <robh@kernel.org>
+Cc: Saravana Kannan <saravanak@google.com>, devicetree-spec@vger.kernel.org, 
 	kernel-team@android.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 7, 2024 at 12:55=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Rob,
->
-> On Thu, 7 Mar 2024 at 11:23, Rob Herring <robh@kernel.org> wrote:
-> >
-> > On Wed, Mar 6, 2024 at 1:17=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
-rote:
-> > >
-> > > Hi Saravana,
-> > >
-> > > On Wed, 6 Mar 2024 at 13:30, Saravana Kannan <saravanak@google.com> w=
-rote:
-> > > >
-> > > > The post-init-providers property can be used to break a dependency =
-cycle by
-> > > > marking some provider(s) as a post device initialization provider(s=
-). This
-> > >
-> > > Please can you add hyphens to avoid confusion? I believe this should
-> > > be 'post-device-initialization' throughout. There is no 'post' device=
-.
-> >
-> > There is no 'post-device-initialization' thing either. Shrug.
->
-> 'post-device-initialization' is intended to be an adjective and the
-> hyphens help to make that clear.
+The post-init-providers property can be used to break a dependency cycle by
+marking some provider(s) as a post-device-initialization provider(s). This
+allows an OS to do a better job at ordering initialization and
+suspend/resume of the devices in a dependency cycle.
 
-I think it's clear enough, but I'll do it just for you :)
+Signed-off-by: Saravana Kannan <saravanak@google.com>
+---
+ dtschema/schemas/post-init-providers.yaml | 105 ++++++++++++++++++++++
+ 1 file changed, 105 insertions(+)
+ create mode 100644 dtschema/schemas/post-init-providers.yaml
 
-> >
-> > > > allows an OS to do a better job at ordering initialization and
-> > > > suspend/resume of the devices in a dependency cycle.
-> > > >
-> > > > Signed-off-by: Saravana Kannan <saravanak@google.com>
-> > > > ---
-> > > >  dtschema/schemas/post-init-providers.yaml | 105 ++++++++++++++++++=
-++++
-> > > >  1 file changed, 105 insertions(+)
-> > > >  create mode 100644 dtschema/schemas/post-init-providers.yaml
-> > > >
-> > > > diff --git a/dtschema/schemas/post-init-providers.yaml b/dtschema/s=
-chemas/post-init-providers.yaml
-> > > > new file mode 100644
-> > > > index 0000000..92eb9a0
-> > > > --- /dev/null
-> > > > +++ b/dtschema/schemas/post-init-providers.yaml
-> > > > @@ -0,0 +1,105 @@
-> > > > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> > > > +# Copyright (c) 2020, Google LLC. All rights reserved.
-> > > > +%YAML 1.2
-> > > > +---
-> > > > +$id: http://devicetree.org/schemas/post-init-providers.yaml#
-> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > +
-> > > > +title: Post device initialization providers
-> > > > +
-> > > > +maintainers:
-> > > > +  - Saravana Kannan <saravanak@google.com>
-> > > > +
-> > > > +description: |
-> > > > +  This property is used to indicate that the device(s) pointed to =
-by the
-> > >
-> > > Should this be 'device node' instead of 'device'?
+diff --git a/dtschema/schemas/post-init-providers.yaml b/dtschema/schemas/post-init-providers.yaml
+new file mode 100644
+index 0000000..a329776
+--- /dev/null
++++ b/dtschema/schemas/post-init-providers.yaml
+@@ -0,0 +1,105 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++# Copyright (c) 2020, Google LLC. All rights reserved.
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/post-init-providers.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Post-device-initialization providers
++
++maintainers:
++  - Saravana Kannan <saravanak@google.com>
++
++description: |
++  This property is used to indicate that the device(s) pointed to by the
++  property are not needed for the initialization of the device that lists this
++  property. This property does not make a device (that's previously not a
++  provider) into a provider. It simply downgrades an existing provider to a
++  post-device-initialization provider.
++
++  A device can list its providers in devicetree using one or more of the
++  standard devicetree bindings. By default, it is assumed that the provider
++  device can be initialized before the consumer device is initialized.
++
++  However, that assumption cannot be made when there are cyclic dependencies
++  between devices. Since each device is a provider (directly or indirectly) of
++  the others in the cycle, there is no guaranteed safe order for initializing
++  the devices in a cycle. We can try to initialize them in an arbitrary order
++  and eventually successfully initialize all of them, but that doesn't always
++  work well.
++
++  For example, say,
++  * The device tree has the following cyclic dependency X -> Y -> Z -> X (where
++    -> denotes "depends on").
++  * But X is not needed to fully initialize Z (X might be needed only when a
++    specific functionality is requested after initialization of Z).
++
++  If all the other -> are mandatory initialization dependencies, then trying to
++  initialize the devices in a loop (or arbitrarily) will always eventually end
++  up with the devices being initialized in the order Z, Y and X.
++
++  However, if Y is an optional provider for X (where X provides limited
++  functionality when Y is not initialized and providing its services), then
++  trying to initialize the devices in a loop (or arbitrarily) could end up with
++  the devices being initialized in the following order:
++
++  * Z, Y and X - All devices provide full functionality
++  * Z, X and Y - X provides partial functionality
++  * X, Z and Y - X provides partial functionality
++
++  However, we always want to initialize the devices in the order Z, Y and X
++  since that provides the full functionality without interruptions.
++
++  One alternate option that might be suggested is to have the driver for X
++  notice that Y became available at a later point and adjust the functionality
++  it provides. However, other userspace applications could have started using X
++  with the limited functionality before Y was available and it might not be
++  possible to transparently transition X or the users of X to full
++  functionality while X is in use.
++
++  Similarly, when it comes to suspend (resume) ordering, it's unclear which
++  device in a dependency cycle needs to be suspended/resumed first and trying
++  arbitrary orders can result in system crashes or instability.
++
++  Explicitly calling out which link in a cycle needs to be broken when
++  determining the order, simplifies things a lot, improves efficiency, makes
++  the behavior more deterministic and maximizes the functionality that can be
++  provided without interruption.
++
++  This property is used to provide this additional information between devices
++  in a cycle by telling which provider(s) is not needed for initializing the
++  device that lists this property.
++
++  In the example above, Z would list X as a post-init-providers and the
++  initialization dependency would become X -> Y -> Z -/-> X. So the best order
++  to initialize them becomes clear: Z, Y and then X.
++
++select: true
++
++properties:
++  post-init-providers:
++    # One or more providers can be marked as post initialization provider
++    description:
++      List of phandles to providers that are not needed for initializing or
++      resuming this device.
++    $ref: /schemas/types.yaml#/definitions/phandle-array
++    items:
++      maxItems: 1
++
++additionalProperties: true
++
++examples:
++  - |
++    gcc: clock-controller@1000 {
++        compatible = "vendor,soc4-gcc", "vendor,soc1-gcc";
++        reg = <0x1000 0x80>;
++        clocks = <&dispcc 0x1>;
++        #clock-cells = <1>;
++        post-init-providers = <&dispcc>;
++    };
++    dispcc: clock-controller@2000 {
++        compatible = "vendor,soc4-dispcc", "vendor,soc1-dispcc";
++        reg = <0x2000 0x80>;
++        clocks = <&gcc 0xdd>;
++        #clock-cells = <1>;
++    };
+-- 
+2.44.0.278.ge034bb2e1d-goog
 
-I think device is more appropriate. Not every device node is a device
-(eg: the pinctrl map, the remote endpoints pointed to by
-remote-endpoints, etc). And with the property you are pointing to a
-device node that represents a device.
-
-> > >
-> > > > +  property are not needed for the initialization of the device tha=
-t lists this
-> > > > +  property. This property does not make a device (that's previousl=
-y not a
-> > > > +  provider) into a provider. It simply downgrades an existing prov=
-ider to a
-> > > > +  post device initialization provider.
-> > > > +
-> > > > +  A device can list its providers in devicetree using one or more =
-of the
-> > > > +  standard devicetree bindings. By default, it is assumed that the=
- provider
-> > > > +  device can be initialized before the consumer device is initiali=
-zed.
-> > > > +
-> > > > +  However, that assumption cannot be made when there are cyclic de=
-pendencies
-> > > > +  between devices. Since each device is a provider (directly or in=
-directly) of
-> > > > +  the others in the cycle, there is no guaranteed safe order for i=
-nitializing
-> > > > +  the devices in a cycle. We can try to initialize them in an arbi=
-trary order
-> > > > +  and eventually successfully initialize all of them, but that doe=
-sn't always
-> > > > +  work well.
-> > > > +
-> > > > +  For example, say,
-> > > > +  * The device tree has the following cyclic dependency X -> Y -> =
-Z -> X (where
-> > > > +    -> denotes "depends on").
-> > > > +  * But X is not needed to fully initialize Z (X might be needed o=
-nly when a
-> > > > +    specific functionality is requested post initialization).
-> > >
-> > > How about 'is requested after initialization of Z'
-
-Sure.
-
-> > >
-> > > > +
-> > > > +  If all the other -> are mandatory initialization dependencies, t=
-hen trying to
-> > > > +  initialize the devices in a loop (or arbitrarily) will always ev=
-entually end
-> > > > +  up with the devices being initialized in the order Z, Y and X.
-> > > > +
-> > > > +  However, if Y is an optional provider for X (where X provides li=
-mited
-> > > > +  functionality when Y is not initialized and providing its servic=
-es), then
-> > > > +  trying to initialize the devices in a loop (or arbitrarily) coul=
-d end up with
-> > > > +  the devices being initialized in the following order:
-> > > > +
-> > > > +  * Z, Y and X - All devices provide full functionality
-> > > > +  * Z, X and Y - X provides partial functionality
-> > > > +  * X, Z and Y - X provides partial functionality
-> > > > +
-> > > > +  However, we always want to initialize the devices in the order Z=
-, Y and X
-> > > > +  since that provides the full functionality without interruptions=
-.
-> > > > +
-> > > > +  One alternate option that might be suggested is to have the driv=
-er for X
-> > > > +  notice that Y became available at a later point and adjust the f=
-unctionality
-> > > > +  it provides. However, other userspace applications could have st=
-arted using X
-> > > > +  with the limited functionality before Y was available and it mig=
-ht not be
-> > > > +  possible to transparently transition X or the users of X to full
-> > > > +  functionality while X is in use.
-> > >
-> > > This seems strange to me. It seems like something that could be
-> > > implemented. That said, I understand that such an implementation coul=
-d
-> > > become painful.
-> >
-> > It has been implemented. And cycle detection has been implemented. And
-> > yet we are still here needing something more.
->
-> Sure, I understand that.
->
-> >
-> >
-> > > > +  Similarly, when it comes to suspend (resume) ordering, it's uncl=
-ear which
-> > > > +  device in a dependency cycle needs to be suspended/resumed first=
- and trying
-> > > > +  arbitrary orders can result in system crashes or instability.
-> > > > +
-> > > > +  Explicitly calling out which link in a cycle needs to be broken =
-when
-> > > > +  determining the order, simplifies things a lot, improves efficie=
-ncy, makes
-> > > > +  the behavior more deterministic and maximizes the functionality =
-that can be
-> > > > +  provided without interruption.
-> > > > +
-> > > > +  This property is used to provide this additional information bet=
-ween devices
-> > > > +  in a cycle by telling which provider(s) is not needed for initia=
-lizing the
-> > > > +  device that lists this property.
-> > > > +
-> > > > +  In the example above, Z would list X as a post-init-providers an=
-d the
-> > > > +  initialization dependency would become X -> Y -> Z -/-> X. So th=
-e best order
-> > > > +  to initialize them becomes clear: Z, Y and then X.
-> > > > +
-> > > > +select: true
-> > > > +
-> > > > +properties:
-> > > > +  post-init-providers:
-> > >
-> > > What is 'init'? It seems to mean when Linux probes the device. In
-> > > U-Boot, devices all are bound at the start, but only probed (lazilly)
-> > > when used. For some device types there is then an 'init' step which
-> > > actually starts using the device, before which no hardware is
-> > > accessed. So the use of the word 'init' seems a bit vague to me.
-
-I'm using the word init as a short form of English word
-"initialization" to mean the device has been initialized and ready to
-provide its services. Whether that means you do stuff lazily or touch
-the hardware is irrelevant. For example, you can probe a device in
-Linux without ever touching any hardware register of that specific
-device.
-
-I intentionally didn't use the word probe (Linux specific) or get into
-specifics because it can depends on the bootloader/OS/whatever driver
-model.
-
-So, I'd keep the naming as is. All the other suggestions are more
-confusing in my opinion.
-
--Saravana
-
-> > >
-> > > In general this binding seems liable to be specific to the OS being
-> > > used. It also seems to be a hint, rather than something that must be
-> > > parsed and used. However I suppose adding the suffix '-hint' would
-> > > just confuse things.
-> > >
-> > > How about 'secondary-providers' or 'minor-providers' or
-> > > 'delayed-providers' or 'deferred-providers'?
-> > >
-> > > Separately/alternatively I wonder if the target node is always going
-> > > to be inited later, for any device that uses it. If so, perhaps a
-> > > property in the target node would be better, something like:
-> > >
-> > > dispcc: clock-controller@2000 {
-> > >    ...
-> > >    minor-provider;
-> >
-> > That doesn't work if a node is 2 or more providers and only some of
-> > them are optional/post-init/deferred.
->
-> That's right. It would be nice though, if the situation you describe
-> does not actually happen in practice currently.
