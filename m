@@ -1,45 +1,41 @@
 Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B48D1537A4
-	for <devicetree-spec@vger.kernel.org>; Thu, 15 Aug 2024 21:40:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 190CA14BF9B
+	for <devicetree-spec@vger.kernel.org>; Thu, 15 Aug 2024 21:40:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.117.254.33
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723758020; cv=none; b=pa7oUycyhAV2G1flR8q1T3PhWspaVKsuTimYprxg8TdAZO4v1a4KmYJ6Whn+gJv3/TZTBBtXuD2D9weuNzjJBSG25VH/KFbeABxYsMXsRdQpLT7Nb5KTM4ybpRdFS45Nueu3pZ8f5PohfmuD2T7CAOkUoxN5UecTVe6nH+mFkns=
+	t=1723758020; cv=none; b=mJjy3HVRH+IADqpyQ0gGb1j4ct2aM4LkfBLxG2wyOcb50tkirhrwjMAQUq0uCdli0RwR99/k57QmJ4ddc0tM4ubOUI0Dm3a+yy3sd1e7xqOQggaTwUL6P9dvx7gxe3/wT4KYbUzCdKDmaQaIa7Ymy7xxEvuJcTDxpSXrFltcRYk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1723758020; c=relaxed/simple;
-	bh=uixzx293zi4EbW44FAXO+3iHNRT9KQ1qR3Wxtrs1WGc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ucp5lcrttElqh3zvd5IfebE/Mm5SC2uvZfoeRB5etuggRoDTyBUIy/5lB/yEVdlrYrlzTG+/JkiaPNqY/jaNJeKkFJD0bUeQXRb9/vf6KjXRAi+pq5M2QNzPjCZadch63QeFW+wu5KjG+tfeV426fDrH3aphltgHq1tVOdxS18g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com; spf=pass smtp.mailfrom=sang-engineering.com; dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b=h/aE4aI+; arc=none smtp.client-ip=194.117.254.33
+	bh=cJaVGYUenxRIG1LOJqIzqkTj+afPq78Oz29juMpk2gc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=lLG66gUvmy9rt44qQt7RKotfKSnSX9mv2slO9G6xc4T1FkQKDG+leUGotklgB6SDMlIkw8X5y4srQG6GFq7AwczBx9hUxzwRPLwEsxx9sxeLObC2ORfe0jz2p4xycQncT2Y03mv42OS53eLG+CRSXG5QVvxHEtYtBJ0IZHoT4Kg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com; spf=pass smtp.mailfrom=sang-engineering.com; dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b=VO1nuYHN; arc=none smtp.client-ip=194.117.254.33
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="h/aE4aI+"
+	dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="VO1nuYHN"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	sang-engineering.com; h=from:to:cc:subject:date:message-id
-	:in-reply-to:references:mime-version:content-transfer-encoding;
-	 s=k1; bh=4qhqVgvw3Z+RW+itxvmehChRkK8ifMLtZfkRwcU9IgQ=; b=h/aE4a
-	I+gXkQrhw0y+l2Xz2JUB0L2AYG7NU7TukEIKcOGilApOx79B1ZYPAbw29odCFThq
-	c7Y55Grcjz9vzm95TcxzAnqIZ1twppSvx6I7DOhcd/qCDETYX5miYNs23yvW/eML
-	U2PITPtRl4L34LqxHiIvl0cTG/9NNhmHH2iVmBP7N7l+IQGt5M/CoixrAC3okPsy
-	vfcfd2koOVQkEPFxqdGaSsG/dchdANydDgZK/P3+SYkLEaaUB9IduhafcFyvW0sx
-	HCVhNXTIUNWUSmgpJw4TltgzuhrntB6dp0dsWrQK2Jn4B0Hx/0GExMyqId39/lZb
-	R/X8ydJZIERbfsDg==
-Received: (qmail 2404127 invoked from network); 15 Aug 2024 23:40:16 +0200
-Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 15 Aug 2024 23:40:16 +0200
-X-UD-Smtp-Session: l3s3148p1@zKU6sL8fWI0gAQnoAH4zAClVBN/DeGcx
+	:mime-version:content-transfer-encoding; s=k1; bh=4XmfelGNV5Z2+G
+	Sgo/72Ljhp4B5UEyAL9EE3eiFgyVk=; b=VO1nuYHNnfftzwEtRcQrFIC4ALM4y9
+	Y1ew00AP+lZhhHWK1mn0rq60GSiMU1OnIbnY/bycqxwAso/fWfnx0Jtq6Agw2WCh
+	8UlJK1uB7fDzIDb81aPcLqMst0Yh+zZbMvN1HVjaMpG51KIPokHwV1EByAgJZRoV
+	CzNbcOlV/lpB4dxfR/IEvpLU1a7N9liV2ycrG3pjXXzrjdVK+bLCLBuFfH/H5m/x
+	FMgYCXrGn6kJEboyViyGvw3bHlEP9qHn8/FXt3H0lwUnhEjygvMsFwLLziNYyVn/
+	vWXmei59Mu7zjzO1TnA2GYGTdI/fFJYZ+vliArrftbDDMSNPpEV4X33Q==
+Received: (qmail 2404078 invoked from network); 15 Aug 2024 23:40:15 +0200
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 15 Aug 2024 23:40:15 +0200
+X-UD-Smtp-Session: l3s3148p1@VqsnsL8fbKsgAQnoAH4zAClVBN/DeGcx
 From: Wolfram Sang <wsa+renesas@sang-engineering.com>
 To: linux-renesas-soc@vger.kernel.org
 Cc: linux-i2c@vger.kernel.org,
 	devicetree-spec@vger.kernel.org,
 	Wolfram Sang <wsa+renesas@sang-engineering.com>
-Subject: [PATCH v2 dt-schema 2/3] schemas: i2c: clean up interrupt descriptions for I2C targets
-Date: Thu, 15 Aug 2024 23:40:12 +0200
-Message-ID: <20240815214013.6519-3-wsa+renesas@sang-engineering.com>
+Subject: [PATCH v2 dt-schema 0/3] schemas: i2c: fix "smbus_alert" handling
+Date: Thu, 15 Aug 2024 23:40:10 +0200
+Message-ID: <20240815214013.6519-1-wsa+renesas@sang-engineering.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240815214013.6519-1-wsa+renesas@sang-engineering.com>
-References: <20240815214013.6519-1-wsa+renesas@sang-engineering.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -48,48 +44,28 @@ List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Schemas should be OS agnostic, so don't mention what the "I2C core" will
-do because this only applies to Linux. Also, drop the generic
-"smbus_alert" naming because this belongs to controllers not targets, so
-we don't want to describe it here. Finally, use "contains" instead of
-"items" because the enum is not exhaustive.
+"smbus_alert" is currently listed as an interrupt for targets. This is
+wrong, it is an interrupt for the controller. The mistake (mea culpa!)
+was already in the originating "i2c.txt" file in the Linux Kernel. Time
+to fix it. Make small changes to descriptions to use inclusive language
+while we are here.
 
-Signed-off-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
----
- dtschema/schemas/i2c/i2c-controller.yaml | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+Changes since v1:
+* use "contains" instead of "items" in patch 2+3
+* drop "irq" binding from patch 3
+* checked with dt-doc-validate now
 
-diff --git a/dtschema/schemas/i2c/i2c-controller.yaml b/dtschema/schemas/i2c/i2c-controller.yaml
-index e475ead..6dc73f8 100644
---- a/dtschema/schemas/i2c/i2c-controller.yaml
-+++ b/dtschema/schemas/i2c/i2c-controller.yaml
-@@ -171,20 +171,20 @@ patternProperties:
- 
-       interrupts:
-         description:
--          I2C core will treat "irq" interrupt (or the very first interrupt if
--          not using interrupt names) as primary interrupt for the target.
-+          If not using interrupt-names, the first interrupt will be treated as
-+          the primary interrupt for the target.
- 
-       interrupt-names:
-         anyOf:
-           - {} # Any name is allowed.
--          - items:
-+          - contains:
-               enum:
-                 - irq
-                 - wakeup
--                - smbus_alert
-             description:
--              Names which are recognized by I2C core, other names are left to
--              individual bindings.
-+              Generic names are "irq" for the primary interrupt and "wakeup"
-+              for the wakeup interrupt. Other names are left to individual
-+              bindings.
- 
-       wakeup-source:
-         description:
+Thanks, Rob, for the support!
+
+
+Wolfram Sang (3):
+  schemas: i2c: reword descriptions for inclusive language
+  schemas: i2c: clean up interrupt descriptions for I2C targets
+  schemas: i2c: add generic interrupt name for I2C controllers
+
+ dtschema/schemas/i2c/i2c-controller.yaml | 37 +++++++++++++++++-------
+ 1 file changed, 26 insertions(+), 11 deletions(-)
+
 -- 
 2.43.0
 
