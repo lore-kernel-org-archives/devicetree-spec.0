@@ -1,41 +1,45 @@
 Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 190CA14BF9B
-	for <devicetree-spec@vger.kernel.org>; Thu, 15 Aug 2024 21:40:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A6081537D9
+	for <devicetree-spec@vger.kernel.org>; Thu, 15 Aug 2024 21:40:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.117.254.33
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723758020; cv=none; b=mJjy3HVRH+IADqpyQ0gGb1j4ct2aM4LkfBLxG2wyOcb50tkirhrwjMAQUq0uCdli0RwR99/k57QmJ4ddc0tM4ubOUI0Dm3a+yy3sd1e7xqOQggaTwUL6P9dvx7gxe3/wT4KYbUzCdKDmaQaIa7Ymy7xxEvuJcTDxpSXrFltcRYk=
+	t=1723758021; cv=none; b=FyGDPZXSQDTG1fOtIM1bR91zz6GJTuMl5CmVb+Ews3O5SxVl8a2vHLPgHFtHjhkCO2t7cBUspuMjosAc5e2pZFY3qihik3aU1dg+Vd1UHB29o9qe1r/cITcLAvY3QCH+tNH5o8WX+j7pW32AXiM5qWxFnedpkiWrywYDH/2Cb+Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1723758020; c=relaxed/simple;
-	bh=cJaVGYUenxRIG1LOJqIzqkTj+afPq78Oz29juMpk2gc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=lLG66gUvmy9rt44qQt7RKotfKSnSX9mv2slO9G6xc4T1FkQKDG+leUGotklgB6SDMlIkw8X5y4srQG6GFq7AwczBx9hUxzwRPLwEsxx9sxeLObC2ORfe0jz2p4xycQncT2Y03mv42OS53eLG+CRSXG5QVvxHEtYtBJ0IZHoT4Kg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com; spf=pass smtp.mailfrom=sang-engineering.com; dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b=VO1nuYHN; arc=none smtp.client-ip=194.117.254.33
+	s=arc-20240116; t=1723758021; c=relaxed/simple;
+	bh=EXxKVP9wze1+GWixvMjhq/LYI1QHRZcPF6P1jWQ2DBk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=EdmyLcezkC0QBSmmFLWDq8+fdP0d/YdK/vw/uvRzVHMWscWjJLJyMwhdh+wGsnaqn4auPru4e62felCzx5LHqW5zNiWDgL48r4pflYO/7JX2m60IsOfv05WPmQx6OBHC+6XTcwFiR+pObkae8dJXlXCIooVBtUgIdKll9lm8mK0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com; spf=pass smtp.mailfrom=sang-engineering.com; dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b=MN5zuBtT; arc=none smtp.client-ip=194.117.254.33
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="VO1nuYHN"
+	dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="MN5zuBtT"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	sang-engineering.com; h=from:to:cc:subject:date:message-id
-	:mime-version:content-transfer-encoding; s=k1; bh=4XmfelGNV5Z2+G
-	Sgo/72Ljhp4B5UEyAL9EE3eiFgyVk=; b=VO1nuYHNnfftzwEtRcQrFIC4ALM4y9
-	Y1ew00AP+lZhhHWK1mn0rq60GSiMU1OnIbnY/bycqxwAso/fWfnx0Jtq6Agw2WCh
-	8UlJK1uB7fDzIDb81aPcLqMst0Yh+zZbMvN1HVjaMpG51KIPokHwV1EByAgJZRoV
-	CzNbcOlV/lpB4dxfR/IEvpLU1a7N9liV2ycrG3pjXXzrjdVK+bLCLBuFfH/H5m/x
-	FMgYCXrGn6kJEboyViyGvw3bHlEP9qHn8/FXt3H0lwUnhEjygvMsFwLLziNYyVn/
-	vWXmei59Mu7zjzO1TnA2GYGTdI/fFJYZ+vliArrftbDDMSNPpEV4X33Q==
-Received: (qmail 2404078 invoked from network); 15 Aug 2024 23:40:15 +0200
-Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 15 Aug 2024 23:40:15 +0200
-X-UD-Smtp-Session: l3s3148p1@VqsnsL8fbKsgAQnoAH4zAClVBN/DeGcx
+	:in-reply-to:references:mime-version:content-transfer-encoding;
+	 s=k1; bh=qq3ScW5pg08u1UFPZa79aJfX7ldEfNzfsS0vXLeKG/4=; b=MN5zuB
+	tTnANhH5KeMJxk0ZsRnE5DYlsTHLT3FEdEz/rC4ZNERU/PnS1/lfl5YTbnMU1giV
+	92QxVqpEXzOyNvKv9V/W64/sJkyQprTP1aA74hfaaXjf/l3RIrNmwhjOvCiAtcF6
+	U8ka+AVy/3BWPK/xad6ncOsK/GXBLGpnJJGLjersNWEpiMXCXc+JVOrIjc0AyUV4
+	vDNKlfVLTWNS8sWT5isbuERS3bVEmMLT/GOfsl6/gtfcOiytrnM6QnvqjRQU1kdG
+	MXEpH32OfUf3DHPELB1lofQsR0giujMNyHR3P1tcYwUamjfOS80ZdyvP8cYR9wDN
+	l4c2DqI0JOXEA2Vg==
+Received: (qmail 2404152 invoked from network); 15 Aug 2024 23:40:17 +0200
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 15 Aug 2024 23:40:17 +0200
+X-UD-Smtp-Session: l3s3148p1@6DdIsL8faI0gAQnoAH4zAClVBN/DeGcx
 From: Wolfram Sang <wsa+renesas@sang-engineering.com>
 To: linux-renesas-soc@vger.kernel.org
 Cc: linux-i2c@vger.kernel.org,
 	devicetree-spec@vger.kernel.org,
 	Wolfram Sang <wsa+renesas@sang-engineering.com>
-Subject: [PATCH v2 dt-schema 0/3] schemas: i2c: fix "smbus_alert" handling
-Date: Thu, 15 Aug 2024 23:40:10 +0200
-Message-ID: <20240815214013.6519-1-wsa+renesas@sang-engineering.com>
+Subject: [PATCH v2 dt-schema 3/3] schemas: i2c: add generic interrupt name for I2C controllers
+Date: Thu, 15 Aug 2024 23:40:13 +0200
+Message-ID: <20240815214013.6519-4-wsa+renesas@sang-engineering.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240815214013.6519-1-wsa+renesas@sang-engineering.com>
+References: <20240815214013.6519-1-wsa+renesas@sang-engineering.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -44,28 +48,40 @@ List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-"smbus_alert" is currently listed as an interrupt for targets. This is
-wrong, it is an interrupt for the controller. The mistake (mea culpa!)
-was already in the originating "i2c.txt" file in the Linux Kernel. Time
-to fix it. Make small changes to descriptions to use inclusive language
-while we are here.
+"smbus_alert" is a generic interrupt name for controllers, so document
+it.
 
-Changes since v1:
-* use "contains" instead of "items" in patch 2+3
-* drop "irq" binding from patch 3
-* checked with dt-doc-validate now
+Signed-off-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
+---
+ dtschema/schemas/i2c/i2c-controller.yaml | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-Thanks, Rob, for the support!
-
-
-Wolfram Sang (3):
-  schemas: i2c: reword descriptions for inclusive language
-  schemas: i2c: clean up interrupt descriptions for I2C targets
-  schemas: i2c: add generic interrupt name for I2C controllers
-
- dtschema/schemas/i2c/i2c-controller.yaml | 37 +++++++++++++++++-------
- 1 file changed, 26 insertions(+), 11 deletions(-)
-
+diff --git a/dtschema/schemas/i2c/i2c-controller.yaml b/dtschema/schemas/i2c/i2c-controller.yaml
+index 6dc73f8..97d0aaa 100644
+--- a/dtschema/schemas/i2c/i2c-controller.yaml
++++ b/dtschema/schemas/i2c/i2c-controller.yaml
+@@ -90,6 +90,21 @@ properties:
+       low-pass analog filter). Typical value should be above the normal i2c bus
+       clock frequency (clock-frequency). Specified in Hz.
+ 
++  interrupts:
++    description:
++      If not using interrupt-names, the first interrupt will be treated as the
++      primary interrupt for the controller.
++
++  interrupt-names:
++    anyOf:
++      - {} # Any name is allowed.
++      - contains:
++          enum:
++            - smbus_alert
++        description:
++          Generic name is "smbus_alert" for the SMBusAlert signal. Other names
++          are left to individual bindings.
++
+   mctp-controller:
+     type: boolean
+     description:
 -- 
 2.43.0
 
