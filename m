@@ -1,69 +1,73 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88600155749;
-	Thu, 15 Aug 2024 22:48:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A41EC1B583E
+	for <devicetree-spec@vger.kernel.org>; Mon,  9 Sep 2024 10:58:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.117.254.33
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1723762116; cv=none; b=hGjxCMwlICyUg9gnlZSDm6Y2NXz98fBZNvNy2cIefKWmvPdW7lZjPLfg5DF4SxRUNFIMdyKoi/fy5bXP1nL9fpE3FOfrlaiRHTy6DxJJyu852vLEwJ6UEr7l3Qn1FOofIUOqaNXbM6lxHaV0athS28sD2X72r2q5wtJZ/j59GlI=
+	t=1725879523; cv=none; b=UbETY3NDzNgeHmAe55xL0UU3j1uU1BSHsXJh7JlTF5Tjw3fRaBiOj2dBA83iOnPG3TWigp/SFIeJouO/McTMGVhZQ+2NpyDMwv38tg3zX03YHOAmv6laQH0qXHgr8o6/DuHqbGy0HMbBnDk3/SdXLgqIMgHu31K5qI8RiaN86Wo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1723762116; c=relaxed/simple;
-	bh=iDXaL3PgPtaL78Posd8L2U/dDWjO2qga+a8I7G+pm5s=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=PdtHOB5srBlNyDLwp/a0uoJbx8AJiWA6bg0CsP1DPO2teEcYdPJc8kRD3X/jVneb8JIvvnssiYFXvnE7geTJJk7T6LB7DkgGZnbg+iayZapyPI+aqvYfcsRrFAgHjMT+kIqD7nGVHViWj7AUjOG8R1ihCUS+Hx6AgJfm8pHicpM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=g8P3EDHw; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1725879523; c=relaxed/simple;
+	bh=4ffm+7cR1ZRKXI4mD63W8SZwQQnR+sPYghebbp8Yw6c=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=fO5cQ3GtvHVq8dY2lm4I5H1rZkZLmeZ1OGRrPtaGiMwYdG+i3TG+7flT6fNyjOn0o4FaFz2NXdb4bflijZJUwdd/GSykmL+8RP0g5IAGQUKmLc2mZhtqwOCkEZMXoyDjiFLVDdJUhIyXM59Gd5FddrsfBxJ7KPaGc4XiD71pXuY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com; spf=pass smtp.mailfrom=sang-engineering.com; dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b=LTWq9Lo8; arc=none smtp.client-ip=194.117.254.33
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="g8P3EDHw"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EB6EBC32786;
-	Thu, 15 Aug 2024 22:48:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1723762116;
-	bh=iDXaL3PgPtaL78Posd8L2U/dDWjO2qga+a8I7G+pm5s=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=g8P3EDHw56bBuFWtIkImDRjzjuIBvzQOSqA1Olv2fZ/ObxH6wgX7JSKU9MsQ6F3tD
-	 y+QKU80YGmll6WuScH/WkO8jTt/I+nbS5X4CqH5q+r41JOSBFfxYx8Lc7trUMYsAFD
-	 dw3wEFWJhhjxX6OiejfzIvN1Tk4aMvRCy/3xv1efBiYEXS7mOOWYJ9FEmysMpFdoub
-	 znp0Ok+S3coMRc2Le3NVsF7D3fq/Ee+3ALmtZjyTxck8YtOzGM/RLbMRgTfdqfjIFn
-	 O2tSWKIZYoQSjrudys34JqfJ9d3cMDu0RaqUJB2ePogYfjpDmz8hNSkZv6MT+Jhgqv
-	 r6Lxjwv8Xhl6Q==
-Date: Thu, 15 Aug 2024 16:48:35 -0600
-From: Rob Herring <robh@kernel.org>
-To: Wolfram Sang <wsa+renesas@sang-engineering.com>
-Cc: linux-renesas-soc@vger.kernel.org, linux-i2c@vger.kernel.org,
-	devicetree-spec@vger.kernel.org
-Subject: Re: [PATCH v2 dt-schema 0/3] schemas: i2c: fix "smbus_alert" handling
-Message-ID: <20240815224835.GA3287461-robh@kernel.org>
-References: <20240815214013.6519-1-wsa+renesas@sang-engineering.com>
+	dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="LTWq9Lo8"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	sang-engineering.com; h=from:to:cc:subject:date:message-id
+	:mime-version:content-transfer-encoding; s=k1; bh=+SZh6Xd3HzMOgs
+	tqqLmZpchNLWCCiq+A1Oa+4OeKqug=; b=LTWq9Lo8xGbLjUOZbef7YIF/xH5QRC
+	JFUeljW/Mn22obZLzKdY3ho3LpOt1b6YNJwkk+C+z07lLhdzAYKiGciZ9dcAZpxC
+	CtR8dLvA8YhW/ep33QQ3/Njev64TOx1GfJ8UH+ONGk3pfvKmZMsPrs+Y1H20zAF7
+	y1+Dgo3H29DxTWg/hqLxyu/4TtEiRtBIv9vFV3RsNO2nHz29Snz8GGb1s4gjGd93
+	aqHpw2mqE2uAeYPouPaNVSkKkpu2C9d3CcrXebWxJ6dVYLUTX9bFbCu1hLn0yLNh
+	uPnP+qOUFXiehj/KDuLevTCwC20Xl7dQssFTgT4+ousNlAV4l24FP/EA==
+Received: (qmail 2045066 invoked from network); 9 Sep 2024 12:58:38 +0200
+Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 9 Sep 2024 12:58:38 +0200
+X-UD-Smtp-Session: l3s3148p1@QaGeo60h0JQgAwDPXwlaAFpYOMUD2VTJ
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
+To: linux-renesas-soc@vger.kernel.org
+Cc: linux-i2c@vger.kernel.org,
+	devicetree-spec@vger.kernel.org,
+	Wolfram Sang <wsa+renesas@sang-engineering.com>
+Subject: [PATCH dt-schema] schemas: i2c: add optional GPIO binding for SMBALERT# line
+Date: Mon,  9 Sep 2024 12:58:35 +0200
+Message-ID: <20240909105835.28531-1-wsa+renesas@sang-engineering.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240815214013.6519-1-wsa+renesas@sang-engineering.com>
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 15, 2024 at 11:40:10PM +0200, Wolfram Sang wrote:
-> "smbus_alert" is currently listed as an interrupt for targets. This is
-> wrong, it is an interrupt for the controller. The mistake (mea culpa!)
-> was already in the originating "i2c.txt" file in the Linux Kernel. Time
-> to fix it. Make small changes to descriptions to use inclusive language
-> while we are here.
-> 
-> Changes since v1:
-> * use "contains" instead of "items" in patch 2+3
-> * drop "irq" binding from patch 3
-> * checked with dt-doc-validate now
-> 
-> Thanks, Rob, for the support!
-> 
-> 
-> Wolfram Sang (3):
->   schemas: i2c: reword descriptions for inclusive language
->   schemas: i2c: clean up interrupt descriptions for I2C targets
->   schemas: i2c: add generic interrupt name for I2C controllers
+Most I2C controllers do not have a dedicated pin for SMBus Alerts. Allow
+them to define a GPIO as a side-channel.
 
-Applied, thanks!
+Signed-off-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
+---
+ dtschema/schemas/i2c/i2c-controller.yaml | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Rob
+diff --git a/dtschema/schemas/i2c/i2c-controller.yaml b/dtschema/schemas/i2c/i2c-controller.yaml
+index 97d0aaa..487e669 100644
+--- a/dtschema/schemas/i2c/i2c-controller.yaml
++++ b/dtschema/schemas/i2c/i2c-controller.yaml
+@@ -135,6 +135,11 @@ properties:
+       use this information to detect a stalled bus more reliably, for example.
+       Can not be combined with 'multi-master'.
+ 
++  smbalert-gpios:
++    maxItems: 1
++    description:
++      Specifies the GPIO used for the SMBALERT# line. Optional.
++
+   smbus:
+     type: boolean
+     description:
+-- 
+2.43.0
+
