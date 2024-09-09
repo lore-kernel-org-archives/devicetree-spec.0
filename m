@@ -1,49 +1,49 @@
-Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com [209.85.219.169])
+Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com [209.85.219.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29EE0146D75;
-	Mon,  9 Sep 2024 14:28:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F50C16D9AF;
+	Mon,  9 Sep 2024 18:24:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1725892086; cv=none; b=BZAP6umjc1l+DusS29OF+8vs4v8CIe+VeKXETunVy4UAqNfPMFRoah6r5KVL4LcOEnVPWIYh/NnhF9eM1PvhC66iwmwMD8RAa8EOnxCyDJEPEOWRjeIBCSgcUgImu7l3u9mVNGD29uouxbPaEQvBbc2eI0dw3LHavWBaJzbob9I=
+	t=1725906277; cv=none; b=JRfFzcupPPps9uiwebQKbAWRnNcKKW4hMkX6LtMH2j8582iiBZM9wD1JFsVPizQmBKTky+u0umRG/xZ0j/kV3GStx2ydv0iGnnJbmRpnyTfgvraXtmk5mcUnF0EE2a0EIKkxKnlwtwisBbKkhQyhm6jJnFdTU2cF2m40o/BR3Kw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1725892086; c=relaxed/simple;
-	bh=Upr2kVJPeIeM/kmdb+9pvBJ2V0ID4O32UEDnljK+yw4=;
+	s=arc-20240116; t=1725906277; c=relaxed/simple;
+	bh=H1HrYV3nGu7dk6DeTttTdNdhYwRQg0LmmbTolyu8hX0=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=rUIFtR+luAH12BGxmudlQSdkrKqOU8zIHR/Xu7kodracybnpcMUCCAjYpVZz2FbEzy+fhhTA47i6sPcXY0GVKzhYi6eU/oPaeyRZxCb8UpV/z+Wbt+/wl4ZEB5qA0tZelVc2yaul9KhZEnmTBDHYDHXppMYMjLKPt72LtR55+ek=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.219.169
+	 To:Cc:Content-Type; b=SoAB6JVx/Z8TjCwdrVkQ3gMeef0DgK/rnPHhDjnSgpLIJl5mLw45F8Q5ZsP1Ji9HGfq3jBVlxldOPJH6JHrxYEXXhtm560WrK6DyLDFIivT7E0GIeMr6LNkTP0tJhnjFWvlw3Mic3m87IjPfA+NSNARm1NGu6kc7EWDTCKcMwmw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.219.178
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yb1-f169.google.com with SMTP id 3f1490d57ef6-e1d4368ad91so1535044276.0;
-        Mon, 09 Sep 2024 07:28:03 -0700 (PDT)
+Received: by mail-yb1-f178.google.com with SMTP id 3f1490d57ef6-e1651f48c31so5155753276.0;
+        Mon, 09 Sep 2024 11:24:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725892082; x=1726496882;
+        d=1e100.net; s=20230601; t=1725906274; x=1726511074;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=AXkyE1Z714MyovHiivV/drnn/cmkdD/V8e57YXHJufo=;
-        b=qfBWPtJhVFe9lyzAuYEhvWG7rCf6KntSxeDYmn1p+08xQ/0EFuc9cP8bcTnlnLGWSa
-         DBefelUEuybslokbWttJouWrCZW/Jeh9jT0WYwpujPREVutAcPzsczXlZZKsV9vTEeDo
-         dULkKf3V851mXRWBH9qjIp34e/R2OF6sHlMDDa+cF1AJfsdJX1lU+EPHUIwELy013pXM
-         Gidn8cVCzi2N2LVUCbCzd+pKBqQ4Wv8SnJ6w546CJjq/hQwq46e5WTECeij2Y9RPiMkK
-         J1ZoiOPvOTrJqqorxW/Ej5rWFokf1E/rqXd5bhsESzECcPAZ8Vr/UQKGRdZIZ2ZcDqN1
-         FWHg==
-X-Forwarded-Encrypted: i=1; AJvYcCV3x9LvT8JtX4ZnfH9++MF4tw4cscQR8RdaZ6lrVOO4klWZSiGFQhHAWdfF+y3/bH3WSYMs0j48VTUSO04QPZc=@vger.kernel.org, AJvYcCWUzhLw1iX7XPxqNvTysaxqZF56zrVgSL+AuXm0KIGVkzmZyZMMAfFxD2TkYQgrqpF/GHZK6WvUBmBpwgkfPvPvTfI=@vger.kernel.org, AJvYcCXvrV8Nn5a05BwCdjzpxzDydAGFpDIy/3dStOjOVFrBXcqzuLwVJSOjmF+7Rj5BvMuYRGqNY9MhPCsU@vger.kernel.org
-X-Gm-Message-State: AOJu0YzR0EcY3HWNFDF2pnPVe68fR/SZHkkK28MyHo47pIyEfwggqgKo
-	xtP1loQO0oKry8AwQWxdNVyb67sNtAC/dpANEK18SpTj0NrcV1ukicutsQwr
-X-Google-Smtp-Source: AGHT+IGsX230Z/gtLB7z9dEoMXgkkyAidsDqGhBpyGP/dFb3orlaEFV/DfJ96wV+HOqtIv85VUqf8w==
-X-Received: by 2002:a05:690c:c93:b0:6af:8f7a:28ce with SMTP id 00721157ae682-6db445f32famr95138147b3.20.1725892082353;
-        Mon, 09 Sep 2024 07:28:02 -0700 (PDT)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com. [209.85.128.178])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-6db5c7007c8sm9168737b3.145.2024.09.09.07.28.02
+        bh=GT+93N3cYqkEubN3oqEdQZHocdjlebcPKNrk4DFLYiw=;
+        b=DSsQ+S3hTncgUcfX5zdNjHevvKSnNg1Ip2+tRJPT+qN+KO9K0czt1/tW69NmtVCe9G
+         0U737jPkcBditMXs/NCkhAQ13LPmdFnvs3UcCSi07eVDaGR9JN1ouKFxD1lFgtjxYkcN
+         7u8ub8PQ7/XRcMsCBZrS76u/82vDdqGtI9CYMcApKnE3x7jMeiBtyaYxSoqa9Q6rzPm/
+         WJzVyrKYynPqx+2ZTX0ssG7HYkETsoFRuMR8PaltZSTxTUpHOY1X2asH/PQ+AfM1H4hC
+         xdlS6qUZrSVzx1lICQxeB85J0LB4k1tIjahGj2IgF0pKEgjM1WX0Oi0skXCbw3S6n82P
+         gk4g==
+X-Forwarded-Encrypted: i=1; AJvYcCW8gElmb2ghlxHizsNH+DjXTSadM2E2TByV0nPAd0l/TfmM4QM0RyItfQ+fQ35T4nQwybShTNq3J6VtiNTjEisA4sw=@vger.kernel.org, AJvYcCXSyGZxt034GcGbN858PuUeUoJi9Ueeo7fFGPup+Di9zok2Ur+dXTcWzfGg49r1rJEak4lZtra39Nc+@vger.kernel.org, AJvYcCXq90JhUnBY2YBYGnaNjWfYqgsYMX1B3gVsyBreLTUs3zV/BnNIuAcXodRuUuvGG0KCfCYqOm7RkWGnjbpDx8I=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx5SEZbA6q/TjYKFsrNUuX8LngI3J14jsUS8xGEOdUo8j/ETnK1
+	/yEACoIJqESWK7qVRU9P7ZzDn/WaHQX+948SiaIa/Ir4zepQgRU/6rJDluUm
+X-Google-Smtp-Source: AGHT+IHs3ybvb/kwPIC9K7Q0KGaUz7WgzJcr7z8v9fn3rtxmq4Jy/a+kvZkE3RcoamYKX0+eWEQFLw==
+X-Received: by 2002:a05:6902:2012:b0:e1d:449:31b7 with SMTP id 3f1490d57ef6-e1d348650bemr11519121276.8.1725906274126;
+        Mon, 09 Sep 2024 11:24:34 -0700 (PDT)
+Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com. [209.85.219.175])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e1d7b9db608sm16027276.6.2024.09.09.11.24.33
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 09 Sep 2024 07:28:02 -0700 (PDT)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-6d7073a39dcso48157267b3.1;
-        Mon, 09 Sep 2024 07:28:02 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCVr07afTSHnZ3VrAYQu1XE0qqL+Na3xZsZuG3iN8NPHyr3PHLOUkDpKSk577mCsZiDGWS1jQSBa8aJWbNTiQAU=@vger.kernel.org, AJvYcCWGt/ue6PW8w4KlW8KM2nV41rjYNpDQR7xooU1RFbOELeJBjmPycBAh3mNEXcowjo6GHXORgVvVRZD1@vger.kernel.org, AJvYcCXQZUb9HHiX269QdB6P0BFW0jErvjOJb12ITPHtuflezMmcomXj6WrrHYyl06EDras635UILCNs96ZrdrOFd+srwYY=@vger.kernel.org
-X-Received: by 2002:a05:690c:3687:b0:6d9:807f:5115 with SMTP id
- 00721157ae682-6db2603b6c0mr150438347b3.19.1725892081850; Mon, 09 Sep 2024
- 07:28:01 -0700 (PDT)
+        Mon, 09 Sep 2024 11:24:33 -0700 (PDT)
+Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-e1a7c25e350so4480485276.3;
+        Mon, 09 Sep 2024 11:24:33 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AJvYcCU935LWDDb3JIhM9gjl3QcvDBRSZH2jTFU2Ar2lOot2wYnWvTwQ1IoAjDoJS0EcuPFE8l0DraMUR9n7Z1GD3+o=@vger.kernel.org, AJvYcCUB2dfWmUXf0VfGt5dTwq7BFpoOTI/NaEyrbelNCHPzVLIkmQeNZF7xJDo5GAReD5I8f4l10qoUx35NKqARdfnvC84=@vger.kernel.org, AJvYcCViy4UcEJf0iCTmC57SXFzgpprFHcoPR6T28zl9bngUoQttOTotVoyVMaAXhanv4abBSc+UsMpd5Fuw@vger.kernel.org
+X-Received: by 2002:a05:690c:2d09:b0:6db:5567:6907 with SMTP id
+ 00721157ae682-6db55676eb2mr89491407b3.14.1725906273718; Mon, 09 Sep 2024
+ 11:24:33 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -55,9 +55,9 @@ References: <20240909105835.28531-1-wsa+renesas@sang-engineering.com>
  <CAMuHMdWGtuAuQ3M3HonY8zfODTTz_izV6g9555iwuPLSY+P9_g@mail.gmail.com> <CAL_Jsq+cFb56e5WvipL1nR-0TDz+v6vnFDvz9F9JbXinxkEt1Q@mail.gmail.com>
 In-Reply-To: <CAL_Jsq+cFb56e5WvipL1nR-0TDz+v6vnFDvz9F9JbXinxkEt1Q@mail.gmail.com>
 From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Mon, 9 Sep 2024 16:27:48 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdXiY4kxTaiYk3FOmW_JsK5Beyia1w73DA3grL9mu55X_Q@mail.gmail.com>
-Message-ID: <CAMuHMdXiY4kxTaiYk3FOmW_JsK5Beyia1w73DA3grL9mu55X_Q@mail.gmail.com>
+Date: Mon, 9 Sep 2024 20:24:21 +0200
+X-Gmail-Original-Message-ID: <CAMuHMdV4xf37BLwORE=bh1s-SGXH4vnhEqFkvxu+h4RJKB1F6w@mail.gmail.com>
+Message-ID: <CAMuHMdV4xf37BLwORE=bh1s-SGXH4vnhEqFkvxu+h4RJKB1F6w@mail.gmail.com>
 Subject: Re: [PATCH dt-schema] schemas: i2c: add optional GPIO binding for
  SMBALERT# line
 To: Rob Herring <robh@kernel.org>
@@ -91,21 +91,9 @@ Allow
 >
 > All sounds like Linux problems...
 
-;-)
-
-> > See also the different handling of interrupts and gpios by gpio-keys.
->
-> I believe "gpios" is what was originally supported, but now it is
-> preferred if GPIOs are used as interrupts then we use interrupts in
-> DT.
-
-You really do not want to use gpio-keys with interrupts, unless you
-have no choice.  Some shortcomings are outlined in "[PATCH RFC 3/3]
-Input: gpio-keys - Fix ghost events with both-edge irqs" [1].
-They do not matter for SMBALERT, though.
-
-[1] https://lore.kernel.org/r/356b31ade897af77a06d6567601f038f56b3b2a2.1638=
-538079.git.geert+renesas@glider.be
+Let me rephrase in the familiar way: in the case of the latter, the
+interrupt number is not a property of the hardware, but depends on
+software configuration.
 
 Gr{oetje,eeting}s,
 
