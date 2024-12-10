@@ -1,74 +1,86 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EA491D0943;
-	Tue,  1 Oct 2024 23:05:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80BCD1B2195;
+	Tue, 10 Dec 2024 14:41:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1727823946; cv=none; b=dFNlh28sCvJZ8GImvKwHiLrZWmYmPJBv98/V01Z21JoJXmMeMXhCAOnGdeOfE4+AoC8FHde6k9wp2vo4VREbXurkFGqOl1MIHHTe/QTEx2gf2aS4M6jIWnJ0Pa4vx/GCqzaWySYU/pCN/uAm/hsn9tApqpfX40pieDcz/5GIYJs=
+	t=1733841718; cv=none; b=Sj0QFkUPfBTU4hkcuFKPJupzZX68qnLekoKaoQYQCLYuBDquMpDkM/JKb9NCQ6VHjElAZQE87ULiKLEcWnWdLvnNr8ncBluPIeYi144CWk2Om/Kf+mSUnPG3DU9EvBRVIchlB83K1J+mRzdfjLp2YItmZjoKfh9qeiGaVG5DWDY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1727823946; c=relaxed/simple;
-	bh=wpshmwB6VkHtdKwNBCKAevlj9A5uw8FmmNrgqjxZwlQ=;
+	s=arc-20240116; t=1733841718; c=relaxed/simple;
+	bh=6I+fvpRnzlPuOqr0NtIcUKQjHLNr3VYA1+cn4EHRNgY=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=jLV2hwohzZn2z/DJUrAgY7L2lMsh52d3nGBXL2YpjldQTdHKq5v3lornBOtRt8bzCRA9H6vWlNs8Osf3W57Z9wPvC7tzFb353zwzqet6n4YlaaE03E/7hK4GcaAswlohNM2SuY6jlEJhctHVV/DAq7+EPLzWCluGMCbqMg6T1SA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YpA5qeCo; arc=none smtp.client-ip=10.30.226.201
+	 To:Cc:Content-Type; b=rlpPl+GBtNESO3niLEsK2GYqZd6EVs8u9GhPjBoZdFENgYm2mIO8jNWxSm4DIVsLXlsTvObfBbGx022RutS1oMXXTl0VP0/UN4PLh/6+387dxNZI6gYTt56HCpV8gsB+LHONgmz2oxQDyP746LOCq1ckiHAT973GUo7VUuD0l1g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NfO/9HfI; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YpA5qeCo"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CCC7EC4CED1;
-	Tue,  1 Oct 2024 23:05:45 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NfO/9HfI"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05DC3C4CEDE;
+	Tue, 10 Dec 2024 14:41:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1727823945;
-	bh=wpshmwB6VkHtdKwNBCKAevlj9A5uw8FmmNrgqjxZwlQ=;
+	s=k20201202; t=1733841718;
+	bh=6I+fvpRnzlPuOqr0NtIcUKQjHLNr3VYA1+cn4EHRNgY=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=YpA5qeCo7Bc8w/odgKCruYxtYJfbAWRy/E1OPyPYlMhiA7CfqHEd8HnKhEVWoW4Bw
-	 ATFGyIlXspCplDAasYSQ36j0ac56rilnS5dfg/Vy2KP7AKREi/EjHAPeNRw+WDtmyl
-	 /TjQ+pG3Izho2nndhZkFeTmC19mWdlOHbN3t7KhZeIR3dcwQbmr28/E/fXk27zvEMX
-	 85tz+7eIsLGCUoN8i3GZqs7e/dNuWIHF3BXrDcqBg98AOkEUQBu2I/x4LaEQuWmPFr
-	 wOwJFomcVana4TlTAZlUTLtXB3QNTIOPkSHhbBmaCQP7+FI0JI38mztV3qtQvV21lr
-	 qWAF1IBDgEQPw==
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5398e33155fso4325835e87.3;
-        Tue, 01 Oct 2024 16:05:45 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCVxshY436LZP8diTmHhuLtlCcMV6lULgSC8jbfufFqPWz03sKuCg4bJQRKzQQO9ViMt6BKrNATScbyj@vger.kernel.org, AJvYcCXmyVJx0YlzcDqtDTD5qMiAQYMTbzzW+hxqeJnuRZU0Km8+A4KfknwTlGsxH9Q+RNxzBkX+FxjnNSDoGWCAq+s=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyhCKslqGwv89YPOMXZJVFR3/TVo7HtvkrSKyzVHB0h9cuaGPvl
-	O7rRXpuohE3K4Ukl+4hPFADz78R7aJUjdRphyulyYaR+363fZGMVUm1W6Hze4I1bjT9JuPBubPp
-	A2g5LengY3hbR1Kz766M7EOmhlQ==
-X-Google-Smtp-Source: AGHT+IFH7ioAgfOMUhVPg1kRaVOz8AQm1o/RUZ35K6Vi2CVpKIgmSHbtXdTjF6RYMTSQac1N+p+l9V8yd/CMyrwUSg4=
-X-Received: by 2002:a05:6512:2399:b0:539:91b8:edb7 with SMTP id
- 2adb3069b0e04-539a07a1d5amr619489e87.42.1727823943884; Tue, 01 Oct 2024
- 16:05:43 -0700 (PDT)
+	b=NfO/9HfIy+WghyrLVXC0d4Mbpp4/XvHE5Z/uhYp1vxnRlsW+Nd/mEvkBqeZhRvmMK
+	 kgpSMxbXZkrUDhbGe0wGsJMr6V3hKIa7LJZcpIP3jSy0XF1/Lq4PnYHJlgyqhrcSqs
+	 U39FLUtTATfsdQsLIl/XS8pXHunELnvA58omJ+L3+MYnv4qVc99e3oz62ki18/vu1T
+	 cdHegQlu5YNgraaqGwfINe6AT02a9jBlqKu7O/9+la2j8/riwPAFI39fI3FKwggf1f
+	 ovNa7g1R3viYIictxHljFCIBmigeICZyvP8MEHi6NFCidGBwC8gkpUZpGt7tkATpVb
+	 np8JrdX95cybg==
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-6eff5ad69a1so28940627b3.3;
+        Tue, 10 Dec 2024 06:41:57 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCWPCJQn0Fh2yFO1qXDLa0/QXLZDOSZUj5RrCK8BVvoIXI1ovMIORkMNus0IISwIxKoqd9LDlWt/0/WOP2PDrBk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwRmWCxESIToPFTlb3abM+hZ8pcVeLdfVanWZSWunmtQoxdYE8X
+	tHTj0+xbhD6HCyKEw12bafgns2obtFditvDULNyu0zzfvHDR/ujYdM9bxrCfgvrmLSshiMcni3l
+	ROOOul/rBXO6r4uYahpTewU3hJg==
+X-Google-Smtp-Source: AGHT+IEFK4UoAEDb9osbYUZV0RyjUZPG4SHW9yY8AoUNGN7ZS1Z1jUfl+Uyz1M9es3mv0bzOJ6l1wGkpquMbIdVMzmw=
+X-Received: by 2002:a05:6902:12cc:b0:e39:9a5b:53ac with SMTP id
+ 3f1490d57ef6-e3a0b417f62mr11841401276.40.1733841717209; Tue, 10 Dec 2024
+ 06:41:57 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20240909105835.28531-1-wsa+renesas@sang-engineering.com>
-In-Reply-To: <20240909105835.28531-1-wsa+renesas@sang-engineering.com>
+References: <a068210820b44d28a6e97eb07f43f3c5@huawei.com>
+In-Reply-To: <a068210820b44d28a6e97eb07f43f3c5@huawei.com>
 From: Rob Herring <robh@kernel.org>
-Date: Tue, 1 Oct 2024 18:05:19 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqLsX_QYuhEe30n6p36GdjXTPgWAzNNDAmxXb3j-mB=wQw@mail.gmail.com>
-Message-ID: <CAL_JsqLsX_QYuhEe30n6p36GdjXTPgWAzNNDAmxXb3j-mB=wQw@mail.gmail.com>
-Subject: Re: [PATCH dt-schema] schemas: i2c: add optional GPIO binding for
- SMBALERT# line
-To: Wolfram Sang <wsa+renesas@sang-engineering.com>
-Cc: linux-renesas-soc@vger.kernel.org, linux-i2c@vger.kernel.org, 
-	devicetree-spec@vger.kernel.org
+Date: Tue, 10 Dec 2024 08:41:46 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqLGEvGBQ0W_B6+5cME1UEhuKXadBB-6=GoN1tmavw9K_w@mail.gmail.com>
+Message-ID: <CAL_JsqLGEvGBQ0W_B6+5cME1UEhuKXadBB-6=GoN1tmavw9K_w@mail.gmail.com>
+Subject: Re: Separate L1 cache object in CPU@x
+To: Alireza Sanaee <alireza.sanaee@huawei.com>
+Cc: "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, 
+	Mailing List <devicetree-spec@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 9, 2024 at 5:58=E2=80=AFAM Wolfram Sang
-<wsa+renesas@sang-engineering.com> wrote:
+On Thu, Nov 28, 2024 at 10:01=E2=80=AFAM Alireza Sanaee
+<alireza.sanaee@huawei.com> wrote:
 >
-> Most I2C controllers do not have a dedicated pin for SMBus Alerts. Allow
-> them to define a GPIO as a side-channel.
->
-> Signed-off-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
-> ---
->  dtschema/schemas/i2c/i2c-controller.yaml | 5 +++++
->  1 file changed, 5 insertions(+)
+> Hi
 
-I guess GPIO rather than interrupt is fine.
+Better to send questions like this to devicetree-spec@vger.kernel.org
+if you want them to be seen.
 
-Will apply it.
+> I was working on some scenarios where I have multi-threading on for my AR=
+M CPUs and would like to share L1 caches between two hyperthreaded cores. T=
+his is particularly possible to be expressed via ACPI PPTT tables, and it i=
+s important to be able to express the same thing on both devicetree and ACP=
+I PPTT because some use device tree and some use PPTT table for topology an=
+d sharing purposes on ARM. Currently L1 caches are expressed via some prope=
+rties within CPU object and it seems not possible to use a separate cache o=
+bject for L1 looking at the latest spec. I wonder what the thought are on t=
+his?
+
+The easiest thing to do here is that each thread within a core should
+be a 'reg' entry. So if you have 2 threads per core, the cpu nodes
+would have 2 entries in 'reg'. This is what the DT spec says. Though
+the spec says to do that if the MMU is shared, I would put that down
+as powerpc specific. As the spec came from ePAPR, there's still a lot
+of powerpc specifics left. (Patches welcome.)
+
+I don't think we've ever supported multi-threading with DT on ARM, so
+likely there might be some issues to fix in the kernel.
 
 Rob
