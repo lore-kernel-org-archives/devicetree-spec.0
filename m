@@ -1,142 +1,112 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 087611DF749;
-	Tue,  7 Jan 2025 14:23:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB5141F37C0;
+	Tue,  7 Jan 2025 20:42:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1736259783; cv=none; b=LROs7cRo4Q17k8R3xza1D+4yIQbiiPDzNLafxo9+/xQwvDju2dmcaEQOEEVc6U218TrTSVeKV1ZH/PAV/zRVvL2WKBmjJHaUBf1IglBR8Enfu3iDvOMvzmbTPOKaTh9M4R7uidnniJPCRUjrticD9bUFlkmq8HavyIKqplzCWNo=
+	t=1736282551; cv=none; b=GS2dkOXNTAF69qjdSGf0n82ca9D7Tdu6le95THnDLLn8boeE/IesSK33AmFe4ldDKAAW2LlxZEkTvxff5W5tY6doLuOMrf9olGTmYG/OZPj+7+RxwlbtQQPnupSlPiisDb+Gcpr5TQE3c8gMzBm9ZxaCAJufC4KkXXl8/7xNhcY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1736259783; c=relaxed/simple;
-	bh=XumDMLAbqkhnyDz/dDcKcCAFPBsTz0nD1eivBz5CzY4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=mlCzV6YPx+rYAPpMhyEQ5hKPRIEzi+lwZ2QcnIcnlBOKogkNukHJt3+ZmlH5Rp2RYSFCimPFTBR21eVqnM+i0YZAxpY2ErGVjqNna5oXy0BmsyYvDVDIJF8Mn77GZ17o1WunQfk1hBL4a74megArOXeMB6m9JfKIE0Fu7jZpmUQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QTe6Eu7J; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1736282551; c=relaxed/simple;
+	bh=B1Ckc7g9BeYgu/ickCDB0Ca1bCjlvly28BndxYTw1HE=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To; b=SRdKL7ZWBfFrJl+e4QY0Q/lqTJTixoRZdQb0v1LGXyb/Ed+LB6jnpexZknEsEWWPoUic8A58qJFa3gODWymGuJXrIT/PF5WBPo9LMzL300ghVnUzNnyo5kILup1ZKLlP+6asOXLj6ROaJ9v6FvSIOwMpfbyHIH+2u7BV96sDzDY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f1X6Fjoq; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QTe6Eu7J"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8DE8EC4CEE0;
-	Tue,  7 Jan 2025 14:23:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f1X6Fjoq"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23916C4CED6;
+	Tue,  7 Jan 2025 20:42:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1736259782;
-	bh=XumDMLAbqkhnyDz/dDcKcCAFPBsTz0nD1eivBz5CzY4=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=QTe6Eu7J16nTxBgCqj+6qo7tGooq8zgvUUDbmHhrBhnwhbnw9i8K2sI06LixutNlj
-	 JSSsAS074HXjv2PjWHt+gKpzJBDtCcqNSe6Vp52OqqnnmVbKQMf/AYPHQPRtlE2owH
-	 RUfV7F70oJeJ4y9n0BJkgXR23LLRt5367PCiQZq9KoPcYhIZEWhzpdwhdFM2LL3VF3
-	 9KEQfnT8MQohTq57LMRMu7UrIIBfvC9pdbXzFrdRmFHIvoPRalkMBnSIAs0cwAmO4Q
-	 NGMDkwo0kcRHvd+MAhiIRhEGxq6Dz5GtBpBs9zHIitwFQZdNFfrFCgPqquzWOdSErZ
-	 aiYQtGs7WDSFw==
-Received: by mail-yb1-f172.google.com with SMTP id 3f1490d57ef6-e53537d8feeso20618662276.0;
-        Tue, 07 Jan 2025 06:23:02 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCU1lgXjxlT1AJQF2cfNadubMSAA6JO/KVclBPg4WddLThsTVLQ9kF1llRrEWEWJJIz0Cb3q8okCH4wyZoIiYA0=@vger.kernel.org, AJvYcCW2DD/CEsGYej6cirCPsNxglttqwNArFHGzOS7OV3e9SKximPxbeSKPjtvzX7tO8rTW/qokdeKNIsjqyZlt@vger.kernel.org, AJvYcCXB16D1ie0Dn5m+AwsdA7L2Yvd9ZjZDdZE31tPo8OLfx3lyk1wAvQ4K8I9cVqnV2b39oSn+WylwTepI@vger.kernel.org, AJvYcCXJEGVCFAMmiIbv8NnfDZk6Dl9zv1hTjnWXJR7DrJokFLls62Cb+9ikJRS4yS28zxMO3szFZLIcyZkhi8cCRA==@vger.kernel.org, AJvYcCXsLtiI7nJ66EAxXfWDhYZnWyx5luLx0crD9/NchB0j9ypIp9XvrGk7Nula2N7CRHDfqjjp+3sdpUvNYQ==@vger.kernel.org
-X-Gm-Message-State: AOJu0YwoW2JGU75eG1oRPrhXCfqoAO6jK1cZG+C7oLAp8dU18Ojyr4aa
-	T0c6oUgT+XqMlOlLv6rYuqZHqqXXRJwyRdrH0650taR9HawWUX4+oRTmSn7KYBrVrT4hKa1Ydlj
-	TsTeikdPxbXrbQZT18v+SS/6Usg==
-X-Google-Smtp-Source: AGHT+IGHo8fmWD04h+JCrYuXZlP1ao+KuFmwZqgSmkjvK6+8NoE9jk4fInapJpbRYcWa7knk2/MJBrcm65WQZmMzzsY=
-X-Received: by 2002:a05:690c:d96:b0:6ef:805c:ea15 with SMTP id
- 00721157ae682-6f3f815b496mr426649477b3.23.1736259781608; Tue, 07 Jan 2025
- 06:23:01 -0800 (PST)
+	s=k20201202; t=1736282550;
+	bh=B1Ckc7g9BeYgu/ickCDB0Ca1bCjlvly28BndxYTw1HE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:From;
+	b=f1X6FjoqgTjt1mJZyJ+Jl8CPM0ijT8X6zotnBSQ3+iWJO2VYUwttFLuC2UIyPTAih
+	 68qbHXpmh8kkKeqvLxQJPqwV3rBtzD7UuJOnmHnIIQ/JXlNovNudCiI3AiwWIi3CzL
+	 h5gb+c3sKucJIKeYdp/b7r2HEDcKZvXJZ/hx4LPgJseLkKlC0yulDeh8ciIfAHdWBt
+	 TAIy9K+7EqNi8q1HhQez/AJNsoYFkuXw+aE+5aA+KU3i2wUt7VE6B5KsDngi6wTso2
+	 MGf1iN7lfvazmT2Gvyu69WhQfg2x/kPiysSlJwTkLrUUUKAIUy5f7QPsVwKTMjBR4d
+	 YLaVUeqFa1IdQ==
+Date: Tue, 7 Jan 2025 14:42:28 -0600
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Krishna Chaitanya Chundru <quic_krichai@quicinc.com>
+Cc: Rob Herring <robh@kernel.org>,
+	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+	andersson@kernel.org, dmitry.baryshkov@linaro.org,
+	manivannan.sadhasivam@linaro.org, krzk@kernel.org,
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+	lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org,
+	linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+	devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com
+Subject: Re: [PATCH V1] schemas: pci: bridge: Document PCI L0s & L1 entry
+ delay and nfts
+Message-ID: <20250107204228.GA180123@bhelgaas>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250106093304.604829-1-krishna.chundru@oss.qualcomm.com> <20250106233246.GA116572@bhelgaas>
-In-Reply-To: <20250106233246.GA116572@bhelgaas>
-From: Rob Herring <robh@kernel.org>
-Date: Tue, 7 Jan 2025 08:22:50 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqKejDi-_4MfxZ8aT+pEcfsTTm36jfe6tBuNgkDdT_ZnTA@mail.gmail.com>
-Message-ID: <CAL_JsqKejDi-_4MfxZ8aT+pEcfsTTm36jfe6tBuNgkDdT_ZnTA@mail.gmail.com>
-Subject: Re: [PATCH V1] schemas: pci: bridge: Document PCI L0s & L1 entry
- delay and nfts
-To: Bjorn Helgaas <helgaas@kernel.org>
-Cc: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, andersson@kernel.org, 
-	dmitry.baryshkov@linaro.org, manivannan.sadhasivam@linaro.org, 
-	krzk@kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org, 
-	linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <6d75827d-5285-35ff-bf9b-aec77cd8304e@quicinc.com>
 
-On Mon, Jan 6, 2025 at 5:32=E2=80=AFPM Bjorn Helgaas <helgaas@kernel.org> w=
-rote:
->
-> On Mon, Jan 06, 2025 at 03:03:04PM +0530, Krishna Chaitanya Chundru wrote=
-:
-> > Some controllers and endpoints provide provision to program the entry
-> > delays of L0s & L1 which will allow the link to enter L0s & L1 more
-> > aggressively to save power.
->
-> Although these are sort of related because FTS is used during L0s->L1
-> transitions, I think these are subtle enough that it's worth splitting
-> this into two patches.
->
-> > As per PCIe spec 6 sec 4.2.5.6, the number of Fast Training Sequence (F=
-TS)
-> > can be programmed by the controllers or endpoints that is used for bit =
-and
-> > Symbol lock when transitioning from L0s to L0 based upon the PCIe data =
-rate
-> > FTS value can vary. So define a array for each data rate for nfts.
-> >
-> > These values needs to be programmed before link training.
->
-> IIUC, the point of this is to program the N_FTS value ("number of Fast
-> Training Sequences required by the Receiver" as described in PCIe
-> r6.0, sec 4.2.5.1, tables 4-25, 4-26, 4-27 for TS1, TS2, and Modified
-> TS1/TS2 Ordered Sets).
->
-> During Link training, all PCIe components transmit the N_FTS value
-> they require.  Sec 4.2.5.6 only describes the Fast Training Sequence
-> from a protocol perspective.  The fact that the N_FTS value of a
-> device may be programmable is device-specific.
->
-> Possible text:
->
->   Per PCIe r6.0, sec 4.2.5.1, during Link training, a PCIe component
->   captures the N_FTS value it receives.  Per 4.2.5.6, when
->   transitioning the Link from L0s to L0, it must transmit N_FTS Fast
->   Training Sequences to enable the receiver to obtain bit and Symbol
->   lock.
->
->   Components may have device-specific ways to configure N_FTS values
->   to advertise during Link training.  Define an n_fts array with an
->   entry for each supported data rate.
->
-> > Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.=
-com>
-> > ---
-> > - This change was suggested in this patch: https://lore.kernel.org/all/=
-20241211060000.3vn3iumouggjcbva@thinkpad/
-> > ---
-> >  dtschema/schemas/pci/pci-bus-common.yaml | 16 ++++++++++++++++
-> >  1 file changed, 16 insertions(+)
-> >
-> > diff --git a/dtschema/schemas/pci/pci-bus-common.yaml b/dtschema/schema=
-s/pci/pci-bus-common.yaml
-> > index 94b648f..f0655ba 100644
-> > --- a/dtschema/schemas/pci/pci-bus-common.yaml
-> > +++ b/dtschema/schemas/pci/pci-bus-common.yaml
-> > @@ -128,6 +128,16 @@ properties:
-> >      $ref: /schemas/types.yaml#/definitions/uint32
-> >      enum: [ 1, 2, 4, 8, 16, 32 ]
-> >
-> > +  nfts:
-> > +    description:
-> > +      Number of Fast Training Sequence (FTS) used during L0s to L0 exi=
-t for bit
-> > +      and Symbol lock.
->
-> I think it's worth using the "number of Fast Training Sequences
-> required by the Receiver" language from the spec to hint that these
-> values will be used to program a component with the number of FTSs
-> that it requires as a Receiver, and the component will advertise this
-> number as N_FTS during Link training.
->
->   n_fts:
+On Tue, Jan 07, 2025 at 07:49:00PM +0530, Krishna Chaitanya Chundru wrote:
+> On 1/6/2025 8:37 PM, Rob Herring wrote:
+> > On Mon, Jan 6, 2025 at 3:33 AM Krishna Chaitanya Chundru
+> > <krishna.chundru@oss.qualcomm.com> wrote:
+> > > 
+> > > Some controllers and endpoints provide provision to program the entry
+> > > delays of L0s & L1 which will allow the link to enter L0s & L1 more
+> > > aggressively to save power.
+> > > 
+> > > As per PCIe spec 6 sec 4.2.5.6, the number of Fast Training Sequence (FTS)
+> > > can be programmed by the controllers or endpoints that is used for bit and
+> > > Symbol lock when transitioning from L0s to L0 based upon the PCIe data rate
+> > > FTS value can vary. So define a array for each data rate for nfts.
+> > > 
+> > > These values needs to be programmed before link training.
 
-n-fts
+> > Do these properties apply to any link like downstream ports on a
+> > PCIe switch?
+> > 
+> These applies to downstream ports also on a switch.
 
-Underscores are discouraged.
+IIUC every PCIe component with a Link, i.e., Upstream Ports (on a
+Switch or Endpoint) and Downstream Ports (a Root Port or Switch), has
+an N_FTS value that it advertises during Link training.
+
+I suppose N_FTS depends on the component electrical design and maybe
+the Link, and it only makes sense to have this n-fts property for
+specific devices that support this kind of configuration, right?  I
+don't think we would know what to do with n-fts for random plug-in
+Switches or Endpoints because there's no generic way to configure
+N_FTS, and we *couldn't* do it before the Link is trained anyway
+unless there's some sideband mechanism.
+
+> > > +    description:
+> > > +      Number of Fast Training Sequence (FTS) used during L0s to L0 exit for bit
+> > > +      and Symbol lock.
+> > > +    $ref: /schemas/types.yaml#/definitions/uint32-array
+> > > +    minItems: 1
+> > > +    maxItems: 5
+> > 
+> > Need to define what is each entry? Gen 1 to 5?
+> > 
+> yes there are from Gen1 to Gen 5, I will update this in next patch these
+> details.
+
+Components are permitted to advertise different N_FTS values at
+different *speeds*, not "GenX" (PCIe r6.0, sec 4.2.5.6)
+
+The spec discourages use of Gen1, etc because they are ambiguous (sec
+1.2):
+
+  Terms like "PCIe Gen3" are ambiguous and should be avoided. For
+  example, "gen3" could mean (1) compliant with Base 3.0, (2)
+  compliant with Base 3.1 (last revision of 3.x), (3) compliant with
+  Base 3.0 and supporting 8.0 GT/s, (4) compliant with Base 3.0 or
+  later and supporting 8.0 GT/s, ....
+
+We're stuck with the use of genX for max-link-speed, but we should use
+speeds when we can for clarity, e.g., in the description here.
