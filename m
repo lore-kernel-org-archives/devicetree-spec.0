@@ -1,69 +1,69 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 687C633EC
-	for <devicetree-spec@vger.kernel.org>; Sun, 16 Feb 2025 01:45:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 469532E40B
+	for <devicetree-spec@vger.kernel.org>; Sun, 16 Feb 2025 01:45:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739670343; cv=none; b=hSTjFfoOWjh6llRykvECBaP/yxAiXE9a63h/DTsanKIuNGUs9MejOagab/6Y9zA09X4xSNGfC/WJQnIeaPv4dO7Kh5vM8M6FhuvJYL25VTcF+C/1pn+brxwxWL5wauy/tvs6naZgCY2sNdOkqzXajzyaTgpF9rTiG//Z/gYEU20=
+	t=1739670347; cv=none; b=dUKc7p+a6XuOosUneHRMCqzYgHsInxIWfyJp+gZ+LtjVd67Bqx/RWsriDrEdld/x5c0/Pjk3EttEGiwz8GFWQa5rXjCsP1GAkxsNtG1HZeRs21imWfVsRxo+lOgjuzaPXSFeVNy2xTCtlSSf9Xq1hDHieU+Q+HGIoey3uEhPBeQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739670343; c=relaxed/simple;
-	bh=Fk5tEvSGj966u5MNAJ6KeljaVlxKuCrisn/aqCxdhBw=;
+	s=arc-20240116; t=1739670347; c=relaxed/simple;
+	bh=BGcJQ3Ll6glAfMQXdp/lUcU5Vrse7Olu5opVqRzh+DE=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=BQlRCa4nk361RcbZHRKPRr/7kR21dgo/5gzMu5m9iw0lTfEbp3r5kB7cWVgV+NC/gUteXLIJ489uAwoHCRwDayRZk7sLm/O+PYc6uBpvuL8IMiAuS2z0+cO6+LwLP6gNBOcJKqaLSvHrRz7dvpGAlp8f7PXWNTmjahEfgaDqeEc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QNGkFf93; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version; b=WFLRt124d1/joAMYsu9M38l5yhuBYGD6uQU6DTH1IwxAzt8ErRdKCdZSzIDpJ52S+z/fQmugVj8YeBEaj/Um/XQqBeG2aLUEBrfNlfbMCb8c0sWVPrYWE8aIgbiFUkG7QjkNiUaL+5QElRxGUiCeuCt3Skl7JcCdtIk8FecUH9Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lLGV0P/i; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QNGkFf93"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51G1RdKl029121
-	for <devicetree-spec@vger.kernel.org>; Sun, 16 Feb 2025 01:45:40 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lLGV0P/i"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51G0rH4E008187
+	for <devicetree-spec@vger.kernel.org>; Sun, 16 Feb 2025 01:45:45 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=uBFsWeSYOmq
-	gaCuFxuf/xhhEESZ518ip0a8YRr+64yE=; b=QNGkFf931rknH/8YWJAz9QemnD/
-	f9RRsMjk5UY42TexsNNRuSOT5PlGKFuac1LCUTX46Q4AxVf9Vg8SQnNSIDq+JDCS
-	LJkAZaZZJQsB4xzs+c+DTty0iJaYTm9RnxQaonF6VTjoEGMBlSIdJwxtrdlDCb/a
-	6NwxEQRrNN1hiXkoIzjm9cPHcYlbNoVTYjvvE1CiimWecBrtbGXwEuvBzpCah6AM
-	doEkLusongbS9ucxtJFGv93zaMsMBM0XQXTELuM+SYK3LZEwwuYsCsoLl7VJilXS
-	7nqMcHTkiXus1EiuXt5YyIVH8YD35tHAnGEJ/2Dh48nv9b0OcPvSbGx1ouw==
+	:mime-version:references:subject:to; s=qcppdkim1; bh=jPVONscn72E
+	ctMrzq7jWfE2rC2sdmlOx+fZ773e4rMw=; b=lLGV0P/iKQys++M8x2cRh1fr0F+
+	DT8hJ4pTVDTP7qL0hD+mHtNxFYiCla0zGqXc9Vn9e6eleDlTTw39JIX6NfhR+MBL
+	m8K/eqypNXRtXJSibsSPu+AzYiCl0GyHMR+/Wb72LfKH1fn/ItDbAbH/n7wdhOpi
+	K+NnjK84Rt13viM2rGlgedAM5c1HQLWi3suDnRkIikD8sRLkImarbVSd0h+cmIw1
+	PYA1WFZgbjTH2J7Yugxx34v1xznI1s9mDFVGhNneTYAHqxmt3KmCAABzLAth7jom
+	m3bBIWsKt4zMi/2bbzBeEzdjTMOzVSn+8mcKBnO54EfkX2IVXODcChXgiLw==
 Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44tkw41ay3-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44tktf9b1y-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <devicetree-spec@vger.kernel.org>; Sun, 16 Feb 2025 01:45:40 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-220d6c10a17so55723925ad.0
-        for <devicetree-spec@vger.kernel.org>; Sat, 15 Feb 2025 17:45:40 -0800 (PST)
+	for <devicetree-spec@vger.kernel.org>; Sun, 16 Feb 2025 01:45:45 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-221063a808dso13011535ad.1
+        for <devicetree-spec@vger.kernel.org>; Sat, 15 Feb 2025 17:45:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739670339; x=1740275139;
+        d=1e100.net; s=20230601; t=1739670344; x=1740275144;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=uBFsWeSYOmqgaCuFxuf/xhhEESZ518ip0a8YRr+64yE=;
-        b=cU3xMl3kNh8lU0Ug7be+7JRPm0ZEXyIaPFZDkj7DoV/9VVQFxHrdSi5gXvgHCNewgG
-         rAmbtsr4hb+cpIv8zDwVsU9EGsdPZKPZFe4CekQ9ae34O65Um0xV4LEZwFECNwSU5F/M
-         S3PoMtWg88cLDvSEvDQHDQQcJJKOfruZfMTifHE4ne5W+GOV+T/izeCpOrBoeQUuZ22A
-         ULhTX1zqu6i4/KgsIKwz/EFcK5QuRw7GQclDIJfHudlk5WlRlHxQjizeAAD7cjXIipeM
-         pW18ZfxN1HpfhGujSB/ZREA2x/rHnbLkGFANIYgKHqmU46IpFxcDQFZ6+o9HV1211KUo
-         eptQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXQnar9mjybpsYyJ0D5/67zzEFz6Z5PIAzGr8bGc1b9BiEpEBrrEzlnvw5f6g+QF152eSab0DjrH0r9tZTlaHE=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy+17+U8HhdXiSfBRffWGIn7cuVqY4aCpi1TUTR/u3/9sNgW2eg
-	NeGXydjAsiNpPD+/ThWresHe4EI+LlrB0UVz8FCTjuuHllEp5zK0bcTFUTefSeBF7Gh1JQrUzzY
-	gLeNaE7OkhZtHS0mFfuIctPd/uvPemtwoyhu9Bh97riKOAPc0ZEovyzWvv9wIi8jkDDQ=
-X-Gm-Gg: ASbGncscIbxLp4BgS/uW4EFT4hYPkONu7czKLOpYVBIjLF/HumjcVPNbcULPSD8ZTQe
-	oKXM0Iq5fr1i8A49APh0Vg9UOBXkddLa7umNW7y/tXtTPmigcL5/Aktpu/ib2G8uLqJtLcnaMV8
-	4rP/E6XjUbRIaV23VdfWwLapP9TdnYIukNvXAd+6X/OkB8tHDSiE6I3ckhdswyLRJrB3uYnttEm
-	x8RiZWOEmMgkaqMYPUYGoL5bERL1fq/xTe4ONH8DQmL6Kel2jj1dnvCh6xyshT0BZV29IO+HE9t
-	wlsBv5/gGJhTiCbSDrJycmDS3ajxLfSNksnqUWk+
-X-Received: by 2002:a17:902:cf08:b0:220:fe36:650c with SMTP id d9443c01a7336-221047179dfmr77346955ad.23.1739670338762;
-        Sat, 15 Feb 2025 17:45:38 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFtn0S+vjVcVhx9pqmU7t/1GUwT1n4B1MxV5GxUJhmy6ojrRHtS/+9ejqHefQ8Ia6K1n3p9LQ==
-X-Received: by 2002:a17:902:cf08:b0:220:fe36:650c with SMTP id d9443c01a7336-221047179dfmr77346735ad.23.1739670338393;
-        Sat, 15 Feb 2025 17:45:38 -0800 (PST)
+        bh=jPVONscn72EctMrzq7jWfE2rC2sdmlOx+fZ773e4rMw=;
+        b=e5I8Xtb/WVAPaJS7+VyVPO6kU9Oa7NGUKGE7bTxaoDWehqOI6hC+UUmYA38eaoA0rj
+         CHQMfndvBXn6qyH2kfLjiOSZkrAc1/56pFoeKA1C9aoeIGxzw75q/0nTN9+Icbo1GGxL
+         RICYQNt16XaZA+ECpOdtTRubS2NMyewTs5Ju0I6Z6oATdP/9sAE4Wltb8be0V5w1ElwO
+         N11qaFCbHAT99jsN1qkIFl0ip+93+HGFfv/kNx+OAKJECHinX3r7aVbUpRrv7deqtjj4
+         5Bmd+im1FO7X4fhNIbQQkQaBu9NBbZmGy7xK7U9i57ouvpnHhS+SxEPwEhEYL4mbFqAA
+         y9Ag==
+X-Forwarded-Encrypted: i=1; AJvYcCVuZIh1d+eKR7Kq0Mu4c+8TzH6LnKkdbamhpndebR+IYQYzQGDUIJdNyBUwGlzXo5duUzmaiTDDCdi7MMlCbjc=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyLORncX8vZpiquhzTKxAt4ND4/J4GFfIsyqY01EMSuiZy0bOJZ
+	HKYUJuK8L/2qG0gXT8sdVhq20j8BklzrhhSyk55iDK9bjGAmWqbIk4XY2enggZolVQb0CXanliy
+	TnQl+DTf+6ixEGDYtv1bVI1uTzVS0Ao0f7poPt+Ci30/ckN+GXifYe+Oj8vtNXgxBK4I=
+X-Gm-Gg: ASbGncsd2FG5Y1Lo2pFCRb+9zv/xNmCzYxni/uAYi4GFGdNulkJvMVYckEYRKw2s2Cz
+	iCMpiEe36Cknks2MNfKFkbIZyd5UmG8oeFnqlFWAP1Q42z7Bu6ya+RA3EjfrvMn1i/KKuh1x1RV
+	xOB+De72lpfxagpFSxBcztgP23GFLrAzFzRYFQmLECa31IAgZbXbUFCjTPQRtGMRCcM9OqDksO2
+	JfwKo8rifZbhX25aNPMyvpV8tndqA81/+q2MJ5R6pu8/Xtw9fDCHy5uyebss7HJ7c0RrciXYsw1
+	UJTd377zyW2T1IixLt2VcEi/vC+4f2JRCISIhMLG
+X-Received: by 2002:a17:902:e5d0:b0:215:89a0:416f with SMTP id d9443c01a7336-22104058b35mr58608975ad.30.1739670343818;
+        Sat, 15 Feb 2025 17:45:43 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEOZ+s1hML65+t/oMtnG25500NghTCO06Dip85+ffWni6ZFpcXj+VIoxImhNSiQ1ejvbPABEw==
+X-Received: by 2002:a17:902:e5d0:b0:215:89a0:416f with SMTP id d9443c01a7336-22104058b35mr58608675ad.30.1739670343430;
+        Sat, 15 Feb 2025 17:45:43 -0800 (PST)
 Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-220d536455esm49896955ad.74.2025.02.15.17.45.34
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-220d536455esm49896955ad.74.2025.02.15.17.45.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Feb 2025 17:45:38 -0800 (PST)
+        Sat, 15 Feb 2025 17:45:42 -0800 (PST)
 From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 To: andersson@kernel.org, robh@kernel.org, dmitry.baryshkov@linaro.org,
         manivannan.sadhasivam@linaro.org, krzk@kernel.org, helgaas@kernel.org
@@ -72,9 +72,9 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
         devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com,
         Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Subject: [PATCH V3 1/2] schemas: pci: bridge: Document PCI L0s & L1 entry delay
-Date: Sun, 16 Feb 2025 07:15:09 +0530
-Message-Id: <20250216014510.3990613-2-krishna.chundru@oss.qualcomm.com>
+Subject: [PATCH V3 2/2] schemas: pci: bridge: Document PCIe N_FTS
+Date: Sun, 16 Feb 2025 07:15:10 +0530
+Message-Id: <20250216014510.3990613-3-krishna.chundru@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250216014510.3990613-1-krishna.chundru@oss.qualcomm.com>
 References: <20250216014510.3990613-1-krishna.chundru@oss.qualcomm.com>
@@ -85,45 +85,53 @@ List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 4x0NCdHpz2Sqc2b07GiqcOyywt0Ffhp6
-X-Proofpoint-GUID: 4x0NCdHpz2Sqc2b07GiqcOyywt0Ffhp6
+X-Proofpoint-ORIG-GUID: uW1wtF6yDQHWcnNRcf9cVP7-2HnUL52e
+X-Proofpoint-GUID: uW1wtF6yDQHWcnNRcf9cVP7-2HnUL52e
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-02-15_09,2025-02-13_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- priorityscore=1501 spamscore=0 phishscore=0 clxscore=1015 malwarescore=0
- mlxscore=0 lowpriorityscore=0 mlxlogscore=999 adultscore=0 suspectscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 clxscore=1015
+ lowpriorityscore=0 spamscore=0 mlxlogscore=936 impostorscore=0
+ priorityscore=1501 adultscore=0 phishscore=0 suspectscore=0 mlxscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.19.0-2501170000 definitions=main-2502160014
 
-Some controllers and endpoints provide provision to program the entry
-delays of L0s & L1 which will allow the link to enter L0s & L1 more
-aggressively to save power.
+Per PCIe r6.0, sec 4.2.5.1, during Link training, a PCIe component
+captures the N_FTS value it receives.  Per 4.2.5.6, when
+transitioning the Link from L0s to L0, it must transmit N_FTS Fast
+Training Sequences to enable the receiver to obtain bit and Symbol
+lock.
 
-These values needs to be programmed before link training.
+Components may have device-specific ways to configure N_FTS values
+to advertise during Link training.  Define an n_fts array with an
+entry for each supported data rate.
 
 Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
- dtschema/schemas/pci/pci-bus-common.yaml | 6 ++++++
- 1 file changed, 6 insertions(+)
+ dtschema/schemas/pci/pci-bus-common.yaml | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/dtschema/schemas/pci/pci-bus-common.yaml b/dtschema/schemas/pci/pci-bus-common.yaml
-index 94b648f..a9309af 100644
+index a9309af..ca97a00 100644
 --- a/dtschema/schemas/pci/pci-bus-common.yaml
 +++ b/dtschema/schemas/pci/pci-bus-common.yaml
-@@ -150,6 +150,12 @@ properties:
-     description: Disables ASPM L0s capability
-     type: boolean
+@@ -128,6 +128,16 @@ properties:
+     $ref: /schemas/types.yaml#/definitions/uint32
+     enum: [ 1, 2, 4, 8, 16, 32 ]
  
-+  aspm-l0s-entry-delay-ns:
-+    description: ASPM L0s entry delay
++  n-fts:
++    description:
++      The number of Fast Training Sequences (N_FTS) required by the
++      Receiver (this component) when transitioning the Link from L0s
++      to L0; advertised during initial Link training. Each entry in
++      the array specifies a PCIe data rate
++    $ref: /schemas/types.yaml#/definitions/uint8-array
++    minItems: 1
++    maxItems: 5
 +
-+  aspm-l1-entry-delay-ns:
-+    description: ASPM L1 entry delay
-+
-   vpcie12v-supply:
-     description: 12v regulator phandle for the slot
- 
+   reset-gpios:
+     description: GPIO controlled connection to PERST# signal
+     maxItems: 1
 -- 
 2.34.1
 
