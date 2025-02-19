@@ -1,82 +1,44 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 469532E40B
-	for <devicetree-spec@vger.kernel.org>; Sun, 16 Feb 2025 01:45:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 866E01ADC86;
+	Wed, 19 Feb 2025 19:49:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739670347; cv=none; b=dUKc7p+a6XuOosUneHRMCqzYgHsInxIWfyJp+gZ+LtjVd67Bqx/RWsriDrEdld/x5c0/Pjk3EttEGiwz8GFWQa5rXjCsP1GAkxsNtG1HZeRs21imWfVsRxo+lOgjuzaPXSFeVNy2xTCtlSSf9Xq1hDHieU+Q+HGIoey3uEhPBeQ=
+	t=1739994565; cv=none; b=hNKtOAOL7qB+9qkB0mJwpgY1VGgFJqqwdFhqeLmhxoDcjC4aXMdRDMIxNmxFUw5MxvT9T/8p5KqoatftYpmxs3A+lrlHBQKOZYjMyZFalPjUx2qCxm+Kmol4taLgGu+qGR8xKK/zYGBlWtkIljvI9wAbqAortSAxUD2oVUplwyU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739670347; c=relaxed/simple;
-	bh=BGcJQ3Ll6glAfMQXdp/lUcU5Vrse7Olu5opVqRzh+DE=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=WFLRt124d1/joAMYsu9M38l5yhuBYGD6uQU6DTH1IwxAzt8ErRdKCdZSzIDpJ52S+z/fQmugVj8YeBEaj/Um/XQqBeG2aLUEBrfNlfbMCb8c0sWVPrYWE8aIgbiFUkG7QjkNiUaL+5QElRxGUiCeuCt3Skl7JcCdtIk8FecUH9Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lLGV0P/i; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1739994565; c=relaxed/simple;
+	bh=UYy/lu0qQ2sbGAMvLTq/G1MIeAdrMLKHu1KjRZuiZK8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=RRGAS1Vpm4IcN5TjUDZ7o9xSoLTi9m/OT/90k+iFRYN1sueL1ghyKv6vwuYKrOZ75sbKHN6Wd/h0UfIaXBmpAP4/oTEGrNt+FA5AI9HTrj69458Agt0k1CsizUP89uuMwtBeDEagnLjCRX9IyFlbj/ODskyYocP6JyvB1I8t+54=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qoYl5k9l; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lLGV0P/i"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51G0rH4E008187
-	for <devicetree-spec@vger.kernel.org>; Sun, 16 Feb 2025 01:45:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=jPVONscn72E
-	ctMrzq7jWfE2rC2sdmlOx+fZ773e4rMw=; b=lLGV0P/iKQys++M8x2cRh1fr0F+
-	DT8hJ4pTVDTP7qL0hD+mHtNxFYiCla0zGqXc9Vn9e6eleDlTTw39JIX6NfhR+MBL
-	m8K/eqypNXRtXJSibsSPu+AzYiCl0GyHMR+/Wb72LfKH1fn/ItDbAbH/n7wdhOpi
-	K+NnjK84Rt13viM2rGlgedAM5c1HQLWi3suDnRkIikD8sRLkImarbVSd0h+cmIw1
-	PYA1WFZgbjTH2J7Yugxx34v1xznI1s9mDFVGhNneTYAHqxmt3KmCAABzLAth7jom
-	m3bBIWsKt4zMi/2bbzBeEzdjTMOzVSn+8mcKBnO54EfkX2IVXODcChXgiLw==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44tktf9b1y-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <devicetree-spec@vger.kernel.org>; Sun, 16 Feb 2025 01:45:45 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-221063a808dso13011535ad.1
-        for <devicetree-spec@vger.kernel.org>; Sat, 15 Feb 2025 17:45:45 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739670344; x=1740275144;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jPVONscn72EctMrzq7jWfE2rC2sdmlOx+fZ773e4rMw=;
-        b=e5I8Xtb/WVAPaJS7+VyVPO6kU9Oa7NGUKGE7bTxaoDWehqOI6hC+UUmYA38eaoA0rj
-         CHQMfndvBXn6qyH2kfLjiOSZkrAc1/56pFoeKA1C9aoeIGxzw75q/0nTN9+Icbo1GGxL
-         RICYQNt16XaZA+ECpOdtTRubS2NMyewTs5Ju0I6Z6oATdP/9sAE4Wltb8be0V5w1ElwO
-         N11qaFCbHAT99jsN1qkIFl0ip+93+HGFfv/kNx+OAKJECHinX3r7aVbUpRrv7deqtjj4
-         5Bmd+im1FO7X4fhNIbQQkQaBu9NBbZmGy7xK7U9i57ouvpnHhS+SxEPwEhEYL4mbFqAA
-         y9Ag==
-X-Forwarded-Encrypted: i=1; AJvYcCVuZIh1d+eKR7Kq0Mu4c+8TzH6LnKkdbamhpndebR+IYQYzQGDUIJdNyBUwGlzXo5duUzmaiTDDCdi7MMlCbjc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyLORncX8vZpiquhzTKxAt4ND4/J4GFfIsyqY01EMSuiZy0bOJZ
-	HKYUJuK8L/2qG0gXT8sdVhq20j8BklzrhhSyk55iDK9bjGAmWqbIk4XY2enggZolVQb0CXanliy
-	TnQl+DTf+6ixEGDYtv1bVI1uTzVS0Ao0f7poPt+Ci30/ckN+GXifYe+Oj8vtNXgxBK4I=
-X-Gm-Gg: ASbGncsd2FG5Y1Lo2pFCRb+9zv/xNmCzYxni/uAYi4GFGdNulkJvMVYckEYRKw2s2Cz
-	iCMpiEe36Cknks2MNfKFkbIZyd5UmG8oeFnqlFWAP1Q42z7Bu6ya+RA3EjfrvMn1i/KKuh1x1RV
-	xOB+De72lpfxagpFSxBcztgP23GFLrAzFzRYFQmLECa31IAgZbXbUFCjTPQRtGMRCcM9OqDksO2
-	JfwKo8rifZbhX25aNPMyvpV8tndqA81/+q2MJ5R6pu8/Xtw9fDCHy5uyebss7HJ7c0RrciXYsw1
-	UJTd377zyW2T1IixLt2VcEi/vC+4f2JRCISIhMLG
-X-Received: by 2002:a17:902:e5d0:b0:215:89a0:416f with SMTP id d9443c01a7336-22104058b35mr58608975ad.30.1739670343818;
-        Sat, 15 Feb 2025 17:45:43 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEOZ+s1hML65+t/oMtnG25500NghTCO06Dip85+ffWni6ZFpcXj+VIoxImhNSiQ1ejvbPABEw==
-X-Received: by 2002:a17:902:e5d0:b0:215:89a0:416f with SMTP id d9443c01a7336-22104058b35mr58608675ad.30.1739670343430;
-        Sat, 15 Feb 2025 17:45:43 -0800 (PST)
-Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-220d536455esm49896955ad.74.2025.02.15.17.45.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Feb 2025 17:45:42 -0800 (PST)
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-To: andersson@kernel.org, robh@kernel.org, dmitry.baryshkov@linaro.org,
-        manivannan.sadhasivam@linaro.org, krzk@kernel.org, helgaas@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org,
-        linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
-        devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Subject: [PATCH V3 2/2] schemas: pci: bridge: Document PCIe N_FTS
-Date: Sun, 16 Feb 2025 07:15:10 +0530
-Message-Id: <20250216014510.3990613-3-krishna.chundru@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250216014510.3990613-1-krishna.chundru@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qoYl5k9l"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB2D4C4CED1;
+	Wed, 19 Feb 2025 19:49:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1739994565;
+	bh=UYy/lu0qQ2sbGAMvLTq/G1MIeAdrMLKHu1KjRZuiZK8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=qoYl5k9l2SDx44RekQuCJla114E3wfs6aYeD6rwHHgZtsjRe/9gxcKjKEqmqrzJXB
+	 8neAg8ezfGb4OJyLGxOPOBsj6TTjq7EXlrnbrvImAs27D3UCfS4iQY58V9K1iPksXK
+	 jQzJXMg5S5dbRX24Ws9ls9RdSlUNr7Qz/q3HFD0yvorBUyUoV1YalZO6B4ppru1MmH
+	 Y9moeE0KUc5n1l9OPMM9aEWPZpU+PObBrSJj1sGQcPOgo5iBa1EhL9JsK2APaqA7EZ
+	 OalRrjsOI4cf+L78KuEL3QflG0U1BabWgoAchX9IYy1AdMwH0voeU57ROxpgDjf7fm
+	 pcbJpyISf6GuA==
+Date: Wed, 19 Feb 2025 13:49:23 -0600
+From: Rob Herring <robh@kernel.org>
+To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Cc: andersson@kernel.org, dmitry.baryshkov@linaro.org,
+	manivannan.sadhasivam@linaro.org, krzk@kernel.org,
+	helgaas@kernel.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, lpieralisi@kernel.org, kw@linux.com,
+	conor+dt@kernel.org, linux-pci@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org,
+	quic_vbadigan@quicinc.com
+Subject: Re: [PATCH V3 0/2] schemas: pci: bridge: Document PCI L0s & L1 entry
+ delay and N_FTS
+Message-ID: <20250219194923.GA2776564-robh@kernel.org>
 References: <20250216014510.3990613-1-krishna.chundru@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
@@ -84,54 +46,40 @@ List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: uW1wtF6yDQHWcnNRcf9cVP7-2HnUL52e
-X-Proofpoint-GUID: uW1wtF6yDQHWcnNRcf9cVP7-2HnUL52e
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-15_09,2025-02-13_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 clxscore=1015
- lowpriorityscore=0 spamscore=0 mlxlogscore=936 impostorscore=0
- priorityscore=1501 adultscore=0 phishscore=0 suspectscore=0 mlxscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2501170000 definitions=main-2502160014
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250216014510.3990613-1-krishna.chundru@oss.qualcomm.com>
 
-Per PCIe r6.0, sec 4.2.5.1, during Link training, a PCIe component
-captures the N_FTS value it receives.  Per 4.2.5.6, when
-transitioning the Link from L0s to L0, it must transmit N_FTS Fast
-Training Sequences to enable the receiver to obtain bit and Symbol
-lock.
+On Sun, Feb 16, 2025 at 07:15:08AM +0530, Krishna Chaitanya Chundru wrote:
+> Some controllers and endpoints provide provision to program the entry
+> delays of L0s & L1 which will allow the link to enter L0s & L1 more
+> aggressively to save power.
+> 
+> Per PCIe r6.0, sec 4.2.5.1, during Link training, a PCIe component
+> captures the N_FTS value it receives.  Per 4.2.5.6, when
+> transitioning the Link from L0s to L0, it must transmit N_FTS Fast
+> Training Sequences to enable the receiver to obtain bit and Symbol
+> lock.
+> 
+> Components may have device-specific ways to configure N_FTS values
+> to advertise during Link training.  Define an n-fts array with an
+> entry for each supported data rate.
+> 
+> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+> ---
+> changes in v3:-
+> - Update the description to specfify about entries of the array (rob)
+> changes in v2:-
+> - Split N_FTS & L1 and L0s entry delay in two patches (bjorn)
+> - Update the commit text, description (bjorn)
+> 
+> Krishna Chaitanya Chundru (2):
+>   schemas: pci: bridge: Document PCI L0s & L1 entry delay
+>   schemas: pci: bridge: Document PCIe N_FTS
+> 
+>  dtschema/schemas/pci/pci-bus-common.yaml | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
 
-Components may have device-specific ways to configure N_FTS values
-to advertise during Link training.  Define an n_fts array with an
-entry for each supported data rate.
+Applied, thanks.
 
-Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
----
- dtschema/schemas/pci/pci-bus-common.yaml | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/dtschema/schemas/pci/pci-bus-common.yaml b/dtschema/schemas/pci/pci-bus-common.yaml
-index a9309af..ca97a00 100644
---- a/dtschema/schemas/pci/pci-bus-common.yaml
-+++ b/dtschema/schemas/pci/pci-bus-common.yaml
-@@ -128,6 +128,16 @@ properties:
-     $ref: /schemas/types.yaml#/definitions/uint32
-     enum: [ 1, 2, 4, 8, 16, 32 ]
- 
-+  n-fts:
-+    description:
-+      The number of Fast Training Sequences (N_FTS) required by the
-+      Receiver (this component) when transitioning the Link from L0s
-+      to L0; advertised during initial Link training. Each entry in
-+      the array specifies a PCIe data rate
-+    $ref: /schemas/types.yaml#/definitions/uint8-array
-+    minItems: 1
-+    maxItems: 5
-+
-   reset-gpios:
-     description: GPIO controlled connection to PERST# signal
-     maxItems: 1
--- 
-2.34.1
-
+Rob
