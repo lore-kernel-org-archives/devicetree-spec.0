@@ -1,69 +1,69 @@
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com (mail-am7eur03on2087.outbound.protection.outlook.com [40.107.105.87])
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com (mail-vi1eur02on2089.outbound.protection.outlook.com [40.107.241.89])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC4B318A6CF
-	for <devicetree-spec@vger.kernel.org>; Thu, 20 Feb 2025 14:52:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.105.87
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE7261EB9F7
+	for <devicetree-spec@vger.kernel.org>; Thu, 20 Feb 2025 15:04:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.241.89
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740063155; cv=fail; b=XxS8LmMpeyN1pC4e6xGjjFsZWbJUBHH00KkK7EVrlWYfnKQFXry0ik+L001v7+qTNAXi4l+ojrCD0+N0JUqCQ+Juc/QmET6AKNNpyTZ0JxAPkW8cLb87B/ro7WZAw/4G5JdkRkahlRhT0H8c7yx8iGsmJQYB2UmmcYoqdJ7RkWQ=
+	t=1740063875; cv=fail; b=KWJFKQ0TUT/a+kIhDAD+EE7MPsKj7FMPybhIQy+yPMy56D+uwHZvrtnwneTQWPAUyI5S1pavj1lClyrx0HIyjBBKz3OUDaeasCMfj5QiIh2Tze03jePEvjHF3XS3Et43ED21WCv0PsGQDVW/IttCBHoJDPUjU9YdUtk4gyMzP1c=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740063155; c=relaxed/simple;
-	bh=oTMbYJ4xmu8FQrLlSZV/rZkTtp/7ODbvH/gCbBq23DI=;
+	s=arc-20240116; t=1740063875; c=relaxed/simple;
+	bh=P8Pp8XZq1BVi9Vf6kriC0hLeLGdDn36gmx38Rqh6FCA=;
 	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=eq7R8B8nmMHUKwbl5tIs7ictyEx+8Zwb3LgWXMsfVH0VNBDlqCkNcunlND/gDprenO2mOFwsAsarTlCf3QAIkw40cU4Od1Fr3jfRAtJoGsHUFwL30xoHLwvpVpqD6Wh+uwJVRgEYq57QFJRJxsLexB2IwBl3vbb4ia0K6OVwapo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cherry.de; spf=pass smtp.mailfrom=cherry.de; dkim=pass (1024-bit key) header.d=cherry.de header.i=@cherry.de header.b=RKvya0jk; arc=fail smtp.client-ip=40.107.105.87
+	 Content-Type:MIME-Version; b=RoX4IjegQJV2tyj5LbVibauYn+p6u2pO3dTpN+o6VnEbdvdvXYjfbZuReXkoTmZTxMYqp/risHgQxf/2vZLju5p0YXoM/Log+jsM+Ju7f1y6/7bVlH6T0THbBtUOfSrjdYH4Cqhf+cITkcGsZ8NUGm3O7Yh+v1ZZTexb9hVAnL8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cherry.de; spf=pass smtp.mailfrom=cherry.de; dkim=pass (1024-bit key) header.d=cherry.de header.i=@cherry.de header.b=Ony/O1bx; arc=fail smtp.client-ip=40.107.241.89
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cherry.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cherry.de header.i=@cherry.de header.b="RKvya0jk"
+	dkim=pass (1024-bit key) header.d=cherry.de header.i=@cherry.de header.b="Ony/O1bx"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=valq4xK+Zq+AaUnRm3MoSOvcVJRKu1gEEpankPU2q1+bSOv35pBBGxtZ2xYWnNmt5zuRj8t30CN9xH5tQ76MAjTzMDSUARwl9CjVJqrcDlffp8+0pVk2LCWsBuC8m8qwi5iUc70MdVVJefiYF8kRrbeYmVctWf+YVsI8WUukCPaeMjsfVWNz1/pPe9bCTj5gnrIdrV7XKr+vw54H7rLccplMCnjoR2wgxbXsrmr2eFocH+31YB3MfsEwFvJdzXuzIql9a+D+pdAI0/PeIWlC816GzZdXY10QST/cDvezm1KtqI4k1K5oy8l9yfEuTHNtJ59OLIGZwwnnZDzeF2vUZA==
+ b=eO77z7d6FIRa/mgsnRIsh9sqkhORLaErNyCY45Ikza2GOz8dXsOqEfDEZm/PnNP9kozAeWYg8KifprIXod9Gvy/pWouGIDzLI//eTv088mwaA0XmXl2MsmBfo0NN3eis4b4iKYegfiLwk3ZJ2qOwWIjLQDkwxPbQbxoAmyuVCFpg79I47Et2wUgZvq1Nf3QrNkmhLE1mE71svkkzBRaUAazCwNo1esgF/r5qZzVBweNg1h4vByOs1urDfSXpZdaEuec85Au74tDKnEQ2cRZbiHfhXJ1L+QPEOAMJMaUtakPyTzosK67Sk6m5ZnI8X5UxMAnDBeihpLrq++K3kwggJg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fAeJ8DReiHyy2+SOvpNxPau3etvfy/lbE4wJSmQz2Co=;
- b=LLbzxAoVp7XJluAJPVwaaVCz9QLO9WAeFnH6lJM8+ZnX1LL7ISaImTe218yojZtlkBk3La9cbCvPRbKa8x810G05unb84BJLXx8ousB+/hW4uHP4NBcIsRVJ9OtrfhbJsibUZlPHXmLKqBDsNccSK8GMPZH1iQbnOEZJsBrB2QG5eZ7bdwlhHp6KONbDVZPCksux78SSMEUv45j3NiysjztR0VnLRvA3x5axm3tyzCnRvXBD1C5dpD468j/KYO5hBYthgADc4K5TbwiISL9PX+9ffl1dxLWgcaQDUwtBM8rZ+XpL62wlGcXeQ7/7d9YWAMw09LxC9wUzhVlxx0VQyQ==
+ bh=z0LbI9gpD5k2AgSAifj80rltx7wM1Rb7/cPrsgT6OtM=;
+ b=P8usorGVqu4fu9WEEAVpnfrg1/J5jazXxNA8y1nOCbgYGnVoAHvQroU+wVefULQj5PyUbuiqjmlbLFEUdZdb6LcK1RNw3VXg7Jt8DafEZtXMRPjvfimStW0o440AcYnXQBHvZt0FhxQBx9DaCOQ3IMoqorSag6tYgsb+qPBny4suvtNsjmDf4Ikhuxr7oRSiEyXCAUfhfsU3ypPVQKtGjGz5QGnoCBPoafC25USb+xYsiLtKlUQ8xmFq6uZ+M19ZsJvYAU0nzquOhTxPliQZ03Tz69SoQJvNsD1qQ3wc5it9pKhhc/mxKNDReSbeL9SDWfS3zpoqS21IZW/tUgbzyw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fAeJ8DReiHyy2+SOvpNxPau3etvfy/lbE4wJSmQz2Co=;
- b=RKvya0jkUfuTyWbax/k/5CSZBoNw6KZ7F+l574xZGlUUQwkHOYJQIJ4KzLCLs7oirDfq4ZGnE+PzOr0uVLCcUD4qxQPXjuTAIX/WNgOn8q7oOk8vU18V5kXmF/mJYOs19qsKCdLpiaBShAzc/Tk3AgeklDGsqzQG0Re22rXK8VA=
+ bh=z0LbI9gpD5k2AgSAifj80rltx7wM1Rb7/cPrsgT6OtM=;
+ b=Ony/O1bxTRxDl0yKvvWupnxQ7TKP8eZTpT2WnnjnUCvoyU4npuum6LrXXkeYWQSJ8yilfQ3l7O58hqAhXHnvwtzJsbYKKp7OnsjTxWBPtW+b7Gc82CvdyyzrLzSCYquKc92OhOEpAHCxwMQSzQu2RRddXZKgwqq9cnWosqG/eyE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PAXPR04MB8095.eurprd04.prod.outlook.com (2603:10a6:102:1c6::12) with
+ by AM8PR04MB7331.eurprd04.prod.outlook.com (2603:10a6:20b:1c7::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.19; Thu, 20 Feb
- 2025 14:52:28 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.15; Thu, 20 Feb
+ 2025 15:04:28 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8445.016; Thu, 20 Feb 2025
- 14:52:25 +0000
-Message-ID: <6c99ba5b-c4e0-4d7b-ab30-35cd20407a0b@cherry.de>
-Date: Thu, 20 Feb 2025 15:52:24 +0100
+ 15:04:28 +0000
+Message-ID: <07eb10ff-2791-420d-a302-a2e8c308b468@cherry.de>
+Date: Thu, 20 Feb 2025 16:04:27 +0100
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] Add 'bootsource' /chosen property
-To: Simon Glass <sjg@chromium.org>, Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: foss+dt@0leil.net, a.fatoum@pengutronix.de, heiko@sntech.de,
- devicetree-spec@vger.kernel.org, u-boot@lists.denx.de
+To: Daniel Golle <daniel@makrotopia.org>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <foss+dt@0leil.net>, Ahmad Fatoum
+ <a.fatoum@pengutronix.de>, Heiko Stuebner <heiko@sntech.de>,
+ devicetree-spec@vger.kernel.org
 References: <20250205-bootsource-v1-1-95f4ba69ac27@cherry.de>
  <CAFLszThr_vLbhU7A0_0VTLCGW03k6NmtxLVoW7OzrtxGFertZg@mail.gmail.com>
  <fb6792e8-97c5-4d0e-8ded-e73ea3a7513c@cherry.de>
  <CAFLszTg9-jMk0PBBSEVT=FonzRUNJOQ5NBMdDYUihWS8NkMhbQ@mail.gmail.com>
  <fc2c6f06-98d9-49d3-9ce5-46dd675e8846@cherry.de>
- <CAFLszTi2pa56uY95BRvd0snNJC_4qLV3Nm=_4EK5xXDzbmGF6Q@mail.gmail.com>
- <87h64vs7ch.fsf@bloch.sibelius.xs4all.nl>
- <CAFLszTgaHhEKvDeK_U1Rsm450+7GYeDu7gE1U=vkYEkS9W+tFg@mail.gmail.com>
+ <5E98D444-A005-42CD-8A6A-381791237A6E@makrotopia.org>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAFLszTgaHhEKvDeK_U1Rsm450+7GYeDu7gE1U=vkYEkS9W+tFg@mail.gmail.com>
+In-Reply-To: <5E98D444-A005-42CD-8A6A-381791237A6E@makrotopia.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR5P281CA0017.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:f1::9) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR0P281CA0096.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a9::9) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
@@ -72,455 +72,160 @@ List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB8095:EE_
-X-MS-Office365-Filtering-Correlation-Id: b0fde77a-f880-4f5b-b611-08dd51be3080
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM8PR04MB7331:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1ba8796c-5cbc-4507-34f5-08dd51bfdf33
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?WXZYWkZXSlFkcGs1L0dTbVZrdi81MHdDQ203ZXZVR0g2SlZFMVVRVlNLc1dl?=
- =?utf-8?B?K3UycWdjQjNsN1ZWTzFPRkY5VExuRHZiMi9FQUp4QnJ0V3k0Um1USlJVMjRj?=
- =?utf-8?B?djNMUXJONlVSeGYzS1RwdThRaGZTLzhnU1hNU0F1MUNjUWdZU211Z1lJWlNX?=
- =?utf-8?B?NS85L2JwNnZxblQ1dWp6ZUtQSlY5V2JmYmJxYkhxNE9uRGxzd0xmZUNMNFJW?=
- =?utf-8?B?WVcrTm5aRVc1VnlJRHVZc0VNd2tMMkFaQjRWTmxIelJjY0hnVG4zVjQ1MFFt?=
- =?utf-8?B?N0VTenhoS09ZSEs3djJSZ0tqZ2FrSHJYdHJnR1g0RVJPWG1SVTkydmZMankz?=
- =?utf-8?B?SW4wajNYTm5tNW9CaFAvMkJGYXp4bkVwMEpFRlZXWTh4SW1DNWN1Sk9tK2pz?=
- =?utf-8?B?Y0VSRGZsLzBCR0IrZTBlMXFUWXRqTHJGLzIzNVpuN1gwMUFCUkpQM2FMOTlX?=
- =?utf-8?B?V1JleW5NTkFzK3Y0RlVCUnpwa2d3RUVpaEpzMWRNVWhwUFgrT1AwaVkvMkU1?=
- =?utf-8?B?RUE2dFFFRW4wMGNxYnZkcmZyaTRpT2h3NjRLdEo2WFkwaktxeEZNN2llRmE5?=
- =?utf-8?B?WEVSUmlnajFiNjNwQnNYT2F6VzZkNVV2TjlVbXpXenZNRWVWTVNvdkFEbzI1?=
- =?utf-8?B?c290UDE5Ny9lQWRaaGdvM3hzcDhrVkJDeWUyZVVyRTdFOWtVMTJRV0xYbVN2?=
- =?utf-8?B?ejVtOFNHdmlNR0U3bEtqMDIxbllEQWpYS1NkdFNLSXB0QlEweU1EMmxRNmJO?=
- =?utf-8?B?VmZibHJSaHo3ZzNBbERSTnpmMHoxK3VNYnB4d3RyeXEzOU9mSVU2c285NERm?=
- =?utf-8?B?WXhpaS9NOGh3bG9vQk11aXJVZEFlR2F6TE5SWnlGVFlaVms4T1g5VU42S3pB?=
- =?utf-8?B?ZHFObmZJT1IvakFSUkcwdThBb0tYN0ZVMzd6ZGVrdElFY0ZnQlNiYkFDWk1I?=
- =?utf-8?B?VzAybU5xSzEwQng1V2NtQUo3NFptL1ZROWlQSXd2YlczREVUdWRUV3pjdUNS?=
- =?utf-8?B?YjBRdEJ3T21SeGR2MTU4MnVLYjE5bnZtSFhyb1pPdjU3S0RqaDhMMUtvbXZO?=
- =?utf-8?B?c2NkOERIM3BGY21tby9GRU8vbk5OdTNMbUEweXZxelJ4dzJlQjJYT2cvN0Fz?=
- =?utf-8?B?OThoUnhMN1BrdktMei81WjF0U2hvQlRLQ0xBWWFNZkRqQUZiWHovd2NYV2Ns?=
- =?utf-8?B?OHdER1Y0dGk4Z2l0Rnh0U21FMkd1dTNBMHIyQzM3RkZJTGNRT2N1TmV5cDhj?=
- =?utf-8?B?cW9WU0ZxSGRwRk9DZ3dudWoxZms2UmdmemxGdWJQTEU2STB4eG4vMCt3RzE0?=
- =?utf-8?B?aDYySmdOa1pXRFpJbHZ3Q0doY3BBQnVYWmtLYjV2elMvOTFBMVFKRDhmVXdR?=
- =?utf-8?B?aXI0ZGJPSWNxNDdNa2NPamJZUWdmbVZUWWFpMXEyQlUwQ3BDWTlvRmNQblZV?=
- =?utf-8?B?djZiVkROSERkQTFUN2M1Y1UyajIvZ0VxRjRiUGZmOWE1bUpLVzk2Z3F0VW5U?=
- =?utf-8?B?THRZVGpBSGtEZTNLcVMxM0ZtaldMRmdMN3Y2QnUzOVMwWmYwTWdjU1JyUy9p?=
- =?utf-8?B?LzVkWmY5YUJCWUlDNmtSTFhCNm03cmdPZGJsb3JoMTNqUVJKWVJyNTBQOTMx?=
- =?utf-8?B?ZTFxSE9rYzF0dkpiYVJTUUQ2R2JRL2ZMWEpJamVSUDNSa2pxNVhaSmVqd01t?=
- =?utf-8?B?ODBuRXp3V3R6dTRiSnFySjNUYUJnY3NzaE5vcE5Vd29FRlJjOGZyd2lCNU1U?=
- =?utf-8?B?MlowdnJnTFhhUmFXZnBrTWY2alM3V1lCOGJvcEVGdCtGK0hyWTAxMXlDdkUw?=
- =?utf-8?B?dk1WakNJOTNkVWdkTjBHZkpqdHo2dTUrOGdjS1lya2crQUhXbk4xclJTK1RW?=
- =?utf-8?Q?N6JOv/XM+0Pn+?=
+	=?utf-8?B?Ykt3WHladVVldDdHdzdkOUsyNjFlTDdQMnV3ZTNaVTBxY3JGNWhQUmpDWm1U?=
+ =?utf-8?B?ZUhnNkNKMGVJakN1K21wT08ra3VWdlhyZGdJVGZaaFBaa3VsVEEraUgrTkpG?=
+ =?utf-8?B?dldjR1hlTi95ZmNXVG9aTmFIL0pqVldIQ0hpek9BbWFHaU93WmNwSHdOTHFq?=
+ =?utf-8?B?Z0JwclhhVWRXdDBqVTJKQkk3RVNaMVFZNW9sRWR4YXNaZ0xnNHpnQkhaN0d6?=
+ =?utf-8?B?TzFaUkJ1cExKemxqWnVqZ0k5OE5NVGllaDVtVDQ1OHhlN2grUjlEaklESVBK?=
+ =?utf-8?B?UmlwK2k4VlR5SW1KanFhcGNWZys3d1JtR2RCK0h1VldPb0ZmNDkzWmpqU3BZ?=
+ =?utf-8?B?RVFUcXJDREFqelBsMm1MVW9PaHlQSWdSMmJaN25ZVFFFRzRqR3VpZmdOaG94?=
+ =?utf-8?B?WkJPMmJJR0pFeEErUkhrWUFlWjd1bE9BTndZaUNMdVhjeS94YXVHbjNOcG8v?=
+ =?utf-8?B?YmZTK1ZDdEtTMitFSHgvZTZNRFMrb3g0SXltaS9obWdDaE9SL0ZjbmEraTJi?=
+ =?utf-8?B?S0h1L2VZM3VVODQ2NFJlMXlYaXNJZUpaazRTRnM5b3ZFMGpFRmlXSFRhL3Ir?=
+ =?utf-8?B?WGRoU3YyTjB5bDFRT285Z01LeWFqTEdlanhYOVYrNFU0OVQvc3F4aDkvbHA0?=
+ =?utf-8?B?NVphWTE5Y3E2ZExkTGk5NU9iZXVxcVpLbWcxM2U1MS9IbUQ4dEdsMC9ZekZR?=
+ =?utf-8?B?d01oYnByTlhaZS9XRjBIVDA5UWNUaHAwWjRaTDBYZ1NkaTVqQVpKV0tKMVI3?=
+ =?utf-8?B?OEZHSFhVb2w0UTRBUmdFUW9SSDdUNHRKSVpoQlBxSXF0cXV6M09Rem1MQjdB?=
+ =?utf-8?B?Zm1wdXJ5TnQ4V0JUTE9vUzN4RUQ1bXZBWDEzZGNOMFY2RkorNkpwbE0zWDlF?=
+ =?utf-8?B?QytaYWVtMllnT0NGYkxmMG5GdS8rdldLT3NIZGd1NkhId2JuclRNZW5Pa3g3?=
+ =?utf-8?B?Z2JwZ2RiSC94NVo0SHlPZDYxT2lsL2JkamhNVW4rd1dYT1dlc3lGdXRTemRL?=
+ =?utf-8?B?TWgyMjcvdS9TYTVYcllIS0FMQk1WVkFNZkFPaTlRcGJRYnNnUTdnVytSRHJ4?=
+ =?utf-8?B?bWpMRDZYYkV5U0VJOFkyVTJRTHViYy9IbmgvMVFPaEdSc2tiZ0FLOEUybytO?=
+ =?utf-8?B?TDJHbTJDZGUrTk5KSmYwa2dpNmFOSTZDWWp0Zmxrd09tNkQvUWk5VFlLTGxM?=
+ =?utf-8?B?aXl6eE9EeTIwcDR2UTBSV0tJMUpLYWlzbTZXRGtUeTg1S1YrOFBKTHlBT2xO?=
+ =?utf-8?B?VGZBbDBvMW5KSU4ySEZkbGR4Z21NWTBsUW5uVVM3dG1BT0wxRGdodU9xL3NL?=
+ =?utf-8?B?cy81a0Z0emE5TklwM1NDeFV2c3F3VXBMdGFqS2tZUnF3bGdKQ2gydCs0UnpU?=
+ =?utf-8?B?VmVSN1o2Zlg2N1c5dTc2YW9MK1h2RWo0a2xpU3kxODFtSGpJRHNVZWFjbzRF?=
+ =?utf-8?B?R1hxQ01yUzk4Q25JVHJ0U3loc2NNeWhXMlU4Y0NZRHdjWXpHWkE3ZGFHOExS?=
+ =?utf-8?B?U0ZVbFJFbnRWejB3U2xGcTZsRGREWHV1MkVzS0RKTXMrdVNKcWsyN3hmR1Ru?=
+ =?utf-8?B?WExZRVZoeU1Rc2I2cmI0UDFBNFpwSnhtc0VFOXpKUHY0TkFVQkFrTWlKK01o?=
+ =?utf-8?B?NUJicFkxaXBoZmU1NUluTXJKbnpleWYzNzllZm9qTmhiZ1dIRTdZdmNiYjht?=
+ =?utf-8?B?ZkFnbzVJdXFHWVVxK1ZtL3ZHTzJSZDBGTTFIRGdTblUvNlZpcG5ZaWpZa2RM?=
+ =?utf-8?B?K25KTzFlT2ltemNtdHVRTWhyR0tjcWs4SFJsRTA3OHN3WE9hTk9YMzJ3VmRK?=
+ =?utf-8?B?akwxbGdtVTJQcFlSWDZTZz09?=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR04MB8897.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(7053199007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR04MB8897.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?d2FxT3FuUEFMVmc2b3FTcFFEOWhUcVA3a0tVRk9pc3YzVUx2YnhLNmtIYXdI?=
- =?utf-8?B?Y3FlQXduKytzS1BWSHZUY3gxY25Sb0pJWXRxS2FiWFdSRXQ2OWpQK25xenN3?=
- =?utf-8?B?SmJtVTFjWndweXpTWXQ1VE1GajlDZDBSSkZ6dklTUWVoaXpOVnRmVGVYMkRq?=
- =?utf-8?B?dHViOHo2NmlLTlczZGYxZTlKT3dZU1NjVzFicVlGd0dPNXMvaGNlNWVNRTlU?=
- =?utf-8?B?SERZb01MK21ObDRiTldOekp6M2I5QUgxS2FmZG8ydTFHVk5LVTRiV3NFNnRt?=
- =?utf-8?B?TWNmUGJxc2RZQnN0a2s2U2tJRzdHMTFzWGlhUFdmWnlVUnFqeFF0ci9pNklI?=
- =?utf-8?B?SlRWL1FGUmNoZ08zOTdCTCtlYzE0UEJIdlpIS2JscEllRWtrb3FhU2NXM1J4?=
- =?utf-8?B?TlQyMEtCRHpFang1T2hxOFhpQTJwQnFaempMZ0tzVEpUb2Q2cmxwbVZBSEZJ?=
- =?utf-8?B?RWZwT1VpZFcvVDhhRjNOMjlSSzRySHM0dk9jRDJlSTM5bGxHTnJ2Y1JKVUx1?=
- =?utf-8?B?LzRMQnpSVlpmYzY2Zk1kWFB1aGlzZSt5V0ZLVTQ4TjFPaTg4VDdiTEtKNTVi?=
- =?utf-8?B?dnFFWGFOc1BqTHdxMG82NkVrbS9CRWt4R2d1Y0srRHE3QjJ2akl4VXVRRUpn?=
- =?utf-8?B?bGV2eGdMYUtmZ0Z3aGhTRUJscVRCNkxsYUQ5NzJKekNqYlo0QnhndnpwT2RE?=
- =?utf-8?B?RUtvN01FNHhhQm5pMUxxK0U5L0M5MWJjdGNZRFhwRFdNTDhkWDEwTVB6Yytj?=
- =?utf-8?B?bXVCR3hJWVhKZzZxb1Vib2VqTWU3YkZpRnVuWHhXUkgrK0tsSk54M3Q2bHdE?=
- =?utf-8?B?cDZRNmVrdWNJU2p5S0JLcWFxR2FyQ3paVDlOdmp3TE1Vd05IazdnT01FYWEv?=
- =?utf-8?B?SU1OTFlvTXkvSzZVNnVVRzhobTdmYzZyQTkvRms0bUg4OFByc0JCZUY3Vm8y?=
- =?utf-8?B?ZHRhTVdydlRkeDBVMFZwcDI0VHZBSWFHc1FkcjYyM0RTOFlLVi8xYXhqYmR0?=
- =?utf-8?B?V2NqM3RsUnBWbGc1UDY1NzdvWXVVRGtqN0orV1hHRVlWMXhVVG1LdUQzUW0v?=
- =?utf-8?B?Y1VVeEsyUnlyZW5EV2grbFBjZWNpTmNwam1aWXRWRktBTnMwRnFYUGdmME9u?=
- =?utf-8?B?Rkx2VkxHUktUSnFoTGcwK0s2VUl1enVOTmdNTEFPdzgyTGhIM0N5dTh4Y2p2?=
- =?utf-8?B?UEVmZmtKZkN5Nk1MbG5sMU9yVHRkektGRU04MTNsUzA1MExMZjEyaGZienFq?=
- =?utf-8?B?SFdSQVhSbitEQWYwN2d5RlUyNGFUNktiV0VVL212ZU1xKzhFQ0ZISkROSDB0?=
- =?utf-8?B?SS95ajFQMXBxT3FFRE1CWEMvdWpFWnBFUDNwNm51TlBXcGh0b0x2Sm90N1JN?=
- =?utf-8?B?KzB4bkl0Y1RRWUNwSVZwd08vL2NSNHFST0ZWM1lQcXBzeGVTY3Z2WkpsQkMv?=
- =?utf-8?B?cDVUTzV4NzdDYzE2T0tYNnJ6c3p0T1J2QkJVb1VCMTZBRmo1M3Z2YXg3Uy8z?=
- =?utf-8?B?T1ZMWFlyb3h6NzFCR2NOSk15RHdHdnNGdUtzT090S2VITEtMZjJvT1dXS2ZU?=
- =?utf-8?B?aGtkMjZIL1EzdGg5UGxHOHJGc3lJR2VKTHVjQVpzeXVLZ2xCYkJSdC9KSUV0?=
- =?utf-8?B?QmExc2pRRlhVNkV3L2Q5WXl3K1Ezd0ZxN2k5R1pVRm9EZk1vekNaOXAxeStJ?=
- =?utf-8?B?OHpySy9FcVdDQzhUeTNwTEVJQmRyQ1JFSjRqRHAwcUVIMVlRN1dteDgvOE1V?=
- =?utf-8?B?ZDJoQmh1ODVHM3ZLMWtUZFExUDJ6cTBGcEMzc0xONVNoNzhjMWxWSEhiWjBN?=
- =?utf-8?B?S2lFeHN6Mm1GVUc3NUZoUTdQTk1zNjJpRlk0eDVwZVZzSVlPMEIzckZEVkU2?=
- =?utf-8?B?Mk1XKzBveUJxeno0VndFQ1dPTGhlOFpGNjFSUjYybHQ4REpCa0ZINWY2TmUw?=
- =?utf-8?B?T21CQXVBZnZqVEZCaGRvREYvYm92b3UzMVViLzhkT0FYd1VDdjVSSUwzTWd5?=
- =?utf-8?B?eWJpdVpoRkRYWDIrTDlmdnc2cmNEYTBJTUZZY053K2NyeVVabXlNNHB5UEcv?=
- =?utf-8?B?bkN1SGl2WWhmV1J3TUE1SFhVSnY4TXhMbE1CMG1mTC9IMWlHdlorNytNdlNw?=
- =?utf-8?B?QjIwM21BQUFzc29PYm8vK1p5TDRkTFNyOHRNdmhQUkU4anRSOUNBRU45MG5j?=
- =?utf-8?B?dmc9PQ==?=
+	=?utf-8?B?QVpXS0ZldmxrS0Z6VzdIdFlKemY5QVJ6b2c3ZEVxSldhM0VUS28vMmpJS29M?=
+ =?utf-8?B?UXNZaHBjKzZ4TUZMQWFaZGRQTERBc1FBYVV2bEFsa2h0VS9QK084cVNrM0pQ?=
+ =?utf-8?B?SWVLS1lENXd5cERLbk1xcWhNdHpiN2REamIvSm5jUkxqMjRNRTNkVEU1bmxX?=
+ =?utf-8?B?Rm9PcDA5L01OUk8zQnFpOVlqSG1meWRrYStvMlZwMFBxTnZtcURzbExLa2lY?=
+ =?utf-8?B?d0NoZWtCWHZ6TStGUHZlNXp0UWlMUGsvMmdudzQ4bWU4aTMzNDlVSGZKTzFx?=
+ =?utf-8?B?K2tHWFFkWjdBYWtyNHNPdWdlRm1GWE9RT0N3MGNpSTR3ZnhPUDBOUUFRK1Zt?=
+ =?utf-8?B?dUFHcEZXTlJQNzJTZVN6S3FvMk93VVJWam16OE5pTGtKUUVSelF5bW00Sm1T?=
+ =?utf-8?B?bnZKTG9yNlJUUk1pVGpYS0JnMjh2WDljMHdTdTN1MHBOS2pNejNXWFVXdWF6?=
+ =?utf-8?B?S1l1WlpXYWJrZy9vUHFSb2lzeUZwcHlLcDRoUVVacUorR1NwYWdPajdRVkZ5?=
+ =?utf-8?B?aDZNcFUxd0hqNFJ3bUtzVUhBaGFmeXdjUHBFM28rTy9WVkR5a2ZsajVjTU5Y?=
+ =?utf-8?B?Y1R1K2lGSDF0SnZSb1VhdzJlemJGZE4vaTdiN3dYNUYwZVcrK2NaUFZweXkw?=
+ =?utf-8?B?SEZHUzJGZnB4cDJzUUZIUzhrVmV6V2JtVUY4Vld2bFBubUVhczNxd3k1T0U0?=
+ =?utf-8?B?NzNqeDlza09vcDRUS1dJempwNGVoWk80QlVCTUtTYlVXVFFyeHBFVURBMmMx?=
+ =?utf-8?B?M3NxZ3RuNkQ3MXlVSE5hZWxLR3A5Um5vUXpQVC9NYldHSmhjZ0FmdENoRncv?=
+ =?utf-8?B?YklXWFlpd3NLdlBWZWI3ZUxTQTRMRkMrQnA2b0o2NmJ5d05RN3VJTFdwVlZy?=
+ =?utf-8?B?VFlFQVpiL055b2NhVWVoRGYrNFA0NHBmOG1qNHFHakZ1dm9CMEREaDRUMWpE?=
+ =?utf-8?B?TlBTWlA5Ymk2ZFdnTFdoV3V6bkZyRFk0N3ovMERVcDdMV3N4SmFvM1Rwdm1R?=
+ =?utf-8?B?c3lKSExpVHFjeWtvU0Z3dDcvN1BLK0NmK25tMVVoZ0k4K3I4WFRSM09JT3g4?=
+ =?utf-8?B?NFFIQ04zRUlndUhuT3NJclpPOUJad05qc0o4dXdHYzR3NERMbHpuaG53SWxu?=
+ =?utf-8?B?VG1NWXBGUnJuTC91VUgwTm9ONmY1T3JYVFpodWt6V0RndGZzLy91MTdoOG1a?=
+ =?utf-8?B?YmRYYW5tLzYyTU9zNWFIR1M0Z1IvSFMrQmpGNktJd2xVL1RUaFZCVkpxK25I?=
+ =?utf-8?B?SGRtUUYreFlnL0VTcUhubFZYRW1ld0w2bE41QWlPNTVwQzhVcU1rWU9HTHF5?=
+ =?utf-8?B?WUk2b2hLY3JTL0RETFlpZE8xZkpqQVozbkU0SDJueGpwNmV2c2ZDU1ZCN1FE?=
+ =?utf-8?B?QmRGM0NManZrbFdkK3ZrTkdRdDhiL0V4dlIyb0JFaXR4bER5T1Z2OVhqUXdq?=
+ =?utf-8?B?dDFHZ2Fza1NlS0VJRzBoU0gySTYxUHJjeCtyWTJyd3h3YzJ6YkN6Wi9NRjFG?=
+ =?utf-8?B?cEd3cm9Ed28wRTNYVFdzNmRiN0pzWHhxYXpJcnpOVTlxNll0bCtwcER6bWts?=
+ =?utf-8?B?MVNUZlVoT3dhaFh4eFFJZXJBbElzZm1ZN0xsTFFDWXN6VmwrMDZDUWNnWk5s?=
+ =?utf-8?B?cnA1eXA0VG1OZzNiT25SbVlWWm1pVDhOQ1VTK2xQaG9yY054Ti9nUGlIVzVj?=
+ =?utf-8?B?Q00zUm9DL2pQQUZBQnBKcS9mVzFVNk1iNnVrQXN0RkFMYzBMWXZ6enRjSFhv?=
+ =?utf-8?B?L3gxTG1VcTNGTDVwVTV6NE9vNmg1aU9wL1FTMVltcmxJNXlXVEswMTBJdEpl?=
+ =?utf-8?B?aE9XT1VIcHdIVEI2d1l2R2MzOWhGRmFmQVJDYkRJWnVMOEx5dUxaOEVhanZ1?=
+ =?utf-8?B?U3dsY3FLYWZpNDJNZ3lXdWlWaklyemtmYXY4UDBBaUJrTmlVdFlUanNjWW14?=
+ =?utf-8?B?TzVCYmFHT0NEMjdFckJHSUN6OVRnWVpLbkZ3US96dmZyOXgySDJnZmUzWDlx?=
+ =?utf-8?B?a3N6aFVjTzZOUlpvd0ROMWRObTdUYTB5c3E5TXpNQ1lLMkVVYVZyREVudlhS?=
+ =?utf-8?B?N1YrVFUrL2dZZnErZ3RTZjhPSjFyQjlaejlDZkpFWDRFZDEydUEzRXFmUm9W?=
+ =?utf-8?B?dFNETGxYZG0wdmFlU3dPSDJHVnlZdHltdUV3a0pGd244TjN0Ni9ZR2gyVjZp?=
+ =?utf-8?B?S2c9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b0fde77a-f880-4f5b-b611-08dd51be3080
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ba8796c-5cbc-4507-34f5-08dd51bfdf33
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2025 14:52:25.7250
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2025 15:04:28.3205
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jueuYl7FhDofu5KQ1ezsuX/3Ft4cKMsJW+JHkiNk215CFk8Y6D6BRf03Cw00c8A0kpq1kpmC442TO9LlqRaEYmOIrc51zPG12g8WexHSeoE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8095
+X-MS-Exchange-CrossTenant-UserPrincipalName: Jfgk2vZ5lz822D/sbLYoOjOsljuHZaJxsps508sdUnevZZA0ag61ND28mBT3aGRvt9OEPfUyRuv3ML+o6B9U+u8XzHUDeeYVafIdK9ElEAo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7331
 
-Hi Simon, Mark,
+Hi Daniel,
 
-On 2/15/25 2:04 PM, Simon Glass wrote:
-> Hi Mark,
+On 2/15/25 4:13 PM, Daniel Golle wrote:
+> Hi Quentin,
 > 
-> On Sat, 15 Feb 2025 at 05:47, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+> On 10 February 2025 16:25:23 UTC, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>> [...]
+>> What I can say from glancing at the code is that for Rockchip they do the following:
 >>
->>> From: Simon Glass <sjg@chromium.org>
->>> Date: Sat, 15 Feb 2025 04:59:06 -0700
+>> Register a bootsource type (e.g. MMC, SPI, I2C, USB, etc...), a bootsource instance of that type (e.g. MMC0, SPI3, I2C7, ...). The mapping between what the ROM says the device is vs what it is in the DT is done in their Barebox-specific DT via this custom prop in /chosen:
 >>
->> Hi Siomon, Quentin,
+>> barebox,bootsource-<bootsourcetype><bootsourceinstance> = &label;  # à-la /aliases
 >>
->>> Hi Quentin,
->>>
->>> On Mon, 10 Feb 2025 at 09:25, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>>>
->>>> Hi Simon,
->>>>
->>>> On 2/9/25 3:28 PM, Simon Glass wrote:
->>>>> Hi Quentin,
->>>>>
->>>>> On Thu, 6 Feb 2025 at 08:46, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>>>>>
->>>>>> Hi Simon,
->>>>>>
->>>>>> On 2/6/25 1:33 PM, Simon Glass wrote:
->>>>>>> Hi Quentin,
->>>>>>>
->>>>>>> On Wed, 5 Feb 2025 at 02:12, Quentin Schulz <foss+dt@0leil.net> wrote:
->>>>>>>>
->>>>>>>> From: Quentin Schulz <quentin.schulz@cherry.de>
->>>>>>>>
->>>>>>>> Bootloaders typically can be loaded from different storage media, such
->>>>>>>> as eMMC, SD card, SPI flash, EEPROM, but also from non-persistent media
->>>>>>>> such as USB (via proprietary protocols loading directly into SRAM, or
->>>>>>>> fastboot, DFU, etc..), JTAG, ...
->>>>>>>>
->>>>>>>> This information is usually reported by the SoC-ROM via some proprietary
->>>>>>>> mechanism (some specific address in registers/DRAM for example).
->>>>>>>>
->>>>>>>> It would be useful to know which medium was used to load the first stage
->>>>>>>> of the bootloader. SoC-ROM shall be ignored and not reported in this
->>>>>>>> property.
->>>>>>>>
->>>>>>>> This can allow client programs to detect which medium to write to when
->>>>>>>> updating the boot program, or detect if fallback mechanisms to
->>>>>>>> unexpected medium were used to reach the client program's execution.
->>>>>>>>
->>>>>>>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
->>>>>>>> ---
->>>>>>>> Bootloaders typically can be loaded from different storage media, such
->>>>>>>> as eMMC, SD card, SPI flash, EEPROM, but also from non-persistent media
->>>>>>>> such as USB (via proprietary protocols loading directly into SRAM, or
->>>>>>>> fastboot, DFU, etc..), JTAG, ...
->>>>>>>>
->>>>>>>> This information is usually reported by the SoC-ROM via some proprietary
->>>>>>>> mechanism (some specific address in registers/DRAM for example).
->>>>>>>>
->>>>>>>> It would be useful to know which medium was used to load the first stage
->>>>>>>> of the bootloader. SoC-ROM shall be ignored and not reported in this
->>>>>>>> property.
->>>>>>>>
->>>>>>>> This can allow client programs to detect which medium to write to when
->>>>>>>> updating the boot program, or detect if fallback mechanisms to
->>>>>>>> unexpected medium were used to reach the client program's execution.
->>>>>>>>
->>>>>>>> Note that this property is already set by Barebox and I'm planning on
->>>>>>>> adding it to U-Boot as well, specifically for Rockchip SoCs.
->>>>>>>>
->>>>>>>> I have some doubts about the wording, especially in the case of
->>>>>>>> hypervisors or chained boot programs. I'm not entirely sure what would
->>>>>>>> make the most sense to put in the property for those scenario.
->>>>>>>> ---
->>>>>>>>     source/chapter3-devicenodes.rst | 3 +++
->>>>>>>>     1 file changed, 3 insertions(+)
->>>>>>>>
->>>>>>>> diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenodes.rst
->>>>>>>> index 8080321d6e60d6b1e86c81af86c6850246a0223b..defd1a46e4ffaa4bb085306b5e153d38b740ac66 100644
->>>>>>>> --- a/source/chapter3-devicenodes.rst
->>>>>>>> +++ b/source/chapter3-devicenodes.rst
->>>>>>>> @@ -456,6 +456,9 @@ time. It shall be a child of the root node.
->>>>>>>>                                                            the client program. The value could
->>>>>>>>                                                            potentially be a null string if no boot
->>>>>>>>                                                            arguments are required.
->>>>>>>> +   ``bootsource``          O     ``<string>``          A string that specifies the full path to the
->>>>>>>> +                                                       node representing the device the BootROM used
->>>>>>>> +                                                       to load the initial boot program.
->>>>>>>
->>>>>>> Could/shoud this be a phandle instead? It might be more efficient.
->>>>>>>
->>>>>>
->>>>>> In terms of size in DTB, phandle vs string probably much more efficient yes.
->>>>>>
->>>>>>    From user's perspective, I'm not too sure?
->>>>>>
->>>>>> /aliases does use full paths for example.
->>>>>>
->>>>>> Having a full path allows for easy consumption, just cat
->>>>>> /proc/device-tree/chosen/bootsource and you'll have the actual path.
->>>>>> Otherwise, we'd need a special tool for that I guess since it'll return
->>>>>> the phandle number and then you have to traverse the tree to find which
->>>>>> node has that phandle number?
->>>>>>
->>>>>> Also, I could imagine some scenario where:
->>>>>> - a boot source would not be available in DT yet (though we probably
->>>>>> shouldn't write it in /chosen/bootsource since we wouldn't know the
->>>>>> proper path to it), e.g. USB loading, this is usually done via a
->>>>>> proprietary protocol and/or tool (e.g. rockusb/rkdeveloptool for
->>>>>> Rockchip) but no USB support yet in boot program or kernel (that was the
->>>>>> case for a long time for RK3588 for example and I still have at least
->>>>>> one device without the USB node described yet).
->>>>>> - a boot source would be available in EL3 but not EL2, so does not make
->>>>>> necessarily make sense to have it in kernel DTB for example. If it's not
->>>>>> there, can't have a phandle.
->>>>>> - a boot source supported only in boot program's DTB and not kernel's
->>>>>> DTB, we probably still want to provide it to kernel's DTB even if it's
->>>>>> not a device node in it.
->>>>>> - a boot source doesn't necessarily have a label (though we could use a
->>>>>> full-path phandle I believe &{/some/path@1f000} probably works). That is
->>>>>> not uncommon for SPI flashes for example.
->>>>>
->>>>> Well I'm not sure what we are defining here and which programs will use it.
->>>>>
->>>>
->>>> I'm not sure to understand where the confusion is wrt "what we are
->>>> defining here"? Can you please clarify?
->>>>
->>>> Used by whatever and whoever wants to have some specific logic based on
->>>> which medium the DUT was booted from, e.g. software updaters, distros or
->>>> CI tools (labgrid in my case)? If your software is assuming the DUT is
->>>> booted from eMMC while it is actually from SPI, you may think you're
->>>> updating (including security fixes) the SW while you're not.
->>>
->>> So for example, VBE includes a node which tells you which device is
->>> used for firmware updates. If VBE is used, does it supercede this
->>> setting?
->>>
-
-If I remember how VBE is working, they are for different things.
-
-If I recall correctly, VBE will provide which medium/partition/offset 
-was used by VPL to load the next stage (SPL IIRC?).
-
-This /chosen/bootsource would be what's reported by the bootrom. I.e. 
-where VPL/TPL or whatever the first stage loaded by the BootROM is stored.
-
-E.g. you could very well upload VPL+TPL over USB via rkdeveloptool and 
-have it load SPL+Proper from a local storage medium such as eMMC, for 
-example if VPL+TPL somehow got corrupted and you need to recover the 
-board. In that case /chosen/bootsource would be the USB device, not the 
-eMMC.
-
-FWIW, we have /chosen/u-boot,spl-boot-device for storing the boot medium 
-that was used by SPL to load U-Boot proper, I assume this would be what 
-VPL/VBE would set for the updatable part of U-Boot?
-
->>>>
->>>> Throwing ideas right now, but this could also probably be used by
->>>> fastboot/DFU to know which medium (e.g. MMC, SPI) to update by default
->>>> instead of using one that defaults from the env/bin. I have no
->>>> experience with either so maybe that's misleading.
->>>
->>> What are you planning to use this for? Can we scope it to that, initially?
-
-I have our RK3399 Puma with 9 possible booting media scenario (SPI-NOR, 
-eMMC and SD card for TPL, with the same amount of choices for U-Boot 
-proper), not counting USB loading.
-
-Our other products have 4 (eMMC, SD card for TPL, same amount of choices 
-for proper), not counting USB loading.
-
-It is possible to have a board I'm trying to test eMMC/SPI boot actually 
-boot from SPI/eMMC based on their state and content. I don't want to 
-think I actually properly tested eMMC/SPI booting but actually tested 
-something else.
-
-So the answer is simply CI for now, for me. I'm pretty sure it isn't the 
-only usecase since Barebox added support for it too, long time ago.
-
-This would also help debug customer setups much more easily if we know 
-they are updating the wrong storage medium. We also have customers who 
-have U-Boot without serial, so just looking at the serial output is not 
-an option.
-
->>>
->>>>
->>>>> I don't really like the idea of mentioning a boot source that is not
->>>>> in the device tree. In fact that's one reason why I believe it is
->>>>> better to use a phandle, since it enforces that. The RK3588 things you
->>>>> mention sound like things the vendor should fix from day one, if it
->>>>> matters.
->>>>>
->>>>
->>>> There is no such "full Device Tree support day one", especially for new
->>>> arm SoCs. We still do not have USB-C support on Radxa Rock-5B (it's on
->>>> the way but still), the introducing commit was made more than two years
->>>> ago already. I don't understand what's being suggested here.
->>>
->>> You mentioned that we have to use a string because it might refer to a
->>> node not in the devicetree, e.g. we booted from USB but there is no
->>> USB node in the devicetree. My suggestion would be to add that node,
->>> even if it is empty.
->>>
-
-Considering that DT people usually advocate for the full dt binding 
-picture when adding support for a new controller, PHY, SoC, I'm not sure 
-a random empty node is going to fly by them.
-
-But sure, that's an option.
-
->>>>
->>>>> If the boot-source device is not in the 'kernel' DTB, then why have
->>>>> the boot source there? What use could it be? This seems like having an
->>>>
->>>> Informative?
->>>
->>> OK, but this is really what I'm getting at. You must be adding this
->>> for a reason, perhaps many. So please can you list the actual uses
->>> your software will make, with this value in place?
->>>
-
-I need it for CI of the bootloader, much easier to parse the DT than 
-parse some possibly changing bootloader output.
-
-I can think of other scenarios like making sure updates are applied to 
-the bootloader that is actually being used, helping debug people's 
-setups, allowing userspace to have different logic based on which device 
-was used for loading the first stage, starting manufacturing 
-provisioning if you boot from USB, go through a full recovery process if 
-booting from SD card, ...
-
->>>>
->>>>> alias to something that doesn't exist in the tree. But it could also
->>>>> be used to just have "my-silly-device" as the value, with a magic
->>>>> meaning which no one can figure out.
->>>>>
->>>>
->>>> That's fair.
->>>>
->>>>> Re not having a label, we can add one. Yes, fdtdump does not have the
->>>>> schema and doesn't decode phandles, although I suppose we could teach
->>>>> it some basic things, or add a new tool.
->>>>>
->>>>
->>>> If you don't use the same DT for U-Boot and the kernel (which is the
->>>> case for all Rockchip-based devices as far as I know), a label may be an
->>>> issue, especially if you don't keep the symbols in the DTB. Because then
->>>> you need to guarantee that label X in U-Boot matching node Y in U-Boot
->>>> also matches node Y in the kernel and not node Z, so you need some kind
->>>> of hardcoding/mapping somewhere in U-Boot.
->>>
->>> Wouldn't you set it correctly when you update the /chosen node? There
->>> is no sense in putting this property in either the U-Boot or Linux
->>> devicetree. It needs to be added to the Linux devicetree, in the FDT
->>> fix-ups, just before booting LInux, like we do with other things in
->>> the /chosen node.
->>>
-
-How do I know I set it up correctly? I don't necessarily have the 
-symbols in the kernel DT and the path/phandle value may be different 
-between U-Boot DT and kernel DT.
-
->>>>
->>>>> So overall, this seems like a balance between short-term convenience
->>>>> and long-term confusion.
->>>>>
->>>>> To me, the strongest argument for paths is that /aliases uses full
->>>>> paths rather the phandles. I believe that was a mistake (it caused
->>>>> problems in SPL as it bloats the DT), but I've not looked at what it
->>>>> would take to change it now.
->>>>>
->>>>>>
->>>>>> And additional argument for full-path: Barebox already uses that.
->>>>>
->>>>> Were there discussions with that, which could be used here?
->>>>>
->>>>
->>>> @Ahmad, any piece of history you'd like to share here maybe?
->>>>
->>>> What I can say from glancing at the code is that for Rockchip they do
->>>> the following:
->>>>
->>>> Register a bootsource type (e.g. MMC, SPI, I2C, USB, etc...), a
->>>> bootsource instance of that type (e.g. MMC0, SPI3, I2C7, ...). The
->>>> mapping between what the ROM says the device is vs what it is in the DT
->>>> is done in their Barebox-specific DT via this custom prop in /chosen:
->>>>
->>>> barebox,bootsource-<bootsourcetype><bootsourceinstance> = &label;  #
->>>> à-la /aliases
->>>>
->>>> This gets read and resolved and then inserted as
->>>>
->>>> /chosen/bootsource = "/some/path"
->>>>
->>>> into the kernel DT.
->>>>
->>>>> Anyway, if this is the way you want to go, I think it would be useful
->>>>> to add some of your notes above into the binding, so there are some
->>>>> rules around it.
->>>>>
->>>>
->>>> I'm not sure what classifies as a rule in what I suggested, could you
->>>> elaborate on that maybe?
->>>
->>> Let's get the info on what you are actually going to use this (you, or
->>> your company).
->>>
->>> But overall, I don't really have a strong opinion on whether this
->>> should be a string or a phandle. If we consistently used phandles
->>> today, I would want that, but we don't, so it seems that ship has
->>> sailed.
+>> This gets read and resolved and then inserted as
 >>
->> It probably should be a string because that allows you to specify some
->> additional information at the end of the path.  For example if you
->> boot from a disk on an AHCI controller, there are no nodes for the
->> individual disks.  So if you use a phandle the best you can do is
->> point at the AHCI controller.  A string also allows you to specify the
->> partition on a disk and a file on that partition if necessary.  This
->> is similar to how "stdout-path" and "stdin-path" can include
->> additional information about the serial interface (i.e. baud rate,
->> parity bit, stop bit).
+>> /chosen/bootsource = "/some/path"
 >>
+>> into the kernel DT.
+> 
+> We are doing something quite similar downsream at openwrt.org for MediaTek router SoCs, see for example:
+> 
+> https://github.com/openwrt/openwrt/blob/main/package/boot/uboot-mediatek/patches/310-mt7988-select-rootdisk.patch
+> 
+> https://github.com/openwrt/openwrt/blob/main/target/linux/mediatek/files-6.6/arch/arm64/boot/dts/mediatek/mt7988a-bananapi-bpi-r4.dtsi#L32
+> 
+> https://github.com/openwrt/openwrt/blob/main/target/linux/mediatek/files-6.6/arch/arm64/boot/dts/mediatek/mt7988a-bananapi-bpi-r4-emmc.dtso#L60
+> 
+> 
+> Of course we could use the standard "bootsource" property instead, but having a way to reference the volume or partition used as rootfs instead of just passing a referencd to a physical device is advantagous...
+> 
 
-I really really want to reiterate that this property is NOT to be used 
-for storing which medium was used to load the kernel, rootfs, or 
-whatnot. Only from where the BootROM of the SoC loaded the first 
-user-flashable/loadable.
+If I understood correctly, your prebuilt DT would have
 
-Also not from first stage to second stage, e.g. not for storing from 
-where U-Boot SPL loaded U-Boot proper from, this we already use 
-/chosen/u-boot,spl-boot-device for that.
+/ {
+     chosen {
+         rootdisk-emmc = <&rootfs_in_emmc>;
+         rootdisk-nor = <&rootfs_in_nor>;
+         rootdisk-sd = <&rootfs_in_sd>;
+         rootdisk-spim-nand = <&rootfs_in_ubi>;
+     };
+};
 
-I do not know which info all SoC models or vendors are exposing as their 
-first boot medium. Rockchip stores that in an undocumented register as 
-far as I could tell. c.f. BROM_BOOTSOURCE_ID_ADDR for the register 
-(somewhere at the beginning of the SRAM it seems) and 
-arch/arm/include/asm/arch-rockchip/bootrom.h for the meaning of its content.
+and then at runtime you would populate /chosen/rootdisk property with 
+the "rootdisk-<medium>" string with <medium> matching whatever the 
+BootROM reports. I assume the goal is to somehow make sure that the 
+rootfs is loaded from the same storage medium as the one used by the 
+BootROM to load the first stage bootloader?
 
-I guess if Rockchip's BootROM could load from eMMC HW boot partitions, 
-and they would expose the information, it would make sense to be able to 
-specify that in the path. Similarly, Rockchip's BootROM looks for a 
-special magic value at different offsets to detect where a first stage 
-bootloader is loaded. I do not know if the offset the first stage 
-bootloader was found is stored in some undocumented register/RAM 
-address, but if it could, it would be helpful to know as well. If we had 
-two copies of the bootloader at offsets that can be read by the BootROM, 
-we could imagine storing the offset of the bootloader that was properly 
-loaded and provide that information to the user. E.g. if we boot from 
-the second offset, it means the first one got some bitflip or corruption 
-and we should fix it.
+Can you confirm I did get that right?
 
-I guess we could also imagine a BootROM capable of reading MBR/GPT 
-partition tables and reporting which partition it used to load the first 
-stage bootloader.
+I was specifically NOT aiming /chosen/bootsource to represent the 
+storage medium used to load the kernel or rootfs, but rather the medium 
+that was used by the BootROM to load the first stage of the bootloader 
+that is user-flashable/uploadable.
 
-There's just so many possible scenario I could imagine, I am not 
-entirely sure it makes sense to try to have all those supported in one 
-single string property?
+You could very well decide to load/mount your rootfs from SD even if the 
+BootROM loaded the first stage bootloader from SPI-NOR. This property is 
+about representing the latter, not the former and not merging the 
+meaning of both into one.
+
+However, I could see a BootROM being able to report from which partition 
+and controller it loaded the first stage bootloader, and then it'd make 
+sense to have that in /chosen, either as part of /chosen/bootsource or 
+an additional property like /chosen/bootsource-partition.
 
 Cheers,
 Quentin
