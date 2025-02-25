@@ -1,257 +1,421 @@
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C23842F46
-	for <devicetree-spec@vger.kernel.org>; Sun, 23 Feb 2025 00:33:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 968881DFDE
+	for <devicetree-spec@vger.kernel.org>; Tue, 25 Feb 2025 06:03:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740270799; cv=none; b=n2BIS7cOgmwsw4mA2yywFKsliAm5QcxRLrpgGFJnDplNj5RW0ZSNDL/jH+HsfYRodOKDgg+doJZUwrXZjY205fe+KqeZQdNV5iZTpZNdrr7ypYY1V+21yw9iX7Is+AQKg1MEgNRxZwuNVjrX9nrOYqBjiQLtb+aRABLrnPHLCIg=
+	t=1740463383; cv=none; b=G86wdrbg4tcyPAn+Zr0QhLJtfPvD5uc3ha7pvqfNWiC6sNExuXHs/kT8I8nOx+duSlUrLHYind+heNVnpyhTa0K+Tj7F8rzNYLDz+jRCWK5JjzNGvB6yLJ4R3VaIzVYKQuaOgzl1lIOFpmTVNFPDTtOzVUV5JFir+NBT9nKWxy4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740270799; c=relaxed/simple;
-	bh=QLMCNCiwKqFAvbjXYABKCcQvrYJFW+We2cMPvZ/oDzA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=J6iBN0BLgf1eJhJPE3WzvjQVp7T3aCvIjV/qB/TmpUKntfsK1J4kOYvEBSZ92QvQ/8u7vN9PjEyxMMVSPdeqtj4mwySFjWTONitbZ0rvmQBFwEUJfan6Ir3SbYtWGlkLLnOBjhzGcB1pIB/QmmGd5u3aDvZcHsVY5DDe7tzxLIQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=Jb4x3YP2; arc=none smtp.client-ip=209.85.218.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	s=arc-20240116; t=1740463383; c=relaxed/simple;
+	bh=hCch3GGwWR/XxT0Jrz2kF8+UYBNQp2N4cw9R1PpVPM0=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=fRjVd38Q5TA14kUviOc+b56377vSbbhOIEZ06iI5f9jbM2JrwrIIgSxIE6jWa5B038o+Ll6jr8jwYchloLTYlZac8TPetWlO/QsDaXz3IWjcVyoCpHJuoF8hDofBN3YQPCgQI4ShCHDx9ELeSIxLw+eg0mFVGl9T06M99uy5h/U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=beagleboard.org; spf=fail smtp.mailfrom=beagleboard.org; dkim=pass (2048-bit key) header.d=beagleboard-org.20230601.gappssmtp.com header.i=@beagleboard-org.20230601.gappssmtp.com header.b=jUIdV0nw; arc=none smtp.client-ip=209.85.214.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=beagleboard.org
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=beagleboard.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="Jb4x3YP2"
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-aaec111762bso720877066b.2
-        for <devicetree-spec@vger.kernel.org>; Sat, 22 Feb 2025 16:33:17 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=beagleboard-org.20230601.gappssmtp.com header.i=@beagleboard-org.20230601.gappssmtp.com header.b="jUIdV0nw"
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2211acda7f6so115862905ad.3
+        for <devicetree-spec@vger.kernel.org>; Mon, 24 Feb 2025 22:03:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1740270796; x=1740875596; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cNdEyuFHUP3y64ux1I5nc8h7S6Yf3Be726yC4Moi4JY=;
-        b=Jb4x3YP2ME7sWRMFwyBACF8LhbJkdHAl8w0D1X86yG7lJVp57psBXpvaQuyOdr4sYA
-         JmAi9uQ5YXQMnFEOySygUFbsdjmwJ+APhVpjfGM/z6uuGMW+/Pp/XgsUS1EJUA87nCSj
-         8Usv2KO+0McyGciDaZVR57qORo2lS59USMkpY=
+        d=beagleboard-org.20230601.gappssmtp.com; s=20230601; t=1740463381; x=1741068181; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0C6viWcIiYSNNYaRW1T087dXeM5W5uNs0zNIT6rUI5M=;
+        b=jUIdV0nwCJslV3UKQoqifa6b7YC574C4mT0Yc1He7FAqcK6EAjSQrlWpZSjHYmleAf
+         IwKkM8QXQW2AmEY+comx1XwkBw4sSbCIoLO3O0vG5U0L2OKgO3lJrty3f+vUeihG5af7
+         3X3gttHpmRo7nPJysrVYb/cWOUpzDnMI9U2yXGlhgKmV1N0QCWfa/if5Z9t10GVEhbdV
+         V/TIZx5Ozo48r0jiLRW6rsITltH+Sis5ZPe7Z4iH4iEBi3456Z9bYvjwZO9pg36/zebZ
+         6MqsVqyn4AudDRvLixYhhn+gQ2Lm64EuIPl9QfbrCpZ4fgqesbV4wZKACo1PBpZxMfek
+         bVhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740270796; x=1740875596;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cNdEyuFHUP3y64ux1I5nc8h7S6Yf3Be726yC4Moi4JY=;
-        b=qactF2wjnIV8jGPoD5f+9iHo0liizm3Kb8QaUmk9LU62mNeWQHlBv0Uud+7odgu6Cx
-         Fx7KVzMtFyIHiS5xpf7zO8a2wMxi+ll2J7s9m5Zv43vqWW+QkOEzFEd8RbV1Uf4ziNhy
-         jF/yOsQ7SlZzF3en/f48rbon2/c19nHrhnhViAZ0TmZB+TEb4/vhZfxnPNQvry6kGCg5
-         V4UPmcTu4BZL7HBxliBkXjZkwOnFZV/lfOH1k2LFDAVoK+DTp76XYf89gespxqqHawe/
-         g0BjB0IbUffKeJdXX7NSfye4VvayNuhkiwmR5n0mw2AaIgZCtdoibrndf9MLynXG42HS
-         sbiA==
-X-Forwarded-Encrypted: i=1; AJvYcCV4WR1O1JlN69iGre191qEi5g1qEHTJvtn/Py6g35X9LJT7AqcRv+fQcPHeuy4nVBNPy/mpF71tA21ouObP54o=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxZIIFJhotfj4oda5goWkUJJkG/lfKj4NPKzpSr9t538ImNnnzm
-	jNGP5tfiyEo33PXd0FnZ3xYemRineOw7y+3FNS3L5pkkaFss3PMSrF30uGZ4Nk0iF+cEh97WVe4
-	MU3L+t6oAyE0OlDN5maK/fgt8kOpNEhPZNNqd
-X-Gm-Gg: ASbGncv58fDo7SGpyGaNZaPgJuOQQJqB4jNBiTrtNK++jlT03b/k94OjBFJ9UpV8G8B
-	dqp+gC+QEt4tVnvCY7IDtZfPuQJnffwMN3O/7gxHUt86zR7dYiOW6ayJjxQpzPAli/VYer3YtQY
-	V8b/+/mbjy
-X-Google-Smtp-Source: AGHT+IFy+V4++6Q9lqCfUEH28dLJotMSi/e/WBY2X2PO2HDBOQO/d7LoVoutjlu1EeeWjY7g+KNFlHBFTH6lfqXa6gU=
-X-Received: by 2002:a17:907:2d92:b0:ab8:c215:fd27 with SMTP id
- a640c23a62f3a-abc09a42e5cmr900553966b.14.1740270795951; Sat, 22 Feb 2025
- 16:33:15 -0800 (PST)
+        d=1e100.net; s=20230601; t=1740463381; x=1741068181;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0C6viWcIiYSNNYaRW1T087dXeM5W5uNs0zNIT6rUI5M=;
+        b=gVqDuaGEQWwzxshE3KM5LwXHD6novkADC2WbREV/61vxgNWy6ovuS8yZigOs/wSAuJ
+         be/1VQ0WgS368C/pPQ10cQfi7mFZXJQ5SnBS5IxwZfRWZscYj5nR6EJftuqZCqPJ9JqK
+         bE8KJaxo4UoXBtVJIRf8bhFa90JEmB30IZx1/gySF9+pmOySldX+rlZPcXM162S3dtXr
+         Wa4ge+x6vZdx3nbroRHryeKwgjsKC1soopkmWVC0FvcuBNbkrDtLN5E7Y0aGDh/fMhWY
+         1V117pI/G/oK1t/uOHK3G5t0B9flxQuWi6f6rFD94z+CM0RzJauGbE9c8MeLtKtt+qrp
+         IS0Q==
+X-Gm-Message-State: AOJu0YzLMmEhhhqEwgee4Z+B57o2CcCWYGgG2ui5+V/rw9I7ms8rcyNI
+	HyEuyed2BNq+3oFemmONEDVgfAYnUuIjItHWtLm7mP+VWWvFDQuFNZfwNmNnUQ==
+X-Gm-Gg: ASbGncsh1x4RdL3AbrVQ6xMGnakFavCLZ21zFuMG3xJONQ0mVGSys9NSeDT+tX9ar05
+	R3nyhUnWbquxg/9o0gyuBidASJEqRHI3Isu3yMJiXTPn/a/9OFT9XBRxi/bjayInagVGFOFftIj
+	/AbACVpmdaE55J9CpI70fswu6PvTW7tCPuFQ5tvOXeREKuLGDHJJmNu5FhlB65QOsztXNCBKHC8
+	3+tbybCUhk4ty0dCeePBacEEgvbb48+HamP4a+xA3cg+feXV6dkOFt/linaTHTVeqK8Z7r7tXWo
+	oHopBrRlaGBP0VrGjUoaC2cKPv2M7ixRdQ==
+X-Google-Smtp-Source: AGHT+IFsZHyMePyDFAEDX1V2tJC23BWout2U4FFdzHEEgDddVvir3P3enTMYxfwpFjOGzZQ7rxjG0A==
+X-Received: by 2002:a17:902:d4cf:b0:220:e338:8d2 with SMTP id d9443c01a7336-2219ff4ecc0mr227736165ad.21.1740463380613;
+        Mon, 24 Feb 2025 22:03:00 -0800 (PST)
+Received: from [172.16.119.211] ([103.15.228.94])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2230a0a63fdsm5999965ad.209.2025.02.24.22.02.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Feb 2025 22:02:59 -0800 (PST)
+From: Ayush Singh <ayush@beagleboard.org>
+Date: Tue, 25 Feb 2025 11:32:21 +0530
+Subject: [PATCH] Add new `export-symbols` node
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250205-bootsource-v1-1-95f4ba69ac27@cherry.de>
- <CAFLszThr_vLbhU7A0_0VTLCGW03k6NmtxLVoW7OzrtxGFertZg@mail.gmail.com>
- <fb6792e8-97c5-4d0e-8ded-e73ea3a7513c@cherry.de> <CAFLszTg9-jMk0PBBSEVT=FonzRUNJOQ5NBMdDYUihWS8NkMhbQ@mail.gmail.com>
- <fc2c6f06-98d9-49d3-9ce5-46dd675e8846@cherry.de> <5E98D444-A005-42CD-8A6A-381791237A6E@makrotopia.org>
- <07eb10ff-2791-420d-a302-a2e8c308b468@cherry.de> <Z7dItf07omjuTm0U@makrotopia.org>
- <6b6925ee-ba1a-46ed-88dd-87b3bc4b77a5@cherry.de>
-In-Reply-To: <6b6925ee-ba1a-46ed-88dd-87b3bc4b77a5@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 22 Feb 2025 17:33:04 -0700
-X-Gm-Features: AWEUYZkkJZ4zJg8XiyMqJ7ASjCPovrI_68BsEgOd7sgyWmsj1dhXJkzCPzUpe2k
-Message-ID: <CAFLszTh9UcS=3JSO5ZUTr7d6g9+dhorxJBP1--YkpsOcny7Y7g@mail.gmail.com>
-Subject: Re: [PATCH] Add 'bootsource' /chosen property
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Daniel Golle <daniel@makrotopia.org>, u-boot@lists.denx.de, 
-	Quentin Schulz <foss+dt@0leil.net>, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
-	Heiko Stuebner <heiko@sntech.de>, devicetree-spec@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250225-export-symbols-v1-1-693049e3e187@beagleboard.org>
+X-B4-Tracking: v=1; b=H4sIAOxcvWcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDIyNT3dSKgvyiEt3iytyk/JxiXWNTI5M0QyOT5BRLYyWgpoKi1LTMCrC
+ B0bG1tQBU+Y6qYAAAAA==
+X-Change-ID: 20250225-export-symbols-3524f124cd93
+To: Jason Kridner <jkridner@beagleboard.org>, 
+ Deepak Khatri <lorforlinux@beagleboard.org>, 
+ Robert Nelson <robertcnelson@beagleboard.org>, nenad.marinkovic@mikroe.com, 
+ Andrew Davis <afd@ti.com>, Geert Uytterhoeven <geert@linux-m68k.org>, 
+ Robert Nelson <robertcnelson@gmail.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Saravana Kannan <saravanak@google.com>, 
+ David Gibson <david@gibson.dropbear.id.au>, 
+ Herve Codina <herve.codina@bootlin.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Luca Ceresoli <luca.ceresoli@bootlin.com>, 
+ Grant Likely <grant.likely@secretlab.ca>, Dhruva Gole <d-gole@ti.com>
+Cc: devicetree-spec@vger.kernel.org, Ayush Singh <ayush@beagleboard.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11596;
+ i=ayush@beagleboard.org; h=from:subject:message-id;
+ bh=hCch3GGwWR/XxT0Jrz2kF8+UYBNQp2N4cw9R1PpVPM0=;
+ b=owEBbQKS/ZANAwAIAQXO9ceJ5Vp0AcsmYgBnvV0MWTS66Pywj10jMSQWZOlNWda4vYKBM7gW0
+ CR3lSw205yJAjMEAAEIAB0WIQTfzBMe8k8tZW+lBNYFzvXHieVadAUCZ71dDAAKCRAFzvXHieVa
+ dBNNEACb2Ft/qJSENN2vgUvyXgefbzTKs2uk9LrohPaJvbTyc/e5CqRzbyGGujuJQuoYybJdWme
+ V4cq748xbCZTmmqpaQgeoAY50H/W31fg1r22oozCx9PaKGkAg1iGjn3UllvayTLHS8zf5yQNWC5
+ P+okxmJfz/QJV10KJJGb5RjP46/V5CaK66rdjD4RJBaw1WJz7KJ1jrhl8o2hqiWy64E9AlhBvpU
+ 04lodDpVly6nMrwteODuOQaSHTujOhbUnNqZAAp8sAfX3LmuaDvBBr0KkrX+7bYiq1jjbIKhb8B
+ tmGtUv0b5eKaC9GE5PUymYjq/fVU95EQeEv+H5bme2nxlAvowqUsHx9p5dSVplPDMKXMvH0kGqv
+ A/2s9h0QFLN7kxArI/AAvvOk9c6Mtj4o9tpBGX89/WGmMZswBukChrTmFbr50mBfkILgp6CNqFu
+ 0hN8jqzMSICHUsRTXGSkVJ5+FPIprvoJ6hqBx3ta0mOotqbopH7T/KzYX1XtfDn5+ByGJNVKn4H
+ 4yYd79ryJ4hVmu54OeHFqk9nQiJp7c0hrL8bOpGY0xsG+YEcGZAW+vgSyACPJlFT6kS3B4WFa/c
+ zGMbMb4u8QOn8ZSJSejbHGIXvHG4ngTnn01OvXdYgrNG2QCKmA2MyGX3IHEF9kFH0oQIyhwzCnI
+ 1GdD/sF0os1QdAQ==
+X-Developer-Key: i=ayush@beagleboard.org; a=openpgp;
+ fpr=DFCC131EF24F2D656FA504D605CEF5C789E55A74
 
-Hi Quentin,
+`export-symbols` is designed to be a local replacement of global
+`__symbols__` allowing nodes to define aliases to nodes in a tree, which
+will take precedence over the aliases defined in the global `__symbols__`.
 
-On Thu, 20 Feb 2025 at 08:55, Quentin Schulz <quentin.schulz@cherry.de> wro=
-te:
->
-> On 2/20/25 4:22 PM, Daniel Golle wrote:
-> > On Thu, Feb 20, 2025 at 04:04:27PM +0100, Quentin Schulz wrote:
-> >> Hi Daniel,
-> >>
-> >> On 2/15/25 4:13 PM, Daniel Golle wrote:
-> >>> Hi Quentin,
-> >>>
-> >>> On 10 February 2025 16:25:23 UTC, Quentin Schulz <quentin.schulz@cher=
-ry.de> wrote:
-> >>>> [...]
-> >>>> What I can say from glancing at the code is that for Rockchip they d=
-o the following:
-> >>>>
-> >>>> Register a bootsource type (e.g. MMC, SPI, I2C, USB, etc...), a boot=
-source instance of that type (e.g. MMC0, SPI3, I2C7, ...). The mapping betw=
-een what the ROM says the device is vs what it is in the DT is done in thei=
-r Barebox-specific DT via this custom prop in /chosen:
-> >>>>
-> >>>> barebox,bootsource-<bootsourcetype><bootsourceinstance> =3D &label; =
- # =C3=A0-la /aliases
-> >>>>
-> >>>> This gets read and resolved and then inserted as
-> >>>>
-> >>>> /chosen/bootsource =3D "/some/path"
-> >>>>
-> >>>> into the kernel DT.
-> >>>
-> >>> We are doing something quite similar downsream at openwrt.org for Med=
-iaTek router SoCs, see for example:
-> >>>
-> >>> https://github.com/openwrt/openwrt/blob/main/package/boot/uboot-media=
-tek/patches/310-mt7988-select-rootdisk.patch
-> >>>
-> >>> https://github.com/openwrt/openwrt/blob/main/target/linux/mediatek/fi=
-les-6.6/arch/arm64/boot/dts/mediatek/mt7988a-bananapi-bpi-r4.dtsi#L32
-> >>>
-> >>> https://github.com/openwrt/openwrt/blob/main/target/linux/mediatek/fi=
-les-6.6/arch/arm64/boot/dts/mediatek/mt7988a-bananapi-bpi-r4-emmc.dtso#L60
-> >>>
-> >>>
-> >>> Of course we could use the standard "bootsource" property instead, bu=
-t having a way to reference the volume or partition used as rootfs instead =
-of just passing a referencd to a physical device is advantagous...
-> >>>
-> >>
-> >> If I understood correctly, your prebuilt DT would have
-> >>
-> >> / {
-> >>      chosen {
-> >>          rootdisk-emmc =3D <&rootfs_in_emmc>;
-> >>          rootdisk-nor =3D <&rootfs_in_nor>;
-> >>          rootdisk-sd =3D <&rootfs_in_sd>;
-> >>          rootdisk-spim-nand =3D <&rootfs_in_ubi>;
-> >>      };
-> >> };
-> >>
-> >> and then at runtime you would populate /chosen/rootdisk property with =
-the
-> >> "rootdisk-<medium>" string with <medium> matching whatever the BootROM
-> >> reports. I assume the goal is to somehow make sure that the rootfs is =
-loaded
-> >> from the same storage medium as the one used by the BootROM to load th=
-e
-> >> first stage bootloader?
-> >>
-> >> Can you confirm I did get that right?
-> >
-> > Yes, that's more or less correct. It's to point Linux to the device or
-> > partition of the uImage from which U-Boot has loaded the Linux kernel.
-> >
-> > Note that for OpenWrt we prefer to store the uImage.FIT inside a raw
-> > block or flash partition, or UBI volume, rather than as a file inside a
-> > filesystem.
-> >
-> > This information is then used for two things:
-> >
-> >   - Mount the root filesystem
-> >     We use a read-only squashfs which is part of the uImage.FIT, it ess=
-entially
-> >     has the same purpose of an initramfs on other distributions, but mo=
-unting
-> >     squashfs is much faster then decompressing the whole initramfs at o=
-nce, and
-> >     it doesn't need to remain in RAM permanently.
-> >
-> >   - Know where an updated uImage.FIT should be written to.
-> >
->
-> OK, so everything in a FIT image and you store the location and storage
-> medium where it was loaded from so that you can update it. Makes sense.
->
-> I guess we could have bootstd/bootmeths populate another property that
-> specifies which medium and partition was used to load the kernel/FDT and
-> initramfs. I don't have much experience with that aside from
-> extlinux.conf and that wouldn't be appropriate I believe especially if
-> you used root=3DPARTLABEL=3D or a UUID in your kernel command line as the=
-re
-> could be multiple ones with the same there (e.g. we have the exact same
-> image you can flash on SD card and eMMC and the probe order isn't
-> deterministic in the kernel I believe).
->
-> Don't want to get sidetracked too far though, I don't think it is
-> incompatible with or related to /chosen/bootsource usage?
->
-> >>
-> >> I was specifically NOT aiming /chosen/bootsource to represent the stor=
-age
-> >> medium used to load the kernel or rootfs, but rather the medium that w=
-as
-> >> used by the BootROM to load the first stage of the bootloader that is
-> >> user-flashable/uploadable.
-> >>
-> >> You could very well decide to load/mount your rootfs from SD even if t=
-he
-> >> BootROM loaded the first stage bootloader from SPI-NOR. This property =
-is
-> >> about representing the latter, not the former and not merging the mean=
-ing of
-> >> both into one.
-> >
-> > Of course, especially for general purpose Linux which would not fit int=
-o
-> > NOR flash that's the only option.
-> >
-> > In case of OpenWrt we usually do want to load kernel (and rootfs) from
-> > the same device also used by the BootROM for booting. OpenWrt can easil=
-y
-> > fit onto 16 MiB of NOR flash, including bootloader, EEPROM for MAC
-> > addresses and WiFi calibration as well as some megabytes for user data.
-> >
->
-> We (Cherry/Theobroma) have some modified behavior for bootstd to favor
-> booting from the same storage medium as U-Boot proper (so NOT
-> necessarily what is reported by /chosen/bootsource) instead of
-> defaulting to boot from SD card first and then eMMC. See
-> https://elixir.bootlin.com/u-boot/v2025.01/source/board/theobroma-systems=
-/common/common.c#L11.
-> So I very much understand your usecase :)
->
-> FYI, U-Boot SPL favors for loading U-Boot proper the same storage medium
-> as was used by the BootROM (so that would be the same as reported by
-> /chosen/bootsource here!) and this is modeled with the "same-as-spl"
-> string in /chosen/u-boot,spl-boot-order property. I was thinking of
-> adding a "same-as-proper" boot target for bootstd so I can remove my
-> custom setup_boottargets. This was also somehow asked by at least one
-> person over IRC some months ago, so maybe I'm not the only one with this
-> usecase :) Haven't spent time looking into it and I may never have time
-> to do so, take this as a brain dump here :)
->
->
-> > To satisfy both needs, I reckon we would need to formally introduce an
-> > OpenWrt boot-method to U-Boot, and then U-Boot could leave a mark in
-> > /chosen where the uImage.FIT was loaded from, independently of the
-> > BootROM which may differ?
-> >
->
-> Yes, I don't think both could or should be represented by the same proper=
-ty.
->
-> To sum up, specifically for U-Boot:
->
-> BootROM loading VPL/TPL/SPL -> /chosen/bootsource (what this patch is
-> suggesting)
-> VPL loading SPL -> don't know, haven't checked the VBE series yet :(
-> maybe Simon has something in mind?
-> SPL loading U-Boot proper -> /chosen/u-boot,spl-boot-device
-> U-Boot proper loading kernel/fit/... -> nothing at the moment
->
-> Forgot to thank you for sharing what OpenWRT does :)
+Having a way to allow node local aliases helps in usecases such as
+connectors and addon-boards, by allowing decoupling of
+overlays/devicetree nodes of addon-board from the base connector.
 
-Thanks for all the details. It seems fine to me. Perhaps you could
-copy some of the text above into your binding so there is more detail?
+Signed-off-by: Ayush Singh <ayush@beagleboard.org>
+---
+This patch series follows the initial RFC [9] sent a few weeks ago. I
+will be reiterating the RFC here for anyone who might be seeing this the
+first time, since there was not much feedback in that thread.
 
-Regards,
-Simon
+The patch series adds export-symbols to base devicetree specification to
+allow for support of base board + runtime connector setups using devicetree
+overlays. The idea was actually proposed in the linux kernel mailing list
+by Herve Codina [0] with the devicetree schema and linux kernel
+implementation. Initial implementations for devicetree compiler [1] and
+fdtoverlay [2] have also been sent to the mailing lists.
+
+Introduction
+*************
+
+There are a lot of setups, especially in embedded systems that consist of
+a base connector and addon boards that can be connected to this connector.
+Here are some examples:
+- MikroBus
+- GE SUNH
+- BeagleCapes, etc
+
+Some of these connectors have runtime detection capabilities (GE SUNH),
+while some do not (MikroBUS without 1-wire EEPROM). The goal is to decouple 
+the connector on base device tree with the overlay for addon boards. This
+will allow having 1 overlay for each board that would work with connector
+devicetree on any board.
+
+One of the issue was referencing resources available on the base board
+device tree from the addon overlay device tree. Using a nexus node [3]
+helps decoupling resources and avoid the knowledge of the full base board
+from the overlay. Indeed, with nexus node, the overlay need to know only
+about the nexus node itself.
+
+For instance, suppose a connector where a GPIO is connected at PinA. On the
+base board this GPIO is connected to the GPIO 12 of the SoC GPIO controller.
+
+The base board can describe this GPIO using a nexus node:
+
+    soc_gpio: gpio-controller {
+      #gpio-cells = <2>;
+    };
+
+    connector1: connector1 {
+        /*
+         * Nexus node for the GPIO available on the connector.
+         * GPIO 0 (Pin A GPIO) is connected to GPIO 12 of the SoC gpio
+         * controller
+         */
+        #gpio-cells = <2>;
+        gpio-map = <0 0 &soc_gpio 12 0>;
+        gpio-map-mask = <0xf 0x0>;
+        gpio-map-pass-thru = <0x0 0xf>;
+    };
+
+The connector pin A GPIO can be referenced using:
+
+  <&connector1 0 GPIO_ACTIVE_HIGH>
+
+This implies that the overlay needs to know about exact label that
+references the connector. This label can be different on a different board
+and so applying the overlay could fail even if it is used to describe the
+exact same addon board. Further more, a given base board can have several
+connectors where the exact same addon board can be connected. In that case,
+the same overlay cannot be used on both connector. Indeed, the connector
+labels have to be different.
+
+The `export-symbols` node solves this issue.
+
+The idea of export-symbols is to have something similar to the global 
+`__symbols__` node but local to a specific node. Symbols listed in this
+export-symbols are local and visible only when an overlay is applied on a
+node having an export-symbols subnode.
+
+Note: `export-symbols` properties differ from __symbols__ since they are
+phandles, not path references. This is much easier to work with in
+overlays as described in [7].
+
+Using export-symbols, our example becomes:
+
+    soc_gpio: gpio-controller {
+      #gpio-cells = <2>;
+    };
+
+    connector1: connector1 {
+        /*
+         * Nexus node for the GPIO available on the connector.
+         * GPIO 0 (Pin A GPIO) is connected to GPIO 12 of the SoC gpio
+         * controller
+         */
+        #gpio-cells = <2>;
+        gpio-map = <0 0 &soc_gpio 12 0>;
+        gpio-map-mask = <0xf 0x0>;
+        gpio-map-pass-thru = <0x0 0xf>;
+
+        export-symbols {
+          connector = <&connector1>;
+        };
+    };
+
+With that export-symbols node, an overlay applied on connector1 node can
+have the symbol named 'connector' resolved to connector1. Indeed, the 
+`export-symbols` node available at connector1 node is used when the overlay
+is applied. If the overlay has an unresolved 'connector' symbol, it will be
+resolved to connector1 thanks to export-symbols.
+
+Our overlay using the nexus node can contains:
+
+   node {
+      foo-gpio = <&connector 0 GPIO_ACTIVE_HIGH>;
+   };
+
+It used the GPIO 0 from the connector it is applied on.
+
+A board with two connectors can be described with:
+
+    connector1: connector1 {
+        ...
+        export-symbols {
+          connector = <&connector1>;
+        };
+    };
+
+    connector2: connector2 {
+        ...
+        export-symbols {
+          connector = <&connector2>;
+        };
+    };
+
+In that case, the same overlay with unresolved 'connector' symbol can be
+applied on both connectors and the correct symbol resolution (connector1
+or connector2) will be done.
+
+Alternatives
+*************
+
+Some alternative approaches that were considered:
+
+1. Using aliases.
+
+   Currently, it is not possible to update aliases in device tree overlays.
+   I sent a patch a few weeks ago to add this support [4]. However, as was
+   outlined by Rob, this can break existing drivers that used the unused
+   indexes for devices not present in the aliases list.
+
+2. Add support for phandles in `__symbols__`
+
+   This has been discussed in the following patch series [5]. However,
+   since there is no way to distinguish between strings and phandles in
+   devicetree (everything is bytestring), the type guessing is awkward.
+   Also, the export-symbol solution is much more flexible than extending
+   the old `__symbols__` node.
+
+3. Add support for path reference resolution to overlays
+
+   An approach using `__symbols__` was proposed by Andrew Davis [6].
+   However, currently, it is difficult to support path reference resolution
+   support to overlays [7]. This limitation makes it difficult to support
+   connector chaining (MikroBUS -> Grove -> Addon board), which is possible
+   in some connectors.
+
+Some other benefits to export-symbols
+**************************************
+
+1. No need to enable generation of all symbols in base devicetree
+   Since the nodes used by connector are referenced by properties in
+   `export-symbols`, the symbols table entries for these nodes will be
+   generated, even if symbols generation is not enabled globally. This
+   can help save space, specially in constrained devices.
+
+2. Enables scoping symbol resolution
+   Does not pollute the global symbols, and can be useful outside addon
+   board setups.
+
+Why add to specification?
+**************************
+
+I would like the ability to share the addon board overlays with
+ZephyrRTOS, which also has boards that support MikroBUS (like BeagleConnect
+Freedom [8]) and U-Boot. So it would make more sense if this node is part
+of the specification instead of linux specific.
+
+[0]: https://lore.kernel.org/all/20241209151830.95723-1-herve.codina@bootlin.com/
+[1]: https://lore.kernel.org/all/20250110-export-symbols-v1-1-b6213fcd6c82@beagleboard.org/
+[2]: https://lore.kernel.org/devicetree-compiler/86a7a08c-d81c-43d4-99fb-d0c4e9777601@beagleboard.org/T/#t
+[3] https://github.com/devicetree-org/devicetree-specification/blob/v0.4/source/chapter2-devicetree-basics.rst#nexus-nodes-and-specifier-mapping
+[4]: https://lore.kernel.org/all/20241110-of-alias-v2-0-16da9844a93e@beagleboard.org/T/#t
+[5]: https://lore.kernel.org/devicetree-compiler/44bfc9b3-8282-4cc7-8d9a-7292cac663ef@ti.com/T/#mbbc181b0ef394b85b76b2024d7e209ebe70f7003
+[6]: https://lore.kernel.org/lkml/20240702164403.29067-1-afd@ti.com/
+[7]: https://lore.kernel.org/devicetree-compiler/6b2dba90-3c52-4933-88f3-b47f96dc7710@beagleboard.org/T/#m8259c8754f680b9da7b91f7b7dd89f10da91d8ed
+[8]: https://www.beagleboard.org/boards/beagleconnect-freedom
+[9]: https://lore.kernel.org/devicetree-spec/edaa1378-c871-4c55-ab99-21ef6656f35a@beagleboard.org/T/#mc339a0ae0c886ca46da0f7bb679518fa8b0b3007
+
+Best Regards,
+Ayush Singh
+---
+ source/chapter3-devicenodes.rst | 89 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 89 insertions(+)
+
+diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenodes.rst
+index 8080321d6e60d6b1e86c81af86c6850246a0223b..c525eec7c5cd30a5ba933b4c0592c6a16cb14f6a 100644
+--- a/source/chapter3-devicenodes.rst
++++ b/source/chapter3-devicenodes.rst
+@@ -988,3 +988,92 @@ each with their own on-chip L2 and a shared L3.
+             };
+         };
+     };
++
++``*/export-symbols`` node
++-------------------------
++A devicetree node may have an export-symbols child node
++(`*/export-symbols`) that defines one of more export-symbol properties.
++
++Each property of the `export-symbols` node defines an alias local to it's
++parent. The property name specifies the alias name. The property value
++specifies the phandle to a node in the devicetree. For example, the
++property ``serial0 = <&main_uart0>`` defines ``serial0`` as the local alias
++to ``main_uart0``.
++
++Alias names shall be lowercase text strings of 1 to 31 characters from the
++following set of characters.
++
++.. tabularcolumns:: | c p{8cm} |
++.. table:: Valid characters for alias names
++
++   ========= ================
++   Character Description
++   ========= ================
++   0-9       digit
++   a-z       lowercase letter
++   \-        dash
++   ========= ================
++
++An alias value is a phandle to a node in the devicetree.
++
++Resolution of nodes using `export-symbols` follows the following rules
++depending on the context:
++
++No target involved
++~~~~~~~~~~~~~~~~~~~
++Properties of parent node use symbols from ``export-symbols``, but none of
++the subnodes will be able to use them. For example, the following code will
++resolve properly:
++
++.. code-block:: dts
++
++    / {
++        parent {
++            led = <&local_gpio 0 GPIO_ACTIVE_HIGH>;
++
++            export-symbols {
++                local_gpio = <&gpio0>;
++            };
++        };
++    }
++
++However, the code below is not valid:
++
++.. code-block:: dts
++
++    / {
++        parent {
++            child {
++                /* child node cannot access export-symbols */
++                led = <&local_gpio 0 GPIO_ACTIVE_HIGH>;
++            };
++
++            export-symbols {
++                local_gpio = <&gpio0>;
++            };
++        };
++    }
++
++Target is used in the base devicetree or overlays
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++Any node/subnode property is free to use symbols from ``export-symbols``
++defined in the parent. To provide a concrete exampe, the following is
++valid:
++
++.. code-block:: dts
++
++    / {
++        parent {
++            export-symbols {
++                local_gpio = <&gpio0>;
++            };
++        };
++    }
++
++    &parent {
++        led = <&local_gpio 0 GPIO_ACTIVE_HIGH>;
++
++        child {
++            led = <&local_gpio 0 GPIO_ACTIVE_HIGH>;
++        };
++    };
+
+---
+base-commit: 5688e1c0b961d2ca5a32e3b624a9f4a9b433184f
+change-id: 20250225-export-symbols-3524f124cd93
+
+Best regards,
+-- 
+Ayush Singh <ayush@beagleboard.org>
+
