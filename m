@@ -1,82 +1,90 @@
-Received: from sipsolutions.net (s3.sipsolutions.net [168.119.38.16])
+Received: from ixit.cz (ip-89-177-23-149.bb.vodafone.cz [89.177.23.149])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B247419C569;
-	Wed, 26 Mar 2025 23:14:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=168.119.38.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B88E322B;
+	Fri, 28 Mar 2025 19:52:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=89.177.23.149
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1743030885; cv=none; b=PfajpzEE6v2NbpqOm31jpN943o+ApTPY/k2OLVfSbPujsI5Ovs0nKfBgsuC28paat0xgs/PJ1E6yyUFRakJyCuToqgTENUuNNzaf/LPjHbvSZVByjFDRnltViLKV0vmeAkgKrAHCou66lb0supL6njCK4/za+t4kffPXjSxreGY=
+	t=1743191554; cv=none; b=gYnwLt0+02ck4fuz17ADbcvxonxE+X3ot3mkuUiSfBha1YQEmO3KKDsY9OFKrwyF7Sla22SnL+2tJo7r4LU1Zojlj5nEZcmh+jmZchViLzPorwh1KBspomccwjeAWqu3ZWaid+Lkb8fco/D2zFsrewtGh9gvBEWimomODKbvEZI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1743030885; c=relaxed/simple;
-	bh=NRxhzX97zbLNqsKqNz31eZbURDBwCrCNRXlfK0yFU6I=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=X07cbKcRkgNXZ4Z+hTVCUWUSKHIIv7CRyns7+V7attsWVq4nXyhyggwMJkLSIj9PdMf8shaxXt/AZw4LdNzuSjil5sYe8yVLtzrA5dyH2dkFIGbB3e1rErmxjFA92nbLln4WJ/VSbL02sGMdEqg5g6TDXJd0+k46GPVLA6bvIBU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sipsolutions.net; spf=pass smtp.mailfrom=sipsolutions.net; dkim=pass (2048-bit key) header.d=sipsolutions.net header.i=@sipsolutions.net header.b=x/EEL1ja; arc=none smtp.client-ip=168.119.38.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sipsolutions.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sipsolutions.net
+	s=arc-20240116; t=1743191554; c=relaxed/simple;
+	bh=YaO70SFlWiugUmK0UvlOIGdArpJwA4i3j0CMMhbaJtg=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
+	 MIME-Version:Content-Type; b=FfEbr4oM9gpShlR+xtvO5WCfamDlXLDiMPF9CtcUANxMn+6zwVv3JOCWOdL/rZOpG1T0OtC6nezvbDfx6LlY3sV7bs4/Wl7ZH3IFNGnIJHCyOqswBY4w5477kzVUBoP+jlX20f8ljcOdlo+rwjl710uAaQWx6tjJMvaA0D/5lh8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=DsWrrv4p; arc=none smtp.client-ip=89.177.23.149
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sipsolutions.net header.i=@sipsolutions.net header.b="x/EEL1ja"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=sipsolutions.net; s=mail; h=MIME-Version:Content-Transfer-Encoding:
-	Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
-	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-To:
-	Resent-Cc:Resent-Message-ID; bh=NRxhzX97zbLNqsKqNz31eZbURDBwCrCNRXlfK0yFU6I=;
-	t=1743030883; x=1744240483; b=x/EEL1ja1n0FpYr0sDGlWFxeEgs7/QwJVuDntw0gzrfhavm
-	mb5qlkdKrYgxZ+Weo3yTMSmBLwUVe606Nnpo1KULQAIw7pAau46NulauJfYGjOZ/qMoHD+n60SVn+
-	Z5N0hhO13cVWFlGy78HdVLDcEeX+FfKc+rIseP9l4ftFl8SoPTh2OixyT33BBqqmBc5+H/ntLJ7++
-	8hBeKlf/89k0AnMkBHc+JO58m1CbSObjQpHIGgSltZBA/LGfqzzPpTC/TIr3zr0snviokudTAynh2
-	/2mhiMK/OfzVxFnxduw+FI62EC7I1xexuhuwuqdFLpky39MO9pHzK+Dvyl3Zfa2Q==;
-Received: by sipsolutions.net with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.98)
-	(envelope-from <johannes@sipsolutions.net>)
-	id 1txZx1-00000006USq-3r9X;
-	Thu, 27 Mar 2025 00:14:24 +0100
-Message-ID: <69bd300d79f7f6317a964030930252b307b85007.camel@sipsolutions.net>
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="DsWrrv4p"
+Received: from [127.0.0.1] (78-80-113-104.customers.tmcz.cz [78.80.113.104])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id C7768166734;
+	Fri, 28 Mar 2025 20:52:20 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1743191541;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=YaO70SFlWiugUmK0UvlOIGdArpJwA4i3j0CMMhbaJtg=;
+	b=DsWrrv4pATyhBjy330V52YVR7/U6IEbdIN0bLmMqS7u0ypYW1s9HicPipP+Ea+DVpEzYEo
+	J4KpYiRjNreuP0JfptcLoB5gKSZWxU1UlErJQiedYNLxo97rB6/s3m9O76C0MBhROW00Q+
+	vR9LNUtjnlr3vUIDJsJfqMoYoxOISS4=
+Date: Fri, 28 Mar 2025 19:52:18 +0000
+From: David Heidelberg <david@ixit.cz>
+To: Johannes Berg <johannes@sipsolutions.net>, Rob Herring <robh@kernel.org>
+CC: Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Mailing List <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>,
+ Lorenzo Bianconi <lorenzo@kernel.org>, van Spriel <arend@broadcom.com>,
+ =?ISO-8859-1?Q?J=E9r=F4me_Pouiller?= <jerome.pouiller@silabs.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Andy Gross <agross@kernel.org>,
+ Mailing List <devicetree-spec@vger.kernel.org>, netdev@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-wireless@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ Janne Grunau <j@jannau.net>
 Subject: Re: [PATCH v5 0/5] dt-bindings: net: Add network-class.yaml schema
-From: Johannes Berg <johannes@sipsolutions.net>
-To: David Heidelberg <david@ixit.cz>, Rob Herring <robh@kernel.org>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
- <davem@davemloft.net>,  Eric Dumazet <edumazet@google.com>, Jakub Kicinski
- <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,  Krzysztof Kozlowski	
- <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Mailing List	
- <devicetree-spec-u79uwXL29TY76Z2rM5mHXA@public.gmane.org>, Lorenzo Bianconi
-	 <lorenzo@kernel.org>, van Spriel <arend@broadcom.com>, 
- =?ISO-8859-1?Q?J=E9r=F4me?= Pouiller	 <jerome.pouiller@silabs.com>, Bjorn
- Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- Andy Gross <agross@kernel.org>, Mailing List	
- <devicetree-spec@vger.kernel.org>, netdev@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-wireless@vger.kernel.org, linux-arm-msm@vger.kernel.org, Janne Grunau
-	 <j@jannau.net>
-Date: Thu, 27 Mar 2025 00:14:19 +0100
-In-Reply-To: <4B465FA3-E6B5-4EB1-A712-0C8874402FCE@ixit.cz>
-References: <20250324-dt-bindings-network-class-v5-0-f5c3fe00e8f0@ixit.cz>
-	 <3452b67752228665fa275030a7d8100b73063392.camel@sipsolutions.net>
-	 <CAL_JsqLv9THitHzj8nj7ppCp-aKn010-Oz=s+AUNKOCoDmBnbQ@mail.gmail.com>
-	 <bfb7433131cb9aeebc75666f86a67a6c71521229.camel@sipsolutions.net>
-	 <4B465FA3-E6B5-4EB1-A712-0C8874402FCE@ixit.cz>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.54.3 (3.54.3-1.fc41) 
+In-Reply-To: <69bd300d79f7f6317a964030930252b307b85007.camel@sipsolutions.net>
+References: <20250324-dt-bindings-network-class-v5-0-f5c3fe00e8f0@ixit.cz> <3452b67752228665fa275030a7d8100b73063392.camel@sipsolutions.net> <CAL_JsqLv9THitHzj8nj7ppCp-aKn010-Oz=s+AUNKOCoDmBnbQ@mail.gmail.com> <bfb7433131cb9aeebc75666f86a67a6c71521229.camel@sipsolutions.net> <4B465FA3-E6B5-4EB1-A712-0C8874402FCE@ixit.cz> <69bd300d79f7f6317a964030930252b307b85007.camel@sipsolutions.net>
+Message-ID: <42F3BE66-15C3-4C95-8133-2EA19E54B32F@ixit.cz>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-malware-bazaar: not-scanned
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Hi Johannes,
+
+from the functionality standpoint this bindings do not change anything=2E
+
+From=20validation point, if the `make dtbs_check` will pass as expected, it =
+should yield only better results for integrators and developers=2E=20
+
+Thou if you want to postpone it for 6=2E16, I'll understand=2E
+
+Thank you
+David
 
 On Wed, 2025-03-26 at 23:08 +0000, David Heidelberg wrote:
-> > I can do that, but I suppose it's 6.16 material at this point.
+> > I can do that, but I suppose it's 6=2E16 material at this point=2E
 >=20
-> Hi Johannes.=20
+> Hi Johannes=2E=20
 >=20
-> I assume you meant 6.15?=20
+> I assume you meant 6=2E15?=20
 
-No. 6.15 merge window just opened.
+No=2E 6=2E15 merge window just opened=2E
 
-> This patchset should mainly clarify where these properties can be used an=
-d address incorrect warnings regarding device-tree verification.=20
+> This patchset should mainly clarify where these properties can be used a=
+nd address incorrect warnings regarding device-tree verification=2E=20
 
 I'm not really convinced that makes it a bugfix for the rc series
 though?
