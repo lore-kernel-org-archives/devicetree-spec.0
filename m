@@ -1,60 +1,99 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C93587D07D
-	for <devicetree-spec@vger.kernel.org>; Mon, 31 Mar 2025 23:40:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E32B132103;
+	Tue,  1 Apr 2025 08:10:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1743464425; cv=none; b=qFSNdxy/F9oen/4sZpseGzKy/oqYSnfb8TurYUhPkySthf2gLsDIM1/EhbFszyMOAyHtdGdMFecewIRMzDm6a7/lzKSk0VDGu38a6vUbpeQELtpuakabn1fhlaXdBoUze+ekkTTgGjJAKds+ElO4lfDIvOVbrfRbw1ZWIp0giT0=
+	t=1743495062; cv=none; b=esyUqqXdhkzZBGH71ng4PWQTt8P3UNIVx9XzYz5FbpTgRYVp+m10CLyBesqHeGOg1pe+pNiwOfPMK9mgc8BSvGRkvPpxdZAo91wqbpdFsQw0Ty7ir86QpzEnX7vpfn3V+j5mT9/wywdBilF1LM73vy+2PAieHg/9XTvVPbm9HnQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1743464425; c=relaxed/simple;
-	bh=8lrWvIjsftzkEJETrErCTRH2OB7GpJFpZFonzyS4oYI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WgXhUI8K6b+OpfghnSRGNTXOET+8DWrXEokkf1GlPg7PPFFUB3Fg3OzREdJvWsOFNuXTyUivcCzxOLzawD3wUSimMPJ4oaKy5WcTuh1X5LwmKiuvpxIxQQTGn0z8MzRjqAFCMDAWLbtm8Lt6TaXzBrCZmgRo8UFesM1vNOXqg2s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Sf8srWPC; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1743495062; c=relaxed/simple;
+	bh=BAOOCyDh7128Gf6xKr/E8pz3C5wmnjftErUM/zHUJPA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=eG1Jh4Rua3AR3GFMpkn7GRKztkOLsbz8STskyPXtbPWGyyJyWOCNysdh9sWHzmG/6A2Wou1ibD0HGOThG05Fo08k27MQnOsoPEplxTqLlcA1vrnJIOsB/kOESkuLMvKDn4pFjEatE0iAncQFfTOw/B2msuHIcq5oGW/W+09zMiE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=JhwsZLh8; arc=none smtp.client-ip=217.70.183.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Sf8srWPC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D902C4CEE3;
-	Mon, 31 Mar 2025 23:40:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1743464425;
-	bh=8lrWvIjsftzkEJETrErCTRH2OB7GpJFpZFonzyS4oYI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Sf8srWPCnc1nYAJerqLOVDN9Uc9lOSC+6/ot1BQHIBDyvUOSDzhjLA79N0Z4eMcNN
-	 UwmslzsH7FfeQsYiPE+qAt+f0PKsA6GrP5z486Mn6LZzv6QUICs0xZ/Ou2ZIq4MXnC
-	 WKKg+4gw0+w4i4nYVSjZ1S7cISGMuS2N9olPZYV+x81IIWq8OfSISlmszd6tqXoC/g
-	 /HQXKiHy0oONHeFNh9/76yN5OjlUY2soYTkGFIE5eIL8N+jOYuzHLSxHU3nKVePj7q
-	 MDfxOZm214QjElVYWQDadkL+jE1A885z32SHThnha2G437MX7BaTBaCIbgo9++8AEn
-	 E9vsc4bGg9eoA==
-Date: Mon, 31 Mar 2025 18:40:24 -0500
-From: Rob Herring <robh@kernel.org>
-To: Raphael Gallais-Pou <rgallaispou@gmail.com>
-Cc: Grant Likely <grant.likely@secretlab.ca>,
-	devicetree-spec@vger.kernel.org
-Subject: Re: [PATCH] Add display-controller to list of generic node names
-Message-ID: <20250331234024.GA2838596-robh@kernel.org>
-References: <20250331200224.41184-1-rgallaispou@gmail.com>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="JhwsZLh8"
+Received: by mail.gandi.net (Postfix) with ESMTPA id 16BE5433F1;
+	Tue,  1 Apr 2025 08:10:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1743495052;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=PRCHZq5QRln/HfzZm2RI8VZaUdthL6BYmvZIMg3bZ7g=;
+	b=JhwsZLh8tjVeKmy4hx5iZ52Irb+c2Nd9NamhkJOEDXHP1BURrGqObazEOHDROMbqxzbOJI
+	lnLTdv2RyzBop3+VRtcGJ9azkuL3/nOxnXZBmxaSxuhvqCBIp7bVEArriosOTR8tBMMTO0
+	LsY+seS/Cgml2RLiMXVTby8YsSKmh8r82tDrvU2dCCTvP48f7FB+r+GOUHHF/VwLSIpeo4
+	hoOH9v6KKX2v73SCNJ1uxEYEOvmYML81+7O5XhwkD79p4Ns+08vbXjvRuNp0gwWdZLreX9
+	zRP0aV8f9n30ZjmQMdJyP4sFsx/dOnY54l32mQFkNtac9T3VmWAa+FH1MMBPvQ==
+From: Herve Codina <herve.codina@bootlin.com>
+To: Wolfram Sang <wsa+renesas@sang-engineering.com>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: linux-i2c@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	devicetree-spec@vger.kernel.org,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+	Herve Codina <herve.codina@bootlin.com>
+Subject: [PATCH 0/2] i2c: Introduce I2C bus extensions
+Date: Tue,  1 Apr 2025 10:10:38 +0200
+Message-ID: <20250401081041.114333-1-herve.codina@bootlin.com>
+X-Mailer: git-send-email 2.49.0
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250331200224.41184-1-rgallaispou@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddukedvvdelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepjfgvrhhvvgcuvehoughinhgruceohhgvrhhvvgdrtghoughinhgrsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeelteduffeltddvtdffgedugfejffeggeekheejiefggfeivefhkeffheehheeiueenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecukfhppedvrgdtudemvgdtrgemvdegieemjeejledtmedviegtgeemvgdvvdemiedtfegumeehkegrnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdgrtddumegvtdgrmedvgeeimeejjeeltdemvdeitgegmegvvddvmeeitdefugemheekrgdphhgvlhhopehlohgtrghlhhhoshhtrdhlohgtrghlughomhgrihhnpdhmrghilhhfrhhomhephhgvrhhvvgdrtghoughinhgrsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeduvddprhgtphhtthhopeifshgrodhrvghnvghsrghssehsrghnghdqvghnghhinhgvvghrihhnghdrtghomhdprhgtphhtthhopegrnhguihdrshhhhihtiheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprhhos
+ ghhsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehkrhiikhdoughtsehkvghrnhgvlhdrohhrghdprhgtphhtthhopegtohhnohhrodgutheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqihdvtgesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopeguvghvihgtvghtrhgvvgesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehlihhnuhigqdhkvghrnhgvlhesvhhgvghrrdhkvghrnhgvlhdrohhrgh
+X-GND-Sasl: herve.codina@bootlin.com
 
-On Mon, Mar 31, 2025 at 10:02:24PM +0200, Raphael Gallais-Pou wrote:
-> The device-tree specification does not present a generic node name for
-> hardware compositors.  Several names are used, but 'display-controller'
-> is the most straight-forward name to describe such device.
-> 
-> Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
-> ---
->  source/chapter2-devicetree-basics.rst | 1 +
->  1 file changed, 1 insertion(+)
+Hi,
 
-Applied, thanks.
+An I2C bus can be wired to the connector and allows an add-on board to
+connect additional I2C devices to this bus.
 
-Rob
+Those additional I2C devices could be described as sub-nodes of the I2C
+bus controller node however for hotplug connectors described via device
+tree overlays there is additional level of indirection, which is needed
+to decouple the overlay and the base tree.
+
+This decoupling is performed thanks to the I2C bus extension feature
+which is introduced and detailed in patch 2 of this series.
+
+The implementation related to I2C bus extension has been already
+proposed as an RFC in Linux [0]. The missing part in this RFC was the
+binding.
+
+This binding related to I2C controller is not available in the Linux
+repository but in dt-schema repository and so, this series update the
+I2C controller binding to introduce the feature:
+  - Patch 1 is a fix avoid a wrong matching I2C bus node name.
+  - Patch 2 is the I2C bus extension itself.
+
+[0] https://lore.kernel.org/all/20250205173918.600037-1-herve.codina@bootlin.com/
+
+Best regards,
+Hervé Codina
+
+Herve Codina (2):
+  schemas: i2c: Avoid extra characters in i2c nodename pattern
+  schemas: i2c: Introduce I2C bus extensions
+
+ dtschema/schemas/i2c/i2c-controller.yaml | 69 +++++++++++++++++++++++-
+ 1 file changed, 68 insertions(+), 1 deletion(-)
+
+-- 
+2.49.0
 
