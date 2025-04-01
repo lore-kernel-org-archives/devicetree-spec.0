@@ -1,47 +1,39 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEFA11FAC55;
-	Tue,  1 Apr 2025 14:10:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CDA5204F8E
+	for <devicetree-spec@vger.kernel.org>; Tue,  1 Apr 2025 14:30:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1743516626; cv=none; b=rQ+hjpygVQ7pHtwusmN8IcoK2JBhwa5LZ4YtbvghrJGEB7zLD2jrMG7/iU+d7xTsO5cS0FczADRwO6VGPDXiDPLCGvd/U7xgW00gre1JBvYQ4cuJQMjV3DWRayJb2XFhm+6mHgDpAwPfzBtgmQXzG5GfDO1aobk927zfZ36k15o=
+	t=1743517806; cv=none; b=DMXpb/Fr4wD1lhdJTX+4aZ4nkYHWeMHFXkcPTUpS4MYVZeZAu1nAFO+4ep4Yr65uI255RfS46fcSn8+QE7B//WBGqzyq8z5PFRTTtU2FA4mlpHEV+NWMgBcO8NyI+X4fvWUn1PG3XNyFx6VyHJKkFH/VcHynfNfX5+sRAUtL22U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1743516626; c=relaxed/simple;
-	bh=jLjkyOQuOzBl4oTWHSyJ7vkYp1bKwM67FwX5cSCD6vs=;
+	s=arc-20240116; t=1743517806; c=relaxed/simple;
+	bh=K+7kQvMhx6AOm5j8Rh5bgQvyL9fPK1tKfNE1xrweIto=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WOwvwiPMe8q7/HFWLXgNm5sZKcfbWGGgi/egP2Qrypt8Hb2XVLwpPVsuezeLVnY55/1/SdaRO4GiSf3Unu4P4QVYz+Jkidd2f+ofqs+7jNgiWl+lvN4agngQb+O3TJhMp68NTZa+W9mGreGodgjFfyQko0sleUZrIbe/THuIxuI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VoxX2dIb; arc=none smtp.client-ip=10.30.226.201
+	 Content-Type:Content-Disposition:In-Reply-To; b=X+2DQoYa3qyjqHJZRNGRCDLXnvMs3SeK0bdGwRyI5UYVtTk137cmbXyp4g2ILD6AICO975hLgrUM9J6CadaUwP/DI2NfIiigMtIcRXQ0EjvydODYNkEfomH6CPl/Ru9N6z/z8aPySfqJhoa5TKgEoZYDnxkE+u/3J7ZV7QvnBuc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iSh+QBdR; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VoxX2dIb"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F457C4CEE4;
-	Tue,  1 Apr 2025 14:10:25 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iSh+QBdR"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0016C4CEE4;
+	Tue,  1 Apr 2025 14:30:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1743516625;
-	bh=jLjkyOQuOzBl4oTWHSyJ7vkYp1bKwM67FwX5cSCD6vs=;
+	s=k20201202; t=1743517804;
+	bh=K+7kQvMhx6AOm5j8Rh5bgQvyL9fPK1tKfNE1xrweIto=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=VoxX2dIbEW9bqMjkL0WMPeD4YIvXgphDS0TT/yVI4schin0F26yJ+22HXWV4eklIZ
-	 M6F/ldkGjXQPYKtCr8rRe/pEPJqJaBm+FK+xOztmRAFJWEe3gYKGG0ovI1h4iwE9+E
-	 uU4WRHZmn+2fXWyGtnqIAdH0KoDsurqBqCxoSxwB6XmtJsSL+6phAAgepkpyAGO68z
-	 4Qg/lGuvQgGkkE0HC5UcB7CeMjr4jbqLH7ICgNMSJ9XQf4kbiUhphLuo+6u+/wRwBM
-	 Sm3JICUecmw4FSscPUTFhVw8Xw+k+EGKKGYhaBPvtHfdkS2HH1rHw1V/JZkE2p3Y9K
-	 waV3H39f/bsZw==
-Date: Tue, 1 Apr 2025 09:10:24 -0500
+	b=iSh+QBdRaNuzEXRmvHcYd6VMjgCctDrhbO4oIQcjfkAKgh6pXBIdWd6wvb/t/Vq4h
+	 TBP+WoYNJsDT8z843Pwl4ePBcSwqn7UFVoJob5pO/iIlikoj0fAJLWCK3f1DTBkW0h
+	 0hTDSaerRhrDme1GrO4tR4KRbnjiGwh7LIiulVHvLek7o53iWYGXXK1rp8yXYKUJTs
+	 qzpH5PUFEv1EVi+WtMZp06HIw8D9GYBmbI7bKE3uRWs6EZvbWSqJtq7l5H9I32OywT
+	 XJCeW/jPCiT2zDHVxG8oDPGY8bmkeZskXkurepsz+HrNMegZ8gXQXgeLXtMyO2j9eE
+	 9GZn9+OcHBoHw==
+Date: Tue, 1 Apr 2025 09:30:03 -0500
 From: Rob Herring <robh@kernel.org>
-To: Herve Codina <herve.codina@bootlin.com>
-Cc: Wolfram Sang <wsa+renesas@sang-engineering.com>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, linux-i2c@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	devicetree-spec@vger.kernel.org,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Subject: Re: [PATCH 1/2] schemas: i2c: Avoid extra characters in i2c nodename
- pattern
-Message-ID: <20250401141024.GA3313904-robh@kernel.org>
-References: <20250401081041.114333-1-herve.codina@bootlin.com>
- <20250401081041.114333-2-herve.codina@bootlin.com>
+To: Raphael Gallais-Pou <rgallaispou@gmail.com>
+Cc: Grant Likely <grant.likely@secretlab.ca>,
+	devicetree-spec@vger.kernel.org
+Subject: Re: [PATCH] chapter2: fix reference to chapter6
+Message-ID: <20250401143003.GA3391926-robh@kernel.org>
+References: <20250401114736.56670-1-rgallaispou@gmail.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -50,18 +42,18 @@ List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250401081041.114333-2-herve.codina@bootlin.com>
+In-Reply-To: <20250401114736.56670-1-rgallaispou@gmail.com>
 
-On Tue, Apr 01, 2025 at 10:10:39AM +0200, Herve Codina wrote:
-> Current nodename pattern doesn't limit the end of name for an i2c node.
-> It can match 'i2c@10-foo'.
+On Tue, Apr 01, 2025 at 01:47:36PM +0200, Raphael Gallais-Pou wrote:
+> Appendix 6 is now chapter 6.
 > 
-> In order to avoid matching to an incorrect name, avoid any extra
-> characters in nodename pattern.
+> Closes #73
 > 
-> Signed-off-by: Herve Codina <herve.codina@bootlin.com>
+> Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
 > ---
->  dtschema/schemas/i2c/i2c-controller.yaml | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  source/chapter2-devicetree-basics.rst | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
 Applied.
+
+Rob
