@@ -1,38 +1,38 @@
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net [217.70.183.200])
+Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E295D70830;
-	Fri,  2 May 2025 14:09:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.200
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED2531EFFAF;
+	Mon,  5 May 2025 08:22:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1746194957; cv=none; b=SK8QUkYQgBgyB5ZlOAZe80ONbtHR4GZ/EyO7bxd/qpmF1nRuD6tM8ZF3Xdhpv1bfjmwZHxYT9zskOptmqQDk7atqC3apJ7qd1Hzsn2OCq6KAZ8dE5CJ46rp8+NFjJjN4167ENO5BwkgIi9LGlWJjiHiqDAeH80BF8X00QXVysq4=
+	t=1746433333; cv=none; b=iX2i8sMx/oJnTRhxaeI5JMGTuZrXzX6ru2Up+qkQ0+pNNJfnU6aE28NmEVD1XHuaGyhF42ovl6wkLHpZFZtFefAnR2l9rr3C5na03jXeqfTrlztATwkzh1ZHTBtYH2+9bX7qaCIz8OogC2FIW+x+r3olGfO04v8vscJQI2KD/Z8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1746194957; c=relaxed/simple;
-	bh=x10rJVRO+bobuZENwdtQ9uPUVVMm4D4dXAPYpSKSIiY=;
+	s=arc-20240116; t=1746433333; c=relaxed/simple;
+	bh=zCrAasw3aT6zagyU+hfu0KLmpivQDVk4DpsxMEgM65k=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=L0RpHhwN6YJV7eCE2lG/atuRVzcPoP2vpwn7ma5McGKloUAdKAX0PkJ+6rwEKuwsZjJ5QSx1nQX03kP7mEWoY+PFDRdiy/lDRD9dC3FZXDSdbmhihnTWPHE8ElfBrRBFck7/1KVPFd44G54Tcby1YxsQG8yVo475xhFSs7Igl9c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=p7ILztUJ; arc=none smtp.client-ip=217.70.183.200
+	 MIME-Version:Content-Type; b=IPrDhdAQwHelVZhU2u6eOqaA47+WAXSZD5ydDBlYU+cMg49TdE09c70JkyYQjsI43blZXa3iweWHqokcoYcK3dqAtV7WaYeYdrWQj+1XcIA0Iyfo1q9xXu3XF85Zgoav6mVZWoCFt0gEoWTFlKrEG6mhuYdeEZxb1cpywjRxNjA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=mVtwl5fo; arc=none smtp.client-ip=217.70.183.195
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="p7ILztUJ"
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 2353A43930;
-	Fri,  2 May 2025 14:09:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="mVtwl5fo"
+Received: by mail.gandi.net (Postfix) with ESMTPSA id ADCF31FD48;
+	Mon,  5 May 2025 08:22:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1746194953;
+	t=1746433329;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=KFncIClPHZHqPRHwYeVO7dn4vVHyo3SFbQeh1DTCLyA=;
-	b=p7ILztUJkSqkTIf9Ci0t06hKjp+n8QXM9kCo6TrS6OTCPxYmC6iIf3D7y4H5H1RmYO3M9E
-	9VdcVG7O3VmCeaxm1+v//m13J9WSsxZnPNdAiQBUKwsCSj1yAf3Gh8NixBdYJ1tU+qReBW
-	A6cGn2FVE/cA2PKDAilyL+GqsTVmJ5fcTlBQdAMIE2bzIgziUgu/36VVOVG2QGGjECh/LS
-	ABodCoR5ZKUzIYeQcPvpfZZOwbR9GFf5fLSDxP1M2HavJmKDHWObRcnVm4D62+NyG7OWXS
-	/yYlxAPQ6cEwuGsYGUuegenNepzPVKMU+CTr8eDZ+7YyQDD8fE53txxCxs4+2A==
-Date: Fri, 2 May 2025 16:09:10 +0200
-From: Luca Ceresoli <luca.ceresoli@bootlin.com>
-To: Herve Codina <herve.codina@bootlin.com>
+	bh=YM3k1ODh/XrTfaviGoaAW5WSeUPQLJS+hciVRusS5Yg=;
+	b=mVtwl5foQ/Tm6luhAVmCrNrTxB1YGeVTjiF4WibQSEH4i5AGSKe4AuqPq90zZTB8TdFwWD
+	DgXjCeVVoc/zW/nQpbT0tqpiB0/2lhCCBZPIuUdhtNJzW8Xha8Y8fp0yzCSnREF6aFhORr
+	op3cMN7xmlf7L/HK3FPQ0oZFFyCJEOyV+NkESvWupHQdJCfDh9kU84EuQWUUOHE3PMWvwG
+	NTijzjDcAKYW0zGkpFBgNnX+M5Lz0DjWRPdniq1oar8C27c3QgLrMYXugVro5LrV252bHs
+	0gC3lFxa2OX9/IOD04n+1n9d1B7VPJm4oQV1R/+PlZD1EmnWqvDPP72FzGEaNQ==
+Date: Mon, 5 May 2025 10:22:07 +0200
+From: Herve Codina <herve.codina@bootlin.com>
+To: Luca Ceresoli <luca.ceresoli@bootlin.com>
 Cc: Ayush Singh <ayush@beagleboard.org>, Wolfram Sang
  <wsa+renesas@sang-engineering.com>, Andi Shyti <andi.shyti@kernel.org>, Rob
  Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor
@@ -41,12 +41,13 @@ Cc: Ayush Singh <ayush@beagleboard.org>, Wolfram Sang
  devicetree-spec@vger.kernel.org, Thomas Petazzoni
  <thomas.petazzoni@bootlin.com>
 Subject: Re: [PATCH v2 1/1] schemas: i2c: Introduce I2C bus extensions
-Message-ID: <20250502160910.448f63dd@booty>
-In-Reply-To: <20250430152201.209797-2-herve.codina@bootlin.com>
+Message-ID: <20250505102207.2c54cbaf@bootlin.com>
+In-Reply-To: <20250502160910.448f63dd@booty>
 References: <20250430152201.209797-1-herve.codina@bootlin.com>
 	<20250430152201.209797-2-herve.codina@bootlin.com>
+	<20250502160910.448f63dd@booty>
 Organization: Bootlin
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -54,66 +55,75 @@ List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-GND-State: clean
 X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvjedvieeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfgjfhhoofggtgfgsehtqhertdertdejnecuhfhrohhmpefnuhgtrgcuvegvrhgvshholhhiuceolhhutggrrdgtvghrvghsohhlihessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhephfetudeugfehheeliefhjeejuddvledtuddttdevledthfehgeeugfetheekgfffnecuffhomhgrihhnpegsohhothhlihhnrdgtohhmnecukfhppedvrgdtvdemieejtdemvddtvddtmegvrgdtudemsggvgedumeelhegvjeemfeegfeemledufegvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdgrtddvmeeijedtmedvtddvtdemvggrtddumegsvgegudemleehvgejmeefgeefmeeludefvgdphhgvlhhopegsohhothihpdhmrghilhhfrhhomheplhhutggrrdgtvghrvghsohhlihessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepuddvpdhrtghpthhtohephhgvrhhvvgdrtghoughinhgrsegsohhothhlihhnrdgtohhmpdhrtghpthhtoheprgihuhhshhessggvrghglhgvsghorghrugdrohhrghdprhgtphhtthhopeifshgrodhrvghnvghsrghssehsrghng
- hdqvghnghhinhgvvghrihhnghdrtghomhdprhgtphhtthhopegrnhguihdrshhhhihtiheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprhhosghhsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehkrhiikhdoughtsehkvghrnhgvlhdrohhrghdprhgtphhtthhopegtohhnohhrodgutheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqihdvtgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
-X-GND-Sasl: luca.ceresoli@bootlin.com
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvkedtheelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfgjfhhoofggtgfgsehtkeertdertdejnecuhfhrohhmpefjvghrvhgvucevohguihhnrgcuoehhvghrvhgvrdgtohguihhnrgessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepveeiffefgeeitdelleeigefhjeelueeuveekveetgeffheeltdekgeduiefggfdvnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehlohgtrghlhhhoshhtpdhmrghilhhfrhhomhephhgvrhhvvgdrtghoughinhgrsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeduvddprhgtphhtthhopehluhgtrgdrtggvrhgvshholhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtoheprgihuhhshhessggvrghglhgvsghorghrugdrohhrghdprhgtphhtthhopeifshgrodhrvghnvghsrghssehsrghnghdqvghnghhinhgvvghrihhnghdrtghomhdprhgtphhtthhopegrnhguihdrshhhhihtiheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprhhosghhsehkvghrnhgvlhdro
+ hhrghdprhgtphhtthhopehkrhiikhdoughtsehkvghrnhgvlhdrohhrghdprhgtphhtthhopegtohhnohhrodgutheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqihdvtgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
+X-GND-Sasl: herve.codina@bootlin.com
 
-Hello Herv=C3=A9,
+Hi Luca,
 
-On Wed, 30 Apr 2025 17:22:00 +0200
-Herve Codina <herve.codina@bootlin.com> wrote:
+On Fri, 2 May 2025 16:09:10 +0200
+Luca Ceresoli <luca.ceresoli@bootlin.com> wrote:
 
-> An I2C bus can be wired to the connector and allows an add-on board to
-> connect additional I2C devices to this bus.
->=20
-> Those additional I2C devices could be described as sub-nodes of the I2C
-> bus controller node however for hotplug connectors described via device
-> tree overlays there is additional level of indirection, which is needed
-> to decouple the overlay and the base tree:
->=20
->   --- base device tree ---
->=20
->   i2c1: i2c@abcd0000 {
->       compatible =3D "xyz,i2c-ctrl";
->       i2c-bus-extension@0 {
->           i2c-bus =3D <&i2c_ctrl>;
->       };
->       ...
->   };
->=20
->   i2c5: i2c@cafe0000 {
->       compatible =3D "xyz,i2c-ctrl";
->       i2c-bus-extension@0 {
->           i2c-bus =3D <&i2c-sensors>;
-                        ^^^^^^^^^^^
+> Hello Hervé,
+> 
+> On Wed, 30 Apr 2025 17:22:00 +0200
+> Herve Codina <herve.codina@bootlin.com> wrote:
+> 
+> > An I2C bus can be wired to the connector and allows an add-on board to
+> > connect additional I2C devices to this bus.
+> > 
+> > Those additional I2C devices could be described as sub-nodes of the I2C
+> > bus controller node however for hotplug connectors described via device
+> > tree overlays there is additional level of indirection, which is needed
+> > to decouple the overlay and the base tree:
+> > 
+> >   --- base device tree ---
+> > 
+> >   i2c1: i2c@abcd0000 {
+> >       compatible = "xyz,i2c-ctrl";
+> >       i2c-bus-extension@0 {
+> >           i2c-bus = <&i2c_ctrl>;
+> >       };
+> >       ...
+> >   };
+> > 
+> >   i2c5: i2c@cafe0000 {
+> >       compatible = "xyz,i2c-ctrl";
+> >       i2c-bus-extension@0 {
+> >           i2c-bus = <&i2c-sensors>;  
+>                         ^^^^^^^^^^^
+> 
+> This should be i2c_sensors (with an underscore)...
+> 
+> >       };
+> >       ...
+> >   };
+> > 
+> >   connector {
+> >       i2c_ctrl: i2c-ctrl {
+> >           i2c-parent = <&i2c1>;
+> >           #address-cells = <1>;
+> >           #size-cells = <0>;
+> >       };
+> > 
+> >       i2c-sensors {  
+> 
+> ...and this should have a label:
+> 
+>         i2c-sensors: i2c-sensors {
+> 
+> With those fixed you can add my:
 
-This should be i2c_sensors (with an underscore)...
+Indeed, thanks for pointing out.
 
->       };
->       ...
->   };
->=20
->   connector {
->       i2c_ctrl: i2c-ctrl {
->           i2c-parent =3D <&i2c1>;
->           #address-cells =3D <1>;
->           #size-cells =3D <0>;
->       };
->=20
->       i2c-sensors {
+I will fix them in the next iteration and add your 'Reviewed-by' tag.
 
-...and this should have a label:
+> 
+> +Reviewed-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
+> 
 
-        i2c-sensors: i2c-sensors {
-
-With those fixed you can add my:
-
-+Reviewed-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
-
---=20
-Luca Ceresoli, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+Best regards,
+Hervé
