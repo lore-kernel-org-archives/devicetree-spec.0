@@ -1,129 +1,153 @@
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net [217.70.183.195])
+Received: from smtp-190d.mail.infomaniak.ch (smtp-190d.mail.infomaniak.ch [185.125.25.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED2531EFFAF;
-	Mon,  5 May 2025 08:22:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF99C2627E5
+	for <devicetree-spec@vger.kernel.org>; Mon,  5 May 2025 15:52:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.125.25.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1746433333; cv=none; b=iX2i8sMx/oJnTRhxaeI5JMGTuZrXzX6ru2Up+qkQ0+pNNJfnU6aE28NmEVD1XHuaGyhF42ovl6wkLHpZFZtFefAnR2l9rr3C5na03jXeqfTrlztATwkzh1ZHTBtYH2+9bX7qaCIz8OogC2FIW+x+r3olGfO04v8vscJQI2KD/Z8=
+	t=1746460339; cv=none; b=EqkxKfcTqfC74KQ5OgXhjZRqtl6gN157si+4FptOLfmlVFcUHzHtK5Fib+F7+xYGlZ7bFZyX5JQtLGI/loAXaFifF1HPlqR7IyW8z44/em0Ri2sHn1hPBZZhddAOFuhNpN8i5Yw3VVb3ED2WJwOQSqSXRnPLNjTp6CK/dVgwuVc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1746433333; c=relaxed/simple;
-	bh=zCrAasw3aT6zagyU+hfu0KLmpivQDVk4DpsxMEgM65k=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=IPrDhdAQwHelVZhU2u6eOqaA47+WAXSZD5ydDBlYU+cMg49TdE09c70JkyYQjsI43blZXa3iweWHqokcoYcK3dqAtV7WaYeYdrWQj+1XcIA0Iyfo1q9xXu3XF85Zgoav6mVZWoCFt0gEoWTFlKrEG6mhuYdeEZxb1cpywjRxNjA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=mVtwl5fo; arc=none smtp.client-ip=217.70.183.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="mVtwl5fo"
-Received: by mail.gandi.net (Postfix) with ESMTPSA id ADCF31FD48;
-	Mon,  5 May 2025 08:22:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1746433329;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=YM3k1ODh/XrTfaviGoaAW5WSeUPQLJS+hciVRusS5Yg=;
-	b=mVtwl5foQ/Tm6luhAVmCrNrTxB1YGeVTjiF4WibQSEH4i5AGSKe4AuqPq90zZTB8TdFwWD
-	DgXjCeVVoc/zW/nQpbT0tqpiB0/2lhCCBZPIuUdhtNJzW8Xha8Y8fp0yzCSnREF6aFhORr
-	op3cMN7xmlf7L/HK3FPQ0oZFFyCJEOyV+NkESvWupHQdJCfDh9kU84EuQWUUOHE3PMWvwG
-	NTijzjDcAKYW0zGkpFBgNnX+M5Lz0DjWRPdniq1oar8C27c3QgLrMYXugVro5LrV252bHs
-	0gC3lFxa2OX9/IOD04n+1n9d1B7VPJm4oQV1R/+PlZD1EmnWqvDPP72FzGEaNQ==
-Date: Mon, 5 May 2025 10:22:07 +0200
-From: Herve Codina <herve.codina@bootlin.com>
-To: Luca Ceresoli <luca.ceresoli@bootlin.com>
-Cc: Ayush Singh <ayush@beagleboard.org>, Wolfram Sang
- <wsa+renesas@sang-engineering.com>, Andi Shyti <andi.shyti@kernel.org>, Rob
- Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor
- Dooley <conor+dt@kernel.org>, linux-i2c@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- devicetree-spec@vger.kernel.org, Thomas Petazzoni
- <thomas.petazzoni@bootlin.com>
-Subject: Re: [PATCH v2 1/1] schemas: i2c: Introduce I2C bus extensions
-Message-ID: <20250505102207.2c54cbaf@bootlin.com>
-In-Reply-To: <20250502160910.448f63dd@booty>
-References: <20250430152201.209797-1-herve.codina@bootlin.com>
-	<20250430152201.209797-2-herve.codina@bootlin.com>
-	<20250502160910.448f63dd@booty>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.43; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1746460339; c=relaxed/simple;
+	bh=zZWPHineC6vcPFG2Wxb0mMPUxPbLsvzygkFLL9T4acM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=FSWapF8viZQlk7zObYZQD2IBCeVDsc1bT/cxo9tFLLo3z9qk/ZQGcAKCsVF0nfkn8nLnigjSXt16mNMPczLjQLjaba2EAgMCTZukbVpgVNL2ZIKWr2X72k2BW2WbuwdnB8iY8UWvVgPqWOfntd/medMYjy5B5SZv1weg9FENmPc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=0leil.net; spf=pass smtp.mailfrom=0leil.net; arc=none smtp.client-ip=185.125.25.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown [IPv6:2001:1600:7:10::a6b])
+	by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4ZrlvF14k0zWJt;
+	Mon,  5 May 2025 17:34:33 +0200 (CEST)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4ZrlvD0tHpzRhC;
+	Mon,  5 May 2025 17:34:31 +0200 (CEST)
+From: Quentin Schulz <foss+dt@0leil.net>
+Date: Mon, 05 May 2025 17:34:22 +0200
+Subject: [PATCH v2] Add 'bootsource' /chosen property
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvkedtheelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfgjfhhoofggtgfgsehtkeertdertdejnecuhfhrohhmpefjvghrvhgvucevohguihhnrgcuoehhvghrvhgvrdgtohguihhnrgessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepveeiffefgeeitdelleeigefhjeelueeuveekveetgeffheeltdekgeduiefggfdvnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehlohgtrghlhhhoshhtpdhmrghilhhfrhhomhephhgvrhhvvgdrtghoughinhgrsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeduvddprhgtphhtthhopehluhgtrgdrtggvrhgvshholhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtoheprgihuhhshhessggvrghglhgvsghorghrugdrohhrghdprhgtphhtthhopeifshgrodhrvghnvghsrghssehsrghnghdqvghnghhinhgvvghrihhnghdrtghomhdprhgtphhtthhopegrnhguihdrshhhhihtiheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprhhosghhsehkvghrnhgvlhdro
- hhrghdprhgtphhtthhopehkrhiikhdoughtsehkvghrnhgvlhdrohhrghdprhgtphhtthhopegtohhnohhrodgutheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqihdvtgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
-X-GND-Sasl: herve.codina@bootlin.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250505-bootsource-v2-1-5a315d9bff26@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAH3aGGgC/23MQQ7CIBCF4as0sxZDJ6WKK+9huqAwCJtihkpsG
+ u4udu3yf8n7dsjEkTLcuh2YSswxLS3w1IENZnmSiK41oEQlUSoxp7Tm9GZL4jo4j0qRptFCO7y
+ YfPwc2GNqHWJeE2+HXfrf+pcpveiFVn6YzaiNxcvdBmLezo5gqrV+ASoNhuukAAAA
+X-Change-ID: 20250205-bootsource-84df255e9e6c
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>, 
+ Heiko Stuebner <heiko@sntech.de>, Simon Glass <sjg@chromium.org>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Daniel Golle <daniel@makrotopia.org>, devicetree-spec@vger.kernel.org, 
+ u-boot@lists.denx.de
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.2
+X-Infomaniak-Routing: alpha
 
-Hi Luca,
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-On Fri, 2 May 2025 16:09:10 +0200
-Luca Ceresoli <luca.ceresoli@bootlin.com> wrote:
+Bootloaders typically can be loaded from different storage media, such
+as eMMC, SD card, SPI flash, EEPROM, but also from non-persistent media
+such as USB (via proprietary protocols loading directly into SRAM, or
+fastboot, DFU, etc..), JTAG, ...
 
-> Hello Hervé,
-> 
-> On Wed, 30 Apr 2025 17:22:00 +0200
-> Herve Codina <herve.codina@bootlin.com> wrote:
-> 
-> > An I2C bus can be wired to the connector and allows an add-on board to
-> > connect additional I2C devices to this bus.
-> > 
-> > Those additional I2C devices could be described as sub-nodes of the I2C
-> > bus controller node however for hotplug connectors described via device
-> > tree overlays there is additional level of indirection, which is needed
-> > to decouple the overlay and the base tree:
-> > 
-> >   --- base device tree ---
-> > 
-> >   i2c1: i2c@abcd0000 {
-> >       compatible = "xyz,i2c-ctrl";
-> >       i2c-bus-extension@0 {
-> >           i2c-bus = <&i2c_ctrl>;
-> >       };
-> >       ...
-> >   };
-> > 
-> >   i2c5: i2c@cafe0000 {
-> >       compatible = "xyz,i2c-ctrl";
-> >       i2c-bus-extension@0 {
-> >           i2c-bus = <&i2c-sensors>;  
->                         ^^^^^^^^^^^
-> 
-> This should be i2c_sensors (with an underscore)...
-> 
-> >       };
-> >       ...
-> >   };
-> > 
-> >   connector {
-> >       i2c_ctrl: i2c-ctrl {
-> >           i2c-parent = <&i2c1>;
-> >           #address-cells = <1>;
-> >           #size-cells = <0>;
-> >       };
-> > 
-> >       i2c-sensors {  
-> 
-> ...and this should have a label:
-> 
->         i2c-sensors: i2c-sensors {
-> 
-> With those fixed you can add my:
+This information is usually reported by the SoC-ROM via some proprietary
+mechanism (some specific address in registers/DRAM for example).
 
-Indeed, thanks for pointing out.
+It would be useful to know which medium was used to load the first stage
+of the bootloader. SoC-ROM shall be ignored and not reported in this
+property.
 
-I will fix them in the next iteration and add your 'Reviewed-by' tag.
+This can allow client programs to detect which medium to write to when
+updating the boot program, or detect if fallback mechanisms to
+unexpected medium were used to reach the client program's execution.
 
-> 
-> +Reviewed-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
-> 
+In cases where a boot program is split into multiple stages (like
+U-Boot), it only represents the device that was used to load the very
+first stage (in case of U-Boot, VPL/TPL/SPL whichever is executed first)
+and not any of the later stages (in case of U-Boot, TPL/SPL/proper) or
+any client program. They may match, but they may not and this property
+is meant to only represent the device used for loading the very first
+stage.
+
+I have a board running U-Boot which currently has 9 boot scenarios
+(eMMC/SD/SPI-NOR for the first stage, eMMC/SD/SPI-NOR for the next
+stages; not counting USB loading yet, which would make it a few more). I
+cannot force the BootROM of this board to select a specific device aside
+from erasing the other media.
+The only way to identify which device was used for the first stage is to
+parse U-Boot first stage console output or add some custom logic for my
+board. To validate that a new version of the bootloader works, including
+the fallback mechanisms, I need to make sure the BootROM loads the first
+stage from the expected device otherwise I may have false positives.
+This would be useful for automated testing.
+
+I could also very well see this being used to identify where the first
+stage of the boot program is stored (which may differ from where the
+later stages are! that's the case for U-Boot proper for example!) to be
+able to update it from a client program.
+
+Note that Barebox has been using this property for a while already, with
+this very content[1].
+
+This is chosen as a string so that it matches other properties in
+/chosen (e.g. stdout-path) as well as allows for extending it, in case
+one needs to provide additional information (e.g. HW boot partition for
+eMMC, a specific disk on an AHCI controller, a specific USB device on
+a USB bus, etc.).
+
+[1] https://lore.kernel.org/u-boot/0066fcc2-3431-48be-8dc2-00ea7e2550c2@pengutronix.de/
+
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Note that this property is already set by Barebox and I'm planning on
+adding it to U-Boot as well, specifically for Rockchip SoCs.
+
+I have some doubts about the wording, especially in the case of
+hypervisors or chained boot programs. I'm not entirely sure what would
+make the most sense to put in the property for those scenario.
+---
+Changes in v2:
+- added usecases, non-usecases and increased verbosity of the definition
+  of the property name as requested by Simon,
+- Link to v1: https://lore.kernel.org/r/20250205-bootsource-v1-1-95f4ba69ac27@cherry.de
+---
+ source/chapter3-devicenodes.rst | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenodes.rst
+index 8080321d6e60d6b1e86c81af86c6850246a0223b..98cab42c105d9a390f74a6f80fb2bba61d5bb919 100644
+--- a/source/chapter3-devicenodes.rst
++++ b/source/chapter3-devicenodes.rst
+@@ -456,6 +456,23 @@ time. It shall be a child of the root node.
+                                                        the client program. The value could
+                                                        potentially be a null string if no boot
+                                                        arguments are required.
++   ``bootsource``          O     ``<string>``          A string that specifies the full path to the
++                                                       node representing the device the BootROM used
++                                                       to load the initial boot program.
++                                                       If the initial boot program is split into
++                                                       multiple stages, this represents the storage
++                                                       medium or device (e.g. used by fastboot) from
++                                                       which the very first stage was loaded by the
++                                                       BootROM.
++                                                       It may differ from the device from which later
++                                                       stages of the boot program or client program
++                                                       are loaded from, as this property isn't meant
++                                                       to represent those devices.
++                                                       A later stage of the boot program, or the
++                                                       client program, may use this information to
++                                                       favor the device in this property over others
++                                                       for loading later stages, or know the storage
++                                                       medium to flash an update to.
+    ``stdout-path``         O     ``<string>``          A string that specifies the full path to the
+                                                        node representing the device to be used for
+                                                        boot console output. If the character ":" is
+
+---
+base-commit: 5688e1c0b961d2ca5a32e3b624a9f4a9b433184f
+change-id: 20250205-bootsource-84df255e9e6c
 
 Best regards,
-Hervé
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
