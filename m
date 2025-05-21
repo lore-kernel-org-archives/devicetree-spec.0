@@ -1,94 +1,92 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 911B81D554;
-	Tue, 20 May 2025 12:29:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22E6B2475D0
+	for <devicetree-spec@vger.kernel.org>; Wed, 21 May 2025 09:35:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.117.254.33
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747744181; cv=none; b=aprcmF1fjoVCZXRQzvnJb0wzcd5ocTlsFTofgbsz3ms/ScZcIsZDfT9k4i+EFSkAMgMGZK7SBZHQAf7TU/qZhPFER+h7L2p6jgwycbCNBiSVET0rweNRZdh/noHwihns6WgaabdTsz+57oR4dnMzhAJ9fzIxH+jDppjugQ2iy+s=
+	t=1747820130; cv=none; b=TKzCOAz4oiGvE6F92US4C6LVDhX7rJKkx/5y5B/xl1zsx/3wSmW95QWboBkgfIa2xi0BlVmIF2nCiiB5b8jbgqiirwg15EYCzXDGEIJ7lj0a6d5q8FvIvqD1quZ5SErcwAp+vMuDAuGFJRYztHuCQ4fWtY7g5N6xA2VE1nGbsnM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747744181; c=relaxed/simple;
-	bh=otdy0gj6v9t3yu2PkIBmFIF6Tt+1vULwohKrUAvm0yY=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Content-Type; b=sY7d1Wr+j1yt7hUr8fd1GRJ42GvLaEVeEzfQFkXynevZJlCuIvUaqhEle0yyoGWdEVa1Vvip74LDUnfljlOjjpFaW31FFVWu9RXNXwCY6hohYz2Svk6AjBJhH7pwW2oPgrpWOpDBAIYWm/h9wlC9WCvKU7U9xhY6Ek1nYaZU05Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AEOF1xkA; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1747820130; c=relaxed/simple;
+	bh=zCpVGOY46npj5hztF2H/D7hUPZG4VbkBf6TIh+lGy5E=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=kKvgg5e324mONGciy9PRyL8XZphxBFGEe6JlhgK4PvhR5ghk77yHx6b+NF0ZmN3KCoFgq0bXi/gFfyQucqS3SE3Cw0f54wxhk6hOR/zi1J5y5r+nc60pQYkT8J+fYU0Z9g6L7P8iEOhBCIjLuhkhrnZL3tKTlQwrOZq9qXaJIg8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com; spf=pass smtp.mailfrom=sang-engineering.com; dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b=H1y0Ty95; arc=none smtp.client-ip=194.117.254.33
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AEOF1xkA"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA8BCC4CEE9;
-	Tue, 20 May 2025 12:29:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747744181;
-	bh=otdy0gj6v9t3yu2PkIBmFIF6Tt+1vULwohKrUAvm0yY=;
-	h=References:In-Reply-To:From:Date:Subject:To:From;
-	b=AEOF1xkAvspZIMxlqJU++FoMGMfmrUG3vV3vuDCDhBPk/YY9BuElisiRXMKR6dC4M
-	 hj1YCDtfaCYlnW/KP2eVhEvqT1+2D3Ka6AfJyMXZ5xVeQsyu03H1bv5aBlUoie7ATL
-	 Kg9ZkmHpi91kQEKefJ4dA7SLbrHxhU7J9XIRny7IdGK4xXxYzRncZHV+Up7nnINsvg
-	 fO7WAPAAUY02H6EHPilWqNasqqPj55vrDR4fl/8RxvDG0XioxbXFo8YnmmBvuvX5rg
-	 Cz+cyYMLGZScjn9uQQjfGXXtu2uaeLF1OOsgjLRS+MxWHGpysQb0QBWFyUL8P0BWiU
-	 1sgiwEkZGkeqg==
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-5f3f04b5dbcso7887104a12.1;
-        Tue, 20 May 2025 05:29:40 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCUKY1uhKH+NnaLFUxU3gFLGYsQ+rnvDEDbXU71P4JAOfI3TQk0QRBy3na/FxIlOJBwqD+t6o88ugwpC@vger.kernel.org, AJvYcCVWZ0wviR6ZR8uM+2eaOKCpQZc+q74fWgvnyHQJ54jqIDV7OQ8rbDqQe8COeyVWCX11ICjMkk5tMcyILKB0MR8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwP3VxysuZoH25dnnsPDyqn8E5go7nhq4tkVXoE5mwWtJgGmiZT
-	2DCJlNX7pNzuKBjLDPCmmoo4Jrl8dGIMpHGB+kMJq+qkfbh+oPkQX9s1Wz0HmW3QbKPj1JlN/fr
-	JgGkbQT7CHVNsVSPttczqFY+uMua+cg==
-X-Google-Smtp-Source: AGHT+IHyQN353A/uwLSNuLP227CqS6FWSa1S1hmDkcYfXYkNrY7nLkglTVvVmjhUVaYygP7eRACgyrx4Egh9t13xQt0=
-X-Received: by 2002:a17:907:6096:b0:ad5:c07:49f8 with SMTP id
- a640c23a62f3a-ad52d575894mr1569447466b.41.1747744179546; Tue, 20 May 2025
- 05:29:39 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="H1y0Ty95"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	sang-engineering.com; h=date:from:to:cc:subject:message-id
+	:references:mime-version:content-type:in-reply-to; s=k1; bh=zCpV
+	GOY46npj5hztF2H/D7hUPZG4VbkBf6TIh+lGy5E=; b=H1y0Ty95a2r2mz8z/c2t
+	HO+piVqFQTtrOlLGln0bJr2xBkWwY54rG4gKwCuzvo8mZaBNIBN+NJiD2DsGYY5G
+	IVoutH2w3Jg6h+1BA7TFGa6doRUQauANCDwZhb7xlV1rVH1abpnyWrRfySTeCw1e
+	HTw8OdqhysYHSknmA9hXozAsfl4wK5ZT58LSxa0ONu0t+ynXkeOD19NU3fOh288g
+	CNTPW0piJqUClQzJJe22N2XE05MhYmf/2/jF22Yfy8QQwVHn7XPpSXB0Gbsb/ptv
+	1PxQ9fKxNRrzbDo9wHBg5Q6Rp+6cfCv/QoDzwd/53QDwPUruhmDQqoojwNH+jBBG
+	9g==
+Received: (qmail 3206593 invoked from network); 21 May 2025 11:35:26 +0200
+Received: by mail.zeus03.de with UTF8SMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 21 May 2025 11:35:26 +0200
+X-UD-Smtp-Session: l3s3148p1@J7PDFaI13Jtehhrc
+Date: Wed, 21 May 2025 11:35:26 +0200
+From: Wolfram Sang <wsa+renesas@sang-engineering.com>
+To: Rob Herring <robh@kernel.org>
+Cc: devicetree-spec@vger.kernel.org, linux-i2c@vger.kernel.org
+Subject: Re: [PATCH dt-schema] schemas: i2c: Allow '-' in 'i2c-.*' node names
+Message-ID: <aC2eXoAyATuusWX4@shikoro>
+Mail-Followup-To: Wolfram Sang <wsa+renesas@sang-engineering.com>,
+	Rob Herring <robh@kernel.org>, devicetree-spec@vger.kernel.org,
+	linux-i2c@vger.kernel.org
+References: <20250519184530.21845-1-wsa+renesas@sang-engineering.com>
+ <CAL_Jsq+UCU8RdAGVPbsFDo6aaAyoAKtjDd4yYfs47YOt__VhgQ@mail.gmail.com>
+ <aCxKlniEUCJq-aqu@shikoro>
+ <CAL_JsqL6CdmrCTbvbFEUjhbd+yDtd9Jf9r+OcV0imcoB117iAg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250519184530.21845-1-wsa+renesas@sang-engineering.com>
- <CAL_Jsq+UCU8RdAGVPbsFDo6aaAyoAKtjDd4yYfs47YOt__VhgQ@mail.gmail.com> <aCxKlniEUCJq-aqu@shikoro>
-In-Reply-To: <aCxKlniEUCJq-aqu@shikoro>
-From: Rob Herring <robh@kernel.org>
-Date: Tue, 20 May 2025 07:29:28 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqL6CdmrCTbvbFEUjhbd+yDtd9Jf9r+OcV0imcoB117iAg@mail.gmail.com>
-X-Gm-Features: AX0GCFsseX5UsSVIQcg5aNMvQODxZR3i0B4-8Ft-IxxK46nz9V_LnUTCOzENOMQ
-Message-ID: <CAL_JsqL6CdmrCTbvbFEUjhbd+yDtd9Jf9r+OcV0imcoB117iAg@mail.gmail.com>
-Subject: Re: [PATCH dt-schema] schemas: i2c: Allow '-' in 'i2c-.*' node names
-To: Wolfram Sang <wsa+renesas@sang-engineering.com>, Rob Herring <robh@kernel.org>, 
-	devicetree-spec@vger.kernel.org, linux-i2c@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="FZ+PYxgj2QU7N/F5"
+Content-Disposition: inline
+In-Reply-To: <CAL_JsqL6CdmrCTbvbFEUjhbd+yDtd9Jf9r+OcV0imcoB117iAg@mail.gmail.com>
 
-On Tue, May 20, 2025 at 4:25=E2=80=AFAM Wolfram Sang
-<wsa+renesas@sang-engineering.com> wrote:
->
-> On Mon, May 19, 2025 at 08:18:53PM -0500, Rob Herring wrote:
-> > On Mon, May 19, 2025 at 1:45=E2=80=AFPM Wolfram Sang
-> > <wsa+renesas@sang-engineering.com> wrote:
-> > >
-> > > When allowing extended i2c node names, the '-' character was not adde=
-d
-> > > to the character class. Fixes the following error:
-> > >
-> > > .../Kernel/linux/arch/arm/boot/dts/microchip/usb_a9g20.dtb: i2c-gpio-=
-0 (i2c-gpio): $nodename:0: 'i2c-gpio-0' does not match '^i2c(@.+|-[a-z0-9]+=
-)?$'
-> > >         from schema $id: http://devicetree.org/schemas/i2c/i2c-gpio.y=
-aml#
-> >
-> > IMO, we should change the node name to "i2c-0". While I'm on the fence
-> > whether it's worth changing these, I do think it is worth not getting
-> > new ones.
->
-> It is hard changing the existing ones. They are numbered based on the
-> numbers of GPIO based I2C busses only. If we drop "gpio-", they need to
-> be mixed with other non-GPIO busses. That numbering is usually unique
-> per board and can't be automated.
 
-I don't understand. For arm32, I see 1 case of possibly already having
-an i2c-[0-9] name and that's in
-arch/arm/boot/dts/samsung/exynos5250-arndale.dts. The non-GPIO I2C
-buses are all MMIO and have unit addresses (and also aren't at the
-root level).
+--FZ+PYxgj2QU7N/F5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-The hardest part is doing a dtb->dts pass and comparing those before
-and after to make sure you haven't combined or split nodes.
 
-Rob
+> The hardest part is doing a dtb->dts pass and comparing those before
+> and after to make sure you haven't combined or split nodes.
+
+I'll pass. I'll fix the boards I have actually access to, but the above
+task sounds no fun to me.
+
+That being said: is my original patch here rejected? We allow only one
+'-' for i2c node names?
+
+
+--FZ+PYxgj2QU7N/F5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmgtnl4ACgkQFA3kzBSg
+KbZJeg//XOEs+tUP75TLJ3/mrAjOfk9PDXDgwskaUM1+nfU3hpVvXAkV1hGVmjtI
+BZBMV9FHSgEj88B/2tmPynPw5v6BXYTfxnjVwnejgZMcle5HOlXUIXvde6UvzSZt
+HXmuTIaUxighWhRU+9IEf2IHJRgp1j9Hp/tpbEIJj5xXuBWA7vMyh4yi9fHfGjkG
+h54iDRm5f5fJNKO6/hqWiesnH6yuy1E0r55nWFc78rjLU1L3uvrrMUcz397tu4Gm
+wE8OvvNmwXcANjXq1+zss27xrt4r/Pywk/NQVszY0kxRU3PfUx+BUD161/+3220r
+GwYJe/CX/gsOHX/PDzbe7cuHWYRNB2KsqMNnWY/ikoi+ecYbt8LlHicF6TiMKCWc
+BkLhHTgPZu5UTN6TGGaxboUl1tbTzXv1qlQ5EnaG7UNL48n7qsCF/ZD/Gy/4WTLt
+No8G6vGdqGFzSvxY+Voe0wsK1DVK6qydi6fOEEj8bFi6MkY8x7gIeVucdUXcGNUr
+7aFQ6wyJIvHhKaxFV6RGNg10gNogLiNcIyBZZjuB4+gVrOWl4tXFfIjW82l/hwiw
+HoHK/oiEPa2txrtgPMEFVjGoDYOeZe3xNHfJtPCl/wu2Lkx86HWUOJRD9S7oVaIV
+lEDs5U3EOVmtuC2ua22Whlh6U/TsnYeiOB4Z3UBZXXtMh2RZpJk=
+=fqO/
+-----END PGP SIGNATURE-----
+
+--FZ+PYxgj2QU7N/F5--
