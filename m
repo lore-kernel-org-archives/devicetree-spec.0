@@ -1,77 +1,64 @@
-Received: from mail.actia.se (mail.actia.se [212.181.117.226])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 355A824E00F
-	for <devicetree-spec@vger.kernel.org>; Mon,  9 Jun 2025 10:00:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.181.117.226
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99CD42505CB;
+	Mon,  9 Jun 2025 13:17:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1749463204; cv=none; b=r4xSFewSpWnGEx20MzxmPPOPDZLd8PtS2SeiUSlvg1LC7hS5LJUbPEqTze0K5D7v5V1P6XjT6suxoGuxiwc/d0Xmf4AzlAcDkYwS2Nzb05Uns/U8G3dCF5bxIqhy/5ZMaQdarWCjgW/2iJy1k/PId+SieMTP5LfaTSGUj6/PRpM=
+	t=1749475020; cv=none; b=Dui+1xOIkGVfV45agU3a3wqR8Cly4BnYAb74RXepB7x8oeKaa4BjNjDcbzbt4geUXVZ7HD6falOSZNxWY66BIet/nzrvwaRvvJPEHmcfStC2DZoraY6pVLtJ/Jp3dHvhEZib0yribyOJmMPRaUhEegk4GTL8cFeWiCNK1Y+eb+4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1749463204; c=relaxed/simple;
-	bh=WQszISOy16USZRQnjf+EINBTqnsmaNMvSf9u5Z08SYI=;
-	h=From:To:CC:Subject:Date:Message-ID:Content-Type:MIME-Version; b=NaXSdwTFkI4Cm75WeSFnpRtAsfU8f3rRSkqaE0X3WtxM1CFbiUfqLcXpeBXsTzR+nTDTKib1+a89tiZbc0Fv0jNy2dKyRQ5xNViIA9QUBSdeKSlcjmUxwaeGDN2chl1XaCEJLmULPLR2Z9vTf8Hcvf7+EeVe7oXC0F8MH+FGbFY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=actia.se; spf=pass smtp.mailfrom=actia.se; arc=none smtp.client-ip=212.181.117.226
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=actia.se
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=actia.se
-Received: from S036ANL.actianordic.se (10.12.31.117) by S036ANL.actianordic.se
- (10.12.31.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Jun
- 2025 11:59:51 +0200
-Received: from S036ANL.actianordic.se ([fe80::e13e:1feb:4ea6:ec69]) by
- S036ANL.actianordic.se ([fe80::e13e:1feb:4ea6:ec69%3]) with mapi id
- 15.01.2507.039; Mon, 9 Jun 2025 11:59:51 +0200
-From: John Ernberg <john.ernberg@actia.se>
-To: Rob Herring <robh@kernel.org>
-CC: "devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>, "John
- Ernberg" <john.ernberg@actia.se>
-Subject: [PATCH] meta-schemas: nodes: Allow if-then-else directly in
- patternProperties objects
-Thread-Topic: [PATCH] meta-schemas: nodes: Allow if-then-else directly in
- patternProperties objects
-Thread-Index: AQHb2SU9ppm6LCs3VEaSo6pryhWUbw==
-Date: Mon, 9 Jun 2025 09:59:51 +0000
-Message-ID: <20250609095929.1964499-1-john.ernberg@actia.se>
-Accept-Language: en-US, sv-SE
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: git-send-email 2.49.0
-x-esetresult: clean, is OK
-x-esetid: 37303A2955B14453627464
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	s=arc-20240116; t=1749475020; c=relaxed/simple;
+	bh=YBrZfAOWC77371Om/Q2DCtJzOeAx6cYDgxkksmHBjdQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=QKAti8vX61sUzsDfTCDoDU+KKq9BXZExP9lhtNGuY2qWTrtpuuS1ZCr+I+YNC7P/crojrEcjSgzDpyBNdUBBt5L/hCzJvaxg7cDlnEMBGRglNVaigBclLKkxL42ntKfLRvMCRpyfGN/5svdRL4QLmeLMOl7flJW0smnFSM2LvPA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lk9lTXNK; arc=none smtp.client-ip=10.30.226.201
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lk9lTXNK"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2630C4CEEB;
+	Mon,  9 Jun 2025 13:16:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1749475020;
+	bh=YBrZfAOWC77371Om/Q2DCtJzOeAx6cYDgxkksmHBjdQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=lk9lTXNKiFFxmljg3Ocr/fnCIDgQULgMZHKldFFXmAGH67geDpLERAjwNU453CerI
+	 4wN0LYpigFOHVAcJAErYMGsl2DmnLt6QTNJypdNW6HEHA9SYz7JmvRa5Rwhxyx4NSF
+	 3r0pziDcEaGux+YEdgtWoMUvNhiKpcSUVAcr5ri73zsFY+uFmrvMWMmhFXjTxMIe1S
+	 aZhvL+gfvh8xodgZPGZ2EAHaAYKHYQmNYUcg+vL35OC/RvQQLmh5W7JqJjQ69rod4U
+	 mtuBJdPRO0cdptraCHTmOaVs6+OFRIvfOgGjWSmXg2X4EY0mg1i9fC7O6bWDeoPg/F
+	 fl3NnQBS8N/yg==
+Date: Mon, 9 Jun 2025 08:16:59 -0500
+From: Rob Herring <robh@kernel.org>
+To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Cc: andersson@kernel.org, dmitry.baryshkov@linaro.org,
+	manivannan.sadhasivam@linaro.org, krzk@kernel.org,
+	helgaas@kernel.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, lpieralisi@kernel.org, kw@linux.com,
+	conor+dt@kernel.org, linux-pci@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org,
+	quic_vbadigan@quicinc.com, sherry.sun@nxp.com
+Subject: Re: [PATCH] schemas: PCI: Add standard PCIe WAKE# signal
+Message-ID: <20250609131659.GA1737613-robh@kernel.org>
+References: <20250515090517.3506772-1-krishna.chundru@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250515090517.3506772-1-krishna.chundru@oss.qualcomm.com>
 
-Having local singular if-then-else statements under a patternProperties
-object-node causes a schema warning about an unexpected statement.
+On Thu, May 15, 2025 at 02:35:17PM +0530, Krishna Chaitanya Chundru wrote:
+> As per PCIe spec 6, sec 5.3.3.2 document PCI standard WAKE# signal,
+> which is used to re-establish power and reference clocks to the
+> components within its domain.
+> 
+> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+> ---
+>  dtschema/schemas/pci/pci-bus-common.yaml | 4 ++++
+>  1 file changed, 4 insertions(+)
 
-Allow this construct to reduce size of singular if-then-else blocks in
-this context, aligning the rules of them with the top-level.
+Applied, thanks.
 
-Signed-off-by: John Ernberg <john.ernberg@actia.se>
----
- dtschema/meta-schemas/nodes.yaml | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/dtschema/meta-schemas/nodes.yaml b/dtschema/meta-schemas/nodes=
-.yaml
-index 0b2c8f7..e45cb45 100644
---- a/dtschema/meta-schemas/nodes.yaml
-+++ b/dtschema/meta-schemas/nodes.yaml
-@@ -27,6 +27,9 @@ propertyNames:
-     - deprecated
-     - required
-     - not
-+    - if
-+    - else
-+    - then
-     - allOf
-     - anyOf
-     - oneOf
---=20
-2.49.0
+Rob
