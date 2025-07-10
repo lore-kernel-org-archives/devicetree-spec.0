@@ -1,264 +1,133 @@
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A48C27EFF9;
-	Wed, 18 Jun 2025 08:23:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.197
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EE89539A;
+	Thu, 10 Jul 2025 00:58:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750235010; cv=none; b=AK73U41o0//Sqbc44qADrM1Y7h9cgSyWheA0OqPFlYUNqEra+CZKH1KU4GsZ2L+HiHPnZ+IQhc2vZBvXo0tVga1HSdJWOEFScnE3APCkYkxAoed41ifyMdFsLy/rLO8Di6KkxAKeUDFExAWCQ0iIK+sZcxtUQnLRLEy5L/Hsmz8=
+	t=1752109103; cv=none; b=UdOGcp/Cjswx+qJjZGBxzcOMtNCFNQVyrtzQKMuRxHpDMZmC3fRS1N/OCPMUSBzByctDdMsMc1EnMjWURrZzT/zLALpo5YaUKN/bQDUaRY4r2JvK7Agk0JYgl4Kn54C41zKH47ZCLGRalMnmPvXuuGO0/3O6kXKiaO9YpQv+fEM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750235010; c=relaxed/simple;
-	bh=hgfpYcsEljxEd1bZa0sO5OOQlAVcZKWfL9Eh6kUTjRY=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Ny3nPUr6KZnmzjPBtKwuMEBoha9NXBADAzdXAot7u62057fpS936iyrR0Nx7p14F+rHOMmjiJcu4ZWSFYK4ARayS21BvVXUb2yB7vFv5WP4iv2FvvnDQC0TovIkLOuaDt+t4CBVfR2AYuV9dJdB8CoX6GPSm+L6tXWTTEDST/qI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=cV6ccwfM; arc=none smtp.client-ip=217.70.183.197
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1752109103; c=relaxed/simple;
+	bh=P1d0IshYGbaAr/Hr/+3PPdk883uiqvPufCBEpnmmtQE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MjaEY4tXAPIeTxWxsqZO/Bt/D9KReClKxAUH70cy4ae5+p+5ngTmEMM08Bvq8nWdFL28KNPqnOlPllf3TwBWQa9KuRKwt6baR3rq5ZWYaW3Zl/E+/jLR/JpUHrBCqQaoqOhu5TmbEM2JW3NKIUzyNhidrzHdDiNrHgiAy79qjZ8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DXeD96cj; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="cV6ccwfM"
-Received: by mail.gandi.net (Postfix) with ESMTPA id BA65844339;
-	Wed, 18 Jun 2025 08:23:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1750235005;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=9eWbuIkx1HJ3sxkyzCu4pbFxB8FyTj9ryw6j6Dn+ZMk=;
-	b=cV6ccwfM2IEVSAzdLuSOS5XZ0XTMjSp0yq5SGgdxrkZuE5yCLxWq/A/BRU+SZOjvKAfqT8
-	nV4B6gqB+kJFltF3yIIZ5Tx0TKv9bo2+LEflxYDrNZNS0ieXIw4/E5C+wzxOZI3I4F370x
-	J+41GwfiSSTg75uFkCO1CYhbF3stGX+MApWoCwr1oyiKYpJM9JWD1tjuReQi7o8YvxZ0VD
-	hhJcPdnJjnL/wC4PjM4N3Yif25iaowPF2bdOOb5rQWlk8HYoWjlodGuFh4NjgtR2Qfi2z/
-	0UYTX2W8xb49ado+LRSk4HRyWN4Ffl90Y9AixkOodWvlk2Fkgn6h0zJpyMEuRw==
-From: Herve Codina <herve.codina@bootlin.com>
-To: Ayush Singh <ayush@beagleboard.org>,
-	Wolfram Sang <wsa+renesas@sang-engineering.com>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>
-Cc: linux-i2c@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	devicetree-spec@vger.kernel.org,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	Herve Codina <herve.codina@bootlin.com>
-Subject: [PATCH v3 1/1] schemas: i2c: Introduce I2C bus extensions
-Date: Wed, 18 Jun 2025 10:23:12 +0200
-Message-ID: <20250618082313.549140-2-herve.codina@bootlin.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250618082313.549140-1-herve.codina@bootlin.com>
-References: <20250618082313.549140-1-herve.codina@bootlin.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DXeD96cj"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48AB6C4CEEF;
+	Thu, 10 Jul 2025 00:58:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1752109102;
+	bh=P1d0IshYGbaAr/Hr/+3PPdk883uiqvPufCBEpnmmtQE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=DXeD96cjQYgk7BBvsbsPthJVjBguygDmr58DkUqtClTt8EYDlOo2PO4EDaT8nBO4l
+	 1htaIsnjtbK2zziciZHnyyoagRCGsofviI36cLjmtD9e9fIpsOuA85YaUDMtq/+7eD
+	 eYymN8TttJ1F3gOdwf5maxP6ljB7eeD4/NphgE+w/tSEIrYTarNMwtI10URmBjDdSy
+	 AGqsXOcoiltthV0WfAIRQhEx/YHJyxYlDSHL175fZYxZUUbteBiccq6UzGgJePXyZf
+	 8XNB4PH7ApHiVscyApAwanNQw+aCFeEOQp3VHlpMAN49Rk9o8pJoJgcbRLqjEa+zzD
+	 vNcELqwyc9hlQ==
+Date: Wed, 9 Jul 2025 19:58:21 -0500
+From: Rob Herring <robh@kernel.org>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: linux-doc@vger.kernel.org, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org
+Subject: Re: [PATCH] docs: devicetree: overlay-notes: recommend top-level
+ compatible in DTSO
+Message-ID: <20250710005821.GA94507-robh@kernel.org>
+References: <20250624181320.2810521-1-raymond.mao@linaro.org>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddvgddvudelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefjvghrvhgvucevohguihhnrgcuoehhvghrvhgvrdgtohguihhnrgessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepheffiefgjeeuleeuueffleeufefglefhjefhheeigedukeetieeltddthfffkeffnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehlohgtrghlhhhoshhtrdhlohgtrghlughomhgrihhnpdhmrghilhhfrhhomhephhgvrhhvvgdrtghoughinhgrsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopedufedprhgtphhtthhopegrhihushhhsegsvggrghhlvggsohgrrhgurdhorhhgpdhrtghpthhtohepfihsrgdorhgvnhgvshgrshesshgrnhhgqdgvnhhgihhnvggvrhhinhhgrdgtohhmpdhrtghpthhtoheprghnughirdhshhihthhisehkvghrnhgvlhdrohhrghdprhgtphhtthhopehrohgshheskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepkhhriihksehkvghrnhgvlhdrohhrg
- hdprhgtphhtthhopegtohhnohhrodgutheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqihdvtgesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopeguvghvihgtvghtrhgvvgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
-X-GND-Sasl: herve.codina@bootlin.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250624181320.2810521-1-raymond.mao@linaro.org>
 
-An I2C bus can be wired to the connector and allows an add-on board to
-connect additional I2C devices to this bus.
++devicetree-spec (because linux-doc doesn't really care)
 
-Those additional I2C devices could be described as sub-nodes of the I2C
-bus controller node however for hotplug connectors described via device
-tree overlays there is additional level of indirection, which is needed
-to decouple the overlay and the base tree:
+On Tue, Jun 24, 2025 at 11:13:20AM -0700, Raymond Mao wrote:
+> When managing multiple base device trees and overlays in a structured
+> way (e.g. bundled in firmware or tools), it is helpful to identify the
+> intended target base DT for each overlay, which can be done via a
+> top-level compatible string in the overlay.
 
-  --- base device tree ---
+I think this should be more general and more specific at the same time. 
 
-  i2c1: i2c@abcd0000 {
-      compatible = "xyz,foo";
-      i2c-bus-extension@0 {
-          i2c-bus = <&i2c_ctrl>;
-      };
-      ...
-  };
+You might not want to match on a top-level board/soc compatible, but 
+rather the compatible for a specific node. For example, you may have an 
+overlay for a cape, hat, etc. that applies to a connector node and that 
+connector node could be on any number of boards or even multiple 
+connectors on 1 board. That's all under development, but so far in those 
+cases we expect some sort of connector driver to apply the overlays. But 
+I think you could have the same issue of identifying which overlay files 
+are relevant. I don't think folks working on add-on boards have thought 
+that far ahead.
 
-  i2c5: i2c@cafe0000 {
-      compatible = "xyz,bar";
-      i2c-bus-extension@0 {
-          i2c-bus = <&i2c_sensors>;
-      };
-      ...
-  };
+And since we don't know the target-path up front, it is just left blank 
+so far. It would be better if we expressed *something*. Perhaps 
+'target-compatible'? Something like that would work in your case I 
+think.
 
-  connector {
-      i2c_ctrl: i2c-ctrl {
-          i2c-parent = <&i2c1>;
-          #address-cells = <1>;
-          #size-cells = <0>;
-      };
+You'd have to be somewhat crazy, but you can bundle a bunch of 
+mutually-exclusive or unrelated overlays within a single overlay file. I 
+don't know that we want to prevent doing that. Someone might come up 
+with some not crazy reason to do that...
 
-      i2c_sensors: i2c-sensors {
-          i2c-parent = <&i2c5>;
-          #address-cells = <1>;
-          #size-cells = <0>;
-      };
-  };
+> 
+> This patch updates the document with a note and example for this
+> practice.
+> 
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+>  Documentation/devicetree/overlay-notes.rst | 28 ++++++++++++++++++++++
+>  1 file changed, 28 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/overlay-notes.rst b/Documentation/devicetree/overlay-notes.rst
+> index 35e79242af9a..30b142d1b2ee 100644
+> --- a/Documentation/devicetree/overlay-notes.rst
+> +++ b/Documentation/devicetree/overlay-notes.rst
+> @@ -103,6 +103,34 @@ The above bar.dtso example modified to use target path syntax is::
+>      ---- bar.dtso --------------------------------------------------------------
+>  
+>  
+> +Overlay identification
+> +----------------------
+> +
+> +When managing overlays dynamically or bundling multiple base device trees
+> +and overlays in a single system (e.g., in firmware, initramfs, or user-space
+> +tools), it becomes important to associate each overlay with its intended
+> +target base DT.
+> +
+> +To support this, overlays should include the top-level compatible string
+> +from its base DT.
 
-  --- device tree overlay ---
+The base has multiple compatible strings, so which one? Has to match on 
+any one or all of them?
 
-  ...
-  // This node will overlay on the i2c-ctrl node of the base tree
-  i2c-ctrl {
-      eeprom@50 { compatible = "atmel,24c64"; ... };
-  };
-  ...
-
-  --- resulting device tree ---
-
-  i2c1: i2c@abcd0000 {
-      compatible = "xyz,foo";
-      i2c-bus-extension@0 {
-          i2c-bus = <&i2c_ctrl>;
-      };
-      ...
-  };
-
-  i2c5: i2c@cafe0000 {
-      compatible = "xyz,bar";
-      i2c-bus-extension@0 {
-          i2c-bus = <&i2c_sensors>;
-      };
-      ...
-  };
-
-  connector {
-      i2c_ctrl: i2c-ctrl {
-          i2c-parent = <&i2c1>;
-          #address-cells = <1>;
-          #size-cells = <0>;
-
-          eeprom@50 { compatible = "atmel,24c64"; ... };
-      };
-
-      i2c_sensors: i2c-sensors {
-          i2c-parent = <&i2c5>;
-          #address-cells = <1>;
-          #size-cells = <0>;
-      };
-  };
-
-Here i2c-ctrl (same goes for i2c-sensors) represent the part of I2C bus
-that is on the hot-pluggable add-on. On hot-plugging it will physically
-connect to the I2C adapter on the base board. Let's call the 'i2c-ctrl'
-node an "extension node".
-
-In order to decouple the overlay from the base tree, the I2C adapter
-(i2c@abcd0000) and the extension node (i2c-ctrl) are separate nodes.
-
-The extension node is linked to the I2C bus controller in two ways. The
-first one with the i2c-bus-extension available in I2C controller
-sub-node and the second one with the i2c-parent property available in
-the extension node itself.
-
-The purpose of those two links is to provide the link in both direction
-from the I2C controller to the I2C extension and from the I2C extension
-to the I2C controller.
-
-Signed-off-by: Herve Codina <herve.codina@bootlin.com>
-Reviewed-by: Ayush Singh <ayush@beagleboard.org>
-Reviewed-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
----
- dtschema/schemas/i2c/i2c-controller.yaml | 67 ++++++++++++++++++++++++
- 1 file changed, 67 insertions(+)
-
-diff --git a/dtschema/schemas/i2c/i2c-controller.yaml b/dtschema/schemas/i2c/i2c-controller.yaml
-index 8488edd..8ab7fec 100644
---- a/dtschema/schemas/i2c/i2c-controller.yaml
-+++ b/dtschema/schemas/i2c/i2c-controller.yaml
-@@ -30,6 +30,13 @@ properties:
-     minimum: 1
-     maximum: 5000000
- 
-+  i2c-parent:
-+    $ref: /schemas/types.yaml#/definitions/phandle
-+    description:
-+      In case of an I2C bus extension, reference to the I2C bus controller
-+      this extension is connected to. In other word, reference the I2C bus
-+      controller on the fixed side that drives the bus extension.
-+
-   i2c-scl-falling-time-ns:
-     description:
-       Number of nanoseconds the SCL signal takes to fall; t(f) in the I2C
-@@ -159,6 +166,25 @@ allOf:
-         - i2c-scl-has-clk-low-timeout
- 
- patternProperties:
-+  'i2c-bus-extension@[0-9a-f]+$':
-+    type: object
-+    description:
-+      An I2C bus extension connected to an I2C bus. Those extensions allow to
-+      decouple I2C busses when they are wired to connectors.
-+
-+    properties:
-+      reg:
-+        maxItems: 1
-+
-+      i2c-bus:
-+        $ref: /schemas/types.yaml#/definitions/phandle
-+        description:
-+          Reference to the extension bus.
-+
-+    required:
-+      - reg
-+      - i2c-bus
-+
-   '@[0-9a-f]+$':
-     type: object
- 
-@@ -221,3 +247,44 @@ dependentRequired:
-   i2c-digital-filter-width-ns: [ i2c-digital-filter ]
- 
- additionalProperties: true
-+
-+examples:
-+  # I2C bus extension example involving an I2C bus controller and a connector.
-+  #
-+  #  +--------------+     +-------------+     +-------------+
-+  #  | i2c@abcd0000 |     |  Connector  |     | Addon board |
-+  #  |    (i2c1)    +-----+ (i2c-addon) +-----+ (device@10) |
-+  #  |              |     |             |     |             |
-+  #  +--------------+     +-------------+     +-------------+
-+  #
-+  # The i2c1 I2C bus is wired from a I2C controller to a connector. It is
-+  # identified at connector level as i2c-addon bus.
-+  # An addon board can be connected to this connector and connects a device
-+  # (device@10) to this i2c-addon extension bus.
-+  - |
-+    i2c1: i2c@abcd0000 {
-+        compatible = "xyz,i2c-ctrl";
-+        reg = <0xabcd0000 0x100>;
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        i2c-bus-extension@0 {
-+            reg = <0>;
-+            i2c-bus = <&i2c_addon>;
-+        };
-+    };
-+
-+    connector {
-+        i2c_addon: i2c-addon {
-+            i2c-parent = <&i2c1>;
-+            #address-cells = <1>;
-+            #size-cells = <0>;
-+
-+            device@10 {
-+                compatible = "xyz,foo";
-+                reg = <0x10>;
-+            };
-+        };
-+    };
-+
-+...
--- 
-2.49.0
-
+> +This enables higher-level software or firmware to identify which base DT
+> +an overlay is compatible with and apply it accordingly.
+> +
+> +Example usage::
+> +
+> +    ---- bar.dtso - overlay with top-level compatible string -------------------
+> +	/dts-v1/;
+> +	/plugin/;
+> +	compatible = "corp,foo";
+> +
+> +	...
+> +    ---- bar.dtso --------------------------------------------------------------
+> +
+> +This top-level compatible string is not required by the kernel overlay
+> +mechanism itself, but it is strongly recommended for managing overlays in
+> +scalable systems.
+> +
+> +
+>  Overlay in-kernel API
+>  --------------------------------
+>  
+> -- 
+> 2.25.1
+> 
