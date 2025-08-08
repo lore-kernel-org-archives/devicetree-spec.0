@@ -1,128 +1,175 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D85B2A1CF;
-	Thu,  7 Aug 2025 11:46:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEB7379CD;
+	Fri,  8 Aug 2025 16:07:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.196
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754567187; cv=none; b=Z/BiG3fa/Lxeuv/lk9qt1RNzB1ZWDQ/eKzDVKL4MuO/XaG5ySJ6vtkvRF6ecFMEDEYUnCuftdMBXquXt42Y9G3XOo/Si5tkl6yi3FXiez34CwH4t10FyPEuPQQ87UnhhdnHxtoD0kF+D0sv09v0J5jkkL2YD4rBJZdaYQhcd6wE=
+	t=1754669280; cv=none; b=LuxN+AGblMQ93cGjyZZKAu9IkJEIdUNOJSuRHDa+P6ktsorPTCaORD18oV9gfWnecXgwJWjoC8cqeMnbio3g3iLsg8+fxdQg6xGvGdUTN3Tv25Xu7wKOdNzPSd3CV/TNvhFxCSDj+gAT3255ioXi59PCRYdYu45H5T6IxjeHFqw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754567187; c=relaxed/simple;
-	bh=7EcW2IB/Hoo31JQCi+ZPT/KI3YtuMNEtsU4Q0qj9Ds0=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Content-Type; b=nEpyg60aV1/NPAFiTUxA4WpI4Qg0x5+rYoRmgOsnAWO9KLEhQxKFKY6jShiaXsZPkv+8pNnYEbPaQXHf/YDb2rkzZk4dMsdeU9eH9vYqi1/gR+CmGLSRKfOu/v0murWZTiNYCTa8bnLsDaNn8EAmWyCLRLyxnBDyZRHxf4sHUIk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VcHSl8Id; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1754669280; c=relaxed/simple;
+	bh=X1HyUdIzzadSIJ9P6pejrZwtipW8T00o1QaRFEHmHyg=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=mYmzGSPDAGywr1Kuzru51ZYLmQyjj9WH8Ne/4pnEPKOE+M/opCwnNHTD4HzMd5h30lnhQzfntOD2nEPhf69SuLDR2mhT8Oc/iDeKMryq4ESB5ol121Ww0bNCfUZooMEiahHzDSyk7nbxAx6C5gyU9GgCVePU2UxrvI+AsXYve1s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=kM6QnpNW; arc=none smtp.client-ip=217.70.183.196
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VcHSl8Id"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8F9BC4CEEB;
-	Thu,  7 Aug 2025 11:46:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1754567187;
-	bh=7EcW2IB/Hoo31JQCi+ZPT/KI3YtuMNEtsU4Q0qj9Ds0=;
-	h=Date:From:Subject:To:From;
-	b=VcHSl8IdZT7wDopZTf+iv0npq2wRAQi355OQWzi+WBefsthauEB/DbLwlD3OR7eMb
-	 qmWE2vIqmWgxnXmiGeBhmdGcqfCrusNHHr9rR+6T/WfuPcaQohSOhTMzaLsEAoq6fe
-	 c1SkmJ+zoaOFGp2O2dEY1XH1dZbHyv3lwITplV4osbd7pNMl5eMin9qDneXjCmGPeH
-	 L4TYR+r2dE46kaFcLF8SHzB1zO1J2LWEGjoyEuTybgTd7KGRii/4L9i0VpOkct8V8r
-	 Ynxso2jBXIIZkVgx4ANEaShHYW+K3dgLSPHzv3y1Kk/0LS9uwH04awKsl/9Siu10AF
-	 MqUWPQSz877KA==
-Message-ID: <8c59ef9a-7b5c-4fec-b630-ac84218ed955@kernel.org>
-Date: Thu, 7 Aug 2025 13:46:18 +0200
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="kM6QnpNW"
+Received: by mail.gandi.net (Postfix) with ESMTPSA id CDB4D44380;
+	Fri,  8 Aug 2025 16:07:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1754669270;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=CwxuZRcIL0K9SXTSDkik9eTSLuO290wVxQgkHReMc0A=;
+	b=kM6QnpNW/9J2Cb6+CuPw3sr+2Gg4t1/dVq2HzxRh4V6pfC+ri+0XrXJbkmtCuHEn3C4vPP
+	zN4XeJFZ3jxsPlD+5yA0h13XBjGWONvhyhQMa3RU/+sQ7g0Vku4lQ4ExZZQkmiXR4oxLQ6
+	eUh2R6UMOjDcVoOUYlRCBioDweQAeDhTt0f52U8y9U2yj/KcKsFosrs50Jv3vwPOiFRJAF
+	rhz1Z1IDTKfNO1uQPDsPCMPvZbcX/+GV0UFVHLynD9Z0CP7LcYk/+faUdtaGQe7n1ew8Bl
+	bWElCHXfhVAMDOcv9q8XvJYMwCTuqi2VktmwxbzyQmDhMAIxf+2vMqQi0ySXkA==
+Date: Fri, 8 Aug 2025 18:07:46 +0200
+From: Luca Ceresoli <luca.ceresoli@bootlin.com>
+To: Rob Herring <robh@kernel.org>, Wolfram Sang
+ <wsa+renesas@sang-engineering.com>
+Cc: Herve Codina <herve.codina@bootlin.com>, Ayush Singh
+ <ayush@beagleboard.org>, Andi Shyti <andi.shyti@kernel.org>, Krzysztof
+ Kozlowski <krzk@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ linux-i2c@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org, Thomas
+ Petazzoni <thomas.petazzoni@bootlin.com>
+Subject: Re: [PATCH v3 1/1] schemas: i2c: Introduce I2C bus extensions
+Message-ID: <20250808180746.6fa6a6f9@booty>
+In-Reply-To: <CAL_JsqJ=jmXVwjtNCjRpUKj02dnJEz4GHMX2wMRaWw=M+sZQ0w@mail.gmail.com>
+References: <20250618082313.549140-1-herve.codina@bootlin.com>
+ <20250618082313.549140-2-herve.codina@bootlin.com>
+ <CAL_JsqJ=jmXVwjtNCjRpUKj02dnJEz4GHMX2wMRaWw=M+sZQ0w@mail.gmail.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Subject: [ANNOUNCEMENT / CFP] LPC 2025 Devicetree Microconference CFP
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 a/A=
-To: "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- "linux-arm-kernel@lists.infradead.org"
- <linux-arm-kernel@lists.infradead.org>,
- linux-arm-msm <linux-arm-msm@vger.kernel.org>, Rob Herring
- <robh@kernel.org>, Conor Dooley <conor@kernel.org>,
- "imx@lists.linux.dev" <imx@lists.linux.dev>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- devicetree-compiler@vger.kernel.org, devicetree-spec@vger.kernel.org
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdduvdegvdehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfgjfhhoofggtgfgsehtqhertdertdejnecuhfhrohhmpefnuhgtrgcuvegvrhgvshholhhiuceolhhutggrrdgtvghrvghsohhlihessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhephfekieegtefhgeelieehhefgtdekffevgfegvdeggeelkeehjeetteethfevudfgnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghdpsghoohhtlhhinhdrtghomhenucfkphepjeekrddvuddvrddvjedrudduheenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeejkedrvdduvddrvdejrdduudehpdhhvghlohepsghoohhthidpmhgrihhlfhhrohhmpehluhgtrgdrtggvrhgvshholhhisegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeduvddprhgtphhtthhopehrohgshheskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepfihsrgdorhgvnhgvshgrshesshgrnhhgqdgvnhhgihhnvggvrhhinhhgrdgtohhmpdhrtghpthhtohephhgvrhhvvgdrtghoughinhgrsegsohhothhlihhnrdgtohhmpdhrtghpthhtoheprgihuhhshhessggvrghglhgvsghorghrugdro
+ hhrghdprhgtphhtthhopegrnhguihdrshhhhihtiheskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepkhhriihksehkvghrnhgvlhdrohhrghdprhgtphhtthhopegtohhnohhrodgutheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqihdvtgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
+X-GND-Sasl: luca.ceresoli@bootlin.com
 
-There will be a dedicated Devicetree Microconference on Linux Plumbers
-2025 in December in Tokyo and Call For Papers is currently open.
+Hello Rob, Wolfram,
 
-The Devicetree Microconference focuses on discussing and solving
-problems present in the systems using Devicetree as firmware
-representation. Primarily this will be Linux kernel and U-Boot, but also
-can cover topics relevant to Zephyr or System Devicetrees.
+[this e-mail is co-written with Herv=C3=A9]
 
-Topics suggested for discussion include, but are not limited to:
-1. DTS validation against DT schema,
-2. Style checking/linting for DTS,
-3. Using the Linux kernel DTS in U-Boot or other projects,
-4. DTB selection on EFI systems like arm64 laptops,
-5. Hot-pluggable hardware with Devicetree overlay,
-6. Common incorrect or problematic patterns of using OF Linux API, e.g.
-impossible to disable unconditional device_init_wakeup().
+Rob, Wolfram: this e-mail mentions DT description together with
+implementation ideas, but both of your opinions are very relevant here.
 
-Feel welcomed to bring any other topics I am not aware of. Few more
-ideas for discussions are mentioned on DT MC abstract page:
-https://lpc.events/event/19/sessions/237/
+On Fri, 1 Aug 2025 13:09:54 -0500
+Rob Herring <robh@kernel.org> wrote:
+
+> On Wed, Jun 18, 2025 at 3:23=E2=80=AFAM Herve Codina <herve.codina@bootli=
+n.com> wrote:
+> >
+> > An I2C bus can be wired to the connector and allows an add-on board to
+> > connect additional I2C devices to this bus.
+> >
+> > Those additional I2C devices could be described as sub-nodes of the I2C
+> > bus controller node however for hotplug connectors described via device
+> > tree overlays there is additional level of indirection, which is needed
+> > to decouple the overlay and the base tree:
+> >
+> >   --- base device tree ---
+> >
+> >   i2c1: i2c@abcd0000 {
+> >       compatible =3D "xyz,foo";
+> >       i2c-bus-extension@0 { =20
+>=20
+> This is at I2C bus address 0? No. You are mixing 2 different address
+> spaces. Don't do that.
+>=20
+> You could solve this with just a property in the parent. If there's
+> more than 1, then it's just multiple phandles. However I don't think
+> you need this at all. You can just search the DT for 'i2c-parent' and
+> find phandles that match the i2c controller node. But why does the
+> controller driver need to know about connectors? Shouldn't the
+> connector driver drive this and tell the controller there's more
+> devices?
+
+These were the concerns you had raised last April [0], so let's continue
+from there and Herv=C3=A9's follow-up.
+
+Herv=C3=A9's position was that a double-reference is more effective as every
+interested party (the i2c adapter and the i2c extension node) have an
+explicit description of the connected party/parties. Besides, this looks
+consistent with the bidirectional links in remote-endpoints, which has
+similarities.
+
+OTOH I agree a single-direction link (i2c extension node to i2c
+adapter) should work, in principle. However there are issues, mainly in
+how an adapter finds out about the extensions when it is probed after
+them.
+
+Your proposal of searching the whole tree involves a lot of searches in
+a potentially large tree, even though I don't expect it to happen often
+at least for the use cases I'm aware of.
+
+But, more important, Herv=C3=A9 pointed out an "i2c-parent" property is
+already used for different purposes (i2c muxes). We could choose
+another string but that would be fragile too.
 
 
-CFP ends on: 14th of September 2025
+One idea is to unambiguously mark i2c bus extension nodes with a
+compatible string:
 
-Proposals can be submitted here:
+  connector {
+      i2c_ctrl: i2c-ctrl {
+          compatible =3D "i2c-bus-extension"; // <-----
+          i2c-parent =3D <&i2c1>;
+          #address-cells =3D <1>;
+          #size-cells =3D <0>;
+      };
+  };
 
-https://lpc.events/event/19/abstracts/
+And then implementing a device driver for the i2c bus extension.
+
+This would allow to ensure extensions are probed after their adapter
+(thanks to probe deferral) and at that point can register themselves at
+the adapter. In other words the device driver core would provide the
+synchronization between adapter, bus extension, and devices on the bus
+extension.
 
 
-This email has a list of people in Bcc. It is far from being complete,
-so feel free to forward it further.
+A different option is to only have the "i2c-parent" phandle in the
+extension node and nothing else in DT (no bidirectional link, no
+compatible string), without any full-tree searches.
 
-Best regards,
-Krzysztof
+On the implementation side, the connector driver when probing would
+register the extension nodes at the I2C core, which would maintain a
+list of extension nodes. This is important when the connector probes
+first. Then when any adapter probes the core would iterate over the
+list to check whether the newly-probed adapter is pointed to by one of
+the registered bus extensions, and then start populating the devices on
+the matching bus extension(s).
 
+A lot of care would have to be put in the disconnection path and while
+removing any bus extension from the global list, which could race with
+the I2C core using the list itself. The drive core wouldn't do it for
+us for free.
+
+
+Rob, Wolfram, what are your opinions about these options, and which is
+worth pursuing? Do you have better proposals?
+
+[0] https://lore.kernel.org/all/20250402102123.30391c27@bootlin.com/
+
+Luca
+
+--=20
+Luca Ceresoli, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
