@@ -1,77 +1,93 @@
-Received: from mail-io1-f42.google.com (mail-io1-f42.google.com [209.85.166.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DB4E34F46C
-	for <devicetree-spec@vger.kernel.org>; Thu, 11 Sep 2025 15:14:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BF9730EF90
+	for <devicetree-spec@vger.kernel.org>; Thu,  6 Nov 2025 11:40:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757603689; cv=none; b=r94ILsyBTUz4g6+yXRHCR/J/rl3ngxm4mfGGt8OQN9qpFl2SL4wV337bgT2ar6GmT5ca5tZc1sa32rmRK5YbskIx8W8gC80r4IaeUdqb/U3GvMizUqLQ9ILZNyQ5Q1tXFXHZ5am7nJDdh3gVrhIgBXgEJ8JYAECLG/4WjhZWEi8=
+	t=1762429211; cv=none; b=Ac+OOZjY3FQJPiwkpE9AVPnuACF+SQYRE7TRbZ4dgTa8f0P/c3BC4jcLYWWtE7VygcI3o54od3uOxdzfhyx9FXfb65duaDwYB0O87ZQggsDSSZgC9puM2bnaV60kC1zWQMmXfublNHdJWtYrCbMq6ctp21vJRr19lH5APE2jI1w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757603689; c=relaxed/simple;
-	bh=gFPP5AJxajK95ebcT+ygBcwnznDTFSpDjpt5bFKHJco=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=OMEyi8quroqmO8mxLkRFdzuGyrFHqqbT8OvpDBkcbjs8oBlTmq50WOqgbcD8bdZkE1ylDiIJbYQdxTVr4KK/jmuy/UkUX2iuS/RWVeGhbhfFaNGD0z3NKdAdO1WMbNu+j1N6PakLsiXQcNv6YblOwrYPSjAKjy/gr5eI4OtJW54=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=sBZlDMUR; arc=none smtp.client-ip=209.85.166.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1762429211; c=relaxed/simple;
+	bh=IATc/BWe25FDjleFlTjelCzWKgHVZ0FKWD/Y6NACOW4=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=eAWY53swMz7YTsTKtc+CrgI0X8i5iE7y+0Bye7PxBKkNFU18eX5vqPscJNo6eLKAPdZf0XxP4b/jcJo6yqlhOTI5ixbyaIXjmbJ/fNWF6t6LY5yK3hJuC2H9mBbEKTGEpyuO6QyOQM/F4r6lf3T+c+1WbB5SYwIC8YXMOxlT3jc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cWTKpl7u; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NXNvkOsV; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="sBZlDMUR"
-Received: by mail-io1-f42.google.com with SMTP id ca18e2360f4ac-8877677dbaeso18748739f.0
-        for <devicetree-spec@vger.kernel.org>; Thu, 11 Sep 2025 08:14:47 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cWTKpl7u";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NXNvkOsV"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5A66rBYV3361959
+	for <devicetree-spec@vger.kernel.org>; Thu, 6 Nov 2025 11:40:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=tplQaWj0LuJZs5gP92aThpV6BCVGBwjEo2F
+	RoetI/a8=; b=cWTKpl7uylAE8ZSH5FJ6mBudAt0nW7lIfwlu+/eq9Jl3Kx70dXK
+	5eQ73Ft+MOj029II1odW+3dgDdvD4MNQoLUK3vIbGNKutb/OuR8qY5e42ZUWXVq9
+	QbCNJrKY/DfXLgN9jhAgqW1TOPQYaOQZvK46KOLFjMqKms1QGTUspJCXPyKxSD81
+	hZ2NpHmiIg/zNshlr5VsCSQ0A1LghJCSL6McpT28ec4bTraP60Ixx2XkelArVOB7
+	O3ujdxHZ+Tm6FoSceP/5PnvxMykV5aMP793EyCRTFm+MqqaC1RkgMBGOQSzDYMva
+	zM86jigHaLh4DCDG7nRUWDPsq1HIqA+Dpgw==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4a8pt58sd5-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <devicetree-spec@vger.kernel.org>; Thu, 06 Nov 2025 11:40:09 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-7a99a5f77e0so560931b3a.2
+        for <devicetree-spec@vger.kernel.org>; Thu, 06 Nov 2025 03:40:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1757603686; x=1758208486; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1762429209; x=1763034009; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=TL8sBN7m+ljpvNUUKvtA2Gj21T9prXayXIxSz2NFiTU=;
-        b=sBZlDMURowbtqyFhuvFBFXvaAZqP9GHX+AiR6MM5AmoPOhu/VkL8lPn6JlOwrOJjkx
-         Vlqh6AjuCmydboDwDpi5l9aaIIxopf65+aJ6kwz+8mQqEw30aDHfAgGcHDzXovMrHpSg
-         YBNUWD1Qi337fAuTI3PIoV1gJnIZPFGfRFW5FbcV+8/Jra3cNmbSK8N2I5u8rAndjDny
-         sbpjC5TA54XNEp3UAAEPsIXhcoTx4VHRcy5qVvQLv+X7yVU7RmLsw1YXvZrReVDvZ3E7
-         JsU5X/kB8qd4T7TJLl2a/tDnbo3FiBuxz6TbwONGqfQMwalkRoLWNxiheK1ZSFPMtNKB
-         GXGw==
+        bh=tplQaWj0LuJZs5gP92aThpV6BCVGBwjEo2FRoetI/a8=;
+        b=NXNvkOsVcdaob3HO5ImMNb9zm1poy4IUR2dcQBvh13pH3AqHyEwSPkOCNDX8gyLqDv
+         QSEEq5+bDbkoA+O3QSiWzKKfdEg0v3eCqhYXzJQRoQLCIqm+b6FNj69VTtIyiT5jYWgy
+         6AnEamsWrPFPCuRo1wwe+d4S8XNTGHmBdihVcUf1fgSMLLuWL5Q0BeQ0n50NaRHkUE68
+         eAr13vMRJMxaOkxa8NkX3qJA1lfiFi4VtzbPeiEsdA+VWJAdUQ3EAUveiBxF63UXxYPD
+         7rrv9pyt3RFSsrZDNzwAKIup5ednd5MenWQ69n5VPRbZP0KkxQeOUQDSemNmbYk92oP1
+         N2Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757603686; x=1758208486;
+        d=1e100.net; s=20230601; t=1762429209; x=1763034009;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=TL8sBN7m+ljpvNUUKvtA2Gj21T9prXayXIxSz2NFiTU=;
-        b=lVe3hofukyMdSwqy+twkIcD9Aeb15DJmOMpjM6mBfsA4N3SCrQWVNCAy2aK5Jee1Xs
-         Me5IC+kZ8nsmYIlgXn6Blp88kUY9PrVl+RLIaQR1DWl+s5CHC+BkoccRyi5tPwLdFRC1
-         iQfrfuafEcJmBa6rcpNUR0AC5yPL3wz/Kv8OA1xn2LnAKiX6ZwMw+OePO2ykqX/RHbUp
-         XqbJYXGkkMmVa8XWqnxolWzWpYOSE3iv2+OgMJdEqams6rpaIR78cwbqABxmiE/Cq6KU
-         gQFA1cUWKC/IW929kG0+wOkhy9ySIgVrk+ZaUyOe4P2qBuESjmt/B+9iicYre3D13Q+n
-         P9FQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVJ3l7BLRdOfEYHJZzw4KlE73dDqRF1H8Gg6Xs9H4DThbrmvJ1EDfQrFLOvSTKuTj8wNIYWUe59YMEjcJzLGcA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyOu7XMpLMZMp7LTB5g2QTzRk6DZZeeZa/hQlAMwE0il38fRsKX
-	CVWJgJm4I8YICXtfnaanOxnVb32Ejs2PwU8dwlxghbHIiJIbw1qMysQy2gip1A/f0SL6eNJa6SA
-	wssgV
-X-Gm-Gg: ASbGncsc26sx8A9YegS5bmSfnvJX0KXpGcLDtjZKi9Sx0iZWiuaikKqzcKRUE7i0hsJ
-	0vVPSvEs9wgCKlHYGEc3BCxORgdtxro5EAepZkIWBxA1hx2u+n//kknegWN7DQUQHAcUgoj6VaQ
-	tvQt6Nk0pxl2U/at2+pPaekxEh/aOFEjXQuAqFB+V78dEX3zjaV5q5XGLHvSrk0OISatcoG2rRB
-	3/H1eQK8eprgZyfEKqqPdKwQCDGRuTbhQcfKwgU60SgaT8o9+Jr4wmZg9B83QaheYGmkXd70Cwi
-	4lzY1udmVofEUk8LvEs4ajZ3VIeQNx/hUrBJ1NU/iqHfAdj/wloua1mXcXzisQgrvzGz1wcRJxK
-	169c64f2NjdW+6dbHpUqmxf++gYn7oeA1loOJHU9+lbtgGq88Tx+jrdXAWKikXWpHqYpRwUZQXb
-	5pgOsuFWGq8A==
-X-Google-Smtp-Source: AGHT+IE6DbCHQGT3GL1n9OFvLlun1jX9ds1zSORNzE+G+6Ju2SnMa2q2FJWS74CsRl89wRYBcZzTXg==
-X-Received: by 2002:a05:6602:2c06:b0:88d:4fd3:8131 with SMTP id ca18e2360f4ac-88d4fd38225mr1277407039f.19.1757603686287;
-        Thu, 11 Sep 2025 08:14:46 -0700 (PDT)
-Received: from ubuntu.localdomain (209-227-169-220.cpe.distributel.net. [209.227.169.220])
-        by smtp.gmail.com with ESMTPSA id ca18e2360f4ac-88f2fabab2bsm68042039f.24.2025.09.11.08.14.44
+        bh=tplQaWj0LuJZs5gP92aThpV6BCVGBwjEo2FRoetI/a8=;
+        b=cUdxfA8ABKEnFORuCJdVH/EwxIegMPiBDbMpGcjOo4bPDaVCMMsS25zbeoyJuyz1Z/
+         ytF8b+OPhDsWpCjw9GQghkmLye1l3Eo2mf2EtpFXTWAneOcyWcdD2ZM7Pv4ry9kKqM3I
+         CV8wp9eG4MZqsU1Dp+ixoO9a5R7MjSxVrfLNUSa4fFZIeNhD2pRDHXRntddbk/6coZwy
+         DihvWU+CzzVPByG4u/4Hipw9xSnclvBoXRbAHxjJPxwlVVKSDSFH44SSziEn2VLg/Lmy
+         bu/Th+fLXt3ASC5CfcAOYrunOq/xHHoDz9pgcCrXy+rNbBADg9bRgiqEyx1XmA+iqO8d
+         1UuA==
+X-Forwarded-Encrypted: i=1; AJvYcCWDLNOesPYjI7TrYZlWimZ8I+wvxKKf/Se2dEN5br+7wk3oVFRtB57Dd6PxYL10n67+4h/bo/qGLTrwkf1NflY=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz88auEMdl+iL5VNCjU1WsnAVL69v8XcoCcsyEEwShNx+m6zax+
+	avNcXJOLLidCaYCYyZKLqEruG6ScQ6eyXI1VtT3nlWrIHplMnlOu4dv2hdDHXszwU1dQHPau3Gi
+	Hq4cwWbWoCTdvA0qNX6j+Fqsd2n3ex+uwZT1j9U3EDvr4VaBBnDRECyRsQMu+mCbvSKzVIt8=
+X-Gm-Gg: ASbGnctGDVfCc9sWIc67KSVTCL5FAcvxA2ed9eu9lU36m/dt/rFknysOFk12Cd/EqIH
+	yOR7FDjsdwatseTJvSaHCh8vgDmyRaDHGPxNWAFtyog5hVbpw7u5XbvVUZdMdhjtzTWAmibLLP7
+	cGpu2SZuSPGSxd0hwFuXQwRuejPvFotLdUgiOgdBAno/H9gZc3NQI7ANHSa6alS8lKwORclK1AY
+	k4MxxyMGVQVVJnuJNJGMIw6qrwkgBSROGvLvOBUM8jTEqsWvsbBAfB+4Bt0W4vtQh/Lxb73R1LB
+	5OHDj7Vd0EY+uSTmqRdyxx7cjLQ2qCv/76cEAXMymLkwjgqjsnwZ2883tqkaIFTUwBTr5bCWut6
+	/fCndls1cW47CoqhNg6tniGpDZqxzR06rhw==
+X-Received: by 2002:a05:6a00:2d16:b0:7aa:4f1d:c458 with SMTP id d2e1a72fcca58-7ae1eda0230mr8572490b3a.19.1762429208692;
+        Thu, 06 Nov 2025 03:40:08 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEVUotlLDMkntNYYi4mBj3e7/x6lXZl4DxAaQeDTqWGqpoOiGkfaB2MP1zjb/rE3tBpq3DVJA==
+X-Received: by 2002:a05:6a00:2d16:b0:7aa:4f1d:c458 with SMTP id d2e1a72fcca58-7ae1eda0230mr8572448b3a.19.1762429208107;
+        Thu, 06 Nov 2025 03:40:08 -0800 (PST)
+Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7af822041d1sm2480040b3a.37.2025.11.06.03.40.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Sep 2025 08:14:45 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: linux-doc@vger.kernel.org,
-	devicetree-spec@vger.kernel.org,
-	devicetree@vger.kernel.org
-Cc: ilias.apalodimas@linaro.org,
-	Raymond Mao <raymond.mao@linaro.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3] docs: devicetree: overlay-notes: recommend top-level compatible in DTSO
-Date: Thu, 11 Sep 2025 08:14:36 -0700
-Message-Id: <20250911151436.2467758-1-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
+        Thu, 06 Nov 2025 03:40:07 -0800 (PST)
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+To: andersson@kernel.org, robh@kernel.org, manivannan.sadhasivam@linaro.org,
+        krzk@kernel.org, helgaas@kernel.org
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org,
+        linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com,
+        krishna.chundru@oss.qualcomm.com
+Subject: [PATCH] schemas: pci: Document PCIe T_POWER_ON
+Date: Thu,  6 Nov 2025 17:09:51 +0530
+Message-Id: <20251106113951.844312-1-krishna.chundru@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -79,76 +95,63 @@ List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: cosWN9zsoeYcGOsCO2IRqz96iVQmcZa6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA2MDA5MSBTYWx0ZWRfX6gxwU1vVHqhH
+ 1jd/2j2mZb6sbW9ygrfZ6TEm6Rtm/poNBnWXuQIN2cndonoOz5354egnxB1t9eExAKG0SgwbfBG
+ 4XSY/qtUvBRQWYqteRY/4Mjq+9KBGNEaEZdX+ZQ8NMfrhXxWGYjAhhMoHaTae9ed2NEQhSWZcJC
+ 3ZEYemMId4GygNFDAR6S7imEq2eqkrqF99tV+fhkDNOZ/9+C2ioIGYYuFz/P/V9CzY1LmfsEZev
+ UDus7UAUY4xT9O+NWAJe85QrOvuYiSdRh+FdSwKnuM0XQpXXEhnhOPN26E4WOr3I9PIvygLdJxP
+ +os/ywCdQ/hsiw19+6KeWJBEGBixJV0OoFjlR1da4JPpyA5B2S36BoNCpRRvaq/NLDNxqn2pVJU
+ c/GYJ5j84HCKMuaAEsyi5yp4ypV1Qg==
+X-Authority-Analysis: v=2.4 cv=XNI9iAhE c=1 sm=1 tr=0 ts=690c8919 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=EUspDBNiAAAA:8 a=fqsP0TYi9zmme8frg18A:9 a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-ORIG-GUID: cosWN9zsoeYcGOsCO2IRqz96iVQmcZa6
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-06_03,2025-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 suspectscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0
+ impostorscore=0 bulkscore=0 phishscore=0 priorityscore=1501 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511060091
 
-When managing multiple base device trees and overlays in a structured
-way (e.g. bundled in firmware or tools), it is helpful to identify the
-intended target base DT for each overlay, which can be done via a
-top-level compatible string in the overlay.
+From PCIe r6, sec 5.5.4 & sec 5.5.5 T POWER_ON is the minimum amount
+of time that each component must wait in L1.2.Exit after sampling CLKREQ#
+asserted before actively driving the interface to ensure no device is ever
+actively driving into an unpowered component and these values are based on
+the components and AC coupling capacitors used in the connection linking
+the two components.
 
-This provides a way to identify which overlays should be applied once the
-DT is selected for the case when a device have a common firmware binary
-which only differs on the DT and overlays.
+Certain controllers may need to program this before enumeration, such
+controllers can use this property to program it.
 
-This patch updates the document with a note and example for this
-practice.
-For more information on this firmware requirement, please see [1].
-
-[1] https://github.com/FirmwareHandoff/firmware_handoff/pull/74
-
-Suggested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
-Changes in v2:
-- Updated commit message.
-Changes in v3
-- Rename to 'overlay-compatible' and rephrase the description accordingly.
+ dtschema/schemas/pci/pci-bus-common.yaml | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
- Documentation/devicetree/overlay-notes.rst | 32 ++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
-
-diff --git a/Documentation/devicetree/overlay-notes.rst b/Documentation/devicetree/overlay-notes.rst
-index 35e79242af9a..77284afba9a4 100644
---- a/Documentation/devicetree/overlay-notes.rst
-+++ b/Documentation/devicetree/overlay-notes.rst
-@@ -103,6 +103,38 @@ The above bar.dtso example modified to use target path syntax is::
-     ---- bar.dtso --------------------------------------------------------------
+diff --git a/dtschema/schemas/pci/pci-bus-common.yaml b/dtschema/schemas/pci/pci-bus-common.yaml
+index 5257339..bbe5510 100644
+--- a/dtschema/schemas/pci/pci-bus-common.yaml
++++ b/dtschema/schemas/pci/pci-bus-common.yaml
+@@ -152,6 +152,15 @@ properties:
+       This property is invalid in host bridge nodes.
+     maxItems: 1
  
- 
-+Overlay identification
-+----------------------
++  t-power-on-us:
++    description:
++      The minimum amount of time that each component must wait in
++      L1.2.Exit after sampling CLKREQ# asserted before actively driving
++      the interface to ensure no device is ever actively driving into an
++      unpowered component. This value is based on the components and AC
++      coupling capacitors used in the connection linking the two
++      components(PCIe r6.0, sec 5.5.4).
 +
-+When managing device tree overlays dynamically - such as bundling multiple base
-+device trees and overlays within firmware, initramfs, or user-space tools - it
-+is important to associate each overlay with its corresponding base device tree.
-+
-+To support this association, each overlay should define a top-level compatible
-+string (referred to as the 'overlay-compatible' string). This string is
-+intended to match the top-level compatible property of the target base device
-+tree.
-+
-+By including this identifier, higher-level software or firmware can determine
-+which base device tree an overlay is compatible with, and apply it accordingly.
-+
-+Example usage::
-+
-+    ---- bar.dtso - overlay with top-level compatible string -------------------
-+	/dts-v1/;
-+	/plugin/;
-+	/ {
-+		overlay-compatible = "corp,foo";
-+
-+		...
-+	};
-+    ---- bar.dtso --------------------------------------------------------------
-+
-+This top-level compatible string is not required by the kernel overlay
-+mechanism itself, but it is strongly recommended for managing overlays in
-+scalable systems.
-+
-+
- Overlay in-kernel API
- --------------------------------
- 
+   supports-clkreq:
+     description:
+       If present this property specifies that CLKREQ signal routing exists from
 -- 
-2.25.1
+2.34.1
 
