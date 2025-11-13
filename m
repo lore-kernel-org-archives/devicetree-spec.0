@@ -1,87 +1,24 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A46932F74D
-	for <devicetree-spec@vger.kernel.org>; Thu, 13 Nov 2025 07:48:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33DC3DDD2
+	for <devicetree-spec@vger.kernel.org>; Thu, 13 Nov 2025 08:29:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763020100; cv=none; b=lrhsU/N4uehl05186dZ2N5EmiS/jle5I1tTN2Vd+vQx8NagNxg6n9gDEcr395f64bMWpVnp182PBDetu/P7jLct8+vGiRQ0s1V+XyChiS8AkXkFw+mCyycvVI8rP86/xIV6SD5SEu78QnZnwGIA8EcXFtQTZM7lY7k8ZiFy7pAE=
+	t=1763022553; cv=none; b=Tu3jUuAXyGkI4EmweDeQdhPe8O4aVQIaYJbVCH2nY0auwmY4r6Id6e0vgeedzXZES1X1mOdIcjWXpJiwqst6R0PduveOzoZlS3bug4K0EdAWmtQf6K2zWAxP6ChxEQvZnaVksMPTI61pg596xKa6ERnICL/9JFUA47joCWEWuXY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763020100; c=relaxed/simple;
-	bh=vFb2M/nGxgnEBD9w5S2ekv3idrtEuY3kFjlfebSCyeg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=R6o4qx9ZKDXPHPLYGqa4gKhv4LlMRx+e7sGdAzPhyVB6FcOBGgznnD/Ogy5GX37TKyvA32SjsPKRxaQNhVPpgm3QmM+MivEjRq8KzYM3b7SAMRXQEgQdGi3iw22QfRCd00jVKzF1Pd+30KNkHzjmpcyKLZRRDDZaZO2v+V10pvM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bUev4afq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=evpGfOT4; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bUev4afq";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="evpGfOT4"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AD11A9u3035322
-	for <devicetree-spec@vger.kernel.org>; Thu, 13 Nov 2025 07:48:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ZhJiozGc7U8ZGJ8uF2XWeIPBKlSbzOs14hlPqFLDlL0=; b=bUev4afqfG1rIKXk
-	adLozXY4vwGey3rmYhB7jvaFd4QdWpywYz0fC2ZUySlVflX6gn5Kk3rrMnw+5Qg+
-	T6UJV396b3J+dRotjg2muurlmmslNjiTZxLPY4QNOP6T4KjJIfxGEQ1IDtqSIm9+
-	+HqWEZA7ZOQUmw8ta6QjliNsBVHuWoQO74XEGqQ9973z7QavTew8F4ik2hLgiROC
-	0kI/ZJM4aSgNA8zR0tXJ3R4AjfR59nTGdlqoQ9T6RDYgeMcR38/tFR5VipCDGm+Y
-	aFO0MwvDpyLyD4436+u6cO2ah4LtDYie4ybWLK5FyA9N9oQWXAjHZBiw2PGkqxIU
-	bAYq2Q==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ad4ju9749-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <devicetree-spec@vger.kernel.org>; Thu, 13 Nov 2025 07:48:11 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-b99d6bd6cc9so534465a12.1
-        for <devicetree-spec@vger.kernel.org>; Wed, 12 Nov 2025 23:48:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1763020091; x=1763624891; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ZhJiozGc7U8ZGJ8uF2XWeIPBKlSbzOs14hlPqFLDlL0=;
-        b=evpGfOT4PWoMD+LQj99PQtAObLm89GzULZm1xLVaIjrCzyTewg2DL12hyufRmgsQDA
-         ypQjbeONOFFY9OJXMh5z8UWmri0T0BnNgZjaApT26r2wsqdnNgy6uhPno4Oyi1LQDy2Q
-         +pBtive8gHlyIo8ZMPYhodGw6R0zWSsfgaTPopsOoh/Nh+RBmNO1JeBKe/0MfsPxZ0I2
-         ZaFQXZ5Nd8zABm9mbb8AaeWZq6WIFyUQoTxWcZbm8i/PB7PA+ads6SAigF6ZAILKpj/h
-         07QBTVCQp5dhQJ9MqqNPMG8jV6Bbup/eyt/myMjJuBZiCJYJg8TGlcyP7Cy4P/ijS2ee
-         SBuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763020091; x=1763624891;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ZhJiozGc7U8ZGJ8uF2XWeIPBKlSbzOs14hlPqFLDlL0=;
-        b=rgzhGFbikxfTDj/PoI1Qyz6/FvYSysamHT4SjNwsK4tFH8mUxux6ioRwzuplie026h
-         g0PHDKZOEiRAK79X/Uieyfglac3HPmBY2hbdFH1npUSOx/FiU3h2L6vcu5pc/Xwe6ACn
-         unffkS90Cp1iZTbRVaeuJwxtAFjQQouG6Yd0TfVO/2NuHeQTCUHG6A3F+ST4xqPDwTJM
-         SY9btfwG4uiLfl/8eDtEGNQBx7TNw5fcy9y/b+8vmiLKc6Y0JYxqmRSyhyps/ZHGFNZY
-         j0L82XOXdRMSzlVueelb2rQ32w8MWqe/4dPpZ45vi73T+kQ2SqT0CYR3YjqcbWJhGsW7
-         qIGA==
-X-Forwarded-Encrypted: i=1; AJvYcCWsBrF4CIukRx7r5Az4dMlY+xsihLfLSoJFlNNBZExucbFaN1vX71uJO2lI2gG/M4LIUOtXz2Ev8yz8uumjEdI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzveZHdgyCGZEOPhZfuQ6p4t3FM3iGR6snL0rIAssLFK6DUruin
-	8QtY1wwNvd9jnBAU5epuBc/VqqIZEsHOVse5ZKlppXDee91p3WagVlXsu3kZv4ifew4arPyKPMC
-	iOq4ceWiuHLkVvipc+YCrXl8QU7u67uCik5SpBTZO5dzKRhs/8Xj8Hjwep4LI5h2Zs+tA0bE=
-X-Gm-Gg: ASbGnctmMf2k7t0tHYHkHWoc8hecG0PwK46Ut8Zb5DD1Al0AcrtcYWLz6K9C6k4Wbut
-	cc/V4eGqCJCo7OQVj0BR9qA8x8GxpDHoBnrUlEwgSizrNR0cEpXTf/bou7AUbkuhbqI3snqmFqh
-	+VkvoiYwk0ciMuLs7klvPQnNYki82DHmZ4ZLnnfSYo/KFNqP8b/4YCnN8ICezUxfBS/wOLE7Hcx
-	61EACY82c0tHwwid1Y5XgXhkzIky8ig4jHWP7jKq/SeSDpw0HvY3z+hDT2t3UbpVQZ4mt2eGC+4
-	wjMtlyH8cT+ma9jT86g098Ao+Lap32D5eB2SGTJvbuyc9fq995gPF+RuSKqhXHFEPfoq7sswdJ4
-	SMcffJn6n0Y4Q7OKjkT+Vwvx/ihVeZ0w=
-X-Received: by 2002:a17:902:ebc6:b0:298:495c:1bf0 with SMTP id d9443c01a7336-2984edd2700mr69775575ad.44.1763020091142;
-        Wed, 12 Nov 2025 23:48:11 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF8rRkEuWW/6gSHvrkhgOhcnbTpcGFokK+8H6N4ylsRW3aMFxk3k4phtF2p1olCGtMTmr/Plw==
-X-Received: by 2002:a17:902:ebc6:b0:298:495c:1bf0 with SMTP id d9443c01a7336-2984edd2700mr69775255ad.44.1763020090661;
-        Wed, 12 Nov 2025 23:48:10 -0800 (PST)
-Received: from [10.218.35.45] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2985c2bed5asm15548045ad.88.2025.11.12.23.48.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 12 Nov 2025 23:48:10 -0800 (PST)
-Message-ID: <9dbae7ca-b24f-4591-99cf-7720ace6a452@oss.qualcomm.com>
-Date: Thu, 13 Nov 2025 13:18:04 +0530
+	s=arc-20240116; t=1763022553; c=relaxed/simple;
+	bh=WkwkFGhjSe/RTTW/9W8KFbpvM90IQfQ0/X6XqByt9+g=;
+	h=Message-ID:Date:MIME-Version:From:To:Cc:Subject:Content-Type; b=s6HTGcF3yES5enkrh+XP22EqkCJFkrHlEr6W1Y+lnNZ3b8EoKbU2/7yvrth+1IcOx3AJz/SWlVLgVAYOJAYboDiFmNrWWqRTbhf+aRgK6HrJ87msJQ1EpY+H9x+iz3dXr/xlp2LssgpbChSmPoAVXVOJxmj1GgFQAQJmy8K0DX8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[127.0.0.1])
+	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+	(envelope-from <a.fatoum@pengutronix.de>)
+	id 1vJShN-0007EK-Ij; Thu, 13 Nov 2025 09:28:57 +0100
+Message-ID: <ebc08400-c16d-4ed0-b487-9aabe13bbf0f@pengutronix.de>
+Date: Thu, 13 Nov 2025 09:28:56 +0100
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -89,98 +26,65 @@ List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] schemas: pci: Document PCIe T_POWER_ON
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: andersson@kernel.org, robh@kernel.org, krzk@kernel.org, helgaas@kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org,
-        linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
-        devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com
-References: <20251110112947.2071036-1-krishna.chundru@oss.qualcomm.com>
- <gqvc3orlyk6l5jq2bpxsf5lvvafmtxcpdquffcpdqdiek3bldh@l3em25rqaldg>
-Content-Language: en-US
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-In-Reply-To: <gqvc3orlyk6l5jq2bpxsf5lvvafmtxcpdquffcpdqdiek3bldh@l3em25rqaldg>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Content-Language: en-US, de-DE, de-BE
+To: "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, devicetree-spec@vger.kernel.org
+Cc: "kernel@pengutronix.de" <kernel@pengutronix.de>, quentin.schulz@cherry.de
+Subject: SoC-specific device tree aliases?
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: Zj6hCCEkxq2wW0cqS7chWP94KtmKPExq
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEzMDA1NCBTYWx0ZWRfX6a8uBxgjryFl
- 2zXJuQOIofdZJAoD5qCRKmlqvxTE6mejS12BF2Qoi89WKA8ZB70HtPzlB0wSuQe5cRQryyCoBfj
- Hvgco9WebkTxih1BfO8whdpG/x1HyajyjgTvL+KXBFI3OSYpY1wiggFhZVP81NMhZh7cpvIFi9z
- WYLQF2DSgudl9s/d2K/QIY2uj6u8ZMw2sMLZym4QPi1LVL8zLOjEbbBgmXfXHbnQiN7x/1cnKNL
- uMFloctDGyL455UrUHamTLgzrYt+Uil8OOzE4pvq11Yvt8ptxOH7gb10tUVyZvpMlw2IUvU1zmg
- p80Dt0OdRPoFtLGgdY62ntqw0k0CZ65N7ePv0dVXDutPaEjSTMULnwUvTmCGqBEouZ25DfsFbsE
- ouuYzqvAf6u5yPbCmw9obfwS/BWC4g==
-X-Authority-Analysis: v=2.4 cv=BdnVE7t2 c=1 sm=1 tr=0 ts=69158d3b cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=5gsRW-pyyPTur7QFVg0A:9 a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-GUID: Zj6hCCEkxq2wW0cqS7chWP94KtmKPExq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-12_06,2025-11-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 bulkscore=0 priorityscore=1501 spamscore=0
- lowpriorityscore=0 suspectscore=0 malwarescore=0 clxscore=1015 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511130054
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: devicetree-spec@vger.kernel.org
+
+Hello,
+
+With /chosen/bootsource now part of dt-schema, I would like to raise a
+related point: The need for SoC-specific device tree aliases.
+
+For many SoCs, there is a canonical numbering for peripherals; it's used
+in the datasheet and BootROMs often makes use of it at runtime to report
+the bootsource as a pair:
+
+  - One value to enumerate type of boot medium (e.g. mmc, spi-nor..)
+  - Another value that describes which instance (e.g. SDHC1, SPI3, ...)
+
+Some examples, where this is the case, are AT91, STM32MP or i.MX.
+
+barebox has traditionally used /aliases to translate BootROM information
+to a device tree node to fixup /chosen/bootsource.
+
+This doesn't work out for many newer SoC support, because of different
+expectations: For upstream, aliases are relevant to a board, while
+barebox traditionally expected them to be SoC-specific (because they
+used to be on i.MX, probably).
+
+To accommodate this, barebox nowadays extends upstream device trees with
+/chosen/barebox,bootsource-${alias} properties, which can be used as
+translation table instead of aliases.
+
+This solves the issue, but there is occasional breakage when upstream
+decides to remove aliases from the SoC DTSI and move them into the
+boards until barebox is made to add the /chosen/barebox, overrides.
+
+As described above, I think the data sheet numbering is pretty much an
+aspect of the hardware and it has a place in the upstream SoC DTSI.
 
 
+So what are the thoughts on adding /soc/aliases or some other top-level
+node to hold this information?
+Or would a h"ardware-label" property or similar be more tenable?
 
-On 11/10/2025 5:33 PM, Manivannan Sadhasivam wrote:
-> On Mon, Nov 10, 2025 at 04:59:47PM +0530, Krishna Chaitanya Chundru wrote:
->>  From PCIe r6, sec 5.5.4 & Table 5-11 in sec 5.5.5 T_POWER_ON is the
->> minimum amount of time(in us) that each component must wait in L1.2.Exit
->> after sampling CLKREQ# asserted before actively driving the interface to
->> ensure no device is ever actively driving into an unpowered component and
->> these values are based on the components and AC coupling capacitors used
->> in the connection linking the two components.
->>
->> This property should be used to indicate the T_POWER_ON for each Root Port.
->>
-> I'm not sure if we should restrict this property to just Root Ports. Defining a
-> property in 'pci-bus-common.yaml' means, all PCI bridges could use it, but this
-> value is applicable to endpoint devices also.
-Better to add in pci-device.yaml then.
-> Also, you might want to add some info that the driver (or DT consumer) should
-> derive the T_POWER_ON Scale and T_POWER_ON Value from this value.
-ack
 
-- Krishna Chaitanya.
-> - Mani
->
->> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
->> ---
->> Changes in v1:
->> - Updated the commiit text (Mani).
->> - Link to v1: https://lore.kernel.org/all/20251110112550.2070659-1-krishna.chundru@oss.qualcomm.com/#t
->>
->>   dtschema/schemas/pci/pci-bus-common.yaml | 9 +++++++++
->>   1 file changed, 9 insertions(+)
->>
->> diff --git a/dtschema/schemas/pci/pci-bus-common.yaml b/dtschema/schemas/pci/pci-bus-common.yaml
->> index 5257339..bbe5510 100644
->> --- a/dtschema/schemas/pci/pci-bus-common.yaml
->> +++ b/dtschema/schemas/pci/pci-bus-common.yaml
->> @@ -152,6 +152,15 @@ properties:
->>         This property is invalid in host bridge nodes.
->>       maxItems: 1
->>   
->> +  t-power-on-us:
->> +    description:
->> +      The minimum amount of time that each component must wait in
->> +      L1.2.Exit after sampling CLKREQ# asserted before actively driving
->> +      the interface to ensure no device is ever actively driving into an
->> +      unpowered component. This value is based on the components and AC
->> +      coupling capacitors used in the connection linking the two
->> +      components(PCIe r6.0, sec 5.5.4).
->> +
->>     supports-clkreq:
->>       description:
->>         If present this property specifies that CLKREQ signal routing exists from
->> -- 
->> 2.34.1
->>
->>
+Thanks!
+Ahmad
+
+-- 
+Pengutronix e.K.                  |                             |
+Steuerwalder Str. 21              | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
 
