@@ -1,176 +1,186 @@
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C233C320387
-	for <devicetree-spec@vger.kernel.org>; Thu, 13 Nov 2025 06:16:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A46932F74D
+	for <devicetree-spec@vger.kernel.org>; Thu, 13 Nov 2025 07:48:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763014596; cv=none; b=oPEf/57n7SgBwxb1mau2wSWFDP9vB4PpsL0vTjXVzxqttMx3YBg7ySsM0DhNybf8muvVaBrIf18+E98D/a6cWOO2aNB/2weZBDKCW3pBcLjxLaFkegRpEGvVLM6V0IyjoduKYPIsgsgpSKppDEjUYLDivOgKKOVjQ5VQWjmRbOM=
+	t=1763020100; cv=none; b=lrhsU/N4uehl05186dZ2N5EmiS/jle5I1tTN2Vd+vQx8NagNxg6n9gDEcr395f64bMWpVnp182PBDetu/P7jLct8+vGiRQ0s1V+XyChiS8AkXkFw+mCyycvVI8rP86/xIV6SD5SEu78QnZnwGIA8EcXFtQTZM7lY7k8ZiFy7pAE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763014596; c=relaxed/simple;
-	bh=vXr4z/5AmuKDK9MkRAtVv/b3MT7Gq4lxxIUxD2UqhlA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=c/xzWuRdlo4IRKVwENlAu7CUhGHet6n1y1s1pieJQCZljMcQ+2r/HpzET8G1cU+CdFnFeutki445kzemeAxZTITxhysqVKqIW+W4G5+guCTWd85LvYoiBrbng81/IEmOYGNSWYc14CYfELiAccB87gV3vO8g1XFiqSJs9aitq18=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MJlZziOi; arc=none smtp.client-ip=209.85.208.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1763020100; c=relaxed/simple;
+	bh=vFb2M/nGxgnEBD9w5S2ekv3idrtEuY3kFjlfebSCyeg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=R6o4qx9ZKDXPHPLYGqa4gKhv4LlMRx+e7sGdAzPhyVB6FcOBGgznnD/Ogy5GX37TKyvA32SjsPKRxaQNhVPpgm3QmM+MivEjRq8KzYM3b7SAMRXQEgQdGi3iw22QfRCd00jVKzF1Pd+30KNkHzjmpcyKLZRRDDZaZO2v+V10pvM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bUev4afq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=evpGfOT4; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MJlZziOi"
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-64320b9bb4bso1015622a12.0
-        for <devicetree-spec@vger.kernel.org>; Wed, 12 Nov 2025 22:16:34 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bUev4afq";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="evpGfOT4"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AD11A9u3035322
+	for <devicetree-spec@vger.kernel.org>; Thu, 13 Nov 2025 07:48:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ZhJiozGc7U8ZGJ8uF2XWeIPBKlSbzOs14hlPqFLDlL0=; b=bUev4afqfG1rIKXk
+	adLozXY4vwGey3rmYhB7jvaFd4QdWpywYz0fC2ZUySlVflX6gn5Kk3rrMnw+5Qg+
+	T6UJV396b3J+dRotjg2muurlmmslNjiTZxLPY4QNOP6T4KjJIfxGEQ1IDtqSIm9+
+	+HqWEZA7ZOQUmw8ta6QjliNsBVHuWoQO74XEGqQ9973z7QavTew8F4ik2hLgiROC
+	0kI/ZJM4aSgNA8zR0tXJ3R4AjfR59nTGdlqoQ9T6RDYgeMcR38/tFR5VipCDGm+Y
+	aFO0MwvDpyLyD4436+u6cO2ah4LtDYie4ybWLK5FyA9N9oQWXAjHZBiw2PGkqxIU
+	bAYq2Q==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ad4ju9749-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <devicetree-spec@vger.kernel.org>; Thu, 13 Nov 2025 07:48:11 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-b99d6bd6cc9so534465a12.1
+        for <devicetree-spec@vger.kernel.org>; Wed, 12 Nov 2025 23:48:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763014593; x=1763619393; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vXr4z/5AmuKDK9MkRAtVv/b3MT7Gq4lxxIUxD2UqhlA=;
-        b=MJlZziOiocbfn5p0sDIcqn8JGRhvZP3lJsp1vTWYcMKjSxcjSIQFJ5rG2R6P8cyDpk
-         ABlOisRQrYZswEP9oBzX2mx4xZxHeggANTywM1wg0x+etQHxV5o/QVhNTF/0O2priB/5
-         OyXdu3dSPuMwDbvZE2lnjLxC0sqv4lv2zgt5j2X43/IAr4nEGeYPV9fFQc8C1CJF/P6D
-         nZ3XrjxaeFm2xmM/7njUxNZXknWIaRHShi6SlXO/bgpk0V6QaCynkfN9LZurFOF7YSu0
-         u9W5vJ90WWUz4/i1XUvp2gkrjTXzRj+OX47zRl3lnvSq6oF8zNbZ94XYfxzjkJSadRf+
-         hrEA==
+        d=oss.qualcomm.com; s=google; t=1763020091; x=1763624891; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ZhJiozGc7U8ZGJ8uF2XWeIPBKlSbzOs14hlPqFLDlL0=;
+        b=evpGfOT4PWoMD+LQj99PQtAObLm89GzULZm1xLVaIjrCzyTewg2DL12hyufRmgsQDA
+         ypQjbeONOFFY9OJXMh5z8UWmri0T0BnNgZjaApT26r2wsqdnNgy6uhPno4Oyi1LQDy2Q
+         +pBtive8gHlyIo8ZMPYhodGw6R0zWSsfgaTPopsOoh/Nh+RBmNO1JeBKe/0MfsPxZ0I2
+         ZaFQXZ5Nd8zABm9mbb8AaeWZq6WIFyUQoTxWcZbm8i/PB7PA+ads6SAigF6ZAILKpj/h
+         07QBTVCQp5dhQJ9MqqNPMG8jV6Bbup/eyt/myMjJuBZiCJYJg8TGlcyP7Cy4P/ijS2ee
+         SBuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763014593; x=1763619393;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=vXr4z/5AmuKDK9MkRAtVv/b3MT7Gq4lxxIUxD2UqhlA=;
-        b=rhVoIy4K6SJZDpdX94XkS5mmNBptgA5DnEt1E5Ww+UhzKp+N6+vSslMzZZ8dfFXfSN
-         Vy6q7eM1vovVqQf3/imqOg6F2oa6urBWvXnkxG7HCUkQLGHWwiziJ17xhKUUueMtfl86
-         nsjJR1mmrA8XU4/ihrd6oODiRQK0nsw7A5/uNb9rplgaufKw+Kt11Xx9Lj14t3/Ha7gY
-         Ulj+c1cKHFvJpopllWqURIsaGmrdC9tanFugZlm0qWUYYYt5YsGbPRMbI0Sz2vHs+XQm
-         f1+d3T3i8rOoq/o6AdtsAL+Ou/ThvJE4y+g6rqqWl5xAXv/0Y7j0cKqKDtyITq4ItBWo
-         Gq6Q==
-X-Forwarded-Encrypted: i=1; AJvYcCU3iKtzb8YoyGPufp41hVyYmtBhwhOeoNg9xpYMvbr9XeeLVU6xTzwOn17luR+yEQdPZasjje20gX3GoN7klgw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzaM1ydaiePn/tnEYyyimk+9BBksJ1qi7O/CGu2f9fPvtqU5Vt7
-	GcwsAw/LOpqfWWXY/+LmJjRnyCjQe/W+mFWqCD6bo/8e7Em7C6TICpG1VT9taoQpNRmt32f+wg6
-	uL+W3W4aPqpbiconQ0AN/+WiRPFM9FPk=
-X-Gm-Gg: ASbGncvaQd8b1BAgvna7AX06Fh4ycirQ+qAdLH5BEFaa3e8BYgw3V0z0LS8+V0EWIgB
-	u5gSXhE/ax+BvZRqwuMENIP7RWbATxOnFt6EGKkEPxtJ/TGIo4BqRVJKhUSAGmbBn/A0dR/M3BO
-	FsQUU8cfav/iKiDRfLDrnQObGr7RguR+UnjBaqOL3VfTz1VC8Ex5xH3b4nI/fGQ5lruQDKXZSLl
-	9kBXitiSc2iizdwuqSGQnBOJaBPn4BfXLzSsvhRgu/8q3+zbiP+in2ZuX0=
-X-Google-Smtp-Source: AGHT+IF0lUMHUkosIjNcmT2zVA/YLbM9CDi0kMvQoY+mWAyW3yJ8I1hbIvOE8r577BhAUOnw4TrJG1tWSe9ZriSdU30=
-X-Received: by 2002:aa7:db42:0:b0:643:eae:b1b6 with SMTP id
- 4fb4d7f45d1cf-64334cf0ec9mr1146356a12.12.1763014593016; Wed, 12 Nov 2025
- 22:16:33 -0800 (PST)
+        d=1e100.net; s=20230601; t=1763020091; x=1763624891;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ZhJiozGc7U8ZGJ8uF2XWeIPBKlSbzOs14hlPqFLDlL0=;
+        b=rgzhGFbikxfTDj/PoI1Qyz6/FvYSysamHT4SjNwsK4tFH8mUxux6ioRwzuplie026h
+         g0PHDKZOEiRAK79X/Uieyfglac3HPmBY2hbdFH1npUSOx/FiU3h2L6vcu5pc/Xwe6ACn
+         unffkS90Cp1iZTbRVaeuJwxtAFjQQouG6Yd0TfVO/2NuHeQTCUHG6A3F+ST4xqPDwTJM
+         SY9btfwG4uiLfl/8eDtEGNQBx7TNw5fcy9y/b+8vmiLKc6Y0JYxqmRSyhyps/ZHGFNZY
+         j0L82XOXdRMSzlVueelb2rQ32w8MWqe/4dPpZ45vi73T+kQ2SqT0CYR3YjqcbWJhGsW7
+         qIGA==
+X-Forwarded-Encrypted: i=1; AJvYcCWsBrF4CIukRx7r5Az4dMlY+xsihLfLSoJFlNNBZExucbFaN1vX71uJO2lI2gG/M4LIUOtXz2Ev8yz8uumjEdI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzveZHdgyCGZEOPhZfuQ6p4t3FM3iGR6snL0rIAssLFK6DUruin
+	8QtY1wwNvd9jnBAU5epuBc/VqqIZEsHOVse5ZKlppXDee91p3WagVlXsu3kZv4ifew4arPyKPMC
+	iOq4ceWiuHLkVvipc+YCrXl8QU7u67uCik5SpBTZO5dzKRhs/8Xj8Hjwep4LI5h2Zs+tA0bE=
+X-Gm-Gg: ASbGnctmMf2k7t0tHYHkHWoc8hecG0PwK46Ut8Zb5DD1Al0AcrtcYWLz6K9C6k4Wbut
+	cc/V4eGqCJCo7OQVj0BR9qA8x8GxpDHoBnrUlEwgSizrNR0cEpXTf/bou7AUbkuhbqI3snqmFqh
+	+VkvoiYwk0ciMuLs7klvPQnNYki82DHmZ4ZLnnfSYo/KFNqP8b/4YCnN8ICezUxfBS/wOLE7Hcx
+	61EACY82c0tHwwid1Y5XgXhkzIky8ig4jHWP7jKq/SeSDpw0HvY3z+hDT2t3UbpVQZ4mt2eGC+4
+	wjMtlyH8cT+ma9jT86g098Ao+Lap32D5eB2SGTJvbuyc9fq995gPF+RuSKqhXHFEPfoq7sswdJ4
+	SMcffJn6n0Y4Q7OKjkT+Vwvx/ihVeZ0w=
+X-Received: by 2002:a17:902:ebc6:b0:298:495c:1bf0 with SMTP id d9443c01a7336-2984edd2700mr69775575ad.44.1763020091142;
+        Wed, 12 Nov 2025 23:48:11 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF8rRkEuWW/6gSHvrkhgOhcnbTpcGFokK+8H6N4ylsRW3aMFxk3k4phtF2p1olCGtMTmr/Plw==
+X-Received: by 2002:a17:902:ebc6:b0:298:495c:1bf0 with SMTP id d9443c01a7336-2984edd2700mr69775255ad.44.1763020090661;
+        Wed, 12 Nov 2025 23:48:10 -0800 (PST)
+Received: from [10.218.35.45] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2985c2bed5asm15548045ad.88.2025.11.12.23.48.06
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 12 Nov 2025 23:48:10 -0800 (PST)
+Message-ID: <9dbae7ca-b24f-4591-99cf-7720ace6a452@oss.qualcomm.com>
+Date: Thu, 13 Nov 2025 13:18:04 +0530
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251110112947.2071036-1-krishna.chundru@oss.qualcomm.com>
- <aRHdiYYcn2uZkLor@wunner.de> <enri4affdgq4q5mibnmhldhqqoybqbdcswohoj5mst2i77ckmu@dwlaqfxyjy3w>
- <CANAwSgQcMDXitA2RLbFsD_v2KoOQMcHywxcxNs-ab-O2JddAuQ@mail.gmail.com> <vnfjiakbgw3s7dxqh3zriifxjoqcjhshat3hrnikebpa57yh3k@erc4nb5enqes>
-In-Reply-To: <vnfjiakbgw3s7dxqh3zriifxjoqcjhshat3hrnikebpa57yh3k@erc4nb5enqes>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Thu, 13 Nov 2025 11:46:16 +0530
-X-Gm-Features: AWmQ_blPalLirVu2H6vvDa6N8fgBoN3hOKiij4FJp2bVsL0Z_mFude8G2oo5hRc
-Message-ID: <CANAwSgR+aaAreZABqXO+0tDW67LnWZzLoU=tXwUi1eN7krceiw@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2] schemas: pci: Document PCIe T_POWER_ON
 To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Lukas Wunner <lukas@wunner.de>, 
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, andersson@kernel.org, robh@kernel.org, 
-	manivannan.sadhasivam@linaro.org, krzk@kernel.org, helgaas@kernel.org, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org, 
-	linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: andersson@kernel.org, robh@kernel.org, krzk@kernel.org, helgaas@kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org,
+        linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com
+References: <20251110112947.2071036-1-krishna.chundru@oss.qualcomm.com>
+ <gqvc3orlyk6l5jq2bpxsf5lvvafmtxcpdquffcpdqdiek3bldh@l3em25rqaldg>
+Content-Language: en-US
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+In-Reply-To: <gqvc3orlyk6l5jq2bpxsf5lvvafmtxcpdquffcpdqdiek3bldh@l3em25rqaldg>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: Zj6hCCEkxq2wW0cqS7chWP94KtmKPExq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEzMDA1NCBTYWx0ZWRfX6a8uBxgjryFl
+ 2zXJuQOIofdZJAoD5qCRKmlqvxTE6mejS12BF2Qoi89WKA8ZB70HtPzlB0wSuQe5cRQryyCoBfj
+ Hvgco9WebkTxih1BfO8whdpG/x1HyajyjgTvL+KXBFI3OSYpY1wiggFhZVP81NMhZh7cpvIFi9z
+ WYLQF2DSgudl9s/d2K/QIY2uj6u8ZMw2sMLZym4QPi1LVL8zLOjEbbBgmXfXHbnQiN7x/1cnKNL
+ uMFloctDGyL455UrUHamTLgzrYt+Uil8OOzE4pvq11Yvt8ptxOH7gb10tUVyZvpMlw2IUvU1zmg
+ p80Dt0OdRPoFtLGgdY62ntqw0k0CZ65N7ePv0dVXDutPaEjSTMULnwUvTmCGqBEouZ25DfsFbsE
+ ouuYzqvAf6u5yPbCmw9obfwS/BWC4g==
+X-Authority-Analysis: v=2.4 cv=BdnVE7t2 c=1 sm=1 tr=0 ts=69158d3b cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=5gsRW-pyyPTur7QFVg0A:9 a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-GUID: Zj6hCCEkxq2wW0cqS7chWP94KtmKPExq
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-12_06,2025-11-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 phishscore=0 bulkscore=0 priorityscore=1501 spamscore=0
+ lowpriorityscore=0 suspectscore=0 malwarescore=0 clxscore=1015 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511130054
 
-Hi Manivannan
 
-On Thu, 13 Nov 2025 at 11:21, Manivannan Sadhasivam <mani@kernel.org> wrote=
-:
->
-> On Thu, Nov 13, 2025 at 10:46:59AM +0530, Anand Moon wrote:
-> > Hi Manivannan
-> >
-> > On Thu, 13 Nov 2025 at 10:01, Manivannan Sadhasivam <mani@kernel.org> w=
-rote:
-> > >
-> > > On Mon, Nov 10, 2025 at 01:41:45PM +0100, Lukas Wunner wrote:
-> > > > On Mon, Nov 10, 2025 at 04:59:47PM +0530, Krishna Chaitanya Chundru=
- wrote:
-> > > > > From PCIe r6, sec 5.5.4 & Table 5-11 in sec 5.5.5 T_POWER_ON is t=
-he
-> > > >
-> > > > Please use the latest spec version as reference, i.e. PCIe r7.0.
-> > > >
-> > > > > minimum amount of time(in us) that each component must wait in L1=
-.2.Exit
-> > > > > after sampling CLKREQ# asserted before actively driving the inter=
-face to
-> > > > > ensure no device is ever actively driving into an unpowered compo=
-nent and
-> > > > > these values are based on the components and AC coupling capacito=
-rs used
-> > > > > in the connection linking the two components.
-> > > > >
-> > > > > This property should be used to indicate the T_POWER_ON for each =
-Root Port.
-> > > >
-> > > > What's the difference between this property and the Port T_POWER_ON=
-_Scale
-> > > > and T_POWER_ON_Value in the L1 PM Substates Capabilities Register?
-> > > >
-> > > > Why do you need this in the device tree even though it's available
-> > > > in the register?
-> > > >
-> > >
-> > > Someone needs to program these registers. In the x86 world, BIOS will=
- do it
-> > > happily, but in devicetree world, OS has to do it. And since this is =
-a platform
-> > > specific value, this is getting passed from devicetree.
-> > >
-> > According to the RK3588 TRM Part 2, the DSP_PCIE_L1SUB_CAPABILITY_REG (=
-0x4)
-> > It is a commonly configurable parameter, It can be tuned on for the
-> > Rockchip platform.
->
-> T_POWER_ON is a generic value defined in the spec. All compatible platfor=
-ms
-> should support setting this value through 'L1 PM Substates Capabilities'
-> register or by platform specific register.
->
-Ok, Thanks.
-> > > - Mani
-> > >
-> > > --
-> > > =E0=AE=AE=E0=AE=A3=E0=AE=BF=E0=AE=B5=E0=AE=A3=E0=AF=8D=E0=AE=A3=E0=AE=
-=A9=E0=AF=8D =E0=AE=9A=E0=AE=A4=E0=AE=BE=E0=AE=9A=E0=AE=BF=E0=AE=B5=E0=AE=
-=AE=E0=AF=8D
-> > >
-> > Thanks
-> > -Anand
-> >
-> > I could not apply this patch
-> >
-> > $ git am ./v2_20251110_krishna_chundru_schemas_pci_document_pcie_t_powe=
-r_on.mbx
-> > Applying: schemas: pci: Document PCIe T_POWER_ON
-> > error: dtschema/schemas/pci/pci-bus-common.yaml: does not exist in inde=
-x
-> > Patch failed at 0001 schemas: pci: Document PCIe T_POWER_ON
-> > hint: Use 'git am --show-current-patch=3Ddiff' to see the failed patch
-> > hint: When you have resolved this problem, run "git am --continue".
-> > hint: If you prefer to skip this patch, run "git am --skip" instead.
-> > hint: To restore the original branch and stop patching, run "git am --a=
-bort".
-> > hint: Disable this message with "git config set advice.mergeConflict fa=
-lse"
->
-> This is a dtschema patch, not Linux kernel.
->
-Ok, got that.
+
+On 11/10/2025 5:33 PM, Manivannan Sadhasivam wrote:
+> On Mon, Nov 10, 2025 at 04:59:47PM +0530, Krishna Chaitanya Chundru wrote:
+>>  From PCIe r6, sec 5.5.4 & Table 5-11 in sec 5.5.5 T_POWER_ON is the
+>> minimum amount of time(in us) that each component must wait in L1.2.Exit
+>> after sampling CLKREQ# asserted before actively driving the interface to
+>> ensure no device is ever actively driving into an unpowered component and
+>> these values are based on the components and AC coupling capacitors used
+>> in the connection linking the two components.
+>>
+>> This property should be used to indicate the T_POWER_ON for each Root Port.
+>>
+> I'm not sure if we should restrict this property to just Root Ports. Defining a
+> property in 'pci-bus-common.yaml' means, all PCI bridges could use it, but this
+> value is applicable to endpoint devices also.
+Better to add in pci-device.yaml then.
+> Also, you might want to add some info that the driver (or DT consumer) should
+> derive the T_POWER_ON Scale and T_POWER_ON Value from this value.
+ack
+
+- Krishna Chaitanya.
 > - Mani
 >
-> --
-> =E0=AE=AE=E0=AE=A3=E0=AE=BF=E0=AE=B5=E0=AE=A3=E0=AF=8D=E0=AE=A3=E0=AE=A9=
-=E0=AF=8D =E0=AE=9A=E0=AE=A4=E0=AE=BE=E0=AE=9A=E0=AE=BF=E0=AE=B5=E0=AE=AE=
-=E0=AF=8D
-Thanks
--Anand
+>> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+>> ---
+>> Changes in v1:
+>> - Updated the commiit text (Mani).
+>> - Link to v1: https://lore.kernel.org/all/20251110112550.2070659-1-krishna.chundru@oss.qualcomm.com/#t
+>>
+>>   dtschema/schemas/pci/pci-bus-common.yaml | 9 +++++++++
+>>   1 file changed, 9 insertions(+)
+>>
+>> diff --git a/dtschema/schemas/pci/pci-bus-common.yaml b/dtschema/schemas/pci/pci-bus-common.yaml
+>> index 5257339..bbe5510 100644
+>> --- a/dtschema/schemas/pci/pci-bus-common.yaml
+>> +++ b/dtschema/schemas/pci/pci-bus-common.yaml
+>> @@ -152,6 +152,15 @@ properties:
+>>         This property is invalid in host bridge nodes.
+>>       maxItems: 1
+>>   
+>> +  t-power-on-us:
+>> +    description:
+>> +      The minimum amount of time that each component must wait in
+>> +      L1.2.Exit after sampling CLKREQ# asserted before actively driving
+>> +      the interface to ensure no device is ever actively driving into an
+>> +      unpowered component. This value is based on the components and AC
+>> +      coupling capacitors used in the connection linking the two
+>> +      components(PCIe r6.0, sec 5.5.4).
+>> +
+>>     supports-clkreq:
+>>       description:
+>>         If present this property specifies that CLKREQ signal routing exists from
+>> -- 
+>> 2.34.1
+>>
+>>
+
