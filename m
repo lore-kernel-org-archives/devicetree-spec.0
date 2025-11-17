@@ -1,175 +1,202 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA66D326956;
-	Mon, 17 Nov 2025 10:41:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E508194AD7
+	for <devicetree-spec@vger.kernel.org>; Mon, 17 Nov 2025 12:56:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763376077; cv=none; b=lZhMPy2SnpkmKkf1hprvqH0vx5RhdTaOn/IeQ+UrwXfqwHwDa3Ywd8AJY9X3Ott6Hftm2i2Sc9CY1hvfgcTQqNlrqo78LNXGkMw3NeFiOzwvINRsdBzssSvqzOcpKCRyxhR/d1UCj5QZEh746Opng8HPLVgPET8RYT4kHUEVFuw=
+	t=1763384208; cv=none; b=VVi4x4fk8LVtnB9h7gkbRzG/DbuirnVrDaWibbcOn3ROvoefTGYrOWb0sLCyE+V7U2itK/EekCSe7EDAZlkgvRGH4N+yCjQvwmCBBWS8Ax0gs1I6eXZ4l3Ixl6alQBEsog9ihIXYoWavGJ2gQsNOnH6Oq9VlAzzMvHT6CeOCwZI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763376077; c=relaxed/simple;
-	bh=2qPbx9mVBr3uy8j3ss2BO+2cePvtQMpugZQlpaK/bIo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qz+wzP4J5Xg68daPUenvgvx1mby6udEuRqBY+l8Z0buEk3aaddmSKrxHgJY/NVE8A56FkpVfgk8y/zFPySo8tM+ewkRD3DWLbE935bNqG24WJI+zbBn0R8X0zDNxjTkkZlVhznIoa/5x0fM/MBGDZWeCOx8URCNx16kwH9ySG1E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HHWAfKxb; arc=none smtp.client-ip=10.30.226.201
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HHWAfKxb"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46DD4C116B1;
-	Mon, 17 Nov 2025 10:41:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1763376076;
-	bh=2qPbx9mVBr3uy8j3ss2BO+2cePvtQMpugZQlpaK/bIo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=HHWAfKxb8rm1c4pgZb38nfg4FuY+J34nPxeZtTyhjftyeCCEFHCRSGk4UD/fuACE3
-	 uzwULp020SbmEjTqlxKgVAG8ou6XNoWsc3r8xiHX9OUySNcN4nml7PlRlNYnVuk+xX
-	 +i/Pesb23uvdWgu2fH2ItAwO7TdDxB2ZoxZQfznBkCspwOqihmYULl9qxnhzSgB6wx
-	 Um9E+zkFWQ1rga8V4yGTOH7y3sNCErX0NC1Tpuikn79vvsGdlUWGN442bUS+4/bRwd
-	 EsZiAdvAUVz1dbobTBTM6suK9A69HCThy8poH2By3Dz4wDAMElnHl+/OIOjCwKwrZ2
-	 a/fKlZpz27MOQ==
-Message-ID: <e5502ec8-0c55-47ce-a9e5-62e137c9808b@kernel.org>
-Date: Mon, 17 Nov 2025 11:41:12 +0100
+	s=arc-20240116; t=1763384208; c=relaxed/simple;
+	bh=0SXdMZLbyuzzaPsKS2Cii36mpzbCUWpkd/CpZzx9Q08=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=JUysdKaQOhxwKtCfSLNErzhMT28dz1iWECnyOtB4/GAsBdKrR9FKjatJa6zop9rv+0/GDZa6gbnOM4G4695n+s9C2DRX8ALPjjshKrTfmnzJbFj/tN3o0+XB8NrZLdTDqnzO+cSeJJyHuOeXJ51ZR2EcUlZ+TwRRvJYTeX/aiVM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <mkl@pengutronix.de>)
+	id 1vKymZ-0001xi-Nr; Mon, 17 Nov 2025 13:56:35 +0100
+Received: from moin.white.stw.pengutronix.de ([2a0a:edc0:0:b01:1d::7b] helo=bjornoya.blackshift.org)
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <mkl@pengutronix.de>)
+	id 1vKymZ-000uil-1F;
+	Mon, 17 Nov 2025 13:56:35 +0100
+Received: from pengutronix.de (p54b152ce.dip0.t-ipconnect.de [84.177.82.206])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: mkl-all@blackshift.org)
+	by smtp.blackshift.org (Postfix) with ESMTPSA id 09E514A151B;
+	Mon, 17 Nov 2025 12:56:35 +0000 (UTC)
+Date: Mon, 17 Nov 2025 13:56:34 +0100
+From: Marc Kleine-Budde <mkl@pengutronix.de>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Sascha Hauer <s.hauer@pengutronix.de>, 
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Ahmad Fatoum <a.fatoum@pengutronix.de>, Rob Herring <robh@kernel.org>, devicetree-spec@vger.kernel.org, 
+	quentin.schulz@cherry.de, "kernel@pengutronix.de" <kernel@pengutronix.de>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>
+Subject: Re: SoC-specific device tree aliases?
+Message-ID: <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
+References: <ebc08400-c16d-4ed0-b487-9aabe13bbf0f@pengutronix.de>
+ <58816b68-3b09-4320-9a4e-09f2c2b2d0fa@kernel.org>
+ <aRrcRZvdrbAmsCm_@pengutronix.de>
+ <8ce701c9-6c8d-4b3e-8706-760b8aba89fc@kernel.org>
+ <aRr6JLMplFVeHcjj@pengutronix.de>
+ <e5502ec8-0c55-47ce-a9e5-62e137c9808b@kernel.org>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="dr3j23cwjssp2sgf"
+Content-Disposition: inline
+In-Reply-To: <e5502ec8-0c55-47ce-a9e5-62e137c9808b@kernel.org>
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: mkl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: devicetree-spec@vger.kernel.org
+
+
+--dr3j23cwjssp2sgf
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 Subject: Re: SoC-specific device tree aliases?
-To: Sascha Hauer <s.hauer@pengutronix.de>
-Cc: Ahmad Fatoum <a.fatoum@pengutronix.de>,
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, devicetree-spec@vger.kernel.org,
- "kernel@pengutronix.de" <kernel@pengutronix.de>, quentin.schulz@cherry.de
-References: <ebc08400-c16d-4ed0-b487-9aabe13bbf0f@pengutronix.de>
- <58816b68-3b09-4320-9a4e-09f2c2b2d0fa@kernel.org>
- <aRrcRZvdrbAmsCm_@pengutronix.de>
- <8ce701c9-6c8d-4b3e-8706-760b8aba89fc@kernel.org>
- <aRr6JLMplFVeHcjj@pengutronix.de>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 a/A=
-In-Reply-To: <aRr6JLMplFVeHcjj@pengutronix.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
 
-On 17/11/2025 11:34, Sascha Hauer wrote:
-> On Mon, Nov 17, 2025 at 10:52:49AM +0100, Krzysztof Kozlowski wrote:
->> On 17/11/2025 09:26, Sascha Hauer wrote:
->>> On Mon, Nov 17, 2025 at 08:38:48AM +0100, Krzysztof Kozlowski wrote:
->>>> On 13/11/2025 09:28, Ahmad Fatoum wrote:
->>>>> Hello,
->>>>>
->>>>> With /chosen/bootsource now part of dt-schema, I would like to raise a
->>>>> related point: The need for SoC-specific device tree aliases.
->>>>>
->>>>> For many SoCs, there is a canonical numbering for peripherals; it's used
->>>>> in the datasheet and BootROMs often makes use of it at runtime to report
->>>>> the bootsource as a pair:
->>>>>
->>>>>   - One value to enumerate type of boot medium (e.g. mmc, spi-nor..)
->>>>>   - Another value that describes which instance (e.g. SDHC1, SPI3, ...)
->>>>>
->>>>> Some examples, where this is the case, are AT91, STM32MP or i.MX.
->>>>>
->>>>> barebox has traditionally used /aliases to translate BootROM information
->>>>> to a device tree node to fixup /chosen/bootsource.
->>>>>
->>>>> This doesn't work out for many newer SoC support, because of different
->>>>> expectations: For upstream, aliases are relevant to a board, while
->>>>> barebox traditionally expected them to be SoC-specific (because they
->>>>> used to be on i.MX, probably).
->>>>
->>>> Please state exactly the problem - you have aliases in DTS but
->>>> bootsource in DTSI? Then that's clearly mixup - you need to define them
->>>> in the same place. Aliases are in DTS (I see here other thread on that),
->>>> so stdout-path is also in DTS.
->>>>
->>>> Or you don't have bootsource in DTSI at all because barebox invents it
->>>> regardless of actual aliases? Then shouldn't this be an obvious issue?
->>>> You cannot have barebox as second source of aliases.
->>>>
->>>>>
->>>>> To accommodate this, barebox nowadays extends upstream device trees with
->>>>> /chosen/barebox,bootsource-${alias} properties, which can be used as
->>>>> translation table instead of aliases.
->>>>>
->>>>> This solves the issue, but there is occasional breakage when upstream
->>>>> decides to remove aliases from the SoC DTSI and move them into the
->>>>> boards until barebox is made to add the /chosen/barebox, overrides.
->>>>>
->>>>> As described above, I think the data sheet numbering is pretty much an
->>>>> aspect of the hardware and it has a place in the upstream SoC DTSI.
->>>>>
->>>>>
->>>>> So what are the thoughts on adding /soc/aliases or some other top-level
->>>>> node to hold this information?
->>>>> Or would a h"ardware-label" property or similar be more tenable?
->>>>
->>>> So you want to map full node path to some alias, so later you can map
->>>> that alias back to full node path, right? This sounds like quite
->>>> redundant information in DTS just to avoid impact of node reshuffling
->>>> (like unit address changes). In DTS-source-code realm, we solved it with
->>>> phandles. Maybe this would help here?
->>>
->>> We want aliases that map from the hardware numbers of a device as used
->>> in the reference manuals to the actual device nodes. One reason why we
->>> need it is to get the device node a SoC has booted from. Many SoCs have
->>> registers which describe <bootsource> <instance number>. We want to get
->>> the device node from that information.
->>
->> Ah, so you don't map from full node path but from some value in register
->> and you want to store these values as alias.
-> 
-> Not sure if we mean the same when you say "store these values as alias".
-> 
-> What we want to do is a SoC dtsi providing something like:
+On 17.11.2025 11:41:12, Krzysztof Kozlowski wrote:
+> On 17/11/2025 11:34, Sascha Hauer wrote:
+> > On Mon, Nov 17, 2025 at 10:52:49AM +0100, Krzysztof Kozlowski wrote:
+> >> On 17/11/2025 09:26, Sascha Hauer wrote:
+> >>> On Mon, Nov 17, 2025 at 08:38:48AM +0100, Krzysztof Kozlowski wrote:
+> >>>> On 13/11/2025 09:28, Ahmad Fatoum wrote:
+> >>>>> Hello,
+> >>>>>
+> >>>>> With /chosen/bootsource now part of dt-schema, I would like to rais=
+e a
+> >>>>> related point: The need for SoC-specific device tree aliases.
+> >>>>>
+> >>>>> For many SoCs, there is a canonical numbering for peripherals; it's=
+ used
+> >>>>> in the datasheet and BootROMs often makes use of it at runtime to r=
+eport
+> >>>>> the bootsource as a pair:
+> >>>>>
+> >>>>>   - One value to enumerate type of boot medium (e.g. mmc, spi-nor..)
+> >>>>>   - Another value that describes which instance (e.g. SDHC1, SPI3, =
+=2E..)
+> >>>>>
+> >>>>> Some examples, where this is the case, are AT91, STM32MP or i.MX.
+> >>>>>
+> >>>>> barebox has traditionally used /aliases to translate BootROM inform=
+ation
+> >>>>> to a device tree node to fixup /chosen/bootsource.
+> >>>>>
+> >>>>> This doesn't work out for many newer SoC support, because of differ=
+ent
+> >>>>> expectations: For upstream, aliases are relevant to a board, while
+> >>>>> barebox traditionally expected them to be SoC-specific (because they
+> >>>>> used to be on i.MX, probably).
+> >>>>
+> >>>> Please state exactly the problem - you have aliases in DTS but
+> >>>> bootsource in DTSI? Then that's clearly mixup - you need to define t=
+hem
+> >>>> in the same place. Aliases are in DTS (I see here other thread on th=
+at),
+> >>>> so stdout-path is also in DTS.
+> >>>>
+> >>>> Or you don't have bootsource in DTSI at all because barebox invents =
+it
+> >>>> regardless of actual aliases? Then shouldn't this be an obvious issu=
+e?
+> >>>> You cannot have barebox as second source of aliases.
+> >>>>
+> >>>>>
+> >>>>> To accommodate this, barebox nowadays extends upstream device trees=
+ with
+> >>>>> /chosen/barebox,bootsource-${alias} properties, which can be used as
+> >>>>> translation table instead of aliases.
+> >>>>>
+> >>>>> This solves the issue, but there is occasional breakage when upstre=
+am
+> >>>>> decides to remove aliases from the SoC DTSI and move them into the
+> >>>>> boards until barebox is made to add the /chosen/barebox, overrides.
+> >>>>>
+> >>>>> As described above, I think the data sheet numbering is pretty much=
+ an
+> >>>>> aspect of the hardware and it has a place in the upstream SoC DTSI.
+> >>>>>
+> >>>>>
+> >>>>> So what are the thoughts on adding /soc/aliases or some other top-l=
+evel
+> >>>>> node to hold this information?
+> >>>>> Or would a h"ardware-label" property or similar be more tenable?
+> >>>>
+> >>>> So you want to map full node path to some alias, so later you can map
+> >>>> that alias back to full node path, right? This sounds like quite
+> >>>> redundant information in DTS just to avoid impact of node reshuffling
+> >>>> (like unit address changes). In DTS-source-code realm, we solved it =
+with
+> >>>> phandles. Maybe this would help here?
+> >>>
+> >>> We want aliases that map from the hardware numbers of a device as used
+> >>> in the reference manuals to the actual device nodes. One reason why we
+> >>> need it is to get the device node a SoC has booted from. Many SoCs ha=
+ve
+> >>> registers which describe <bootsource> <instance number>. We want to g=
+et
+> >>> the device node from that information.
+> >>
+> >> Ah, so you don't map from full node path but from some value in regist=
+er
+> >> and you want to store these values as alias.
+> >
+> > Not sure if we mean the same when you say "store these values as alias".
+> >
+> > What we want to do is a SoC dtsi providing something like:
+>
+> I meant how your bootloader/barebox generates this information.
 
-I meant how your bootloader/barebox generates this information.
+Most SoC have 1 or 2 registers where you can read the source where the
+system has booted from.
 
+One register contains the information such as eMMC, NAND, USB, serial
+download, ... the other register contains the information about which
+instance, e.g. 0, 1, 2... The boot loader combines both pieces of
+information and knows the boot source of the system.
 
-Best regards,
-Krzysztof
+The problem we want to solve is the mapping from the SoC specific
+numbering of the registers to the devices in the DT.
+
+regards,
+Marc
+
+--=20
+Pengutronix e.K.                 | Marc Kleine-Budde          |
+Embedded Linux                   | https://www.pengutronix.de |
+Vertretung N=C3=BCrnberg              | Phone: +49-5121-206917-129 |
+Amtsgericht Hildesheim, HRA 2686 | Fax:   +49-5121-206917-9   |
+
+--dr3j23cwjssp2sgf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEn/sM2K9nqF/8FWzzDHRl3/mQkZwFAmkbG38ACgkQDHRl3/mQ
+kZyDlgf+M1oE2u20KvrVgPcM3R7EC6zrj0ndK6A2Tq14t438d2B8Mh9RNBjDZJhM
+U6v0aRP8xJQRHlkJ6b0ioq3wlXbA4n3kwPmY2cVBy4tnMXT34EkuWXsbr+NWVBpO
+WLWvrhqIrityasvGLeD1jkCisoicEw5vapfO62qAsokDawA3zq3tCXjeahCoAWQw
+o/Iyl0z6J+NJOfGELuG0jX392SnZuWW1p1hL5EN1oNq7z6UQPniLoudLuZd+aaJE
+H6DrMJ0c/KPwd01gxWh41WcmK3azu+5uJcLCsJWHb9N1nLEG9CaCYt97KsHPmrKU
+WUIqoS7k7SvRXbWE3eL0RZ/VqnIbyg==
+=5H4S
+-----END PGP SIGNATURE-----
+
+--dr3j23cwjssp2sgf--
