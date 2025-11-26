@@ -1,51 +1,50 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C2F4324B1C;
-	Wed, 26 Nov 2025 13:30:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63309302CDF;
+	Wed, 26 Nov 2025 14:44:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764163813; cv=none; b=M8FAWCheh1z/gzwRKHMi2au/WtgJuVtTMxZZ5QPqh47J03QX4Sh5gkhsovTJPxTcvB4lzG5XyW6nYLWmBgQa4v9xUoXnUYiWwynx+9Fcd39K2JZm6D31xrPuybd6NjOCqGUldRCdk0gBPnNSXW/IrHRtQxMOWDvBMLpXMgyrC4Y=
+	t=1764168251; cv=none; b=D7K1kUMy2xVGiOaEWMOdFwE6z2VzLDdezaLXe2U/QGgFvqJg6WOPaM3v3oNT0gUEYtb/9nvPka7Jyyqc+IPNYxwTTYOYjwbT+7QrQY8kRB8FfM3SFVEhfsJNl6RqH+jPTlq8XVOgt3xw0CLkmnI5uk5ssTuAAVX18tO0aPrWj+o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764163813; c=relaxed/simple;
-	bh=Z216M+xUGw2GstoG94tVpUUtHanANw2APL6ZZLCKi5c=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ICZSlK2A6tIzgM0quJWyCnpOcpQYHZhHqbM9Y1yLJtt8u/iJi5VgJgInlGYJsePbfEXT6gEMg9NAftP7z2yJezp66/kL15x7c5cDQHCnFUQtLeoUDGu45itvD5zyDFus64lOZKZ5qxItdn1DIO5ksnjxlCLU15Km2pz5nEdjz/4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JTLKoOxJ; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1764168251; c=relaxed/simple;
+	bh=CaXdK+vzZdACfgHpBANqiwt7O2iyXlQl5re8FsK88co=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To; b=dBmJVFrcmOV0pg0/aWfTSZHnqWD/ZWGE3DQrOosCQziADs1Sat36on9v8qYAsPWDHcWusdkyuLVNloeugkm45vJfy+6GsgXDL/5w4nK9yZhFZ8anlUVjZ+ttUWwCEKf6+Ji8KuBv9MtWW/IbYVii6V090e5/b1SBtA88NUjbSQc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ssx6gYoB; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JTLKoOxJ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D588C113D0;
-	Wed, 26 Nov 2025 13:30:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ssx6gYoB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C96B8C4CEF7;
+	Wed, 26 Nov 2025 14:44:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1764163811;
-	bh=Z216M+xUGw2GstoG94tVpUUtHanANw2APL6ZZLCKi5c=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=JTLKoOxJ/NGVlRDVdmfNjZa18GbXEZhc/GKcGJ3CLW3pq9T0qkySQnQXJ4ibnLPcN
-	 tnuQd8LWO9dNUyyTuqthIWzFeB19q8bXniLWRurwd4AmRtRAUgKITQdRmRJshX5cOH
-	 rdPpL/zNG3SP6Ak8U6cLFZyZR+yx+U9e5Z0qbMFi6m8pRYGY5gOy/oBGaUZp+gk6PC
-	 iHS3cu0DDfTOgpAtWvP3WL+nYUi1g7s8M+HCDIjX1MfML/ovyTlxOBIAJ+RVQDOZ4G
-	 cZXUdI4OryIP5JsYiZjVSO28j986fydaGlVI3nrJe4o1ZzVPl/aYFiL/94cyJ/aKzo
-	 c6IxUrgl0JNTg==
-Date: Wed, 26 Nov 2025 19:00:00 +0530
-From: Manivannan Sadhasivam <mani@kernel.org>
+	s=k20201202; t=1764168250;
+	bh=CaXdK+vzZdACfgHpBANqiwt7O2iyXlQl5re8FsK88co=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:From;
+	b=Ssx6gYoBmcnMtyX1VwaoNqJ/PBMS9NEkbNm8RP2uOl0B6VQhn+duPP8p7OziVpHEH
+	 /vGRvFBUrt850rzDHIUGr80SxUGHpLsDxFAoRPPhpUohkCcKPY6PTqUR6dHTvcKMJ1
+	 LWqc7Ss/wSHgp4ffrVoTfYeCXo/Gj7CbRMJw56n+4vY1GZHXYtK/etbsRKR5kFepXG
+	 zKERq7Bgc0TK9Narnaap9m6f4r+U+xKsEVt+GP8IPQ1uZtXZQVdehIDGDRWWRzMgMW
+	 OyS+BRsc1fdQOJIEtq/keFqx1RVT/kPV5Vwv7CrzGwKusHR1myhZHVwnp0QZnHlqFH
+	 65HLeFzy03sIA==
+Date: Wed, 26 Nov 2025 08:44:09 -0600
+From: Bjorn Helgaas <helgaas@kernel.org>
 To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Cc: andersson@kernel.org, robh@kernel.org, krzk@kernel.org, 
-	helgaas@kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org, linux-pci@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com, 
+Cc: andersson@kernel.org, robh@kernel.org, mani@kernel.org, krzk@kernel.org,
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+	lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org,
+	linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+	devicetree-spec@vger.kernel.org, quic_vbadigan@quicinc.com,
 	lukas@wunner.de
 Subject: Re: [PATCH v3] schemas: pci: Document PCIe T_POWER_ON
-Message-ID: <ek7xcuknyoadyel7btqqhdeqlw77yjt6itzzsujxud36rj4hjw@yzxj6lce2qy4>
-References: <20251126103112.838549-1-krishna.chundru@oss.qualcomm.com>
+Message-ID: <20251126144409.GA2825768@bhelgaas>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 In-Reply-To: <20251126103112.838549-1-krishna.chundru@oss.qualcomm.com>
 
 On Wed, Nov 26, 2025 at 04:01:12PM +0530, Krishna Chaitanya Chundru wrote:
@@ -58,17 +57,11 @@ On Wed, Nov 26, 2025 at 04:01:12PM +0530, Krishna Chaitanya Chundru wrote:
 > 
 > This property should be used to indicate the T_POWER_ON and drivers using
 > this property are responsible for parsing both the scale and the value of
-
-s/parsing/programming
-
 > T_POWER_ON to comply with the PCIe specification.
-> 
+
+Add space before open "(" above and in description below.
+
 > Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-
-Acked-by: Manivannan Sadhasivam <mani@kernel.org>
-
-- Mani
-
 > ---
 > Changes in v2:
 > - Move the property to pci-device.yaml so that it will be applicable to
@@ -105,6 +98,3 @@ Acked-by: Manivannan Sadhasivam <mani@kernel.org>
 > -- 
 > 2.34.1
 > 
-
--- 
-மணிவண்ணன் சதாசிவம்
