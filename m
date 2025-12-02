@@ -1,284 +1,229 @@
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [78.32.30.218])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17149191F91
-	for <devicetree-spec@vger.kernel.org>; Tue,  2 Dec 2025 03:31:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B52A1FD4;
+	Tue,  2 Dec 2025 10:07:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=78.32.30.218
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764646294; cv=none; b=jzFFn2Z0nAhvJ17wV+HDm6qhz2vu/lKz4OxsUVr6ITcFW/bNyaYX+y1c69Wccv6aELPlZLlWLZnkGwA9AbROeRE9ueoORanLk2d2yvhSq7Cg4ucl2solrF5EEw8X8/vGhg5mI8K8TGO18e+4TCY6j9ZwtyGRmcvfVU0UACnI5lc=
+	t=1764670050; cv=none; b=Ifq6x5VZU57oi7U8hbdk0FdjrtR/CAhAapCcpE4pUoeMoWn8bPPPIKNP+trtBkivxxBPfMqGkx3oa37FE2WCvXH3AY/03MV7RRTDE6YGOcaPqhBjyW82rLrwUEwXpwc7kEcpLE2gOM/cxnFCPArsVZLjY06x91/PbX8KLK+pqQU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764646294; c=relaxed/simple;
-	bh=wyinoc4xaY1OzgCf76hkfzZu6NKt+z87cHaL8MQdtdk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=oyMXip2XZ2IpMh+fkQcsBeAEj0AIrxBoEpPQmyE6pU4tKMlYLc5od0Bih6NhowmWkQl7EJss+RI364AU5GpceGbVgEfoqOJFbJJ7Cy2KjUJmh41mSnl8gaeVnX2vLI/RC3L5uI56xM2pSmQt9Oh+/JpgZIICuzVou+x+F/JDlFI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=Pf5CxoU2; arc=none smtp.client-ip=209.85.167.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	s=arc-20240116; t=1764670050; c=relaxed/simple;
+	bh=W1jo2FzA8QJoxuxxRreNhXS6x9rg2V/nqo9oprNWXdg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=tB7OdtLZ6kGLHSWMFtfRnda7Rwa9X2RFduJwUm1t2OD77f8tcimo/EMbzUsQKzrXdeQi5PViZVMYGoYMNFEVc2lSSDAa/K7ybtP3U+n9LX0eXLhhFnBnoBRKLsHhTyyzhUA8UcRjaL7q8+pcIXI968vlNM9i1seuEBwEmbl59F0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=armlinux.org.uk; spf=none smtp.mailfrom=armlinux.org.uk; dkim=pass (2048-bit key) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b=Yli6UluX; arc=none smtp.client-ip=78.32.30.218
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=armlinux.org.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=armlinux.org.uk
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="Pf5CxoU2"
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-595819064cdso6562549e87.0
-        for <devicetree-spec@vger.kernel.org>; Mon, 01 Dec 2025 19:31:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1764646290; x=1765251090; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=UISp/QKH49pzmuCcD0EsuuYAsPOsnKu2RiSc8caIOyQ=;
-        b=Pf5CxoU26gks7QsnkMKSMnOYpPy5ybJ7JyJ9b9nK1MGmvlapsFV5E/cgRbTGNqJD3d
-         ONdgCKOfouITaGalD992vX+lFy8SAXCvrw7kWiU10X2Lhg8sM2E+aeQJTdnJMFApf8Gn
-         dzKRnXrf7YkzcMpTAwl55OhfqmvH7YGZyE5SE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764646290; x=1765251090;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=UISp/QKH49pzmuCcD0EsuuYAsPOsnKu2RiSc8caIOyQ=;
-        b=L9Hl+/VYlDj1Y1RokeQOdTWvCcV0RMLcmoCEfzVKv41Zs7ASUbUeruxjefF3FH0Ym/
-         JZVMcKDi+8qHP/159aAEPRhqCQvNoUe/H+Rucvo2cMJsB/CWpYSRiCP+QKJxCOMEtrZG
-         UKnnd255lRhpzNK8TwINbX7gazc44iFqHn/75TMAI/O50sz+MDdoZMVJ7RpYd9aT/PHl
-         RPuGTSrHFYi/aTyYLq+3v0Vc6NDLnXt6RyJHvGSJNxWWSaXMxQqOjc387F1l9V/10Wwi
-         V/pAzGwlu5Ojcf1xN37DIIWSTKP6InUxDJKtbGq1Nbc5a5Reva/WGIR4adaISvcBB6yW
-         mNOQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXuTbzc51RxCZqThSH1/WhjcDHfCQiDM2CFNtfCUcL1rU1GiGxkkcV9+MMywvucDNql9WRcB/mEL45h23+DyPI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyA/PW6BTNyDn4qa0FUT52dGCqQMgtYUzNRcti5/bVGJ2WNSmOo
-	k71tcBFvydZASjSFWkju7RM/3JWzS2QBBZI+UmCM4a8iBU51qSWdGK1JkzNmJ9ISPth4NxAvboc
-	rlUOUPwD8BP1t8mOtMQUK0UWJJB4Wb7hdZ+dnWo8A
-X-Gm-Gg: ASbGncsWjQs6pSSiHVU8uIVHnJf/mi5w3isrAoyFZE5p7NfLELtsfzYZCf7vlvLxAd+
-	8C4wL3qa810mpPyXbFZvLxzSCUMtiB2ju/a+ujh22FasDZRJS1vy2HQSqWVc267c4UyXcsISYl4
-	byHoaafWMuxtYBSw21xh2mMH0pjSvBWmajw3LK2Kvn7KB3lKcOSKX983B1UXL/OgDOLXOgb1bya
-	FgSh+wm/hRASdAMUVPTkqeYZI00N0fU8zpJJpqJLFLXUzPHlBB6duVom/PW4JK5x4p9Gx7gJogP
-	i4uIXPAuz9RIzX29vzIYfzZgJw==
-X-Google-Smtp-Source: AGHT+IG/XT0mJ+VtcswRdHKIakx2G21+IYuhd8npGfA3vfhDMFJa23+U+8Cos/aIvejkhufQb/8Duqd/PP0vxmMf82A=
-X-Received: by 2002:a05:6512:1256:b0:594:1cef:21fb with SMTP id
- 2adb3069b0e04-597cfae45c6mr278160e87.3.1764646290107; Mon, 01 Dec 2025
- 19:31:30 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b="Yli6UluX"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
+	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=Y4X378c6zWViriJYOw+/GaWx0jTGV641+tTTbHHjbUE=; b=Yli6UluXG0OSfp1fiFVJKP6b86
+	v7Vd/S7/V6iHVWqxmjtK0aY0fwXPEeeqi04AvTAVUWTpu2PWXeRmq13ZRWNgP/qy7JPqYC6RRbquQ
+	mc+w2JndO5GiOyDM7ZJtq6LwcL1iJNiUPBgA/83Me7YYxR6Ao8HaQ9uYSGTSJ1YpVP3K87i+pwSeN
+	qIIlg11VUCTqpiKeIOfCbPbXQ0c22HyO+zExyynKHNGpnzIIDoPf0/2JrKoSEROI0qLqumcVhtBvP
+	JoBL3jNSY5PGYSJvYu2p+b4yr7KKqft4X1SsQh67BLeO4wQre0qB9zvgM5H1ishiWlrbxyNpfZaAm
+	yLx76HNw==;
+Received: from shell.armlinux.org.uk ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:54184)
+	by pandora.armlinux.org.uk with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <linux@armlinux.org.uk>)
+	id 1vQNI3-000000001Y8-39xa;
+	Tue, 02 Dec 2025 10:07:23 +0000
+Received: from linux by shell.armlinux.org.uk with local (Exim 4.98.2)
+	(envelope-from <linux@shell.armlinux.org.uk>)
+	id 1vQNI2-000000007Ls-0GXs;
+	Tue, 02 Dec 2025 10:07:22 +0000
+Date: Tue, 2 Dec 2025 10:07:21 +0000
+From: "Russell King (Oracle)" <linux@armlinux.org.uk>
+To: Doug Anderson <dianders@chromium.org>
+Cc: devicetree-spec@vger.kernel.org, boot-architecture@lists.linaro.org,
+	Chen-Yu Tsai <wenst@chromium.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>,
+	LKML <linux-kernel@vger.kernel.org>,
+	Linux ARM <linux-arm-kernel@lists.infradead.org>,
+	William McVicker <willmcvicker@google.com>,
+	Julius Werner <jwerner@chromium.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Peter Griffin <peter.griffin@linaro.org>,
+	Tudor Ambarus <tudor.ambarus@linaro.org>,
+	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>
+Subject: Re: Proposal: Officially allow "incomplete" trees as a base
+Message-ID: <aS66WcLPm6e5rdyk@shell.armlinux.org.uk>
+References: <CAD=FV=Ux7nGFnYEyX0cUL-9__BKnTYc+kAJjkF458ZnFS7zoJA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <CAD=FV=Ux7nGFnYEyX0cUL-9__BKnTYc+kAJjkF458ZnFS7zoJA@mail.gmail.com>
- <CAD++jLkuRQKoiEN928GtAj7wUts5PxH905bLp6ZhKsJ3NnenEA@mail.gmail.com> <CAD=FV=X5=AK4XMANv+fatn3d9Y5vo9AXsHWb_47HmNaMWUtMwA@mail.gmail.com>
-In-Reply-To: <CAD=FV=X5=AK4XMANv+fatn3d9Y5vo9AXsHWb_47HmNaMWUtMwA@mail.gmail.com>
-From: Chen-Yu Tsai <wenst@chromium.org>
-Date: Tue, 2 Dec 2025 11:31:19 +0800
-X-Gm-Features: AWmQ_bmp8bpRQyGIP8TF94WGb_32TOhHca9ia1ako0VXsKtlbsLs6VtRP2W_koE
-Message-ID: <CAGXv+5HyMYgKmLc+jmkj-gytm9SNVg9dS7Vn3dQ-dsH8Wo+4sg@mail.gmail.com>
-Subject: Re: Proposal: Officially allow "incomplete" trees as a base
-To: Doug Anderson <dianders@chromium.org>
-Cc: Linus Walleij <linusw@kernel.org>, devicetree-spec@vger.kernel.org, 
-	boot-architecture@lists.linaro.org, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, 
-	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, 
-	Linux ARM <linux-arm-kernel@lists.infradead.org>, 
-	William McVicker <willmcvicker@google.com>, Julius Werner <jwerner@chromium.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Peter Griffin <peter.griffin@linaro.org>, 
-	Tudor Ambarus <tudor.ambarus@linaro.org>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
-	Simon Glass <sjg@chromium.org>, Yu-Ping Wu <yupingso@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAD=FV=Ux7nGFnYEyX0cUL-9__BKnTYc+kAJjkF458ZnFS7zoJA@mail.gmail.com>
+Sender: Russell King (Oracle) <linux@armlinux.org.uk>
 
-On Tue, Dec 2, 2025 at 8:44=E2=80=AFAM Doug Anderson <dianders@chromium.org=
-> wrote:
->
-> Hi,
->
-> On Mon, Dec 1, 2025 at 3:52=E2=80=AFPM Linus Walleij <linusw@kernel.org> =
-wrote:
-> >
-> > Hi Dough,
-> >
-> > thanks for your mail!
-> >
-> > Let me just see if I understand correctly what you're trying to
-> > do  (and apparently actively doing in production):
->
-> Thanks for your thoughts. Just to be clear, even though I've dealt
-> with device trees on a lot of ChromeOS boards, this is something that
-> _Android_ phones are doing in production and is what I'm focusing on
-> here. The whole scheme is at least roughly documented at:
->
-> https://source.android.com/docs/core/architecture/dto/partitions
->
-> This is all stuff that predates me looking at Android. I'm just coming
-> in and trying to make sense of what's there and trying to upstream
-> what I can.
->
-> Separately, it can be noted that we always _wanted_ a similar solution
-> for ChromeOS, but we never quite got there... ;-)
+On Tue, Nov 18, 2025 at 02:43:20PM -0800, Doug Anderson wrote:
+> This is a continuation of the discussion that started in reply to my
+> patch adding basic device trees for Pixel 10 phones [1].
+> 
+> 
+> Problem statement:
+> ------------------
+> 
+> We would like an officially accepted scheme that lets us more
+> efficiently ship compiled device trees for a handful of related
+> products by breaking the device trees up into a common "base" device
+> tree and then applying "overlay" device trees atop the base to make a
+> full and complete device tree.
+> 
+> To make it more concrete, we'd like to build a "base" device tree that
+> describes a SoC and then have the overlays be enough to make a full
+> description of a board. In theory, one could also imagine wanting to
+> expand this to 3 or more levels (perhaps SoC, baseboard, derived
+> boards), though this is not planned at this time.
+> 
+> The primary reason for wanting to break device trees like this is
+> efficiency of the shipped binary device trees. A large portion of a
+> final device tree just describes the SoC. We save space in the final
+> compiled device trees if they don't need to contain as much duplicated
+> information.
 
-FTR ChromeOS is moving in that direction: splitting SKU differences
-based on components into overlays that get applied to the base by the
-bootloader.
+Having worked on the SolidRun i.MX6 platforms, I agree with this.
+Within these platforms there are:
 
-In the simplest example we could have one base dts and two overlays
-for two different DSI panel models:
+SoC	SOM		Platform
+imx6dl	pre-v1.5	cubox
+imx6q	v1.5		hummingboard
+	v1.5 + emmc	hummingboard2
 
-  - base.dtb
-    - panel-model-a.dtbo
-    - panel-model-b.dtbo
+On top of these, I have specific "user" extensions for hardware that
+I've connected - e.g.
+- the NoIR RPi camera needs DT modification.
+- for monitoring a mechanical church clock, a "gps" variant that
+  allowed PPS to be used with a GPIO pin, and a "capture" variant
+  that configured the hardware to allow precise event stamping.
+- 1-wire, for ds18b20 temperature sensors.
 
-The problem we then run into is that the base.dtb will only have the
-generic model compatible "google,foo", not the sku and revision
-specific ones like "google,foo-sku1-rev2".
+Without the user extensions, this adds up to 18 DTB files:
+arch/arm/boot/dts/nxp/imx/imx6dl-cubox-i-emmc-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6dl-cubox-i-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6dl-cubox-i.dts
+arch/arm/boot/dts/nxp/imx/imx6dl-hummingboard-emmc-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6dl-hummingboard-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6dl-hummingboard.dts
+arch/arm/boot/dts/nxp/imx/imx6dl-hummingboard2-emmc-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6dl-hummingboard2-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6dl-hummingboard2.dts
+arch/arm/boot/dts/nxp/imx/imx6q-cubox-i-emmc-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6q-cubox-i-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6q-cubox-i.dts
+arch/arm/boot/dts/nxp/imx/imx6q-hummingboard-emmc-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6q-hummingboard-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6q-hummingboard.dts
+arch/arm/boot/dts/nxp/imx/imx6q-hummingboard2-emmc-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6q-hummingboard2-som-v15.dts
+arch/arm/boot/dts/nxp/imx/imx6q-hummingboard2.dts
 
-And we'd really like to avoid having _more_ overlays just to add the
-final specific compatible string, as that kind of defeats the purpose
-of using overlays to reduce the number of dts files.
+basically, every combination needs to be enumerated. So, having two SoC
+dt files, three for the SOM, and three for the platform that the boot
+loader combines would significantly cut this down - to 8.
 
-I proposed internally maybe having the bootloader fix up the final
-compatible string, but I think we need some rough consensus upstream
-whether this is acceptable or not.
+However, it isn't that simple. For example, when the Hummingboard2 is
+used with the iMX6Q SoC, there's a SATA device present in the SoC level
+that needs Hummingboard2 specific properties to tune the signal
+waveform. However, iMX6DL doesn't have this SATA device in silicon, so
+the node doesn't exist in the base SoC DT file. The situation is the
+same for Hummingboard, but the tuning parameters, being board specific,
+are different.
 
+This means is that there are DT properties that are dependent on the
+SoC DT component and the platform DT component which do not fit with
+splitting the DT files into their individual "component" levels.
 
-> > On Tue, Nov 18, 2025 at 11:43=E2=80=AFPM Doug Anderson <dianders@chromi=
-um.org> wrote:
-> >
-> > > We would like an officially accepted scheme that lets us more
-> > > efficiently ship compiled device trees for a handful of related
-> > > products by breaking the device trees up into a common "base" device
-> > > tree and then applying "overlay" device trees atop the base to make a
-> > > full and complete device tree.
-> > (...)
-> > > In Android, we do a pretty good job of solving the stated problem
-> > > using device tree overlays. We describe the SoCs in "dts" files and
-> > > compile them into "dtb"s. We describe boards in "dtso" files and
-> > > compile them into "dtbo" files. A bootloader can handle identifying
-> > > the correct base and overlay (the scheme for doing this is a separate
-> > > but related topic) and applying the overlay atop the base "dtb". This
-> > > solution is fully implemented downstream for Android phones and is
-> > > well documented [2].
-> >
-> > So in the kernel we have several arch/*/boot/dts/vendor/ folders
-> > where they have:
-> >
-> > soc.dtsi included by board.dtsi included by system.dts
-> > and the top system.dts is all that get compiled.
-> >
-> > So what you say is that you do the same thing but at runtime?
->
-> Essentially. In this case, we don't ship the device tree _sources_ but
-> ship _compiled_ device tree. We compile the SoC into a "dtb" and then
-> combine anything above the SoC into a single "dtbo". We ship several
-> "dtb" files and several "dtbo" files and combine them at runtime after
-> we identify which hardware we're running on.
->
->
-> > Can you just describe why this is done like this with
-> > overlays?
-> >
-> > I can only guess that you have one bootloader that needs
-> > to compose device trees to many systems and the bootloader
-> > only discovers the system it is running on and its constraints
-> > at runtime, so shipping the static system.dtb as many people
-> > do is not an option for you?
-> >
-> > And the reason the bootloader doesn't already know what
-> > it is running on and doesn't just pass that one device tree
-> > or is just prepared with that one device tree has something
-> > to do with manufacturing or so?
-> >
-> > Sorry it just evades me.
->
-> Our builder creates a single "image" that can be flashed onto any
-> number of devices. Users (or manufacturers) can download and install
-> this single image and it will work on a wide variety of devices. So
-> you can download a single "Pixel 10" image that can be installed on
-> any of the Pixel 10 devices (Pixel 10, Pixel 10 Pro, and Pixel 10 Pro
-> XL). It will also work on our development board and early
-> pre-production variants of those boards.
->
-> In order for this to work, we need a lot of device trees and
-> _something_ needs to pick the correct one. Right now, the bootloader
-> is in charge of this task.
->
-> If we had less variety of products that we needed to ship then, yes,
-> we could just ship the one device tree and have a separate build for
-> each product. ...but that doesn't scale terribly well.
->
->
-> > Probably becayse even U-Boot these days use the provided
-> > device tree dtb, for the system targeted, to initialize itself. I
-> > suppose your bootloader is generic enough to avoid that
-> > chicken-and-egg problem, right?
->
-> FWIW: I believe even U-boot supports shipping a pile of device trees
-> and detecting things at runtime. See the "FIT" image:
->
-> https://docs.u-boot.org/en/latest/usage/fit/index.html
->
->
-> > I guess if I had this problem:
-> >
-> > soc.dtsi
-> > board-a.dtsi
-> > board-b.dtsi
-> > system-board-a-v1.dts
-> > system-board-a-v2.dts
-> > system-board-b-v1.dts
-> >
-> > etc having to be combined at runtime, in a bootloader, I would
-> > consider shipping exactly these files in a memory-based
-> > filesystem in my bootloader, and bake a DTS compiler into
-> > my bootloader so it can just build a device tree for what
-> > it detects.
-> >
-> > But I guess you didn't want to hear that :D
->
-> You're saying to just ship device tree source instead of binary? Hmmm,
-> it's an interesting idea. It wouldn't be _terrible_ since "dtb" stores
-> a lot of strings to begin with, but I think it would still add enough
-> of a bloat to make it a no-go for us... I would also imagine it would
-> be a pain to deal with #include of header files with #defines. Do we
-> somehow partially pre-process the device tree files but don't apply
-> the #include files. It might be possible to solve some specific cases,
-> but having this work in a generic way seems miserable.
->
->
-> > Anyway, please describe how you ended up in this situation,
-> > I'm trying to understand this.
->
-> The main goal is just building/shipping one image to support a variety
-> of similar products and trying to save space by not repeating the SoC
-> bits over and over again.
+The other issue would be the /model property - for example:
 
-I think that's a valid goal. ChromeOS ships all DTBs for the same SoC
-in a unified kernel FIT image. It used to be all DTBs for the same SoC
-vendor (arch/arm64/boot/dts/mediatek/*.dtb), but we ran out of space
-on an old device that had a pretty small kernel image partition.
+        model = "SolidRun HummingBoard2 Solo/DualLite";
+        model = "SolidRun HummingBoard2 Solo/DualLite (1.5som+emmc)";
+        model = "SolidRun HummingBoard2 Solo/DualLite (1.5som)";
+        model = "SolidRun HummingBoard Solo/DualLite";
+        model = "SolidRun HummingBoard2 Dual/Quad";
+        model = "SolidRun Cubox-i Solo/DualLite";
 
-And given that the devices built on one SoC are mostly derived from the
-same reference hardware design, maybe 90~95% of the resulting DTBs are
-the same. It would be nice to even have the reference design as the base
-DTB, but again that would require either having a bunch of DTBOs just
-to fix the board compatible, or have the bootloader fix it up.
+as a set of examples. I don't see a clear way to generate these from
+a fragmented scheme. There's a similar problem with the board-level
+compatible:
 
-> > It is quite clear that device tree overlays were intended for
-> > say plug-n-play additions and minor fragments to be added
-> > to a basically complete device tree, what you are doing was
-> > probably not how it was intended. (Or let's see if someone
-> > proves me wrong on that.)
->
-> Not sure what makes that so clear, since it's not clear to me. In any
-> case, even if device tree overlays weren't intended for such a usage,
-> they actually seem to work fairly well for it, even if upstream
-> currently rejects device tree usage like this.
->
-> FWIW, the fact that bootloaders (like U-Boot) have the ability to
-> apply overlays makes me think that _someone_ intended them to be used
-> similar to how Android is using them. ;-) If it was just expansion
-> cards then (presumably) someone would boot to Linux and just apply
-> overlays from there. See:
->
-> https://docs.u-boot.org/en/latest/usage/fit/overlay-fdt-boot.html
+        compatible = "solidrun,cubox-i/dl", "fsl,imx6dl";
+        compatible = "solidrun,hummingboard2/dl", "fsl,imx6dl";
+        compatible = "solidrun,hummingboard/dl", "fsl,imx6dl";
+        compatible = "solidrun,hummingboard2/q", "fsl,imx6q";
 
-FWIW Simon also mentioned this as a possibility in his "FIT support for
-extension boards / overlays" proposal [1], but maybe I'm misreading it.
+These don't include the SoM information.
 
+Maybe what would work would be a high-level DT file that contains
+paths to the lower levels that need to be combined, along with
+properties that need to be merged. E.g.
 
-Thanks
-ChenYu
+/ {
+	model = "SolidRun HummingBoard2 Dual/Quad";
+	compatible = "solidrun,hummingboard2/q", "fsl,imx6q";
 
-[1] https://lore.kernel.org/all/CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH=
-_9sTF7Mw@mail.gmail.com/
+	dts-components {
+		compatible = "boot/dt";
+		
+		component@1 {
+			compatible = "dt";
+			path = "imx6q.dtbo";
+		};
+
+		component@2 {
+			compatible = "dt";
+			path = "imx6qdl-sr-som-v1.5.dtbo";
+		};
+
+		component@3 {
+			compatible = "dt";
+			path = "imx6qdl-hummingboard2.dtbo";
+		};
+
+		component@4 {
+			compatible = "dt";
+			path = "imx6ql-hummingboard2-emmc.dtbo";
+		};
+	};
+
+	soc {
+		sata@2200000 {
+			.. sata tuning properties ..
+		};
+	};
+};
+
+Or something similar. However, this would mean we would still need the
+18 or so top level DT files, but also each component as well, which
+will increase the number of files we're having to manage on a target
+platform - so I'm wondering whether it's worth it.
+
+I don't think we'll be able to get away from this problem: it's likely
+that there will continue to be properties that are specific across
+several "levels" of a split DT setup, and apart from something like the
+above, I don't really see a way to handle them.
+
+I also don't see a sensible way without something like the above for a
+boot loader to know the filenames of each of the components for a
+platform - and it would need to be told the order to glue those
+components together.
+
+I would have liked to use overlays for these platforms, but ISTR they
+either weren't supported at the time, or frowned upon, and even so I
+can only see them working for the simplest of cases due to the issue
+I mention above.
+
+-- 
+RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
+FTTP is here! 80Mbps down 10Mbps up. Decent connectivity at last!
