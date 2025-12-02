@@ -1,67 +1,41 @@
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B00761684B0
-	for <devicetree-spec@vger.kernel.org>; Tue,  2 Dec 2025 00:44:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1ED012DDA1
+	for <devicetree-spec@vger.kernel.org>; Tue,  2 Dec 2025 00:48:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764636267; cv=none; b=D0AtyDdhSXlHoJRKIAeg0/SH9nx4b6hOcxUbynpvcU+jw2IQilLcTUT2MYgUqkm/5EgaOq60HhIs0TrjY2nr3s2qvKtSQB6yV1X8K2S/nZlWPmKjBCJlfsSamtpBsi1T9G2gySm1jTzlJp9IzGViVft1d205OJ10EU+ECAkUV9k=
+	t=1764636527; cv=none; b=YQEp9Zl0fIyqM16Azxd6EGGfsXWQ0U+KYTEk8z8/jKDDxi9zKHI9LbjjpWrj7JoFidI/fbr5T2RkaSJrLjVih/ZL8MgI+GIvb1SF3Q3QnW8UmMMCdxf5PAI9UZfDXouquwcYdhdDEWBviK/nKirY9iyWUNGSPZ0QuyihA1mpC/w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764636267; c=relaxed/simple;
-	bh=/zpM7Et8+6q6wcoIoJtNb12xO+RS+qqsz/B4wUHVqHU=;
+	s=arc-20240116; t=1764636527; c=relaxed/simple;
+	bh=F1zMf0xAV3n5GajLqqtfHNPR2ObKgiI1lW5iYWJGjSY=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=gY1gqlh0utptLdOVgdSzC4znyNR5eiOvsVcc0Jl5ClSNm2d/eEA+R1Cj4eCwAvRn+L6N7WiAcAocXS3MezeC11mfBuJ+WQQbGGsBCGwyMao6LFfvkQhT1Z7AxQyjMSV/WzRtECTXeM7JtJnhVmRB6iOONsqOMgPaOZ3NUbJPqsg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=XJtVmn6F; arc=none smtp.client-ip=209.85.218.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	 To:Cc:Content-Type; b=evgTuZ4nta/NV8PLZmB7kOM1OS2JFTfImsOipeke2oG7z5+xXRxyBce7Wiyci6eCk3um5iUdXjrJGzfQQrvZla+59BbSIQNQYi+6typLzvwzuat4SdKWAFj50rOthqYXYyodgMveSEtZpJtui5cUmjhQjzuPHW8X5ts50Wy1omg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kni7xeGE; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="XJtVmn6F"
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-b735e278fa1so232357366b.0
-        for <devicetree-spec@vger.kernel.org>; Mon, 01 Dec 2025 16:44:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1764636263; x=1765241063; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=oeguxzobQAB3EZbFcGpLg32aJHzhS0qrVQLsNvfJv+k=;
-        b=XJtVmn6FQDIOzNvZMb8AzLi6Z9lKqzQSyqo6YL+yrhf/uEmJuH9et0BrjgC3xJJcij
-         Z9+fH21unhO/YLq1ghXHO4PfTTRpV18vnloQ8sVoxFS6MOTOmxu2awhXQVaOpQE4J1w9
-         MqiswUofNaqZC9IcFbbRbNVlC37+MjWUELmO4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764636263; x=1765241063;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=oeguxzobQAB3EZbFcGpLg32aJHzhS0qrVQLsNvfJv+k=;
-        b=PS62WQOJVEsUAALS+W0ugvvatQjf9z/rL/0M3/iaQo23ml+NTBqXvYn0ste2AJ0K2y
-         nesvXZmnhjj8mzT4LeU27gicTwv0ElIdNf8amw3oZ7G35i8pCLNVE/jEbSF5bBGR+z3l
-         9uHsvF6IRs8AyboPqsl/8Qg6kkumfS6Od62EKRjwckCI9ur1RozUau0t+J+GF9vwvBOY
-         LjI8ldjeu+53kvCiNdbBWCK53p1TW5obX8uV9gjUuUZNV3/jdpciUysa/yU0mu7MZ5mP
-         k8pMlX5Zn8GVwb8cTXvxqJ2U+yChl6Ds7oE2/PZyrOBPBC/QExj5BopnER1F1vlXGNKc
-         aICw==
-X-Gm-Message-State: AOJu0YyNwlTvDDTBozVglIm/Gs+uTa7rcsvhcgoQ5nMq0LBwrloFw7Dz
-	1gwT5Ua/hgOReck7i4JkKOfs0LUfqp5xfK55H5iiUlI+DpkcLYKNDZkSNFmnTKDXe+nXs5I8NvF
-	3UUnGFfNA
-X-Gm-Gg: ASbGncvZJNSInB4iBqTGF6nEIUQ/8CWtBwbkTnIi6jfh8SkOAc8u7C7W/eBwhbIPyn1
-	oN6Lytf1NMmCWIRNrah2bCMiIdjyKflOnNFUjYUYo8DRtkoLTmz+V7Ch7koYaLms1QETX9bNFU4
-	c4j4IrE803k5OZjxWIRcb/jyjjndrrs82dQQjEC4LDldP/m9gj2NI8NQZzA8NXXCtZoave/ifOp
-	3qZAD32VQ8Qks+qfFlSrV5QTCp7dpRlb6wDkMgsM3BKuKdnvFIdN5rxzsiJEH3MbzQK5yLErLib
-	lWVR/EOuZpRc03StqA64auImb9fUcNUNzyeTYco0UR8AGT7j75x9KF5Pb9Te5Be90N1ykreVwNt
-	HgKy73xlcI2xqjrk7YKE0aSSvZz+l1F8BTICImCFhITPz6ARZQ2glrJ+vsxJL1yfJNlr1q4uw4l
-	lmWkPPB0lfYmVpC0Bb16IySJekfvRkNrE+tQEruU70BbHNSEObPw==
-X-Google-Smtp-Source: AGHT+IFX+ItclyYxvVcxmfV8ZMX89P4APM78Z9N3Kx9edv/4j4I0bd6FwVZggPLC6qNv/l1ZJPdxnQ==
-X-Received: by 2002:a17:906:d54e:b0:b76:5ef6:3b73 with SMTP id a640c23a62f3a-b76c54b9c6dmr2795120866b.23.1764636262684;
-        Mon, 01 Dec 2025 16:44:22 -0800 (PST)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com. [209.85.128.47])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b76f5a3a4ebsm1359471566b.62.2025.12.01.16.44.21
-        for <devicetree-spec@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 01 Dec 2025 16:44:21 -0800 (PST)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47118259fd8so46473555e9.3
-        for <devicetree-spec@vger.kernel.org>; Mon, 01 Dec 2025 16:44:21 -0800 (PST)
-X-Received: by 2002:a5d:64e9:0:b0:429:b9bc:e826 with SMTP id
- ffacd0b85a97d-42e0f35bdb6mr29386558f8f.53.1764636261047; Mon, 01 Dec 2025
- 16:44:21 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kni7xeGE"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D1EAC19422
+	for <devicetree-spec@vger.kernel.org>; Tue,  2 Dec 2025 00:48:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1764636526;
+	bh=F1zMf0xAV3n5GajLqqtfHNPR2ObKgiI1lW5iYWJGjSY=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=kni7xeGEcSHgsOn0IoB0h0waN+XHTY6dxaVorAYfaItXdCWeLm8eOJd4WMd13o2sH
+	 rCpk4mtZOMdbozE2e7ITrTSVRbc7BEpJsy2HACkib3Wkp98RbxO2nGyBePjOS2L2qd
+	 8QS3F+eNHDYAbsoEHqCO930npFXEjZSKYQCCN+YN8e5O6S9+VYGGg4IRgosY9DBVxo
+	 1FOvumZLy9d0FBlKxtBI/FWM7psUDjmeOh1upIm8mMjraiN1BV5pqtUHo5SmD7+MJC
+	 zPpyB3BwFvske5HxuZ9VYQBqnOo9fhefbML9otbLrrKS7pPq/YCL+fJJFccbhnn/mi
+	 +kqZR9TCbvsgw==
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b76b5afdf04so859290966b.1
+        for <devicetree-spec@vger.kernel.org>; Mon, 01 Dec 2025 16:48:46 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCU2ndAE4i1Tkm2LTqLW3EeJCzcmYS8XdTUUoinsIVZwjbtbaurPTI2rvofhQeSG4GHsUIX9/JLYsf8PDlcc6oY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxUYJ6mrYcb//V/TyYC8IWrRaX+PHaEmkaBLtXhuLw/B7U1SX7G
+	hLfxxgYEEgBwLM1D0HugukI4BmH7i2wKkfUg2QottduMonGwWfhydPloNON16gwqj7KHHJgQW46
+	yt1UK3dhX/MJqRdq3Y0NM53U27C1LAA==
+X-Google-Smtp-Source: AGHT+IHsbAgkTYC3BiyJbz7RyFZBLR+6hEYw0E6ajgDKEs+abMeN+Q9Ms42Dfb0hRLTV+mlCnXEF5zGTuqKzeflJPYI=
+X-Received: by 2002:a17:907:9812:b0:b73:8e7d:4f91 with SMTP id
+ a640c23a62f3a-b767184b2b6mr3860980966b.41.1764636525152; Mon, 01 Dec 2025
+ 16:48:45 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -69,183 +43,153 @@ List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 References: <CAD=FV=Ux7nGFnYEyX0cUL-9__BKnTYc+kAJjkF458ZnFS7zoJA@mail.gmail.com>
- <CAD++jLkuRQKoiEN928GtAj7wUts5PxH905bLp6ZhKsJ3NnenEA@mail.gmail.com>
-In-Reply-To: <CAD++jLkuRQKoiEN928GtAj7wUts5PxH905bLp6ZhKsJ3NnenEA@mail.gmail.com>
-From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 1 Dec 2025 16:44:08 -0800
-X-Gmail-Original-Message-ID: <CAD=FV=X5=AK4XMANv+fatn3d9Y5vo9AXsHWb_47HmNaMWUtMwA@mail.gmail.com>
-X-Gm-Features: AWmQ_bk30zsEX6ldKjcS73dst-qzy7aOugGH30_jv9Y6DTxDabuDBqyR7LAhrbg
-Message-ID: <CAD=FV=X5=AK4XMANv+fatn3d9Y5vo9AXsHWb_47HmNaMWUtMwA@mail.gmail.com>
+ <CAODwPW_51fKOfDQbTUFCum13M621Uxi2Zw2YHng0DrrwwvZhRQ@mail.gmail.com>
+In-Reply-To: <CAODwPW_51fKOfDQbTUFCum13M621Uxi2Zw2YHng0DrrwwvZhRQ@mail.gmail.com>
+From: Rob Herring <robh@kernel.org>
+Date: Mon, 1 Dec 2025 18:48:33 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqJz8D53OF8PGaq+o6X5zfE1Y4NrH+BpYPEo6OENviJvbg@mail.gmail.com>
+X-Gm-Features: AWmQ_bmC9dfGHTRkyO29JA1uPLAX1tEAvsj_cavV6WehLJKkNSkE0dPMilgLT3M
+Message-ID: <CAL_JsqJz8D53OF8PGaq+o6X5zfE1Y4NrH+BpYPEo6OENviJvbg@mail.gmail.com>
 Subject: Re: Proposal: Officially allow "incomplete" trees as a base
-To: Linus Walleij <linusw@kernel.org>
-Cc: devicetree-spec@vger.kernel.org, boot-architecture@lists.linaro.org, 
-	Chen-Yu Tsai <wenst@chromium.org>, Rob Herring <robh@kernel.org>, 
+To: Julius Werner <jwerner@chromium.org>
+Cc: Doug Anderson <dianders@chromium.org>, devicetree-spec@vger.kernel.org, 
+	boot-architecture@lists.linaro.org, Chen-Yu Tsai <wenst@chromium.org>, 
 	Krzysztof Kozlowski <krzk@kernel.org>, 
 	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, 
 	Linux ARM <linux-arm-kernel@lists.infradead.org>, 
-	William McVicker <willmcvicker@google.com>, Julius Werner <jwerner@chromium.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Peter Griffin <peter.griffin@linaro.org>, 
-	Tudor Ambarus <tudor.ambarus@linaro.org>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>
+	William McVicker <willmcvicker@google.com>, Conor Dooley <conor+dt@kernel.org>, 
+	Peter Griffin <peter.griffin@linaro.org>, Tudor Ambarus <tudor.ambarus@linaro.org>, 
+	=?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
+	yupingso@chromium.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-
-On Mon, Dec 1, 2025 at 3:52=E2=80=AFPM Linus Walleij <linusw@kernel.org> wr=
-ote:
+On Tue, Nov 18, 2025 at 5:48=E2=80=AFPM Julius Werner <jwerner@chromium.org=
+> wrote:
 >
-> Hi Dough,
+> > 4. When applying an overlay to a device tree that's "incomplete", the
+> > top level overlay will be merged instead of replaced.
+> >
+> > Example for 2 levels:
+> >
+> > base (incomplete) compatible: "socvendor,mysoc-rev1", "socvendor,mysoc"=
+;
+> > overlay compatible: "boardvendor,myboard-rev1", "boardvendor,myboard";
+> > merged compatible: "boardvendor,myboard-rev1", "boardvendor,myboard",
+> >                    "socvendor,mysoc-rev1", "socvendor,mysoc";
+> >
+> > Possible example if we support 3 levels:
+> >
+> > SoC (incomplete) compatible: "socvendor,mysoc-rev1", "socvendor,mysoc"
+> > overlay1 (incomplete) compatible: "referencevendor,referencecodename";
+
+I don't understand this one...
+
+> > overlay2 compatible: "boardvendor,myboard-rev1", "boardvendor,myboard"
+> > merged compatible: "boardvendor,myboard-rev1", "boardvendor,myboard",
+> >                    "referencevendor,reference-codename",
+> >                     , "socvendor,mysoc";
 >
-> thanks for your mail!
->
-> Let me just see if I understand correctly what you're trying to
-> do  (and apparently actively doing in production):
+> Sorry, I only cursorily followed the previous discussion so I may have
+> missed the exact need for this part. But I would caution against any
+> proposal that changes the basic rules of how an overlay is applied.
+> The definition of how overlays work has (I think?) been stable for
+> over a decade now, and is implemented in bootloaders that often cannot
+> easily be updated. I absolutely support your effort to get more
+> upstream standardization for managing base device trees and overlays
+> (which I think need to be flexible for arbitrary layers, not just SoC
+> and board), but let's not break the overlay code in old bootloaders
+> while doing it.
 
-Thanks for your thoughts. Just to be clear, even though I've dealt
-with device trees on a lot of ChromeOS boards, this is something that
-_Android_ phones are doing in production and is what I'm focusing on
-here. The whole scheme is at least roughly documented at:
+I think merging compatibles is orthogonal to splitting SoC and board
+DTs. Doug needs to merge because there is more than 1 SoC version or
+base DT to pick. In many cases (SoC revision compatibles are the
+exception upstream), there is only 1 SoC DT and N board DTs. So we
+should consider both and define them separately. In the simple case,
+you'd have something like:
 
-https://source.android.com/docs/core/architecture/dto/partitions
+SoC (incomplete) compatible: "socvendor,mysoc"
+Board overlay compatible: "boardvendor,myboard-rev1",
+"boardvendor,myboard", "socvendor,mysoc"
 
-This is all stuff that predates me looking at Android. I'm just coming
-in and trying to make sense of what's there and trying to upstream
-what I can.
+Then you just apply the overlay and it overwrites the incomplete
+compatible. That works with existing overlay applying (overwriting)
+for multiple steps as long as each step is a superset (compatible
+list) of the prior steps.
 
-Separately, it can be noted that we always _wanted_ a similar solution
-for ChromeOS, but we never quite got there... ;-)
+In Doug's case, I think you need code to decide which base to pick and
+then fixup the final compatible.
 
+SoC (incomplete) compatible: "socvendor,mysoc-rev1", "socvendor,mysoc"
+Board overlay compatible: "boardvendor,myboard-rev1",
+"boardvendor,myboard", "socvendor,mysoc"
 
-> On Tue, Nov 18, 2025 at 11:43=E2=80=AFPM Doug Anderson <dianders@chromium=
-.org> wrote:
->
-> > We would like an officially accepted scheme that lets us more
-> > efficiently ship compiled device trees for a handful of related
-> > products by breaking the device trees up into a common "base" device
-> > tree and then applying "overlay" device trees atop the base to make a
-> > full and complete device tree.
-> (...)
-> > In Android, we do a pretty good job of solving the stated problem
-> > using device tree overlays. We describe the SoCs in "dts" files and
-> > compile them into "dtb"s. We describe boards in "dtso" files and
-> > compile them into "dtbo" files. A bootloader can handle identifying
-> > the correct base and overlay (the scheme for doing this is a separate
-> > but related topic) and applying the overlay atop the base "dtb". This
-> > solution is fully implemented downstream for Android phones and is
-> > well documented [2].
->
-> So in the kernel we have several arch/*/boot/dts/vendor/ folders
-> where they have:
->
-> soc.dtsi included by board.dtsi included by system.dts
-> and the top system.dts is all that get compiled.
->
-> So what you say is that you do the same thing but at runtime?
+And then after applying, you do the merge to insert the SoC rev compatible:
 
-Essentially. In this case, we don't ship the device tree _sources_ but
-ship _compiled_ device tree. We compile the SoC into a "dtb" and then
-combine anything above the SoC into a single "dtbo". We ship several
-"dtb" files and several "dtbo" files and combine them at runtime after
-we identify which hardware we're running on.
+"boardvendor,myboard-rev1", "boardvendor,myboard",
+"socvendor,mysoc-rev1", "socvendor,mysoc"
 
+You need SoC specific code to know what SoC revision you are running
+on, so SoC specific post apply code should be fine too. There's not
+any existing bootloader problem because you need code to handle this.
 
-> Can you just describe why this is done like this with
-> overlays?
->
-> I can only guess that you have one bootloader that needs
-> to compose device trees to many systems and the bootloader
-> only discovers the system it is running on and its constraints
-> at runtime, so shipping the static system.dtb as many people
-> do is not an option for you?
->
-> And the reason the bootloader doesn't already know what
-> it is running on and doesn't just pass that one device tree
-> or is just prepared with that one device tree has something
-> to do with manufacturing or so?
->
-> Sorry it just evades me.
+Maybe that fixup will end up being generic enough that it's not
+platform specific, but that's an optimization of the implementation.
 
-Our builder creates a single "image" that can be flashed onto any
-number of devices. Users (or manufacturers) can download and install
-this single image and it will work on a wide variety of devices. So
-you can download a single "Pixel 10" image that can be installed on
-any of the Pixel 10 devices (Pixel 10, Pixel 10 Pro, and Pixel 10 Pro
-XL). It will also work on our development board and early
-pre-production variants of those boards.
+> Is there really a need to merge the compatible strings in your case?
 
-In order for this to work, we need a lot of device trees and
-_something_ needs to pick the correct one. Right now, the bootloader
-is in charge of this task.
+Well, you could just require duplicating an overlay N times for N
+bases, but that doesn't scale
 
-If we had less variety of products that we needed to ship then, yes,
-we could just ship the one device tree and have a separate build for
-each product. ...but that doesn't scale terribly well.
+> I
+> think in the vast majority of platform identification cases, code only
+> cares about matching the most precise string (i.e.
+> "boardvendor,myboard-rev1"). If we do feel like having the whole chain
+> of identification is necessary, it could be achieved by just
+> copy&pasting the extra strings into the overlay file. If we have
+> cross-validation between base and overlay source files we could also
+> have the validation check that the overlays correctly contain all
+> compatible strings from their base tree. If we know that the base
+> trees aren't standalone anyway, we could also just invent other
+> property names that identify them (e.g. `soc-compatible =3D
+> "socvendor,mysoc";`). Anything other than breaking the overlay format
+> would be preferable in my opinion.
 
+There's also a use case I'm aware of where the base DT is just for a
+SoM and then the bootloader applies an expansion board overlay. So it
+is not always "not standalone". And of course, this could be combined
+with what Doug wants to do.
 
-> Probably becayse even U-Boot these days use the provided
-> device tree dtb, for the system targeted, to initialize itself. I
-> suppose your bootloader is generic enough to avoid that
-> chicken-and-egg problem, right?
+Note that for any new property (or an incomplete compatible) like
+soc-compatible, you will need to consider how we validate it.
 
-FWIW: I believe even U-boot supports shipping a pile of device trees
-and detecting things at runtime. See the "FIT" image:
+> I also feel like we need a better standardized way to tie base device
+> trees to overlays, like your `/loaders` node proposal in an earlier
+> email, although maybe that's an orthogonal discussion (but related,
+> especially if there's supposed to be cross-validation between base
+> trees and overlays). The compatible string is just not a scalable way
+> for bootloaders to make this determination, there may be a lot more
+> differentiation than just "SoC" and "board", and the scheme almost
+> certainly needs to be platform/bootloader-specific because every
+> hardware vendor has their own ideas about how to group and reuse parts
+> of a platform. This information doesn't necessarily need to be *in*
+> the device tree, it could also just be in a separate YAML file in the
+> same repo (since bootloaders will almost certainly want to have it
+> transformed into their own out-of-band descriptor at build-time
+> anyway, so that they can compress the device tree itself and don't
+> have to decompress each one for matching), but it needs to be
+> somewhere.
 
-https://docs.u-boot.org/en/latest/usage/fit/index.html
+There is a proposal here[1]. It's simple, but I do wonder if looking
+at the root compatible only is too narrow of a view. An overlay could
+target a connector compatible for example.
 
+We kind of have this information in the kernel build already as well.
+The requirement for overlays in the kernel tree is overlays get
+applied to at least one target at build time. It would be nice for any
+solution to this problem to replace those build rules.
 
-> I guess if I had this problem:
->
-> soc.dtsi
-> board-a.dtsi
-> board-b.dtsi
-> system-board-a-v1.dts
-> system-board-a-v2.dts
-> system-board-b-v1.dts
->
-> etc having to be combined at runtime, in a bootloader, I would
-> consider shipping exactly these files in a memory-based
-> filesystem in my bootloader, and bake a DTS compiler into
-> my bootloader so it can just build a device tree for what
-> it detects.
->
-> But I guess you didn't want to hear that :D
+Rob
 
-You're saying to just ship device tree source instead of binary? Hmmm,
-it's an interesting idea. It wouldn't be _terrible_ since "dtb" stores
-a lot of strings to begin with, but I think it would still add enough
-of a bloat to make it a no-go for us... I would also imagine it would
-be a pain to deal with #include of header files with #defines. Do we
-somehow partially pre-process the device tree files but don't apply
-the #include files. It might be possible to solve some specific cases,
-but having this work in a generic way seems miserable.
-
-
-> Anyway, please describe how you ended up in this situation,
-> I'm trying to understand this.
-
-The main goal is just building/shipping one image to support a variety
-of similar products and trying to save space by not repeating the SoC
-bits over and over again.
-
-
-> It is quite clear that device tree overlays were intended for
-> say plug-n-play additions and minor fragments to be added
-> to a basically complete device tree, what you are doing was
-> probably not how it was intended. (Or let's see if someone
-> proves me wrong on that.)
-
-Not sure what makes that so clear, since it's not clear to me. In any
-case, even if device tree overlays weren't intended for such a usage,
-they actually seem to work fairly well for it, even if upstream
-currently rejects device tree usage like this.
-
-FWIW, the fact that bootloaders (like U-Boot) have the ability to
-apply overlays makes me think that _someone_ intended them to be used
-similar to how Android is using them. ;-) If it was just expansion
-cards then (presumably) someone would boot to Linux and just apply
-overlays from there. See:
-
-https://docs.u-boot.org/en/latest/usage/fit/overlay-fdt-boot.html
-
-
--Doug
+[1] https://lore.kernel.org/all/20250911151436.2467758-1-raymond.mao@linaro=
+.org/
