@@ -1,344 +1,248 @@
-Received: from DM1PR04CU001.outbound.protection.outlook.com (mail-centralusazon11010061.outbound.protection.outlook.com [52.101.61.61])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06D682FF15A;
-	Wed,  3 Dec 2025 14:41:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.61.61
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764772906; cv=fail; b=PDrszlPMnY0/xTeZ4CXbjC5PJok1dxRbN0xUmkhxMxKvK3PBOExkstMRlMLyaLamNjllyzdAB94kCFp6efxY1PsBhkiv85+6UQtJJW7y7tzJhZOCg0nlXx434PyEX4tLH/cdNLeML+Qwsrlrnjwg4Y0xQCR/3zrm5XQrPxL2sik=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764772906; c=relaxed/simple;
-	bh=m7AhALe2UYpl8Wvcw1L7RmKOkuRDanjk2y2LO+GmOSo=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=s2f8X/f0hzVI81iDzKDW73oqkIVugTeyVZA2GQBQdMBxWVFUkdpmA/9Qong2gm+ttCshH3ujyqF9gf1DFHSOKAz0FZpHIbdSQ+86ZFT7NBgjDc4Pzjj8NiPVvUL9wGeiUM9ZjvN5kRaE3+6prMLXCtTWpkOmGQKNmmLG3EXr+eg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=V8t/EnVb; arc=fail smtp.client-ip=52.101.61.61
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86B10346FA6
+	for <devicetree-spec@vger.kernel.org>; Wed,  3 Dec 2025 16:25:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.47
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1764779122; cv=none; b=aoIT+LEryY+YdmWWaY5Y6dcUgjiJuxwTkXcJgDsL2pE88XmS1hnOaxMyK11xDiB2OFMcZ6Q64MECKrKkeEc/j0ZURLpcFrzAu9ikVkNh81EFVJO+IHT06vyqphKi7bVZ8ziRfOvZk1HNdbDm1EJKhmVwOmSZx0zcSrrpq0WfpxM=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1764779122; c=relaxed/simple;
+	bh=X78IJ0DvEjlyqwGmyrvaQ2ENJh3+EZqI8vGK+k61x8o=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=gX0mfNd61vaqFUOq6GonSngYmgl3VUSMq3iVtq5cjdkh4qpAl+ZMQpcsZE9WpWa3n3vR8A7MV3bXLB/Zu0pHt9l9XuyRk4vWYf9oTx2K8BN1RC+ICsIgJSgyl44fJdNCtoxG+CVkxj5+JTTvYfXA5MWhRex/0VMY/szoEVUBYwQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=ZVyOk0/N; arc=none smtp.client-ip=209.85.218.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="V8t/EnVb"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=J/Ioju+Vy+n5OlGisXXLfODdQd+BcCvNMjp0ey+1mdPVv4HZF4t/xwshyKHfGPvuV4ahS/tzCQoXlupoCLiFew97cteg3C6rbwu/d9cGySbPqttPexrs55jEP8XPmYq0HXR2Df0menu4gTektWs7Hmbyav4IzXsSPfZ0zOTIpMnq4wtvfrxF6s1Cogp0zSuPawEut/LHJHNRszs2GMj5gM2kUzWldCcLK8i13oTplwAdkNfrRSdba1MTDineUhtVvBdJqjkjfg+q/ATaLGJFFl2unG47e/H1p7OFuUl5oVQWeGx/oE0U/wxuNYFKRKAUpVZH60AQ2UP3a3bJ+jLWqQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BxSByKyr5ZxILTKwzeAT4ruDNbccrpZqap4vAL1yTnM=;
- b=aGIr5cFcRYAf/wPvK/1UcZTuigT1jGMQT+oS1TRxFt+bQg8VuHOYjZw8qjwg47+93/OMakMyFYxUsZWxctQVBKkaB95Srv/R1lJFebLCLkjFT5/PCv21rKZZom/MOHjeUPoAe6lGR7LWD/LiC9CNhZqMDxLnUUZA0PK9FGegbqZBcGE9pcvPLQR0tifNJqwuIAhnc/ZQ0+DHRyvT5VEbhgFTCdx7JqMrHYBJJ3N3xJH0DzxRT+Aq644nbofQR2VUHjiarVwwag9iW7EmS6ewgqSuQe9YscwgM6IkdpS6S3BKTNHoF9KqsEhLZUecdJSK7qeANPphTdpq4FWQybmbrw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BxSByKyr5ZxILTKwzeAT4ruDNbccrpZqap4vAL1yTnM=;
- b=V8t/EnVb/uT/9BKa6HApF2HfP7KwSglj31ezGt7odSfRj4U8UxfObIKQujSPrmZfaVIm4Qf7/sW5Ap56XEPt4CnvRHAN/cNKcQLS2pyBXyccbjD7OaQS/q/KvnALT4TaAprWGSGf4gkhxYracjxVWXLdfQ95nkUwGdBZblgUOdA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by LV3PR12MB9165.namprd12.prod.outlook.com (2603:10b6:408:19f::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Wed, 3 Dec
- 2025 14:41:42 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.9388.003; Wed, 3 Dec 2025
- 14:41:42 +0000
-Message-ID: <87a5fa3a-4242-4755-913d-b87cf8873039@amd.com>
-Date: Wed, 3 Dec 2025 15:41:31 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] docs: devicetree: overlay-notes: recommend top-level
- compatible in DTSO
-To: Rob Herring <robh@kernel.org>, Raymond Mao <raymond.mao@linaro.org>
-Cc: linux-doc@vger.kernel.org, devicetree-spec@vger.kernel.org,
- devicetree@vger.kernel.org, ilias.apalodimas@linaro.org,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, linux-kernel@vger.kernel.org
-References: <20250911151436.2467758-1-raymond.mao@linaro.org>
- <CAL_Jsq+apXxvngU9enNw9yzD1YAAOyamwkTBvqdrc2M955Q38g@mail.gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <CAL_Jsq+apXxvngU9enNw9yzD1YAAOyamwkTBvqdrc2M955Q38g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR07CA0302.eurprd07.prod.outlook.com
- (2603:10a6:800:130::30) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="ZVyOk0/N"
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b735b89501fso843836566b.0
+        for <devicetree-spec@vger.kernel.org>; Wed, 03 Dec 2025 08:25:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1764779115; x=1765383915; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jOmbe3vzAARQVwHwMPSNLWrHj5szl0MDHgWp97fNf0I=;
+        b=ZVyOk0/Nna/jCSIfAKHLNU5B7L8ih/j+xrd//WPxRdtLXQkJHps7EUSDdrQEIQdFSp
+         IVprCL9nXgdTv+rAU3u+0NcfEBjJXFToQdrnfRTJR528l2cVD8uN32MLrbKyFh0+LDRR
+         g7qnMouYpNIGqby63VF/7eRbTjd5fx8mvt1YE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764779115; x=1765383915;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=jOmbe3vzAARQVwHwMPSNLWrHj5szl0MDHgWp97fNf0I=;
+        b=IaUUiTU2O+J3i3/RuOCCB7q/9icpRAg/7R+qIzw5R+9QWFbGs5jOVXawEDU7QAhtLo
+         LWuOSQ6UARBg8hyAqMlPjaOvq3yHW9Peed0q9sILK6lZyoAK14ylcUKdf8a2ra3q2tdn
+         ea/eqA1lozX9ok9KmgvxUkx2KL57HZiQEPDhWxg6Hn9e23SpaKsWuXREp28rN6QKp2QF
+         yjPWmPTbIPTsIyMUTlzZeujT+eih0WsTnQ54OWGmgiV9S1XHyh8eQtJqxSbz2C+geSXc
+         HzFqYQ+u7xNA94Xjk7uCKsSx6ZxvW8C17QhkPpneNaYJS6YZuWHlf9TAjvcY6ylySEFT
+         YnmA==
+X-Forwarded-Encrypted: i=1; AJvYcCWrSmuzKlIvODRRljZVa0B9vwTAryEL7ECJTIAQ9dm4+UBcOLr9M7gs/7hEcGV0WUyjf9/VWlCLt5wPaRC5fn4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YztK34aoPTnSPot97jANnCh6blt/TXsPW1E5c2a1xNPMoBYeoFS
+	bWtZBYn6KR3B21K8rJD6ZYmZEv9GpJJYyKDd7rIzq4qv2wOhHysAQlyGAtlpuIQtp1dcjYW4iV0
+	l3L+Gt/b9
+X-Gm-Gg: ASbGnctigLqrCt4YU4JssFO2uchvwGmh3eLNuqtf1a8rNq70oKbWDgzdkfIoxVPavAg
+	v+CKduIwneX0h6/V7eIE80388ckI5pH/R3zuJuVqD8XlVwR+jAWCq63i6u+kcNB7hPmOQdX+p3j
+	mrDoT5xKlUWQlTiQoSfOa+nwzY2LDkhZDKYxWSLOZqpuZ5KhMZR3NgwkWaxK7jLRrHcZ9QzfhG4
+	4llbEAWa/c+Tl4FoqEvJqQnIGMkCpITUAVs2lP6lllkY6SqvPjlLzF8M73BhyhynID4V4SIbyal
+	PnLRYwkXmE6fjeB0/iU7OGmebrLDrpmpfkSk/rh68FJkzqEV7u4lTYDdgzrnxKrztYMu6YvBSFl
+	t6+TclrYVxBo9nzDlLWAOnbvdSCUQIFU5robzYfhkEsvyK7ehroeYkc1jjwe8n3MF3PxAS1qnSU
+	OoBcW+ssIZJ7pcoxVcupci0P1hNo7bHr+zKIpnPnng8pRcE1kPMg==
+X-Google-Smtp-Source: AGHT+IEkPZKfrUBxbMyMpEFA8xl076MCF8lP/aRk+EniHpxBeeJnVTNhkphi2qR1Uwv4QcjiwMDwdg==
+X-Received: by 2002:a17:907:86a5:b0:b0e:d477:4972 with SMTP id a640c23a62f3a-b79dc4ea3a7mr334252066b.25.1764779114937;
+        Wed, 03 Dec 2025 08:25:14 -0800 (PST)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com. [209.85.128.48])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-64750a90d5dsm18598934a12.12.2025.12.03.08.25.14
+        for <devicetree-spec@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 03 Dec 2025 08:25:14 -0800 (PST)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-477770019e4so59784915e9.3
+        for <devicetree-spec@vger.kernel.org>; Wed, 03 Dec 2025 08:25:14 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCVAq1jdpsztqihPjkpiYw+pKzOVFqhiUMscXpcTH8zXqo2fjkz4+nGAeI1hsr/2nQNrIMeEeEQcbhxGPYDQ8+E=@vger.kernel.org
+X-Received: by 2002:a05:600c:35ce:b0:476:84e9:b571 with SMTP id
+ 5b1f17b1804b1-4792aef7e8emr35377505e9.14.1764779114094; Wed, 03 Dec 2025
+ 08:25:14 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|LV3PR12MB9165:EE_
-X-MS-Office365-Filtering-Correlation-Id: 62d9d0f5-4ba4-4adc-54cd-08de327a130f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?OWlkRGVPRGJnKzIveWFmOXdOendsMEZJRXREWXVKR0RsZE9pc3dOZmcxQUZy?=
- =?utf-8?B?UjZaQnBrN1hQZnJqQkxBY2lkWFBWRVFTclRGc0RjR1ZIUWFyY3dvTEI2bmw4?=
- =?utf-8?B?YWs4dWRKTjJpVGY4eVNKUStlRWYwWFB6TEV5MUFmZnFFRTU2SGIzRmhEbFBQ?=
- =?utf-8?B?MnB6NXEyL3NSemdYWVVRSHg2V0NUZ0MvT0p1NEJQZ0NhbGFwd2hsZis0R3N5?=
- =?utf-8?B?UnpvZHoxN0RqUHJIR0dNUWtvSitocDhuVWdYMEFYZE9wVHpDZFNnTktqakJ2?=
- =?utf-8?B?dnNmYmRiV3BRSkJtN1JpUWhLWmNZN2Y0SjE4MnVFcjNlbm43TUdWQkNRWHVp?=
- =?utf-8?B?bG5WQ1JRZmpPVG53eGpiUEsvc2orK2lUay8yS3pIMmZLRG94ejZUNGNZRXZh?=
- =?utf-8?B?TGxzQng4LzJlRTFLWHo1LzI5Uk5GY3RDRzlyTjY1WG5kTVpxZnBOVHFvUGI1?=
- =?utf-8?B?MzdPRE1DNjVwYisxY1k0ZjNOOGkzL2kvalhaV3VhOGdkVzZjNCtCMzJMV3I4?=
- =?utf-8?B?TXplTnl4SjVVVElJeWRGbXJ2M2ZpdFFQV2src1QraWd4QklyR0kwSGxMcThG?=
- =?utf-8?B?V2RaNWZmdS96M2d0eXo2RjEyMFdyZzJFM2hUSk5teHBJeklFYTVkTWZqS1V5?=
- =?utf-8?B?c3h1bk5nMHU2Y2xWTVlmaXNKaU02MlZGdjZLZis1V0l6a1FJSGdheWhTb3Vm?=
- =?utf-8?B?b0t0M2U0Y2tDbjFxSmt3c0lyNGdJYlZUR01QcjJIVGUxdk8zNDVYLzFkRkxE?=
- =?utf-8?B?eGE5MzNkM1BwZGczYjB4T1puVWNndWprTVNVM0o4MjFjNlRxN3VTMVZZUmpq?=
- =?utf-8?B?NEo1TEVYa0RXYldoOThERnAwdDhyMFlqWi95c0tpTCt2ekNSQ3RDVHE4Ny81?=
- =?utf-8?B?bVk0NlhYZFdiMDllbXNqcnZHVFM5ajR3bWxUMXFZNDBVQzVYcXRqdGh5aVpy?=
- =?utf-8?B?cHFRTG9kMkR3ZS85Z1NDa1BPbkhwbHlsbUxUdU10ZERvS2pSNVNOeUtHOWRT?=
- =?utf-8?B?ejBzSkFQZkZMZStJd3RzWFZoSlVmMXFsb3pMTGhzSlQyMGlnand5VGV0UytB?=
- =?utf-8?B?WG8vSXhxK015WEFxbTE0T2JKZE8zd1luSUc4c1h1S0xPelZ2TlAvdzJNeHJt?=
- =?utf-8?B?TUlZVkJCR1BTNnZ0dmFUckl5YS9kSk9tbHM0S044RDMxTUk1cFZnNlNrU3JB?=
- =?utf-8?B?ZkdNSG5URVpmVkdBYlRkaHQ5NHQvV2FzTmpjTkVPejdWUTZEMGI3akNMZDg4?=
- =?utf-8?B?M2Vzc3ZqQnR6cWVXcGI2cGpaVXFoR2hDUHUxMDJSWmVjSStUa3k2bHdsYVhR?=
- =?utf-8?B?N3paNUFCdFRHc2t3OVB4bFZSR3FYS3RnNW4wV3lPSFoxVVJRN3BEdVdGalI0?=
- =?utf-8?B?UU9kdGtRcHNmcXZLWFh3VkdQc2JPS3F1aEVPZzN6eVo2MDNpMGFvRnR6ZWxW?=
- =?utf-8?B?YzFsL3dWOE1YNjJvb0xWTjlLQlVwc2ljdUtvbDAyMEk3b21zWTFEajJuWVlY?=
- =?utf-8?B?TytsK3pZUzhlVkY3SUx5WVJ4ajhrUE1NVFRmU2NDMDJzR3Z6alpFN1lDZkp1?=
- =?utf-8?B?VmJaMDBqOHhyK3FISFljam0rbHRrYVE2U2dFQ09FNlh3UFpFUStNeWxVMkh3?=
- =?utf-8?B?ZWRHSFRidE0weXhhUmpwS2pGUnZlTTVPb05OTllYVWtJcXBvckxjZFZPUHJU?=
- =?utf-8?B?akQvaXFLTHFSdHFkUzRPS0d5d3p1ZWk5RDRzMUp0R2NKakpnU29RUEx3eUJD?=
- =?utf-8?B?NVhGcUV1d2NiUTdRcHVMeUJZb1Q0YzJXcXRRUnE2Z3Nud1BiMmF4U3kxMkRJ?=
- =?utf-8?B?Zyt3em9lYlc3czVmaDNNdHpxSkM1QTBmbEdlLzJYU2FmZldoQjA5a1BDeE94?=
- =?utf-8?B?OFZhWjBBc0lZOGJLbEExNEVJUUR0UFRYd283aUVuSWl3aGc9PQ==?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ2PR12MB8109.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?N3V4Z3VLUHBDMlhRQVlTUTRRd1JiZk5kUWFyaXlVQ2t0aE1RS1pvS0JNU0dn?=
- =?utf-8?B?bUYyYy9qYXgwTlR2M3JMVHkxUldJSTg5cFIzbjRwR0V1OEhCWDlIY0t0VEp4?=
- =?utf-8?B?UDcvVkd1RUlwUFlqM2NlZUZzeWgvbjIvVHk0WW4rK3dtRU42RkdHSnIyRm9N?=
- =?utf-8?B?RlNOMmFTOFJ6V1FFT3ZxWjF3cm1pNCs2RVllcnZTcHZ1SklFeW15Zi96b044?=
- =?utf-8?B?dVQ0Q3I0NXJqdExXTER6TGhxUThzU0Z5bER5bk55OVV0QnNuSzZZcEs0SmVo?=
- =?utf-8?B?UXVyY25JK1FPSmNvMHIyL3I2NW1rQzF5ZnlvRnd3eW1LWlVHRGZPZW4rUm4v?=
- =?utf-8?B?dkhESkdmWkxsV1IyRmhFeUFWazdvaTV5UVJISGFQc2JBbHVuWSt6dDNmNEtL?=
- =?utf-8?B?QW1uR0xxTWVwbGpUYnJHTTg5KzhBcXIrL05tM0VReitJbnVzaDVZSW5XMmlV?=
- =?utf-8?B?SExLUEVUamlGSzU0ZDdENC9ZalRLZXYvSWVvR0swY2tkeVZmN0JnNjMvQTRY?=
- =?utf-8?B?elZJNk1wM2JUdDdsTWFNaFYvdnZDQWZGT0VpTFpJNUZzQVFwam01NXV3bVhI?=
- =?utf-8?B?TzBHcFVtcVZ6RHB0VC9YanV4MkVZVWUxcmhxU3hhZS8rTEJxb3B0THpuY21Y?=
- =?utf-8?B?ZmdWMnp0d0RBd0tuMHQvL0RPUzZNa2c2M3RVRVIyclZzb05IZHNvdEhxVXVL?=
- =?utf-8?B?aXBwOW5HRkt3dUN2VCsxU3Y3MDFtb29kZXF2Q3pXeDltdUd6MGVWZTVTZDJ0?=
- =?utf-8?B?c3IzS3U0blhSeVA4Uit1Vm1zb20vTk5XLzBXRG12UjNCNXEyaDc1dDNybGZJ?=
- =?utf-8?B?bVdyL21sUUZyNnFTL0xNODhxY3crNWg5dFhobjFkcGlJS2R6SVB3S01zZjN1?=
- =?utf-8?B?akk1eVpZUUl0azNlNitxTTF4eWdtRE1mTlhKMjZGMnVSTEtpZ085QW0vU3gv?=
- =?utf-8?B?ZkhlaUE3VnAvNWlBUEZjczQ0cnpVNnNWR2JKSE5KWEFJSURJYUZYRm8zc011?=
- =?utf-8?B?eXZ0TDVzaDlhWnZjQzZFdVg3R2hKbU5qUm5TWU5DSnlNT3F6emtxcDltU0Vp?=
- =?utf-8?B?amZYU3V4LzBwcllXZVQ4WEExdGxEdGJUem9GQ2t1VHV4THJBdVZsODFnUzNV?=
- =?utf-8?B?ZlgwcDBBQ0RMUStCeUVMTEVtQUpmVXpBVmEwdGFVTGpYZ0Qzb2ZzR2JlVzdG?=
- =?utf-8?B?ZVVlcTh4ZzNjTWt2UzI4cWErTWVnSzc5akNkQTBPUmR3QVNOdmMwWTJDTG5G?=
- =?utf-8?B?MjRNUDIwdERMQ3V3VlQvbnRCZ0cxaW1INm5zK3ZrdlpaT0hueHkyZWh1cXp5?=
- =?utf-8?B?ZDd2eDJ4ZytQMUh6V1ZwWDJuWHRYQXpDT0JUbm9QZzh2Y3FGQjE2VFRydUNo?=
- =?utf-8?B?WVZmZkYxaVN1NWZCZEVvSmJqZmdnaW5oSUUwa2F6ZFVvR292bTRHR3h2WDgy?=
- =?utf-8?B?QVNPckUvVGpmV1BmNmtiTXZQczA2clFWZlQ5cXJybzJ4NS9HYjI1Z205VllZ?=
- =?utf-8?B?MnRTckkxcTdJd1R6NTFtWitYdm13QXhDTlZ5OUNhbkt4eWJSSVRwSjhFQ3Q4?=
- =?utf-8?B?Z2pyZTlYa3dvT0NsSjh2YnAyaFRGSjFnRzgxc0FIbWthb0Jvc3pRUDUwbWlu?=
- =?utf-8?B?bTFVQytVbm9JcjZIcCtDQUQrOWFOTnJHZFBiMktySjF1ODN0L2ZSS1JUOWE3?=
- =?utf-8?B?Z2xUbTBDTDhYWE13K3d4eGhCSFNiRVhZNHNrajk0Y0lFS1RFdTlteE5CSSsz?=
- =?utf-8?B?enhpT2ZvSEFNOWc2NGMvU2JTZlRaclZUbVRWUmpHS2lVQ3o5bjM4SEpwMFdL?=
- =?utf-8?B?bnNrc0xwWW84VkZ2Ri9lUFFmUm5CaWhaYUNpY3dBWjgwSEZEd2duZ2ZPUVZm?=
- =?utf-8?B?TWJRdDZ6OHg0M0hnQVZ3ajlsbVhCY3l0ejl4aDNEeUdUd2hPTVBUNG4rWXlU?=
- =?utf-8?B?TVdmVW1PODZiWHpORkRhSkdnNm1TR1RpUHdORW5VV3MvK2ZGTS9iTnNOaHRi?=
- =?utf-8?B?WnRIaWVLM1R3UWFvVXVJekRpRkdTYXF5UTJjenpYT2tTbkVpZHBBL1lxeU9t?=
- =?utf-8?B?Y3E5SHNBaFBwbG9MejNnVkVnSVpUV3NMRi92QVIwK05lK3lnQXBtK2xBNjN5?=
- =?utf-8?Q?ztpVOP6HLOQj+BNE0sqDF+jOc?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 62d9d0f5-4ba4-4adc-54cd-08de327a130f
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2025 14:41:42.3359
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ydURp3dmOuFzcsqP/Hj5gDH7I58DO3CMP7KyGymWSFg2nFi1UTqQMstWFPDPYrBW
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9165
+References: <CAD=FV=Ux7nGFnYEyX0cUL-9__BKnTYc+kAJjkF458ZnFS7zoJA@mail.gmail.com>
+ <CAD++jLkuRQKoiEN928GtAj7wUts5PxH905bLp6ZhKsJ3NnenEA@mail.gmail.com>
+ <CAD=FV=X5=AK4XMANv+fatn3d9Y5vo9AXsHWb_47HmNaMWUtMwA@mail.gmail.com>
+ <CAGXv+5HyMYgKmLc+jmkj-gytm9SNVg9dS7Vn3dQ-dsH8Wo+4sg@mail.gmail.com>
+ <CAD=FV=Uq9yfUkLUgg116G+2AvEKkEPmdRgUJ5f1bj229j=LxUg@mail.gmail.com> <CAGXv+5HU2y-8AZhXDjneaTdD1yr2h06OXbkozcQJj2mBcR1HmQ@mail.gmail.com>
+In-Reply-To: <CAGXv+5HU2y-8AZhXDjneaTdD1yr2h06OXbkozcQJj2mBcR1HmQ@mail.gmail.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Wed, 3 Dec 2025 08:25:01 -0800
+X-Gmail-Original-Message-ID: <CAD=FV=U54Uwny=kHY+VjG5DGCSHeRUCcWMG=hG88ov8hC6Ynew@mail.gmail.com>
+X-Gm-Features: AWmQ_bkDjTZX2TJKEcgkE7D_dL3KInx1SDfyqXNvFHSLkZzFxywJ641Qd3tcrIU
+Message-ID: <CAD=FV=U54Uwny=kHY+VjG5DGCSHeRUCcWMG=hG88ov8hC6Ynew@mail.gmail.com>
+Subject: Re: Proposal: Officially allow "incomplete" trees as a base
+To: Chen-Yu Tsai <wenst@chromium.org>
+Cc: Linus Walleij <linusw@kernel.org>, devicetree-spec@vger.kernel.org, 
+	boot-architecture@lists.linaro.org, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, 
+	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, 
+	Linux ARM <linux-arm-kernel@lists.infradead.org>, 
+	William McVicker <willmcvicker@google.com>, Julius Werner <jwerner@chromium.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Peter Griffin <peter.griffin@linaro.org>, 
+	Tudor Ambarus <tudor.ambarus@linaro.org>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
+	Simon Glass <sjg@chromium.org>, Yu-Ping Wu <yupingso@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-On 11/14/25 14:08, Rob Herring wrote:
-> On Thu, Sep 11, 2025 at 10:14 AM Raymond Mao <raymond.mao@linaro.org> wrote:
->>
->> When managing multiple base device trees and overlays in a structured
->> way (e.g. bundled in firmware or tools), it is helpful to identify the
->> intended target base DT for each overlay, which can be done via a
->> top-level compatible string in the overlay.
->>
->> This provides a way to identify which overlays should be applied once the
->> DT is selected for the case when a device have a common firmware binary
->> which only differs on the DT and overlays.
->>
->> This patch updates the document with a note and example for this
->> practice.
->> For more information on this firmware requirement, please see [1].
->>
->> [1] https://github.com/FirmwareHandoff/firmware_handoff/pull/74
->>
->> Suggested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> ---
->> Changes in v2:
->> - Updated commit message.
->> Changes in v3
->> - Rename to 'overlay-compatible' and rephrase the description accordingly.
->>
->>   Documentation/devicetree/overlay-notes.rst | 32 ++++++++++++++++++++++
->>   1 file changed, 32 insertions(+)
->>
->> diff --git a/Documentation/devicetree/overlay-notes.rst b/Documentation/devicetree/overlay-notes.rst
->> index 35e79242af9a..77284afba9a4 100644
->> --- a/Documentation/devicetree/overlay-notes.rst
->> +++ b/Documentation/devicetree/overlay-notes.rst
->> @@ -103,6 +103,38 @@ The above bar.dtso example modified to use target path syntax is::
->>       ---- bar.dtso --------------------------------------------------------------
->>
->>
->> +Overlay identification
->> +----------------------
->> +
->> +When managing device tree overlays dynamically - such as bundling multiple base
->> +device trees and overlays within firmware, initramfs, or user-space tools - it
->> +is important to associate each overlay with its corresponding base device tree.
->> +
->> +To support this association, each overlay should define a top-level compatible
->> +string (referred to as the 'overlay-compatible' string). This string is
->> +intended to match the top-level compatible property of the target base device
->> +tree.
-> 
-> This property needs to be defined in dtschema at a minimum. Really we
-> need to check the values are documented. We already have all the
-> possible compatibles, so we'd need to generate a schema from them. But
-> that part can wait as we don't actually validate overlays on their
-> own.
->> +
->> +By including this identifier, higher-level software or firmware can determine
->> +which base device tree an overlay is compatible with, and apply it accordingly.
->> +
->> +Example usage::
->> +
->> +    ---- bar.dtso - overlay with top-level compatible string -------------------
->> +       /dts-v1/;
->> +       /plugin/;
->> +       / {
->> +               overlay-compatible = "corp,foo";
->> +
->> +               ...
->> +       };
->> +    ---- bar.dtso --------------------------------------------------------------
->> +
->> +This top-level compatible string is not required by the kernel overlay
->> +mechanism itself, but it is strongly recommended for managing overlays in
->> +scalable systems.
-> 
-> Please define exactly how the matching works. I assume it is the 1
-> overlay-compatible string has to match any one of the entries in the
-> base root compatible property. I don't like to assume though.
-> 
-> How would you handle a case where you have 2 similar SoCs which don't
-> share a common compatible string and the overlay applies to both of
-> them?
+On Tue, Dec 2, 2025 at 11:34=E2=80=AFPM Chen-Yu Tsai <wenst@chromium.org> w=
+rote:
+>
+> On Wed, Dec 3, 2025 at 6:11=E2=80=AFAM Doug Anderson <dianders@chromium.o=
+rg> wrote:
+> >
+> > > In the simplest example we could have one base dts and two overlays
+> > > for two different DSI panel models:
+> > >
+> > >   - base.dtb
+> > >     - panel-model-a.dtbo
+> > >     - panel-model-b.dtbo
+> > >
+> > > The problem we then run into is that the base.dtb will only have the
+> > > generic model compatible "google,foo", not the sku and revision
+> > > specific ones like "google,foo-sku1-rev2".
+> > >
+> > > And we'd really like to avoid having _more_ overlays just to add the
+> > > final specific compatible string, as that kind of defeats the purpose
+> > > of using overlays to reduce the number of dts files.
+> >
+> > I think you may have simplified the above a little too much to the
+> > point where it's confusing. At least I'm a bit confused. I _think_ the
+> > problems you're talking about are the kinds of things we run into when
+> > we take overlays above just two levels. I'm imagining:
+> >
+> > - base.dtb
+> > - board1-rev1.dtbo
+> > - board2-rev1.dtbo
+> > - board1-rev2.dtbo
+> > - board2-rev2.dtbo
+> > - panel-a.dtbo
+> > - panel-b.dtbo
+> >
+> > So I think you're saying that you'd start with the "base.dtb" and then
+> > extend it with exactly one of the "board" overlays and then exactly
+> > one of the "panel" overlays. Is that right?
+>
+> For now I think we just experiment with having one end "model" or
+> "product" as the base.dtb. The panel-*.dtbo selected describe the
+> optional components, while the board-rev??.dtbo just provides the
+> top level compatible and model.
+>
+> In an example that I plan to send out this week, I would rework:
+>
+>   - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri.dtsi
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku0.dts
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku1.dts
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku2.dts
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku3.dts
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku4.dts
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku5.dts
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku6.dts
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku7.dts
+>
+> into:
+>
+>   - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri.dts
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-audio-max98390-es83=
+26.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-audio-max98390-rt56=
+82s.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-audio-tas2563-es832=
+6.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-audio-tas2563-rt568=
+2s.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-panel-boe.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-panel-ivo.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku0.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku1.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku2.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku3.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku4.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku5.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku6.dtso
+>     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku7.dtso
+>
+> The "mt8188-geralt-ciri-sku?.dtso" files only contain the following
+> boilerplate:
+>
+>     /dts-v1/;
+>     /plugin/;
+>
+>     &{/} {
+>         model =3D "Google Ciri sku? board (rev4)";
+>         compatible =3D "google,ciri-sku?", "google,ciri", "mediatek,mt818=
+8";
+>     };
+>
+> The base "mt8188-geralt-ciri.dts" would already have a generic board-
+> specific compatible:
+>
+>     model =3D "Google Ciri board";
+>     compatible =3D "google,ciri", "mediatek,mt8188";
+>
+> > So I'd imagine that each of the "board" overlays could have "full"
+> > compatible strings. For instance, I'd imagine "board2-rev2" could
+> > have:
+> >
+> > compatible =3D "google,booard2-rev2", "socVendor,soc"
+> >
+> >
+> > The problem you're struggling with (I think) is that the panel
+> > overlays won't be represented in the compatible string (and "model")
+> > even though (historically) we always did in ChromeOS (they were
+> > included in the "sku" part of the compatible string).
+> >
+> > Did I get that right?
+>
+> In a sense you've generalized the problem I was describing.
+>
+> In my example, the top level compatible gets fixed up by the final
+> SKU-specific overlay. But that's 8 extra files to do one bit of
+> fixup that supposedly the bootloader could be taught to do, and
+> could do even better. The bootloader knows exactly which SKU and
+> revision it's running on and can insert the information appropriately.
+> We could get rid of those awkwardly long compatible string sequences:
+>
+>   compatible =3D "google,tentacruel-sku262147", "google,tentacruel-sku262=
+146",
+>                "google,tentacruel-sku262145", "google,tentacruel-sku26214=
+4",
+>                "google,tentacruel", "mediatek,mt8186";
+>
+> Going back to what I think you're describing, is that instead of one
+> base board DTB for each product, we could have one base DTB for the
+> reference design (in place of the .dtsi file we currently have), and
+> make products and component selection all use overlays.
+>
+> If we do that, then inserting the correct top level compatible and model
+> becomes more important, since we do have things such as the ChromeOS OF
+> component prober working based on top level compatible. Also, the model
+> is present in logs, and would be very misleading to say one device name
+> while in reality it is a different one.
 
-Let me describe what we are doing in this space today.
+I wasn't saying that you'd just have the same "compatible" for every
+derivative of a reference board. That seems over the top. I was
+thinking that you'd even have a unique "compatible" for each revision
+of each board instance. I'm simply suggesting that you don't need a
+per-SKU "compatible". Those don't add any real benefit, do they?
 
-We are applying overlay in u-boot for SOM + CC (Carrier Card) and you can see 
-DTs in the Linux kernel tree.
+In your Ciri example above, you could get rid of all of the "sku"
+overlay files since you've said that all they're doing is updating the
+"compatible". Since (I think) you're only trying to support "rev4"
+based on your model string, that would leave you just one file for
+Ciri. If you had more than one revision then you'd have more than one,
+but it doesn't need to be multiplied by the SKUs, right?
 
-SOM itself is using
-
-	compatible = "xlnx,zynqmp-sm-k24-rev1", "xlnx,zynqmp-sm-k24-revB",
-		     "xlnx,zynqmp-sm-k24-revA", "xlnx,zynqmp-sm-k24",
-		     "xlnx,zynqmp";
-
-CC are using
-
-	compatible = "xlnx,zynqmp-sk-kd240-rev1",
-		     "xlnx,zynqmp-sk-kd240-revB",
-		     "xlnx,zynqmp-sk-kd240-revA",
-		     "xlnx,zynqmp-sk-kd240", "xlnx,zynqmp";
-
-The reason is that we have to run SW on SOM to detect SC. We have SOM+CC 
-combinations for all revisions and based on autodetection we are choosing 
-combination which matches it (multiple full DTs in FIT image).
-
-Feel free to look at
-https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/zynqmp-binman-som.dts
-where combinations are described.
-
-Today FIT image have full DTBs and not overlays. Overlays are just helping us to 
-build different combinations in a simpler way.
-
-https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/Makefile#L351
-
-We would use a mechanism which can connect CC overlay with SOM.
-SOM can run on 4 different CCs
-And some CCs can be populated by different SOMs (with the same SOC family).
-
-All of these combinations should be working when run time DT overlay applying 
-mechanism is in place.
-
-Above is pretty much describing how to connect overlay with base DT and likely 
-it should have more then one compatible string.
-
-It should be also described if base DT will accept DT overlay compatible string 
-or remain on existing one.
-
-Another mechanism which we are exploring is to use transfer list where SW 
-components start to inject DT overlays to it (for example description from 
-OP-TEE) which is then passed to U-Boot which should merge them together.
-For it overlay-compatible = "xlnx,zynqmp"; in overlay could be used and will be 
-connected to actual silicon.
-
-Based on above description I can't see any issue to cover our existing use cases 
-if overlay-compatible can contains multiple compatible strings not just one.
-
-Thanks,
-Michal
-
+-Doug
