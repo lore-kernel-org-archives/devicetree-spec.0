@@ -1,248 +1,186 @@
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86B10346FA6
-	for <devicetree-spec@vger.kernel.org>; Wed,  3 Dec 2025 16:25:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A71D32F770
+	for <devicetree-spec@vger.kernel.org>; Wed,  3 Dec 2025 17:51:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764779122; cv=none; b=aoIT+LEryY+YdmWWaY5Y6dcUgjiJuxwTkXcJgDsL2pE88XmS1hnOaxMyK11xDiB2OFMcZ6Q64MECKrKkeEc/j0ZURLpcFrzAu9ikVkNh81EFVJO+IHT06vyqphKi7bVZ8ziRfOvZk1HNdbDm1EJKhmVwOmSZx0zcSrrpq0WfpxM=
+	t=1764784302; cv=none; b=SE2eQvWveXwmi2E8aCOsorTaCQ/lpbRXbaYDgF6DdRaZ04FAWouvKUaAAoa2SA4mjI+GB6JK9+yEiTa339kOScIAnPx5q81eCMlBsmspX4U/488c/bdJEhqA0Bo1KXWJoDtAQKFv1z/oHB5CmjSh+PWZeaOw4m+P72KjF8qvOlg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764779122; c=relaxed/simple;
-	bh=X78IJ0DvEjlyqwGmyrvaQ2ENJh3+EZqI8vGK+k61x8o=;
+	s=arc-20240116; t=1764784302; c=relaxed/simple;
+	bh=ABMMraB9tPMvepd0zwOKIL1tb1nFWaBr2Q92AKB/OlM=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=gX0mfNd61vaqFUOq6GonSngYmgl3VUSMq3iVtq5cjdkh4qpAl+ZMQpcsZE9WpWa3n3vR8A7MV3bXLB/Zu0pHt9l9XuyRk4vWYf9oTx2K8BN1RC+ICsIgJSgyl44fJdNCtoxG+CVkxj5+JTTvYfXA5MWhRex/0VMY/szoEVUBYwQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=ZVyOk0/N; arc=none smtp.client-ip=209.85.218.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	 To:Cc:Content-Type; b=JFqEBzGKcG6muaU2YsGQLJim0g7Ag8Gf09C62gijTkNh8vMSUK7InSBlp+tA+twmJc0LnWPrRR7GfZTvq7+eO9rmRLl5mOjUy2U6XwYdU240JkQBhZzAQI/9oQDA2c3YcnQrKucF+lA48v5+pJdGdgapZN6XZAHwiGWLsfBiCxg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TEQOKY3k; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="ZVyOk0/N"
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b735b89501fso843836566b.0
-        for <devicetree-spec@vger.kernel.org>; Wed, 03 Dec 2025 08:25:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1764779115; x=1765383915; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jOmbe3vzAARQVwHwMPSNLWrHj5szl0MDHgWp97fNf0I=;
-        b=ZVyOk0/Nna/jCSIfAKHLNU5B7L8ih/j+xrd//WPxRdtLXQkJHps7EUSDdrQEIQdFSp
-         IVprCL9nXgdTv+rAU3u+0NcfEBjJXFToQdrnfRTJR528l2cVD8uN32MLrbKyFh0+LDRR
-         g7qnMouYpNIGqby63VF/7eRbTjd5fx8mvt1YE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764779115; x=1765383915;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=jOmbe3vzAARQVwHwMPSNLWrHj5szl0MDHgWp97fNf0I=;
-        b=IaUUiTU2O+J3i3/RuOCCB7q/9icpRAg/7R+qIzw5R+9QWFbGs5jOVXawEDU7QAhtLo
-         LWuOSQ6UARBg8hyAqMlPjaOvq3yHW9Peed0q9sILK6lZyoAK14ylcUKdf8a2ra3q2tdn
-         ea/eqA1lozX9ok9KmgvxUkx2KL57HZiQEPDhWxg6Hn9e23SpaKsWuXREp28rN6QKp2QF
-         yjPWmPTbIPTsIyMUTlzZeujT+eih0WsTnQ54OWGmgiV9S1XHyh8eQtJqxSbz2C+geSXc
-         HzFqYQ+u7xNA94Xjk7uCKsSx6ZxvW8C17QhkPpneNaYJS6YZuWHlf9TAjvcY6ylySEFT
-         YnmA==
-X-Forwarded-Encrypted: i=1; AJvYcCWrSmuzKlIvODRRljZVa0B9vwTAryEL7ECJTIAQ9dm4+UBcOLr9M7gs/7hEcGV0WUyjf9/VWlCLt5wPaRC5fn4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YztK34aoPTnSPot97jANnCh6blt/TXsPW1E5c2a1xNPMoBYeoFS
-	bWtZBYn6KR3B21K8rJD6ZYmZEv9GpJJYyKDd7rIzq4qv2wOhHysAQlyGAtlpuIQtp1dcjYW4iV0
-	l3L+Gt/b9
-X-Gm-Gg: ASbGnctigLqrCt4YU4JssFO2uchvwGmh3eLNuqtf1a8rNq70oKbWDgzdkfIoxVPavAg
-	v+CKduIwneX0h6/V7eIE80388ckI5pH/R3zuJuVqD8XlVwR+jAWCq63i6u+kcNB7hPmOQdX+p3j
-	mrDoT5xKlUWQlTiQoSfOa+nwzY2LDkhZDKYxWSLOZqpuZ5KhMZR3NgwkWaxK7jLRrHcZ9QzfhG4
-	4llbEAWa/c+Tl4FoqEvJqQnIGMkCpITUAVs2lP6lllkY6SqvPjlLzF8M73BhyhynID4V4SIbyal
-	PnLRYwkXmE6fjeB0/iU7OGmebrLDrpmpfkSk/rh68FJkzqEV7u4lTYDdgzrnxKrztYMu6YvBSFl
-	t6+TclrYVxBo9nzDlLWAOnbvdSCUQIFU5robzYfhkEsvyK7ehroeYkc1jjwe8n3MF3PxAS1qnSU
-	OoBcW+ssIZJ7pcoxVcupci0P1hNo7bHr+zKIpnPnng8pRcE1kPMg==
-X-Google-Smtp-Source: AGHT+IEkPZKfrUBxbMyMpEFA8xl076MCF8lP/aRk+EniHpxBeeJnVTNhkphi2qR1Uwv4QcjiwMDwdg==
-X-Received: by 2002:a17:907:86a5:b0:b0e:d477:4972 with SMTP id a640c23a62f3a-b79dc4ea3a7mr334252066b.25.1764779114937;
-        Wed, 03 Dec 2025 08:25:14 -0800 (PST)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com. [209.85.128.48])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-64750a90d5dsm18598934a12.12.2025.12.03.08.25.14
-        for <devicetree-spec@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 03 Dec 2025 08:25:14 -0800 (PST)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-477770019e4so59784915e9.3
-        for <devicetree-spec@vger.kernel.org>; Wed, 03 Dec 2025 08:25:14 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCVAq1jdpsztqihPjkpiYw+pKzOVFqhiUMscXpcTH8zXqo2fjkz4+nGAeI1hsr/2nQNrIMeEeEQcbhxGPYDQ8+E=@vger.kernel.org
-X-Received: by 2002:a05:600c:35ce:b0:476:84e9:b571 with SMTP id
- 5b1f17b1804b1-4792aef7e8emr35377505e9.14.1764779114094; Wed, 03 Dec 2025
- 08:25:14 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TEQOKY3k"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91639C116C6
+	for <devicetree-spec@vger.kernel.org>; Wed,  3 Dec 2025 17:51:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1764784301;
+	bh=ABMMraB9tPMvepd0zwOKIL1tb1nFWaBr2Q92AKB/OlM=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=TEQOKY3kKKKqyCCLbwVzyww/9ySF2tBjZXrREVlmYLXy+y0ZCY0M57Kf4g3u2LjbF
+	 NAM+6aH8oiRkDv108T0tIIpP7oucQ28ZfUk8X08dvDr5JBvs9iIqpkX25JBtRMoe/r
+	 8VqzFtArHAHKC9XJFbXWxH3yJBezJHw3BjkadG+lJZDi1i8Y7m5iy0KfDgtZaJTny/
+	 brJLZOSgSuhU2RDdZaqWUt5chujwlUlZzSA+kMFbNd1zLqLeDTRjCoViDNekGD/G9N
+	 QlEEUl7Gb8ejC4WzVG32nJYLgfrXPUveMb69oNPmER2UTrHniMsRPGkTPPnPoS1kxe
+	 Z96nSFZosFNzw==
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-64312565c10so10808393a12.2
+        for <devicetree-spec@vger.kernel.org>; Wed, 03 Dec 2025 09:51:41 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCUklXt2KGuzpsS55CorrTsoXU/XRWDao6/KdMkENCumzr6zXda1HwrvOZJkUGgTraDuK2NpF4ID7Q9GEA9qHu8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyc3NYRMP6h6A1oEtGxE6z/t8fNNB1liNKuXQD7HPzFh7BC/4rq
+	jMM6HIl/VZOQZtGPw12bjJuRPsfRjPXDa4fSSlty0qBalP8pOt8YrNZKKBiqd4ZZbSIaK2LM+VC
+	EoKcYt96aLBCACTzLXejlEU8ybpBS2w==
+X-Google-Smtp-Source: AGHT+IGZnv3IdzCfaBgaCN9nKAbuyEt6MyarxJdGHL7jwcJM+QgpiDNKxFIa9x50mX+I6XGGNuDnJAaMWKj3UuKHzeY=
+X-Received: by 2002:a17:907:6d0d:b0:b6d:3fc9:e60c with SMTP id
+ a640c23a62f3a-b79ec4560a4mr7309166b.20.1764784300046; Wed, 03 Dec 2025
+ 09:51:40 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <CAD=FV=Ux7nGFnYEyX0cUL-9__BKnTYc+kAJjkF458ZnFS7zoJA@mail.gmail.com>
- <CAD++jLkuRQKoiEN928GtAj7wUts5PxH905bLp6ZhKsJ3NnenEA@mail.gmail.com>
- <CAD=FV=X5=AK4XMANv+fatn3d9Y5vo9AXsHWb_47HmNaMWUtMwA@mail.gmail.com>
- <CAGXv+5HyMYgKmLc+jmkj-gytm9SNVg9dS7Vn3dQ-dsH8Wo+4sg@mail.gmail.com>
- <CAD=FV=Uq9yfUkLUgg116G+2AvEKkEPmdRgUJ5f1bj229j=LxUg@mail.gmail.com> <CAGXv+5HU2y-8AZhXDjneaTdD1yr2h06OXbkozcQJj2mBcR1HmQ@mail.gmail.com>
-In-Reply-To: <CAGXv+5HU2y-8AZhXDjneaTdD1yr2h06OXbkozcQJj2mBcR1HmQ@mail.gmail.com>
-From: Doug Anderson <dianders@chromium.org>
-Date: Wed, 3 Dec 2025 08:25:01 -0800
-X-Gmail-Original-Message-ID: <CAD=FV=U54Uwny=kHY+VjG5DGCSHeRUCcWMG=hG88ov8hC6Ynew@mail.gmail.com>
-X-Gm-Features: AWmQ_bkDjTZX2TJKEcgkE7D_dL3KInx1SDfyqXNvFHSLkZzFxywJ641Qd3tcrIU
-Message-ID: <CAD=FV=U54Uwny=kHY+VjG5DGCSHeRUCcWMG=hG88ov8hC6Ynew@mail.gmail.com>
-Subject: Re: Proposal: Officially allow "incomplete" trees as a base
-To: Chen-Yu Tsai <wenst@chromium.org>
-Cc: Linus Walleij <linusw@kernel.org>, devicetree-spec@vger.kernel.org, 
-	boot-architecture@lists.linaro.org, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, 
-	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, 
-	Linux ARM <linux-arm-kernel@lists.infradead.org>, 
-	William McVicker <willmcvicker@google.com>, Julius Werner <jwerner@chromium.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Peter Griffin <peter.griffin@linaro.org>, 
-	Tudor Ambarus <tudor.ambarus@linaro.org>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
-	Simon Glass <sjg@chromium.org>, Yu-Ping Wu <yupingso@chromium.org>
+References: <ebc08400-c16d-4ed0-b487-9aabe13bbf0f@pengutronix.de>
+ <58816b68-3b09-4320-9a4e-09f2c2b2d0fa@kernel.org> <aRrcRZvdrbAmsCm_@pengutronix.de>
+ <8ce701c9-6c8d-4b3e-8706-760b8aba89fc@kernel.org> <aRr6JLMplFVeHcjj@pengutronix.de>
+ <e5502ec8-0c55-47ce-a9e5-62e137c9808b@kernel.org> <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
+ <de1739a8-4677-4cc8-b501-2568b7513467@kernel.org> <aRs2y3w854vnHAzg@pengutronix.de>
+ <576a9eae-7dba-47d0-ad66-0a81d1893271@kernel.org> <aRs-DaayhtQTtFXj@pengutronix.de>
+ <9e14fb8e-af84-4072-b0ac-9ead882782be@kernel.org> <CAL_Jsq+=v96eP6V+5Ehi9EQT3iKKU7=t7kvJ-WSA+1WCHDuHEA@mail.gmail.com>
+ <07ee3540-d0c1-436e-9e1d-db1952f609a6@kernel.org> <bcb359cf-0e8a-46ec-9f69-51c4c9e8874e@pengutronix.de>
+ <6638e499-2320-41c9-b720-faf4f976e476@kernel.org> <34bd1a0d8e579aba0a6a88039006500fe822ef3d.camel@ew.tq-group.com>
+ <dd589476-56df-4565-b4cb-e34f0d7d5559@kernel.org> <47903a88-8de9-4ac6-9111-c85ed1428ff0@pengutronix.de>
+In-Reply-To: <47903a88-8de9-4ac6-9111-c85ed1428ff0@pengutronix.de>
+From: Rob Herring <robh@kernel.org>
+Date: Wed, 3 Dec 2025 11:51:28 -0600
+X-Gmail-Original-Message-ID: <CAL_Jsq+9s7UTXU8YLsX=_z1fnc2H4PmReb+2mHx=+uuonqM7xQ@mail.gmail.com>
+X-Gm-Features: AWmQ_bmS_JWVNCGQZnqg2TRVyQIbBacXh8MhBDhhsfFAV4-C3_H-zXYNtuWuhIY
+Message-ID: <CAL_Jsq+9s7UTXU8YLsX=_z1fnc2H4PmReb+2mHx=+uuonqM7xQ@mail.gmail.com>
+Subject: Re: SoC-specific device tree aliases?
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, 
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	devicetree-spec@vger.kernel.org, quentin.schulz@cherry.de, 
+	Marc Kleine-Budde <mkl@pengutronix.de>, "kernel@pengutronix.de" <kernel@pengutronix.de>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Wed, Dec 3, 2025 at 5:37=E2=80=AFAM Ahmad Fatoum <a.fatoum@pengutronix.d=
+e> wrote:
+>
+> Hi,
+>
+> On 12/3/25 12:08 PM, Krzysztof Kozlowski wrote:
+> > On 03/12/2025 11:36, Matthias Schiffer wrote:
+> >> On Wed, 2025-12-03 at 11:25 +0100, Krzysztof Kozlowski wrote:
+> >>> On 03/12/2025 11:16, Ahmad Fatoum wrote:
+> >>>> Hello Krzysztof,
+> >>>>
+> >>>> On 11/17/25 5:29 PM, Krzysztof Kozlowski wrote:
+> >>>>> On 17/11/2025 17:06, Rob Herring wrote:
+> >>>>>>> So you want it to be an ABI for barebox, sure, just make it a bin=
+ding.
+> >>>>>>
+> >>>>>> What do you have in mind? Other than standard names for the aliase=
+s,
+> >>>>>> what can we check here? That a specific alias points to a specific
+> >>>>>> path? That would be a bit too much IMO. That would be equivalent t=
+o
+> >>>>>> specifying possible values in 'reg' for all devices.
+> >>>>>
+> >>>>> Binding with pattern or list of needed alias names, referenced by g=
+iven
+> >>>>> soc-platform top-level schema.
+> >>>>>
+> >>>>> One of the points is to make it explicit and obvious (e.g. to Arnd =
+or to
+> >>>>> me if I forget, because I follow the same logic of aliases per boar=
+d)
+> >>>>> that these aliases are used outside of kernel.
+> >>>>>
+> >>>>> Just because ufs/mmc/spi can be used that way, does not mean we sho=
+uld
+> >>>>> accept any possible alias into soc.dtsi.
+> >>>>
+> >>>> I can't see how this could work. A number of boards renumber MMC dev=
+ices
+> >>>> in a different manner than the SoC reference manual:
+> >>>>
+> >>>> - Changing the alias numbering is an ABI break, because Linux derive=
+s
+> >>>> its /dev/mmcblkX numbering from it
+> >>>
+> >>> First, why the alias would change? Isn't the board following the SoC
+> >>> numbering in 99.9% cases?
+> >>
+> >> At least for our TQ-Systems boards, we have a convention based on usag=
+e (mmc0:
+> >> eMMC, mmc1: SD card; serial0 is often the console) rather than followi=
+ng the SoC
+> >> numbering; that is, we're using the aliases as a form of hardware abst=
+raction
+> >> rather than hardware description.
+> >
+> > Huh, does it even match numbering on the schematics / board / user-guid=
+es?
+> >
+> > I would prefer not to create bindings purely because some existing DTS
+> > code is not matching our expectations. However there could be a case
+> > where board numbering is different than soc number and we want to keep
+> > aliases configured for board.
+> >
+> > Basically what you propose here is the discouraged instance ID disguise=
+d
+> > under one more 'alias' which is not really alias. It's just an instance
+> > ID. There is no other use of soc-aliases beside instance ID.
+> >
+> > I see the problem you want to solve, I agree it is worth solving and I
+> > agree that DT is the place for this mapping between register value and
+> > device node. However solution of discouraged instance ID is just...
+> > well, discouraged, so not optimal. I don't have particular advice expec=
+t
+> > a dedicated property for each device in such case.
+>
+> How do we move forward here? I don't think we can change the nature of
+> /aliases being board-specific now without breaking users.
+>
+> Does this make the addition of /soc-aliases (or /soc/aliases?) more
+> palatable?
 
-On Tue, Dec 2, 2025 at 11:34=E2=80=AFPM Chen-Yu Tsai <wenst@chromium.org> w=
-rote:
->
-> On Wed, Dec 3, 2025 at 6:11=E2=80=AFAM Doug Anderson <dianders@chromium.o=
-rg> wrote:
-> >
-> > > In the simplest example we could have one base dts and two overlays
-> > > for two different DSI panel models:
-> > >
-> > >   - base.dtb
-> > >     - panel-model-a.dtbo
-> > >     - panel-model-b.dtbo
-> > >
-> > > The problem we then run into is that the base.dtb will only have the
-> > > generic model compatible "google,foo", not the sku and revision
-> > > specific ones like "google,foo-sku1-rev2".
-> > >
-> > > And we'd really like to avoid having _more_ overlays just to add the
-> > > final specific compatible string, as that kind of defeats the purpose
-> > > of using overlays to reduce the number of dts files.
-> >
-> > I think you may have simplified the above a little too much to the
-> > point where it's confusing. At least I'm a bit confused. I _think_ the
-> > problems you're talking about are the kinds of things we run into when
-> > we take overlays above just two levels. I'm imagining:
-> >
-> > - base.dtb
-> > - board1-rev1.dtbo
-> > - board2-rev1.dtbo
-> > - board1-rev2.dtbo
-> > - board2-rev2.dtbo
-> > - panel-a.dtbo
-> > - panel-b.dtbo
-> >
-> > So I think you're saying that you'd start with the "base.dtb" and then
-> > extend it with exactly one of the "board" overlays and then exactly
-> > one of the "panel" overlays. Is that right?
->
-> For now I think we just experiment with having one end "model" or
-> "product" as the base.dtb. The panel-*.dtbo selected describe the
-> optional components, while the board-rev??.dtbo just provides the
-> top level compatible and model.
->
-> In an example that I plan to send out this week, I would rework:
->
->   - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri.dtsi
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku0.dts
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku1.dts
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku2.dts
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku3.dts
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku4.dts
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku5.dts
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku6.dts
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku7.dts
->
-> into:
->
->   - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri.dts
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-audio-max98390-es83=
-26.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-audio-max98390-rt56=
-82s.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-audio-tas2563-es832=
-6.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-audio-tas2563-rt568=
-2s.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-panel-boe.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-panel-ivo.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku0.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku1.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku2.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku3.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku4.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku5.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku6.dtso
->     - arch/arm64/boot/dts/mediatek/mt8188-geralt-ciri-sku7.dtso
->
-> The "mt8188-geralt-ciri-sku?.dtso" files only contain the following
-> boilerplate:
->
->     /dts-v1/;
->     /plugin/;
->
->     &{/} {
->         model =3D "Google Ciri sku? board (rev4)";
->         compatible =3D "google,ciri-sku?", "google,ciri", "mediatek,mt818=
-8";
->     };
->
-> The base "mt8188-geralt-ciri.dts" would already have a generic board-
-> specific compatible:
->
->     model =3D "Google Ciri board";
->     compatible =3D "google,ciri", "mediatek,mt8188";
->
-> > So I'd imagine that each of the "board" overlays could have "full"
-> > compatible strings. For instance, I'd imagine "board2-rev2" could
-> > have:
-> >
-> > compatible =3D "google,booard2-rev2", "socVendor,soc"
-> >
-> >
-> > The problem you're struggling with (I think) is that the panel
-> > overlays won't be represented in the compatible string (and "model")
-> > even though (historically) we always did in ChromeOS (they were
-> > included in the "sku" part of the compatible string).
-> >
-> > Did I get that right?
->
-> In a sense you've generalized the problem I was describing.
->
-> In my example, the top level compatible gets fixed up by the final
-> SKU-specific overlay. But that's 8 extra files to do one bit of
-> fixup that supposedly the bootloader could be taught to do, and
-> could do even better. The bootloader knows exactly which SKU and
-> revision it's running on and can insert the information appropriately.
-> We could get rid of those awkwardly long compatible string sequences:
->
->   compatible =3D "google,tentacruel-sku262147", "google,tentacruel-sku262=
-146",
->                "google,tentacruel-sku262145", "google,tentacruel-sku26214=
-4",
->                "google,tentacruel", "mediatek,mt8186";
->
-> Going back to what I think you're describing, is that instead of one
-> base board DTB for each product, we could have one base DTB for the
-> reference design (in place of the .dtsi file we currently have), and
-> make products and component selection all use overlays.
->
-> If we do that, then inserting the correct top level compatible and model
-> becomes more important, since we do have things such as the ChromeOS OF
-> component prober working based on top level compatible. Also, the model
-> is present in logs, and would be very misleading to say one device name
-> while in reality it is a different one.
+No.
 
-I wasn't saying that you'd just have the same "compatible" for every
-derivative of a reference board. That seems over the top. I was
-thinking that you'd even have a unique "compatible" for each revision
-of each board instance. I'm simply suggesting that you don't need a
-per-SKU "compatible". Those don't add any real benefit, do they?
+Thinking about this some more, I'm not sure that something aliases
+based is even the right approach. Let's back up to the original
+problem instead of talking about a problem concerning a possible
+solution.
 
-In your Ciri example above, you could get rid of all of the "sku"
-overlay files since you've said that all they're doing is updating the
-"compatible". Since (I think) you're only trying to support "rev4"
-based on your model string, that would leave you just one file for
-Ciri. If you had more than one revision then you'd have more than one,
-but it doesn't need to be multiplied by the SKUs, right?
+You have a platform specific register with values (or from 1 or
+multiple fields) that you need to map to devices in DT. That's it.
+That could be solved like this:
 
--Doug
+bootsource-map =3D
+  <0x2 &mmc0>,
+  <0x3 &mmc1>,
+  <0x10 &spi0>,
+  ...;
+
+Simple. The first value is platform specific. Maybe it is several
+fields (e.g. device type, instance) merged together. Doesn't matter.
+
+And where do we put 'bootsource-map'? That could be either in the node
+of the device with the boot source register(s) or alongside bootsource
+in chosen. In chosen is a bit weird because that's supposed to be
+things the bootloader fills in.
+
+Now I'm pretty annoyed because like what happens many times, I
+accepted bootsource and you all turn right around want to add on to
+it. IOW, it didn't completely solve the problem or give me the whole
+picture. Why does that matter? Because now I might say 'bootsource'
+can just be the index into 'bootsource-map', but now we're stuck with
+it (forever). Anything else needed in this area?
+
+Rob
