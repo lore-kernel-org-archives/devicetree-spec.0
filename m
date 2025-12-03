@@ -1,49 +1,43 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from glittertind.blackshift.org (glittertind.blackshift.org [116.203.23.228])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C49D736D4FC;
-	Wed,  3 Dec 2025 11:24:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C5E42F5318;
+	Wed,  3 Dec 2025 11:29:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=116.203.23.228
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764761074; cv=none; b=YuRBm1Rxtf2oUU2xbWsoaqPoG9F0vb06l7ZR+m5V7rS8NsOxMDYxc5jW6ITpZfbXXgn+qvm5ohjkX+6IEQUrrLGJ8TbVL2SyhdyC9X5lFsWhzTvAcsj9uTzkzV9EEz6z71BKIn2n6p2/Npw8KoNSUxpWVHnoca7/vOi2qq26bvI=
+	t=1764761397; cv=none; b=k5nppv0nxsylWQGq37JxQv7J65tY/LQ+oRohIDGtRutpBFw9Psknxa5BopzCdHWqBbVT6qgP9WgBxa+FZHzevVI0/QbE5wRHkeVbimbran+UgsZM5LcCT3HFMKjqYFH2GfrbdxiX0V8GtjWeMiszRy6f6MXv4pQhuLZZ9Nw+KBk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764761074; c=relaxed/simple;
-	bh=7vp81gq/AzlQ2ezHN6rqzTadSfhvSo+POlhzPIKyWKc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Gx5gcRt/92kGodw9dIbndXb3zpajq/eut5mVfG36+Rrz4Di9tOOthJsoGAPYjpCuWZ26axxTHWyL31vG6d9YjmC9u2/wFyvN6f1RqkBywkPS4Go88CabHDoHScC21SB/aCZl5xPOQ5VDEPwY7DB5SspAE1b0ABP0P53AjFowLLs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Z9bmUHSQ; arc=none smtp.client-ip=10.30.226.201
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Z9bmUHSQ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 029EAC4CEFB;
-	Wed,  3 Dec 2025 11:24:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1764761074;
-	bh=7vp81gq/AzlQ2ezHN6rqzTadSfhvSo+POlhzPIKyWKc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Z9bmUHSQCgS1EiWqR7TwE+4V+JhqphP336m2o9ynrUqfKEJSWPTgjiavWGAYOyJCt
-	 91uFGwAHrnhVhtB/Pbv66vKKMmxXcpeWUqqjbOFqUudMmg3Wrqpu4wVS9CM3sXq698
-	 tgjprP92lFfZddI0saHWudc2I5z4ebqfjK8zQ2J8wlhpnomPULWD8NkiXlHa6BDYW0
-	 sTx7Mg8IXwYTcd3suIQEd6Fwb9VLQ0dtGRhUNLrAgd2SKzVYZG0fKseeUp4Z8bF3Hm
-	 +VXf4LHQDhOBvxwQnO6MVlE0YOfklf11MbVxneJDDZghMOGo6Xw1otLnB22eJw4bLu
-	 NaU29iirPb7Bw==
-Message-ID: <cbf203b8-28a9-48be-bd87-29eb0d6656ab@kernel.org>
-Date: Wed, 3 Dec 2025 12:24:30 +0100
-Precedence: bulk
-X-Mailing-List: devicetree-spec@vger.kernel.org
-List-Id: <devicetree-spec.vger.kernel.org>
-List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
-List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+	s=arc-20240116; t=1764761397; c=relaxed/simple;
+	bh=8E4cajnzDsEXR4Y5U4stRqHzzcaoI/VX5B7tMew+SVQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Js3vgma8PkrxoD5GJ6AwslgTlBlROYspeesTQbD32PCT7LdC/xAyhaksm8mdRQWILcZHgHKbrN4dEDedST+87eEINZewlW2DLnA7/3mt98Ik4j/laA0KZyo1v/b2hBCKZbVNSQRqK3pIfC3epcNUZCrZMdvW9wxNHY6fDiKtbkw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=blackshift.org; spf=pass smtp.mailfrom=blackshift.org; arc=none smtp.client-ip=116.203.23.228
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=blackshift.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=blackshift.org
+Received: from bjornoya.blackshift.org (unknown [IPv6:2003:102:af0a:700:7b4:bad1:4073:8aa9])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature ECDSA (secp384r1) server-digest SHA384
+	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
+	(Client CN "bjornoya.blackshift.org", Issuer "R13" (verified OK))
+	by glittertind.blackshift.org (Postfix) with ESMTPS id F3C03769BBF;
+	Wed, 03 Dec 2025 11:20:55 +0000 (UTC)
+Received: from pengutronix.de (p54b152ce.dip0.t-ipconnect.de [84.177.82.206])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: mkl-all@blackshift.org)
+	by smtp.blackshift.org (Postfix) with ESMTPSA id 652614AE620;
+	Wed, 03 Dec 2025 11:20:55 +0000 (UTC)
+Date: Wed, 3 Dec 2025 12:20:52 +0100
+From: Marc Kleine-Budde <mkl@blackshift.org>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Ahmad Fatoum <a.fatoum@pengutronix.de>, Rob Herring <robh@kernel.org>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, devicetree-spec@vger.kernel.org, quentin.schulz@cherry.de, 
+	Marc Kleine-Budde <mkl@pengutronix.de>, "kernel@pengutronix.de" <kernel@pengutronix.de>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>
 Subject: Re: SoC-specific device tree aliases?
-To: Marc Kleine-Budde <mkl@blackshift.org>
-Cc: Ahmad Fatoum <a.fatoum@pengutronix.de>, Rob Herring <robh@kernel.org>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, devicetree-spec@vger.kernel.org,
- quentin.schulz@cherry.de, Marc Kleine-Budde <mkl@pengutronix.de>,
- "kernel@pengutronix.de" <kernel@pengutronix.de>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>
+Message-ID: <20251203-adorable-gila-monster-3d313a-mkl@blackshift.org>
 References: <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
  <de1739a8-4677-4cc8-b501-2568b7513467@kernel.org>
  <aRs2y3w854vnHAzg@pengutronix.de>
@@ -54,102 +48,91 @@ References: <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
  <07ee3540-d0c1-436e-9e1d-db1952f609a6@kernel.org>
  <bcb359cf-0e8a-46ec-9f69-51c4c9e8874e@pengutronix.de>
  <6638e499-2320-41c9-b720-faf4f976e476@kernel.org>
- <20251203-adorable-gila-monster-3d313a-mkl@blackshift.org>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 a/A=
-In-Reply-To: <20251203-adorable-gila-monster-3d313a-mkl@blackshift.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Precedence: bulk
+X-Mailing-List: devicetree-spec@vger.kernel.org
+List-Id: <devicetree-spec.vger.kernel.org>
+List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
+List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="t4ohs6ozy6w5jecs"
+Content-Disposition: inline
+In-Reply-To: <6638e499-2320-41c9-b720-faf4f976e476@kernel.org>
 
-On 03/12/2025 12:20, Marc Kleine-Budde wrote:
-> On 03.12.2025 11:25:11, Krzysztof Kozlowski wrote:
->> On 03/12/2025 11:16, Ahmad Fatoum wrote:
->>> Hello Krzysztof,
->>>
->>> On 11/17/25 5:29 PM, Krzysztof Kozlowski wrote:
->>>> On 17/11/2025 17:06, Rob Herring wrote:
->>>>>> So you want it to be an ABI for barebox, sure, just make it a binding.
->>>>>
->>>>> What do you have in mind? Other than standard names for the aliases,
->>>>> what can we check here? That a specific alias points to a specific
->>>>> path? That would be a bit too much IMO. That would be equivalent to
->>>>> specifying possible values in 'reg' for all devices.
->>>>
->>>> Binding with pattern or list of needed alias names, referenced by given
->>>> soc-platform top-level schema.
->>>>
->>>> One of the points is to make it explicit and obvious (e.g. to Arnd or to
->>>> me if I forget, because I follow the same logic of aliases per board)
->>>> that these aliases are used outside of kernel.
->>>>
->>>> Just because ufs/mmc/spi can be used that way, does not mean we should
->>>> accept any possible alias into soc.dtsi.
->>>
->>> I can't see how this could work. A number of boards renumber MMC devices
->>> in a different manner than the SoC reference manual:
->>>
->>> - Changing the alias numbering is an ABI break, because Linux derives
->>> its /dev/mmcblkX numbering from it
->>
->> First, why the alias would change? Isn't the board following the SoC
->> numbering in 99.9% cases?
->>
->> Second, I don't think it is an ABI. We had it ~5 or ~8 years ago where
->> the mmcblkX was changing based on probe ordering. Many people setups got
->> broken, many people complained and the consensus reply was: please start
->> finally using UUID/PARTUIID/LABEL for rootfs. Eventually we got back to
->> mmcblkX stability but rule is there - if your cmdline has /dev/mmcblkX,
->> then it is your problem.
-> 
-> In order to use UUID/PARTUIID/LABEL in the kernel command line, the
-> firmware/bootloader/... has to map from the register value to the
-> instance to read the UUID/PARTUIID/LABEL from the media.
 
-Or have it stored when flashing/configuring the board as part of
-firmware configuration like U-Boot env.
+--t4ohs6ozy6w5jecs
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: SoC-specific device tree aliases?
+MIME-Version: 1.0
 
-Best regards,
-Krzysztof
+On 03.12.2025 11:25:11, Krzysztof Kozlowski wrote:
+> On 03/12/2025 11:16, Ahmad Fatoum wrote:
+> > Hello Krzysztof,
+> >
+> > On 11/17/25 5:29 PM, Krzysztof Kozlowski wrote:
+> >> On 17/11/2025 17:06, Rob Herring wrote:
+> >>>> So you want it to be an ABI for barebox, sure, just make it a bindin=
+g.
+> >>>
+> >>> What do you have in mind? Other than standard names for the aliases,
+> >>> what can we check here? That a specific alias points to a specific
+> >>> path? That would be a bit too much IMO. That would be equivalent to
+> >>> specifying possible values in 'reg' for all devices.
+> >>
+> >> Binding with pattern or list of needed alias names, referenced by given
+> >> soc-platform top-level schema.
+> >>
+> >> One of the points is to make it explicit and obvious (e.g. to Arnd or =
+to
+> >> me if I forget, because I follow the same logic of aliases per board)
+> >> that these aliases are used outside of kernel.
+> >>
+> >> Just because ufs/mmc/spi can be used that way, does not mean we should
+> >> accept any possible alias into soc.dtsi.
+> >
+> > I can't see how this could work. A number of boards renumber MMC devices
+> > in a different manner than the SoC reference manual:
+> >
+> > - Changing the alias numbering is an ABI break, because Linux derives
+> > its /dev/mmcblkX numbering from it
+>
+> First, why the alias would change? Isn't the board following the SoC
+> numbering in 99.9% cases?
+>
+> Second, I don't think it is an ABI. We had it ~5 or ~8 years ago where
+> the mmcblkX was changing based on probe ordering. Many people setups got
+> broken, many people complained and the consensus reply was: please start
+> finally using UUID/PARTUIID/LABEL for rootfs. Eventually we got back to
+> mmcblkX stability but rule is there - if your cmdline has /dev/mmcblkX,
+> then it is your problem.
+
+In order to use UUID/PARTUIID/LABEL in the kernel command line, the
+firmware/bootloader/... has to map from the register value to the
+instance to read the UUID/PARTUIID/LABEL from the media.
+
+Marc
+
+--=20
+Pengutronix e.K.                 | Marc Kleine-Budde          |
+Embedded Linux                   | https://www.pengutronix.de |
+Vertretung N=C3=BCrnberg              | Phone: +49-5121-206917-129 |
+Amtsgericht Hildesheim, HRA 2686 | Fax:   +49-5121-206917-9   |
+
+--t4ohs6ozy6w5jecs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEn/sM2K9nqF/8FWzzDHRl3/mQkZwFAmkwHREACgkQDHRl3/mQ
+kZzwfgf8D0iKkrtKkeJ70sXp75h6AxSyZRncrmiVeBUi8lAVt62FfYa5J61M91Ml
+6x5nXN82mwu8dpL/FaF0M1bU4gf2lwv1RBkr2AV3N6ujlWfZlNKyghtiZPcTcTeH
+PUy41AeTORxsm8AcdoFWMaG4HD/ghoK69Lmjr4R6a8aQwMEg06v4dsKoq0oFe6af
+JSVNLeyF1BAkNGywXpvBLNn0Vbn6MWymnJh/f3/e2Y1fKKI0uRf9VVuGPOfjZCFS
++a0Yw1DfKGuxexmfsh/v7NpdUSK72rOSmaLN85uJ+9TYZrMWyB+OSTV4DFXY1pGS
+6fhmRNBMCR420AxfBHuuecVCOVR+DA==
+=Pc8g
+-----END PGP SIGNATURE-----
+
+--t4ohs6ozy6w5jecs--
