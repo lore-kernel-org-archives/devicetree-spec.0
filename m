@@ -1,44 +1,48 @@
-Received: from glittertind.blackshift.org (glittertind.blackshift.org [116.203.23.228])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C5E42F5318;
-	Wed,  3 Dec 2025 11:29:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=116.203.23.228
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E5A124E4A1
+	for <devicetree-spec@vger.kernel.org>; Wed,  3 Dec 2025 11:34:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764761397; cv=none; b=k5nppv0nxsylWQGq37JxQv7J65tY/LQ+oRohIDGtRutpBFw9Psknxa5BopzCdHWqBbVT6qgP9WgBxa+FZHzevVI0/QbE5wRHkeVbimbran+UgsZM5LcCT3HFMKjqYFH2GfrbdxiX0V8GtjWeMiszRy6f6MXv4pQhuLZZ9Nw+KBk=
+	t=1764761701; cv=none; b=dIJBA2igdQ/aWfAT0XML/x30aoWMqs+flWFWxm77zv0JlA9uHrVVZ8Z92kfSLNLTxHvvh8/XViCrnM0z8F47uEz7vtCDybpXVdQ4+ycAaDlXOolpX4JRU2EyfA5Tkzo0eqZOgg/QAYr+ZGvbecuINxey9EKrxYXKrCvMQKK7uv8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764761397; c=relaxed/simple;
-	bh=8E4cajnzDsEXR4Y5U4stRqHzzcaoI/VX5B7tMew+SVQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Js3vgma8PkrxoD5GJ6AwslgTlBlROYspeesTQbD32PCT7LdC/xAyhaksm8mdRQWILcZHgHKbrN4dEDedST+87eEINZewlW2DLnA7/3mt98Ik4j/laA0KZyo1v/b2hBCKZbVNSQRqK3pIfC3epcNUZCrZMdvW9wxNHY6fDiKtbkw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=blackshift.org; spf=pass smtp.mailfrom=blackshift.org; arc=none smtp.client-ip=116.203.23.228
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=blackshift.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=blackshift.org
-Received: from bjornoya.blackshift.org (unknown [IPv6:2003:102:af0a:700:7b4:bad1:4073:8aa9])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature ECDSA (secp384r1) server-digest SHA384
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "bjornoya.blackshift.org", Issuer "R13" (verified OK))
-	by glittertind.blackshift.org (Postfix) with ESMTPS id F3C03769BBF;
-	Wed, 03 Dec 2025 11:20:55 +0000 (UTC)
-Received: from pengutronix.de (p54b152ce.dip0.t-ipconnect.de [84.177.82.206])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	(Authenticated sender: mkl-all@blackshift.org)
-	by smtp.blackshift.org (Postfix) with ESMTPSA id 652614AE620;
-	Wed, 03 Dec 2025 11:20:55 +0000 (UTC)
-Date: Wed, 3 Dec 2025 12:20:52 +0100
-From: Marc Kleine-Budde <mkl@blackshift.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Ahmad Fatoum <a.fatoum@pengutronix.de>, Rob Herring <robh@kernel.org>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, devicetree-spec@vger.kernel.org, quentin.schulz@cherry.de, 
-	Marc Kleine-Budde <mkl@pengutronix.de>, "kernel@pengutronix.de" <kernel@pengutronix.de>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>
+	s=arc-20240116; t=1764761701; c=relaxed/simple;
+	bh=2CDpfurWhZKfXtEZ54dirUQfDB5GZUe89QM6AihBRDg=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=AGnH2KNvsG9PqRHfNxeoDqvGth03sgO67npUejJ54As3uPSAMnZ6+u5SKAV+gBgFnVfoNUNsAhqx2QaLZPOs3s850LfBNNym5nL0dKSVNve4yFKdGT2W94suSaIoLNSj2wTpMOei8L5XPisYoMG4d3NROe3KtrUwjpwMTx/6b+o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[127.0.0.1])
+	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+	(envelope-from <a.fatoum@pengutronix.de>)
+	id 1vQl8B-0005vO-2V; Wed, 03 Dec 2025 12:34:47 +0100
+Message-ID: <ddc6fa7b-7840-4340-be41-8f28aad1c80e@pengutronix.de>
+Date: Wed, 3 Dec 2025 12:34:45 +0100
+Precedence: bulk
+X-Mailing-List: devicetree-spec@vger.kernel.org
+List-Id: <devicetree-spec.vger.kernel.org>
+List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
+List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
 Subject: Re: SoC-specific device tree aliases?
-Message-ID: <20251203-adorable-gila-monster-3d313a-mkl@blackshift.org>
-References: <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
+To: Krzysztof Kozlowski <krzk@kernel.org>, Rob Herring <robh@kernel.org>
+Cc: Sascha Hauer <s.hauer@pengutronix.de>,
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, devicetree-spec@vger.kernel.org,
+ quentin.schulz@cherry.de, Marc Kleine-Budde <mkl@pengutronix.de>,
+ "kernel@pengutronix.de" <kernel@pengutronix.de>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>
+References: <ebc08400-c16d-4ed0-b487-9aabe13bbf0f@pengutronix.de>
+ <58816b68-3b09-4320-9a4e-09f2c2b2d0fa@kernel.org>
+ <aRrcRZvdrbAmsCm_@pengutronix.de>
+ <8ce701c9-6c8d-4b3e-8706-760b8aba89fc@kernel.org>
+ <aRr6JLMplFVeHcjj@pengutronix.de>
+ <e5502ec8-0c55-47ce-a9e5-62e137c9808b@kernel.org>
+ <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
  <de1739a8-4677-4cc8-b501-2568b7513467@kernel.org>
  <aRs2y3w854vnHAzg@pengutronix.de>
  <576a9eae-7dba-47d0-ad66-0a81d1893271@kernel.org>
@@ -48,91 +52,87 @@ References: <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
  <07ee3540-d0c1-436e-9e1d-db1952f609a6@kernel.org>
  <bcb359cf-0e8a-46ec-9f69-51c4c9e8874e@pengutronix.de>
  <6638e499-2320-41c9-b720-faf4f976e476@kernel.org>
-Precedence: bulk
-X-Mailing-List: devicetree-spec@vger.kernel.org
-List-Id: <devicetree-spec.vger.kernel.org>
-List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
-List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="t4ohs6ozy6w5jecs"
-Content-Disposition: inline
+Content-Language: en-US, de-DE, de-BE
 In-Reply-To: <6638e499-2320-41c9-b720-faf4f976e476@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: devicetree-spec@vger.kernel.org
 
+Hello Krzysztof,
 
---t4ohs6ozy6w5jecs
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: SoC-specific device tree aliases?
-MIME-Version: 1.0
-
-On 03.12.2025 11:25:11, Krzysztof Kozlowski wrote:
+On 12/3/25 11:25 AM, Krzysztof Kozlowski wrote:
 > On 03/12/2025 11:16, Ahmad Fatoum wrote:
-> > Hello Krzysztof,
-> >
-> > On 11/17/25 5:29 PM, Krzysztof Kozlowski wrote:
-> >> On 17/11/2025 17:06, Rob Herring wrote:
-> >>>> So you want it to be an ABI for barebox, sure, just make it a bindin=
-g.
-> >>>
-> >>> What do you have in mind? Other than standard names for the aliases,
-> >>> what can we check here? That a specific alias points to a specific
-> >>> path? That would be a bit too much IMO. That would be equivalent to
-> >>> specifying possible values in 'reg' for all devices.
-> >>
-> >> Binding with pattern or list of needed alias names, referenced by given
-> >> soc-platform top-level schema.
-> >>
-> >> One of the points is to make it explicit and obvious (e.g. to Arnd or =
-to
-> >> me if I forget, because I follow the same logic of aliases per board)
-> >> that these aliases are used outside of kernel.
-> >>
-> >> Just because ufs/mmc/spi can be used that way, does not mean we should
-> >> accept any possible alias into soc.dtsi.
-> >
-> > I can't see how this could work. A number of boards renumber MMC devices
-> > in a different manner than the SoC reference manual:
-> >
-> > - Changing the alias numbering is an ABI break, because Linux derives
-> > its /dev/mmcblkX numbering from it
->
+>>> Just because ufs/mmc/spi can be used that way, does not mean we should
+>>> accept any possible alias into soc.dtsi.
+>>
+>> I can't see how this could work. A number of boards renumber MMC devices
+>> in a different manner than the SoC reference manual:
+>>
+>> - Changing the alias numbering is an ABI break, because Linux derives
+>> its /dev/mmcblkX numbering from it
+> 
 > First, why the alias would change? Isn't the board following the SoC
 > numbering in 99.9% cases?
->
+
+For 32-bit i.MX, the figure is more like 80% with 20% of the boards
+going out of their way to override the numbering in the SoC dtsi.
+
+I can only assume the figure may be higher for other platforms, where
+there is no numbering in the DTSI. See below[1] for calculation.
+
 > Second, I don't think it is an ABI. We had it ~5 or ~8 years ago where
 > the mmcblkX was changing based on probe ordering. Many people setups got
 > broken, many people complained and the consensus reply was: please start
-> finally using UUID/PARTUIID/LABEL for rootfs. Eventually we got back to
+> finally using UUID/PARTUIID/LABEL for rootfs.
+
+On the other hand, I have seen people flashing the same image to both an
+eMMC and a SD-Card and wondering why the bootloader picks a different
+rootfs than the kernel.
+
+> Eventually we got back to
 > mmcblkX stability but rule is there - if your cmdline has /dev/mmcblkX,
 > then it is your problem.
 
-In order to use UUID/PARTUIID/LABEL in the kernel command line, the
-firmware/bootloader/... has to map from the register value to the
-instance to read the UUID/PARTUIID/LABEL from the media.
+Device tree aliases are the only way to identify the same MMC device
+in bootloader and kernel over different boots and for my part, I can
+only encourage their use.
 
-Marc
+[1]: I checked out Linux v6.18, used imx_v6_v7_defconfig and built the
+dtb target.
 
---=20
-Pengutronix e.K.                 | Marc Kleine-Budde          |
-Embedded Linux                   | https://www.pengutronix.de |
-Vertretung N=C3=BCrnberg              | Phone: +49-5121-206917-129 |
-Amtsgericht Hildesheim, HRA 2686 | Fax:   +49-5121-206917-9   |
+arch/arm/boot/dts/nxp/imx/.*.dtb.dts.tmp in the build directory are the
+preprocessed device tree source files.
 
---t4ohs6ozy6w5jecs
-Content-Type: application/pgp-signature; name="signature.asc"
+I deleted arch/arm/boot/dts/nxp/imx/.imx7ulp*.dtb.dts.tmp, because
+it's the only SoC apparently that numbers MMC peripherals stating with 0.
 
------BEGIN PGP SIGNATURE-----
+Now let's find all instances of mmcX = somethingY, where X is not Y - 1:
 
-iQEzBAABCgAdFiEEn/sM2K9nqF/8FWzzDHRl3/mQkZwFAmkwHREACgkQDHRl3/mQ
-kZzwfgf8D0iKkrtKkeJ70sXp75h6AxSyZRncrmiVeBUi8lAVt62FfYa5J61M91Ml
-6x5nXN82mwu8dpL/FaF0M1bU4gf2lwv1RBkr2AV3N6ujlWfZlNKyghtiZPcTcTeH
-PUy41AeTORxsm8AcdoFWMaG4HD/ghoK69Lmjr4R6a8aQwMEg06v4dsKoq0oFe6af
-JSVNLeyF1BAkNGywXpvBLNn0Vbn6MWymnJh/f3/e2Y1fKKI0uRf9VVuGPOfjZCFS
-+a0Yw1DfKGuxexmfsh/v7NpdUSK72rOSmaLN85uJ+9TYZrMWyB+OSTV4DFXY1pGS
-6fhmRNBMCR420AxfBHuuecVCOVR+DA==
-=Pc8g
------END PGP SIGNATURE-----
+perl -ne '/mmc(\d+)\s*=\s*&\w+?(\d+)/ && $1 != $2 - 1 and \
+	print($ARGV, $_) && close ARGV' \
+		arch/arm/boot/dts/nxp/imx/.*.dtb.dts.tmp
 
---t4ohs6ozy6w5jecs--
+This returns 76 matches out of a total 381, so that's 19.95% of all i.MX
+device trees that went out of their way to override the numbering in the
+SoC dtsi.
+
+Cheers,
+Ahmad
+
+> 
+> 
+> 
+> 
+> Best regards,
+> Krzysztof
+> 
+
+-- 
+Pengutronix e.K.                  |                             |
+Steuerwalder Str. 21              | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
+
