@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66AC42EFD99;
-	Wed,  3 Dec 2025 11:08:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C49D736D4FC;
+	Wed,  3 Dec 2025 11:24:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764760115; cv=none; b=DxnxRBhM5s9JvNtLARZ//vkMwIUQGWLU+xgDB0OdiMRRjEqCfwQRcwa5l4hfHentiYYr69bNZ+l4SMt5XrzC9UZP9InPfuTxJHis0t0oiP87aUf0Z7Hy74VfUQJYGjefszrvw+jEk84DyaYinsix3l5HhGr9C2Ks3sVbsxTD/tg=
+	t=1764761074; cv=none; b=YuRBm1Rxtf2oUU2xbWsoaqPoG9F0vb06l7ZR+m5V7rS8NsOxMDYxc5jW6ITpZfbXXgn+qvm5ohjkX+6IEQUrrLGJ8TbVL2SyhdyC9X5lFsWhzTvAcsj9uTzkzV9EEz6z71BKIn2n6p2/Npw8KoNSUxpWVHnoca7/vOi2qq26bvI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764760115; c=relaxed/simple;
-	bh=t3W10qsRJTd3xYWo8h8fePXxAi5MXuaO7mW7w3R5grs=;
+	s=arc-20240116; t=1764761074; c=relaxed/simple;
+	bh=7vp81gq/AzlQ2ezHN6rqzTadSfhvSo+POlhzPIKyWKc=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=KDh7C55do5ivcBA9nFyZ6Ge1OpgYJD6Bv4uGVdbP2Tk9/rXh38gX1bqIdhf6NXiP0XjcDctBLUira+KxtguLEWW9IMx5KbuF4/wC9pU3wtqNc2zAIoOY/arLCb4svxAow/oHg2/bPB5mTcC9X3n0Wld+Kfk58Pn5Yyh2QIRUR3g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XhQCS2ob; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:Content-Type; b=Gx5gcRt/92kGodw9dIbndXb3zpajq/eut5mVfG36+Rrz4Di9tOOthJsoGAPYjpCuWZ26axxTHWyL31vG6d9YjmC9u2/wFyvN6f1RqkBywkPS4Go88CabHDoHScC21SB/aCZl5xPOQ5VDEPwY7DB5SspAE1b0ABP0P53AjFowLLs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Z9bmUHSQ; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XhQCS2ob"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99B5AC113D0;
-	Wed,  3 Dec 2025 11:08:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Z9bmUHSQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 029EAC4CEFB;
+	Wed,  3 Dec 2025 11:24:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1764760114;
-	bh=t3W10qsRJTd3xYWo8h8fePXxAi5MXuaO7mW7w3R5grs=;
+	s=k20201202; t=1764761074;
+	bh=7vp81gq/AzlQ2ezHN6rqzTadSfhvSo+POlhzPIKyWKc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=XhQCS2obvmNKPGBY06kIZu5LLFLMx+5blL04pytjUsPg0V/oow+iVojGuqozLsImC
-	 azxrSjfXhkCpfCa2QIdb1gr+UAmlHcJCOXmmkOrEv8tluW86E3RbGFNV/xQmcUQ2iZ
-	 uXiUaeOFDnR4BzFiUv3CJLk890f+kjBmqxL1zsg9OM86KXG2Uz6lyqdkw+F0mLJVhV
-	 x0ez1mmTpfNHJ0dNXXE9aKB+D3+U21xsUp1HYghLGBtNBYuDCtgIu6emuNfLfQHbDn
-	 cGY6DjtaZzLJLvypVwUUwEOI0bo9V8rJGUsc96uWtUNL9TE3yTWlxYM0gaSkUsnzbk
-	 u30BN+0+hvFtg==
-Message-ID: <dd589476-56df-4565-b4cb-e34f0d7d5559@kernel.org>
-Date: Wed, 3 Dec 2025 12:08:30 +0100
+	b=Z9bmUHSQCgS1EiWqR7TwE+4V+JhqphP336m2o9ynrUqfKEJSWPTgjiavWGAYOyJCt
+	 91uFGwAHrnhVhtB/Pbv66vKKMmxXcpeWUqqjbOFqUudMmg3Wrqpu4wVS9CM3sXq698
+	 tgjprP92lFfZddI0saHWudc2I5z4ebqfjK8zQ2J8wlhpnomPULWD8NkiXlHa6BDYW0
+	 sTx7Mg8IXwYTcd3suIQEd6Fwb9VLQ0dtGRhUNLrAgd2SKzVYZG0fKseeUp4Z8bF3Hm
+	 +VXf4LHQDhOBvxwQnO6MVlE0YOfklf11MbVxneJDDZghMOGo6Xw1otLnB22eJw4bLu
+	 NaU29iirPb7Bw==
+Message-ID: <cbf203b8-28a9-48be-bd87-29eb0d6656ab@kernel.org>
+Date: Wed, 3 Dec 2025 12:24:30 +0100
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -36,21 +36,15 @@ List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: SoC-specific device tree aliases?
-To: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-Cc: Sascha Hauer <s.hauer@pengutronix.de>,
+To: Marc Kleine-Budde <mkl@blackshift.org>
+Cc: Ahmad Fatoum <a.fatoum@pengutronix.de>, Rob Herring <robh@kernel.org>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
  "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
  Conor Dooley <conor+dt@kernel.org>, devicetree-spec@vger.kernel.org,
  quentin.schulz@cherry.de, Marc Kleine-Budde <mkl@pengutronix.de>,
  "kernel@pengutronix.de" <kernel@pengutronix.de>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Ahmad Fatoum <a.fatoum@pengutronix.de>, Rob Herring <robh@kernel.org>
-References: <ebc08400-c16d-4ed0-b487-9aabe13bbf0f@pengutronix.de>
- <58816b68-3b09-4320-9a4e-09f2c2b2d0fa@kernel.org>
- <aRrcRZvdrbAmsCm_@pengutronix.de>
- <8ce701c9-6c8d-4b3e-8706-760b8aba89fc@kernel.org>
- <aRr6JLMplFVeHcjj@pengutronix.de>
- <e5502ec8-0c55-47ce-a9e5-62e137c9808b@kernel.org>
- <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
+ Krzysztof Kozlowski <krzk+dt@kernel.org>
+References: <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
  <de1739a8-4677-4cc8-b501-2568b7513467@kernel.org>
  <aRs2y3w854vnHAzg@pengutronix.de>
  <576a9eae-7dba-47d0-ad66-0a81d1893271@kernel.org>
@@ -60,7 +54,7 @@ References: <ebc08400-c16d-4ed0-b487-9aabe13bbf0f@pengutronix.de>
  <07ee3540-d0c1-436e-9e1d-db1952f609a6@kernel.org>
  <bcb359cf-0e8a-46ec-9f69-51c4c9e8874e@pengutronix.de>
  <6638e499-2320-41c9-b720-faf4f976e476@kernel.org>
- <34bd1a0d8e579aba0a6a88039006500fe822ef3d.camel@ew.tq-group.com>
+ <20251203-adorable-gila-monster-3d313a-mkl@blackshift.org>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -106,12 +100,12 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
  zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
  XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
-In-Reply-To: <34bd1a0d8e579aba0a6a88039006500fe822ef3d.camel@ew.tq-group.com>
+In-Reply-To: <20251203-adorable-gila-monster-3d313a-mkl@blackshift.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 03/12/2025 11:36, Matthias Schiffer wrote:
-> On Wed, 2025-12-03 at 11:25 +0100, Krzysztof Kozlowski wrote:
+On 03/12/2025 12:20, Marc Kleine-Budde wrote:
+> On 03.12.2025 11:25:11, Krzysztof Kozlowski wrote:
 >> On 03/12/2025 11:16, Ahmad Fatoum wrote:
 >>> Hello Krzysztof,
 >>>
@@ -142,28 +136,20 @@ On 03/12/2025 11:36, Matthias Schiffer wrote:
 >>
 >> First, why the alias would change? Isn't the board following the SoC
 >> numbering in 99.9% cases?
+>>
+>> Second, I don't think it is an ABI. We had it ~5 or ~8 years ago where
+>> the mmcblkX was changing based on probe ordering. Many people setups got
+>> broken, many people complained and the consensus reply was: please start
+>> finally using UUID/PARTUIID/LABEL for rootfs. Eventually we got back to
+>> mmcblkX stability but rule is there - if your cmdline has /dev/mmcblkX,
+>> then it is your problem.
 > 
-> At least for our TQ-Systems boards, we have a convention based on usage (mmc0:
-> eMMC, mmc1: SD card; serial0 is often the console) rather than following the SoC
-> numbering; that is, we're using the aliases as a form of hardware abstraction
-> rather than hardware description.
+> In order to use UUID/PARTUIID/LABEL in the kernel command line, the
+> firmware/bootloader/... has to map from the register value to the
+> instance to read the UUID/PARTUIID/LABEL from the media.
 
-Huh, does it even match numbering on the schematics / board / user-guides?
-
-I would prefer not to create bindings purely because some existing DTS
-code is not matching our expectations. However there could be a case
-where board numbering is different than soc number and we want to keep
-aliases configured for board.
-
-Basically what you propose here is the discouraged instance ID disguised
-under one more 'alias' which is not really alias. It's just an instance
-ID. There is no other use of soc-aliases beside instance ID.
-
-I see the problem you want to solve, I agree it is worth solving and I
-agree that DT is the place for this mapping between register value and
-device node. However solution of discouraged instance ID is just...
-well, discouraged, so not optimal. I don't have particular advice expect
-a dedicated property for each device in such case.
+Or have it stored when flashing/configuring the board as part of
+firmware configuration like U-Boot env.
 
 Best regards,
 Krzysztof
