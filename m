@@ -1,186 +1,288 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A71D32F770
-	for <devicetree-spec@vger.kernel.org>; Wed,  3 Dec 2025 17:51:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A9E5145348
+	for <devicetree-spec@vger.kernel.org>; Wed,  3 Dec 2025 22:37:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764784302; cv=none; b=SE2eQvWveXwmi2E8aCOsorTaCQ/lpbRXbaYDgF6DdRaZ04FAWouvKUaAAoa2SA4mjI+GB6JK9+yEiTa339kOScIAnPx5q81eCMlBsmspX4U/488c/bdJEhqA0Bo1KXWJoDtAQKFv1z/oHB5CmjSh+PWZeaOw4m+P72KjF8qvOlg=
+	t=1764801454; cv=none; b=PDyMrGkHvm0+Y6kIcMD0XpFSsP8tmRkZDMUPVeK94HMZ7/EvJO+e4xeOJnw1S+3OdRxZ7nmmtpnCci7twPyBv+1cYJAzv0sxs9Ig5GqFL+s0ge6aosycjfqWsU07zYN9EiDTzqQ72qCY+HUB0a9DqGsjeBVXpRFRHMAN5g1VwoA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764784302; c=relaxed/simple;
-	bh=ABMMraB9tPMvepd0zwOKIL1tb1nFWaBr2Q92AKB/OlM=;
+	s=arc-20240116; t=1764801454; c=relaxed/simple;
+	bh=CmMeP3Wgb7F2JXCWfuilcNHjgdfnyf8V79u+ji27AA8=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=JFqEBzGKcG6muaU2YsGQLJim0g7Ag8Gf09C62gijTkNh8vMSUK7InSBlp+tA+twmJc0LnWPrRR7GfZTvq7+eO9rmRLl5mOjUy2U6XwYdU240JkQBhZzAQI/9oQDA2c3YcnQrKucF+lA48v5+pJdGdgapZN6XZAHwiGWLsfBiCxg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TEQOKY3k; arc=none smtp.client-ip=10.30.226.201
+	 To:Cc:Content-Type; b=GJe1oa65paGR1C2haiM+KEb0sHXSBn8Dji8HorwKcpGBbnUmp32IrEXS8tnOfD3gj5oos4WoNK9wq9uD6l5UDPqzt4CuJ5iWsid4dDxONstIjOAEBuzWNZYd5TyYKOyFA/jnXq+ygbgTVgF0AagwWx9l/a4tTrZxB6X1ZLh3w1Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=Q8HhMDOe; arc=none smtp.client-ip=209.85.208.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TEQOKY3k"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91639C116C6
-	for <devicetree-spec@vger.kernel.org>; Wed,  3 Dec 2025 17:51:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1764784301;
-	bh=ABMMraB9tPMvepd0zwOKIL1tb1nFWaBr2Q92AKB/OlM=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=TEQOKY3kKKKqyCCLbwVzyww/9ySF2tBjZXrREVlmYLXy+y0ZCY0M57Kf4g3u2LjbF
-	 NAM+6aH8oiRkDv108T0tIIpP7oucQ28ZfUk8X08dvDr5JBvs9iIqpkX25JBtRMoe/r
-	 8VqzFtArHAHKC9XJFbXWxH3yJBezJHw3BjkadG+lJZDi1i8Y7m5iy0KfDgtZaJTny/
-	 brJLZOSgSuhU2RDdZaqWUt5chujwlUlZzSA+kMFbNd1zLqLeDTRjCoViDNekGD/G9N
-	 QlEEUl7Gb8ejC4WzVG32nJYLgfrXPUveMb69oNPmER2UTrHniMsRPGkTPPnPoS1kxe
-	 Z96nSFZosFNzw==
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-64312565c10so10808393a12.2
-        for <devicetree-spec@vger.kernel.org>; Wed, 03 Dec 2025 09:51:41 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCUklXt2KGuzpsS55CorrTsoXU/XRWDao6/KdMkENCumzr6zXda1HwrvOZJkUGgTraDuK2NpF4ID7Q9GEA9qHu8=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyc3NYRMP6h6A1oEtGxE6z/t8fNNB1liNKuXQD7HPzFh7BC/4rq
-	jMM6HIl/VZOQZtGPw12bjJuRPsfRjPXDa4fSSlty0qBalP8pOt8YrNZKKBiqd4ZZbSIaK2LM+VC
-	EoKcYt96aLBCACTzLXejlEU8ybpBS2w==
-X-Google-Smtp-Source: AGHT+IGZnv3IdzCfaBgaCN9nKAbuyEt6MyarxJdGHL7jwcJM+QgpiDNKxFIa9x50mX+I6XGGNuDnJAaMWKj3UuKHzeY=
-X-Received: by 2002:a17:907:6d0d:b0:b6d:3fc9:e60c with SMTP id
- a640c23a62f3a-b79ec4560a4mr7309166b.20.1764784300046; Wed, 03 Dec 2025
- 09:51:40 -0800 (PST)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="Q8HhMDOe"
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-64149f78c0dso344140a12.3
+        for <devicetree-spec@vger.kernel.org>; Wed, 03 Dec 2025 14:37:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1764801449; x=1765406249; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ux8aZbZPgW4tpB1Y7z88VhDcAOYzDYj/EAgU+NDKuyE=;
+        b=Q8HhMDOeH/+/dIFZRxKXFNhdZG+mfCg9y6fZT78uvBInjMwJ4w+QEkcq1FSfMQ3PHx
+         DkJ0g8hP2Cx4jO15FgeV7Mz70sD3bDC7j5vWsShfbJDlMX8yGltfun6FlJkAU9jIuPjO
+         RUlnzuJJ2nEgND+ARD8+PWSbQdn47hybpWbtE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764801449; x=1765406249;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ux8aZbZPgW4tpB1Y7z88VhDcAOYzDYj/EAgU+NDKuyE=;
+        b=RL4fU5ESkj9cVLSRSFLcKbAH+dPQqc2uosD+cfCWl1pNle0QjcH3g8oZXVu8XMHB+i
+         oODpxTA3WZhf/7+kjLYdntt/uJF13oiXkRLiKH3oYKzP0cx/NYGqUEh9N0xHlgeHpYhq
+         CKofNYYkA9j8BgIo6cXoZNPnngIr1yU+V7E4fpY8lgk1BjiRLItIT37XPHn9mgNklWIv
+         XUEVCltWlEoAiLSs/1JFvliswWlFYXwRgAGQvcBEOYQYTkldHof4DwDVAqG5rjVZpcMe
+         BnG4h31LPxrNdEo9HsHH5TUq5scIYUEfu14Odic0YpQF3fFPbchcTOYwk8VNl18FSVtd
+         /TsA==
+X-Forwarded-Encrypted: i=1; AJvYcCXMJ4Uw9UKaU795VWJXNdrFWPlrShwOQrpb5FtTG0IT53GrCxvdIjDQpOzV1cwKZ/RsK/fmw11PQEjFmLMrkpI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyOv+eJ3ytTpDepppCFCdQFCi0LhMsgR5bxNXdIZp9h2wWjJcjE
+	PZSNE1dQtwEk1rIO0IoWB3wPssLqWLrof+FopnYO3nfB6aAnMPrNITMwjPZKPfRRekJZMdM0xQC
+	84StehBvt
+X-Gm-Gg: ASbGncshQqhSrNp+LeFvLtgERwPD7gFTcSmXw8UymhBxdqn17D3/3otI3OaDncYKARG
+	8/EHIDJAwc/2bcxQy1MYt2P2CVJFoScI/k7xJZNQooTkxnwbsk6zsrZF2CiNmarYhuVgeGN3f7Q
+	8P/f2Xqd1kV5+zv97qHm2IlYMhlfk6uqEJMYjixvJFtjZ3YJFB0zdg06aKJpvkR19GR2RLoEEnr
+	fcXSzU6eihISH0MU+cD+imYNiOPz1Y5lFkpW7BWlEAGWTpN6C+cn+5exK/vGRuHn4+uLc+WM2Zz
+	bakzsXVGMwFNKMyjDbf/EirxqDUsqmz5FCWRL/lPuNb3kRmsYVuQdc3wsV+mF8s4ouCwOoTe3v/
+	C0d6yzR+IFzPCCATvAa+NBR/X5z6yebmdK7anfUDrqy8Gk2h/h4ct1WokGQlTmj8fRHhtVDV8H8
+	tjNI14pgA=
+X-Google-Smtp-Source: AGHT+IGNw2x6RidFadFM+S8HjW9eFHiJJgHTp7eR7ldC4mKhbiMvAyiCZFeW8HAfM71sisbXeF5yiQ==
+X-Received: by 2002:a05:6402:2345:b0:640:7402:4782 with SMTP id 4fb4d7f45d1cf-6479c2fdac0mr3576522a12.0.1764801449341;
+        Wed, 03 Dec 2025 14:37:29 -0800 (PST)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com. [209.85.221.49])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-64751062081sm19367052a12.34.2025.12.03.14.37.27
+        for <devicetree-spec@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 03 Dec 2025 14:37:27 -0800 (PST)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-42e2e3c0dccso189408f8f.2
+        for <devicetree-spec@vger.kernel.org>; Wed, 03 Dec 2025 14:37:27 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCUTOrz6MANTO2MN8/tpjy3hu60uWe8j9r9vNZWrnaeRIYx9KWG/iVHwDe/kiyX1wcOd3Q2zGubqg5GT5hu1dRA=@vger.kernel.org
+X-Received: by 2002:a05:6000:1a8f:b0:42b:3e0a:649e with SMTP id
+ ffacd0b85a97d-42f73172837mr4272908f8f.13.1764801447104; Wed, 03 Dec 2025
+ 14:37:27 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <ebc08400-c16d-4ed0-b487-9aabe13bbf0f@pengutronix.de>
- <58816b68-3b09-4320-9a4e-09f2c2b2d0fa@kernel.org> <aRrcRZvdrbAmsCm_@pengutronix.de>
- <8ce701c9-6c8d-4b3e-8706-760b8aba89fc@kernel.org> <aRr6JLMplFVeHcjj@pengutronix.de>
- <e5502ec8-0c55-47ce-a9e5-62e137c9808b@kernel.org> <20251117-smooth-spiked-loon-52df28-mkl@pengutronix.de>
- <de1739a8-4677-4cc8-b501-2568b7513467@kernel.org> <aRs2y3w854vnHAzg@pengutronix.de>
- <576a9eae-7dba-47d0-ad66-0a81d1893271@kernel.org> <aRs-DaayhtQTtFXj@pengutronix.de>
- <9e14fb8e-af84-4072-b0ac-9ead882782be@kernel.org> <CAL_Jsq+=v96eP6V+5Ehi9EQT3iKKU7=t7kvJ-WSA+1WCHDuHEA@mail.gmail.com>
- <07ee3540-d0c1-436e-9e1d-db1952f609a6@kernel.org> <bcb359cf-0e8a-46ec-9f69-51c4c9e8874e@pengutronix.de>
- <6638e499-2320-41c9-b720-faf4f976e476@kernel.org> <34bd1a0d8e579aba0a6a88039006500fe822ef3d.camel@ew.tq-group.com>
- <dd589476-56df-4565-b4cb-e34f0d7d5559@kernel.org> <47903a88-8de9-4ac6-9111-c85ed1428ff0@pengutronix.de>
-In-Reply-To: <47903a88-8de9-4ac6-9111-c85ed1428ff0@pengutronix.de>
-From: Rob Herring <robh@kernel.org>
-Date: Wed, 3 Dec 2025 11:51:28 -0600
-X-Gmail-Original-Message-ID: <CAL_Jsq+9s7UTXU8YLsX=_z1fnc2H4PmReb+2mHx=+uuonqM7xQ@mail.gmail.com>
-X-Gm-Features: AWmQ_bmS_JWVNCGQZnqg2TRVyQIbBacXh8MhBDhhsfFAV4-C3_H-zXYNtuWuhIY
-Message-ID: <CAL_Jsq+9s7UTXU8YLsX=_z1fnc2H4PmReb+2mHx=+uuonqM7xQ@mail.gmail.com>
-Subject: Re: SoC-specific device tree aliases?
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, 
-	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	devicetree-spec@vger.kernel.org, quentin.schulz@cherry.de, 
-	Marc Kleine-Budde <mkl@pengutronix.de>, "kernel@pengutronix.de" <kernel@pengutronix.de>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>
+References: <CAD=FV=Ux7nGFnYEyX0cUL-9__BKnTYc+kAJjkF458ZnFS7zoJA@mail.gmail.com>
+ <aS66WcLPm6e5rdyk@shell.armlinux.org.uk> <CAL_JsqLxLakt94ACgv8z5A-O4WGZPfiZ-7UFaBPaOa7W8L3Cxw@mail.gmail.com>
+In-Reply-To: <CAL_JsqLxLakt94ACgv8z5A-O4WGZPfiZ-7UFaBPaOa7W8L3Cxw@mail.gmail.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Wed, 3 Dec 2025 14:37:15 -0800
+X-Gmail-Original-Message-ID: <CAD=FV=Wfu4ddQdTeupN+Md5Tv+5P1Up+Zo5U2AjGpqayTuqFhw@mail.gmail.com>
+X-Gm-Features: AWmQ_bnIblbkwj1cLEC5h0WcUWlJmSIhOZHgYB3U9v0vApinUDHFAU4YsyhmX8k
+Message-ID: <CAD=FV=Wfu4ddQdTeupN+Md5Tv+5P1Up+Zo5U2AjGpqayTuqFhw@mail.gmail.com>
+Subject: Re: Proposal: Officially allow "incomplete" trees as a base
+To: Rob Herring <robh@kernel.org>
+Cc: "Russell King (Oracle)" <linux@armlinux.org.uk>, devicetree-spec@vger.kernel.org, 
+	boot-architecture@lists.linaro.org, Chen-Yu Tsai <wenst@chromium.org>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, 
+	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, 
+	Linux ARM <linux-arm-kernel@lists.infradead.org>, 
+	William McVicker <willmcvicker@google.com>, Julius Werner <jwerner@chromium.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Peter Griffin <peter.griffin@linaro.org>, 
+	Tudor Ambarus <tudor.ambarus@linaro.org>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 3, 2025 at 5:37=E2=80=AFAM Ahmad Fatoum <a.fatoum@pengutronix.d=
-e> wrote:
+Hi,
+
+On Tue, Dec 2, 2025 at 3:16=E2=80=AFPM Rob Herring <robh@kernel.org> wrote:
 >
-> Hi,
+> > as a set of examples. I don't see a clear way to generate these from
+> > a fragmented scheme. There's a similar problem with the board-level
+> > compatible:
+> >
+> >         compatible =3D "solidrun,cubox-i/dl", "fsl,imx6dl";
+> >         compatible =3D "solidrun,hummingboard2/dl", "fsl,imx6dl";
+> >         compatible =3D "solidrun,hummingboard/dl", "fsl,imx6dl";
+> >         compatible =3D "solidrun,hummingboard2/q", "fsl,imx6q";
+> >
+> > These don't include the SoM information.
 >
-> On 12/3/25 12:08 PM, Krzysztof Kozlowski wrote:
-> > On 03/12/2025 11:36, Matthias Schiffer wrote:
-> >> On Wed, 2025-12-03 at 11:25 +0100, Krzysztof Kozlowski wrote:
-> >>> On 03/12/2025 11:16, Ahmad Fatoum wrote:
-> >>>> Hello Krzysztof,
-> >>>>
-> >>>> On 11/17/25 5:29 PM, Krzysztof Kozlowski wrote:
-> >>>>> On 17/11/2025 17:06, Rob Herring wrote:
-> >>>>>>> So you want it to be an ABI for barebox, sure, just make it a bin=
-ding.
-> >>>>>>
-> >>>>>> What do you have in mind? Other than standard names for the aliase=
-s,
-> >>>>>> what can we check here? That a specific alias points to a specific
-> >>>>>> path? That would be a bit too much IMO. That would be equivalent t=
-o
-> >>>>>> specifying possible values in 'reg' for all devices.
-> >>>>>
-> >>>>> Binding with pattern or list of needed alias names, referenced by g=
-iven
-> >>>>> soc-platform top-level schema.
-> >>>>>
-> >>>>> One of the points is to make it explicit and obvious (e.g. to Arnd =
-or to
-> >>>>> me if I forget, because I follow the same logic of aliases per boar=
-d)
-> >>>>> that these aliases are used outside of kernel.
-> >>>>>
-> >>>>> Just because ufs/mmc/spi can be used that way, does not mean we sho=
-uld
-> >>>>> accept any possible alias into soc.dtsi.
-> >>>>
-> >>>> I can't see how this could work. A number of boards renumber MMC dev=
-ices
-> >>>> in a different manner than the SoC reference manual:
-> >>>>
-> >>>> - Changing the alias numbering is an ABI break, because Linux derive=
-s
-> >>>> its /dev/mmcblkX numbering from it
-> >>>
-> >>> First, why the alias would change? Isn't the board following the SoC
-> >>> numbering in 99.9% cases?
-> >>
-> >> At least for our TQ-Systems boards, we have a convention based on usag=
-e (mmc0:
-> >> eMMC, mmc1: SD card; serial0 is often the console) rather than followi=
-ng the SoC
-> >> numbering; that is, we're using the aliases as a form of hardware abst=
-raction
-> >> rather than hardware description.
-> >
-> > Huh, does it even match numbering on the schematics / board / user-guid=
-es?
-> >
-> > I would prefer not to create bindings purely because some existing DTS
-> > code is not matching our expectations. However there could be a case
-> > where board numbering is different than soc number and we want to keep
-> > aliases configured for board.
-> >
-> > Basically what you propose here is the discouraged instance ID disguise=
-d
-> > under one more 'alias' which is not really alias. It's just an instance
-> > ID. There is no other use of soc-aliases beside instance ID.
-> >
-> > I see the problem you want to solve, I agree it is worth solving and I
-> > agree that DT is the place for this mapping between register value and
-> > device node. However solution of discouraged instance ID is just...
-> > well, discouraged, so not optimal. I don't have particular advice expec=
-t
-> > a dedicated property for each device in such case.
->
-> How do we move forward here? I don't think we can change the nature of
-> /aliases being board-specific now without breaking users.
->
-> Does this make the addition of /soc-aliases (or /soc/aliases?) more
-> palatable?
+> So we're back to needing to merge compatible even though Doug was
+> willing to drop it. Or to put it another way, there's usecases for the
+> base to be different SoC revisions and variants. So I don't think we
+> should give up on solving that.
 
-No.
+I'm willing to take a crack at it. Before doing so, though, I think we
+need to agree upon a definition of what the top-level "compatible" is
+supposed to be. Otherwise, what exactly is our goal in trying to merge
+"compatible" strings? We should have a goal of updating the official
+documentation with whatever we decide.
 
-Thinking about this some more, I'm not sure that something aliases
-based is even the right approach. Let's back up to the original
-problem instead of talking about a problem concerning a possible
-solution.
 
-You have a platform specific register with values (or from 1 or
-multiple fields) that you need to map to devices in DT. That's it.
-That could be solved like this:
+I guess first, we should see what the spec says. The Devicetree
+Specification v0.4 says this about the top-level compatible (which, it
+should be noted, is documented _separtely_ from section 2.3.1 since
+all of section 2.3 is only about device nodes):
 
-bootsource-map =3D
-  <0x2 &mmc0>,
-  <0x3 &mmc1>,
-  <0x10 &spi0>,
-  ...;
+> Specifies a list of platform architectures with which this platform is co=
+mpatible. This property can be used by operating systems in selecting platf=
+orm specific code. The recommended form of the property value is: "manufact=
+urer,model" For example: compatible =3D "fsl,mpc8572ds"
 
-Simple. The first value is platform specific. Maybe it is several
-fields (e.g. device type, instance) merged together. Doesn't matter.
+That's not very detailed, but I guess we can start out looking at what
+it _doesn't_ say.
 
-And where do we put 'bootsource-map'? That could be either in the node
-of the device with the boot source register(s) or alongside bootsource
-in chosen. In chosen is a bit weird because that's supposed to be
-things the bootloader fills in.
+a) The spec doesn't say anything about the top-level compatible
+uniquely identifying a specific hardware configuration. Nothing there
+says "look at one of the strings in the list and you can tell exactly
+what product you have in front of you".
 
-Now I'm pretty annoyed because like what happens many times, I
-accepted bootsource and you all turn right around want to add on to
-it. IOW, it didn't completely solve the problem or give me the whole
-picture. Why does that matter? Because now I might say 'bootsource'
-can just be the index into 'bootsource-map', but now we're stuck with
-it (forever). Anything else needed in this area?
+b) The spec doesn't specifically mention that one should include any
+strings for a SoC / SoM / reference board. Indeed, the example given
+shows an example "compatible" with just one string: "fsl,mpc8572ds".
+Searching the interwebs, I find that this example "compatible"
+probably refers to a Freescale "MPC8572 Development System", which is
+a dev board with a "MPC8572" chip. Notably, the example "compatible"
+didn't include the "MPC8572" chip.
 
-Rob
+c) The spec doesn't seem to include a firm definition of what they
+mean by the word "platform". In my mind, one could interpret the SoC
+as a "platform". One could also interpret a SoM or a reference board
+as a "platform". It's not necessarily clear. Since AI is the answer to
+all things these days, I asked Gemini. I asked what "platform" meant
+in the context of the DT spec and it (confidently) told me that "the
+platform is the physical machine." ...but when I asked if one could
+also consider the SoC the "platform", it told me that was "an
+excellent clarifying question" and went on to say the SoC "is often
+referred to as the base platform or the SoC-level platform." :-P
+
+
+How does that help us? I guess I'd summarize that, from reading the
+spec and more loosely interpreting the word "platform":
+
+a) The compatible string doesn't _need_ to include strings
+representing the SoC, SoM, or baseboard, but it can.
+
+b) The compatible string is primarily there for use by the operating
+system to select platform (board, reference board, SoM, or SoC)
+specific code.
+
+
+That still doesn't really tell us when we should / shouldn't include a
+SoC / SoM / baseboard in the top-level "compatible". It also doesn't
+tell us if we should include even more detailed levels. ...and by
+"more detailed levels", I would perhaps say that each of these could
+also be considered a "platform":
+* google,trogdor-lazor-rev6-sku6 - An exact model of board.
+* google,trogdor-lazor-rev6 - A platform that has several SKUs.
+* google,trogdor-lazor - A platform that has several revisions and SKUs.
+* google,trogdor - A reference platform that has several boards.
+
+
+Perhaps we should lean into the statement "This property can be used
+by operating systems in selecting platform specific code" to give us
+guidance? The problem is that we somehow need to not just look at
+current operating systems but, if we want to strive towards the goal
+of shipping binary device trees, we need to consider future operating
+system code that hasn't yet been written. That sounds impossible and
+makes one think you should cram as much info into the compatible
+string as possible, but...
+
+...actually, we only need to put information into the compatible
+string if there's not an easy way for the operating system to get the
+information elsewhere, right? If the information is found elsewhere in
+the device tree or if the operating system can probe the information
+itself, then there's really no _need_ to put it in the top-level
+"compatible" and we'll never end up painting ourselves into a corner.
+We could still put the information there just to make it convenient,
+but it's not really needed. Does this make sense?
+
+I would further argue that, in order to be useful, any given
+"platform" should document its expectations and we need to be
+consistent across anyone using that platform. To make it concrete, if
+the Qualcomm SC7180 platform documents that "qcom,sc7180" belongs in
+the top-level compatible string then all device trees including sc7180
+should have that string. This _doesn't_ mean that on some future
+platform (like qcom,sc9999) we couldn't make a different decision.
+Maybe on "qcom,sc9999" we've decided to put SoC details as some
+properties under the "soc@0" node. Now the operating system can find
+the details about which SoC is present from the "soc@0" node and
+therefore we don't need to represent it in the top-level compatible
+string.
+
+
+Assuming that all makes sense, maybe the way to document the top-level
+compatible string:
+
+--
+
+Specifies a list of "platform architectures" with which this platform
+is compatible. A "platform architecture" can be at any level, from the
+specific board to the class of board to the reference platform to the
+SoM to the SoC. A given "platform architecture" should always be
+consistently included or not-included by all final device trees using
+it. If the "qcom,sc7180" SoC platform is defined to be included, it
+should be consistently included by any device trees with this SoC. The
+criteria for whether to represent a "platform architecture" in the
+top-level compatible string is the difficulty of the operating system
+obtaining the information in some other way (including from other DT
+properties or from probing). In general, the top-level "compatible"
+used by operating systems in selecting platform specific code. The
+recommended form of the property value is: "manufacturer,model"
+
+Examples:
+
+compatible =3D "fsl,mpc8572ds";
+- Select code related to the Freescale MPC8572 Development System
+
+No platform is included for the CPU since ("fsl,mpc8572") isn't
+consistently listed as a platform.
+
+compatible =3D "google,snow-rev4", "google,snow", "samsung,exynos5250",
+"samsung,exynos5"
+- Select code related to google,snow-rev4.
+- Select code related to google,snow.
+- Select code related to samsung,exynos5250.
+- Select code related to samsung,exynos5.
+
+In this example, the idea is that all exynos5 boards would have
+"samsung,exynos5" so code that needed to run on "exynos5" could
+consistently test for that "compatible" string. Similarly, all
+exynos5250 boards would have "samsung,exynos5250" and all snow boards
+would have "google,snow"
+
+--
+
+What do folks think?
+
+Note that the current Chromebook stuff [1] we used on sc7180-trogdor
+boards doesn't fit amazingly well into that definition, but it can
+kinda squeeze in there. Essentially the sc7180-trogdor stuff is
+designed around making it easy for the bootloader to find the right
+device tree but doesn't provide anything terribly useful to the OS in
+the top-level "compatible" string. At this point, I don't think I
+would encourage others to adopt something similar.
+
+
+If folks agree with the above interpretation, I think I'd end up back
+to arguing _against_ the need to merge compatible strings. If we don't
+need to put detailed SoC information into the top-level compatible
+string then we don't need to merge. I think the most
+flexible/futureproof would be to just define that for the SoC inside
+Pixel 10 (and presumably all future Google Silicon) we'll put SoC
+information under the "soc@0" node and thus there's no need to include
+it in the top-level "compatible". That leaves us without a
+"compatible" to put in the base "dtb", but maybe we can just put
+compatible =3D "incomplete" or something like that?
+
+I suspect that even for Russell's purposes the information can either
+be probed by the OS or put in places other than the top-level
+compatible string. We might not want to change his existing
+devicetrees in case some OS is relying on the existing compatible
+strings, but for work going forward it feels like it would be a
+solution...
+
+
+[1] https://docs.kernel.org/arch/arm/google/chromebook-boot-flow.html
+
+
+-Doug
