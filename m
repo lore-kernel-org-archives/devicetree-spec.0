@@ -1,38 +1,38 @@
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95DB12EC54D;
-	Mon, 12 Jan 2026 14:21:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F0E0272E61
+	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:20:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227662; cv=none; b=oRXCBz4TcasGfh+hmXpjTqukGhmxB/FeR9fqIFKxt7XCtgNEeEaHq7sTq2PsX5SRC8Q1TH50IppMyBOZnVtxyVIIOBRhe3m6liPQkMAw4zPICanU4Jjy86OsnkiZL7QcDlXraCZWv8e9+3iLdg0DA7RgDZlqMyMzeClSgd3xx9s=
+	t=1768227662; cv=none; b=I/6+XOnmlLML67yGa+Cqf6EPhOduexlIfPUTxNjGikIrTeIoGOX+eKtV+swJoXCpKnBwwvw2cpgL2K8k2uzh56pCNaKPhnc8LssDv9IjvHVIWf3c0bJcO9rqDtOcV3bUDrZzH4ThfVxBXsapEEx5DWbqkA6I2C/iHmQ+vEwImBg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768227662; c=relaxed/simple;
-	bh=M6wzRazgjLFhzqVroXSpKrrVzyrsDcHr9GnwSuZiXqE=;
+	bh=JFhL71ct8SrjrJ//e/l5+RKzOUHWDU5KI0MGy1DmXy0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=D8IxQvVizqRPF8ps6axJkaVFSnpgu3HIrCQtaZvwT2IDZaZFhZZ9cd/fnA2yWfe4TDy/8NInd4X9f+EgZbvdd9mskJEROSzcavG1tWqjBP7T3rKAR9fINAbofscE/t15xvvvBZKCONwYLP6/ywQIjV8/qBNd4gSOdWEocnmSBvY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=SccmcNR1; arc=none smtp.client-ip=185.246.84.56
+	 MIME-Version; b=pdRlj2GHoGwhiOzdZtI9XIa4TKKBrG/rQvyDot/5pNSS8EHRlK38+X3GifgUf9Yk3DLAR0rFrnhCy3D08Td7v0fa9jkhXn5HnCFfw7n1NCEGA2EAbT8fhDPAjLEnZq2G+sTLOyqEZbLmmrGiFcFjkDxnWODYXN49Ks5qQFsuEtQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=yPpHocEr; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="SccmcNR1"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="yPpHocEr"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 656221A2804;
-	Mon, 12 Jan 2026 14:20:59 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 94262C20868;
+	Mon, 12 Jan 2026 14:20:31 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 3CBBE606FA;
-	Mon, 12 Jan 2026 14:20:59 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 476E7103C9264;
-	Mon, 12 Jan 2026 15:20:57 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 17B8F606FA;
+	Mon, 12 Jan 2026 14:20:58 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 86C5D103C9262;
+	Mon, 12 Jan 2026 15:20:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227658; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227656; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=EIyB/EHU24MdE3qIWWskCx/gYfNdFh0BY/5BKh5Lhr8=;
-	b=SccmcNR1jbQ8AJLjQe1YA5yNhPDH8Dy88QjW+N69YsuExhqCCo5r7cfmeNRe9YqwrVD1TC
-	Tm7dRl+uv5oepmUJNxJChFfHJcj9hOA20GSml/Wf+PmM9MYSp9MvRXIsl1Y+CE2XPexoI3
-	FAQJ7XSxoYg5d+NNC9on+FicGAzhTxy0cFVZMNU+6G2oeIc6NobDBcezgxfjXn5LKN2EfN
-	nQpdMiqDLDXPtsH4kKmLDSxB9SRLZzCXeRT3mbjvOBUw97/jMppG2Su2KoiT7DGEs0n4E5
-	59l06emiEoD525N2iQuu3AKe+Fd/mp9hcmL4/jJL8U01By8+92P7F/PFGPenqw==
+	bh=mcrxp0ApOG//BK1b6uSdhxWShcoQ7CdeHdkSNR4OcZk=;
+	b=yPpHocErfgxeG2bCDXSAtRXWFwSpOxsQjGA+qDGXv1k68HeZGO4cEDnFMYIlkeACxqyCsN
+	uBG5NX5QdQjxWfg3vQUmIRUZnf7vgMErqvd4hxuwQFLQtmiba7C8TqP8fJk9Lm+3LFxj+G
+	s2QZOfuBTgqAXuXf0rOxJxK1xfkbiRCQsfLQORc3aaCx+P9hctR3qqWurp5DLKdlAy/Ub6
+	MgiVl+f38enIwyz9TG6FJJAo9iyHIQJp1ui7t9IvVZJsjOfJReu+9Q44Cg0Per6ALonWSw
+	Vm8Xy0uRtz4R65YZ98QTjyOvrGHjMRTqBLScsp44p+VuY70sSL549dY/SBqe8g==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 24/77] dtc: Introduce update_exports_ref()
-Date: Mon, 12 Jan 2026 15:19:14 +0100
-Message-ID: <20260112142009.1006236-25-herve.codina@bootlin.com>
+Subject: [RFC PATCH 23/77] dtc: Introduce mark_local_exports()
+Date: Mon, 12 Jan 2026 15:19:13 +0100
+Message-ID: <20260112142009.1006236-24-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,87 +64,79 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-In order to have consistent internal data when a export symbol using a
-local phandle is parsed from a dtb, the reference related to this
-phandle usage needs to be updated based on the phandle value.
+In order to have correct tags set in dtb, an export symbol has to
+be identified as a "local" export symbol when it references a local
+node.
 
-This is done for phandles used by properties in update_phandles_ref().
+This is done for phandles used by properties in mark_local_phandles().
 
 The same operation is needed for export symbols. This is the purpose of
-update_exports_ref().
+mark_local_exports().
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- dtc.c      |  1 +
- dtc.h      |  1 +
- livetree.c | 30 ++++++++++++++++++++++++++++++
- 3 files changed, 32 insertions(+)
+ dtc.c      |  2 ++
+ dtc.h      |  2 ++
+ livetree.c | 23 +++++++++++++++++++++++
+ 3 files changed, 27 insertions(+)
 
 diff --git a/dtc.c b/dtc.c
-index 030bfa2..e0a0b54 100644
+index fe8e8e4..030bfa2 100644
 --- a/dtc.c
 +++ b/dtc.c
-@@ -336,6 +336,7 @@ int main(int argc, char *argv[])
+@@ -336,6 +336,8 @@ int main(int argc, char *argv[])
  	update_phandles_ref(dti);
  	mark_local_phandles(dti);
  
-+	update_exports_ref(dti);
- 	mark_local_exports(dti);
- 
++	mark_local_exports(dti);
++
  	/*
+ 	 * With FDT_REF_PHANDLE added in dtbs, we need to identified
+ 	 * if some unresolved phandle references are allowed in the dtb
 diff --git a/dtc.h b/dtc.h
-index ea073c2..024e172 100644
+index 0bf5ba5..ea073c2 100644
 --- a/dtc.h
 +++ b/dtc.h
-@@ -368,6 +368,7 @@ void generate_local_fixups_tree(struct dt_info *dti, const char *name);
+@@ -368,6 +368,8 @@ void generate_local_fixups_tree(struct dt_info *dti, const char *name);
  void update_phandles_ref(struct dt_info *dti);
  void mark_local_phandles(struct dt_info *dti);
  
-+void update_exports_ref(struct dt_info *dti);
- void mark_local_exports(struct dt_info *dti);
- 
++void mark_local_exports(struct dt_info *dti);
++
  /* Checks */
+ 
+ void parse_checks_option(bool warn, bool error, const char *arg);
 diff --git a/livetree.c b/livetree.c
-index 0e756b8..7cf3ee5 100644
+index 4458437..0e756b8 100644
 --- a/livetree.c
 +++ b/livetree.c
-@@ -1304,6 +1304,36 @@ void mark_local_phandles(struct dt_info *dti)
+@@ -1303,3 +1303,26 @@ void mark_local_phandles(struct dt_info *dti)
+ {
  	mark_local_phandles_internal(dti, dti->dt);
  }
- 
-+static void update_exports_ref_internal(struct dt_info *dti, struct node *node)
++
++static void mark_local_exports_internal(struct dt_info *dti,
++					struct node *node)
 +{
 +	struct node *c;
 +	struct symbol *exportsym;
 +	struct node *refnode;
 +
 +	for_each_symbol(node->exportsymlist, exportsym) {
-+		if (exportsym->ref)
-+			continue;
-+
-+		if (exportsym->is_local) {
-+			refnode = get_node_by_phandle(dti->dt, exportsym->phandle);
-+			if (!refnode)
-+				die("Node not found for phandle 0x%"PRIx32"\n", exportsym->phandle);
-+
-+			exportsym->ref = refnode->fullpath;
-+		} else {
-+			die("Found a non local phandle without a reference\n");
-+		}
++		refnode = get_node_by_ref(dti->dt, exportsym->ref);
++		if (refnode)
++			exportsym->is_local = true;
 +	}
 +
 +	for_each_child(node, c)
-+		update_exports_ref_internal(dti, c);
++		mark_local_exports_internal(dti, c);
 +}
 +
-+void update_exports_ref(struct dt_info *dti)
++void mark_local_exports(struct dt_info *dti)
 +{
-+	update_exports_ref_internal(dti, dti->dt);
-+}
++	mark_local_exports_internal(dti, dti->dt);
 +
- static void mark_local_exports_internal(struct dt_info *dti,
- 					struct node *node)
- {
++}
 -- 
 2.52.0
 
