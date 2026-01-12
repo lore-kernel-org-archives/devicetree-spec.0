@@ -1,38 +1,38 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87FC63587A8
-	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:21:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 430EE3596F1
+	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:21:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227666; cv=none; b=UFNMghRT4Q+1b9wXDZutYyAUMxADK+B3/x5Dj0baHWcJ0XMyR0DTDu3Am+SdtnL60fKZPdhWoYj/FE03Eesld7KUwLu4WTBGWDNtSvnFpSLrAGKiEbKM9ogyKFkqJwdOOGSj5XSz1YAx6LGn0Hr9x3KxmpeSqR40ZBVm1GPwnig=
+	t=1768227667; cv=none; b=FJnd+llAYEzYB6dnfgQSyBHsYMuLICR9E+ODXHcINEyVKK1t3c7WSYHe1it+HFYkuuMsL1vcMQ8MaVHft1sdSdGssmW1GNuk9T2KiQplDdvtQa/cbXq04a30GswsRXfjPEbuHorr9Npt73TYBQmDCIgCxiq76gznyYF/5tHklRc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768227666; c=relaxed/simple;
-	bh=mhfCVt5rt3GPtwxOIzuJdMwa4TeV6J9WyWsZPDpBhGU=;
+	s=arc-20240116; t=1768227667; c=relaxed/simple;
+	bh=nniPvKcWEi4LfAC3oR0MW3FHuw9UeRhJz/7mnfTVxSQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=FoOfTr9t6tqxKet6Rfsncx0zTVkjlmWSDjizk7xpvPyEMr0pjWzs6uW9pmAQ8TVTI5TO5CJcg4p3bg+ksOreRrwnMSD2tHNsaJL4HXBVhTHk0AFBeBZh1vVwXNCLQiUqvReMB5ReYSjztQpx66+h/M0vC7BbkltSveAQyVrQNNg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=d8vZgF/+; arc=none smtp.client-ip=185.171.202.116
+	 MIME-Version; b=Zc772qiJPFZ1Ngv4D+xtqxofAzhV4Geh3864IpdgAuZwNjEo9Br6oN9ImhlatoCaQTWIaF/crp2BPfZpBP5nUpH2yLFnKC3DaYZBdD1Rid4ocY7T09ETPpTk4xuG4xfEgkfruvTXl47elSkrgNr5G0KKEvOHeUnZB8R76b+kBg4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=FvI1FgiV; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="d8vZgF/+"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="FvI1FgiV"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id E5CAEC20868;
-	Mon, 12 Jan 2026 14:20:35 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id D354E4E42094
+	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:21:04 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 69973606FA;
-	Mon, 12 Jan 2026 14:21:02 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 8DCD8103C9273;
-	Mon, 12 Jan 2026 15:21:00 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id A8723606FA;
+	Mon, 12 Jan 2026 14:21:04 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 10082103C9280;
+	Mon, 12 Jan 2026 15:21:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227661; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227663; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=SpFU+MiK+5/rjM23lkiUnkBAKVGmsCcgGfRucPp3BEs=;
-	b=d8vZgF/+/XUSTBhtcMA1b2kwW/RaSqZ59WDsVdugxm25Y74KPJXThvsqI47CZ7CsklmRh/
-	ClAkUATQ85gRNu5h0n7/HB8qNnU7kQwyxFxtxbGBAnItw9QNgSfjMJEDvUAPxJX/Qb2Qbi
-	eA6FCPY0V+2sr3t8RiJUr9rAEVAxJCZ9iJm42s2PMbA7DnrVft4aew1BDxm+YkWc20MX7/
-	7ajQ3jArovba3VLRZSYyIf/bxgeo9BWJ0CbguC446u7UgqbdlcMgWbruJWcCK/wl7cba4K
-	r0RVWB+xjBAsyT1zviDIafNd2l+7P+03qrM4dBm7ygVdL7NcB9/JlXjNvpq6Fw==
+	bh=iEuhMiG7AJAvgbNC6ER9xCpEGPNZd1hu0Nn4zQ6EPeA=;
+	b=FvI1FgiVlJxeGRt0eclmys0iC3nYIL450BFJer9/TPmSa5a4KmIj8JbXjsIM0kYMvLzy6F
+	mXh0OAXs3R+SlLQwMCWsVePG0n1Bpdbpecs8r8dUdaSBdgbbSE0eP+9d7Bx8sfOoFIkrT3
+	KgiS1OSIIgctN0IEKOh3tgbKwmcSr2ab6EJD+QB6GdtSIPWvxMaXLPuondmO/p5eC014oL
+	uHtDdp+ANMqvcMGA4P6W8lmzwK5awYPEWEubxMRnRYNjU8o/qA225NGdeJI0TTBDTKEE9e
+	Jtt0pLtvLkNnPfaVRVd3dEjkpcVWFFAi5iyhBFn4lclft7zh7p0UJgaxUSdFnA==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 26/77] tests: metadata: Add export symbols with local references tests
-Date: Mon, 12 Jan 2026 15:19:16 +0100
-Message-ID: <20260112142009.1006236-27-herve.codina@bootlin.com>
+Subject: [RFC PATCH 27/77] dtc: Add support for export symbols sorting
+Date: Mon, 12 Jan 2026 15:19:17 +0100
+Message-ID: <20260112142009.1006236-28-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,159 +64,70 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-Add tests related to export symbols using local phandle references
-(FDT_EXPORT_SYM dtb tag).
+dtc can sort items when the command line --sort option is set.
+
+Add support for export symbols sorting when this option is used.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- .../metadata_exportsyms_local.dtb.dts.expect  | 26 +++++++++++++++++
- tests/metadata_exportsyms_local.dtb.expect    | 20 +++++++++++++
- tests/metadata_exportsyms_local.dts           | 28 +++++++++++++++++++
- .../metadata_exportsyms_local.dts.dts.expect  | 26 +++++++++++++++++
- tests/run_tests.sh                            |  2 +-
- 5 files changed, 101 insertions(+), 1 deletion(-)
- create mode 100644 tests/metadata_exportsyms_local.dtb.dts.expect
- create mode 100644 tests/metadata_exportsyms_local.dtb.expect
- create mode 100644 tests/metadata_exportsyms_local.dts
- create mode 100644 tests/metadata_exportsyms_local.dts.dts.expect
+ livetree.c | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
 
-diff --git a/tests/metadata_exportsyms_local.dtb.dts.expect b/tests/metadata_exportsyms_local.dtb.dts.expect
-new file mode 100644
-index 0000000..ac3d5b3
---- /dev/null
-+++ b/tests/metadata_exportsyms_local.dtb.dts.expect
-@@ -0,0 +1,26 @@
-+/dts-v1/;
-+
-+/ {
-+
-+	node-a {
-+	};
-+
-+	node-b {
-+		phandle = <0x03>;
-+	};
-+
-+	node-c {
-+
-+		sub-node {
-+			phandle = <0x02>;
-+		};
-+	};
-+
-+	node-d {
-+		phandle = <0x01>;
-+
-+		/export/ node_d: &{/node-d};
-+		/export/ subnode_c: &{/node-c/sub-node};
-+		/export/ node_b: &{/node-b};
-+	};
-+};
-diff --git a/tests/metadata_exportsyms_local.dtb.expect b/tests/metadata_exportsyms_local.dtb.expect
-new file mode 100644
-index 0000000..2002553
---- /dev/null
-+++ b/tests/metadata_exportsyms_local.dtb.expect
-@@ -0,0 +1,20 @@
-+/dts-v1/;
-+
-+/ {
-+    node-a {
-+    };
-+    node-b {
-+        phandle = <0x00000003>;
-+    };
-+    node-c {
-+        sub-node {
-+            phandle = <0x00000002>;
-+        };
-+    };
-+    node-d {
-+        phandle = <0x00000001>;
-+        // [FDT_EXPORT_SYM] 'node_d' -> phandle 0x00000001
-+        // [FDT_EXPORT_SYM] 'subnode_c' -> phandle 0x00000002
-+        // [FDT_EXPORT_SYM] 'node_b' -> phandle 0x00000003
-+    };
-+};
-diff --git a/tests/metadata_exportsyms_local.dts b/tests/metadata_exportsyms_local.dts
-new file mode 100644
-index 0000000..10e6e47
---- /dev/null
-+++ b/tests/metadata_exportsyms_local.dts
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
-+/*
-+ * Copyright (C) 2026 Bootlin
-+ */
-+
-+/dts-v1/;
-+
-+/ {
-+	node-a {
-+	};
-+
-+	node_b: node-b {
-+	};
-+
-+	node-c {
-+		sub_node: sub-node {
-+		};
-+	};
-+
-+	node_d: node-d {
-+		/export/ node_d: &node_d;
-+		/export/ subnode_c: &sub_node;
-+	};
-+};
-+
-+&node_d {
-+	/export/ node_b: &node_b;
-+};
-diff --git a/tests/metadata_exportsyms_local.dts.dts.expect b/tests/metadata_exportsyms_local.dts.dts.expect
-new file mode 100644
-index 0000000..4723e7e
---- /dev/null
-+++ b/tests/metadata_exportsyms_local.dts.dts.expect
-@@ -0,0 +1,26 @@
-+/dts-v1/;
-+
-+/ {
-+
-+	node-a {
-+	};
-+
-+	node_b: node-b {
-+		phandle = <0x03>;
-+	};
-+
-+	node-c {
-+
-+		sub_node: sub-node {
-+			phandle = <0x02>;
-+		};
-+	};
-+
-+	node_d: node-d {
-+		phandle = <0x01>;
-+
-+		/export/ node_d: &node_d;
-+		/export/ subnode_c: &sub_node;
-+		/export/ node_b: &node_b;
-+	};
-+};
-diff --git a/tests/run_tests.sh b/tests/run_tests.sh
-index def1a7e..ed3a240 100755
---- a/tests/run_tests.sh
-+++ b/tests/run_tests.sh
-@@ -1126,7 +1126,7 @@ wrap_fdtdump () {
+diff --git a/livetree.c b/livetree.c
+index 7efa1da..1de5990 100644
+--- a/livetree.c
++++ b/livetree.c
+@@ -916,6 +916,42 @@ static void sort_properties(struct node *node)
+ 	free(tbl);
+ }
  
- metadata_tests() {
- 	for dt in metadata_reflocal metadata_refphandle \
--		  metadata_addon_base; do
-+		  metadata_addon_base metadata_exportsyms_local; do
- 		run_dtc_test -I dts -O dts -o $dt.dts.dts "$SRCDIR/$dt.dts"
- 		base_run_test check_diff $dt.dts.dts "$SRCDIR/$dt.dts.dts.expect"
- 		run_dtc_test -I dts -O dtb -o $dt.dtb "$SRCDIR/$dt.dts"
++static int cmp_symbol(const void *ax, const void *bx)
++{
++	const struct symbol *a, *b;
++
++	a = *((const struct symbol * const *)ax);
++	b = *((const struct symbol * const *)bx);
++
++	return strcmp(a->name, b->name);
++}
++
++static void sort_exportsyms(struct node *node)
++{
++	int n = 0, i = 0;
++	struct symbol *symbol, **tbl;
++
++	for_each_symbol(node->exportsymlist, symbol)
++		n++;
++
++	if (n == 0)
++		return;
++
++	tbl = xmalloc(n * sizeof(*tbl));
++
++	for_each_symbol(node->exportsymlist, symbol)
++		tbl[i++] = symbol;
++
++	qsort(tbl, n, sizeof(*tbl), cmp_symbol);
++
++	node->exportsymlist = tbl[0];
++	for (i = 0; i < (n-1); i++)
++		tbl[i]->next = tbl[i+1];
++	tbl[n-1]->next = NULL;
++
++	free(tbl);
++}
++
+ static int cmp_subnode(const void *ax, const void *bx)
+ {
+ 	const struct node *a, *b;
+@@ -957,6 +993,7 @@ static void sort_node(struct node *node)
+ 	struct node *c;
+ 
+ 	sort_properties(node);
++	sort_exportsyms(node);
+ 	sort_subnodes(node);
+ 	for_each_child_withdel(node, c)
+ 		sort_node(c);
 -- 
 2.52.0
 
