@@ -1,38 +1,38 @@
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97B3625A2CF;
-	Mon, 12 Jan 2026 14:20:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E80E25A659;
+	Mon, 12 Jan 2026 14:20:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227635; cv=none; b=hoiTlNK/XD/5IpN4D3k2cobragH/7IswiwF3s47JPDz3m4eMcrENBgDTDG7x5oZiQvGIHcWv6rg9ZG4EcH8o8A+k+2kyKFnwxY/bIBMPHTQNQalYKYchyHxQbGK0rL6huqJ96H6G1CNql0Y8T05WatYUXvEmc7QcH9XNbnCkgzw=
+	t=1768227635; cv=none; b=eAqjpCoIRy/IEou+zidyfVTJntCrwvVDb1tHLiiyvbyq8oB7uzRK7zdlNKc4ExRNw3yx3/EUSGo/ucl8eWel/ZEvl+BvHTMTBQnsq0XpKr6jjWbDtayTYrX2FlcPkUsffkUdNB/M/SbQZB0hZJI5d8LGtiW7aFzqWMXUyWn/DXQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768227635; c=relaxed/simple;
-	bh=N6vNZnVvxa0cyZoAR2VRThiEj4wnSiGOR31YXUtZkNY=;
+	bh=CvLvY8SMr9F9mZwO/2tuWr2whQw14srELqUnn6HBTBc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ot5V1jTfrtwhzOb9HltO7cYqOimZod4Zc9/U47VVMx3uAxiB1WxelDa6Cjy4X7IeF+JmGy5/xkI+Jr+C7FobPBS89BXfKkehjG/So+i8T3zl92Qr9vTpjdSqRe+yKxwivfVC02xAs1UphU9hy872pBd33/kp9PcILHlylEv8aDI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=v1d0eOjB; arc=none smtp.client-ip=185.246.84.56
+	 MIME-Version; b=a/INdLRRsvG099EF8FWW9bayru0ix2767aIS0aj6sPALVLCZiNv8AShymzsnaCW4y52fdqelDYd7JF3QqR964j1OiyYTps8m6SHGNnT+1Y06ioECcDw18Wf5JZA3TI7M7yoKP7TZpCz2OT6UijQmZsIaVQEYg6fx6g32/kjWZe4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=oqaGkhsI; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="v1d0eOjB"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="oqaGkhsI"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 07BD61A26D2;
-	Mon, 12 Jan 2026 14:20:29 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id BCEE54E42085;
+	Mon, 12 Jan 2026 14:20:30 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id D12116075E;
-	Mon, 12 Jan 2026 14:20:28 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id E046B103C9261;
-	Mon, 12 Jan 2026 15:20:26 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 93AA16075F;
+	Mon, 12 Jan 2026 14:20:30 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 5EC3A103C8CD8;
+	Mon, 12 Jan 2026 15:20:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227628; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227629; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=BvVIGAhOsl/qKFvH3/fIDoLGZ6jnPOuqu4xf6eHm0K4=;
-	b=v1d0eOjBcuWoUxR4Q/hqZzMDFcyIWKdognsVpsxaaS2aVgYVZKsnkfXECT7LUuumtOd9c/
-	QTLxCXEew7zt+QsArVDpZ1QRD3NvTM1gFOyBcCtjG3dur3bX6PmMEjyxgNv5RBFkhjgUTh
-	7mhipVEny6MIuq/10pDaN96g8yomS+FHVsCDu7Xx7Asi62MKPf1Dg8fuLEb5uKR0Np8j/Y
-	zQjgSn6/jx2VMDlAiRHOkrlw8pljydN6JGnfNsj0zabEreO3KH/b+bFSsk8xZ9yjZy0Lpg
-	Upj97a2KhYcM2xnbR6Dy1LIHn+/njAduMAS3PoEpXzo8TJ4NwXeQCxnkqnU9bw==
+	bh=IUPvT7nS1D4nXzhnOstmhdejKMlnh6AgZFSDlvQ1CHk=;
+	b=oqaGkhsI+7DtrxzeEiBANcHQo4BF29lj6p8jmQMnXsHi/URq3Tdtp6KbqYfbjvchL/Uty8
+	I3Z9xJP3BlPJGLIiHPDD5gb5GGSHB7biB4xL7V/LzuOeWTdAtPPNI3MB9LfG9G4ELSLEts
+	6QXI3EwpkLK6uKzTcDW+16A/1E6CD9RHPwzCjtT3E17/aWjQjjibnvl72Ldnz+4U1MPqli
+	7LcgSOiga2F14gVCmIhu5zJqxKT8PeT1IrlxSeczfDOf2JZXVWbWMv7h5a0hmaEYtwK2mB
+	tTATXFdY1M/4EqCtascIcRroOkLVcmwkSQ6MrGqj9r0IJ3hWBZE7668l+y3uhA==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 04/77] dtc: Allow to use data_append_markers() out of data.c
-Date: Mon, 12 Jan 2026 15:18:54 +0100
-Message-ID: <20260112142009.1006236-5-herve.codina@bootlin.com>
+Subject: [RFC PATCH 05/77] fdtdump: Change FDT_PROP prob handling to ease future addition
+Date: Mon, 12 Jan 2026 15:18:55 +0100
+Message-ID: <20260112142009.1006236-6-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,41 +64,65 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-With meta-data available in dtb, markers can be set as soon as a dtb is
-parsed. This will be done in flattree.c using data_append_markers().
+In order to ease future tags addition, perform operation related to
+FDT_PROP when the tag is explicitly FDT_PROP instead of relying to a
+kind of default value case.
 
-Prepare this usage allowing this function to be used out of data.c
+Handle the FDT_PROP tag exactly in the same way as it is done for
+other tags.
+
+No functional modification.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- data.c | 2 +-
- dtc.h  | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ fdtdump.c | 34 ++++++++++++++++++----------------
+ 1 file changed, 18 insertions(+), 16 deletions(-)
 
-diff --git a/data.c b/data.c
-index 5b25aa0..11b2169 100644
---- a/data.c
-+++ b/data.c
-@@ -127,7 +127,7 @@ struct data data_insert_at_marker(struct data d, struct marker *m,
- 	return d;
+diff --git a/fdtdump.c b/fdtdump.c
+index ec25edf..95a2274 100644
+--- a/fdtdump.c
++++ b/fdtdump.c
+@@ -129,23 +129,25 @@ static void dump_blob(void *blob, bool debug)
+ 			continue;
+ 		}
+ 
+-		if (tag != FDT_PROP) {
+-			fprintf(stderr, "%*s ** Unknown tag 0x%08"PRIx32"\n", depth * shift, "", tag);
+-			break;
++		if (tag == FDT_PROP) {
++			sz = fdt32_to_cpu(GET_CELL(p));
++			s = p_strings + fdt32_to_cpu(GET_CELL(p));
++			if (version < 16 && sz >= 8)
++				p = PALIGN(p, 8);
++			t = p;
++
++			p = PALIGN(p + sz, 4);
++
++			dumpf("%04"PRIxPTR": string: %s\n", (uintptr_t)s - blob_off, s);
++			dumpf("%04"PRIxPTR": value\n", (uintptr_t)t - blob_off);
++			printf("%*s%s", depth * shift, "", s);
++			utilfdt_print_data(t, sz);
++			printf(";\n");
++			continue;
+ 		}
+-		sz = fdt32_to_cpu(GET_CELL(p));
+-		s = p_strings + fdt32_to_cpu(GET_CELL(p));
+-		if (version < 16 && sz >= 8)
+-			p = PALIGN(p, 8);
+-		t = p;
+-
+-		p = PALIGN(p + sz, 4);
+-
+-		dumpf("%04"PRIxPTR": string: %s\n", (uintptr_t)s - blob_off, s);
+-		dumpf("%04"PRIxPTR": value\n", (uintptr_t)t - blob_off);
+-		printf("%*s%s", depth * shift, "", s);
+-		utilfdt_print_data(t, sz);
+-		printf(";\n");
++
++		fprintf(stderr, "%*s ** Unknown tag 0x%08"PRIx32"\n", depth * shift, "", tag);
++		break;
+ 	}
  }
- 
--static struct data data_append_markers(struct data d, struct marker *m)
-+struct data data_append_markers(struct data d, struct marker *m)
- {
- 	struct marker **mp = &d.markers;
- 
-diff --git a/dtc.h b/dtc.h
-index 186caad..3bbd97e 100644
---- a/dtc.h
-+++ b/dtc.h
-@@ -187,6 +187,7 @@ struct data data_insert_data(struct data d, struct marker *m, struct data old);
- struct marker *alloc_marker(unsigned int offset, enum markertype type,
- 			    char *ref);
- struct data data_add_marker(struct data d, enum markertype type, char *ref);
-+struct data data_append_markers(struct data d, struct marker *m);
- 
- bool data_is_one_string(struct data d);
  
 -- 
 2.52.0
