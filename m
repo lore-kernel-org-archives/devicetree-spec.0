@@ -1,38 +1,38 @@
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BB7D35F8DC;
-	Mon, 12 Jan 2026 14:21:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9CA535FF4E;
+	Mon, 12 Jan 2026 14:21:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227683; cv=none; b=aGyYsAct9Roqbp7jU/ofkpog9TxAJ8I/RYcXRf4I9jcIl4bWhRP2kn9TqEObzUQUESGabi3QAoIN38MO1H53i6rLgAAkfrKjWlLrdDxhhmvUakoHAz+ttW7zbT4+bao8rorrrVYtDaAj4lYu03ByE/XxCiKsTXmlSvStsQiYwjA=
+	t=1768227684; cv=none; b=fB2uPVDa1aYEdj4mvXoZOG1gEfMlc6WtQbhn5tm1S+tkPgGdmS2lXW0r4dS046Ezw9Ru2RK89JZ3QQwSVCffegV2degACcqukXj5od7MuELCOfKGS9/K1czsDi7U+ZI68h8dT2IJOjMRFRpJwr6pS2snBM4c20ED2QusVju2b94=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768227683; c=relaxed/simple;
-	bh=vfKZ808QQM0nIlJRvHraS0GHeykUmrjvoLimiiF68wk=;
+	s=arc-20240116; t=1768227684; c=relaxed/simple;
+	bh=1onGMMpRznak7CbqW4TktzDUZMDIi2ZM/gqDacla/2U=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=rWDMuOiDXhlgu4bbIcsuTWSc/1LLa30lCt6LJaVGbC51oZtH8KX8boZBGjBOaQn+T3/5U60qNftuVkkotFIT7p8SyMjnc/kZqt9gGbLVDBCQ2PBeEzawqQaBQIEYZWpiTOKpiMYDRgEP+mjy5LRYLW1rtQafTbVSJe4PQ9sEQQ4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=KYCJKoRF; arc=none smtp.client-ip=185.246.84.56
+	 MIME-Version; b=mmNV5QUjbGk6IPgdUefYm4PP5UO/G44lGnSyFmfB4xgYrHRJw6dhEBN9gTY6U+g08K6sGrsJk0taYEGAadV+Dsfc9GPywS4Rqrst8cjsdWekLYTMjO0FvvLgoZvRm0DysIzds+c+tXUShhM+7/RR5UNnAhW1Lx8IVGrNAsuX6ik=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=kJ9xtDLP; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="KYCJKoRF"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="kJ9xtDLP"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 3E2821A2814;
-	Mon, 12 Jan 2026 14:21:19 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 9EC194E42097;
+	Mon, 12 Jan 2026 14:21:17 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 13C42606FA;
-	Mon, 12 Jan 2026 14:21:19 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 0D971103C9263;
-	Mon, 12 Jan 2026 15:21:16 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 735F5606FA;
+	Mon, 12 Jan 2026 14:21:17 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id AC4A2103C9264;
+	Mon, 12 Jan 2026 15:21:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227678; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227676; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=KEET+tHSWdPNEyFdzi+VJg0Gd+rIpUhql9YgoSlC500=;
-	b=KYCJKoRFCyYJzRRJs7Gen6C/gWVni/dHtvUw6U6erIyS4BmWwi7QHVLkt/8nunG2qkGSvA
-	F6HFGR/ALszt4fJqA/H/RqA1DAIzUpyC0M576VdAPdp4M5kZpqxIr2+rgVAVroJx0XZ/kA
-	ZbqPfumMUHBVkGzzdGBcZx17vIUByRmCvAaPR5zF6INi3bVkgTHSCNLCEkBhlGO0uihZd1
-	2Xw2XpHLk5BNlpdrFd8GrY050FyCwXPyv1KjDsP1EOXJFxtOI/FB+DLmX4O/BnV9kTQLwb
-	8rmpen1NsQgx1FLYvkxfk+LzVN5BmuYwgtrO/0oDOLxbkWYhsC2imtmNErifIw==
+	bh=ElGWPoey4Ujkb+I3lI6CjrKZLt6O/F285tA0mrtu7lo=;
+	b=kJ9xtDLPgxWtAPzTp/FeyjTAkX/F8M7BkbuwBZaXXQZd/z3j0ZljU7GrEmtMC2w4VXqu8I
+	Ra/6IyJkElX47fiWeZLOnE940AoqOxH2oZD3w/15an/QZYHykT8d9heV3SGgAlnpTc1mDF
+	jigjB31zZC/bwSdcFdT3FaQFaYAfCvw3dHgyVEvpU0i+jqaoWII2i81YSBXfdL/f+PvbWK
+	Wq38Shd4gZVpsWvIBjkQo+EUUqvGJGX0sAIsYppABZO+JCqT9uEJg6P3Pl22TNr7olwfnJ
+	FT65X7Px5LMV4vnBPsvpJQOt3OdrjBQO2WZ5964k9iU7OVv6Z1A4dAI6bmWR9g==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 37/77] dtc: Add support for import symbols sorting
-Date: Mon, 12 Jan 2026 15:19:27 +0100
-Message-ID: <20260112142009.1006236-38-herve.codina@bootlin.com>
+Subject: [RFC PATCH 36/77] tests: metadata: Add import symbols tests
+Date: Mon, 12 Jan 2026 15:19:26 +0100
+Message-ID: <20260112142009.1006236-37-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,55 +64,114 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-dtc can sort items when the command line --sort option is set.
-
-Add support for import symbols sorting when this option is used.
+Add tests related to import symbols (FDT_IMPORT_SYM dtb tag).
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- livetree.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ tests/metadata_importsyms.dtb.dts.expect |  9 +++++++++
+ tests/metadata_importsyms.dtb.expect     |  8 ++++++++
+ tests/metadata_importsyms.dts            | 14 ++++++++++++++
+ tests/metadata_importsyms.dts.dts.expect |  9 +++++++++
+ tests/run_tests.sh                       | 10 +++++-----
+ 5 files changed, 45 insertions(+), 5 deletions(-)
+ create mode 100644 tests/metadata_importsyms.dtb.dts.expect
+ create mode 100644 tests/metadata_importsyms.dtb.expect
+ create mode 100644 tests/metadata_importsyms.dts
+ create mode 100644 tests/metadata_importsyms.dts.dts.expect
 
-diff --git a/livetree.c b/livetree.c
-index dac5359..285f6e1 100644
---- a/livetree.c
-+++ b/livetree.c
-@@ -1014,9 +1014,36 @@ static void sort_node(struct node *node)
- 		sort_node(c);
- }
- 
-+static void sort_importsyms(struct dt_info *dti)
-+{
-+	int n = 0, i = 0;
-+	struct symbol *symbol, **tbl;
+diff --git a/tests/metadata_importsyms.dtb.dts.expect b/tests/metadata_importsyms.dtb.dts.expect
+new file mode 100644
+index 0000000..eabf8c7
+--- /dev/null
++++ b/tests/metadata_importsyms.dtb.dts.expect
+@@ -0,0 +1,9 @@
++/dts-v1/;
++/addon/;
 +
-+	for_each_symbol(dti->importsymlist, symbol)
-+		n++;
++/import/ base_a: "foo,bar";
++/import/ base_b: "foo,baz";
 +
-+	if (n == 0)
-+		return;
++/ {
++	prop = <0x01>;
++};
+diff --git a/tests/metadata_importsyms.dtb.expect b/tests/metadata_importsyms.dtb.expect
+new file mode 100644
+index 0000000..2177026
+--- /dev/null
++++ b/tests/metadata_importsyms.dtb.expect
+@@ -0,0 +1,8 @@
++/dts-v1/;
++/addon/;
 +
-+	tbl = xmalloc(n * sizeof(*tbl));
++/ {
++    prop = <0x00000001>;
++};
++// [FDT_IMPORT_SYM] 'base_a' (foo,bar)
++// [FDT_IMPORT_SYM] 'base_b' (foo,baz)
+diff --git a/tests/metadata_importsyms.dts b/tests/metadata_importsyms.dts
+new file mode 100644
+index 0000000..671586d
+--- /dev/null
++++ b/tests/metadata_importsyms.dts
+@@ -0,0 +1,14 @@
++// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
++/*
++ * Copyright (C) 2026 Bootlin
++ */
 +
-+	for_each_symbol(dti->importsymlist, symbol)
-+		tbl[i++] = symbol;
++/dts-v1/;
++/addon/;
 +
-+	qsort(tbl, n, sizeof(*tbl), cmp_symbol);
++/import/ base_a: "foo,bar";
++/import/ base_b: "foo,baz";
 +
-+	dti->importsymlist = tbl[0];
-+	for (i = 0; i < (n-1); i++)
-+		tbl[i]->next = tbl[i+1];
-+	tbl[n-1]->next = NULL;
++/ {
++	prop = <1>;
++};
+diff --git a/tests/metadata_importsyms.dts.dts.expect b/tests/metadata_importsyms.dts.dts.expect
+new file mode 100644
+index 0000000..eabf8c7
+--- /dev/null
++++ b/tests/metadata_importsyms.dts.dts.expect
+@@ -0,0 +1,9 @@
++/dts-v1/;
++/addon/;
 +
-+	free(tbl);
-+}
++/import/ base_a: "foo,bar";
++/import/ base_b: "foo,baz";
 +
- void sort_tree(struct dt_info *dti)
- {
- 	sort_reserve_entries(dti);
-+	sort_importsyms(dti);
- 	sort_node(dti->dt);
- }
++/ {
++	prop = <0x01>;
++};
+diff --git a/tests/run_tests.sh b/tests/run_tests.sh
+index 1973525..5368db9 100755
+--- a/tests/run_tests.sh
++++ b/tests/run_tests.sh
+@@ -1127,20 +1127,20 @@ wrap_fdtdump () {
+ metadata_tests() {
+ 	for dt in metadata_reflocal metadata_refphandle \
+ 		  metadata_addon_base metadata_exportsyms_local \
+-		  metadata_exportsyms_ref; do
++		  metadata_exportsyms_ref metadata_importsyms; do
+ 		run_dtc_test -I dts -O dts -o $dt.dts.dts "$SRCDIR/$dt.dts"
+ 		base_run_test check_diff $dt.dts.dts "$SRCDIR/$dt.dts.dts.expect"
+ 		run_dtc_test -I dts -O dtb -o $dt.dtb "$SRCDIR/$dt.dts"
+ 		base_run_test wrap_fdtdump $dt.dtb $dt.dtb.out
+-		# Remove unneeded comments
+-		sed -i '/^\/\/ /d' $dt.dtb.out
++		# Remove unneeded comments, keep comments in the form '// [xxxx'
++		sed -i '/^\/\/ [^\[]/d' $dt.dtb.out
+ 		base_run_test check_diff $dt.dtb.out "$SRCDIR/$dt.dtb.expect"
+ 		run_dtc_test -I dtb -O dts -o $dt.dtb.dts $dt.dtb
+ 		base_run_test check_diff $dt.dtb.dts "$SRCDIR/$dt.dtb.dts.expect"
+ 		run_dtc_test -I dts -O dtb -o $dt.dtb.dts.dtb $dt.dtb.dts
+ 		base_run_test wrap_fdtdump $dt.dtb.dts.dtb $dt.dtb.dts.dtb.out
+-		# Remove unneeded comments
+-		sed -i '/^\/\/ /d' $dt.dtb.dts.dtb.out
++		# Remove unneeded comments, keep comments in the form '// [xxxx'
++		sed -i '/^\/\/ [^\[]/d' $dt.dtb.dts.dtb.out
+ 		base_run_test check_diff $dt.dtb.dts.dtb.out "$SRCDIR/$dt.dtb.expect"
+ 	done
  
 -- 
 2.52.0
