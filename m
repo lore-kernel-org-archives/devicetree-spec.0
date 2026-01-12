@@ -1,38 +1,38 @@
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34EBB246783
-	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:21:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1671B350A29
+	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:21:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227678; cv=none; b=UirS+TwNly4zykc3HQ9tg+npGf1haRjq2FFCfSugDBMAXAODA0O6UIgoyNPiPfqg1husWh5h4g5p0P6LfcZ7EMLVpiPJ3aeBdbMsxkQYDHOWqjOGzfA7K2xk0HH0a4qNAQddsSJcQtaCMRnCkgw4+KV21uUrEltzz1q5KcinMog=
+	t=1768227681; cv=none; b=qUV3S9TkNbjAneSyCoiufbB+k4q3QXXjIniHdMExU8gPf3hPVuym2OoOtp8B/oHm7+TvCiOMgRY2I5BBn6y7qAGhYLr8zrdEStoMjWRYzh7oemNiIXLC9fdP2uV3sz2Xg/QL+hSz0TO8HqqROb2Weo9KZs5ht6sIwVjWgNM4+3Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768227678; c=relaxed/simple;
-	bh=mxWyWe+6tgliFAK69mK8yOaUcXsCwF4dxGaUJaHzMos=;
+	s=arc-20240116; t=1768227681; c=relaxed/simple;
+	bh=Qupti9JYIx5M1WClAqjvNcU4GtJ8Ej/MuffmAQXKn9U=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=JyWRPaykWmuxhaMEr1jLwGOSZrHiyaCNvo37MzgWfFj57qqlrYxAU9DbnQOuuwR9o57fan761P8aLYvrZJr21kggwm5J6wiCgwyg5PfpoChgoZcGjIrenk7VGotyQ336i3zo3Qen3cFausBQ6tJEmM49n6bfiaVkke6QYHbwJzA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=wx3Zg2C4; arc=none smtp.client-ip=185.171.202.116
+	 MIME-Version; b=qkRIqat8xv1bpq5frl7TBI9OdUEFUIGDeF5ZpoghQusO3O+697j4v0Luop4KTy0iyTeXc96LHcQctidoVtHwome6Ea6LsIpkgXkbBJkrOCPFqGciQf61wIqkA4ctekZeVxR3AKaTiHS4Rl9eJQinzaRYsCzAJPIZnpaeR4+yFPI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=HrELKDXR; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="wx3Zg2C4"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="HrELKDXR"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 4AB8DC2086C;
-	Mon, 12 Jan 2026 14:20:45 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 36EE1C2086B;
+	Mon, 12 Jan 2026 14:20:44 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id C17EC606FA;
-	Mon, 12 Jan 2026 14:21:11 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id DFDD6103C8C61;
-	Mon, 12 Jan 2026 15:21:09 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id AF1E1606FA;
+	Mon, 12 Jan 2026 14:21:10 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 51B9E103C9260;
+	Mon, 12 Jan 2026 15:21:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227671; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227669; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=27qw+iXgw5tUODAIs2DRLVPxR66zdH5GPz2Pg0sn2oM=;
-	b=wx3Zg2C4KiweI+Knojw+OGPZjGWF9POGhOctyFnzT+3QY8ve4I2MFuOkJcumn94NyXNVqB
-	lftZKZeVEkzrdas/nxs6x3gZ3XDarFBYfYQU8qZyjrCK8wq5B7HyEqSIrZvV4QGxsLbu3x
-	XcUOlHaiJzgtmjqfuc5ahfv7MFoMMRRfK66F1FnYIyK9SSK0MgAVsY/LjQBH2DwvmQkX2h
-	L8om/pNpBLHX4C3qq2k85Z57C1pX70sqSaSOD7VZvifqX32DGnKGhlz9bSxgLjmRuSo4iq
-	xcp1+tPlCSzjFKF1K0LHwe6jbnjsK/Rt2L8NLD7PND96fyX3KNCrmjw9fiY5pQ==
+	bh=FemrtMrSgqeOA8KgOvOh4Sq9DDEMgd+SGRC7M4Bg9u8=;
+	b=HrELKDXR36UQl6h4YdJqaifnopf+5Hprs1KWzhJbc+ZD82OGl9my6cySn0ah/wOOTex+lp
+	Ocu9RypEP74l+HXiyllsQ7DksOEQvNRaXYVCQSt3CVmeVSen6TBD1F4r3MwNZwwqVDbTbo
+	C7WL92fsg7x4TgEMHsAs6bnPGP702EezgbOIcx+N5Emwh3N8GV28QB02HvxwL6pit3PLhK
+	AVQLKwyWnA4shqCTysCtePcrHMK9TdU1UNsh1+L5B8g8CJ53wtj4RFwUkmLC5LiRkGBP7C
+	lTk+Wq0y3Lm/iRW+BB4KGcZAUPIgp79m/Wm+O/cGZNNfFwdPHJ218CPacX6kFw==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 32/77] dtc-parser: Introduce last_header_flags
-Date: Mon, 12 Jan 2026 15:19:22 +0100
-Message-ID: <20260112142009.1006236-33-herve.codina@bootlin.com>
+Subject: [RFC PATCH 31/77] dtc: Introduce import symbols
+Date: Mon, 12 Jan 2026 15:19:21 +0100
+Message-ID: <20260112142009.1006236-32-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,111 +64,113 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-The parser needs to get header flags value in different places.
+Import symbols allow to define a list of symbols imported and used by an
+addon.
 
-It relies on the fact that the rule used to parse the dts file is always
-  headers memreserves devicetree
+Those symbols have to be resolved when the addon is applied on a base
+device-tree and will involved exported symbols provided at the node the
+addon is applied to.
 
-With that only rule to parse the file, it uses '$<flags>-1' construct to
-get the flags value.
+Import symbols are similar in term of feature to __fixups__ available
+in device-tree overlays.
 
-With the future introduction of import symbols parsing, this rule will
-change and the parser couldn't rely anymore on '$<flags>-1' to get flags
-value. Indeed, import symbols parsing will add a new optional symbol in
-this rule leading to two possible rules (with and without the new
-symbol) to parse the source file.
+The goal is to identify symbols which are used by an addon but not
+defined by the addon itself. Those specific symbols are the imported
+symbols.
 
-Introduce the last_header_flags variable to explicitly keep track of
-flags while also being agnostic of the rule structure and use this new
-variable instead of '$<flags>-1'.
+Introduce the import symbols list related to an addon. No functional
+change yet but preparation for the future support for import symbol
+parsing.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- dtc-parser.y | 28 +++++++++-------------------
- 1 file changed, 9 insertions(+), 19 deletions(-)
+ dtc-parser.y | 3 ++-
+ dtc.h        | 4 +++-
+ flattree.c   | 2 +-
+ fstree.c     | 2 +-
+ livetree.c   | 4 +++-
+ 5 files changed, 10 insertions(+), 5 deletions(-)
 
 diff --git a/dtc-parser.y b/dtc-parser.y
-index 4e46e9d..48c40e8 100644
+index a0d0aef..4e46e9d 100644
 --- a/dtc-parser.y
 +++ b/dtc-parser.y
-@@ -24,6 +24,8 @@ extern void yyerror(char const *s);
- extern struct dt_info *parser_output;
- extern bool treesource_error;
- 
-+unsigned int last_header_flags;
-+
- static bool is_ref_relative(const char *ref)
- {
- 	return ref[0] != '/' && strchr(&ref[1], '/');
-@@ -122,14 +124,17 @@ header:
- 	  DT_V1 ';'
+@@ -113,7 +113,8 @@ sourcefile:
+ 	  headers memreserves devicetree
  		{
- 			$$ = DTSF_V1;
-+			last_header_flags = $$;
- 		}
- 	| DT_V1 ';' DT_PLUGIN ';'
- 		{
- 			$$ = DTSF_V1 | DTSF_PLUGIN;
-+			last_header_flags = $$;
- 		}
- 	| DT_V1 ';' DT_ADDON ';'
- 		{
- 			$$ = DTSF_V1 | DTSF_ADDON;
-+			last_header_flags = $$;
+ 			parser_output = build_dt_info($1, $2, $3,
+-			                              guess_boot_cpuid($3));
++			                              guess_boot_cpuid($3),
++						      NULL);
  		}
  	;
  
-@@ -179,12 +184,7 @@ devicetree:
- 		}
- 	| dt_ref nodedef
- 		{
--			/*
--			 * We rely on the rule being always:
--			 *   versioninfo plugindecl memreserves devicetree
--			 * so $-1 is what we want (plugindecl)
--			 */
--			if (!($<flags>-1 & DTSF_PLUGIN))
-+			if (!(last_header_flags & DTSF_PLUGIN))
- 				ERROR(&@2, "Label or path %s not found", $1);
- 			else if (is_ref_relative($1))
- 				ERROR(&@2, "Label-relative reference %s not supported in plugin", $1);
-@@ -197,7 +197,7 @@ devicetree:
- 		{
- 			struct node *target = get_node_by_ref($1, $3);
+diff --git a/dtc.h b/dtc.h
+index 22816ba..796ed51 100644
+--- a/dtc.h
++++ b/dtc.h
+@@ -350,6 +350,7 @@ struct dt_info {
+ 	struct reserve_info *reservelist;
+ 	uint32_t boot_cpuid_phys;
+ 	struct node *dt;		/* the device tree */
++	struct symbol *importsymlist;	/* Import symbol list */
+ 	const char *outname;		/* filename being written to, "-" for stdout */
+ };
  
--			if (($<flags>-1 & DTSF_PLUGIN) && is_ref_relative($3))
-+			if ((last_header_flags & DTSF_PLUGIN) && is_ref_relative($3))
- 				ERROR(&@2, "Label-relative reference %s not supported in plugin", $3);
+@@ -360,7 +361,8 @@ struct dt_info {
  
- 			if (target) {
-@@ -209,12 +209,7 @@ devicetree:
- 		}
- 	| devicetree DT_PATH_REF nodedef
- 		{
--			/*
--			 * We rely on the rule being always:
--			 *   versioninfo plugindecl memreserves devicetree
--			 * so $-1 is what we want (plugindecl)
--			 */
--			if ($<flags>-1 & DTSF_PLUGIN) {
-+			if (last_header_flags & DTSF_PLUGIN) {
- 				if (is_ref_relative($2))
- 					ERROR(&@2, "Label-relative reference %s not supported in plugin", $2);
- 				add_orphan_node($1, $3, $2);
-@@ -235,12 +230,7 @@ devicetree:
- 			if (target) {
- 				merge_nodes(target, $3);
- 			} else {
--				/*
--				 * We rely on the rule being always:
--				 *   versioninfo plugindecl memreserves devicetree
--				 * so $-1 is what we want (plugindecl)
--				 */
--				if ($<flags>-1 & DTSF_PLUGIN)
-+				if (last_header_flags & DTSF_PLUGIN)
- 					add_orphan_node($1, $3, $2);
- 				else
- 					ERROR(&@2, "Label or path %s not found", $2);
+ struct dt_info *build_dt_info(unsigned int dtsflags,
+ 			      struct reserve_info *reservelist,
+-			      struct node *tree, uint32_t boot_cpuid_phys);
++			      struct node *tree, uint32_t boot_cpuid_phys,
++			      struct symbol *importsymlist);
+ void sort_tree(struct dt_info *dti);
+ void generate_label_tree(struct dt_info *dti, const char *name, bool allocph);
+ void generate_fixups_tree(struct dt_info *dti, const char *name);
+diff --git a/flattree.c b/flattree.c
+index d970259..47a289f 100644
+--- a/flattree.c
++++ b/flattree.c
+@@ -1105,5 +1105,5 @@ struct dt_info *dt_from_blob(const char *fname)
+ 
+ 	fclose(f);
+ 
+-	return build_dt_info(DTSF_V1 | dtsflags, reservelist, tree, boot_cpuid_phys);
++	return build_dt_info(DTSF_V1 | dtsflags, reservelist, tree, boot_cpuid_phys, NULL);
+ }
+diff --git a/fstree.c b/fstree.c
+index 445ae53..a6aaf1e 100644
+--- a/fstree.c
++++ b/fstree.c
+@@ -72,5 +72,5 @@ struct dt_info *dt_from_fs(const char *dirname)
+ 	tree = read_fstree(dirname);
+ 	tree = name_node(tree, "");
+ 
+-	return build_dt_info(DTSF_V1, NULL, tree, guess_boot_cpuid(tree));
++	return build_dt_info(DTSF_V1, NULL, tree, guess_boot_cpuid(tree), NULL);
+ }
+diff --git a/livetree.c b/livetree.c
+index 1de5990..4ec9609 100644
+--- a/livetree.c
++++ b/livetree.c
+@@ -531,7 +531,8 @@ struct reserve_info *add_reserve_entry(struct reserve_info *list,
+ 
+ struct dt_info *build_dt_info(unsigned int dtsflags,
+ 			      struct reserve_info *reservelist,
+-			      struct node *tree, uint32_t boot_cpuid_phys)
++			      struct node *tree, uint32_t boot_cpuid_phys,
++			      struct symbol *importsymlist)
+ {
+ 	struct dt_info *dti;
+ 
+@@ -540,6 +541,7 @@ struct dt_info *build_dt_info(unsigned int dtsflags,
+ 	dti->reservelist = reservelist;
+ 	dti->dt = tree;
+ 	dti->boot_cpuid_phys = boot_cpuid_phys;
++	dti->importsymlist = importsymlist;
+ 
+ 	return dti;
+ }
 -- 
 2.52.0
 
