@@ -1,38 +1,38 @@
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06B733644AD;
-	Mon, 12 Jan 2026 14:21:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8FBD361670;
+	Mon, 12 Jan 2026 14:21:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227702; cv=none; b=iJamgGcuH7TBYtGt0yAl8u7ZKkuYcEtDH2a3BhoOdCkw7+uDvqt5+WqR0NebGUj3z8Ov/7cZS6CHjS2uks5lmgtv6xspN+FQ6k1veuqGbDVolQG3hvzM80zlso6gOBfnoayvre8XaQOMuZ79RGn9vARjBIauA5naanRU2vL+qa0=
+	t=1768227703; cv=none; b=Wu97u1uxpZrFfb0kjWhuDe23cjNEpaCi6fHVcd20aaZe4R1JEYe8LJQ3NPPbMSZ9Li9c2XJkCS9oH8o5njepz1cz9VW6kXCbBA39Ajt5Q5zPXbr7KuyNl+mvutx+OY27181+zQS74gyFbG+/EfGvQl0XQpdrV1/jcM4CQpQsy+g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768227702; c=relaxed/simple;
-	bh=xntXbVBtO+nX4Yp2Qnt+pPiYDGBiY9+fP2bcPhSivOM=;
+	s=arc-20240116; t=1768227703; c=relaxed/simple;
+	bh=emz6BTfiZT39QJRtAInNNGDoqzeKXs1k4yodIzfFbMc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=mo68dXibBciCIsaa733QRPw+TnLf3B5MOvuEJlckoKYrkL7ai4eh2BT2N+q/RoBMEzhYuISlgM2sQYoROhYBGmCEC+VNoSn1YbSs3Lu1hcK2HzBaqDTzBta5tu83PkbIZfaKQVZIqzXk8lVzaCF2mnhxOoDNR1s6tz/jcEqZN0Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=HZxLyH+2; arc=none smtp.client-ip=185.246.85.4
+	 MIME-Version; b=hYMkRfsYSENtLG7xYRPCuBW5Ol8Hyc6QdAgb6dH2qPg4gAJ/V0BO6TtRVtkZD9iE5iPmXato+9DVL4JOBQERBlKvA6APq5cNoOV4A1ckhtSTO9hxN8zjbUXhJ616iT99zS00mitG5D1vWV6zQyuDVgrUXjGvyUXP05yuWDdyuW0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=j2pXUTvN; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="HZxLyH+2"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="j2pXUTvN"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 7C7604E42088;
-	Mon, 12 Jan 2026 14:21:37 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 84A484E42094;
+	Mon, 12 Jan 2026 14:21:39 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 52332606FA;
-	Mon, 12 Jan 2026 14:21:37 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 76E0B103C9260;
-	Mon, 12 Jan 2026 15:21:35 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 5AFBA606FA;
+	Mon, 12 Jan 2026 14:21:39 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id CBF7B103C8CD8;
+	Mon, 12 Jan 2026 15:21:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227696; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227698; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=XGMM8bs5DtdAdz+Pv3kNdr/9N9Lli16DVt2ayg+uReo=;
-	b=HZxLyH+2BWYf5IxKEcDiANcUqFsDEY4nTa5NsjyUjyo1y7R4W5S+bGQKBXKhLf6dkutAtr
-	4psfZ1Q4AktmfIwvgVJ6tmsBIObV5w4NdR0Lp6UGg97b3rqsWobzpXkeOArTePoLsJXN03
-	Y3H8e3HOAXm3y61HpaToAwxSBjpjjt6ofVF1cVhDOkdG7dOMj/sQ+MRfP4Oi146wmJ/Tws
-	OxW2sMHdK9Ye5F/+Ogi08eV0GCInYeWulLBql9vZKWHXSMyFOebJBJH+C7LcZl3koHTxBv
-	hGb0EHrZhwr5UVllvuBD/dGl++IPci8kntSeciOXc+TKcDIaf0+7veVMnWSLuQ==
+	bh=t9eg9xhAykBraJlN9d8iype3cA15Fcc1FzDy86VUk+Y=;
+	b=j2pXUTvNwOWF/XjA0ZsrozI3E54u/80Uvc3Fkr50cdFSzyRcWBX1FH+bD8DRZ03UMGg/RV
+	3ctqwmb4JKc0RkVDlSWz3SI05o3GDglha87fgN9tjxLZtgH69c56q3udoZJ8sxx8mtNmuI
+	mtVFFRwL4SmQkLvMSBQbwAnoxMbFkkVVa58rVm1gOkZu4Vyx9DF5msJsXR02Bq3yFvuR5B
+	tJlvAkxUGqreQlVXAfbnl5P3//Yh7XPgpgHqdlptuvNC3d6dXEqe2/AEztNSO6bi/C1IvG
+	pUx4+yw/QLzRa7TI8mqW3grLF11mp5QJVDy6F9LenS8DeHmwlzyENG9XV0UF+Q==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 50/77] dtc: Handle orphan nodes in mark_local_xxx() and update_xxx_ref()
-Date: Mon, 12 Jan 2026 15:19:40 +0100
-Message-ID: <20260112142009.1006236-51-herve.codina@bootlin.com>
+Subject: [RFC PATCH 51/77] dtc: Avoid NULL fullpath for nodes in orphan trees
+Date: Mon, 12 Jan 2026 15:19:41 +0100
+Message-ID: <20260112142009.1006236-52-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -66,80 +66,47 @@ X-Last-TLS-Session-Version: TLSv1.3
 
 Orphan nodes have been introduced recently.
 
-mark_local_phandles() and mark_local_exports() mark phandles and export
-symbols as local when they reference a local node (i.e. a node in the
-current device-tree).
+The process_checks() function uses fullpath in several places and
+crashes due NULL pointer dereferences if fullpath is NULL.
 
-update_phandles_ref() and update_exports_ref() update references
-pointing to local nodes.
+In order to have process_checks() function running without crashes with
+orphan trees (i.e. trees based on orphan nodes), the fullpath of node
+available in those orphan trees must not be NULL.
 
-Those phandles, export symbols and references can involve orphan trees.
+Fullpath values are built by dti_fill_fullpaths(). Update it to handle
+fullpath in trees based on orphan nodes.
 
-Indeed, even if an orphan node itself is not present in the current
-device-tree, its subnodes are fully described in the current device-tree
-and so, those subnodes have to be considered as local nodes.
+Use a simple "__orphan__/" prefix to avoid the NULL pointer and to be
+distinct from the root node ("/" prefix).
 
-Update those functions to handle orphan nodes.
+It is worth noting that this "__orphan__/" prefix is a temporary prefix
+and it will be change later when support for reference by path involving
+nodes in orphan tree is added.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- livetree.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ dtc.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/livetree.c b/livetree.c
-index fa9daff..52c55be 100644
---- a/livetree.c
-+++ b/livetree.c
-@@ -1481,7 +1481,12 @@ static void update_phandles_ref_internal(struct dt_info *dti, struct node *node)
+diff --git a/dtc.c b/dtc.c
+index 59f4d77..5cf8f31 100644
+--- a/dtc.c
++++ b/dtc.c
+@@ -47,9 +47,14 @@ static void fill_fullpaths(struct node *tree, const char *prefix)
  
- void update_phandles_ref(struct dt_info *dti)
+ static void dti_fill_fullpaths(struct dt_info *dti)
  {
 +	struct node *orphan;
 +
- 	update_phandles_ref_internal(dti, dti->dt);
+ 	/* Fill fullpaths for the root node */
+ 	if (dti->dt)
+ 		fill_fullpaths(dti->dt, "");
 +
 +	for_each_orphan(dti->orphanlist, orphan)
-+		update_phandles_ref_internal(dti, orphan);
++		fill_fullpaths(orphan, "__orphan__/");
  }
  
- static void mark_local_phandles_internal(struct dt_info *dti,
-@@ -1507,7 +1512,12 @@ static void mark_local_phandles_internal(struct dt_info *dti,
- 
- void mark_local_phandles(struct dt_info *dti)
- {
-+	struct node *orphan;
-+
- 	mark_local_phandles_internal(dti, dti->dt);
-+
-+	for_each_orphan(dti->orphanlist, orphan)
-+		mark_local_phandles_internal(dti, orphan);
- }
- 
- static void update_exports_ref_internal(struct dt_info *dti, struct node *node)
-@@ -1537,7 +1547,12 @@ static void update_exports_ref_internal(struct dt_info *dti, struct node *node)
- 
- void update_exports_ref(struct dt_info *dti)
- {
-+	struct node *orphan;
-+
- 	update_exports_ref_internal(dti, dti->dt);
-+
-+	for_each_orphan(dti->orphanlist, orphan)
-+		update_exports_ref_internal(dti, orphan);
- }
- 
- static void mark_local_exports_internal(struct dt_info *dti,
-@@ -1559,6 +1574,10 @@ static void mark_local_exports_internal(struct dt_info *dti,
- 
- void mark_local_exports(struct dt_info *dti)
- {
-+	struct node *orphan;
-+
- 	mark_local_exports_internal(dti, dti->dt);
- 
-+	for_each_orphan(dti->orphanlist, orphan)
-+		mark_local_exports_internal(dti, orphan);
- }
+ /* Usage related data. */
 -- 
 2.52.0
 
