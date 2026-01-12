@@ -1,38 +1,38 @@
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84B1B2D2382;
-	Mon, 12 Jan 2026 14:20:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95DB12EC54D;
+	Mon, 12 Jan 2026 14:21:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227661; cv=none; b=eBmUpSQQ7cjGGytKodNDW2LNGHgZI0o1oONxj3bKtzI59VBABfrgNrUS4jfq8H4c0iVlMN/aM7ihIrFHyTv8RsW4/F9TSLvVuJ7dSvBnrnu6FDC1LxCuRDhYfdNQjLqUn5Mdfm4WYCym6IDkmaBpzA5a7p3RYHC1zECjIfjMU2U=
+	t=1768227662; cv=none; b=oRXCBz4TcasGfh+hmXpjTqukGhmxB/FeR9fqIFKxt7XCtgNEeEaHq7sTq2PsX5SRC8Q1TH50IppMyBOZnVtxyVIIOBRhe3m6liPQkMAw4zPICanU4Jjy86OsnkiZL7QcDlXraCZWv8e9+3iLdg0DA7RgDZlqMyMzeClSgd3xx9s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768227661; c=relaxed/simple;
-	bh=Nj6kJj98DYHwwdjHPdu2+VgWqk7PRTqBXRT9vZd8eeY=;
+	s=arc-20240116; t=1768227662; c=relaxed/simple;
+	bh=M6wzRazgjLFhzqVroXSpKrrVzyrsDcHr9GnwSuZiXqE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Qr2krR0CkMrhciKgZhW+ZJXUDuYM82Yww8cO78NnsiuABGH6T7CQl4H3E2tmAobvgl+vr8nA98U4eTeQbx0tMQsvLhL0MwHfa+8TVzZHC+upml3fU60ukqKp4SXuDfTQRnpy2uaLmBFfbvvJCRojmSm4rJL0ism4Qn+0fXsHQEQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=OWk+hX0W; arc=none smtp.client-ip=185.246.85.4
+	 MIME-Version; b=D8IxQvVizqRPF8ps6axJkaVFSnpgu3HIrCQtaZvwT2IDZaZFhZZ9cd/fnA2yWfe4TDy/8NInd4X9f+EgZbvdd9mskJEROSzcavG1tWqjBP7T3rKAR9fINAbofscE/t15xvvvBZKCONwYLP6/ywQIjV8/qBNd4gSOdWEocnmSBvY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=SccmcNR1; arc=none smtp.client-ip=185.246.84.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="OWk+hX0W"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="SccmcNR1"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 3FAFB4E42092;
-	Mon, 12 Jan 2026 14:20:56 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 656221A2804;
+	Mon, 12 Jan 2026 14:20:59 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 13C27606FA;
-	Mon, 12 Jan 2026 14:20:56 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id E7A4A103C9261;
-	Mon, 12 Jan 2026 15:20:53 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 3CBBE606FA;
+	Mon, 12 Jan 2026 14:20:59 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 476E7103C9264;
+	Mon, 12 Jan 2026 15:20:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227655; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227658; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=0MOeeR6TasGz+3AxpUMPX0Cq21Iksg66J6fcPymVDvA=;
-	b=OWk+hX0Ws5ZSun8uSJ95isB9VmnKshFYFRSaf5ByWplxHtexLxWwE/o1l4qNPsd2IuWBLe
-	9RHRsx3J7EnFIDbaOcu+5sfFu4RnvawMLNvWUFcHJesBviN12H5RHBtdf1scy25ZAZD5d9
-	GAZyEsSlyzldVThWYrppjqyCa6ItUqmfyl/8BNaY/JeH0ZzT1SuTfNEmqfeAFMspzbR1Q+
-	ORUkRDRWyFeemH9l3Erc7bkY7sEOP6qeyLJMTvrPZdx7fYqn6i1mc7y5QuGmgo7VVRCbD5
-	KGcZRQw/MIuwA/+/z46rbiiy63+TBwfJuOi8oHQyrL/oh+bMz7ll6oGQxMETgw==
+	bh=EIyB/EHU24MdE3qIWWskCx/gYfNdFh0BY/5BKh5Lhr8=;
+	b=SccmcNR1jbQ8AJLjQe1YA5yNhPDH8Dy88QjW+N69YsuExhqCCo5r7cfmeNRe9YqwrVD1TC
+	Tm7dRl+uv5oepmUJNxJChFfHJcj9hOA20GSml/Wf+PmM9MYSp9MvRXIsl1Y+CE2XPexoI3
+	FAQJ7XSxoYg5d+NNC9on+FicGAzhTxy0cFVZMNU+6G2oeIc6NobDBcezgxfjXn5LKN2EfN
+	nQpdMiqDLDXPtsH4kKmLDSxB9SRLZzCXeRT3mbjvOBUw97/jMppG2Su2KoiT7DGEs0n4E5
+	59l06emiEoD525N2iQuu3AKe+Fd/mp9hcmL4/jJL8U01By8+92P7F/PFGPenqw==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 22/77] dtc: Add export symbols (/export/ keyword) in generated dts file
-Date: Mon, 12 Jan 2026 15:19:12 +0100
-Message-ID: <20260112142009.1006236-23-herve.codina@bootlin.com>
+Subject: [RFC PATCH 24/77] dtc: Introduce update_exports_ref()
+Date: Mon, 12 Jan 2026 15:19:14 +0100
+Message-ID: <20260112142009.1006236-25-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,47 +64,87 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-The export symbols (/export/ keyword) parsing from a dts file is
-supported.
+In order to have consistent internal data when a export symbol using a
+local phandle is parsed from a dtb, the reference related to this
+phandle usage needs to be updated based on the phandle value.
 
-Add the support for this keyword in the dts file generation.
+This is done for phandles used by properties in update_phandles_ref().
+
+The same operation is needed for export symbols. This is the purpose of
+update_exports_ref().
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- treesource.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ dtc.c      |  1 +
+ dtc.h      |  1 +
+ livetree.c | 30 ++++++++++++++++++++++++++++++
+ 3 files changed, 32 insertions(+)
 
-diff --git a/treesource.c b/treesource.c
-index 1db6390..9effe38 100644
---- a/treesource.c
-+++ b/treesource.c
-@@ -320,6 +320,7 @@ static void write_propval(FILE *f, struct property *prop)
+diff --git a/dtc.c b/dtc.c
+index 030bfa2..e0a0b54 100644
+--- a/dtc.c
++++ b/dtc.c
+@@ -336,6 +336,7 @@ int main(int argc, char *argv[])
+ 	update_phandles_ref(dti);
+ 	mark_local_phandles(dti);
  
- static void write_tree_source_node(FILE *f, struct node *tree, int level)
- {
++	update_exports_ref(dti);
+ 	mark_local_exports(dti);
+ 
+ 	/*
+diff --git a/dtc.h b/dtc.h
+index ea073c2..024e172 100644
+--- a/dtc.h
++++ b/dtc.h
+@@ -368,6 +368,7 @@ void generate_local_fixups_tree(struct dt_info *dti, const char *name);
+ void update_phandles_ref(struct dt_info *dti);
+ void mark_local_phandles(struct dt_info *dti);
+ 
++void update_exports_ref(struct dt_info *dti);
+ void mark_local_exports(struct dt_info *dti);
+ 
+ /* Checks */
+diff --git a/livetree.c b/livetree.c
+index 0e756b8..7cf3ee5 100644
+--- a/livetree.c
++++ b/livetree.c
+@@ -1304,6 +1304,36 @@ void mark_local_phandles(struct dt_info *dti)
+ 	mark_local_phandles_internal(dti, dti->dt);
+ }
+ 
++static void update_exports_ref_internal(struct dt_info *dti, struct node *node)
++{
++	struct node *c;
 +	struct symbol *exportsym;
- 	struct property *prop;
- 	struct node *child;
- 	struct label *l;
-@@ -349,6 +350,18 @@ static void write_tree_source_node(FILE *f, struct node *tree, int level)
- 		fprintf(f, "%s", prop->name);
- 		write_propval(f, prop);
- 	}
++	struct node *refnode;
 +
-+	if (tree->exportsymlist)
-+		fprintf(f, "\n");
-+	for_each_symbol(tree->exportsymlist, exportsym) {
-+		write_prefix(f, level+1);
-+		fprintf(f, "/export/ %s: ", exportsym->name);
-+		if (exportsym->ref[0] == '/')
-+			fprintf(f, "&{%s};\n", exportsym->ref);
-+		else
-+			fprintf(f, "&%s;\n", exportsym->ref);
++	for_each_symbol(node->exportsymlist, exportsym) {
++		if (exportsym->ref)
++			continue;
++
++		if (exportsym->is_local) {
++			refnode = get_node_by_phandle(dti->dt, exportsym->phandle);
++			if (!refnode)
++				die("Node not found for phandle 0x%"PRIx32"\n", exportsym->phandle);
++
++			exportsym->ref = refnode->fullpath;
++		} else {
++			die("Found a non local phandle without a reference\n");
++		}
 +	}
 +
- 	for_each_child(tree, child) {
- 		fprintf(f, "\n");
- 		write_tree_source_node(f, child, level+1);
++	for_each_child(node, c)
++		update_exports_ref_internal(dti, c);
++}
++
++void update_exports_ref(struct dt_info *dti)
++{
++	update_exports_ref_internal(dti, dti->dt);
++}
++
+ static void mark_local_exports_internal(struct dt_info *dti,
+ 					struct node *node)
+ {
 -- 
 2.52.0
 
