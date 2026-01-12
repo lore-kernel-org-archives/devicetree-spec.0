@@ -1,38 +1,38 @@
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EA722DA760;
-	Mon, 12 Jan 2026 14:22:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88A4536C582;
+	Mon, 12 Jan 2026 14:22:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227735; cv=none; b=LeY3e2RewuklPkC76HQvjs82NJ84IkDaaAxtN91Qfd+QvQXGHbxQB159pPERLqetMxBF3qDWsK6ixGDOw3Z/UWp2i3MK5xWpqKUbSHA+ZTVdtMsnILgI/kuhyvtZRiE265jhFPu4WK9Z7zLtX/zTdB/rJD2Hj0rV1hhptznF71w=
+	t=1768227735; cv=none; b=HELZb70yKxOGvKryeLfeT12bMjJvtvSX4F8yRyRqssCmiqaTXn5liq2ZT1vPFJb6a/JWX7HBkdMLleMBDSWc6Q+PPnkfF29RndJ7X3WF0D+x0oLo4yutVg+n6bB+Mk+ezDt4wPyuUUIRPSOiB/4mME09eBQPm7u+g5ap2/OU450=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768227735; c=relaxed/simple;
-	bh=Sucyfoy8+Xz2IsznHku9kGLHK88fT8w0tMw6/VCHFIo=;
+	bh=CaV6+LlKGRYvRL9UsbxBUGMeZd6ptcNGilWz6iyk29w=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=j3WhrJwRMMPXTAQ3HbN5lwuBamzbPzoluClbL+yOKX7n67m2tw4g2UbXn8P9W9i3ocMe1Fbl74i+BW3KAsWYSMDOnkRL2WJXOG1SlQUJ2jwR3t/cBpWM6Jb1rb8wvp7IpbPKRk/gK9Rjsv6a3TfNRnLvuUETgwTCwO3HBdnx0Ws=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=hby+yWLM; arc=none smtp.client-ip=185.246.85.4
+	 MIME-Version; b=O/olmULVy85nQsnavjNMGEC+H2jEe5aMOzINCcmqemcwn9q0jr2LuIaYo5/OmVBgoQ3Oj9AmRngmY6QX+lx0UjavZqKuwpcMoLBIX8JNcysssqy47pKVjduuvpAsddabGB78SwzsPb7SCvyMCvSLxCDWmgVSC06WOsxeR9vwv5U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Rs0m+J5r; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="hby+yWLM"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Rs0m+J5r"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 27D714E42094;
-	Mon, 12 Jan 2026 14:22:11 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id E05FDC2086B;
+	Mon, 12 Jan 2026 14:21:45 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id F067A606FA;
-	Mon, 12 Jan 2026 14:22:10 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id DAAEC103C8CD8;
-	Mon, 12 Jan 2026 15:22:08 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 63D1E606FA;
+	Mon, 12 Jan 2026 14:22:12 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 7B6B6103C9262;
+	Mon, 12 Jan 2026 15:22:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227730; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227731; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=jy5RTTiCQ7Wx69xXqSkW5jY8TKudtZArBpa46lgNVqQ=;
-	b=hby+yWLMwgNZN73qBjc4reFcDEPQrTpFFGWw7tuOAEO+rqawlUqpqDgZkJ4Z417182JDoi
-	dj3Z5ZwV2O9Fg0S5wS+FqzK27QVWJS/BPGuAP6RoEy7ZqEHkJGBujOs08b5L/TD/s2ipXc
-	ti1vxVQH8IbguCOzjxXD/HrHnGowubT2PsTR4e7tzNVvf9Wu9D22aVp6eLJLfI/EoWp57U
-	O/geVXMH/l3Y9RBaEG9rstY3bkGNc3tNKYVCEv7J5onnW0t3hAUWmE9VWMmSO/6sxN7cTv
-	vdpbfxQX2RHc3W/T2wED832TbJy+kpikAWTjfwnDh+YkdU6oelYBhpDXPIpHgg==
+	bh=Fec2nLC5UB9GciN3RWgleKKuS++nqoMq0WJOh/SpVL4=;
+	b=Rs0m+J5rld3HdosKGDqL1UPFWlTCNJQNjU5HQImLt0SRwcr7GhR3KDEYoKUWNbfxdjXY/S
+	TJm1my84s8ou3pRyw3dFdtYd1dZ0UcADhm+ltEBBHFXruSgBVx+v/TMz45uO3lbZJ31WFE
+	cn3YrJVjlCvionZFCF2B/1GtndKvq62JCsnwa8fuoNnihdZ3poLHN9K6jrlg9JjU2EF3RN
+	+9K2cWzTKdrZ/hUtYJGIDm54BtHsyXhxYvtkXzSa0d2CtIJN178W15wbUh4O52MM5iAN4V
+	9atYSAmR0iYFe/M5WINnd+mHy9frkchboRMzvCegvMkHPnWWVdzZUFPyLGk4AA==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 71/77] Add fdtaddon tool to apply an addon
-Date: Mon, 12 Jan 2026 15:20:01 +0100
-Message-ID: <20260112142009.1006236-72-herve.codina@bootlin.com>
+Subject: [RFC PATCH 72/77] tests: Add a first basic test for fdtaddon
+Date: Mon, 12 Jan 2026 15:20:02 +0100
+Message-ID: <20260112142009.1006236-73-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,273 +64,409 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-libfdt has support for applying an addon on top of a base device-tree.
-This is provided by the libfdt fdt_addon_apply() function.
+The fdtaddon tests family goal is to test features related the
+application of an addon to a base device tree.
 
-The fdtaddon tool is command line tool which allows to apply addon dtb
-file to a base device-tree dtb file. It relies on fdt_addon_apply().
+This first basic test added in fdtaddon tests is related to the
+application of a simple addon.
+
+The terminology used in the test is the following:
+  - dts: A 'full' device tree source.
+    This can be either a base device tree or a merged device tree (i.e. a
+    base device tree where an addon has been applied to).
+
+  - dtb: A 'full' device tree blob
+    This can be either a dtb generated by dtc from a dts or the output of
+    the fdtaddon command.
+
+  - dtsa: An addon device tree source
+    A dts with the '/addon/' keyword.
+
+  - dtba: An addon device tree blob
+    This a device tree blob generated from a dtsa.
+
+With this terminology in mind, the test pattern is the following:
+  - Generate the base tree dtb (fdtaddon_base.dtb)
+  - Check this generated dtb against expected contents
+  - Generate a dtba (xxx.dtba) from an input dtsa
+  - Check this generated dtba against expected contents
+  - Apply the dtba to the base tree dtb at node-a1 (xxx-merged1.dtb)
+  - Check this generated dtb against expected contents
+  - Generate a dts (xxx-merged1.dtb.dts) from the generated xxx-merged1.dtb
+  - Check this generated dts against expected contents
+  - Apply the dtba to the base tree dtb at node-a2 (xxx-merged2.dtb)
+  - Check this generated dtb against expected contents
+  - Generate a dts (xxx-merged2.dtb.dts) from the generated xxx-merged2.dtb
+  - Check this generated dts against expected contents
+
+Even if only one basic addon dsta is currently provided in this tests
+introduction, use a loop in order to ease future addition consisting in
+testing other features based on more complex addon dtsa.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- Makefile    |   5 ++
- fdtaddon.c  | 197 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- meson.build |   2 +-
- 3 files changed, 203 insertions(+), 1 deletion(-)
- create mode 100644 fdtaddon.c
+ tests/fdtaddon_base.dtb.expect                | 24 ++++++++++
+ tests/fdtaddon_base.dts                       | 27 +++++++++++
+ tests/fdtaddon_basics1-merged1.dtb.dts.expect | 35 ++++++++++++++
+ tests/fdtaddon_basics1-merged1.dtb.expect     | 27 +++++++++++
+ tests/fdtaddon_basics1-merged2.dtb.dts.expect | 35 ++++++++++++++
+ tests/fdtaddon_basics1-merged2.dtb.expect     | 27 +++++++++++
+ tests/fdtaddon_basics1.dtba.expect            |  8 ++++
+ tests/fdtaddon_basics1.dtsa                   | 13 ++++++
+ tests/meson.build                             |  3 +-
+ tests/run_tests.sh                            | 46 ++++++++++++++++++-
+ tests/testutils.sh                            |  1 +
+ 11 files changed, 244 insertions(+), 2 deletions(-)
+ create mode 100644 tests/fdtaddon_base.dtb.expect
+ create mode 100644 tests/fdtaddon_base.dts
+ create mode 100644 tests/fdtaddon_basics1-merged1.dtb.dts.expect
+ create mode 100644 tests/fdtaddon_basics1-merged1.dtb.expect
+ create mode 100644 tests/fdtaddon_basics1-merged2.dtb.dts.expect
+ create mode 100644 tests/fdtaddon_basics1-merged2.dtb.expect
+ create mode 100644 tests/fdtaddon_basics1.dtba.expect
+ create mode 100644 tests/fdtaddon_basics1.dtsa
 
-diff --git a/Makefile b/Makefile
-index 83d8220..1137cee 100644
---- a/Makefile
-+++ b/Makefile
-@@ -159,6 +159,7 @@ BIN += fdtdump
- BIN += fdtget
- BIN += fdtput
- BIN += fdtoverlay
-+BIN += fdtaddon
- 
- SCRIPTS = dtdiff
- 
-@@ -172,6 +173,7 @@ ifneq ($(MAKECMDGOALS),libfdt)
- -include $(FDTGET_OBJS:%.o=%.d)
- -include $(FDTPUT_OBJS:%.o=%.d)
- -include $(FDTOVERLAY_OBJS:%.o=%.d)
-+-include $(FDTADDON_OBJS:%.o=%.d)
- endif
- endif
- 
-@@ -255,6 +257,8 @@ fdtput:	$(FDTPUT_OBJS) $(LIBFDT_dep)
- 
- fdtoverlay: $(FDTOVERLAY_OBJS) $(LIBFDT_dep)
- 
-+fdtaddon: $(FDTADDON_OBJS) $(LIBFDT_dep)
-+
- dist:
- 	git archive --format=tar --prefix=dtc-$(dtc_version)/ HEAD \
- 		> ../dtc-$(dtc_version).tar
-@@ -295,6 +299,7 @@ TESTS_BIN += fdtput
- TESTS_BIN += fdtget
- TESTS_BIN += fdtdump
- TESTS_BIN += fdtoverlay
-+TESTS_BIN += fdtaddon
- 
- ifneq ($(MAKECMDGOALS),libfdt)
- include tests/Makefile.tests
-diff --git a/fdtaddon.c b/fdtaddon.c
+diff --git a/tests/fdtaddon_base.dtb.expect b/tests/fdtaddon_base.dtb.expect
 new file mode 100644
-index 0000000..c2fefa3
+index 0000000..eb8cd40
 --- /dev/null
-+++ b/fdtaddon.c
-@@ -0,0 +1,197 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
++++ b/tests/fdtaddon_base.dtb.expect
+@@ -0,0 +1,24 @@
++/dts-v1/;
++
++/ {
++    base-node {
++        sub-node {
++            prop = <0x00000000>;
++            phandle = <0x00000002>;
++        };
++    };
++    somewhere {
++        node-a1 {
++            compatible = "abc,aaa";
++            phandle = <0x00000001>;
++            // [FDT_EXPORT_SYM] 'node_a' -> phandle 0x00000001
++            // [FDT_EXPORT_SYM] 'other' -> phandle 0x00000002
++        };
++        node-a2 {
++            compatible = "abc,aaa";
++            phandle = <0x00000003>;
++            // [FDT_EXPORT_SYM] 'node_a' -> phandle 0x00000003
++            // [FDT_EXPORT_SYM] 'other' -> phandle 0x00000002
++        };
++    };
++};
+diff --git a/tests/fdtaddon_base.dts b/tests/fdtaddon_base.dts
+new file mode 100644
+index 0000000..3b00146
+--- /dev/null
++++ b/tests/fdtaddon_base.dts
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
 +/*
-+ * Copyright (c) 2025 Bootlin. All rights reserved.
-+ *
-+ * Author:
-+ *	 Herve Codina <herve.codina@bootlin.com>
++ * Copyright (C) 2026 Bootlin
 + */
 +
-+#include <assert.h>
-+#include <ctype.h>
-+#include <getopt.h>
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <inttypes.h>
++/dts-v1/;
 +
-+#include <libfdt.h>
++/ {
++	base-node {
++		other_a: sub-node {
++			prop = <0>;
++		};
++	};
 +
-+#include "util.h"
-+
-+/* Usage related data. */
-+static const char usage_synopsis[] =
-+	"apply an addon to a base blob\n"
-+	"	fdtaddon <options> <addon.dtba>";
-+static const char usage_short_opts[] = "i:o:t:v" USAGE_COMMON_SHORT_OPTS;
-+static const struct option usage_long_opts[] = {
-+	{ "input", required_argument, NULL, 'i' },
-+	{ "output", required_argument, NULL, 'o' },
-+	{ "target", required_argument, NULL, 't' },
-+	{ "verbose", no_argument, NULL, 'v' },
-+	USAGE_COMMON_LONG_OPTS,
++	somewhere {
++		node_a1: node-a1 {
++			compatible = "abc,aaa";
++			/export/ node_a: &node_a1;
++			/export/ other: &other_a;
++		};
++		node_a2: node-a2 {
++			compatible = "abc,aaa";
++			/export/ node_a: &node_a2;
++			/export/ other: &other_a;
++		};
++	};
 +};
-+static const char *const usage_opts_help[] = { "Input base DT blob",
-+					       "Output DT blob", "Target node",
-+					       "Verbose messages",
-+					       USAGE_COMMON_OPTS_HELP };
+diff --git a/tests/fdtaddon_basics1-merged1.dtb.dts.expect b/tests/fdtaddon_basics1-merged1.dtb.dts.expect
+new file mode 100644
+index 0000000..927733c
+--- /dev/null
++++ b/tests/fdtaddon_basics1-merged1.dtb.dts.expect
+@@ -0,0 +1,35 @@
++/dts-v1/;
 +
-+int verbose;
++/ {
 +
-+static void *do_apply(void *base, const void *addon, const char *target)
-+{
-+	void *tmp_merged;
-+	void *tmp_addon;
-+	size_t max_merged_size;
-+	int ret;
++	base-node {
 +
-+	/*
-+	 * We take copies first, because a failed apply can trash
-+	 * both the base blob and the overlay.
-+	 */
++		sub-node {
++			prop = <0x00>;
++			phandle = <0x02>;
++		};
++	};
 +
-+	/*
-+	 * The merged size should not be greater than the sum of the size of
-+	 * individual items.
-+	 */
-+	max_merged_size = fdt_totalsize(base) + fdt_totalsize(addon);
++	somewhere {
 +
-+	tmp_merged = xmalloc(max_merged_size);
-+	ret = fdt_open_into(base, tmp_merged, max_merged_size);
-+	if (ret) {
-+		fprintf(stderr,
-+			"\nFailed to make temporary copy: %s\n",
-+			fdt_strerror(ret));
-+		goto fail;
-+	}
++		node-a1 {
++			compatible = "abc,aaa";
++			phandle = <0x01>;
 +
-+	tmp_addon = xmalloc(fdt_totalsize(addon));
-+	memcpy(tmp_addon, addon, fdt_totalsize(addon));
++			/export/ node_a: &{/somewhere/node-a1};
++			/export/ other: &{/base-node/sub-node};
 +
-+	if (!(fdt_dt_flags(tmp_addon) & FDT_FLAG_ADDON)) {
-+		fprintf(stderr,
-+			"\nAddon dtb is not an 'addon'\n");
-+		goto fail;
-+	}
++			addon-node {
++				prop = <0x00>;
++			};
++		};
 +
-+	ret = fdt_addon_apply(tmp_merged, tmp_addon, target);
-+	if (ret) {
-+		fprintf(stderr, "\nFailed to apply %s\n", fdt_strerror(ret));
-+		goto fail;
-+	}
++		node-a2 {
++			compatible = "abc,aaa";
++			phandle = <0x03>;
 +
-+	free(tmp_addon);
-+	return tmp_merged;
++			/export/ node_a: &{/somewhere/node-a2};
++			/export/ other: &{/base-node/sub-node};
++		};
++	};
++};
+diff --git a/tests/fdtaddon_basics1-merged1.dtb.expect b/tests/fdtaddon_basics1-merged1.dtb.expect
+new file mode 100644
+index 0000000..bee1397
+--- /dev/null
++++ b/tests/fdtaddon_basics1-merged1.dtb.expect
+@@ -0,0 +1,27 @@
++/dts-v1/;
 +
-+fail:
-+	free(tmp_merged);
-+	free(tmp_addon);
-+	return NULL;
-+}
++/ {
++    base-node {
++        sub-node {
++            prop = <0x00000000>;
++            phandle = <0x00000002>;
++        };
++    };
++    somewhere {
++        node-a1 {
++            compatible = "abc,aaa";
++            phandle = <0x00000001>;
++            // [FDT_EXPORT_SYM] 'node_a' -> phandle 0x00000001
++            // [FDT_EXPORT_SYM] 'other' -> phandle 0x00000002
++            addon-node {
++                prop = <0x00000000>;
++            };
++        };
++        node-a2 {
++            compatible = "abc,aaa";
++            phandle = <0x00000003>;
++            // [FDT_EXPORT_SYM] 'node_a' -> phandle 0x00000003
++            // [FDT_EXPORT_SYM] 'other' -> phandle 0x00000002
++        };
++    };
++};
+diff --git a/tests/fdtaddon_basics1-merged2.dtb.dts.expect b/tests/fdtaddon_basics1-merged2.dtb.dts.expect
+new file mode 100644
+index 0000000..d85567b
+--- /dev/null
++++ b/tests/fdtaddon_basics1-merged2.dtb.dts.expect
+@@ -0,0 +1,35 @@
++/dts-v1/;
 +
-+static int do_fdtaddon(const char *input_filename, const char *output_filename,
-+		       const char *addon_filename, const char *target)
-+{
-+	void *base_blob = NULL;
-+	void *addon_blob = NULL;
-+	void *merged_blob = NULL;
-+	size_t base_buflen;
-+	size_t addon_buflen;
-+	int ret = -1;
++/ {
 +
-+	base_blob = utilfdt_read(input_filename, &base_buflen);
-+	if (!base_blob) {
-+		fprintf(stderr, "\nFailed to read '%s'\n", input_filename);
-+		goto out_err;
-+	}
-+	if (fdt_totalsize(base_blob) > base_buflen) {
-+		fprintf(stderr,
-+			"\nBase blob is incomplete (%zu / %"PRIu32" bytes read)\n",
-+			base_buflen, fdt_totalsize(base_blob));
-+		goto out_err;
-+	}
++	base-node {
 +
-+	addon_blob = utilfdt_read(addon_filename, &addon_buflen);
-+	if (!addon_blob) {
-+		fprintf(stderr, "\nFailed to read '%s'\n", addon_filename);
-+		goto out_err;
-+	}
-+	if (fdt_totalsize(addon_blob) > addon_buflen) {
-+		fprintf(stderr,
-+			"\nAddon blob is incomplete (%zu / %"PRIu32" bytes read)\n",
-+			addon_buflen, fdt_totalsize(addon_blob));
-+		goto out_err;
-+	}
++		sub-node {
++			prop = <0x00>;
++			phandle = <0x02>;
++		};
++	};
 +
-+	/* apply the addon  */
-+	merged_blob = do_apply(base_blob, addon_blob, target);
-+	if (!merged_blob)
-+		goto out_err;
++	somewhere {
 +
-+	fdt_pack(merged_blob);
-+	ret = utilfdt_write(output_filename, merged_blob);
-+	if (ret)
-+		fprintf(stderr, "\nFailed to write '%s'\n", output_filename);
++		node-a1 {
++			compatible = "abc,aaa";
++			phandle = <0x01>;
 +
-+out_err:
-+	free(merged_blob);
-+	free(addon_blob);
-+	free(base_blob);
++			/export/ node_a: &{/somewhere/node-a1};
++			/export/ other: &{/base-node/sub-node};
++		};
 +
-+	return ret;
-+}
++		node-a2 {
++			compatible = "abc,aaa";
++			phandle = <0x03>;
 +
-+int main(int argc, char *argv[])
-+{
-+	char *input_filename = NULL;
-+	char *output_filename = NULL;
-+	char *addon_filename = NULL;
-+	const char *target = NULL;
-+	int opt;
++			/export/ node_a: &{/somewhere/node-a2};
++			/export/ other: &{/base-node/sub-node};
 +
-+	while ((opt = util_getopt_long()) != EOF) {
-+		switch (opt) {
-+		case_USAGE_COMMON_FLAGS
++			addon-node {
++				prop = <0x00>;
++			};
++		};
++	};
++};
+diff --git a/tests/fdtaddon_basics1-merged2.dtb.expect b/tests/fdtaddon_basics1-merged2.dtb.expect
+new file mode 100644
+index 0000000..34a4b36
+--- /dev/null
++++ b/tests/fdtaddon_basics1-merged2.dtb.expect
+@@ -0,0 +1,27 @@
++/dts-v1/;
 +
-+		case 'i':
-+			input_filename = optarg;
-+			break;
-+		case 'o':
-+			output_filename = optarg;
-+			break;
-+		case 'v':
-+			verbose = 1;
-+			break;
-+		case 't':
-+			target = optarg;
-+			break;
-+		}
-+	}
++/ {
++    base-node {
++        sub-node {
++            prop = <0x00000000>;
++            phandle = <0x00000002>;
++        };
++    };
++    somewhere {
++        node-a1 {
++            compatible = "abc,aaa";
++            phandle = <0x00000001>;
++            // [FDT_EXPORT_SYM] 'node_a' -> phandle 0x00000001
++            // [FDT_EXPORT_SYM] 'other' -> phandle 0x00000002
++        };
++        node-a2 {
++            compatible = "abc,aaa";
++            phandle = <0x00000003>;
++            // [FDT_EXPORT_SYM] 'node_a' -> phandle 0x00000003
++            // [FDT_EXPORT_SYM] 'other' -> phandle 0x00000002
++            addon-node {
++                prop = <0x00000000>;
++            };
++        };
++    };
++};
+diff --git a/tests/fdtaddon_basics1.dtba.expect b/tests/fdtaddon_basics1.dtba.expect
+new file mode 100644
+index 0000000..1102923
+--- /dev/null
++++ b/tests/fdtaddon_basics1.dtba.expect
+@@ -0,0 +1,8 @@
++/dts-v1/;
++/addon/;
 +
-+	if (!input_filename)
-+		usage("missing input file");
++/ {
++    addon-node {
++        prop = <0x00000000>;
++    };
++};
+diff --git a/tests/fdtaddon_basics1.dtsa b/tests/fdtaddon_basics1.dtsa
+new file mode 100644
+index 0000000..84621c9
+--- /dev/null
++++ b/tests/fdtaddon_basics1.dtsa
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
++/*
++ * Copyright (C) 2026 Bootlin
++ */
 +
-+	if (!output_filename)
-+		usage("missing output file");
++/dts-v1/;
++/addon/;
 +
-+	if (!target)
-+		usage("missing target");
-+
-+	argv += optind;
-+	argc -= optind;
-+
-+	if (argc != 1)
-+		usage("missing addon file");
-+
-+	addon_filename = argv[0];
-+
-+	if (verbose) {
-+		printf("input  = %s\n", input_filename);
-+		printf("output = %s\n", output_filename);
-+		printf("addon = %s\n", addon_filename);
-+	}
-+
-+	if (do_fdtaddon(input_filename, output_filename, addon_filename, target))
-+		return 1;
-+
-+	return 0;
-+}
-diff --git a/meson.build b/meson.build
-index 66b44e8..c108514 100644
---- a/meson.build
-+++ b/meson.build
-@@ -107,7 +107,7 @@ if get_option('tools') and not wheel_only
-     install: true,
-   )
++/ {
++	addon-node {
++		prop = <0>;
++	};
++};
+diff --git a/tests/meson.build b/tests/meson.build
+index e81a2e1..f0ae98a 100644
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -141,7 +141,8 @@ run_test_types = [
+   'fdtput',
+   'fdtdump',
+   'fdtoverlay',
+-  'metadata'
++  'metadata',
++  'fdtaddon'
+ ]
+ run_test_deps = [
+   dtc_tools, dumptrees_dtb, tests_exe
+diff --git a/tests/run_tests.sh b/tests/run_tests.sh
+index 4392752..32c40cf 100755
+--- a/tests/run_tests.sh
++++ b/tests/run_tests.sh
+@@ -1168,6 +1168,47 @@ metadata_tests() {
+ 	base_run_test check_diff metadata_sort.dtb.dts "$SRCDIR/metadata_sort.dtb.dts.expect"
+ }
  
--  foreach e: ['fdtdump', 'fdtget', 'fdtput', 'fdtoverlay']
-+  foreach e: ['fdtdump', 'fdtget', 'fdtput', 'fdtoverlay', 'fdtaddon']
-     dtc_tools += executable(e, files(e + '.c'), dependencies: util_dep, install: true)
-   endforeach
++run_fdtaddon_test () {
++	printf "fdtaddon $*:	"
++	base_run_test wrap_test $VALGRIND $FDTADDON "$@"
++}
++
++check_dtb () {
++	local dtb="$1"
++	base_run_test wrap_fdtdump "$dtb" "$dtb.out"
++	sed -i '/^\/\/ [^\[]/d' "$dtb.out"
++	base_run_test check_diff "$dtb.out" "$SRCDIR/$dtb.expect"
++}
++
++check_dts () {
++	local dts="$1"
++	base_run_test check_diff "$dts" "$SRCDIR/$dts.expect"
++}
++
++fdtaddon_tests() {
++	run_dtc_test -I dts -O dtb -o fdtaddon_base.dtb "$SRCDIR/fdtaddon_base.dts"
++	check_dtb fdtaddon_base.dtb
++
++	for dt in fdtaddon_basics1; do
++		run_dtc_test -I dts -O dtb -o $dt.dtba "$SRCDIR/$dt.dtsa"
++		check_dtb $dt.dtba
++
++		run_fdtaddon_test -i fdtaddon_base.dtb -o $dt-merged1.dtb \
++				  -t "/somewhere/node-a1" $dt.dtba
++		check_dtb $dt-merged1.dtb
++
++		run_dtc_test -I dtb -O dts -o $dt-merged1.dtb.dts $dt-merged1.dtb
++		check_dts $dt-merged1.dtb.dts
++
++		run_fdtaddon_test -i fdtaddon_base.dtb -o $dt-merged2.dtb \
++				  -t "/somewhere/node-a2" $dt.dtba
++		check_dtb $dt-merged2.dtb
++
++		run_dtc_test -I dtb -O dts -o $dt-merged2.dtb.dts $dt-merged2.dtb
++		check_dts $dt-merged2.dtb.dts
++	done
++}
++
+ pylibfdt_tests () {
+     run_dtc_test -I dts -O dtb -o test_props.dtb "$SRCDIR/test_props.dts"
+     TMP=/tmp/tests.stderr.$$
+@@ -1207,7 +1248,7 @@ while getopts "vt:me" ARG ; do
+ done
  
+ if [ -z "$TESTSETS" ]; then
+-    TESTSETS="libfdt utilfdt dtc dtbs_equal fdtget fdtput fdtdump fdtoverlay metadata"
++    TESTSETS="libfdt utilfdt dtc dtbs_equal fdtget fdtput fdtdump fdtoverlay metadata fdtaddon"
+ 
+     # Test pylibfdt if the libfdt Python module is available.
+     if ! $no_python; then
+@@ -1250,6 +1291,9 @@ for set in $TESTSETS; do
+ 	"metadata")
+ 	    metadata_tests
+ 	    ;;
++	"fdtaddon")
++	    fdtaddon_tests
++	    ;;
+     esac
+ done
+ 
+diff --git a/tests/testutils.sh b/tests/testutils.sh
+index 6b2f0d1..b5e121e 100644
+--- a/tests/testutils.sh
++++ b/tests/testutils.sh
+@@ -27,6 +27,7 @@ DTGET=${TEST_BINDIR}/fdtget
+ DTPUT=${TEST_BINDIR}/fdtput
+ FDTDUMP=${TEST_BINDIR}/fdtdump
+ FDTOVERLAY=${TEST_BINDIR}/fdtoverlay
++FDTADDON=${TEST_BINDIR}/fdtaddon
+ 
+ verbose_run () {
+     if [ -z "$QUIET_TEST" ]; then
 -- 
 2.52.0
 
