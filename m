@@ -1,38 +1,38 @@
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89EAB27280C
-	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:20:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 476922DCC13
+	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:20:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227641; cv=none; b=dgYqcwWsreJJXq262w41GH/IJNHjIt9oDYff1nqiA+P4BgMKGvy3Uq7gXmXxK8JqeJvLa34RLr6bDFH8o6GCOnxYu77Sufi4Qwo41/BGhcYfGc3s9qJys9Z+kGSO8F9pl1DmrLAfAsP4Lb73SxpwFUUq8sDQj9s4yGH6XaXrJ6k=
+	t=1768227644; cv=none; b=WDkDC3Nz6yd4c1jO08fsAeyArTA6LKP2mG9EFve0Hrd3XABYotecGWdA9Hpt6fUp/bpU9CZ8wQHqpdVfQI2uqAtDStbkCV+JDHCQVjYY9oi5eHECIYwgtpVXhXcIQklTqDpVGVIiI2HRuQDEReUzMaPRe3i53QcM48zttiCBPgY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768227641; c=relaxed/simple;
-	bh=ZXU9XNcj48fjtMAslY9eni60v2cXAHj2Unj3M3PwFZY=;
+	s=arc-20240116; t=1768227644; c=relaxed/simple;
+	bh=qtSYMfEKE7N1RUZ+Et1MCf9TOQxcc6/qt8r1vbidjUk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ZNjMzrySf329WYeizED1J8fTTs2GYpHZmXMFIC8kiZ49Nyk6kRNY2FxRu8GGxcNCMAl6WwzcV90E+yOLbuN+N/6dlEwT/2pTWZz/ktb1T6SfChjNrj/Xj1v1+H33H5phoYIUtz3OpLoxmVgBOo7ts5VIcFHcz0EgT+gh4W5krR4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=tTVs3QV5; arc=none smtp.client-ip=185.171.202.116
+	 MIME-Version; b=hJ/SPESDDzmrqbfUT96JD7DFCu0nC00nVE/dwlQ+Zm0eto2kP11QbS5pY9lWZWeM24ECv+Frd56SMd5uOrk473V4d8zFS6ZIRODG97KrDIk37HJlxg6ptVHgrQM/rHIv/l0NODLUrJ2woEvJoyekjCn33G4X4cf/Napsya9+v1Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=zDzGto/i; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="tTVs3QV5"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="zDzGto/i"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id A3DB1C20869;
-	Mon, 12 Jan 2026 14:20:11 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 0E4A4C2086B;
+	Mon, 12 Jan 2026 14:20:13 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 27451606FA;
-	Mon, 12 Jan 2026 14:20:38 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 3ED41103C9264;
-	Mon, 12 Jan 2026 15:20:36 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 86D67606FA;
+	Mon, 12 Jan 2026 14:20:39 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9450A103C9266;
+	Mon, 12 Jan 2026 15:20:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227637; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227638; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=8uFabX923YEkpFpxXtAznZ2imCbjUvPJlwt8YWDTWN8=;
-	b=tTVs3QV5Y8OiHUr0K8AWV6WiaX8f0TDt/7Vu0Fj4Z5coMYpYYSrhN2RzcmdXc/jPuobbMo
-	LTQk2yUzU0ikk/ymI+CI4l+Oi7sesfB76T8ywTCFyosJQ2GPmmJr7ORg82c65IgbusE5Rq
-	1J+4zRIjw2mjBof3muqEbDzvOghd9uLUPT6jAR2fuNIgX3pVjn1adTH05r8YnxHr7Z3btx
-	3167bEOt8r4YbUsUA16CQVRW3d4ffW3ng22Bku7A2OTrXXyrWks822DdaqLHY40HORE/4N
-	eYw0DAztIWWFDSCOtv1DNcOj2f0a0Q69ExCAPhCtEP/GNl7s1K7CdSFaF2k/UQ==
+	bh=MbYI6yj1uJVvzjpvfvc/MoMnyr+zoT0U56BLtMvMqdk=;
+	b=zDzGto/i7u9rJjqABjQYHXFwCjBZM1I7A0OI/FM/F+n5jCXBgFZRzha8W/cFyApQrxZQuH
+	hFjXeTST7u7Kib8fxgWOO0aEdYHHMKXAvBn3LO1S1g3Wm8bjCZkUHie76ztfh5kOyCMfeQ
+	GzcUt+oGkfP4cmCfuv8KWvGMJYFSOzjK3Eu0rSx1RhGP72fH/IAbCgegnQ8FfkCS+ff0Z9
+	YLXYZJDRTPrVuA/ishACjl/2/UoUGqEbNyi3cI/DzR23ADc6KMZ0+OzYOTdqQePOBEAAPf
+	XHHgdV91qd7G7uQazHXGzVwZzPRYoi1yJcJtjNFXBCGUrs30ibVZ/grDtD3RAg==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 10/77] tests: Add basic metadata tests
-Date: Mon, 12 Jan 2026 15:19:00 +0100
-Message-ID: <20260112142009.1006236-11-herve.codina@bootlin.com>
+Subject: [RFC PATCH 11/77] Add support for FDT_REF_PHANDLE dtb tag
+Date: Mon, 12 Jan 2026 15:19:01 +0100
+Message-ID: <20260112142009.1006236-12-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,251 +64,255 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-This first test is related to local phandle references (FDT_REF_LOCAL
-dtb tag).
+The FDT_REF_PHANDLE dtb tag is similar to the FDT_REF_LOCAL tag except
+that it identifies a reference to an external phandle. The node
+referenced by the phandle is not present in the device-tree blob.
 
-The test pattern used is
-  - Generate a dts (xxx.dts.dts) from an input dts
-  - Check this generated dts against expected contents
-  - Generate a dtb (xxx.dtb) from the same input dts
-  - Check this generated dtb against expected contents
-  - Generate a dts (xxx.dtb.dts) from the generated dtb
-  - Check this generated dts against expected contents
-  - Generate a dtb (xxx.dtb.dts.dtb) from the generated dts
-  - Check this generated dtb, expect the same contents as for xxx.dtb
+The FDT_REF_PHANDLE dtb tag is a meta-data tag attached to a property.
 
-Even if only one meta-data feature is currently tested in this tests
-introduction, use a loop in order to ease future addition consisting in
-adding new input dts as soon as new meta-data feature are supported.
+It indicates that the property defined before this tag (FDT_PROP) uses a
+phandle value and the node related to this phandle value is not local
+node (i.e. the node is not present in the device-tree blob). This tag
+can be available only in overlay or addon device-tree blobs. The phandle
+value used in the property has to be resolved when the device-tree blob
+is applied on top of a base device-tree.
 
+It is followed by two values and a possible alignment padding:
+ - offset (32bit):
+     Offset in the property data where the phandle is available.
+ - label (string including \0):
+     The label to use to resolve the phandle value.
+ - padding:
+     Padding (0x00) added to have the next tag aligned on 32bit.
+
+Example:
+  FDT_PROP 0x00000008 xxxxxxxx 0x00 0x01 0x02 0x03 0xff 0xff 0xff 0xff
+  FDT_REF_PHANDLE 0x00000004 "foo1" 0x00 0x00 0x00
+
+  This means that at the offset 4 of the property data, the value
+  (0xffffffff) is an unresolved phandle value and the related node is
+  the node referenced by "foo1".
+
+  This is what is encoded in the dtb when the related dts has a property
+  with the value set to <0x00010203 &foo1> with 'foo1' a reference
+  to an non local node.
+
+If several non local phandles are used in the property data, several
+FDT_REF_PHANDLE are present after the FDT_PROP tag. Each of them points
+with its offset value to the position of one phandle.
+
+For instance, if a first property with 8 bytes of data has a
+unresolved phandle value at offset 4 referenced by "foo" and a second
+property with 16 bytes of data has unresolved phandle values at offset 0
+and 8 referenced by "bar" and "baz", the following tags sequence is
+present:
+  FDT_PROP 0x00000008 xxxxxxxx <data bytes>
+  FDT_REF_PHANDLE 0x00000004 "foo" 0x00 0x00 0x00
+  FDT_PROP 0x00000010 xxxxxxxx <data bytes>
+  FDT_REF_LOCAL 0x00000000 "bar" 0x00 0x00 0x00
+  FDT_REF_LOCAL 0x00000008 "baz" 0x00 0x00 0x00
+
+Add support for this new dtb tag.
+
+Suggested-by: David Gibson <david@gibson.dropbear.id.au>
+Link: https://lore.kernel.org/all/aL-2fmYsbexEtpNp@zatzit/
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- tests/meson.build                      |  3 +-
- tests/metadata_reflocal.dtb.dts.expect | 23 ++++++++++
- tests/metadata_reflocal.dtb.expect     | 20 +++++++++
- tests/metadata_reflocal.dts            | 27 ++++++++++++
- tests/metadata_reflocal.dts.dts.expect | 23 ++++++++++
- tests/run_tests.sh                     | 58 +++++++++++++++++++++++++-
- 6 files changed, 152 insertions(+), 2 deletions(-)
- create mode 100644 tests/metadata_reflocal.dtb.dts.expect
- create mode 100644 tests/metadata_reflocal.dtb.expect
- create mode 100644 tests/metadata_reflocal.dts
- create mode 100644 tests/metadata_reflocal.dts.dts.expect
+ dtc.c        | 12 ++++++++++++
+ fdtdump.c    | 10 ++++++++++
+ flattree.c   | 37 +++++++++++++++++++++++++++++++++++++
+ libfdt/fdt.c | 16 ++++++++++++++++
+ libfdt/fdt.h |  2 ++
+ 5 files changed, 77 insertions(+)
 
-diff --git a/tests/meson.build b/tests/meson.build
-index 37bfd47..e81a2e1 100644
---- a/tests/meson.build
-+++ b/tests/meson.build
-@@ -140,7 +140,8 @@ run_test_types = [
-   'fdtget',
-   'fdtput',
-   'fdtdump',
--  'fdtoverlay'
-+  'fdtoverlay',
-+  'metadata'
- ]
- run_test_deps = [
-   dtc_tools, dumptrees_dtb, tests_exe
-diff --git a/tests/metadata_reflocal.dtb.dts.expect b/tests/metadata_reflocal.dtb.dts.expect
-new file mode 100644
-index 0000000..076c17a
---- /dev/null
-+++ b/tests/metadata_reflocal.dtb.dts.expect
-@@ -0,0 +1,23 @@
-+/dts-v1/;
+diff --git a/dtc.c b/dtc.c
+index d0b4de3..fe8e8e4 100644
+--- a/dtc.c
++++ b/dtc.c
+@@ -336,6 +336,18 @@ int main(int argc, char *argv[])
+ 	update_phandles_ref(dti);
+ 	mark_local_phandles(dti);
+ 
++	/*
++	 * With FDT_REF_PHANDLE added in dtbs, we need to identified
++	 * if some unresolved phandle references are allowed in the dtb
++	 * we have parsed (needed for process_check() to run properly).
++	 *
++	 * Identify plugin device-trees (overlays) based on specific node
++	 * presence.
++	 */
++	if (get_subnode(dti->dt, "__fixups__") ||
++	    get_subnode(dti->dt, "__local_fixups__"))
++		dti->dtsflags |= DTSF_PLUGIN;
 +
-+/ {
+ 	process_checks(force, dti);
+ 
+ 	if (auto_label_aliases)
+diff --git a/fdtdump.c b/fdtdump.c
+index dffa9a6..7300280 100644
+--- a/fdtdump.c
++++ b/fdtdump.c
+@@ -158,6 +158,16 @@ static void dump_blob(void *blob, bool debug)
+ 			continue;
+ 		}
+ 
++		if (tag == FDT_REF_PHANDLE) {
++			offset = fdt32_to_cpu(GET_CELL(p));
++			s = p;
++			p = PALIGN(p + strlen(s) + 1, 4);
 +
-+	node-a {
++			printf("%*s// [FDT_REF_PHANDLE] %s[%"PRIu32"], ref = %s\n",
++				depth * shift, "", last_prop_name, offset, s);
++			continue;
++		}
 +
-+		subnode-a {
-+			phandle = <0x01>;
-+		};
-+	};
-+
-+	node-b {
-+		phandle = <0x02>;
-+	};
-+
-+	node-c {
-+	};
-+
-+	node-d {
-+		ref-subnode-a = <&{/node-a/subnode-a}>;
-+		ref-node-b = <0x123 0x456 &{/node-b} 0x789>;
-+	};
-+};
-diff --git a/tests/metadata_reflocal.dtb.expect b/tests/metadata_reflocal.dtb.expect
-new file mode 100644
-index 0000000..33b3896
---- /dev/null
-+++ b/tests/metadata_reflocal.dtb.expect
-@@ -0,0 +1,20 @@
-+/dts-v1/;
-+
-+/ {
-+    node-a {
-+        subnode-a {
-+            phandle = <0x00000001>;
-+        };
-+    };
-+    node-b {
-+        phandle = <0x00000002>;
-+    };
-+    node-c {
-+    };
-+    node-d {
-+        ref-subnode-a = <0x00000001>;
-+        // [FDT_REF_LOCAL] ref-subnode-a[0]
-+        ref-node-b = <0x00000123 0x00000456 0x00000002 0x00000789>;
-+        // [FDT_REF_LOCAL] ref-node-b[8]
-+    };
-+};
-diff --git a/tests/metadata_reflocal.dts b/tests/metadata_reflocal.dts
-new file mode 100644
-index 0000000..f04d24f
---- /dev/null
-+++ b/tests/metadata_reflocal.dts
-@@ -0,0 +1,27 @@
-+// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
-+/*
-+ * Copyright (C) 2026 Bootlin
-+ */
-+
-+/dts-v1/;
-+
-+/ {
-+	node-a {
-+		subnode_a: subnode-a {
-+		};
-+	};
-+
-+	node_b: node-b {
-+	};
-+
-+	node-c {
-+	};
-+
-+	node_d: node-d {
-+		ref-subnode-a = <&subnode_a>;
-+	};
-+};
-+
-+&node_d {
-+	ref-node-b = <0x123 0x456 &node_b 0x789>;
-+};
-diff --git a/tests/metadata_reflocal.dts.dts.expect b/tests/metadata_reflocal.dts.dts.expect
-new file mode 100644
-index 0000000..b72b545
---- /dev/null
-+++ b/tests/metadata_reflocal.dts.dts.expect
-@@ -0,0 +1,23 @@
-+/dts-v1/;
-+
-+/ {
-+
-+	node-a {
-+
-+		subnode_a: subnode-a {
-+			phandle = <0x01>;
-+		};
-+	};
-+
-+	node_b: node-b {
-+		phandle = <0x02>;
-+	};
-+
-+	node-c {
-+	};
-+
-+	node_d: node-d {
-+		ref-subnode-a = <&subnode_a>;
-+		ref-node-b = <0x123 0x456 &node_b 0x789>;
-+	};
-+};
-diff --git a/tests/run_tests.sh b/tests/run_tests.sh
-index f07092b..7a8bdbc 100755
---- a/tests/run_tests.sh
-+++ b/tests/run_tests.sh
-@@ -1090,6 +1090,59 @@ fdtoverlay_tests() {
-     run_wrap_test test "$bd" = "$pd"
+ 		fprintf(stderr, "%*s ** Unknown tag 0x%08"PRIx32"\n", depth * shift, "", tag);
+ 		break;
+ 	}
+diff --git a/flattree.c b/flattree.c
+index 5c597ad..07f7545 100644
+--- a/flattree.c
++++ b/flattree.c
+@@ -44,6 +44,7 @@ struct emitter {
+ 	void (*endnode)(void *, struct label *labels);
+ 	void (*property)(void *, struct label *labels);
+ 	void (*ref_local)(void *);
++	void (*ref_phandle)(void *);
+ };
+ 
+ static void bin_emit_cell(void *e, cell_t val)
+@@ -98,6 +99,11 @@ static void bin_emit_ref_local(void *e)
+ 	bin_emit_cell(e, FDT_REF_LOCAL);
  }
  
-+# $1: f1 file
-+# $2: f2 file
-+check_diff () {
-+    printf "diff $1 $2:	"
-+    local f1="$1"
-+    local f2="$2"
-+    (
-+        if diff $f1 $f2 >/dev/null; then
-+            PASS
-+        else
-+            if [ -z "$QUIET_TEST" ]; then
-+                echo "DIFF :-:"
-+                diff -u $f1 $f2
-+            fi
-+            FAIL "Results differ from expected"
-+        fi
-+    )
++static void bin_emit_ref_phandle(void *e)
++{
++	bin_emit_cell(e, FDT_REF_PHANDLE);
 +}
 +
-+# $1: dtb file
-+# $2: out file
-+wrap_fdtdump () {
-+    printf "wrap_fdtdump $1:	"
-+    local dtb="$1"
-+    local out="$2"
-+    (
-+        if $FDTDUMP ${dtb} 2>/dev/null >${out}; then
-+            PASS
-+        else
-+            FAIL
-+        fi
-+    )
+ static struct emitter bin_emitter = {
+ 	.cell = bin_emit_cell,
+ 	.string = bin_emit_string,
+@@ -107,6 +113,7 @@ static struct emitter bin_emitter = {
+ 	.endnode = bin_emit_endnode,
+ 	.property = bin_emit_property,
+ 	.ref_local = bin_emit_ref_local,
++	.ref_phandle = bin_emit_ref_phandle,
+ };
+ 
+ static void emit_label(FILE *f, const char *prefix, const char *label)
+@@ -226,6 +233,14 @@ static void asm_emit_ref_local(void *e)
+ 	asm_emit_cell(e, FDT_REF_LOCAL);
+ }
+ 
++static void asm_emit_ref_phandle(void *e)
++{
++	FILE *f = e;
++
++	fprintf(f, "\t/* FDT_REF_PHANDLE */\n");
++	asm_emit_cell(e, FDT_REF_PHANDLE);
 +}
 +
-+metadata_tests() {
-+	for dt in metadata_reflocal; do
-+		run_dtc_test -I dts -O dts -o $dt.dts.dts "$SRCDIR/$dt.dts"
-+		base_run_test check_diff $dt.dts.dts "$SRCDIR/$dt.dts.dts.expect"
-+		run_dtc_test -I dts -O dtb -o $dt.dtb "$SRCDIR/$dt.dts"
-+		base_run_test wrap_fdtdump $dt.dtb $dt.dtb.out
-+		# Remove unneeded comments
-+		sed -i '/^\/\/ /d' $dt.dtb.out
-+		base_run_test check_diff $dt.dtb.out "$SRCDIR/$dt.dtb.expect"
-+		run_dtc_test -I dtb -O dts -o $dt.dtb.dts $dt.dtb
-+		base_run_test check_diff $dt.dtb.dts "$SRCDIR/$dt.dtb.dts.expect"
-+		run_dtc_test -I dts -O dtb -o $dt.dtb.dts.dtb $dt.dtb.dts
-+		base_run_test wrap_fdtdump $dt.dtb.dts.dtb $dt.dtb.dts.dtb.out
-+		# Remove unneeded comments
-+		sed -i '/^\/\/ /d' $dt.dtb.dts.dtb.out
-+		base_run_test check_diff $dt.dtb.dts.dtb.out "$SRCDIR/$dt.dtb.expect"
-+	done
-+}
+ static struct emitter asm_emitter = {
+ 	.cell = asm_emit_cell,
+ 	.string = asm_emit_string,
+@@ -235,6 +250,7 @@ static struct emitter asm_emitter = {
+ 	.endnode = asm_emit_endnode,
+ 	.property = asm_emit_property,
+ 	.ref_local = asm_emit_ref_local,
++	.ref_phandle = asm_emit_ref_phandle,
+ };
+ 
+ static int stringtable_insert(struct data *d, const char *str)
+@@ -299,6 +315,15 @@ static void flatten_tree(struct node *tree, struct emitter *emit,
+ 					emit->cell(etarget, m->offset);
+ 					continue;
+ 				}
 +
- pylibfdt_tests () {
-     run_dtc_test -I dts -O dtb -o test_props.dtb "$SRCDIR/test_props.dts"
-     TMP=/tmp/tests.stderr.$$
-@@ -1129,7 +1182,7 @@ while getopts "vt:me" ARG ; do
- done
++				if (m->ref[0] == '/')
++					die("Phandle uses a non local reference by path (%s)\n",
++					    m->ref);
++
++				emit->ref_phandle(etarget);
++				emit->cell(etarget, m->offset);
++				emit->string(etarget, m->ref, 0);
++				emit->align(etarget, sizeof(cell_t));
+ 			}
+ 		}
+ 	}
+@@ -767,6 +792,7 @@ static struct node *unflatten_tree(struct inbuf *dtbuf,
+ 	const char *flatname;
+ 	uint32_t val;
+ 	uint32_t offset;
++	const char *str;
  
- if [ -z "$TESTSETS" ]; then
--    TESTSETS="libfdt utilfdt dtc dtbs_equal fdtget fdtput fdtdump fdtoverlay"
-+    TESTSETS="libfdt utilfdt dtc dtbs_equal fdtget fdtput fdtdump fdtoverlay metadata"
+ 	node = build_node(NULL, NULL, NULL);
  
-     # Test pylibfdt if the libfdt Python module is available.
-     if ! $no_python; then
-@@ -1169,6 +1222,9 @@ for set in $TESTSETS; do
-         "fdtoverlay")
- 	    fdtoverlay_tests
- 	    ;;
-+	"metadata")
-+	    metadata_tests
-+	    ;;
-     esac
- done
+@@ -824,6 +850,17 @@ static struct node *unflatten_tree(struct inbuf *dtbuf,
+ 			prop->val = data_append_markers(prop->val, m);
+ 			break;
  
++		case FDT_REF_PHANDLE:
++			if (!(flags & FTF_REF_XXX))
++				die("REF_PHANDLE tag found in flat tree"
++					" version <18\n");
++
++			offset = flat_read_word(dtbuf);
++			str = flat_read_string(dtbuf);
++			m = alloc_marker(offset, REF_PHANDLE, xstrdup(str));
++			prop->val = data_append_markers(prop->val, m);
++			break;
++
+ 		default:
+ 			die("Invalid opcode word %08x in device tree blob\n",
+ 			    val);
+diff --git a/libfdt/fdt.c b/libfdt/fdt.c
+index 7268fb6..8f3c35d 100644
+--- a/libfdt/fdt.c
++++ b/libfdt/fdt.c
+@@ -217,6 +217,21 @@ uint32_t fdt_next_tag_full(const void *fdt, int startoffset, int *nextoffset)
+ 		offset += sizeof(fdt32_t);
+ 		break;
+ 
++	case FDT_REF_PHANDLE:
++		/* Skip offset value */
++		tmp32p = fdt_offset_ptr(fdt, offset, sizeof(*tmp32p));
++		if (!can_assume(VALID_DTB) && !tmp32p)
++			return FDT_END; /* premature end */
++		offset += sizeof(fdt32_t);
++
++		/* Skip ref */
++		do {
++			p = fdt_offset_ptr(fdt, offset++, 1);
++		} while (p && (*p != '\0'));
++		if (!can_assume(VALID_DTB) && !p)
++			return FDT_END; /* premature end */
++		break;
++
+ 	default:
+ 		return FDT_END;
+ 	}
+@@ -257,6 +272,7 @@ uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
+ 			return tag;
+ 
+ 		case FDT_REF_LOCAL:
++		case FDT_REF_PHANDLE:
+ 			/*
+ 			 * Next tag is a meta-data tag present in the middle
+ 			 * of the structure -> Skip it and look at next one
+diff --git a/libfdt/fdt.h b/libfdt/fdt.h
+index f8efdf1..530d2e5 100644
+--- a/libfdt/fdt.h
++++ b/libfdt/fdt.h
+@@ -56,6 +56,8 @@ struct fdt_property {
+ 					   size, content */
+ #define FDT_NOP		0x4		/* nop */
+ #define FDT_REF_LOCAL   0x5		/* local phandle reference: offset */
++#define FDT_REF_PHANDLE 0x6		/* external phandle reference: offset,
++					   external label */
+ #define FDT_END		0x9
+ 
+ #define FDT_V1_SIZE	(7*sizeof(fdt32_t))
 -- 
 2.52.0
 
