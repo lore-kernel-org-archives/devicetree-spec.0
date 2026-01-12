@@ -1,38 +1,38 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96263350A29;
-	Mon, 12 Jan 2026 14:21:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 972BF361670;
+	Mon, 12 Jan 2026 14:21:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227694; cv=none; b=jKfAPUZjqUCBTNCKkHi/SCpsmdLl9a0q7Y/M/xmueJXKkXesmngFvXrBkI36IrzTAb2RFjwbAlWr3cn69Lkp0k0fIE9GxsvRCsEoFcoNi8ROceMoBtE5lXjidbFe9v5TIxtgIYfvKohqCXp5G04mlTStXaLokhhr7bPGggQwBy4=
+	t=1768227695; cv=none; b=d2g19nOUNZwpZkazSZ0oCEXHdNW2MQIDOlWvtPEC989PMTxbXnY3BWCUSRnjKaf5cvHRlaPRSxZmOR9nvOA+ehbzcLDvunudBWA2pSelChrwSOJzwnZuquNpd6E1qIJZDzTUwkYicVzKusEKeXlOSR5A/x58Xva0u8Rqn8ey8xg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768227694; c=relaxed/simple;
-	bh=LYvYKtSweDD8VHYtaGBPMKOKolrSaO9bVFl/s96npoo=;
+	s=arc-20240116; t=1768227695; c=relaxed/simple;
+	bh=rg9z+VpW6LnOy3nEU1gPmfERK+TSCIO/nbOFNd4Ncpo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=DFvQFiFwWgxWOw/I8FhIu6DZR8nNyfnxN8brYshETjVkJvWWIX/aO1wOj7zZJtO0+OW2gdoNBff5fkK8NbFWXvnza/HKwK/QLoF0xXNSKjUSpqBqcETQclTs8wamqOVef+lD97yQym3WQw91Psy3bvam4qQkyJ/2WkHZHuFtYPE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Ay232dxN; arc=none smtp.client-ip=185.171.202.116
+	 MIME-Version; b=RzgXG98KC9DmbusVUK92z8MGeiqG68yQRLEHGssCoV03FKmkYDxgZJWCBdfQnIWkUnbEjQXrLuvr2OzsHec6UNwBZKqYcy74kd/5NrDvYCImgo0qDZOzdSNIrRcLIxbSngvoZt2k7vWN/oAYk16AWEiTbroerNqsuOMYG+Csuf0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=1Rh+7SIi; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Ay232dxN"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="1Rh+7SIi"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id DA1CAC2086B;
-	Mon, 12 Jan 2026 14:21:01 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id ABA054E4209A;
+	Mon, 12 Jan 2026 14:21:25 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 5DE6B606FA;
-	Mon, 12 Jan 2026 14:21:28 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 7C4DC103C926E;
-	Mon, 12 Jan 2026 15:21:26 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 84044606FA;
+	Mon, 12 Jan 2026 14:21:25 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C6A09103C9269;
+	Mon, 12 Jan 2026 15:21:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227687; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227684; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=ZmFxIKNmxvZuWpIeOeQbNbEsravESSWH+HLcdBHzG1s=;
-	b=Ay232dxN4+Xa/7nfYNObydLwjV+LiFR1l2HkA0dApIglWlTBFMBZkqnIrEjoypcH+PEU9R
-	3fTDamSrPn+zIvJcMBFxnn2pKuOd2saS7ddMWUcRqCzgP+PfUxKUWVvgc1FjoOpdM2D2tB
-	ByPvWs2F+7cNwsFrk3GYrcGt8zZtMwi8Bhc/5J34nM7qB/3Zj+3MPzIhNOqNPNz3JZeInf
-	teXFV+CgaCrXGZQ4NPYnRV9ShhJG/7NdF22YA4dpr3V0ccGiJQ1CBqGYBe1D+/OWFGRIfN
-	hhht3CD2ldftBg8pK7D1vpDezTYdkfYA9l2f8LzB4WNlHyBDoQAWAlZ0DyznoQ==
+	bh=mt1ukzE1WdqxEMlqc5egdvChAzbkLpTNQ+GIEG3HFTc=;
+	b=1Rh+7SIiA5A/iRCqcvP95WMTi4N5De//C/qMw1LGN6qtLskbrgd6cArg5WEcGyK3SkNBcY
+	nPMlBNc98PZKbxMuPgRSYAJkLOrHrsNp7n0ORoBg0lZAmAZYGeH+w0FXexqMKoEWaogEfG
+	R1TS2Q71N/efNBVJp/ghUfU9vrb6I8Tpa1jnpZ8eT04M4uB/tvnnlmu4//gXtbsfI3SsnX
+	F93aVKx2ZVmXTT9ggm9fj9wf+v88nVr05UKaXUkEu9/g9XMeuI0d7/hGY4jYI65gJXLZs2
+	rXoUkNiWgagrVy9g8H7XHT7Y6ZkscU6MOpwJYcYoSdJcau8ek5RJQVeV34b7fA==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 44/77] dtc: Introduce dti_get_node_phandle()
-Date: Mon, 12 Jan 2026 15:19:34 +0100
-Message-ID: <20260112142009.1006236-45-herve.codina@bootlin.com>
+Subject: [RFC PATCH 42/77] dtc: Introduce dti_get_node_by_phandle()
+Date: Mon, 12 Jan 2026 15:19:32 +0100
+Message-ID: <20260112142009.1006236-43-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -73,13 +73,10 @@ Also, an addon device-tree can have only trees based on orphan nodes. In
 other words an addon device-tree is valid without having the classical
 'root' tree.
 
-To prepare this change, introduce and use dti_get_node_phandle().
+To prepare this change, introduce and use dti_get_node_by_phandle().
 
-dti_get_node_phandle() get the phandle value related to a node and
-allocate a new value if the node doesn't have yet a phandle value.
-
-It behaves in the same way as get_node_phandle() but it works at the
-struct dt_info level.
+dti_get_node_by_phandle() retrieves a node by its phandle value like
+get_node_by_phandle() but it works at the struct dt_info level.
 
 It handles the case where a 'root' device-tree is not present and will
 handle orphan nodes trees as soon as they will be introduced.
@@ -88,99 +85,163 @@ This introduction doesn't lead to any functional changes.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- checks.c   | 5 ++---
- dtc.h      | 2 +-
- livetree.c | 7 +++----
- 3 files changed, 6 insertions(+), 8 deletions(-)
+ checks.c   | 14 +++++---------
+ dtc.h      |  2 +-
+ livetree.c | 19 ++++++++++++++++---
+ 3 files changed, 22 insertions(+), 13 deletions(-)
 
 diff --git a/checks.c b/checks.c
-index a47870d..7dd5032 100644
+index a76e96a..fd22524 100644
 --- a/checks.c
 +++ b/checks.c
-@@ -601,7 +601,6 @@ ERROR(name_properties, check_name_properties, NULL, &name_is_string);
- static void fixup_phandle_references(struct check *c, struct dt_info *dti,
- 				     struct node *node)
+@@ -533,7 +533,6 @@ static cell_t check_phandle_prop(struct check *c, struct dt_info *dti,
+ static void check_explicit_phandles(struct check *c, struct dt_info *dti,
+ 				    struct node *node)
  {
--	struct node *dt = dti->dt;
- 	struct symbol *exportsym;
- 	struct property *prop;
- 	struct node *refnode;
-@@ -624,7 +623,7 @@ static void fixup_phandle_references(struct check *c, struct dt_info *dti,
+-	struct node *root = dti->dt;
+ 	struct node *other;
+ 	cell_t phandle, linux_phandle;
+ 
+@@ -555,7 +554,7 @@ static void check_explicit_phandles(struct check *c, struct dt_info *dti,
+ 	if (linux_phandle && !phandle)
+ 		phandle = linux_phandle;
+ 
+-	other = get_node_by_phandle(root, phandle);
++	other = dti_get_node_by_phandle(dti, phandle);
+ 	if (other && (other != node)) {
+ 		FAIL(c, dti, node, "duplicated phandle 0x%x (seen before at %s)",
+ 		     phandle, other->fullpath);
+@@ -1414,7 +1413,6 @@ static void check_property_phandle_args(struct check *c,
+ 					struct property *prop,
+ 					const struct provider *provider)
+ {
+-	struct node *root = dti->dt;
+ 	unsigned int cell, cellsize = 0;
+ 
+ 	if (!is_multiple_of(prop->val.len, sizeof(cell_t))) {
+@@ -1457,7 +1455,7 @@ static void check_property_phandle_args(struct check *c,
+ 					  cell);
+ 		}
+ 
+-		provider_node = get_node_by_phandle(root, phandle);
++		provider_node = dti_get_node_by_phandle(dti, phandle);
+ 		if (!provider_node) {
+ 			FAIL_PROP(c, dti, node, prop,
+ 				  "Could not get phandle node for (cell %d)",
+@@ -1624,7 +1622,6 @@ static void check_interrupt_map(struct check *c,
+ 				struct dt_info *dti,
+ 				struct node *node)
+ {
+-	struct node *root = dti->dt;
+ 	struct property *prop, *irq_map_prop;
+ 	size_t cellsize, cell, map_cells;
+ 
+@@ -1678,7 +1675,7 @@ static void check_interrupt_map(struct check *c,
+ 			break;
+ 		}
+ 
+-		provider_node = get_node_by_phandle(root, phandle);
++		provider_node = dti_get_node_by_phandle(dti, phandle);
+ 		if (!provider_node) {
+ 			FAIL_PROP(c, dti, node, irq_map_prop,
+ 				  "Could not get phandle(%d) node for (cell %zu)",
+@@ -1716,7 +1713,6 @@ static void check_interrupts_property(struct check *c,
+ 				      struct dt_info *dti,
+ 				      struct node *node)
+ {
+-	struct node *root = dti->dt;
+ 	struct node *irq_node = NULL, *parent = node;
+ 	struct property *irq_prop, *prop = NULL;
+ 	cell_t irq_cells, phandle;
+@@ -1747,7 +1743,7 @@ static void check_interrupts_property(struct check *c,
  				continue;
  			}
  
--			phandle = get_node_phandle(dt, refnode);
-+			phandle = dti_get_node_phandle(dti, refnode);
- 			*((fdt32_t *)(prop->val.val + m->offset)) = cpu_to_fdt32(phandle);
+-			irq_node = get_node_by_phandle(root, phandle);
++			irq_node = dti_get_node_by_phandle(dti, phandle);
+ 			if (!irq_node) {
+ 				FAIL_PROP(c, dti, parent, prop, "Bad phandle");
+ 				return;
+@@ -1882,7 +1878,7 @@ static struct node *get_remote_endpoint(struct check *c, struct dt_info *dti,
+ 	if (!phandle_is_valid(phandle))
+ 		return NULL;
  
- 			reference_node(refnode);
-@@ -644,7 +643,7 @@ static void fixup_phandle_references(struct check *c, struct dt_info *dti,
- 		}
+-	node = get_node_by_phandle(dti->dt, phandle);
++	node = dti_get_node_by_phandle(dti, phandle);
+ 	if (!node)
+ 		FAIL_PROP(c, dti, endpoint, prop, "graph phandle is not valid");
  
- 		/* Create the phandle property for this referenced node */
--		phandle = get_node_phandle(dt, refnode);
-+		phandle = dti_get_node_phandle(dti, refnode);
- 		exportsym->phandle = phandle;
- 
- 		reference_node(refnode);
 diff --git a/dtc.h b/dtc.h
-index 832265c..f7b0b23 100644
+index 3dce237..7d53fcb 100644
 --- a/dtc.h
 +++ b/dtc.h
 @@ -323,7 +323,6 @@ struct property *get_property_by_label(struct node *tree, const char *label,
  struct marker *get_marker_label(struct node *tree, const char *label,
  				struct node **node, struct property **prop);
  struct node *get_subnode(struct node *node, const char *nodename);
--cell_t get_node_phandle(struct node *root, struct node *node);
+-struct node *get_node_by_phandle(struct node *tree, cell_t phandle);
+ struct node *get_node_by_ref(struct node *tree, const char *ref);
+ cell_t get_node_phandle(struct node *root, struct node *node);
  
- uint32_t guess_boot_cpuid(struct node *tree);
+@@ -357,6 +356,7 @@ struct dt_info {
  
-@@ -357,6 +356,7 @@ struct node *dti_get_node_by_path(struct dt_info *dti, const char *path);
+ struct node *dti_get_node_by_path(struct dt_info *dti, const char *path);
  struct node *dti_get_node_by_label(struct dt_info *dti, const char *label);
- struct node *dti_get_node_by_phandle(struct dt_info *dti, cell_t phandle);
- struct node *dti_get_node_by_ref(struct dt_info *dti, const char *ref);
-+cell_t dti_get_node_phandle(struct dt_info *dti, struct node *node);
++struct node *dti_get_node_by_phandle(struct dt_info *dti, cell_t phandle);
  
  /* DTS version flags definitions */
  #define DTSF_V1		0x0001	/* /dts-v1/ */
 diff --git a/livetree.c b/livetree.c
-index f1c7e27..a4917d1 100644
+index 771ff3d..a551307 100644
 --- a/livetree.c
 +++ b/livetree.c
-@@ -853,14 +853,14 @@ static void add_phandle_property(struct node *node,
- 	add_property(node, build_property(name, d, NULL));
+@@ -722,7 +722,7 @@ static cell_t get_node_phandle_existing(struct node *node)
+ 	return propval_cell(prop);
  }
  
--cell_t get_node_phandle(struct node *root, struct node *node)
-+cell_t dti_get_node_phandle(struct dt_info *dti, struct node *node)
+-struct node *get_node_by_phandle(struct node *tree, cell_t phandle)
++static struct node *get_node_by_phandle(struct node *tree, cell_t phandle)
  {
- 	static cell_t phandle = 1; /* FIXME: ick, static local */
+ 	struct node *child, *node;
+ 	cell_t tree_phandle;
+@@ -811,6 +811,19 @@ struct node *dti_get_node_by_label(struct dt_info *dti, const char *label)
+ 	return NULL;
+ }
  
- 	if (phandle_is_valid(node->phandle))
- 		return node->phandle;
- 
--	while (get_node_by_phandle(root, phandle))
-+	while (dti_get_node_by_phandle(dti, phandle))
- 		phandle++;
- 
- 	node->phandle = phandle;
-@@ -1143,7 +1143,6 @@ static void generate_label_tree_internal(struct dt_info *dti,
- 					 struct node *an, struct node *node,
- 					 bool allocph)
++struct node *dti_get_node_by_phandle(struct dt_info *dti, cell_t phandle)
++{
++	struct node *node;
++
++	if (dti->dt) {
++		node = get_node_by_phandle(dti->dt, phandle);
++		if (node)
++			return node;
++	}
++
++	return NULL;
++}
++
+ static void add_phandle_property(struct node *node,
+ 				 const char *name, int format)
  {
--	struct node *dt = dti->dt;
- 	struct node *c;
- 	struct property *p;
- 	struct label *l;
-@@ -1173,7 +1172,7 @@ static void generate_label_tree_internal(struct dt_info *dti,
+@@ -1362,7 +1375,7 @@ static void update_phandles_ref_internal(struct dt_info *dti, struct node *node)
+ 			if (m->is_local) {
+ 				phandle = propval_cell_n(prop,
+ 							 m->offset / sizeof(cell_t));
+-				refnode = get_node_by_phandle(dti->dt, phandle);
++				refnode = dti_get_node_by_phandle(dti, phandle);
+ 				if (!refnode)
+ 					die("Node not found for phandle 0x%"PRIx32"\n", phandle);
  
- 		/* force allocation of a phandle for this node */
- 		if (allocph)
--			(void)get_node_phandle(dt, node);
-+			(void)dti_get_node_phandle(dti, node);
- 	}
+@@ -1420,7 +1433,7 @@ static void update_exports_ref_internal(struct dt_info *dti, struct node *node)
+ 			continue;
  
- 	for_each_child(node, c)
+ 		if (exportsym->is_local) {
+-			refnode = get_node_by_phandle(dti->dt, exportsym->phandle);
++			refnode = dti_get_node_by_phandle(dti, exportsym->phandle);
+ 			if (!refnode)
+ 				die("Node not found for phandle 0x%"PRIx32"\n", exportsym->phandle);
+ 
 -- 
 2.52.0
 
