@@ -1,38 +1,38 @@
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5D5E35EDAB
-	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:21:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D826735EDDC;
+	Mon, 12 Jan 2026 14:21:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227678; cv=none; b=ePTFsL6DvfPAMCiF25FC0sZ4HTDUzVsdFVMs+dQsNWa449BGr3NWTzNjdeM3XGjk/L5ouxGdYHhTAa3t932wO85/N8PUdjhbmv9RJnvbnitVZrkfsui0JBtTxnhWJQjRGGvty3hpZMu6RpAAmlbFlmYdWcHO9XdvyeuztAwyB3Q=
+	t=1768227678; cv=none; b=CSQQyeRjwMj3lITSgaggAwWX/QH5V4R0o3Xb4pAMgKXD39cvc8EJIhNx+EDZFUqQFja6CMEJhVdnOuFz4SIGRtcAd5rZ81wH9XURcFMQUmArAgzUi+qhvCt1x9gyc6uZ6d+3iqL27lnwCblnuWdkrSejcBipba733Z7SJeY3ilI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768227678; c=relaxed/simple;
-	bh=Fbwc+CPSfjhz85440juvsZ0pX7weWkITVUYz8eTZYfs=;
+	bh=G6ixOon71m3vdzrrCu9liSPXb8xkcl7TAu4sMZzvB1c=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=iNP6hIZZzuk/trHX2h07B/EVVOfjHLm2TUykYcYCQDIbdNPvJOu6s009AufTYNP69Y+sKw7h359O1IeVgtOjsc7TnNks+wvNC5vFCtsVeAiDWm2kuzApassyjrhMMCVIsz5qvdExTULpUxF6t0H/T2xBpa0+NlGobHYO8thLcJw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=rn9eEAn7; arc=none smtp.client-ip=185.246.84.56
+	 MIME-Version; b=uRj+GyeVFFHOjTVNZ8kqj15VOHGN6OkHloLopz+aMvuAiygqcZLYxzAB8oRrfwaT22EGqhsxdrAQhll5zEUnxmmSTQip9gBZ4EpHc2GWMiRRxJhUASb3K+ouvNaBt8eRiaun7KSKHXdppbFzGjUO6HE4tR3F6r75t9pag1Pe210=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=zrsTS+Ag; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="rn9eEAn7"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="zrsTS+Ag"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 302221A280C;
-	Mon, 12 Jan 2026 14:21:09 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 18394C2086D;
+	Mon, 12 Jan 2026 14:20:48 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 07055606FA;
-	Mon, 12 Jan 2026 14:21:09 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id EEB0F103C8CD8;
-	Mon, 12 Jan 2026 15:21:06 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 8FEF2606FA;
+	Mon, 12 Jan 2026 14:21:14 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id B0068103C9261;
+	Mon, 12 Jan 2026 15:21:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227668; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227673; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=ac92SjZaWRlxbkMuumtO9ux8bEMj0nelgYnFJXuWnmg=;
-	b=rn9eEAn7bhvN55DNBuIKQQjH6ooCxXAzEWYguAG+riKGzMoQwV/ASiVevxkV72czNFaEXA
-	xwF+7kXBdZi39rFSWuZ42t3OOFhkaTjgOf1TTK+hS6YQT5y5C22vScfxnh4EfJCIgCkZA/
-	APs6NB9UowNpVWpoEFcihUFehlZfw79pzrhZ0zVqSk+nSRYNu/MewQPZqa5stIiTsekJrm
-	g/qn2gMLamuAO+y7M4SqhtSz0yFoziIK63afvg9fpiq3IM8fO9agDjklrs0lqokXG6dGW9
-	Yef744q6h2EkDdqtAdK6LZ8zVZbt1pP22mZjCFX4D3SaN6DX2DngJmMelNTONA==
+	bh=Zf0RdmR6L6y/T0lQPpa2UuZniR+B2NDmmA3x0g2ZM/g=;
+	b=zrsTS+Agg+7yIv1Qo+wcmWMx3iOIpi+qfAjA7cogl509mvyDVeZuTGv2DfQ6olYuz0RLsg
+	PpMmYTyRAi9x7W7HmSTSR8Jtf762J8djzNchbyAqrRchZeIzmzCbXJ4+/95YfcIdN+H1KT
+	W/zL7Cppf0Pklx5EIO45cHaFoH+6pD/t8lM6D0TUcPkCeYXzz+EMBJ/JrlDUUqClMuSfqr
+	KlCWYgKTnrFmh8Z//LJIRT5rQWNgLuQ0gKWtIERlNooThwSya1H66PjnnX0Y4GVdvuKRnx
+	5YRzCMZwwoYfPucNsaQ1HyZ7YQFG+RZP4/aDByVO3sJ9tPcYZhk+t/k88roMow==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 30/77] tests: metadata: Add export symbols with external references tests
-Date: Mon, 12 Jan 2026 15:19:20 +0100
-Message-ID: <20260112142009.1006236-31-herve.codina@bootlin.com>
+Subject: [RFC PATCH 34/77] dtc: Add import symbols (/import/ keyword) in generated dts file
+Date: Mon, 12 Jan 2026 15:19:24 +0100
+Message-ID: <20260112142009.1006236-35-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,154 +64,43 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-Add tests related to export symbols using external references
-(FDT_EXPORT_SYM_REF dtb tag).
+The import symbols (/import/ keyword) parsing from a dts file is
+supported.
+
+Add the support for this keyword in the dts file generation.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- tests/metadata_exportsyms_ref.dtb.dts.expect | 25 +++++++++++++++++++
- tests/metadata_exportsyms_ref.dtb.expect     | 18 ++++++++++++++
- tests/metadata_exportsyms_ref.dts            | 26 ++++++++++++++++++++
- tests/metadata_exportsyms_ref.dts.dts.expect | 25 +++++++++++++++++++
- tests/run_tests.sh                           |  3 ++-
- 5 files changed, 96 insertions(+), 1 deletion(-)
- create mode 100644 tests/metadata_exportsyms_ref.dtb.dts.expect
- create mode 100644 tests/metadata_exportsyms_ref.dtb.expect
- create mode 100644 tests/metadata_exportsyms_ref.dts
- create mode 100644 tests/metadata_exportsyms_ref.dts.dts.expect
+ treesource.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/tests/metadata_exportsyms_ref.dtb.dts.expect b/tests/metadata_exportsyms_ref.dtb.dts.expect
-new file mode 100644
-index 0000000..d2c3320
---- /dev/null
-+++ b/tests/metadata_exportsyms_ref.dtb.dts.expect
-@@ -0,0 +1,25 @@
-+/dts-v1/;
-+/addon/;
-+
-+/ {
-+
-+	node-a {
-+	};
-+
-+	node-b {
-+	};
-+
-+	node-c {
-+
-+		sub-node {
-+
-+			/export/ ref_base_node_a: &base_node_a;
-+			/export/ ref_base_node_b: &base_node_b;
-+		};
-+	};
-+
-+	node-d {
-+
-+		/export/ ref_base_node_c: &base_node_c;
-+	};
-+};
-diff --git a/tests/metadata_exportsyms_ref.dtb.expect b/tests/metadata_exportsyms_ref.dtb.expect
-new file mode 100644
-index 0000000..395861b
---- /dev/null
-+++ b/tests/metadata_exportsyms_ref.dtb.expect
-@@ -0,0 +1,18 @@
-+/dts-v1/;
-+/addon/;
-+
-+/ {
-+    node-a {
-+    };
-+    node-b {
-+    };
-+    node-c {
-+        sub-node {
-+            // [FDT_EXPORT_SYM_REF] 'ref_base_node_a' -> 'base_node_a'
-+            // [FDT_EXPORT_SYM_REF] 'ref_base_node_b' -> 'base_node_b'
-+        };
-+    };
-+    node-d {
-+        // [FDT_EXPORT_SYM_REF] 'ref_base_node_c' -> 'base_node_c'
-+    };
-+};
-diff --git a/tests/metadata_exportsyms_ref.dts b/tests/metadata_exportsyms_ref.dts
-new file mode 100644
-index 0000000..c094be1
---- /dev/null
-+++ b/tests/metadata_exportsyms_ref.dts
-@@ -0,0 +1,26 @@
-+// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
-+/*
-+ * Copyright (C) 2026 Bootlin
-+ */
-+
-+/dts-v1/;
-+/addon/;
-+
-+/ {
-+	node-a {
-+	};
-+
-+	node-b {
-+	};
-+
-+	node-c {
-+		sub_node: sub-node {
-+			/export/ ref_base_node_a: &base_node_a;
-+			/export/ ref_base_node_b: &base_node_b;
-+		};
-+	};
-+
-+	node-d {
-+		/export/ ref_base_node_c: &base_node_c;
-+	};
-+};
-diff --git a/tests/metadata_exportsyms_ref.dts.dts.expect b/tests/metadata_exportsyms_ref.dts.dts.expect
-new file mode 100644
-index 0000000..2654df1
---- /dev/null
-+++ b/tests/metadata_exportsyms_ref.dts.dts.expect
-@@ -0,0 +1,25 @@
-+/dts-v1/;
-+/addon/;
-+
-+/ {
-+
-+	node-a {
-+	};
-+
-+	node-b {
-+	};
-+
-+	node-c {
-+
-+		sub_node: sub-node {
-+
-+			/export/ ref_base_node_a: &base_node_a;
-+			/export/ ref_base_node_b: &base_node_b;
-+		};
-+	};
-+
-+	node-d {
-+
-+		/export/ ref_base_node_c: &base_node_c;
-+	};
-+};
-diff --git a/tests/run_tests.sh b/tests/run_tests.sh
-index fc270e2..1973525 100755
---- a/tests/run_tests.sh
-+++ b/tests/run_tests.sh
-@@ -1126,7 +1126,8 @@ wrap_fdtdump () {
+diff --git a/treesource.c b/treesource.c
+index 9effe38..04f65bb 100644
+--- a/treesource.c
++++ b/treesource.c
+@@ -381,6 +381,7 @@ static void write_tree_source_node(FILE *f, struct node *tree, int level)
+ void dt_to_source(FILE *f, struct dt_info *dti)
+ {
+ 	struct reserve_info *re;
++	struct symbol *importsym;
  
- metadata_tests() {
- 	for dt in metadata_reflocal metadata_refphandle \
--		  metadata_addon_base metadata_exportsyms_local; do
-+		  metadata_addon_base metadata_exportsyms_local \
-+		  metadata_exportsyms_ref; do
- 		run_dtc_test -I dts -O dts -o $dt.dts.dts "$SRCDIR/$dt.dts"
- 		base_run_test check_diff $dt.dts.dts "$SRCDIR/$dt.dts.dts.expect"
- 		run_dtc_test -I dts -O dtb -o $dt.dtb "$SRCDIR/$dt.dts"
+ 	fprintf(f, "/dts-v1/;\n");
+ 	if (dti->dtsflags & DTSF_ADDON)
+@@ -397,5 +398,14 @@ void dt_to_source(FILE *f, struct dt_info *dti)
+ 			(unsigned long long)re->size);
+ 	}
+ 
++	if (dti->importsymlist) {
++		for_each_symbol(dti->importsymlist, importsym) {
++			fprintf(f, "/import/ %s: \"%s\";\n",
++				importsym->name,
++				importsym->compatible);
++		}
++		fprintf(f, "\n");
++	}
++
+ 	write_tree_source_node(f, dti->dt, 0);
+ }
 -- 
 2.52.0
 
