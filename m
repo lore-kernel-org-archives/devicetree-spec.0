@@ -1,38 +1,38 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEB972E2DF3;
-	Mon, 12 Jan 2026 14:20:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B0CB2E7BDC
+	for <devicetree-spec@vger.kernel.org>; Mon, 12 Jan 2026 14:20:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227651; cv=none; b=JSowt2RkE33l9bhk676wBtLAUQ69LZ+MlJJ7bKTC6kt4dIuZvu9PwF065Q6IXAhHPmez8OvXkUt5JwbVTag6POIx7vky8x3msoiBNeXtcX5/fys/l7pfGLQKen9r/YwSwwZ0a7LjRAv1po+p+UpV6Ttrc5WwlpPuLybT1vCDHT8=
+	t=1768227654; cv=none; b=I97TSY2eawhSJNAhUtvsnkcXfxN7VbH5rGGglRjj9ozfDHKvQk9zxiu4YFAptOi7w2wmpyMNPS7Ci0eKLCr7oNuya1g9o/BPnGAUN4P3OeVJXh28M+tFHnQOaTD4wJALv/oXxUi/xKi5gWa2gKPzFdks8hPLHUoeOenJQeHbNnA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768227651; c=relaxed/simple;
-	bh=YO3kQz2fR8DAC3SdoniBXXwcSaVv9biWxGqGAHPUv88=;
+	s=arc-20240116; t=1768227654; c=relaxed/simple;
+	bh=Kjz3gjhhnUhEGWpZM8tXvNG5FsPtVoun+2NKgHFSZMk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=q2QeM8uAxbmp0VWVu6K8cEyX1+4wGxopcz92WEOmpV8GK+ji+TU4PtiT09P7l0wGCaAPRz1j20bBf40HBPvGoS9p7NLc8pUNgYUX/2mPr/aIdQQSNjRunFZKUpjMcHr0hJW1+Apm8qT2CtRerCEczg3Jzn2KHfmr6L3+5pV6/Co=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=D6wtx5al; arc=none smtp.client-ip=185.171.202.116
+	 MIME-Version; b=Rk05q1dRsYlR8owurV2Pz3aMnm3yUl8nEuI3moLydNiiGtxEM9J/WnYRzZHEW5uFpzcB9GkGEO7pMhLQXvn/SSYSSdlw9l19B9tQr+X1RB7ePnG0yBGdtlFHy2N22TzCzNvyAs4pJ9RbVYiBW5cqnd9Rn7jdS1i4Th8FibyxpR4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=l0wbZbYf; arc=none smtp.client-ip=185.246.84.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="D6wtx5al"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="l0wbZbYf"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 2A487C20869;
-	Mon, 12 Jan 2026 14:20:20 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 97B051A27FD;
+	Mon, 12 Jan 2026 14:20:49 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id A252A606FA;
-	Mon, 12 Jan 2026 14:20:46 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id B28B7103C9269;
-	Mon, 12 Jan 2026 15:20:44 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 6D91F606FA;
+	Mon, 12 Jan 2026 14:20:49 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id A5E1B103C8C61;
+	Mon, 12 Jan 2026 15:20:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227645; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227648; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=vovB9PJwe7q82dhVvrskUXYb/fGDuEJF62Jmd31jrl0=;
-	b=D6wtx5alwH/bc4Z2IFvnSyvqi9HVyHD6Cr1DvkW8rv+qAcJj275g+fvH0Z5/ySQ9K+CQlb
-	A+suecQV/dd/Mhjx6jNMyMSyFxuEnNOFP0gUfFbCX0Vuh29S9swI4nXxPuf+K7TzVWFxCE
-	MU1Rux5ktyBkbSVytj8lXsIdsZwpYM2eqDdyqa6xTrvBQJMfxXBRjr9AeoQMv+1O/Ft4rh
-	d/iZvHXjflZCvar3fO35LnPoLboAA9y4nfquOUsyo3WAbxzRTTaIOD++1rPYUnGD1ohUs0
-	4uodWgQ7FO4DzByjHhXALEY0upiJZz8OtL8oN7M3qneybJYXAwzNznUa3VIWnw==
+	bh=YDM7nARSEOyxMicRBpgb4TUpIk9yqVSL2vsEwrm/mwU=;
+	b=l0wbZbYfxtJ777ZbGpZg3Obid8ro7EG5Rcd5qaLTQxFEWOmQLE7/MTat2JkgCjzYShZbDp
+	+l70dkvH/9aqOEeXk6J4GVpIhRVZOfbCKr3rB0iK93K8E9HWlzrgQgXUOwC4i7UKlhuIvJ
+	IWuL4NQNHV9wVcM2IctqaMZIvSnDnZqzkbcrJmiZfXuW4rURbDIZb2g8RkxDSRFt7r1WM5
+	iOYNCR0kpIPVEU6h2wp0neJfL3BSc1kpsNldh2ALd7T175ny/S0V8bQdNJtvBV1uGTqjwa
+	g7kxCtX//H3aPWQNbT+naK7ISRCcBrmNRXVi4RawnfYkIySzHepxyM43lvzTyg==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 16/77] tests: metadata: Add a test related to addon dt_flags header value
-Date: Mon, 12 Jan 2026 15:19:06 +0100
-Message-ID: <20260112142009.1006236-17-herve.codina@bootlin.com>
+Subject: [RFC PATCH 18/77] dtc-parser.y: Avoid an empty proplist
+Date: Mon, 12 Jan 2026 15:19:08 +0100
+Message-ID: <20260112142009.1006236-19-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,61 +64,58 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-Addon dtbs leads to the dt_flags header field set to FDT_FLAG_ADDON
-(0x1).
+In the dts parser grammar, a nodedef is defined by
+  '{' proplist subnodes '}' ';'
+with both proplist and subnodes that can be empty lists.
 
-Add a specific test to check this value.
+Soon a new list will be added in the nodedef related to export symbol
+list.
+
+Having all those lists with support for empty lists will lead to some
+Bison warnings:
+  warning: 4 shift/reduce conflicts [-Wconflicts-sr]
+  warning: 1 reduce/reduce conflict [-Wconflicts-rr]
+
+The simpler way to remove those warning and thus have a robust parsing
+is to avoid those empty lists.
+
+Update the proplist definition and nodedef definition to avoid those
+multiple empty lists. Instead of allowing a proplist to be an empty
+list, force the list to be a non empty one and update the nodedef to
+handle explicitly the absence of the proplist to support the case where
+no properties are available, i.e. the case of a node composed only of
+sub-nodes.
+
+This doesn't change the functional behavior.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- tests/metadata_dtflags1.dtb.expect |  1 +
- tests/metadata_dtflags1.dts        | 11 +++++++++++
- tests/run_tests.sh                 |  6 ++++++
- 3 files changed, 18 insertions(+)
- create mode 100644 tests/metadata_dtflags1.dtb.expect
- create mode 100644 tests/metadata_dtflags1.dts
+ dtc-parser.y | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/tests/metadata_dtflags1.dtb.expect b/tests/metadata_dtflags1.dtb.expect
-new file mode 100644
-index 0000000..00f98f3
---- /dev/null
-+++ b/tests/metadata_dtflags1.dtb.expect
-@@ -0,0 +1 @@
-+// dt_flags:		0x1
-diff --git a/tests/metadata_dtflags1.dts b/tests/metadata_dtflags1.dts
-new file mode 100644
-index 0000000..d2b2295
---- /dev/null
-+++ b/tests/metadata_dtflags1.dts
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
-+/*
-+ * Copyright (C) 2026 Bootlin
-+ */
-+
-+/dts-v1/;
-+/addon/;
-+
-+/ {
-+	prop = <1>;
-+};
-diff --git a/tests/run_tests.sh b/tests/run_tests.sh
-index 496fcb9..688d81d 100755
---- a/tests/run_tests.sh
-+++ b/tests/run_tests.sh
-@@ -1147,6 +1147,12 @@ metadata_tests() {
- 	# Keep only lines containing 'dt_flags'
- 	sed -i '/dt_flags/!d' metadata_dtflags0.dtb.out
- 	base_run_test check_diff metadata_dtflags0.dtb.out "$SRCDIR/metadata_dtflags0.dtb.expect"
-+
-+	run_dtc_test -I dts -O dtb -o metadata_dtflags1.dtb "$SRCDIR/metadata_dtflags1.dts"
-+	base_run_test wrap_fdtdump metadata_dtflags1.dtb metadata_dtflags1.dtb.out
-+	# Keep only lines containing 'dt_flags'
-+	sed -i '/dt_flags/!d' metadata_dtflags1.dtb.out
-+	base_run_test check_diff metadata_dtflags1.dtb.out "$SRCDIR/metadata_dtflags1.dtb.expect"
- }
+diff --git a/dtc-parser.y b/dtc-parser.y
+index d8914d2..2e152b0 100644
+--- a/dtc-parser.y
++++ b/dtc-parser.y
+@@ -272,12 +272,16 @@ nodedef:
+ 		{
+ 			$$ = build_node($2, $3, &@$);
+ 		}
++	| '{' subnodes '}' ';'
++		{
++			$$ = build_node(NULL, $2, &@$);
++		}
+ 	;
  
- pylibfdt_tests () {
+ proplist:
+-	  /* empty */
++	  propdef
+ 		{
+-			$$ = NULL;
++			$$ = chain_property($1, NULL);
+ 		}
+ 	| proplist propdef
+ 		{
 -- 
 2.52.0
 
