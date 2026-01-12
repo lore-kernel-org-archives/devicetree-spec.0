@@ -1,38 +1,38 @@
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A45D27F72C;
-	Mon, 12 Jan 2026 14:20:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22197296BDB;
+	Mon, 12 Jan 2026 14:20:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768227646; cv=none; b=J4fq6X4Z+OerkmJJX+vcpvQCQhEUxZNpn6fzTv8jtuB+x4nxp8Htnx9T6ADFlV/0miAM7JpRdX3K4LW56zFQlNSqI5b2QoEQqpGUZs0os8VQBE0HgVhW5JVoKsQaJ606jm44J4DqPxOoDGCToiMr9cpJiIO1wDg52qY8ijZ/wes=
+	t=1768227647; cv=none; b=qMr7Feord6DuSDvnkZOkyouPzY8NpIp31R7I42Ju04Fjh57XHdj+RaYyWmSjP/z/BQ/DMYVZdXN38K28veTv/BRRP3D1lc3uoHh26GqU2DZHt1QUFOD038OMLMap4yaZ00MJQyeHqCB+qhWoeHAqO44QOoDBUiJVbLAK+LxwrDI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768227646; c=relaxed/simple;
-	bh=MoQoo9fRri73x9p0C7T9REHSx3MxrPKkzLwacQcp6ss=;
+	s=arc-20240116; t=1768227647; c=relaxed/simple;
+	bh=4Sq/1CVeRzD85KIjpnxfyqvFZlORW4g64otbK0jjiWc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=bu1qwp6nTPJaU3F+XpbFfdP3WcY7bJarDvLXY2CC/APkzcBXD76jK267q6cWA64joJ7CsvJpel9PlsU9/lZmRoqH9XPOL7WpHnVGXHeWdSzkVp2TZPz6JMjkw4PeuvlbOolZFb973ykLt0/v2LVFO21Wld2ldrd0YcgDwlhOnV8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=JlZMYo4d; arc=none smtp.client-ip=185.246.84.56
+	 MIME-Version; b=JPWnGZXlvFq9p7wi+uLh0SDi2h4FRYHmZxuCuhNwoRnpYSsqIHUsTj9/dtW22uvHoneXKlBIHY0TaBL1JpGxE2GJuzGrJbyt/UAP1mqiie9RRpuFLfpxLoIfUHUrRzVhOH2tEKQqVuIJpG5jt2L8C3phUIxu90pEFH4xIWrYFB8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=WLsOu/ol; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="JlZMYo4d"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="WLsOu/ol"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 2991D1A27F7;
-	Mon, 12 Jan 2026 14:20:41 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id B63CE4E42088;
+	Mon, 12 Jan 2026 14:20:42 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 0028D606FA;
-	Mon, 12 Jan 2026 14:20:41 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 13776103C9265;
-	Mon, 12 Jan 2026 15:20:39 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 8BB4D606FA;
+	Mon, 12 Jan 2026 14:20:42 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 87B16103C9268;
+	Mon, 12 Jan 2026 15:20:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768227640; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1768227641; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=28CXldTWxJfeqeWSrkzBjbOfb3UPT1622I/9ZKpFlS0=;
-	b=JlZMYo4dpsnirBrviWPJYU0bl8RDspVQjqg8rtQtRfgIkdtbl3+Q2kw3qWYHQ7InkeMJIv
-	ETxU8b5LnF2vPxvoU345fRe3HTo+A7EshEhZDU8ZUBybEs/OO1/9x0RtuXGoaMUitipfIh
-	pMjcmdTx518/cNgVB09bjxaXKbrnRNYY3POYP2Se9dTkywOXPJwnajvZqsb51tyfmeZN6z
-	lmDIA5Z+2KQFoVE52jTT4b5BGPKn0zOdR9/Lh9efi6EsqOq7ao8vL+d3n0pUm5NHTqbKYW
-	T3mJ3SZll1oaDGXM/SAFqo1UCLRXH1/bb/e7KXRWBtNpga9yRqXQqx+r6sTPRQ==
+	bh=wJikY3Tv3xBu71ohhuSowpW9N3sVjLEUGSxvZacmO+Y=;
+	b=WLsOu/ol/7YG/u7o8QkS2b6QZvUfdGg6ICeirrUKJvnxFf7Yapj/uQ41efx0SYmA9OgX2+
+	2JqNtzu4futS8loeLggavBt++yyrb+vLdi1/Be8wbO7TTMlMOB1pj4vl+VboTuJDRMApRO
+	i83kixnVRIlUYZGaV+uc9n6F7xKf5GxXYdAbfY1OPA1UJn/enseW0Iahk7fp3PvYajmVmE
+	tNVFJMjlSSiNvfZz/vwRG10oX49pqON0yaUdPQhf1NYslAM6ZpF9FWwAgFY+pEjHRqNU+g
+	qBUJY2DCdyYAnGExDwZG7wwiigjluqYIEtzll+OCodygDkM5GufMhMZCQgQ05A==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -49,9 +49,9 @@ Cc: Ayush Singh <ayush@beagleboard.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [RFC PATCH 12/77] tests: metadata: Add external phandle reference tests
-Date: Mon, 12 Jan 2026 15:19:02 +0100
-Message-ID: <20260112142009.1006236-13-herve.codina@bootlin.com>
+Subject: [RFC PATCH 13/77] Introduce dt_flags field in dtb header
+Date: Mon, 12 Jan 2026 15:19:03 +0100
+Message-ID: <20260112142009.1006236-14-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260112142009.1006236-1-herve.codina@bootlin.com>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
@@ -64,120 +64,221 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-Add tests related to external phandle references (FDT_REF_PHANDLE dtb
-tag).
+There is no simple way to identify a kind of dtb.
+
+A dtb can be a "standard" device-tree blob but with the future support
+for addon dtb, a dtb could be an addon dtb.
+
+Whereas, looking at node structures and name, we can identify if a
+"standard" dtb is a pure base device-tree or an overlay device-tree,
+this will be no more possible with addons. Indeed, specific node such as
+__local_fixups__ and/or __fixups__ present in overlays will be no more
+present in addons.
+
+In order to avoid any complex and error prone searches in the dtb
+structure to identify whether or not a dtb is an addon, encode this
+information directly in the dtb itself.
+
+This is the purpose of the dt_flags field.
+
+Prepare the support for 'addon' flag introducing the dt_flags field
+in the dtb header.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 ---
- tests/metadata_refphandle.dtb.dts.expect | 17 +++++++++++++++++
- tests/metadata_refphandle.dtb.expect     | 16 ++++++++++++++++
- tests/metadata_refphandle.dts            | 11 +++++++++++
- tests/metadata_refphandle.dts.dts.expect | 17 +++++++++++++++++
- tests/run_tests.sh                       |  2 +-
- 5 files changed, 62 insertions(+), 1 deletion(-)
- create mode 100644 tests/metadata_refphandle.dtb.dts.expect
- create mode 100644 tests/metadata_refphandle.dtb.expect
- create mode 100644 tests/metadata_refphandle.dts
- create mode 100644 tests/metadata_refphandle.dts.dts.expect
+ fdtdump.c               |  4 ++++
+ flattree.c              | 17 +++++++++++++----
+ libfdt/fdt.h            |  5 ++++-
+ libfdt/fdt_rw.c         |  4 ++++
+ libfdt/libfdt.h         |  1 +
+ tests/pylibfdt_tests.py |  6 +++---
+ tests/testutils.c       |  2 +-
+ tests/trees.S           |  1 +
+ 8 files changed, 31 insertions(+), 9 deletions(-)
 
-diff --git a/tests/metadata_refphandle.dtb.dts.expect b/tests/metadata_refphandle.dtb.dts.expect
-new file mode 100644
-index 0000000..c229ec1
---- /dev/null
-+++ b/tests/metadata_refphandle.dtb.dts.expect
-@@ -0,0 +1,17 @@
-+/dts-v1/;
-+
-+/ {
-+
-+	fragment@0 {
-+		target = <&test>;
-+
-+		__overlay__ {
-+			ref = <&node_a>;
-+		};
-+	};
-+
-+	__fixups__ {
-+		test = "/fragment@0:target:0";
-+		node_a = "/fragment@0/__overlay__:ref:0";
-+	};
-+};
-diff --git a/tests/metadata_refphandle.dtb.expect b/tests/metadata_refphandle.dtb.expect
-new file mode 100644
-index 0000000..b2f5f95
---- /dev/null
-+++ b/tests/metadata_refphandle.dtb.expect
-@@ -0,0 +1,16 @@
-+/dts-v1/;
-+
-+/ {
-+    fragment@0 {
-+        target = <0xffffffff>;
-+        // [FDT_REF_PHANDLE] target[0], ref = test
-+        __overlay__ {
-+            ref = <0xffffffff>;
-+            // [FDT_REF_PHANDLE] ref[0], ref = node_a
-+        };
-+    };
-+    __fixups__ {
-+        test = "/fragment@0:target:0";
-+        node_a = "/fragment@0/__overlay__:ref:0";
-+    };
-+};
-diff --git a/tests/metadata_refphandle.dts b/tests/metadata_refphandle.dts
-new file mode 100644
-index 0000000..b8aa650
---- /dev/null
-+++ b/tests/metadata_refphandle.dts
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
-+/*
-+ * Copyright (C) 2026 Bootlin
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+&test {
-+	ref = <&node_a>;
-+};
-diff --git a/tests/metadata_refphandle.dts.dts.expect b/tests/metadata_refphandle.dts.dts.expect
-new file mode 100644
-index 0000000..c229ec1
---- /dev/null
-+++ b/tests/metadata_refphandle.dts.dts.expect
-@@ -0,0 +1,17 @@
-+/dts-v1/;
-+
-+/ {
-+
-+	fragment@0 {
-+		target = <&test>;
-+
-+		__overlay__ {
-+			ref = <&node_a>;
-+		};
-+	};
-+
-+	__fixups__ {
-+		test = "/fragment@0:target:0";
-+		node_a = "/fragment@0/__overlay__:ref:0";
-+	};
-+};
-diff --git a/tests/run_tests.sh b/tests/run_tests.sh
-index 7a8bdbc..423812e 100755
---- a/tests/run_tests.sh
-+++ b/tests/run_tests.sh
-@@ -1125,7 +1125,7 @@ wrap_fdtdump () {
+diff --git a/fdtdump.c b/fdtdump.c
+index 7300280..5c78559 100644
+--- a/fdtdump.c
++++ b/fdtdump.c
+@@ -87,6 +87,10 @@ static void dump_blob(void *blob, bool debug)
+ 	if (version >= 17)
+ 		printf("// size_dt_struct:\t0x%"PRIx32"\n",
+ 		       fdt32_to_cpu(bph->size_dt_struct));
++	if (version >= 18) {
++		printf("// dt_flags:\t\t0x%"PRIx32"\n",
++		       fdt32_to_cpu(bph->dt_flags));
++	}
+ 	printf("\n");
+ 
+ 	for (i = 0; ; i++) {
+diff --git a/flattree.c b/flattree.c
+index 07f7545..2e2ffcb 100644
+--- a/flattree.c
++++ b/flattree.c
+@@ -14,6 +14,7 @@
+ #define FTF_STRUCTSIZE	0x20
+ #define FTF_NOPS	0x40
+ #define FTF_REF_XXX	0x80
++#define FTF_DTFLAGS	0x100
+ 
+ static struct version_info {
+ 	int version;
+@@ -32,7 +33,8 @@ static struct version_info {
+ 	{17, 16, FDT_V17_SIZE,
+ 	 FTF_BOOTCPUID|FTF_STRTABSIZE|FTF_STRUCTSIZE|FTF_NOPS},
+ 	{18, 18, FDT_V18_SIZE,
+-	 FTF_BOOTCPUID|FTF_STRTABSIZE|FTF_STRUCTSIZE|FTF_NOPS|FTF_REF_XXX},
++	 FTF_BOOTCPUID|FTF_STRTABSIZE|FTF_STRUCTSIZE|FTF_NOPS|FTF_REF_XXX|
++	 FTF_DTFLAGS},
+ };
+ 
+ struct emitter {
+@@ -370,7 +372,7 @@ static struct data flatten_reserve_list(struct reserve_info *reservelist,
+ static void make_fdt_header(struct fdt_header *fdt,
+ 			    struct version_info *vi,
+ 			    int reservesize, int dtsize, int strsize,
+-			    int boot_cpuid_phys)
++			    int boot_cpuid_phys, uint32_t dt_flags)
+ {
+ 	int reserve_off;
+ 
+@@ -397,6 +399,8 @@ static void make_fdt_header(struct fdt_header *fdt,
+ 		fdt->size_dt_strings = cpu_to_fdt32(strsize);
+ 	if (vi->flags & FTF_STRUCTSIZE)
+ 		fdt->size_dt_struct = cpu_to_fdt32(dtsize);
++	if (vi->flags & FTF_DTFLAGS)
++		fdt->dt_flags = cpu_to_fdt32(dt_flags);
  }
  
- metadata_tests() {
--	for dt in metadata_reflocal; do
-+	for dt in metadata_reflocal metadata_refphandle; do
- 		run_dtc_test -I dts -O dts -o $dt.dts.dts "$SRCDIR/$dt.dts"
- 		base_run_test check_diff $dt.dts.dts "$SRCDIR/$dt.dts.dts.expect"
- 		run_dtc_test -I dts -O dtb -o $dt.dtb "$SRCDIR/$dt.dts"
+ void dt_to_blob(FILE *f, struct dt_info *dti, int version)
+@@ -424,7 +428,7 @@ void dt_to_blob(FILE *f, struct dt_info *dti, int version)
+ 
+ 	/* Make header */
+ 	make_fdt_header(&fdt, vi, reservebuf.len, dtbuf.len, strbuf.len,
+-			dti->boot_cpuid_phys);
++			dti->boot_cpuid_phys, 0);
+ 
+ 	/*
+ 	 * If the user asked for more space than is used, adjust the totalsize.
+@@ -555,6 +559,11 @@ void dt_to_asm(FILE *f, struct dt_info *dti, int version)
+ 			symprefix, symprefix);
+ 	}
+ 
++	if (vi->flags & FTF_DTFLAGS) {
++		fprintf(f, "\t/* dt_flags */\n");
++		asm_emit_cell(f, 0);
++	}
++
+ 	/*
+ 	 * Reserve map entries.
+ 	 * Align the reserve map to a doubleword boundary.
+@@ -980,7 +989,7 @@ struct dt_info *dt_from_blob(const char *fname)
+ 	}
+ 
+ 	if (version >= 18)
+-		flags |= FTF_REF_XXX;
++		flags |= FTF_REF_XXX | FTF_DTFLAGS;
+ 
+ 	inbuf_init(&memresvbuf,
+ 		   blob + off_mem_rsvmap, blob + totalsize);
+diff --git a/libfdt/fdt.h b/libfdt/fdt.h
+index 530d2e5..128e7bc 100644
+--- a/libfdt/fdt.h
++++ b/libfdt/fdt.h
+@@ -26,6 +26,9 @@ struct fdt_header {
+ 
+ 	/* version 17 fields below */
+ 	fdt32_t size_dt_struct;		 /* size of the structure block */
++
++	/* version 18 fields below */
++	fdt32_t dt_flags;		/* Ored value of FDT_FLAG_XXXX */
+ };
+ 
+ struct fdt_reserve_entry {
+@@ -65,6 +68,6 @@ struct fdt_property {
+ #define FDT_V3_SIZE	(FDT_V2_SIZE + sizeof(fdt32_t))
+ #define FDT_V16_SIZE	FDT_V3_SIZE
+ #define FDT_V17_SIZE	(FDT_V16_SIZE + sizeof(fdt32_t))
+-#define FDT_V18_SIZE	FDT_V17_SIZE
++#define FDT_V18_SIZE	(FDT_V17_SIZE + sizeof(fdt32_t))
+ 
+ #endif /* FDT_H */
+diff --git a/libfdt/fdt_rw.c b/libfdt/fdt_rw.c
+index 00e32bb..1528b33 100644
+--- a/libfdt/fdt_rw.c
++++ b/libfdt/fdt_rw.c
+@@ -457,6 +457,8 @@ int fdt_open_into(const void *fdt, void *buf, int bufsize)
+ 			return err;
+ 		fdt_set_version(buf, 18);
+ 		fdt_set_last_comp_version(buf, 18);
++		if (can_assume(LATEST) || fdt_version(fdt) < 18)
++			fdt_set_dt_flags(buf, 0);
+ 		fdt_set_size_dt_struct(buf, struct_size);
+ 		fdt_set_totalsize(buf, bufsize);
+ 		return 0;
+@@ -487,6 +489,8 @@ int fdt_open_into(const void *fdt, void *buf, int bufsize)
+ 	fdt_set_totalsize(buf, bufsize);
+ 	fdt_set_version(buf, 18);
+ 	fdt_set_last_comp_version(buf, 18);
++	if (can_assume(LATEST) || fdt_version(fdt) < 18)
++		fdt_set_dt_flags(buf, 0);
+ 	fdt_set_boot_cpuid_phys(buf, fdt_boot_cpuid_phys(fdt));
+ 
+ 	return 0;
+diff --git a/libfdt/libfdt.h b/libfdt/libfdt.h
+index d1a9cd5..9777f32 100644
+--- a/libfdt/libfdt.h
++++ b/libfdt/libfdt.h
+@@ -319,6 +319,7 @@ fdt_set_hdr_(last_comp_version)
+ fdt_set_hdr_(boot_cpuid_phys)
+ fdt_set_hdr_(size_dt_strings)
+ fdt_set_hdr_(size_dt_struct)
++fdt_set_hdr_(dt_flags)
+ #undef fdt_set_hdr_
+ 
+ /**
+diff --git a/tests/pylibfdt_tests.py b/tests/pylibfdt_tests.py
+index 373e11a..7d5ab0b 100644
+--- a/tests/pylibfdt_tests.py
++++ b/tests/pylibfdt_tests.py
+@@ -285,9 +285,9 @@ class PyLibfdtBasicTests(unittest.TestCase):
+         """Test that we can access the header values"""
+         self.assertEqual(self.fdt.magic(), 0xd00dfeed)
+         self.assertEqual(self.fdt.totalsize(), len(self.fdt._fdt))
+-        self.assertEqual(self.fdt.off_dt_struct(), 88)
+-        self.assertEqual(self.fdt.off_dt_strings(), 652)
+-        self.assertEqual(self.fdt.off_mem_rsvmap(), 40)
++        self.assertEqual(self.fdt.off_dt_struct(), 96)
++        self.assertEqual(self.fdt.off_dt_strings(), 660)
++        self.assertEqual(self.fdt.off_mem_rsvmap(), 48)
+         self.assertEqual(self.fdt.version(), 18)
+         self.assertEqual(self.fdt.last_comp_version(), 16)
+         self.assertEqual(self.fdt.boot_cpuid_phys(), 0)
+diff --git a/tests/testutils.c b/tests/testutils.c
+index 54da2e4..2d5cfb3 100644
+--- a/tests/testutils.c
++++ b/tests/testutils.c
+@@ -344,7 +344,7 @@ void *open_blob_rw(const void *blob)
+ {
+ 	int err;
+ 	void *buf;
+-	int newsize = fdt_totalsize(blob) + 8;
++	int newsize = fdt_totalsize(blob) + 8 + 4;
+ 
+ 	buf = xmalloc(newsize);
+ 	err = fdt_open_into(blob, buf, newsize);
+diff --git a/tests/trees.S b/tests/trees.S
+index ecd43bc..56c1002 100644
+--- a/tests/trees.S
++++ b/tests/trees.S
+@@ -22,6 +22,7 @@
+ 	fdtlong	0
+ 	fdtlong	(\tree\()_strings_end - \tree\()_strings)
+ 	fdtlong	(\tree\()_struct_end - \tree\()_struct)
++	fdtlong	0
+ 	.endm
+ 
+ 	.macro	rsvmape	addrh, addrl, lenh, lenl
 -- 
 2.52.0
 
