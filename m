@@ -1,112 +1,161 @@
-Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7258741C63;
-	Thu, 15 Jan 2026 07:11:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1007739449B
+	for <devicetree-spec@vger.kernel.org>; Thu, 15 Jan 2026 15:54:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768461081; cv=none; b=GdgzBMlswFbW6y5mL1El18cRksGP/z4QO3kr3gmDqpXvBYdfVK3IwsXgwthxhXp/FVafJxs8OYaQYg9nzbDLJQLtZqhLsmAeVASyN4p1k+hgiWLu9BakNuWzbgWjttfzrb2SKaVsZ4LdLiosunI9kB1y/tomcdpeMRwkHScaVcY=
+	t=1768492476; cv=none; b=NjlMJhCGA7ZyAiET4Bpyu3I+sI4+FY6+V2YKmvqevGJrh8rF0GwYlcM/KtF2QENq1aOMWBSiwLZYTRtvNIBEoQqjZahvwDoSln2u6yu7YnfaaFXvoJZiDCUsmVhQcWj/1ZyQCUfyzXj2yNOSwH1bOoO01W6bSEtM4Jy170vHB+4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768461081; c=relaxed/simple;
-	bh=jtUsr9ZnriNdTqTRjyYPvlhrEAV76gi5JuPwtZrQVt8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JkeksRrBnGq8IFdVW6JmVfBgVgFjqmz5ZQNBZUxKYJHXJwXyh6vrWMiRhkR4WCgKRo6rBZZ5BvGAB18PWyc1InTHSUSSz3JHmlvkWF3Kie912//8IRuuf1VPb8X2biiEtE2I808XDOM2R3HUGakmB8fzrexnNipyRQbHZ8DOG6s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=r7iOJHzd; arc=none smtp.client-ip=150.107.74.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
+	s=arc-20240116; t=1768492476; c=relaxed/simple;
+	bh=dKCRi1EFVnoZ8wrCnpXxN/bjQgwl/QGrd9KTBQZB1lY=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=CizfTpGsIMUfFKhSpeB5uRtXpgwKgxtKnjOJ5V7xLsd6vRKnO9n3+KQUT0jayP9WvrT0HeQm0uZHyEvTNlaAo0y3hIzkmuAlJPR1MTbCLKXYbbjdOv4+DdOPwBX9uJDAMwbB2oj8tW6tqVKys6xZJT5IqCsXUPCGQh0c7R/9aGk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Juu3Teif; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="r7iOJHzd"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=gibson.dropbear.id.au; s=202512; t=1768461077;
-	bh=PpxIiAL1xkdlSfyvsInWR8vH4upI9+yWdhmkzjXUiLQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=r7iOJHzdcbksfcGQLYVawg+DzIpiri7fFgjO6FPWaZ9gQ+HiqJY1zLmaGheIJ9baP
-	 R9n8nOUeaaoe3jyggJHtwgEWFBB7ka1ygIhLPywWgAQDLmlST1rIcXCI+MPEWhnnE1
-	 ZZrHOYZZG5PtJcajo+noFpb+x0U0MJfi5yw4Zrczf0FWxLj8lumI04QTCv8mO6xZXN
-	 8yy+bI8LoYFfWY5fBRNidDsOcr5NQfRAScuO+HcWdgtmH/WjJ6LTuTjWSpBVEHARyT
-	 ySOiHKc7PYY7X67dm/cSb+XFitPnFNziFDgbCqNrkUE96udRpqve0liolKoBdZ3vEi
-	 rN6XjlYpuiATg==
-Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
-	id 4dsDfs6X5Dz4wMF; Thu, 15 Jan 2026 18:11:17 +1100 (AEDT)
-Date: Thu, 15 Jan 2026 18:11:10 +1100
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Herve Codina <herve.codina@bootlin.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Ayush Singh <ayush@beagleboard.org>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	devicetree-compiler@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org,
-	Hui Pu <hui.pu@gehealthcare.com>,
-	Ian Ray <ian.ray@gehealthcare.com>,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Subject: Re: [RFC PATCH 00/77] Add support for dtb metadata and addon
- device-trees
-Message-ID: <aWiTDl3RSs_tyqKz@zatzit>
-References: <20260112142009.1006236-1-herve.codina@bootlin.com>
- <aWgwEmKyPY_odaxw@zatzit>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Juu3Teif"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C8FC7C4AF09
+	for <devicetree-spec@vger.kernel.org>; Thu, 15 Jan 2026 15:54:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768492475;
+	bh=dKCRi1EFVnoZ8wrCnpXxN/bjQgwl/QGrd9KTBQZB1lY=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=Juu3Teifq+ANYIh9VPm99WpcGgNe5Hj5r9Ac9OEgv1EmhWmcEiiFUGJEZ0CF45AYq
+	 X0oPPMIqq1XCkzqrtbCm6OJ50+CBkgtn4HFtH6MfyGEavQRm12rcWV24R9svzG7jTn
+	 atsCytX+rYJRC+M0FbzHRb6v/gsGyo6yyGzRplBEE9MkO8hg6Bw1J48F9UPguxAZtj
+	 r2OfFq9UdSwwl5Ba9rB2sReFM4pMbQ/3HvEEsETlZQ9RDHwseAwCkpg5Ke+ucmoCn4
+	 HicxOKX5Q7Knmuyn/2GEgU+rKOQltRurwKgUcSvdHMGwzL4c+Ce+eypK0Bp5De6YeG
+	 jy4S887k1sx+g==
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b8718187eb6so156860466b.2
+        for <devicetree-spec@vger.kernel.org>; Thu, 15 Jan 2026 07:54:35 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCU4QND5LUEMVTSnhi6B0xduxNlRIHwU5DqPKIibajpgL0DJUESBDKuyp4/S6u4JtlCrxD3jj/0n0qCR1KKmmDo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzwJN1q6fErI3kOIpu/143qUL7pvqK774mZM7L5WF0DtRx4q8je
+	b0mxg0Shs7v7DnulmydKLKbNIYNVdWGceUTItMXV5iErpP+VQO+8XdwCSVweZWaK32PRV8wX0Q4
+	PnyOxZ1h/lf2pMv4uYxg8vfi2VyYggQ==
+X-Received: by 2002:a17:907:6d20:b0:b87:1ffc:bfbc with SMTP id
+ a640c23a62f3a-b8792e082ccmr7114066b.12.1768492474319; Thu, 15 Jan 2026
+ 07:54:34 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="cN30mdffDeCXEuxZ"
-Content-Disposition: inline
-In-Reply-To: <aWgwEmKyPY_odaxw@zatzit>
-
-
---cN30mdffDeCXEuxZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: <20260112142009.1006236-1-herve.codina@bootlin.com>
+ <20260112142009.1006236-7-herve.codina@bootlin.com> <CAL_Jsq+EDvrEqqwsFjs0sGxYfKgQuSFqCiqQs-1b3TnbG+gATQ@mail.gmail.com>
+ <aWg2JJstA0F-h9hi@zatzit>
+In-Reply-To: <aWg2JJstA0F-h9hi@zatzit>
+From: Rob Herring <robh@kernel.org>
+Date: Thu, 15 Jan 2026 09:54:22 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqLx-NWM=gFdQfQ1Nw10ii2n5gX93WgH+zTcbHRt=Ze_vA@mail.gmail.com>
+X-Gm-Features: AZwV_QhbB9OdA6W3gPyZNM8SQiknAanmIyFSp2NdkrcPTLl8bGT4QVG8rHMzo7Q
+Message-ID: <CAL_JsqLx-NWM=gFdQfQ1Nw10ii2n5gX93WgH+zTcbHRt=Ze_vA@mail.gmail.com>
+Subject: Re: [RFC PATCH 06/77] Add support for FDT_REF_LOCAL dtb tag
+To: David Gibson <david@gibson.dropbear.id.au>
+Cc: Herve Codina <herve.codina@bootlin.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Ayush Singh <ayush@beagleboard.org>, 
+	Geert Uytterhoeven <geert@linux-m68k.org>, devicetree-compiler@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	devicetree-spec@vger.kernel.org, Hui Pu <hui.pu@gehealthcare.com>, 
+	Ian Ray <ian.ray@gehealthcare.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>, 
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 15, 2026 at 11:08:51AM +1100, David Gibson wrote:
-> On Mon, Jan 12, 2026 at 03:18:50PM +0100, Herve Codina wrote:
-> > This big picture series adds support for dtb metadata and addon
-> > device-trees.
->=20
-> Oof.  So, I lobbied for (at least aspects of) this approach, I think
-> it's a better idea than more ad-hoc extensions to overlays.
->=20
-> Now I'm reaping what I sowed: reviewing 77 patches for dtc/libfdt is
-> going to be a real challenge - I've been struggling to find time to
-> review a 6 patch series for months.  Well, I guess we'll see what we
-> can do.
+On Wed, Jan 14, 2026 at 6:51=E2=80=AFPM David Gibson
+<david@gibson.dropbear.id.au> wrote:
+>
+> On Tue, Jan 13, 2026 at 01:22:08PM -0600, Rob Herring wrote:
+> > On Mon, Jan 12, 2026 at 8:20=E2=80=AFAM Herve Codina <herve.codina@boot=
+lin.com> wrote:
+> > >
+> > > FDT_REF_LOCAL dtb tag is a meta-data tag attached to a property.
+> > >
+> > > It indicates that the property defined before this tag (FDT_PROP) use=
+s a
+> > > phandle value and the node related to this phandle value is local (i.=
+e.
+> > > the node is present in the device-tree blob).
+> > >
+> > > It is followed by one value:
+> > >  - offset (32bit):
+> > >      Offset in the property data where the phandle is available.
+> > >
+> > > Example:
+> > >   FDT_PROP 0x00000008 xxxxxxxx 0xca 0xfe 0xde 0xca 0x01 0x02 0x03 0x0=
+4
+> > >   FDT_REF_LOCAL 0x00000004
+> > >
+> > >   This means that at the offset 4 of the property data, the value
+> > >   (0x01020304) is a phandle and the related node is available in the
+> > >   dtb.
+> > >
+> > >   This is what is encoded in the dtb when the related dts has a prope=
+rty
+> > >   with the value set to <0xcafedeca &foo> with 'foo' a reference to a=
+n
+> > >   existing node where the phandle value is 0x01020304.
+> > >
+> > > If several local phandles are used in the property data, several
+> > > FDT_REF_LOCAL are present after the FDT_PROP tag. Each of them points
+> > > with its offset value to the position of one phandle.
+> > >
+> > > For instance, if a first property with 8 bytes of data has a phandle
+> > > value at offset 4 and a second property with 16 bytes of data has
+> > > phandle values at offset 0 and 8, the following tags sequence is
+> > > present:
+> > >   FDT_PROP 0x00000008 xxxxxxxx <data bytes>
+> > >   FDT_REF_LOCAL 0x00000004
+> > >   FDT_PROP 0x00000010 xxxxxxxx <data bytes>
+> > >   FDT_REF_LOCAL 0x00000000
+> > >   FDT_REF_LOCAL 0x00000008
+> >
+> > To follow up on my desire to both be easily extended and have more
+> > type info, I have something like this in mind:
+> >
+> > FDT_TYPE_INFO 0x10 FDT_REF_LOCAL 0x0 FDT_TYPE_U32 0x4 FDT_REF_LOCAL
+> > 0x8 FDT_TYPE_U32 0xc
+>
+> I think general type info should be out of scope for this:
+>  * This series is already enormous and complicated without that
 
-Jsyk
+It is enormous, but I don't think the intention was to finalize and
+merge it all at once. I certainly don't intend to review it all now.
+The final result looks sane to me and with that we have a good idea
+what information needs to go in the DTB. I think the first step is to
+define the new metadata tags and what DTB format changes are needed.
 
-In line with the above, the review I've done so far is, deliberately,
-a shallow, first-pass approach.  I'm looking primarily at the commit
-messages rather than code, and I'm focussing on generalities and
-reviewability, rather than details.
+>  * phandles aren't just another type, they have structural relevance
+>    which makes them a special case
 
---=20
-David Gibson (he or they)	| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
-				| around.
-http://www.ozlabs.org/~dgibson
+Fair enough.
 
---cN30mdffDeCXEuxZ
-Content-Type: application/pgp-signature; name=signature.asc
+What's similar is we need to define FOO is at offset X just like the
+markers within dtc. We can add other types later, I'm just asking that
+the design here for new tags and phandles accounts for that.
 
------BEGIN PGP SIGNATURE-----
+> Plus, I'm actually pretty dubious about adding type information to
+> dtbs in the first place.  It gives the impression that dt property
+> values are self-describing, but they're not.  If you want a
+> self-describing format, I think you'd be better off dropping the
+> OF-related past entirely, and using json or one of the various other
+> modern self-describing structure data formats.
 
-iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmlokw0ACgkQzQJF27ox
-2GcECA//RrVwgnoXtXGtTIFdctxoHafJLy9HT1SkkJZX6G4CU48XF8qXZwyDKpTY
-S1NsiW3mEywjq/UCABB5UAD9k16bUBA4obcmxF1nztkHqozPE0kasWmkjpYEdrXD
-5JkduB9T1sSKYUBG+9lCcevGln62bcc2hJ8R13A5DXR8QFsHB8k7YJWzGNZeZ0jz
-bX3pAUEgqfeFVJjpD9b/WgTjzaKVppHCKeBgrBz0ky0jfrBjYjInU1aMft7HwLQH
-2t6A68058J4C1sDPZr2gZ997etH/oN1fmxHBedOE6jcM3hvaOe4TeJcxxmTOBc/z
-uBzDRQ+T02KQfStyVEWGL2GFwRXTW6O9t4W7VYEEa2qAOmW4VK2gScFgiF6eAVws
-sVrZFQ+U203QnbmVZ7U07cD5I/UESSxf1GoXPCG4TF95i/zE5MAMazdqRV6GcXfG
-tyf6L5g5WyvaWfca1ORj6XUnxqupSl17VRSI1Gd4ByhCVwo301yGjhQ6Q2hf5dkq
-rG9SpC3qCJwKAmzEXVRtl30ccw9SPE8HKNxA+jiEIB0E8BS40Vzr7BCjLAVlQTaK
-z74jXs38eby9p8uhQuLfuNvzoiAZfMKZ2hjR00itlomnp09a8mNgrZfmIRRW4OAS
-FHpoBHbvFGrmbfrHydA4bY6q7RZwdRDUvIptnAnCHHpubdBLlW8=
-=8RBe
------END PGP SIGNATURE-----
+json has no concept of integer sizes (and numbers are floats). The
+typical work-around for that is encode everything as a string and then
+we're pretty much back to everything's a byte array. Pretty sure we've
+been thru this already. So I don't know what format we'd use. I've not
+come across one. Perhaps just DTS as that does have the type
+information. :) In any case, I'm not interested in a revolution, just
+evolution. I want a format that transparently works with only an
+updated libfdt. Anything else is simply going to go nowhere (as
+evident by the last 15 years of new DTB format discussions).
 
---cN30mdffDeCXEuxZ--
+I know you aren't a fan of relying on .dts information for type
+information, but that's not the only source anymore. We now have an
+entire database of every last property and its type. That could be
+what's used to populate type information. Again, we don't have to
+define how we do it now, just allow for it (and any other metadata we
+have yet to think about) in the DTB format changes.
+
+Rob
