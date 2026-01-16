@@ -1,161 +1,152 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1007739449B
-	for <devicetree-spec@vger.kernel.org>; Thu, 15 Jan 2026 15:54:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ED5231AAAB
+	for <devicetree-spec@vger.kernel.org>; Fri, 16 Jan 2026 09:09:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768492476; cv=none; b=NjlMJhCGA7ZyAiET4Bpyu3I+sI4+FY6+V2YKmvqevGJrh8rF0GwYlcM/KtF2QENq1aOMWBSiwLZYTRtvNIBEoQqjZahvwDoSln2u6yu7YnfaaFXvoJZiDCUsmVhQcWj/1ZyQCUfyzXj2yNOSwH1bOoO01W6bSEtM4Jy170vHB+4=
+	t=1768554586; cv=none; b=KenycjrFNlUlx7givfYVdytL3JUzvM6zY+wM4z+zpGWSYZ7uFO6ibawEz5A6bI2lh6+mw07mKg2PSHtzOpHDw5+GXEdxRmmP9mIhoHSCe5bN6m4SxqNjkVLx6JxDn9h/GfKl0fwmvkEbO+MG27pcE/lsYgUJekGozcaV1kmrixM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768492476; c=relaxed/simple;
-	bh=dKCRi1EFVnoZ8wrCnpXxN/bjQgwl/QGrd9KTBQZB1lY=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=CizfTpGsIMUfFKhSpeB5uRtXpgwKgxtKnjOJ5V7xLsd6vRKnO9n3+KQUT0jayP9WvrT0HeQm0uZHyEvTNlaAo0y3hIzkmuAlJPR1MTbCLKXYbbjdOv4+DdOPwBX9uJDAMwbB2oj8tW6tqVKys6xZJT5IqCsXUPCGQh0c7R/9aGk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Juu3Teif; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1768554586; c=relaxed/simple;
+	bh=hb2FumJHWlW5h/rzVQfxBB4ttWmFQQfBRluhQ9YGtok=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=g+wuxpdE/W3tdg90UKjaE1EdFN6SLovxRD6XfDEcwpIy5N2Kg2eVDolNoQ/UCw+nt3EfQVScaRJ27BoIdlN13QMp6qM4MtQc4/tUpjKPXPQke5t8u8aNoEhJwNamwaLNcRngtzikypwD7BaNrrXv0p3r9cwTt3wP74V7gmY7idE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=XFqyYgaM; arc=none smtp.client-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Juu3Teif"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C8FC7C4AF09
-	for <devicetree-spec@vger.kernel.org>; Thu, 15 Jan 2026 15:54:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768492475;
-	bh=dKCRi1EFVnoZ8wrCnpXxN/bjQgwl/QGrd9KTBQZB1lY=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=Juu3Teifq+ANYIh9VPm99WpcGgNe5Hj5r9Ac9OEgv1EmhWmcEiiFUGJEZ0CF45AYq
-	 X0oPPMIqq1XCkzqrtbCm6OJ50+CBkgtn4HFtH6MfyGEavQRm12rcWV24R9svzG7jTn
-	 atsCytX+rYJRC+M0FbzHRb6v/gsGyo6yyGzRplBEE9MkO8hg6Bw1J48F9UPguxAZtj
-	 r2OfFq9UdSwwl5Ba9rB2sReFM4pMbQ/3HvEEsETlZQ9RDHwseAwCkpg5Ke+ucmoCn4
-	 HicxOKX5Q7Knmuyn/2GEgU+rKOQltRurwKgUcSvdHMGwzL4c+Ce+eypK0Bp5De6YeG
-	 jy4S887k1sx+g==
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b8718187eb6so156860466b.2
-        for <devicetree-spec@vger.kernel.org>; Thu, 15 Jan 2026 07:54:35 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCU4QND5LUEMVTSnhi6B0xduxNlRIHwU5DqPKIibajpgL0DJUESBDKuyp4/S6u4JtlCrxD3jj/0n0qCR1KKmmDo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzwJN1q6fErI3kOIpu/143qUL7pvqK774mZM7L5WF0DtRx4q8je
-	b0mxg0Shs7v7DnulmydKLKbNIYNVdWGceUTItMXV5iErpP+VQO+8XdwCSVweZWaK32PRV8wX0Q4
-	PnyOxZ1h/lf2pMv4uYxg8vfi2VyYggQ==
-X-Received: by 2002:a17:907:6d20:b0:b87:1ffc:bfbc with SMTP id
- a640c23a62f3a-b8792e082ccmr7114066b.12.1768492474319; Thu, 15 Jan 2026
- 07:54:34 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="XFqyYgaM"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 9DF2C1A28AE;
+	Fri, 16 Jan 2026 09:09:41 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 73E6260732;
+	Fri, 16 Jan 2026 09:09:41 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 976CC10B68982;
+	Fri, 16 Jan 2026 10:09:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1768554580; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=pWMTrCM1SrmudP6LkvHk5+yZ5LbMQD+bMHJM6Q97b0A=;
+	b=XFqyYgaMopa+2wU/1MC014Pmb1OHxSuNChtpb44BbgiI/deW79TZkcXspzANskOgNmFHxS
+	peA2PeAp/ULgSq2bvez0UJ0QxtaDnWGVOwIsTi+yr2DyMWXd0axYgZ/ooNtRUs/rsFtxbs
+	PN4+qR3PbCs7OVqnQ+lLmmsFmeJY1QovGpeps8iUsgDFjc7H9HamIl6NxQ+KNk+VRWJt2Y
+	32Zk/iFHXnlDOFsXEDyZ9Ufm5NzjQNlZa0ZJ+ijudTeUFKit/25XnYZh3cSw86A5xbiyDp
+	ystH1UJHarjFz4Lq83BbekMfpKM7lcqqA9VLOMGExLm5vxTeS2Jv13XS/SRzgw==
+Date: Fri, 16 Jan 2026 10:09:34 +0100
+From: Herve Codina <herve.codina@bootlin.com>
+To: David Gibson <david@gibson.dropbear.id.au>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Ayush Singh <ayush@beagleboard.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
+ devicetree-compiler@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org, Hui Pu
+ <hui.pu@gehealthcare.com>, Ian Ray <ian.ray@gehealthcare.com>, Luca
+ Ceresoli <luca.ceresoli@bootlin.com>, Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>
+Subject: Re: [RFC PATCH 02/77] Introduce v18 dtb version
+Message-ID: <20260116100934.7d522b1a@bootlin.com>
+In-Reply-To: <aWgxAVfUYMUy9mz1@zatzit>
+References: <20260112142009.1006236-1-herve.codina@bootlin.com>
+	<20260112142009.1006236-3-herve.codina@bootlin.com>
+	<aWgxAVfUYMUy9mz1@zatzit>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260112142009.1006236-1-herve.codina@bootlin.com>
- <20260112142009.1006236-7-herve.codina@bootlin.com> <CAL_Jsq+EDvrEqqwsFjs0sGxYfKgQuSFqCiqQs-1b3TnbG+gATQ@mail.gmail.com>
- <aWg2JJstA0F-h9hi@zatzit>
-In-Reply-To: <aWg2JJstA0F-h9hi@zatzit>
-From: Rob Herring <robh@kernel.org>
-Date: Thu, 15 Jan 2026 09:54:22 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqLx-NWM=gFdQfQ1Nw10ii2n5gX93WgH+zTcbHRt=Ze_vA@mail.gmail.com>
-X-Gm-Features: AZwV_QhbB9OdA6W3gPyZNM8SQiknAanmIyFSp2NdkrcPTLl8bGT4QVG8rHMzo7Q
-Message-ID: <CAL_JsqLx-NWM=gFdQfQ1Nw10ii2n5gX93WgH+zTcbHRt=Ze_vA@mail.gmail.com>
-Subject: Re: [RFC PATCH 06/77] Add support for FDT_REF_LOCAL dtb tag
-To: David Gibson <david@gibson.dropbear.id.au>
-Cc: Herve Codina <herve.codina@bootlin.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Ayush Singh <ayush@beagleboard.org>, 
-	Geert Uytterhoeven <geert@linux-m68k.org>, devicetree-compiler@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	devicetree-spec@vger.kernel.org, Hui Pu <hui.pu@gehealthcare.com>, 
-	Ian Ray <ian.ray@gehealthcare.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>, 
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Wed, Jan 14, 2026 at 6:51=E2=80=AFPM David Gibson
-<david@gibson.dropbear.id.au> wrote:
->
-> On Tue, Jan 13, 2026 at 01:22:08PM -0600, Rob Herring wrote:
-> > On Mon, Jan 12, 2026 at 8:20=E2=80=AFAM Herve Codina <herve.codina@boot=
-lin.com> wrote:
-> > >
-> > > FDT_REF_LOCAL dtb tag is a meta-data tag attached to a property.
-> > >
-> > > It indicates that the property defined before this tag (FDT_PROP) use=
-s a
-> > > phandle value and the node related to this phandle value is local (i.=
-e.
-> > > the node is present in the device-tree blob).
-> > >
-> > > It is followed by one value:
-> > >  - offset (32bit):
-> > >      Offset in the property data where the phandle is available.
-> > >
-> > > Example:
-> > >   FDT_PROP 0x00000008 xxxxxxxx 0xca 0xfe 0xde 0xca 0x01 0x02 0x03 0x0=
-4
-> > >   FDT_REF_LOCAL 0x00000004
-> > >
-> > >   This means that at the offset 4 of the property data, the value
-> > >   (0x01020304) is a phandle and the related node is available in the
-> > >   dtb.
-> > >
-> > >   This is what is encoded in the dtb when the related dts has a prope=
-rty
-> > >   with the value set to <0xcafedeca &foo> with 'foo' a reference to a=
-n
-> > >   existing node where the phandle value is 0x01020304.
-> > >
-> > > If several local phandles are used in the property data, several
-> > > FDT_REF_LOCAL are present after the FDT_PROP tag. Each of them points
-> > > with its offset value to the position of one phandle.
-> > >
-> > > For instance, if a first property with 8 bytes of data has a phandle
-> > > value at offset 4 and a second property with 16 bytes of data has
-> > > phandle values at offset 0 and 8, the following tags sequence is
-> > > present:
-> > >   FDT_PROP 0x00000008 xxxxxxxx <data bytes>
-> > >   FDT_REF_LOCAL 0x00000004
-> > >   FDT_PROP 0x00000010 xxxxxxxx <data bytes>
-> > >   FDT_REF_LOCAL 0x00000000
-> > >   FDT_REF_LOCAL 0x00000008
-> >
-> > To follow up on my desire to both be easily extended and have more
-> > type info, I have something like this in mind:
-> >
-> > FDT_TYPE_INFO 0x10 FDT_REF_LOCAL 0x0 FDT_TYPE_U32 0x4 FDT_REF_LOCAL
-> > 0x8 FDT_TYPE_U32 0xc
->
-> I think general type info should be out of scope for this:
->  * This series is already enormous and complicated without that
+Hi David,
 
-It is enormous, but I don't think the intention was to finalize and
-merge it all at once. I certainly don't intend to review it all now.
-The final result looks sane to me and with that we have a good idea
-what information needs to go in the DTB. I think the first step is to
-define the new metadata tags and what DTB format changes are needed.
+On Thu, 15 Jan 2026 11:12:49 +1100
+David Gibson <david@gibson.dropbear.id.au> wrote:
 
->  * phandles aren't just another type, they have structural relevance
->    which makes them a special case
+> On Mon, Jan 12, 2026 at 03:18:52PM +0100, Herve Codina wrote:
+> > This v18 version will add support for
+> >  - metadata in device-tree blobs in order to have a better handling of
+> >    phandles and unresolved references.
+> >  - Addon device-tree blob (successor of device-tree overlay)
+> >  - Import and export symbols feature
+> >  - multiple trees in a addon device-tree blob (i.e. root device tree and
+> >    orphan node tree)  
+> 
+> So, once this patch is applied, the rest of the series pretty much has
+> to be applied "atomically" - otherwise a version built in the interim
+> will be lying in saying that it supports v18.
+> 
+> I therefore suggest moving any changes that *can* be moved before this
+> patch, should be moved before this patch.  That will assist in
+> reviewing and merging the series piecemeal, rather than as a single
+> giant blob.
+> 
+> 
+> Regarding the content itself.  It seems like this is a pretty major
+> change to the dtb format - maybe that would suggest bumping the
+> version by more than one (e.g. like we went from v3 to v16 in the
+> past).
 
-Fair enough.
+I see your point.
 
-What's similar is we need to define FOO is at offset X just like the
-markers within dtc. We can add other types later, I'm just asking that
-the design here for new tags and phandles accounts for that.
+Maybe the Rob's idea related to 'unknown tag' and the suggestion I did [1]
+related to the generic tag value definition to support those 'unknown tag'
+could help here.
 
-> Plus, I'm actually pretty dubious about adding type information to
-> dtbs in the first place.  It gives the impression that dt property
-> values are self-describing, but they're not.  If you want a
-> self-describing format, I think you'd be better off dropping the
-> OF-related past entirely, and using json or one of the various other
-> modern self-describing structure data formats.
+As a reminder here, this generic tag value definition consist in:
+--- 8< ---
+A tag value is on 32bits. We can define the structure of this value.
+  - bit 31 (msb):
+     - 0: This is not a new kind to tag and so it doesn't follow this definition.
+          All existing tags are in this category
+     - 1: New kind of tag adopting this definition
 
-json has no concept of integer sizes (and numbers are floats). The
-typical work-around for that is encode everything as a string and then
-we're pretty much back to everything's a byte array. Pretty sure we've
-been thru this already. So I don't know what format we'd use. I've not
-come across one. Perhaps just DTS as that does have the type
-information. :) In any case, I'm not interested in a revolution, just
-evolution. I want a format that transparently works with only an
-updated libfdt. Anything else is simply going to go nowhere (as
-evident by the last 15 years of new DTB format discussions).
+  - bits 30..28:
+     tag data length encoding
+     0b000: No data related to the tag
+     0b001: 1 data cell (u32) directly follows the tag
+     0b010: 2 data cells (2 u32) directly follow the tag
+     ...
+     0b110: 6 data cells (6 u32) directly follow the tag
+     0b111: Tag is followed by a cell (u32) indicating the size (in bytes)
+            of data available just after this cell (including any padding
+            if needed).
+	    Because this size include some possible padding, its value is a
+            multiple of 4 bytes.
+            The offset of the tag + 4 + size points to the next tag.
+          
 
-I know you aren't a fan of relying on .dts information for type
-information, but that's not the only source anymore. We now have an
-entire database of every last property and its type. That could be
-what's used to populate type information. Again, we don't have to
-define how we do it now, just allow for it (and any other metadata we
-have yet to think about) in the DTB format changes.
+  - bit 27..0
+     tag specific identifier
+--- 8< ---
 
-Rob
+I mean dtb version v20 could be:
+
+ - New header size with dt_flags added in the header (if this new field is
+   kept).
+
+ - Support for the generic tag values and so the notion of 'unknown tag'
+
+With that done, everything else added afterward will have no impact on the
+dtb format itself.
+
+Only libfdt and dtc will have versions defined at some point with support for
+some new flags or new keyword.
+
+What do you think about this v20 dtb version?
+
+> 
+> It would also be nice to have some docs for the new dtb extensions
+> before or at the same time as this.
+
+Yes, the generic tag value definition.
+
+
+[1] https://lore.kernel.org/all/20260114171822.2a44d2a5@bootlin.com/
+
+Best regards
+Hervé
