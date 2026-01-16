@@ -1,39 +1,39 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D42891C8626;
-	Fri, 16 Jan 2026 13:36:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACB482EBB8D
+	for <devicetree-spec@vger.kernel.org>; Fri, 16 Jan 2026 15:17:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768570571; cv=none; b=VweRA/iJFrmMC/g90aprSzvOBhDFn+F0qla3/m3v3OQr0G3AHuvpjQTuuQSI/RSveGps2soDwD1E/u9L76IaxSgKP8aHYEA1yCbqO+2lcPpPRPPqSOH8DckpME+VvRLJcbugH0utGIeJPHlrcVL6nO1ArUuhcmW7KoCG87xI5mM=
+	t=1768576659; cv=none; b=CtYh4XHBPCnDy/kZgXt04i6lvMzPR0I8CIlsKinOwJIF+RoSqbREAOzI9Gu0qdBQtMtqxMNRfdeJgi3iGm4kiHSSxYkeuATclXxfdwkmUqaABAOqQ8sZzTAI+RpkeIM96Gz0a1OFxywlogHt0EGjoPj002K4oeEx8wXU0DysBiI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768570571; c=relaxed/simple;
-	bh=SqaE28L+BIfKar/T+pLOn5aZOKr5wXy2kDvgIFUSX7w=;
+	s=arc-20240116; t=1768576659; c=relaxed/simple;
+	bh=d8ibYRhXbYz1u1gx+ZYfdgs1LIb9Yz+sIuix7rp+jDo=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=c/oaPxd7z36MnZGH2Z6IlraYvTBL0432iwv3lqr2CsnQP3OYasFxE8HjNOZ8VVk5d5mtLB1jMYKjyy9J83YgB5oAMwdOooUQMxcmC8wAsEQetcNLrPPpipdzov20YhpEu8i4J+5m0jDAStiqwIkKW/QlJ011GsdgSpXkBW88XKU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=KyHedZvx; arc=none smtp.client-ip=185.171.202.116
+	 MIME-Version:Content-Type; b=ilBS5rZZoIx9VS7wFaqnGT/uGU0sbNbGihqpEbYjHrBBES9bSmDAZ695DCQhcjnstVnT2Iymp1qEc58aorSLTSs4GkiUIr64acRcDjOsStVbSZHepwZOt5N1ohXX024yXS5dD0zTyoHOsODXG5LCfsC+rYpu54smiYnBpAFuBlk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=2q8B82Us; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="KyHedZvx"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="2q8B82Us"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 2EA07C1F1FA;
-	Fri, 16 Jan 2026 13:35:40 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 2A1CE4E42117;
+	Fri, 16 Jan 2026 15:17:35 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id C8C7660732;
-	Fri, 16 Jan 2026 13:36:06 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id E056710B68A96;
-	Fri, 16 Jan 2026 14:36:01 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id D31A560732;
+	Fri, 16 Jan 2026 15:17:34 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 2C0D710B68805;
+	Fri, 16 Jan 2026 16:17:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1768570566; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1768576653; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=3fdOsjcVVBmzDRNcI+ru+Uu3VzOKUdDXyPGaxdnDz10=;
-	b=KyHedZvx7rtmHe/cnnbNoKHaQS22Or4qHnCC4b4eQ0jNJH7x4QBldH0/UUPUXfMsNjhDTx
-	OGeVUTOd/P6x1mUovZLDDscxP5ZbVZSU5zLvOL5LXdM0LqdMBKJGhEylyJH+aCuGJWGjZK
-	w83tVr6JpRwvBD46qZ9Id7CPrlPRVC0EKBB4AtWpbNSbGZ3sobEatTH7RqgXUBd10ZBxES
-	IVI+zb0ctXXO25GxCG3rU8WOkDadzRtJnATmVFU9IngqF3f951IHjsGU5wyBH1ssBV+0jr
-	WmwS/kfIkpBkmWtEb3dJVsFsb4Cg/Mg/0vfQ3A3EMiR7GDRAYAnnieKir1k0xw==
-Date: Fri, 16 Jan 2026 14:36:00 +0100
+	bh=dfVob1RBqEgBNMF28NVVnEsg3TwRdSyxpplex3+Q4lA=;
+	b=2q8B82UsQP/Mz68CZs5LdOl+D6vE4d35ilFUuFt9Ypyma2NG7AbO2K3qL8nfh5obWTzEyN
+	hgzA71ro3uEE4gfEyvcrFH+w+wGDNHuI4dOvkmtTEriQO87STJOTBpcAQ1BwZWsGWj3zXk
+	+XU5S+XxvEAZ40G1qusYgi+Zwdns4ccI2YKX7hsLxs8q8DNpuda3/pS+cPBAVFDNsWNBo6
+	+ayDZoweqnsx6LouspzL9cgPp7yYmYEuwyKlea2l6pg7ezh6JMzwsAxWmLLNTmmJp3ZBdX
+	rRarMJzA3+4I7L5iChhWJYIw0fYLqzHLtBgge9NrpZENHDqlWi8uh1mYsybrnw==
+Date: Fri, 16 Jan 2026 16:17:27 +0100
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>
 Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
@@ -44,12 +44,12 @@ Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
  <hui.pu@gehealthcare.com>, Ian Ray <ian.ray@gehealthcare.com>, Luca
  Ceresoli <luca.ceresoli@bootlin.com>, Thomas Petazzoni
  <thomas.petazzoni@bootlin.com>
-Subject: Re: [RFC PATCH 10/77] tests: Add basic metadata tests
-Message-ID: <20260116143600.5aacf12b@bootlin.com>
-In-Reply-To: <aWg58Gfb1KnMvQoG@zatzit>
+Subject: Re: [RFC PATCH 11/77] Add support for FDT_REF_PHANDLE dtb tag
+Message-ID: <20260116161727.7fe14658@bootlin.com>
+In-Reply-To: <aWhB4fYnXCD2f6Uq@zatzit>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
-	<20260112142009.1006236-11-herve.codina@bootlin.com>
-	<aWg58Gfb1KnMvQoG@zatzit>
+	<20260112142009.1006236-12-herve.codina@bootlin.com>
+	<aWhB4fYnXCD2f6Uq@zatzit>
 Organization: Bootlin
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
@@ -62,64 +62,79 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-On Thu, 15 Jan 2026 11:50:56 +1100
+Hi David,
+
+On Thu, 15 Jan 2026 12:24:49 +1100
 David Gibson <david@gibson.dropbear.id.au> wrote:
 
-> On Mon, Jan 12, 2026 at 03:19:00PM +0100, Herve Codina wrote:
-> > This first test is related to local phandle references (FDT_REF_LOCAL
-> > dtb tag).
-> > 
-> > The test pattern used is
-> >   - Generate a dts (xxx.dts.dts) from an input dts
-> >   - Check this generated dts against expected contents
-> >   - Generate a dtb (xxx.dtb) from the same input dts
-> >   - Check this generated dtb against expected contents
-> >   - Generate a dts (xxx.dtb.dts) from the generated dtb
-> >   - Check this generated dts against expected contents
-> >   - Generate a dtb (xxx.dtb.dts.dtb) from the generated dts
-> >   - Check this generated dtb, expect the same contents as for xxx.dtb
-> > 
-> > Even if only one meta-data feature is currently tested in this tests
-> > introduction, use a loop in order to ease future addition consisting in
-> > adding new input dts as soon as new meta-data feature are supported.  
+> On Mon, Jan 12, 2026 at 03:19:01PM +0100, Herve Codina wrote:
+> > The FDT_REF_PHANDLE dtb tag is similar to the FDT_REF_LOCAL tag except
+> > that it identifies a reference to an external phandle. The node
+> > referenced by the phandle is not present in the device-tree blob.  
 > 
-> As a rule of tumb, I prefer tests to be introduced in the same patch
-> that introduces the feature tested.  Usually, I don't care that much,
-> but in a giant series like this, it would really help review (the
-> tests help to document the feature being added without switching
-> between patches).
+> The names FDT_REF_PHANDLE and FDT_REF_LOCAL are perhaps a little
+> misleading - both are marking a phandle, the difference is in the form
+> of reference.  That's quite difference from the distinction between
+> the REF_PHANDLE and REF_PATH marker types, where the difference is in
+> what the reference expands to in the property.
 
-Hum ok but it is worth noting that a feature needs several patches to be
-fully supported.
+I am agree.
 
-In order to ease the review (maybe I was wrong), I chose to have distinct
-patches for modification related to new dts keywords and for modification
-related to new dtb tag and tried to have patches as small as possible.
+FDT_PHANDLE: A local phandle with the value known.
+FDT_PHANDLE_REF: An external phandle, its value need to be resolved ?
 
-The last patch of a new feature was a patch adding test.
+This is aligned with FDT_EXPORT_SYM / FDT_EXPORT_SYM_REF.
 
-I am open to remove patches that just add tests. In that case tests will be
-added in the last patch related to a new feature. You still need to switch
-between patches in that case.
+Or maybe:
+FDT_TYPE_PHANDLE
+FDT_TYPE_PHANDLE_REF
 
-Further more, during iteration, the last patch of a new feature could be
-modified just because the test part is present in this patch even if other
-part of the patch itself is not impacted.
+"TYPE" has been mentioned by Rob in the "FDT_TYPE_U32" context.
 
-I mean:
-  - patch 1: related to dts keyword
-  - patch 2: related to dtb + test
+Any other ideas are welcome.
 
-Update patch 1 will imply an update to patch 2.
-I am not sure that this will ease the review.
+> 
+> > The FDT_REF_PHANDLE dtb tag is a meta-data tag attached to a property.
+> > 
+> > It indicates that the property defined before this tag (FDT_PROP) uses a
+> > phandle value and the node related to this phandle value is not local
+> > node (i.e. the node is not present in the device-tree blob). This tag
+> > can be available only in overlay or addon device-tree blobs. The phandle
+> > value used in the property has to be resolved when the device-tree blob
+> > is applied on top of a base device-tree.  
+> 
+> This is kind of looking ahead, but does that imply that this tag is
+> only valid in addon dtbs?
 
+addon dtbs for sure but also overlay (plugin) dtbs.
 
-To avoid that, I can merge all patches related to feature into only one
-patch. This patch can be quite huge and I am not sure that it will be easy
-to review it.
+> 
+> > It is followed by two values and a possible alignment padding:
+> >  - offset (32bit):
+> >      Offset in the property data where the phandle is available.
+> >  - label (string including \0):
+> >      The label to use to resolve the phandle value.  
+> 
+> I expect it will become apparent later in the series, but it would be
+> helpful to clarify what the scope of that label is.  A single node?
+> The whole tree?  Across a tree and all its possible addons?
 
-Once again, I am open to merging patches. Let me know what do you prefer
-in terms of patch granularity.
+This label is the unresolved reference. Its scope is the dtb.
+
+For instance, "prop = < 0 1 &foo>;" in a dts with the node referenced by
+&foo not present in this dts (possible for addons and plugins) will lead
+to 'FDT_REF_PHANDLE 8 "foo"'
+
+The way "foo" is used when the dtb is applied is covered later in the
+series.
+
+It will be resolved with import/export mechanism (when the addon is
+applied).
+
+Also it can be a namespace label reference (see patch 66 for the definition
+of namespace label reference) and here also it will be resolved thanks to
+import/export mechanism. Namespace label references can only be present in
+addons.
 
 Best regards,
 Hervé
