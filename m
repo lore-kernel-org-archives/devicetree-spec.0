@@ -1,180 +1,208 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2A9A3ACA59
-	for <devicetree-spec@vger.kernel.org>; Tue, 20 Jan 2026 20:38:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F4E63D349E;
+	Wed, 21 Jan 2026 04:44:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768941538; cv=none; b=INqXJDUeKun0DRkPiTkbuQ5CAV37asC6W2PPLduiaFY4NcfHisw6C116dH7gFK2YQIAXi/3+o1/nRD5AGbOBiQYZJtfw95K0zi5AWlv0TWDwsQrUkL7+7b6v3nkn2ogdLUBqIMZ0tlwEi4vejg7rOAHf5fuzbCZVwRNSERg9MWI=
+	t=1768970646; cv=none; b=dh/FZAb2+Awba3KDO0J/xyqU+O0H9+GYqQQV/X9rv0xpCYkgMKl0u1dV1EBjBu2c0gtFb5COyc6/LSQbRKlOIc3qSbwKj7IjgKAGZubK222FtJhp29iVJHi7wIKuSVz6nicV51rPN/baDBgFT08w+5F+pYUyAPGHc8vBtGF2I0g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768941538; c=relaxed/simple;
-	bh=uvPYENYteRdmw6w232vZVanaRgiOQijJrHU/5wK5r7s=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=SK9uMj9EEwj4q02zbWzgf3WkUDJ4U1b3/6aLJgFVd1buRWZ3NHrTQABcaLTo5BTWsWK1pAw3M6856jD4D9VMjIigcJJKED7JbdCzdrdpyQaGkaLLIcduDjwjoMPWJ19o9oLV5hoWsMA6usQMPA26an/4wH6f3IFul74Y9sjxdko=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bAec5GRL; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1768970646; c=relaxed/simple;
+	bh=qAii6QgdL7jNKvduUac6KHBcuSw94ItyGA9jGBwPO68=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=kHL1EZw2T6LNeO3I7bqSjl+bg8ASoouwDjXJYRkPe2TSqtJGACUVlnipQGyqXPliN+Ay5Rc3x+9FRD9Sgkh80zpM7lx2g/BUSExO46WPnsmVtElbla+vs8Z0TalAlIN9g1aEJtML2OV/0kf/RmGn07WRu6UrzdJouwas/6fBDVI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=ZA2eF+Ny; arc=none smtp.client-ip=150.107.74.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bAec5GRL"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55072C4AF09
-	for <devicetree-spec@vger.kernel.org>; Tue, 20 Jan 2026 20:38:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768941538;
-	bh=uvPYENYteRdmw6w232vZVanaRgiOQijJrHU/5wK5r7s=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=bAec5GRLWcvsSuxgNE41lfMbTN5H6VzhNqIIE0aDj+qZmmIc4/zrCa1yvKzgUJgJJ
-	 MXpxgtXGv3Ge9wKgVE4jhCuNPmRIxgk46fD5iuLdyyQ9kz7avxvdPFpwsVirV4Fyg6
-	 /5V2msVdj+wvp+A+tGHk1xqegu9uuhFf9/RBZsXxJFovz+AD1nunutoPLO5sezzI0k
-	 3c7Tap/KTxRvEQ0lnpzdF00H/EYXawJx6QrG6BekYPW8+KKlinVuuJ+8QHVjOUQY3U
-	 /aL1N1Bre+yeBv0oTYyBQ8JWwpj3uW5qVHA5Zl87BS/pfDJGqsaAvbwK+yW/YUv9iF
-	 YStFmdQbgKfCA==
-Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-65814266b08so152385a12.3
-        for <devicetree-spec@vger.kernel.org>; Tue, 20 Jan 2026 12:38:58 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCWJ3dWDzPxfgD1OpUZauxg36MAA2uIjqQ6mHfRdo8A2Y1s5zIB80C2j/AedJyxbBvRPlf8B5pPYYgsncoW9jJA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzHbwLARqwlcJl9tR+VWnPgMoXmkwfw+moNgMZ4PRQLD0o9y5Tq
-	bjQqe/WV+k6BpfrVQK6+Vd/9NPEiQCcuVAT4cbydMyj4ZGM3RiFski9C8UWruwX+qwpXGk3Kyiw
-	2PAc8RhUyAQazGFxN2dle1MeDb4eVxw==
-X-Received: by 2002:a05:6402:270d:b0:64d:1a0f:6969 with SMTP id
- 4fb4d7f45d1cf-654524cf13dmr12391632a12.5.1768941536898; Tue, 20 Jan 2026
- 12:38:56 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="ZA2eF+Ny"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=gibson.dropbear.id.au; s=202512; t=1768970636;
+	bh=TBU1vLJlZkxvDPvJysewmpBzqtdpCRwm54Kioswt+Cg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ZA2eF+NyeBpDNw9qrZ8XvxxWwNx9AOAqxIpTmvh91D1xtXdcY3uxIhcOrc+ba//3g
+	 3WRDxpPHI4oWRmrQat3fDZjOIppaTXcAdHJx8H30lVh8e/5ROucMl109KjHx3hXUv0
+	 yY9b7/e0dBFz7e7gw3d+NsqhThbfVL7X4tqbqLaNXPZrH9fa3ZgJT+hgk9h+uxVaIg
+	 hDrCVayWSZKK+kaseXYb0hcJSDkmDf8ottKYFZr+SHQBqMzHJXCMcM4wZUYM+jgkwy
+	 XC95yAsXymxYyLEVsSCmMp8vqogaDhms/iblWkZ6hGyShJMjo06PXgItdEMlQ/Na0E
+	 kyVOM8ZukTJ+Q==
+Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
+	id 4dws646QkBz4wDL; Wed, 21 Jan 2026 15:43:56 +1100 (AEDT)
+Date: Wed, 21 Jan 2026 13:35:34 +1100
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Herve Codina <herve.codina@bootlin.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Ayush Singh <ayush@beagleboard.org>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	devicetree-compiler@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org,
+	Hui Pu <hui.pu@gehealthcare.com>,
+	Ian Ray <ian.ray@gehealthcare.com>,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Subject: Re: [RFC PATCH 19/77] dtc: Introduce export symbols
+Message-ID: <aXA7drNb-0lJXxMY@zatzit>
+References: <20260112142009.1006236-1-herve.codina@bootlin.com>
+ <20260112142009.1006236-20-herve.codina@bootlin.com>
+ <aWiAmjfMiKpC4sdp@zatzit>
+ <20260116172735.757c1872@bootlin.com>
+ <aW3GWZl8AmzsTEu0@zatzit>
+ <20260119145120.724c419d@bootlin.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260112142009.1006236-1-herve.codina@bootlin.com>
- <20260112142009.1006236-3-herve.codina@bootlin.com> <aWgxAVfUYMUy9mz1@zatzit>
- <20260116100934.7d522b1a@bootlin.com> <aW29fwFEB6_qjVEc@zatzit>
-In-Reply-To: <aW29fwFEB6_qjVEc@zatzit>
-From: Rob Herring <robh@kernel.org>
-Date: Tue, 20 Jan 2026 14:38:45 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqLdKMPYq0q1Tw+8Ts9uD=AZR2HGDF2W9iY6Y=EGg=ujTw@mail.gmail.com>
-X-Gm-Features: AZwV_Qj7jkaZl8qV5GM7q3K8zKEntvaKvwM3ox7-PhbZyht2MSIMKZKq0rANS_8
-Message-ID: <CAL_JsqLdKMPYq0q1Tw+8Ts9uD=AZR2HGDF2W9iY6Y=EGg=ujTw@mail.gmail.com>
-Subject: Re: [RFC PATCH 02/77] Introduce v18 dtb version
-To: David Gibson <david@gibson.dropbear.id.au>
-Cc: Herve Codina <herve.codina@bootlin.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Ayush Singh <ayush@beagleboard.org>, 
-	Geert Uytterhoeven <geert@linux-m68k.org>, devicetree-compiler@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	devicetree-spec@vger.kernel.org, Hui Pu <hui.pu@gehealthcare.com>, 
-	Ian Ray <ian.ray@gehealthcare.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>, 
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="WleWFhIMSXWjX9mx"
+Content-Disposition: inline
+In-Reply-To: <20260119145120.724c419d@bootlin.com>
+
+
+--WleWFhIMSXWjX9mx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 18, 2026 at 11:18=E2=80=AFPM David Gibson
-<david@gibson.dropbear.id.au> wrote:
->
-> On Fri, Jan 16, 2026 at 10:09:34AM +0100, Herve Codina wrote:
-> > Hi David,
-> >
-> > On Thu, 15 Jan 2026 11:12:49 +1100
-> > David Gibson <david@gibson.dropbear.id.au> wrote:
-> >
-> > > On Mon, Jan 12, 2026 at 03:18:52PM +0100, Herve Codina wrote:
-> > > > This v18 version will add support for
-> > > >  - metadata in device-tree blobs in order to have a better handling=
- of
-> > > >    phandles and unresolved references.
-> > > >  - Addon device-tree blob (successor of device-tree overlay)
-> > > >  - Import and export symbols feature
-> > > >  - multiple trees in a addon device-tree blob (i.e. root device tre=
-e and
-> > > >    orphan node tree)
-> > >
-> > > So, once this patch is applied, the rest of the series pretty much ha=
-s
-> > > to be applied "atomically" - otherwise a version built in the interim
-> > > will be lying in saying that it supports v18.
-> > >
-> > > I therefore suggest moving any changes that *can* be moved before thi=
-s
-> > > patch, should be moved before this patch.  That will assist in
-> > > reviewing and merging the series piecemeal, rather than as a single
-> > > giant blob.
-> > >
-> > >
-> > > Regarding the content itself.  It seems like this is a pretty major
-> > > change to the dtb format - maybe that would suggest bumping the
-> > > version by more than one (e.g. like we went from v3 to v16 in the
-> > > past).
-> >
-> > I see your point.
-> >
-> > Maybe the Rob's idea related to 'unknown tag' and the suggestion I did =
-[1]
-> > related to the generic tag value definition to support those 'unknown t=
-ag'
-> > could help here.
->
-> Having a standard encoding of tag length so unknown tags can be
-> skipped is a reasonable idea.  I think you do need provision to mark a
-> tag as "safe to ignore" or not - e.g. something like FDT_BEGIN_NODE
-> could never be safely ignored.
->
-> > As a reminder here, this generic tag value definition consist in:
-> > --- 8< ---
-> > A tag value is on 32bits. We can define the structure of this value.
-> >   - bit 31 (msb):
-> >      - 0: This is not a new kind to tag and so it doesn't follow this d=
-efinition.
-> >           All existing tags are in this category
-> >      - 1: New kind of tag adopting this definition
-> >
-> >   - bits 30..28:
-> >      tag data length encoding
-> >      0b000: No data related to the tag
-> >      0b001: 1 data cell (u32) directly follows the tag
-> >      0b010: 2 data cells (2 u32) directly follow the tag
-> >      ...
-> >      0b110: 6 data cells (6 u32) directly follow the tag
-> >      0b111: Tag is followed by a cell (u32) indicating the size (in byt=
-es)
-> >             of data available just after this cell (including any paddi=
-ng
-> >             if needed).
->
-> I'd suggesting giving a byte length not including alignment padding.
-> That way if you wanted to encode a bytestring in there, you wouldn't
-> need a way of encoding the unpadded length in adddition to the
-> standard way encoding the padded length.
->
-> >           Because this size include some possible padding, its value is=
+On Mon, Jan 19, 2026 at 02:51:20PM +0100, Herve Codina wrote:
+> Hi David,
+>=20
+> On Mon, 19 Jan 2026 16:51:21 +1100
+> David Gibson <david@gibson.dropbear.id.au> wrote:
+>=20
+> > On Fri, Jan 16, 2026 at 05:27:35PM +0100, Herve Codina wrote:
+> > > Hi David,
+> > >=20
+> > > On Thu, 15 Jan 2026 16:52:26 +1100
+> > > David Gibson <david@gibson.dropbear.id.au> wrote:
+> > >  =20
+> > > > On Mon, Jan 12, 2026 at 03:19:09PM +0100, Herve Codina wrote: =20
+> > > > > Export symbols allow to define a list of symbols exported at a gi=
+ven
+> > > > > node level. Those exported symbols can be used by an addon when t=
+he
+> > > > > addon is applied on the node exporting the symbols.   =20
+> > > >=20
+> > > > This seems to imply an addon always applies at a single node locati=
+on.
+> > > > I'm not sure that's a good design choice, since I don't see how it
+> > > > covers the case of something that connects to several connectors. =
+=20
+> > >=20
+> > > Apply the addon on a node that knows about those connectors. =20
+> >=20
+> > That seems limiting to me, because it requires the base tree to know
+> > about all possible connector combinations, which I'm not sure is
+> > feasible.  If I understood Geert(?)'s case properly, there are use
+> > cases where a board might have, say, six "type foo" connectors, and an
+> > addon board could connect to any two of those.  Of a board might have
+> > 3 "type foo" and 3 "type bar" connectors and an addon board needs to
+> > connect to (any) of each.  It seems much more natural to me that at
+> > attach time you say
+> > 	"addon foo 0 =3D> board foo 1, addon foo 1 =3D> board foo 5"
+> > or	"addon foo 0 =3D> board foo 2, addon bar 0 =3D> board bar 1"
+>=20
+> Who can perform this mapping ?
+>=20
+> The user applying the addon if a tool is used such as fdtaddon for instan=
+ce
+> (even if this kind of mapping is not yet available in fdtaddon I proposed=
+).
+>=20
+> Or a driver that knows about the board connectors.
+
+Either or.  From the point of view of the design, I'm thinking of this
+being specified by the "client" - that is by whatever is initiating
+the application of the addon.  That could come directly from user
+input, but in cases where the connectors are sufficiently probable,
+something automated could also supply the information.
+
+> This driver will apply the addon dtb and provide custom mapping between
+> symbols expected by the addon (/import/) and symbols provided by the boar=
+d.
+>=20
+> >=20
+> > Rather than the board itself having to anticipate all combinations.
+> >=20
+> > > > > In order to perform
+> > > > > its symbol resolution. Any unresolved phandle value will be resol=
+ved
+> > > > > using those exported symbols.
+> > > > >=20
+> > > > > The feature is similar to __symbols__ involved with overlay but w=
+hile
+> > > > > all symbols are visible with __symbols__, only specific symbols
+> > > > > (exported symbols) are visible with export symbols.   =20
+> > > >=20
+> > > > This paragraph doesn't make sense to me.  What's a "symbol" if it's
+> > > > not something in __symbols__ or export symbols? =20
+> > >=20
+> > > An imported symbols ?
+> > >=20
+> > > /import/ foo "blabla";
+> > >=20
+> > > from the addon point of view where this /import/ is present, 'foo' is=
  a
-> >             multiple of 4 bytes.
-> >             The offset of the tag + 4 + size points to the next tag.
-> >
-> >
-> >   - bit 27..0
-> >      tag specific identifier
-> > --- 8< ---
-> >
-> > I mean dtb version v20 could be:
-> >
-> >  - New header size with dt_flags added in the header (if this new field=
- is
-> >    kept).
-> >
-> >  - Support for the generic tag values and so the notion of 'unknown tag=
-'
-> >
-> > With that done, everything else added afterward will have no impact on =
-the
-> > dtb format itself.
->
-> Well... maybe.  It's not entirely clear to me whether all the new tags
-> can be safely ignored by something that doesn't understand them.
-> e.g. a consumer can't safely ignore the tags which give unresolved
-> phandle references if it then expects the phandle values in the actual
-> property values to be correct.
+> > > symbol. =20
+> >=20
+> > I guess, but existing plugin stuff doesn't really have imported
+> > symbols, so the example doesn't really illuminate the difference from
+> > the status quo.
+>=20
+> A plugin need to know about all possible symbols available on the board
+> is applied too. This is the purpose of __symbols__. This just means that =
+for
+> plugin all possible symbols are imported and symbol translation is not po=
+ssible.
+>=20
+> A plugin is designed for a specific base board. It needs to know about ea=
+ch
+> busses and how they are wired.
+>=20
+> I mean a plugin references i2c5, the i2c controller number 5, and i2c5 ne=
+eds
+> to be present in __symbols__.
+>=20
+> The target property in __overlay__ identify the target node. Here also, t=
+his
+> is dependent on the board the plugin is applied to.
+>=20
+> Addons depend only on the node, describing the connector, they are applied
+> to. They do not depend on the full specific board where this connector is
+> available.
+>=20
+> Two different boards can have the same connector available and a given bo=
+ard
+> can have two connectors of the same family the addon can be connected to.
 
-I think we'd want some higher level "this is an addon or base DT" than
-presence of tags. Maybe that's just the version. Perhaps a new header
-field to say this is a base or addon DT. Or both?
+Ok, I think I see what you're getting at.
 
-Everything in this series intended for the base DT should be safe to
-ignore just as __symbols__ (and __local_fixups__ if you add /plugin/)
-is safe to ignore. It's only software that understands and wants to
-use the new "addons" that needs to understand.
+--=20
+David Gibson (he or they)	| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
+				| around.
+http://www.ozlabs.org/~dgibson
 
-Rob
+--WleWFhIMSXWjX9mx
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmlwO2gACgkQzQJF27ox
+2GdOOQ/+ILSnO3ZrAJSJMxf5lqEnxa5NuX+W4JC56ID9CZZX4/L6YQ6fB/wHDijh
+EJ7R8xizkJdTZNgjIoERa/mH3AYJpMVBHvcL4FtNV1srJV2XpIZ4XluEVsGr21As
+tO/7joHwBokZyH2n2ZBMX+H29VPgvCtWyVLgwwVDHShW8vipvqKrMbTIyQlq6EoI
+Ij/zQQa4hoSNaOa7RbIwl7EjwciYdQN6+V9eYs/GC0T2OGIjqx2ya5a/aOCPSAzW
+C5ow31/UaxyHs1oPxdocuwIDmfC46JmMzCb1HB03lQmFp0zpXv1+2XeyJVX0E1Qd
+ys6p6By19JlvXcQEvwiU+7nTHDHuJwJ9Xtb3VN47OhcD+m8Dpkh96RQwYGyr4/Ck
+34sH3NJ/LoIN6aTn9/le313ZAvqDJCuDpjIrz4Dzy+0heCoptbLXhUVdyI2+9MWk
+25BXeWGtVKRiSGh1wrYI8N9rc+wF92Pn2gHixfkaUrrn7UOWPzJgyTIVFelGxoKs
+d7NULSXOVKhSG2yPvKvhbfO5bjC5QplutwflMaiI0EMDcBh31yaE7K+P29IWAHg4
+DUaOu/AtB1fZGgNRHkke63SP/qEWU7aZA0THa9e6D7odEbtkWd6UV4VYQLW0JuxF
+jOik99na7Qcn2zMnGpsEwleSeIWpBHV9ccPezO3EnJc4SFiCSb0=
+=U0iQ
+-----END PGP SIGNATURE-----
+
+--WleWFhIMSXWjX9mx--
