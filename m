@@ -1,34 +1,34 @@
 Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F4593D349B;
-	Wed, 21 Jan 2026 04:44:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B22FE47B434;
+	Wed, 21 Jan 2026 09:02:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768970646; cv=none; b=hJRe7qiGQhlfyHoWXT5kQMpv2oLAravilnGAS0mRx6VdykoKCfGi2aHwirLxHSFHZe0PXC4ZMzxRWijzVw+PBtAFBTXVaEfcRUJ05WX3AzGFdLKpmgm2P8WyJfvrY4SJqnOqCcEcWNTT+8+n2xzp+2LrwngpCfBprT5w6FuJIjg=
+	t=1768986177; cv=none; b=F21T3jb9rqsYKBwnDDRVH91OGHDLdxF/a/kyZv7E3Fk0ro83vFfykIDS8Yvh1PW/1X0ufLU2lde32uiXWa4zX05j5EbKfp0b3cm6i7laltvWb5yvmqFJHelPr8MnVtjx0F5cjyAcIe6F4hCXxzBY4hsqjHL5ih1RDswZESrzITE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768970646; c=relaxed/simple;
-	bh=vmFU8XHjUILi92lfTDqAYfiGIVyhEpodVoVizjNipiE=;
+	s=arc-20240116; t=1768986177; c=relaxed/simple;
+	bh=ka0ULQIUKqMh3b2RNXuVY1ex+ABAEEFnzmDs/hLvR6o=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tGUAMzxJlZZwH3W9C+wsMnJxYTQHIXiK+B8Jcn0DCXvCTwYVrFQJVgOremgp0i9g+4jJMAFOpJAw9S3XggP9Eg7uHb3BTswG2qDOt6N2oEOed2kZQ35fg871iKjhYiQYXjFBdU4GgpgR4Z3iKIOnejXUyZnSTcg/SzjnP26+Mg4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=mIO6+5lt; arc=none smtp.client-ip=150.107.74.76
+	 Content-Type:Content-Disposition:In-Reply-To; b=jqmlbRHAyPcAAxjeamkqI/GVnmaC82bfCQqhgptdvn9VzawKRXc5zzfM5n//sYZLYFRw80A3RXB//fHnJubUBSTio1UGKlMcVPKzEZ+dbNEc68bvS/Iz2MOh6r/SK80140LbHwzFjpjtEL6lqV+DL01fw84Zov2E0lVwUZ9z8E4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=nQmKwT1Q; arc=none smtp.client-ip=150.107.74.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="mIO6+5lt"
+	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="nQmKwT1Q"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=gibson.dropbear.id.au; s=202512; t=1768970636;
-	bh=4UB/4j16fqtuACzSYwiOI2E+047A9SorvVqUgCveJbQ=;
+	d=gibson.dropbear.id.au; s=202512; t=1768986170;
+	bh=RS0262C9EZHDE/Ozhos9LH8uJQHNrcXTnFMYPJDC3Tk=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=mIO6+5ltoc9PWqb81t62UDquVJSQ2yCJAc8VIL5i2QJ78ycBPTMrpq6wiVk5qx9e1
-	 1O5nWyDd1/xJEnTPHiY0dG4g2k5y/bffzWGU7Jh25xfb1H+pu1LUl8doW4SAefbcvs
-	 t8ZWZGQud7O308bHuSVUgkvb3m8BAlLlOiY4MalgEFHpBG5ajflnT6ef1AMdJMvnKQ
-	 4Rj+mRzI2Qo6m3Pjz6DkH2EoPYiu8TLkte5nir2HKtvqTD2uqIOEsm30cDAGo/vZ/3
-	 Az2c88Lq1EUcNisbDQgqu87OU/qKMQYEC7H75QrGSReg4J46V34jYLfiHD8qbcjPyD
-	 sRv6nvZ7r1VMg==
+	b=nQmKwT1QDP28AFpcupcbMpC3aWQjsRMgnuT3+628INvWb3WjF64K50uGxcUeKhNA3
+	 SUL1toGeyfiFFnBhhOolA72jn2ajFTxoEJc9BhOV0kp5tjyLk7nZMouyfAIvlLdpTb
+	 KNnnyPq3Yws13Qhvc64kSFnL2ht35U9bLaaYFGrYIts4v9vEA6kmoklEshA5a4WA/Z
+	 3HyPiQbBm7zaV16vy6VLS8tEk42ZxIuUC8nXmM41sbQNO9VUHc5aSL+89d/8IFepcQ
+	 eucou6ddGP4APkUgvPFIJkdInclouFsI1lG5CpveNStow3JrrfcxIgIJYJ2x0N5O/o
+	 IavI+c2pvN1hg==
 Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
-	id 4dws646YmLz4w2D; Wed, 21 Jan 2026 15:43:56 +1100 (AEDT)
-Date: Wed, 21 Jan 2026 13:37:52 +1100
+	id 4dwyrp4cG5z4wCH; Wed, 21 Jan 2026 20:02:50 +1100 (AEDT)
+Date: Wed, 21 Jan 2026 20:02:33 +1100
 From: David Gibson <david@gibson.dropbear.id.au>
 To: Herve Codina <herve.codina@bootlin.com>
 Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
@@ -41,12 +41,12 @@ Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
 	Ian Ray <ian.ray@gehealthcare.com>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Subject: Re: [RFC PATCH 32/77] dtc-parser: Introduce last_header_flags
-Message-ID: <aXA8AOuucE5JdJCW@zatzit>
+Subject: Re: [RFC PATCH 46/77] dtc: Introduce dti_get_marker_label()
+Message-ID: <aXCWKf_hvdPsMNKL@zatzit>
 References: <20260112142009.1006236-1-herve.codina@bootlin.com>
- <20260112142009.1006236-33-herve.codina@bootlin.com>
- <aWiJvEEgjl44h6vd@zatzit>
- <20260119151145.2f67139e@bootlin.com>
+ <20260112142009.1006236-47-herve.codina@bootlin.com>
+ <aWiOcrj-1EB4cfO-@zatzit>
+ <20260119170240.47437a8f@bootlin.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -54,73 +54,65 @@ List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="nURbXyNkcTJCgOkG"
+	protocol="application/pgp-signature"; boundary="6ESkxfyR4Qodtky1"
 Content-Disposition: inline
-In-Reply-To: <20260119151145.2f67139e@bootlin.com>
+In-Reply-To: <20260119170240.47437a8f@bootlin.com>
 
 
---nURbXyNkcTJCgOkG
+--6ESkxfyR4Qodtky1
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 19, 2026 at 03:11:45PM +0100, Herve Codina wrote:
-> On Thu, 15 Jan 2026 17:31:24 +1100
+On Mon, Jan 19, 2026 at 05:02:40PM +0100, Herve Codina wrote:
+> On Thu, 15 Jan 2026 17:51:30 +1100
 > David Gibson <david@gibson.dropbear.id.au> wrote:
 >=20
-> > On Mon, Jan 12, 2026 at 03:19:22PM +0100, Herve Codina wrote:
-> > > The parser needs to get header flags value in different places.
+> > On Mon, Jan 12, 2026 at 03:19:36PM +0100, Herve Codina wrote:
+> > > The future introduction of orphan nodes for addons device-tree will l=
+ead
+> > > to more than one tree in the addons data. Those trees will be:
+> > >   - the classical root tree starting at the root node
+> > >   - trees related to orphan nodes
 > > >=20
-> > > It relies on the fact that the rule used to parse the dts file is alw=
-ays
-> > >   headers memreserves devicetree
+> > > Also, an addon device-tree can have only trees based on orphan nodes.=
+ In
+> > > other words an addon device-tree is valid without having the classical
+> > > 'root' tree.
 > > >=20
-> > > With that only rule to parse the file, it uses '$<flags>-1' construct=
- to
-> > > get the flags value.
+> > > To prepare this change, introduce and use dti_get_marker_label().
 > > >=20
-> > > With the future introduction of import symbols parsing, this rule will
-> > > change and the parser couldn't rely anymore on '$<flags>-1' to get fl=
-ags
-> > > value. Indeed, import symbols parsing will add a new optional symbol =
-in
-> > > this rule leading to two possible rules (with and without the new
-> > > symbol) to parse the source file.
+> > > dti_get_marker_label() retrieves a marker and its related node and
+> > > property based on the label value. It behaves in the same way as
+> > > get_marker_label() but it works at the struct dt_info level.
 > > >=20
-> > > Introduce the last_header_flags variable to explicitly keep track of
-> > > flags while also being agnostic of the rule structure and use this new
-> > > variable instead of '$<flags>-1'. =20
+> > > It handles the case where a 'root' device-tree is not present and will
+> > > handle orphan nodes trees as soon as they will be introduced.
+> > >=20
+> > > This introduction doesn't lead to any functional changes. =20
 > >=20
-> > I'm not sure this approach is safe: I'm not sure bison guarantees that
-> > semantic rules will always be executed in the same order, so using
-> > global variables is risky.
+> > For all of these functions, if the new one is basically replacing the
+> > old one, don't change the name, just change the signature.
 >=20
-> if rules were not executed in the same order '$<flags>-1' construct would
-> not work.
+> The old function is kept an used internally (move to static).
+> It is not a simple replacement.
 
-Uhh.. I'm pretty sure $<flags>-1 only depends on the parse tree
-structure, not the order in which the actual semantic rule code
-fragments run.
+It's a replacement in the sense that all the existing callers are
+moving to the new function.
 
-> The problem is not the order. I don't think the order will change. The
-> problem is related to the number of items on stack.
->=20
-> With import symbols, that the stack will be:
->   header memreserved devicetree
-> or
->   header memreserved importsyms devicetree
->=20
-> Using '$-1' will no more be possible. Indeed, '$-1' from the devicetree
-> rule will reference 'header' in one case and 'memreserved' in the other
-> case.
->=20
-> Without a global variable, I don't know how to reference 'header' (or fla=
-gs
-> value) in all cases.
->=20
-> Any better ideas are welcome.
+> When I introduce orphan node later on, those dti_xxxx() functions call
+> the old function multiple times. One call for the root tree and other cal=
+ls
+> for orphan trees.
 
-Ok, I'll try to look into it and see what I can come up with.
+> But anyway, If you prefer keeping the old name with a new signature,
+> I can do the following:
+>  - move function_name() to __function_name()
+>  - Update the function_name() signature and call __function_name().
+
+That's a better plan.  Except don't use __function_name().  _ prefixed
+names are reserved for the C library.  Use a _ suffix instead
+(e.g. see fdt_get_property_by_offset_()).
 
 --=20
 David Gibson (he or they)	| I'll have my music baroque, and my code
@@ -128,24 +120,24 @@ david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
 				| around.
 http://www.ozlabs.org/~dgibson
 
---nURbXyNkcTJCgOkG
+--6ESkxfyR4Qodtky1
 Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmlwO/AACgkQzQJF27ox
-2Gf4zA//ecAeKaXiIbLxczvbxzNwZeSNtvGNo8SZeo5/LDe+8qNrYwaRVmJKqQHD
-LFbL+RLBjdkIgEajYvPSgEGqQ7pkYmy034t53HogY2H5n2oqw0Y7neiyQ0brdIry
-nHde0wqi1NBH1iZmImGeEG0Sul17WEBmgFLZWjsyf7uE8AiiegNh6DDH3HY5YBno
-cTwoMgAcjwcb1WUcez2fcRl34RKz2yahC2tPvwE4fXwbuFATbqJRTQ5eEbYKO55h
-vzb575T9YvH3u2NThVxVcmzvuhwOd6CHTi0oyM+gHCDzVK8ZWx89vvgNipaaCSeG
-/a+s7RGOzvMfJvx0fhH6xZ2vwRsOtHej++w5/EBxunSlMXHUt+1MYRnHaYRD12OS
-m5n2Xx1uLN6IVoTmlATxABiqCacfKGPtOVYoGd1KoiXMu1ZN+L7ELWNkbRGem4c/
-NjNDLLBOguRKX0RDVeviVjYbR24dMn8/Ug6ZOzlvf4SpYCxOJTFlEao28sQUrUbi
-3iol12958J5GO8Lu0egRJdq/ztzRCS2DeOyhvHDO+6mspm/OQTw1ex9YXDD8nrL9
-uYKBHxq+X2an4SJEVfSQmH55Px5/S/peQxCzS31xdMi1N07Yfn6Be4z1mYJRCbdE
-kMDsLDDh1AHO00AKaM6SYxCvhnaD8sHvx0NRgGqQ9WM30KyoGhU=
-=VXLW
+iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmlwlh0ACgkQzQJF27ox
+2GfVXQ//RtZrNUfiUzLMX6Ez9zIWtNtlRvi7GzcRRvtDilwRUtAx1uAjh1Z5Jjem
+WBkpPUZxlwOE/UBYISPDL4vy2zTddChVb9Dvg3GBHed0rwiYwgsn9jjB+Ne6rfjv
+ozEQd+DmMNzx83Pb6BQAJsX9Twy6oBYxysdackblfRlJ4oNEreGRhzXaNhqTks7A
+Tu172rK9+gANZ+xDTQgE1ulSSAAm1lPWfn0uxWLdv9PkZvhg7puKwlEld4VseZb5
+bn5TmG1B4KNawyzb9lOHtG/vhuRWqy2RQnL6WB+n/QBMhNofTQpCgDSzao1h1Kcu
+ybM/yRSHS5QezXcIJ9NelQJclY0IxNPHOjdzmC+AzOMFi+lf1BDIOHOUFZxLU76R
+p1AzmPFjrc96MO3zrMg5w8m5iodDV/AZzPxAaCvDsiSEoWQ5GhUoHZVmIlBUT0e6
+pLlMQ/lkYcYnHM0TWIVp1f54Okm2mnbhkRSHOBJnvsKmpVasczv1U5Ix1suudflS
+qzWvoYl9iBkM0GejbjAjgu77R7nob6hVeSdcbkvCsjJg0fbCGoEAKrzLDUxHcJg0
+n9OJ26Zkyw97EP+O7Wp85nZ0qUWHqwpnTLJr6GgylNYbDQvwoI2eFoka8i2wVgvw
+gQQpb8k2EbfWfzpsoYrL+g/PgkE5mmygi7kR0cD8rOMI+zWYQqg=
+=EXxc
 -----END PGP SIGNATURE-----
 
---nURbXyNkcTJCgOkG--
+--6ESkxfyR4Qodtky1--
