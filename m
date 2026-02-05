@@ -1,373 +1,173 @@
-Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B0DA156236;
-	Thu, 29 Jan 2026 05:08:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD9F439900B
+	for <devicetree-spec@vger.kernel.org>; Thu,  5 Feb 2026 09:34:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1769663343; cv=none; b=jB0A6MsRliOnpSpj/gMj9ESmrNvZfR3bOMNy7Jm5+OYCJLiyd3vPzgW9ysda3oRDWFpFA69cXTWHB2N3if8qwMePwYj2icGZWQ2LHQ0a4l67xXzivGgPljh45/3pQA2OYqYGlRwZdkBIoLOQOVjpkOLNtn7MQ2qkFaDJHGFt8xg=
+	t=1770284044; cv=none; b=DypsAwoo4gKE1k1CES5TtK2hg4I/v+1EVxAng9Lpn0Z2ZleFiWHASInmRiUmmjITpWaDBVSBJKWv+vCm3jrJTb6EuqCLCvxSir7DhTNukIFUpFH10I3Uf059TatdwiLLVD9oLj55HXLmBc7A7T7L4SL2BbdFayXfQWirmSiJSDY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1769663343; c=relaxed/simple;
-	bh=SVSLzhIhDBNht46ZUCencG9Pf89VAI/C1MHdrY2Zy1w=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MHnZ8cljgBtUrwCA8HzN6JDaObygGg6md5p2wqRxr/dEu7NGPKqffp7iTTLoL4iIiR0M5uxiXINfMvRrq5YC8yYeEbRImHpEbvcnbMtFotjQBhFwc8bgJEKgDUktJYiETPEI+/FpMKZCK5zgCq8EZXf4zDEOpRbSM8SYdq1sSE0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=Z69dE/ON; arc=none smtp.client-ip=150.107.74.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
+	s=arc-20240116; t=1770284044; c=relaxed/simple;
+	bh=kPs0DtXG+9QUrv1Us0pa6hxYPDLn14oG/QFMp/cxXH0=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=BneYe4MXNUMRUInZUOHzeR+QbJnefGXcAjQtvQUCaEEU89A8X76HTqQNYeLMI0r0tCGs7S6s0E0vlbDK06KGOmUn+31Non1ygy97TWs1wuTWJ4UQwg32UQe8ke9/lLYImb+wN+XjRQCech3tu9QecWzZznR1uhZO7W8I3qkyHmc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Jx8R7AvC; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Mw8cCMjT; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="Z69dE/ON"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Jx8R7AvC";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Mw8cCMjT"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6155qll64166987
+	for <devicetree-spec@vger.kernel.org>; Thu, 5 Feb 2026 09:34:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=lvQdTkGdnJIP/VHAznG5qfzYCx3k04ZHT1+
+	Hz9zICkw=; b=Jx8R7AvCqo6p+3yMJ1wn+YrNaTSjHpV02CqXd6EcGHVAOp0T4WW
+	s0pYoMubHwMzR/LobBnSpaNU4QF45LUw5UVv6pngG2p/V+qj1AgWvog1JLbYQWiE
+	0doVzeFUzMHQdbC/oIW78o8HMhihs5Kvnfzp4Z+XHPSO8dGCmru2uWhivNSb5BnL
+	1YZ+YaY9fo/KvA3y0/3u8t++2DJ3/P4eKYamqgHKgO71Kga/z7cZqa8ZpkGKYdU2
+	Yf5JWj3XOKMFP5BRQPuuJWvWV260Z9NsZerV929KGP5yqNESTyr1i3TACY/JpCpm
+	L7hjzocIEoBPWXzxxcha0HKpc1QxIkJwqnA==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c4neg8pa9-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <devicetree-spec@vger.kernel.org>; Thu, 05 Feb 2026 09:34:02 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-b630b4d8d52so475269a12.3
+        for <devicetree-spec@vger.kernel.org>; Thu, 05 Feb 2026 01:34:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=gibson.dropbear.id.au; s=202512; t=1769663338;
-	bh=e1N3kyQ4rF1YOiMGhn4H4eSDhV/++xh6wo2DU8EzZsU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Z69dE/ON6RVSaoO48o6KPWOFIikymlmmL10wLQBetcHClkX7yJnFOlotf0bThbiLR
-	 A7Su0osGTrKg3Ask/Z+A2GmGQc7ryN6+icPv+wZo2FJ0Q/bTZqd5qR2JP5JOYU5o5l
-	 InN6d+afml/u+0dD9SLnJ3ykBFoXD9ADlK2hVrE6dyyC8uR9V8VLMnhGPlkU7mN4eK
-	 Wi4O51uw7T67VliZ5Dz9ijLycSEOFGr5XGbPIgITRY23jo5ndoQ5uOCrXYfxHk/kqG
-	 X26RzUpp7GKhi8OdthOXejhBXCTmGfAaV0FHqosshOf5O1oMGq6rUo1VQ54hNMk411
-	 dvL8D/PwtNzgA==
-Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
-	id 4f1nHG0W3Gz4wGT; Thu, 29 Jan 2026 16:08:58 +1100 (AEDT)
-Date: Thu, 29 Jan 2026 16:08:51 +1100
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Rob Herring <robh@kernel.org>
-Cc: Herve Codina <herve.codina@bootlin.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Ayush Singh <ayush@beagleboard.org>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	devicetree-compiler@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org,
-	Hui Pu <hui.pu@gehealthcare.com>,
-	Ian Ray <ian.ray@gehealthcare.com>,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	Saravana Kannan <saravanak@kernel.org>
-Subject: Re: [RFC PATCH 00/77] Add support for dtb metadata and addon
- device-trees
-Message-ID: <aXrrYz4U70FjkEix@zatzit>
-References: <20260112142009.1006236-1-herve.codina@bootlin.com>
- <CAL_JsqK4nH0B-CfKz5wgg12C+Vzi31ceHeOes94Z8hg3uN=X1g@mail.gmail.com>
- <20260114171822.2a44d2a5@bootlin.com>
- <aW3IjNpBnnFE7-r7@zatzit>
- <20260127161907.23e62463@bootlin.com>
- <CAL_JsqLRrbZje_gGZPBDni6StFa+6rdiECtk49on8VfkP7CDvw@mail.gmail.com>
+        d=oss.qualcomm.com; s=google; t=1770284042; x=1770888842; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lvQdTkGdnJIP/VHAznG5qfzYCx3k04ZHT1+Hz9zICkw=;
+        b=Mw8cCMjTM5Tj2TYxoND25+b2Ve4Qs9nc4jcfvejScPw1qNwrr/YsEq+n6Tq+5ImXgr
+         8wT/6M7fCl2ZAGopdp2gLsl4Ga/6Qt1VRsh7Rrdn9yMxuk2Nfnx5JlsuTnRCQNi6+kSX
+         yeDUUg+gBbZOTK+8oS84DMNkgc1QXSTXW+uCK4Ndzb/kA9y3tlhTERxS9UE8/jAsjepe
+         OefRFEp2b88U3dBVI1HyOVLwFxsPfWtn/GN5PKkLHnfqTQYUZjxpRftXatsIBZJssNlp
+         FFBLXPr4N5I9GcEqLFMx3F0WG7noGmCJ04LOJ+o+kdSGgo9mNvhyLN3yBba3zTPiN7nr
+         z1iA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770284042; x=1770888842;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lvQdTkGdnJIP/VHAznG5qfzYCx3k04ZHT1+Hz9zICkw=;
+        b=bMfwJpoV+sILPrpP3QYjYIJqlSVaTu+dbfujySaa3Z7t/UBk7SJzrRx7RRzXfV/vPL
+         lk8PZJE9yRYrI1Ci3iGcFriwbxoZkO3vyo9ZSCbTbcvR4IyKe0TRGkQxpqcmXoIw+s8w
+         dN2jHb8eTfI+V4BzY4rL2w2aR1qjROA++CS9Q0DVuGnoTG92E6UxfDKjhtX4VJFWFVvI
+         T/ykSJCTENSbzh/Tt8JWgjAM6g2gpBkCw/X93C/aXuZ/JK3dfKXwhjQUopTRmuTOIxDJ
+         f2wzzP5Mc8DUyTluh61ok7zKTAXIbRwHnKpKl+5dIRT/Wo+68zSqr+5wCe+6B5NDcTk1
+         qAqg==
+X-Forwarded-Encrypted: i=1; AJvYcCUUQ4IibCM2/i4WDeu6ji8LpV+cthdNU/3koGBErNXCQCjk6TvSrFk3/S+k1DlNLw1Ry9BfrAfeut+b0R/TLCM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwnXLRXTKfIVUliU+sVUz+rIxNDO7AUZQeq5UoJ4dn9Oir8aEPR
+	3SC1y0v1nPkKRRyfut7hqiCihJDkTkETO+1wMF0tdbe23SvIFFwfP09Y5Z8pATGIxsGdhwsvkO2
+	mF/E063+t0Ap0doBiOHkX0VIclocpqp0LweEt9X9ZQaWQpW06E6vxZGeAv/ls4vBcpYJMJXE=
+X-Gm-Gg: AZuq6aL3l3Myf6K8hLrN+rjXqrJJiTUxKg04pUjP+XS5+RgHGo+ZkiUouBNezFwWJmK
+	hDQHD2lV+d+KNitEg5DTCUU4N0jSSIQZhRKwmmNZWBUQRAPXc7eTMKiAWh0EVIs697OXjth+1cF
+	tSKP6Mvkf716GR7prfUFrepaYtY0lQhJyTq2AAxSjejFo5EaWktVQRBXl3I00VXXh0iertnujeU
+	3mAcKmodp2n8zuyIQ/EwxFeHvcbUG+u84II9EXwT2n2oqluwgoeG/TXr5XxO8jgG+q+fGF0jYt/
+	iKGnsarj/YSiL/tzguKKVzPnM055LAwT8UyC0pEiPTkNTRRkcT0iOyAF4SqDxjRP9YBgOg5db8s
+	P6igqiE6WdmysRRjJzZbIoM/NEetoklce73BgGVxnYy3+
+X-Received: by 2002:a05:6a00:4b08:b0:822:abcd:db0f with SMTP id d2e1a72fcca58-8241c64fcf5mr6075325b3a.52.1770284041450;
+        Thu, 05 Feb 2026 01:34:01 -0800 (PST)
+X-Received: by 2002:a05:6a00:4b08:b0:822:abcd:db0f with SMTP id d2e1a72fcca58-8241c64fcf5mr6075305b3a.52.1770284040974;
+        Thu, 05 Feb 2026 01:34:00 -0800 (PST)
+Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8241d487886sm6181538b3a.59.2026.02.05.01.33.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Feb 2026 01:34:00 -0800 (PST)
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+To: andersson@kernel.org, robh@kernel.org, mani@kernel.org, krzk@kernel.org,
+        helgaas@kernel.org
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        lpieralisi@kernel.org, kw@linux.com, conor+dt@kernel.org,
+        linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree-spec@vger.kernel.org, krishna.chundru@oss.qualcomm.com,
+        lukas@wunner.de
+Subject: [PATCH v4] schemas: pci: Document PCIe T_POWER_ON
+Date: Thu,  5 Feb 2026 15:03:46 +0530
+Message-Id: <20260205093346.667898-1-krishna.chundru@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="K9rhePGmAvqJDnoH"
-Content-Disposition: inline
-In-Reply-To: <CAL_JsqLRrbZje_gGZPBDni6StFa+6rdiECtk49on8VfkP7CDvw@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjA1MDA2OCBTYWx0ZWRfX0nJy4SJJYLy8
+ jllVhMbzkrvMr4IRstOOhhl0n/Z2Z/3X1VISa4CiMFRoDUgxtAZXW8y5A2I8OLAywv4VLRBQriH
+ BQXVCxvBxngYmDWm7LujI35dEfAeW9EZLjaZBEa9hcF8GsmdP1HZtz7YdPwZAuFcAJseJi6xDDz
+ 36uNcWOIgMRn+W/PXJb6VJOLLHHuPjupGDM1GVnxaKH+/FXkSI+fm1RVPSycRml+M140cVwI4Um
+ rUrjEtXV4iCSafYZXHDCjPTmqAdCEPQue5AA7tmMf4WwQuMoKdlTc60lEsMLueeJt/dmWObqste
+ IaO55Kd9bDcG7mlWh+n+d0JqkdColeOv0V3xkHRI3yowm/oqREPcEx2TAIlos3xvfERNV2pFVLg
+ AmysMV1Ly9Vu/dA8DmwuO1ED9x558+SRZu0tS+SrhhlRLyAJaXo7zZZc9p+wa2HnTckqaO+aRZb
+ 7gW/Thxvsw/J3b57FLA==
+X-Authority-Analysis: v=2.4 cv=ZITaWH7b c=1 sm=1 tr=0 ts=6984640a cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ji1uk-MP7uB9YWhOYAAA:9
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-ORIG-GUID: UNiFn8RmkWc9Ik_S_9oHovLyBa8QhzIz
+X-Proofpoint-GUID: UNiFn8RmkWc9Ik_S_9oHovLyBa8QhzIz
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-05_01,2026-02-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1015 malwarescore=0 phishscore=0 bulkscore=0
+ impostorscore=0 adultscore=0 lowpriorityscore=0 suspectscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
+ definitions=main-2602050068
 
+From PCIe r7, sec 5.5.4 & Table 5-11 in sec 5.5.5 T_POWER_ON is the
+minimum amount of time (in us) that each component must wait in L1.2.Exit
+after sampling CLKREQ# asserted before actively driving the interface to
+ensure no device is ever actively driving into an unpowered component and
+these values are based on the components and AC coupling capacitors used
+in the connection linking the two components.
 
---K9rhePGmAvqJDnoH
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This property should be used to indicate the T_POWER_ON and drivers using
+this property are responsible for programming both the scale and the value
+of T_POWER_ON to comply with the PCIe specification.
 
-On Tue, Jan 27, 2026 at 04:06:12PM -0600, Rob Herring wrote:
-> On Tue, Jan 27, 2026 at 9:19=E2=80=AFAM Herve Codina <herve.codina@bootli=
-n.com> wrote:
-> >
-> > Hi Rob, David,
-> >
-> > On Mon, 19 Jan 2026 17:00:44 +1100
-> > David Gibson <david@gibson.dropbear.id.au> wrote:
-> >
-> > ...
-> > > >
-> > > > I think we can have metadata at 3 differents levels:
-> > > > - Property
-> > > > - Node
-> > > > - Global dtb
-> > >
-> > > This is a really minor point, but I don't especially like the term
-> > > "metadata" for the symbol / fixup information.  Although it's
-> > > technically accurate that it's metadata for the property bytestrings,
-> > > in most contexts "metadata" makes me think only of tree global
-> > > metadata.  By analogy, symbols and fixup information in a .so or .a
-> > > could be seen as metadata to the raw code / data bytes, but I wouldn't
-> > > normally use that term for it (whereas I might for, say, the soname or
-> > > certain .note sections).
-> > >
-> > > > With the suggestion you did on patch 6 related to FDT_REF_LOCAL and=
- if I
-> > > > understood correctly, you expect to have a kind of "container" tag =
-to group
-> > > > metadata on each level.
-> > > >
-> > > > Also you expect to have the ability to handle all 'for now unknown'=
- tag
-> > > > smoothly and so, I agree, the length of the data related to a tag a=
-re
-> > > > needed to be present with the tag itself. I see to kind of tag, som=
-e with
-> > > > the length of data available in the u32 following the tag and other=
- without
-> > > > the length encoded.
-> > > >
-> > > > Tags without length encoded are followed by one u32 field containin=
-g data
-> > > > related to the tag. This allow to avoid a lot of 'TAG_XXX 0x04 u32_=
-data'
-> > > > Indeed, I have the feeling that quite a lot of tags will have only =
-one u32
-> > > > field as data part and so, having 0x04 encoded (cell aligned) each =
-time.
-> > > >
-> > > > A tag value is on 32bits. We can define the structure of this value.
-> > > >   - bit 31 (msb):
-> > > >      - 0: This is not a new kind to tag and so it doesn't follow th=
-is definition.
-> > > >           All existing tags are in this categorie
-> > > >      - 1: New kind of tag adopting this definition
-> > > >
-> > > >   - bits 30..28:
-> > > >      tag data length encoding
-> > > >      0b000: No data related to the tag
-> > > >      0b001: 1 data cell (u32) directly follows the tag
-> > > >      0b010: 2 data cells (2 u32) directly follow the tag
-> > > >      ...
-> > > >      0b110: 6 data cells (6 u32) directly follow the tag
-> > > >      0b111: Tag is followed by a cell (u32) indicating the size (in=
- bytes)
-> > > >             of data available just after this cell (including any p=
-adding
-> > > >             if needed).
-> > > >         Because this size include some possible padding, its value =
-is a
-> > > >             multiple of 4 bytes.
-> > > >             The offset of the tag + 4 + size points to the next tag.
-> > > >
-> > > >
-> > > >   - bit 27..0
-> > > >      tag specific identifier
-> > >
-> > > As noted elsewhere, I'm not necessarily opposed to having a general
-> > > length encoding.  However, for each new tag I think we need to think
-> > > carefully about whether it really is safe for older software that
-> > > doesn't understand it to just skip it.
-> > >
-> > > > With that definition, the following tags can be defined:
-> > > >   - FDT_INFO_PROPERTY (new tag, length encoding): 0xf0000001
-> > > >      This tag is available after a property.
-> > > >      It is followed by a cell for the length of data, the data part=
- is a
-> > > >      sequence of tags (and related data) giving information related=
- to the
-> > > >      last property available before the tag.
-> > >
-> > > I'd prefer to avoid an additional layer of nesting here - I'd rather
-> > > just have multiple top level tags.
-> > >
-> > > >   - FDT_REF_LOCAL (new tag, 1 cell data): 0x90000002:
-> > > >      The cell after this tag is the offset in the property where a =
-local
-> > > >      phandle is available
-> > > >
-> > > >   - FDT_REF_PHANDLE (new tag, length encoding): 0xf0000003
-> > > >      Cf. patch 11 for definition
-> > > >      It is followed by a cell for the length of data. The data part=
- is
-> > > >      composed of:
-> > > >        - offset (u32)
-> > > >        - label (string including \0)
-> > > >        - padding if needed to have next item aligned on 32bits
-> > > >
-> > > >
-> > > > With that defined, supposing the following dts example:
-> > > >   --- 8< ---
-> > > >   /* 'foo' is a reference to local node,
-> > > >    * 'bar' is a reference to an external node
-> > > >    */
-> > > >   prop =3D <1 2 &foo &bar1>;
-> > > >   --- 8< ---
-> > > >
-> > > > The dtb will see the following structure:
-> > > > FDT_PROP ...
-> > > > FDT_INFO_PROPERTY (0xf0000001)
-> > > >   28 (length =3D (4+4)+(4+4+12) bytes)
-> > > >   FDT_REF_LOCAL (0x90000002)
-> > > >     0x8                             <--- offset of &foo
-> > > >   FDT_REF_PHANDLE (0xf0000003)
-> > > >     12 (length =3D 4+4+1+3 bytes)
-> > > >     0xc                             <--- offset of &bar
-> > > >     "bar1" + its \0                 <-- reference to resolve
-> > > >     0x00 0x00 0x00                  <-- 3 bytes padding
-> > > >
-> > > > Adding FDT_TYPE_U32 later will consist in defining
-> > > > its value, probably a 0x9 family (1 cell after the tag for the
-> > > > offset value)
-> > > >
-> > > > At any point, only looking at the higher part of the tag (i.e. 0xN.=
-=2E.....), we
-> > > > can skip the tag and its data if don't know about the tag.
-> > > >  - 0x0: Old tag format
-> > > >     -> Error if unknown
-> > > >
-> > > >  - 0x8 to 0xe: New format followed by 0 (0x8) to 6 cells of data
-> > > >     -> Ignore if unknown and skip the N cells of data to look at th=
-e next
-> > > >
-> > > >  - 0xf: New format followed by 1 cell giving the size of following =
-data.
-> > > >     -> Ignore if unknown and read the length available in the cell =
-after the
-> > > >        tag, skip length byte of data to look at the next.
-> > > >        If the length read is not a multiple of 4: Error, invalid ta=
-g.
-> > > >
-> > > >
-> > > > For this series we need the container tags:
-> > > > - FDT_INFO_PROPERTY for information related to a property
-> > > >   Among known tags defined in this series, only FDT_REF_LOCAL and
-> > > >   FDT_REF_PHANDLE can be grouped into a FDT_INFO_PROPERTY.
-> > > >
-> > > > - FDT_INFO_NODE for information related to a node
-> > > >   Among known tags defined in this series, only FDT_EXPORT_SYM_LOCAL
-> > > >   and FDT_EXPORT_SYM_REF can be grouped into a FDT_INFO_NODE.
-> > > >
-> > > > - FDT_INFO_DTB for information related to the dtb
-> > > >   Among known tags defined in this series, only FDT_IMPORT_SYM can
-> > > >   be present into a FDT_INFO_DTB.
-> > > >
-> > > > IMHO, the new tag FDT_BEGIN_NODE_REF related to orphan nodes doesn't
-> > > > have to be in one of those containers. Indeed, FDT_BEGIN_NODE_REF
-> > > > is more a node definition than a metadata.
-> > >
-> > > That's a perfect example of a new tag that absolutely cannot be just
-> > > skipped if not understood.  Software *must* hard error if they
-> > > encounter this and don't understand it.
-> > >
-> >
-> > I have started to implement this "unknown tag" feature based on the tag
-> > values definition presented here and with complementary feature (bit
-> > allowing to skip an unknown tag) as presented in patch 2 discussion [1].
-> >
-> > I didn't introduce any FDT_INFO_xxx tags. They introduce nesting tags
-> > and David seems not agree with that.
+Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Acked-by: Manivannan Sadhasivam <mani@kernel.org>
+---
+Changes in V3.
+- Couple of nits from Mani & Bjorn.
+- Link to v3: https://lore.kernel.org/all/20251126103112.838549-1-krishna.chundru@oss.qualcomm.com/
+Changes in v2:
+- Move the property to pci-device.yaml so that it will be applicable to
+  endpoint devices also (Mani).
+- Use latest spec (Lukas)
+- Link to v2: https://lore.kernel.org/all/20251110112947.2071036-1-krishna.chundru@oss.qualcomm.com/
+Changes in v1:
+- Updated the commiit text (Mani).
+- Link to v1: https://lore.kernel.org/all/20251110112550.2070659-1-krishna.chundru@oss.qualcomm.com/#t
 
-Right.  I don't see that they provide any advantage, so it's just
-extra complexity.  I'm open to persuasion if it turns out there's a
-concrete reason for it.
+ dtschema/schemas/pci/pci-device.yaml | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-> > I use simple test tags to have some "unknown tags" in dtb and looked at
-> > the way to handle them.
-> >
-> > When we read a dtb, no problem, we just skip "unknown tags" if we are
-> > allowed to (flag in tag value).
-> >
-> > The issue comes when we modify a dtb.
-> >
-> > libftd allows to modify a dtb. It allows to add/modify/remove properties
-> > and nodes. Bootloaders for instance use this capability to update a dtb
-> > before passing it to the kernel.
-> >
-> > How should we handle unknown tags in this context?
-> >
-> > We don't knwow about the meaning of those tags (unknown tags) and so, we
-> > don't know if those tags are still consistent with modifications done?
->=20
-> I don't think we have any choice, but to remove the tags.
+diff --git a/dtschema/schemas/pci/pci-device.yaml b/dtschema/schemas/pci/pci-device.yaml
+index ca094a0..a847500 100644
+--- a/dtschema/schemas/pci/pci-device.yaml
++++ b/dtschema/schemas/pci/pci-device.yaml
+@@ -63,6 +63,15 @@ properties:
+     description: GPIO controlled connection to WAKE# signal
+     maxItems: 1
+ 
++  t-power-on-us:
++    description:
++      The minimum amount of time that each component must wait in
++      L1.2.Exit after sampling CLKREQ# asserted before actively driving
++      the interface to ensure no device is ever actively driving into an
++      unpowered component. This value is based on the components and AC
++      coupling capacitors used in the connection linking the two
++      components (PCIe r7.0, sec 5.5.4).
++
+ required:
+   - reg
+ 
+-- 
+2.34.1
 
-Agreed.
-
-> > A property can be followed by an unknown tags related to this property.
-> > Also a property can be followed by an unknown tag related to the node.
-> > We simply don't know.
->=20
-> We should be able to distinguish between node and property tags at
-> least. Either by value or location. IOW, node tags must follow a
-> BEGIN_NODE tag and property tags must follow a property.
-
-This seems reasonable to me.  The fact that these properties are
-considered tied to a specific node or property should be stated
-explicitly in the general description of "ignorable" tags, though.  As
-Herve pointed out, we still have the option of adding more "old style"
-tags if we need something that doesn't fit the new constraints.
-
-> > Any modification can impact unknown tags and make them inconsistent.
-> > Here again, we simply don't know.
-> >
-> > Should we avoid any modification when a dtb contains unknown tags?
->=20
-> You answered that below. :)
->=20
-> > Should we simply remove all unknown tags when a modification is done?
->=20
-> For that node or property, yes. For the whole DTB, no. Though does
-> modifying a property constitute modifying a node?
->=20
-> >
-> > Bootloaders need to modify the dtb. Avoiding modification is a no-go.
-> > Removing "unknown tags" when a modification is done will lead to removi=
-ng
-> > all unknown tags at bootloader stage.
-> >
-> > Rob, David, any opinion related to this specific issue and the strategy=
- we
-> > should follow when modification are involved?
->=20
-> Perhaps we should separate the 'version we can read' and the 'version
-> we can write'. Let's say it is v18 that allows unknown tags, but v19
-> that actually adds any specific tags (or adds tags that are not safe
-> to ignore). Then a DTB with last_compat_version=3Dv18 and version=3Dv19
-> can be read by libfdt supporting v18+, but requires v19 libfdt to
-> write it. We'd still have to allow writing a v19 DTB with v18 libfdt,
-> but we'd have to downgrade the version to v18 (or downgrade if we had
-> to drop some tags).
->=20
-> The DT and bootloader/firmware are typically bundled together and in
-> that case there shouldn't be an issue of different versions. You can
-> have a newer DTB instead of the firmware one, but that doesn't need to
-> have the new tags (if the OS does require them, then it broke
-> compatibility).
->=20
-> Even with this series, I think everything can be ignored if you are
-> only looking for compatibility with what we have now.
-
-Not if you rely on reading phandle values.
-
-> It's only if you
-> want to support the addons, then you need v?? which defines the set of
-> tags for addons. So I'm not certain a tag bit is the right way to say
-> safe to ignore or not. I think if we have a new tag that every client
-> has to understand and handle, then that's a major version change. I
-> think the original intent with the versions was 0x10 (aka 16) was a
-> new major version, 0x13(v18) would be another minor rev, and 0x20
-> would be the next major version.
-
-I don't think it was thought out in that much detail at the time, but
-that seems a reasonable approach to me.
-
---=20
-David Gibson (he or they)	| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
-				| around.
-http://www.ozlabs.org/~dgibson
-
---K9rhePGmAvqJDnoH
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAml662IACgkQzQJF27ox
-2GeRyA//TTf5FZV56ScKBvdYqtoT+xdcol9dOlx5Cje23R/6CskLnBliRXswmZ25
-a5WVxftL/0h/c7p22m50Xm6EHN9SILAbLILd6i9aKvsI/DrNBwkvt77Qe0KOV4Xf
-vBVWJN0mqI00S7hGSQyMMmmOYeKkHvmsTA0+DT3Os6M/feom7pXWOYZ+IaxWj7pz
-9ZjxM395f51n30eUCaazlm42dVa0m1XP4Ggr7aphMUuSUN+B91x6j7vZ3LWvxi89
-myoZ8aurcDQCPsr+I8eBZPy0UIxWVL4QKPMkfl/mwqGG6fpXAh/pWbnVbUfWHfx0
-W07g3MKACu2u6+gglo8t8Gl7iiTz+xS1THAsSdpRyNEt08LBnev5ntszdvcYnQjL
-GFhGf/fmdeVSZHzSuD7kU1NgyLrUJD3A+YaKWJumULT3sGOKSfZUVBM7sBlXR2DR
-lXucGC1APsSzh6dV7L6ARvA5Z+WsbyD/4rzI4Ec1EKT43qLR/pYAsrYX87ECQKGo
-0VAZ97AeBeasrN+LwbU4ljBiSzHnSj4cIFKX1JqrjMYhgDc2qI3OLwJWA8VzqQ6u
-BLSaNWo1yHhx39WDJ3HBqqmAcbW04UoNYqhEskKwoMHrUThamNq4F/19mDEQicGV
-di6afmT7lmb7e7v7XO2erPkzzHPWCfRA/Xc3A1gv0nvWdUuw4IM=
-=iTRX
------END PGP SIGNATURE-----
-
---K9rhePGmAvqJDnoH--
