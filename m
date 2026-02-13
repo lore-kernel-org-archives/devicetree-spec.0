@@ -1,40 +1,50 @@
 Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B965B208D0
-	for <devicetree-spec@vger.kernel.org>; Fri, 13 Feb 2026 06:14:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B96FF217659;
+	Fri, 13 Feb 2026 06:14:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1770963277; cv=none; b=cCVX9H+/FmUepSC6lT/iPKofAiDbJBS1iCtRkDT4SrA3etOUcb5KYmS6Pcc2Jt3m80nIvtk9XYefC3x9t1bhDaK4R3WCDhlgWeziPEg5q4e6W1FizKIW5L0DIJjr1I+LzUG4QQGZMM4VzV4/ILlXQxGFATIvxlcr0xt/ng4hQWs=
+	t=1770963277; cv=none; b=J4evrE6m4f67R6uJdks+64BJRk/0rld/ofAsm7wgWN9gF9rtIOTjvq/1tlH+38++mmuEenJDCpRWl/A9xICklIXd7VPczmsPRnuF2vpqMVb3J6gDHFpef6ozj1ggm98F+8ro5SYBCxuoEvVhG+mctGanjQKT7KElE1FYtgZb3gw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1770963277; c=relaxed/simple;
-	bh=UK1nAz2Kgo4UVIivVJg7brDVOrbK3CfQPlCFuTdgqmQ=;
+	bh=qF6Oeuk8GOAaHa4pj4GTJTG9PfcX8pii0+KpBMI1sP8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=J+/yCqFlZONsIz0xrV8tdJCoXQpzvZ/XcGHzZmPYZvWVtPQuqVvfQ7f/yknbAFiOzu5/BtlpdnDfRkEQKPBVYfyCgbuYngLRbZdHOYjOuNxWZA7S6xrhHDlfYzDQ9IwTAqE+fEyN7qr1h5e0ahnEjiVj/4dXCA9vMzJ1nsfGcPY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=V0nswjwV; arc=none smtp.client-ip=150.107.74.76
+	 Content-Type:Content-Disposition:In-Reply-To; b=mCbQasXvgQUipGP3Gg16L80wk4BloNGqeBzpFRBF6mVe+93YoIaAw3plHK2fAqGj4009HGFCSTsXoXOIyL+sB8ZEjuUQlLb4YEj74krMgVJwh5XQjNVYf0D76v381+syjqdp9tkq/sINk1K8TCrs8H5z5G10l4VvWnRQ8Bm/XT0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=BoPaxH6Q; arc=none smtp.client-ip=150.107.74.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="V0nswjwV"
+	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="BoPaxH6Q"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=gibson.dropbear.id.au; s=202602; t=1770963267;
-	bh=qMabVyBV1+BHpSgSfjOcUWdlh1Q54lEAbwndnH+iDCM=;
+	bh=MP91vNwHCLl6vWuiKmiSwgELEwuis9I+P92P6USxMSQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=V0nswjwViTZNXg5lyr9SU2ZcIMvxhZJkBRNnesa7ovfDUcE/l+BrhYNWLvYaKHIEt
-	 gi3QacYmliC82qK4i/T2sbWrV1nE237E3DTbqo/pXBFoYINFlmLDbOk7Sxe8q9zGKg
-	 5CxxDJ4TmGO//8JC7H/TTvA2YNwH1hDn2K8EljlOFmmKJcSLsuKIa0XXkuixHP4VsB
-	 Hkr4H3tXQc9IWeIj04Ua96WZwIJObUovlaOJKE0ao+x4SDg2yHbDDy1UH8z7IXZ1HW
-	 OLXh0+f87ZgvKMopriMThkSV7RfAMTfDr5cAW83tajAcOLDiCAQLonlqTGxYcsQYgB
-	 /fWgR6wF6Hmgg==
+	b=BoPaxH6Q2UpSmy+Hd787cyOgPyy1IIbqFzA8q5bKjYoF6DEI/c/G8q5XahE9ji/Ne
+	 1VTfPyKzhqB29t1sDqRPpGw4frXwIRinmvEEt1BJ4Fn1AxO8nINGlQ3wCMvNEPj6aE
+	 npx57iNvYtr1y+knct3cBblKEl1eMZknGWb/zSEpcVUx7LH04Xl54cGR51lg9RNvUn
+	 lP5T2HfVZGQNA0KsxhdwUOJHRwe9RV+6qR8pJkLd/fcfzcF0GsmpdAVDzhE2MzP3TI
+	 TNkczyihEqOym+ux4z2/WwoYW3KtA2SV9oMA8zxVaAd5my5wKfUF4GPj8Rv1gHW8mK
+	 J3gyCOL1WmlSw==
 Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
-	id 4fC21v5FRTz4wB9; Fri, 13 Feb 2026 17:14:27 +1100 (AEDT)
-Date: Fri, 13 Feb 2026 16:13:47 +1100
+	id 4fC21v5qkDz4wCZ; Fri, 13 Feb 2026 17:14:27 +1100 (AEDT)
+Date: Fri, 13 Feb 2026 17:14:05 +1100
 From: David Gibson <david@gibson.dropbear.id.au>
-To: Kyle Bonnici <kylebonnici@hotmail.com>
-Cc: "devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>
-Subject: Re: Ranges - Intended use case
-Message-ID: <aY6zC7IHuLTjqIEj@zatzit>
-References: <7CB259ED-7AFC-4EE1-A926-54A5F6DCD97B@hotmail.com>
+To: Herve Codina <herve.codina@bootlin.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Ayush Singh <ayush@beagleboard.org>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	devicetree-compiler@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org,
+	Hui Pu <hui.pu@gehealthcare.com>,
+	Ian Ray <ian.ray@gehealthcare.com>,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Subject: Re: [RFC PATCH 01/15] dtc: Use a consistent type for basenamelen
+Message-ID: <aY7BLVQEWLLYxWBi@zatzit>
+References: <20260210173349.636766-1-herve.codina@bootlin.com>
+ <20260210173349.636766-2-herve.codina@bootlin.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -42,135 +52,73 @@ List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="rA3yM6Rw9LKJ2/zG"
+	protocol="application/pgp-signature"; boundary="hcXyh80QbaoBzcm6"
 Content-Disposition: inline
-In-Reply-To: <7CB259ED-7AFC-4EE1-A926-54A5F6DCD97B@hotmail.com>
+In-Reply-To: <20260210173349.636766-2-herve.codina@bootlin.com>
 
 
---rA3yM6Rw9LKJ2/zG
-Content-Type: text/plain; charset=utf-8
+--hcXyh80QbaoBzcm6
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 12, 2026 at 01:14:33PM +0000, Kyle Bonnici wrote:
-> Hi=20
+On Tue, Feb 10, 2026 at 06:33:29PM +0100, Herve Codina wrote:
+> The basenamelen member in the node structure is set in all cases to
+> a positive value, the length of the basename string. Also it is used as
+> parameters on function expecting a size_t type.
 >=20
-> I have been trying to understand how ranges should/should not be used.
+> Further more an implicit cast of strspn() returned value from size_t to
+> int is needed in checks.c to avoid a signed/unsigned compilation warning
+> when this value is checked.
 >=20
-> Looking at the spec=20
+> This member has no reason to be a signed integer and its obvious type is
+> size_t.
 >=20
-> > The ranges property provides a means of defining a mapping or translati=
-on between the address space of the
-> bus (the child address space) and the address space of the bus node=E2=80=
-=99s parent (the parent address space).
+> Be consistent and fix its type.
 >=20
-> This to me the spec leave some space for interpretation on if ranges shou=
-ld be used on just buses or not. Below are some examples to try to get a be=
-tter understanding.
->=20
-> ```
-> / {
-> 	foo { // not a bus
-> 		#address-cells =3D <1>;
-> 		#size-cells =3D <1>;
-> 		ranges; // does this ranges have any meaning?
+> Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 
-An empty ranges property is a special case, which means there is an
-identity mapping between parent and child.  In this case, this is
-invalid - / has no #address-cells or #size-cells properties, meaning
-the parent bus has the default values of 2 and 1 respectively.  Since
-#address-cells is different from the child bus, you can't use an empty
-ranges property here.
+Applied, thanks.
 
-> 		bar@10 {
-> 			reg<0x10 =E2=80=A6>=20
-> 		};
-> 	};
-> };
-> ```
->=20
-> ```
-> / {
-> 	foo { // not a bus
+Reviewing the rest of the series may still take a while.
 
-I'm not sure that there's really any hard distinction between a "bus"
-and "not a bus".
-
-> 		#address-cells =3D <1>;
-> 		#size-cells =3D <1>;
-> 		reg =3D <0x100 0x50>;
-> 		ranges =3D <0x0 0x100 0x50>; // is this an intended use case?
-
-It's a perfectly valid use case.  In this case again, the format is
-invalid since the parent's #address-cells defaults to 2.  It should be:
-	ranges =3D <0x0 0x0 0x100 0x50>;
-
-> 		bar@10 {
-> 			reg<0x10 =E2=80=A6> // hence abs address is 0x110.=20
-> 		};
-> 	};
-> };
-> ```
+> ---
+>  checks.c | 2 +-
+>  dtc.h    | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 >=20
-> ```
-> / {
-> 	foo { // bus
-> 		compatible =3D <simple-bus>;
-> 		#address-cells =3D <1>;
-> 		#size-cells =3D <1>;
-> 		ranges; // this I understand to declare that children will have direct =
-mapping
+> diff --git a/checks.c b/checks.c
+> index 45d0213..946c142 100644
+> --- a/checks.c
+> +++ b/checks.c
+> @@ -324,7 +324,7 @@ ERROR(node_name_chars, check_node_name_chars, NODECHA=
+RS);
+>  static void check_node_name_chars_strict(struct check *c, struct dt_info=
+ *dti,
+>  					 struct node *node)
+>  {
+> -	int n =3D strspn(node->name, c->data);
+> +	size_t n =3D strspn(node->name, c->data);
+> =20
+>  	if (n < node->basenamelen)
+>  		FAIL(c, dti, node, "Character '%c' not recommended in node name",
+> diff --git a/dtc.h b/dtc.h
+> index 7231200..473552e 100644
+> --- a/dtc.h
+> +++ b/dtc.h
+> @@ -227,7 +227,7 @@ struct node {
+>  	struct node *next_sibling;
+> =20
+>  	char *fullpath;
+> -	int basenamelen;
+> +	size_t basenamelen;
+> =20
+>  	cell_t phandle;
+>  	int addr_cells, size_cells;
+> --=20
+> 2.52.0
 >=20
-> 		bar {
-> 			ranges; // is this needed? Or is it implied that the foobar is in the =
-same address space of bar?
-
-It is needed.  If there is no ranges property, the child registers are
-not directly accessible from the parent address space (they might be
-indirectly accessible via registers in the bus bridge).
-
-This is again technically invalid: bar has no #address-cells so it
-defaults to 2, which differs from the parent.
-
-> 			foobar@10 {
-> 				reg<0x10 =E2=80=A6>  // hence abs address is 0x10.=20
-> 			};
-> 		};
-> 	};
-> };
-> ```
 >=20
-> ```
-> / {
-> 	soc { // bus
-> 		compatible =3D <simple-bus>;
-> 		#address-cells =3D <1>;
-> 		#size-cells =3D <1>;
-> 		ranges; // this I understand to declare that children will have direct =
-mapping
->=20
-> 		flash@1000 {
-> 			reg<0x1000 =E2=80=A6>=20
-> 			ranges =3D <0x0 0x1000 =E2=80=A6>;
-> 	=09
-> 			partitions {
-> 				ranges;  // is this needed? Or is it implied that the partition1 is i=
-n the same address space of partitions?
->=20
-> 				partition1@10 {
-> 					reg<0x10 =E2=80=A6>   // hence abs address is 0x1010.=20
-> 				};
-> 			};
-> 		};
-> 	};
-> };
-> ```
->=20
-> Looking forward to explanations on this topic to extend my understanding =
-of devicetree
->=20
-> Regards
-> Kyle
 
 --=20
 David Gibson (he or they)	| I'll have my music baroque, and my code
@@ -178,24 +126,24 @@ david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
 				| around.
 http://www.ozlabs.org/~dgibson
 
---rA3yM6Rw9LKJ2/zG
+--hcXyh80QbaoBzcm6
 Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmmOsvoACgkQzQJF27ox
-2Gcepw/8DDvgp+wZmpxJsQ588VhpwiLrF2ldgxkophiGEX8zCsfElkMFNT4HYaCp
-IOUOUwAdayIyZIsT4XPMyij6ePDwsyKr/uqwQXWUVn1dfES6byNEKK+GAdk1SKxJ
-+Y3fxUFIxlwcdXJOZuSEdkZVa6x+6kFrO0jl3pi2h0CtjcEj5SiyO+ZzDjklEX2u
-jjctcnK8Cn+4JG7U+y0FB1ZSIePbzFH4wvz9jR5/PAEBNnwpVYg7R48bHyHtmbwJ
-uJgmM+LbTNXSv0eLgVc3n80k60IgNANeKjzm5qBcTSJrYPFPsWyXeclPAOihaHAF
-I7BAGXNtB1Uf2MG2+FE2MxmdEuP9bZ5gXg19t5Ux+z9d/02M36UIpq9cLmWug+3O
-DvE7E2970iSvSF6bb2LT7WWBH89bAphfDJcLeRL1JG33NCX422vv3XrgOptBiS3d
-fbmImzBEypUBPjt9O5ig0Dpf8pwcBocEO++7IvEeKwtY+Cu8ViB2Jlhihn3ecDR/
-8sXDt0W4W7w0yervMxNSu4BOOaaNGiJO91zYRrtBirvpKLNh8xNMveq+Qtloua3K
-yvny40BjXnFWrvErAh0qZ14vLTWOvVPzufAjf1PffAZOKQhCrOMdQLrHtvmDYRea
-cBkZGlcRVwQ3XUSL4AtF5NzP+W5GNjzk4u2hud8mBJa9efzCmNk=
-=LnPG
+iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmmOwSAACgkQzQJF27ox
+2Gcd1Q//Tvhcgfpf7L6SlfRq3qmgfQeIu7dWNpS2Z0XN/H9lYuklQ3IiP3nrMbBl
+69bhbRGhTkPTcMsRdzIiMMAOtoyUwzgMJWG8LdgsLXrglgEuv8bWjjFiP/H4YT/8
+yvVsKKRQCFuv6ji00hk7/AZMbtjV3Qh7JoyrkcgE1AtWb5mHdCy809i+ydaB6K+v
+uVpoUEbFmoZ7Mk7XmYuuXXHp5oJyhxZ6R7ZX7JFRngE723XD1NN8jlvyng3TVwzy
+rufa6Fq2w1WaXuoG/bMj3BmpIAJm5XWm/vHAALhMyMD0hcd9caqN+lD2fCBDJ+hw
+V+uH3O7MZPYpR7xHpz3hZtr49ADB3j/31GRQYQfcjZMdUB2Aa9vcgW1vaJYWoif9
+DYHW7+sgXFyZypMY21IDAxZyNhDg8hmTaDaVvzcWqh9Ppn0mxzt8nIIfvNnywMne
+PRpr8gVxjLuAppGhrey1TzcyA1lwhWNdbYzjTYWZxX7Otz3ZnC10xJbgBYJ+P9s3
+Vaf9SFbtzIKLs3i/hQD7oCRMMVZ+blXZMtwULKJjnbJHzo3BuIUcomiHCO7o9xOC
+r1Jl1nJ6KVJp3RNMV5zk6IJFgWpXdAd3oT6ziPk66KZLDMQ3YEQlzkMYEkfts6O0
+iLcEhcC9dnp6N3UnmzHDFl4bRgksKp4u7ohw6jmNvTz8fQHlJBY=
+=fzz+
 -----END PGP SIGNATURE-----
 
---rA3yM6Rw9LKJ2/zG--
+--hcXyh80QbaoBzcm6--
