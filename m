@@ -1,92 +1,127 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 598332DE717
-	for <devicetree-spec@vger.kernel.org>; Mon,  2 Mar 2026 17:50:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCAE8A55;
+	Thu,  5 Mar 2026 00:04:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772473846; cv=none; b=BDxtsD5TBoG9vhU9ycFM8U3bhkd6iZtyFcL0Qd9GT5o//2Tc53T6htlOMslLhaFMfn8HbRZ90zOVg6KeB1oWwLZiI2HjfG4osqaufS/FCiNx8+XoV3LL8XW3TEhsDe4JRZ8mFFHzkfuxquy1nN8K0A1El46pxcb4O4AIlMfDwmI=
+	t=1772669053; cv=none; b=anBk6IKuxHaafgPHY943OV3wJtUp7dkg8bl7Sl5FcQ1Nl8QOnr/3id9QwX8bgMrVCU7bS+8WHmQPjvqKo5+X8WxMYHQr59ihnM7B+TUPN/twZPv+oU49WskQU/pBDbbMqeaTrQOl6u0VJ4yJjVqq2GEJr8arFPn8S9u0brYgbPY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772473846; c=relaxed/simple;
-	bh=twmyGDvb1+bavHPZKSi6+ygl1ybWAsG5IrFRIcyV/Bw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=d34ANBiIceihfUxYlw63cUKemixPPYSdZ6/7XB3h6Ct5RiRndY10UT5PRv2UkUjORNr1u+xsif7J5P+dFUeOWifiOM8wp8deyGA5/vdkts23zmDUuQ1/opEn6iRa222Zxc1wzqP7mXBy70lXHhsj9fcDha7SHqSTSywPuDCAgvU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=C7viy2jk; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1772669053; c=relaxed/simple;
+	bh=/503LLqVy3WTDbGK0D7STcgdReP+YqV/W/6roS384Y8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=aiRsctpqxPo5gFiYYSP+2q8cW0DRQW/dIjnso23wfX7ZyL9FS7QVEns8MNb3eLiyrImaWkcgDeaiUCj7TKVMz9No7Z27m7fR13xhhttzruFlNynoH5B0gmzweTiiObHrq88reTEOmIq3j5G5ma6wypQ2SVy2YGcRKR16DixafGU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=YJp7+LSY; arc=none smtp.client-ip=150.107.74.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="C7viy2jk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04D98C2BC9E
-	for <devicetree-spec@vger.kernel.org>; Mon,  2 Mar 2026 17:50:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1772473846;
-	bh=twmyGDvb1+bavHPZKSi6+ygl1ybWAsG5IrFRIcyV/Bw=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=C7viy2jkgWOeJnlZwFFinQ8+Gzdtv95SSsgYdVlGnFdjfBq1VTH0dGVSs0UDOb0KK
-	 m0h/tUSBbZXuC7F1ngHSy2d7hjZIGpc1dIJHKtEZ3yLs6YWOr5skpfdn7OAZZonLfS
-	 eB1WoD+W/nVC4WjvF7+bSQqw2PqaX1/R0B2zp7U2poQ4CdvnHwE/V0yWF+3Z1KZyVd
-	 hVrJUe6q6U6sYiPAiujkvOQGBxnQ1H/NrfhKMjcBKz09ADkR4RyDJLZU/ENTYDuhkM
-	 hHeN54V2zy+hXY89P2ZyuwMtIUJJh4rG8Iaf2x8kbw+gmoFOe0KDxdsznYtziljGvA
-	 1PLCLPL1iNWaw==
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b7cf4a975d2so565754566b.2
-        for <devicetree-spec@vger.kernel.org>; Mon, 02 Mar 2026 09:50:45 -0800 (PST)
-X-Gm-Message-State: AOJu0YwvFoxp18B/iZOo8sdHMZGn2kFAbjEpjCZWnYt0DZnfIFeR/bCq
-	NVc9RtwwgzmvBgTYP5qedfV0QlC6CjTlXe8cZvoUWP7Jks8C2X2JdMlRMZfJxcqzYRi3U7wDrI2
-	LT91Y8P1Ic1kjOQxBAgmCKNPIvzX2uA==
-X-Received: by 2002:a17:906:c105:b0:b93:c5a9:a5f4 with SMTP id
- a640c23a62f3a-b93c5a9ba15mr94695866b.9.1772473844506; Mon, 02 Mar 2026
- 09:50:44 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="YJp7+LSY"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=gibson.dropbear.id.au; s=202602; t=1772669048;
+	bh=ja4+3AO8i+hm8FtkICeQprQ92Y+QbD0jQKRtBLGDDQo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=YJp7+LSYNB5eY2T1FXpbqS0AuFqrb0znTW5REabu1ftylbwfSKb8iEU7Wn5y/cQ/m
+	 iFlEEdQMGrUwK82tYqE94WI5ePvU1EJW/dPrIgTJuA1O7zLw4UcG2xBGFarxxwtbtH
+	 sLLyM4IRRWhEugWXIMehrR6HvsBMwBrUcFYylpeUghSpY3lpMIjIUNeMKynlb428x0
+	 ms+SPgCtsNEW47PFwgLGEKuLpZ9hwLxCE4h8wvLNtnOyYysDT09qsApHluFMzoP7R/
+	 1c/6TcBRAaQX2/Cqux7XUF7QFMp68X2AxHLkRpMrRHdy0b8bjZOiMGMMp8x5qBtGdu
+	 hT1htSxWb5H6g==
+Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
+	id 4fR8sN0RJJz4wBD; Thu, 05 Mar 2026 11:04:08 +1100 (AEDT)
+Date: Wed, 4 Mar 2026 21:08:50 +1100
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Herve Codina <herve.codina@bootlin.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Ayush Singh <ayush@beagleboard.org>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	devicetree-compiler@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org,
+	Hui Pu <hui.pu@gehealthcare.com>,
+	Ian Ray <ian.ray@gehealthcare.com>,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Subject: Re: [RFC PATCH 07/15] libfdt: fdt_check_full: Handle FDT_NOP when
+ FDT_END is expected
+Message-ID: <aagEsn0RMGVRFRRO@zatzit>
+References: <20260210173349.636766-1-herve.codina@bootlin.com>
+ <20260210173349.636766-8-herve.codina@bootlin.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <DB8PR05MB6826E032A341ED146299DBC18874A@DB8PR05MB6826.eurprd05.prod.outlook.com>
-In-Reply-To: <DB8PR05MB6826E032A341ED146299DBC18874A@DB8PR05MB6826.eurprd05.prod.outlook.com>
-From: Rob Herring <robh@kernel.org>
-Date: Mon, 2 Mar 2026 11:50:31 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqKJZuMzFKuS1-MagAdP9ETv8apms=q21LKF6G+wU+M6eA@mail.gmail.com>
-X-Gm-Features: AaiRm52djlOlhBb4rnZl6ar1yfqItXe5xxk3CC5BBvqZoYF169mJLYi2uYAlG4c
-Message-ID: <CAL_JsqKJZuMzFKuS1-MagAdP9ETv8apms=q21LKF6G+wU+M6eA@mail.gmail.com>
-Subject: Re: Question regarding non-volatile memory mapped memory in embedded systems
-To: "Andreasen, Bjarki" <bjarki.andreasen@nordicsemi.no>
-Cc: "devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="pAL3Zc8TOJ2/WxD/"
+Content-Disposition: inline
+In-Reply-To: <20260210173349.636766-8-herve.codina@bootlin.com>
+
+
+--pAL3Zc8TOJ2/WxD/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 24, 2026 at 8:24=E2=80=AFAM Andreasen, Bjarki
-<bjarki.andreasen@nordicsemi.no> wrote:
->
-> Hello from a zephyr-rtos dev,
->
-> In embedded systems, it is typical to execute directly from non volatile =
-memory mapped storage.
+On Tue, Feb 10, 2026 at 06:33:35PM +0100, Herve Codina wrote:
+> fdt_check_full() makes the assumption that a FDT_END tag is present
+> immediately after the FDT_END_NODE tag related to the root node.
+>=20
+> This assumption is not correct. Indeed, FDT_NOP tags can be present
+> between this FDT_END_NODE tag and the FDT_END tag.
+>=20
+> Handle those possible FDT_NOP tags.
+>=20
+> Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 
-So eXecute In Place or XIP.
+Merged, thanks.
 
-> Looking through the devicetree spec, there is a node for defining memory =
-mapped system memory, and reserved memory, the /memory and /reserved-memory=
- nodes.
->
-> Are the /memory and /reserved-memory nodes intended to be used with volat=
-ile memory mapped storage in embedded systems?
+> ---
+>  libfdt/fdt_check.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/libfdt/fdt_check.c b/libfdt/fdt_check.c
+> index a21ebbc..cca0523 100644
+> --- a/libfdt/fdt_check.c
+> +++ b/libfdt/fdt_check.c
+> @@ -43,7 +43,7 @@ int fdt_check_full(const void *fdt, size_t bufsize)
+>  			return nextoffset;
+> =20
+>  		/* If we see two root nodes, something is wrong */
+> -		if (expect_end && tag !=3D FDT_END)
+> +		if (expect_end && tag !=3D FDT_END && tag !=3D FDT_NOP)
+>  			return -FDT_ERR_BADSTRUCTURE;
+> =20
+>  		switch (tag) {
+> --=20
+> 2.52.0
+>=20
+>=20
 
-Yes. And what's defined in /reserved-memory should be bounded by what
-/memory node(s) define though given there is no enforcement of that,
-that's probably not always true. /memory should not be defining RO
-storage.
+--=20
+David Gibson (he or they)	| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
+				| around.
+http://www.ozlabs.org/~dgibson
 
-> A client program (which in an embedded system may be the entire program b=
-ooted by the soc itself) is to a large extent agnostic to the exact type of=
- memory its executing from since the memory is memory mapped.
-> As long as the program was compiled with the appropriate memory access pe=
-rmissions, non volatile memory like flash being read/execute only, RAM bein=
-g read/write/execute of course.
+--pAL3Zc8TOJ2/WxD/
+Content-Type: application/pgp-signature; name=signature.asc
 
-XIP isn't really defined for DT. I'm not sure it has to be as that's
-more the protocol/interface between the prior stage and the
-client(OS). You could still want/need a generic way to define the
-non-volatile ranges. There are various MTD and partition bindings, but
-those live under specific h/w devices rather than some generic node
-like 'memory'.
+-----BEGIN PGP SIGNATURE-----
 
-Rob
+iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmmoBK0ACgkQzQJF27ox
+2GdFtQ//U5GPbKxzxDk24NbMmRtkOgDqjXNrMkzCqsBmfhYsj5QrjCf1orhp+amh
+pZV0oz+JNKtTohd5CHb9p443WJWpXB1xSFXtAMBCWgI3ncxSwtyeaeBsA1hpx1SL
+1oKw9rHWTDkJL8FiuS6F/dBOAT8VH86a/0k4hUlhxjsB3tjWrjo6W4v6Li/eA/vs
+XtKY7ZkOE7G/BDe5DxDuugbXwuu5ZbNTdDLxFlcCCVWG0Ll+RL9TwBNkuAHRkZy6
+PCe/1h0YooDOFHFdl3bY6W5dBf4sNspkcUYPMQ5DcWy56J0KEdwrlWCeKGYdPnfb
+HH/xFeDcwXybcbt5Vt4b+qOG5/lgX1/+XnX8L3M4wpvlhc/NQJ4wpwA2yisA0xjC
+dN9+Yew1yrHjCj7sQvcE+WELYGzuoay3tnUowOc9yIKINQEN3iC0H3AhmRI4jEJD
+EzGjPQO59C3zwhmvfUA5PgEujppUd8PrliHQKlpRM+/oQ8HbrdTLVX8qb5fJxGdt
+AodFrhU8b0FkgHsfAB+BKozAcG3O6U3lcdqqkor6e0ideGnMTeFSTIv7ZMcWtOyu
+QNnYprKmus+McRz+f2SObD1DWFszRtt7+c6EmPdMFKSWz7t16MmH66tt/ulC/UQd
+z3k7N4SHlw8ZSlynJXVwbKaRZvRC5g6Cmj3g0Czca+fKouTTCoE=
+=86bb
+-----END PGP SIGNATURE-----
+
+--pAL3Zc8TOJ2/WxD/--
