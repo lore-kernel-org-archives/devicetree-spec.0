@@ -1,127 +1,114 @@
-Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCAE8A55;
-	Thu,  5 Mar 2026 00:04:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13DB03B7779
+	for <devicetree-spec@vger.kernel.org>; Thu, 12 Mar 2026 07:54:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1772669053; cv=none; b=anBk6IKuxHaafgPHY943OV3wJtUp7dkg8bl7Sl5FcQ1Nl8QOnr/3id9QwX8bgMrVCU7bS+8WHmQPjvqKo5+X8WxMYHQr59ihnM7B+TUPN/twZPv+oU49WskQU/pBDbbMqeaTrQOl6u0VJ4yJjVqq2GEJr8arFPn8S9u0brYgbPY=
+	t=1773302051; cv=none; b=BiCEb82BeCs5lfsUj3FvXYmLkRZSiVNaEbZwibQcK5hJPFWuAk6s/69dO7TLwUWoaQmoyyakRVGib/e1LlXNYq03A/4Nviptrnj52+30m5sUwUXhsQV8adLiKh3m+L9lYztDYOC0p8qk1NrDvguvSzogGqrsx/tTnX09XB4w8o0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1772669053; c=relaxed/simple;
-	bh=/503LLqVy3WTDbGK0D7STcgdReP+YqV/W/6roS384Y8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aiRsctpqxPo5gFiYYSP+2q8cW0DRQW/dIjnso23wfX7ZyL9FS7QVEns8MNb3eLiyrImaWkcgDeaiUCj7TKVMz9No7Z27m7fR13xhhttzruFlNynoH5B0gmzweTiiObHrq88reTEOmIq3j5G5ma6wypQ2SVy2YGcRKR16DixafGU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=YJp7+LSY; arc=none smtp.client-ip=150.107.74.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
+	s=arc-20240116; t=1773302051; c=relaxed/simple;
+	bh=Govdyk71M+I6axKdjmoCcJlG6TEPshPTfRfVWbmisTc=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=WRVCX+Ixk5SnamvvR583FonRLbwOefxsixciaE7GZcEBnz8OnTP7I4J3txK3mUQId/Kp2mBui8Uzpb66z+Ih+JfrH89NILWD9gED79d8BKVYHN51/A4lnpUO1NZ3kX7TKeOni8tUEwf1wDNTe45VUEiVY6owyXsa3aYuqHaWjpU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=RYW2UpiM; arc=none smtp.client-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="YJp7+LSY"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=gibson.dropbear.id.au; s=202602; t=1772669048;
-	bh=ja4+3AO8i+hm8FtkICeQprQ92Y+QbD0jQKRtBLGDDQo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=YJp7+LSYNB5eY2T1FXpbqS0AuFqrb0znTW5REabu1ftylbwfSKb8iEU7Wn5y/cQ/m
-	 iFlEEdQMGrUwK82tYqE94WI5ePvU1EJW/dPrIgTJuA1O7zLw4UcG2xBGFarxxwtbtH
-	 sLLyM4IRRWhEugWXIMehrR6HvsBMwBrUcFYylpeUghSpY3lpMIjIUNeMKynlb428x0
-	 ms+SPgCtsNEW47PFwgLGEKuLpZ9hwLxCE4h8wvLNtnOyYysDT09qsApHluFMzoP7R/
-	 1c/6TcBRAaQX2/Cqux7XUF7QFMp68X2AxHLkRpMrRHdy0b8bjZOiMGMMp8x5qBtGdu
-	 hT1htSxWb5H6g==
-Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
-	id 4fR8sN0RJJz4wBD; Thu, 05 Mar 2026 11:04:08 +1100 (AEDT)
-Date: Wed, 4 Mar 2026 21:08:50 +1100
-From: David Gibson <david@gibson.dropbear.id.au>
-To: Herve Codina <herve.codina@bootlin.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Ayush Singh <ayush@beagleboard.org>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	devicetree-compiler@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org,
-	Hui Pu <hui.pu@gehealthcare.com>,
-	Ian Ray <ian.ray@gehealthcare.com>,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Subject: Re: [RFC PATCH 07/15] libfdt: fdt_check_full: Handle FDT_NOP when
- FDT_END is expected
-Message-ID: <aagEsn0RMGVRFRRO@zatzit>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="RYW2UpiM"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 4D60D4E42644;
+	Thu, 12 Mar 2026 07:54:07 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 1C0225FDEB;
+	Thu, 12 Mar 2026 07:54:07 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id AF0CC103685B6;
+	Thu, 12 Mar 2026 08:54:02 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1773302046; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=D5yY0c9wx3ZqgsxR2ENFj3jj2EUIEYpXbXhAsxTRZH8=;
+	b=RYW2UpiMJfv0RfUtsX3Rn93eXp5nUxDQSCAD0zYOkzgZnxDadmituXR+m6NMkzfAr50ipq
+	ASB1jA0VYqAzmyDLZOstE/X92+Mjue8FlG0+F8mDivHqSgLDeWFaDYRv+vNQ3w7AhDXkS0
+	0apA/HYHMcW83CSvgL3P2ZElvLE9+tVmjlPGcWzgcO3r1v1uW1hvrxiy8MqT7wzKNOPgFH
+	0C1zZvUoOhB4Z3NyMvxHU1ZlYnVm8qp32O5Yu/6t4vfywQCRaeIoKWWQJX2cKk1hK2/2A2
+	8T9Gjos5qtFGrPZh4TDh18i60M0E2dTC1YZ9EUZtiEKNMWaoT8mtsqBExqNmwg==
+Date: Thu, 12 Mar 2026 08:54:00 +0100
+From: Herve Codina <herve.codina@bootlin.com>
+To: David Gibson <david@gibson.dropbear.id.au>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>
+Cc: Ayush Singh <ayush@beagleboard.org>, Geert Uytterhoeven
+ <geert@linux-m68k.org>, devicetree-compiler@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ devicetree-spec@vger.kernel.org, Hui Pu <hui.pu@gehealthcare.com>, Ian Ray
+ <ian.ray@gehealthcare.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Subject: Re: [RFC PATCH 00/15] Add support for structured tags and v18 dtb
+ version
+Message-ID: <20260312085400.3a11df8b@bootlin.com>
+In-Reply-To: <20260210173349.636766-1-herve.codina@bootlin.com>
 References: <20260210173349.636766-1-herve.codina@bootlin.com>
- <20260210173349.636766-8-herve.codina@bootlin.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="pAL3Zc8TOJ2/WxD/"
-Content-Disposition: inline
-In-Reply-To: <20260210173349.636766-8-herve.codina@bootlin.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
+Hi David,
 
---pAL3Zc8TOJ2/WxD/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 10 Feb 2026 18:33:28 +0100
+Herve Codina <herve.codina@bootlin.com> wrote:
 
-On Tue, Feb 10, 2026 at 06:33:35PM +0100, Herve Codina wrote:
-> fdt_check_full() makes the assumption that a FDT_END tag is present
-> immediately after the FDT_END_NODE tag related to the root node.
->=20
-> This assumption is not correct. Indeed, FDT_NOP tags can be present
-> between this FDT_END_NODE tag and the FDT_END tag.
->=20
-> Handle those possible FDT_NOP tags.
->=20
-> Signed-off-by: Herve Codina <herve.codina@bootlin.com>
+> Recently, I sent a RFC series related to support for metadata and addon
+> device-trees [1].
+> 
+> During the discussion the concept of structured tags and "unknown" tags
+> emerged as well as the need to have them handled as a prerequisite of
+> support for metadata and addon.
+> 
+> The conclusion was the need for a new dtb version (v18) with support
+> for:
+>   - Structured tags and based on them, "unknown" tags.
+>     Those structured tags allow to have an standardized definition of
+>     tags with the capability of skipping a tag and its related data
+>     when a "unknown" tag is incountered by a given version of libfdt,
+>     dtc and tools. Those "unknown" tags are tags defined in future
+>     versions. Even if they exact meaning is unknown for an 'old'
+>     version, they structure is understood and the 'old' version can skip
+>     them without any errors if allowed.
+> 
+>   - Flags in the dtb header (dt_flags).
+>     The goal of this field is to have a placeholder to specify the
+>     type of dtb we are dealing with. For instance, addons dtb will set a
+>     flag in this placeholder
+> 
+>   - A last compatible version for writing purpose.
+>     The goal of the new dtb header field (last_comp_version_w) is to
+>     disable globally any modification. It works similarly to
+>     last_comp_version but for modification. It can be used to avoid any
+>     modification that could be done by an 'old' version and could lead
+>     to inconsistencies between the modification itself and some
+>     "unknown" tags.
+> 
+> This RFC series implements those features and leads to the v18 dtb
+> version.
 
-Merged, thanks.
+I sent this series a month ago.
 
-> ---
->  libfdt/fdt_check.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/libfdt/fdt_check.c b/libfdt/fdt_check.c
-> index a21ebbc..cca0523 100644
-> --- a/libfdt/fdt_check.c
-> +++ b/libfdt/fdt_check.c
-> @@ -43,7 +43,7 @@ int fdt_check_full(const void *fdt, size_t bufsize)
->  			return nextoffset;
-> =20
->  		/* If we see two root nodes, something is wrong */
-> -		if (expect_end && tag !=3D FDT_END)
-> +		if (expect_end && tag !=3D FDT_END && tag !=3D FDT_NOP)
->  			return -FDT_ERR_BADSTRUCTURE;
-> =20
->  		switch (tag) {
-> --=20
-> 2.52.0
->=20
->=20
+I know some patches have been applied but what's the plan for the remaining
+ones?
 
---=20
-David Gibson (he or they)	| I'll have my music baroque, and my code
-david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
-				| around.
-http://www.ozlabs.org/~dgibson
+Is there anything I can do to help move things forward?
 
---pAL3Zc8TOJ2/WxD/
-Content-Type: application/pgp-signature; name=signature.asc
+Let me know if you want some rebase and/or modification and so a new version
+of the series or if you need anything else that can help in moving forward.
 
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmmoBK0ACgkQzQJF27ox
-2GdFtQ//U5GPbKxzxDk24NbMmRtkOgDqjXNrMkzCqsBmfhYsj5QrjCf1orhp+amh
-pZV0oz+JNKtTohd5CHb9p443WJWpXB1xSFXtAMBCWgI3ncxSwtyeaeBsA1hpx1SL
-1oKw9rHWTDkJL8FiuS6F/dBOAT8VH86a/0k4hUlhxjsB3tjWrjo6W4v6Li/eA/vs
-XtKY7ZkOE7G/BDe5DxDuugbXwuu5ZbNTdDLxFlcCCVWG0Ll+RL9TwBNkuAHRkZy6
-PCe/1h0YooDOFHFdl3bY6W5dBf4sNspkcUYPMQ5DcWy56J0KEdwrlWCeKGYdPnfb
-HH/xFeDcwXybcbt5Vt4b+qOG5/lgX1/+XnX8L3M4wpvlhc/NQJ4wpwA2yisA0xjC
-dN9+Yew1yrHjCj7sQvcE+WELYGzuoay3tnUowOc9yIKINQEN3iC0H3AhmRI4jEJD
-EzGjPQO59C3zwhmvfUA5PgEujppUd8PrliHQKlpRM+/oQ8HbrdTLVX8qb5fJxGdt
-AodFrhU8b0FkgHsfAB+BKozAcG3O6U3lcdqqkor6e0ideGnMTeFSTIv7ZMcWtOyu
-QNnYprKmus+McRz+f2SObD1DWFszRtt7+c6EmPdMFKSWz7t16MmH66tt/ulC/UQd
-z3k7N4SHlw8ZSlynJXVwbKaRZvRC5g6Cmj3g0Czca+fKouTTCoE=
-=86bb
------END PGP SIGNATURE-----
-
---pAL3Zc8TOJ2/WxD/--
+Best regards,
+Hervé
