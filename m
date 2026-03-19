@@ -1,99 +1,90 @@
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D4EB384229
-	for <devicetree-spec@vger.kernel.org>; Thu, 19 Mar 2026 15:27:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED0D23D47BB
+	for <devicetree-spec@vger.kernel.org>; Thu, 19 Mar 2026 18:16:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773934077; cv=none; b=O0quZ2xwEd0E4nQus4uE+oMqLlCPZIV6yRPcH2khcuclKhlkCg0Oar5DeAFym3jRdWCgHzn0R1VvBMgFA9kJ5AW5eGgIMCfqoSFeyGetfY3U+DmejlUfhs8TLRvf4obUBl/t3hfNWQ7WXtQ01HiuazHl5ZrkxIEDVptV+ahxk0M=
+	t=1773944163; cv=none; b=DUL+RzGkP8H9Y8AA7FfD5EPHMsNJTnZQ8XW0cF9pgm1oCfm5Y9zUvLRUQ2Hxwathq++AwP9pVQMFUow1ccom/0IeQWSubM1/awP2dMZf4A92aZlUthrfDnFTFJJlL9XSlZ2azGvm9TWB3dCXe1K1Z8Ex1+P1DcvTWaBgxhFist4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773934077; c=relaxed/simple;
-	bh=I4bztdTb8gXlaI7VcQmQpjVmINoyagCdqq4UGz7t9ZA=;
-	h=Message-ID:Subject:From:To:Cc:Date:Content-Type:MIME-Version; b=ePNeLOvpKbY/6bby7yRkig72KZIlMunNX8ndnBYra1zRkdyxAeyc4aSTFCmwssDoJparr8IiZpoV7kDAAfFKxX2DDV8sybFmzI91y5DK6y2UiCNiPdhUdzRMlZTKhI8Gp6MFSaz38YFZH6TJkEUb+hLUnOzLs4DHyn2v039u93s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=m+luREIE; arc=none smtp.client-ip=209.85.128.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1773944163; c=relaxed/simple;
+	bh=+MHqLjOcVYhQqnSfE+0Fp3m0yXDA/5y9ui7z5ud6z5Y=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=BabKLHCUo8qQvZIrXFmjCnXykjzcr3JL+MmbEu08baPVYFlDcsY0qsgxv+Uh63BNBNEEEL4xDfK7iZiZpv7MpvM3bIWsrUITOWd+KRrFvH9tnIh6qFR8aXnAUq2dn2c/cepWIwdT4d2h0gWm6xj3OXZzN4dVj6UrrF2Yz8s08jg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jl5q6zu9; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="m+luREIE"
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-486fda2a389so2650015e9.1
-        for <devicetree-spec@vger.kernel.org>; Thu, 19 Mar 2026 08:27:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773934074; x=1774538874; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:date:cc:to:from
-         :subject:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=I4bztdTb8gXlaI7VcQmQpjVmINoyagCdqq4UGz7t9ZA=;
-        b=m+luREIEqkYmD/LBNsUCTzeqrQ+lgux/jWrX1iDAtrWbK2libsHo+lSuPByoj+WeKX
-         8u1/9LGEsWuNnhr1EyQvs6f5BckPQQF4WQTItEkAn5OFqcNgIDTOIxfbSuagGIigul7M
-         Ay4oIeIMl8SGcAWn3LEyDRPKiCPHw5TZOV4QahZpsvErnVNorDpYoA4Lk6Yvtmnz+BQA
-         vY4dV4xIhwIVpcCgGNE3g3BIt1TZBHKErq+cGjsMUox0jyChdVo6z3tUCpfAcuMA69Bn
-         QQtlLNPhp0lj8oOpHcEG6rJcZpIkbho+ynb/+LRh45ald4wec/6CePldvx739RE+nJsb
-         LYRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773934074; x=1774538874;
-        h=mime-version:user-agent:content-transfer-encoding:date:cc:to:from
-         :subject:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=I4bztdTb8gXlaI7VcQmQpjVmINoyagCdqq4UGz7t9ZA=;
-        b=BsVRSjm14KHup0v9QIJj2y7HpjLMKGh7k/9Bh6DUVyjnMbz23vuZXMBDsYe9xTS7kk
-         ytcqX71V2R8GSmzLfufgSSSb5Q0P4Uq0UXWh5K6aANnmNahzT28Yo+w+B6UASpzRSBWJ
-         5ITTcQmxDP6NaWJ32wVrz6CWzktK8QsT2xpc0VavgWDKAWYTmov1UJAOMN2UjqrI5WOE
-         mR0msyEDx9x4ot2MaDsCQ8DWjDUN2nlgaHYFmFTbcfrin0ngTjFHLwyTU8DtSMcIBK/p
-         GQgho+u6Y+Kfb7K0hCVx1zTRUyjq4DHzwPp8ViVNCYuOIfPD0kmGgTLXi6ALGqDk036k
-         fKzg==
-X-Gm-Message-State: AOJu0YxDdy/d2tG6FLqou/PWEtuxAeUh4QQA6VWAsE88jzRaAaOLlThK
-	LP9s7H4iWzfpeYLfftZ/ZyCjw+AWWzs+JM1AgeYz8jXQf3PAyV/RtqM/EkMf9Q==
-X-Gm-Gg: ATEYQzz/2+LLRB7ve2ni3ZEXjw1PagW/mObhYTZiPDj5fUrIl34iI1WoUIzDM3PBoqc
-	0CXljNKhh7J+J7BK/XxQJ4AVXjXOtCMOouSGBtOFiCNfTr1vFn/qzsjXFyPox71SWKFVLaVCeVz
-	E/5k/3nJxJ2G8oTC+M+iQ7ccrtzh86VkYKwlGR7dl1rhluMqT621Ao4CehQUvyx93JVRShD7Nfc
-	6aiSmryIqxZSy7DuMPRgr9e+bVyTPM9RpY3mBOf5qnsMaFQjhKw8YCya1Dk7KOLut4kix9uc5JK
-	ebA/tHHz2jCYohOuaHbcGlgysAOp29CObx0nc9fwzmA6QUTDD3qYivqEEThnhovY8hdWc9I02Q0
-	QXzWGW92ICZZjnYGpCU6+L18sMv2HGQYyuZ/aZU2lkJrI1ufBTm0ZLQj8MYwUCG96egjuuUWI1K
-	TniCevTqEMK1ZUJ2TvPv+ozRSPrMp/abjRSb8/mLXXz1g=
-X-Received: by 2002:a05:600c:a4f:b0:485:9a50:3384 with SMTP id 5b1f17b1804b1-486f4476ccbmr134945015e9.25.1773934074097;
-        Thu, 19 Mar 2026 08:27:54 -0700 (PDT)
-Received: from vitor-nb.Home (dsl-79-41.bl27.telepac.pt. [176.79.79.41])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486fd9845a2sm32088315e9.6.2026.03.19.08.27.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Mar 2026 08:27:53 -0700 (PDT)
-Message-ID: <88456d17c91737cfc09af46673b49bb9a9d36dc0.camel@gmail.com>
-Subject: reserved-memory: node naming - generic name vs binding
- recommendation
-From: Vitor Soares <ivitro@gmail.com>
-To: devicetree-spec@vger.kernel.org
-Cc: conor+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
- robh+dt@kernel.org
-Date: Thu, 19 Mar 2026 15:27:52 +0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2.1 
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jl5q6zu9"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 932E9C19424
+	for <devicetree-spec@vger.kernel.org>; Thu, 19 Mar 2026 18:16:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1773944162;
+	bh=+MHqLjOcVYhQqnSfE+0Fp3m0yXDA/5y9ui7z5ud6z5Y=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=jl5q6zu9KYG/9F4EHNJM/IGgQ3LriGtRP/mPvzOvsGtYdAus8WneiL3Wx1q451dYv
+	 BrG29ZGHShwKj4CGdLy7qKwN12zXjoK+5jH3jkSEDz7x6aMZ/F+yo7ce0SvaebsB9X
+	 OlpbdukidRq6K3mwQXoEKSGq6QgGllXLVOAnQ8qrbpSDypSTJI6ROsRc7gYGK7dASk
+	 fy2rHORQV1oMNj8RPqLNs3hhmrKOPM4jhoirkfw6SvJh5x0UFTuI5RAAndawsZtxmc
+	 +IcAUIii4kHaJE9Iz+WN0seFV/9adDK4nMcj4yAbnlpBNR/034nix/7iONZLsWjU4/
+	 BflbO4EBiCn1w==
+Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-66847de014aso1918592a12.2
+        for <devicetree-spec@vger.kernel.org>; Thu, 19 Mar 2026 11:16:02 -0700 (PDT)
+X-Gm-Message-State: AOJu0YzBG4W6UzRVRrDnwTOwGIjG+YiSRsBlM3qOmWYuVPPBDDcNs/LI
+	7fwyuU7KQoaxgf5hkOnnhGfeQnKrvMld3UtgdYUJe88ITi7Fzc2YxWvYMtgYFzc0RovMCUPji6L
+	8AMtt+fRAEXzo+bnGyUO9Fm4zRCbAzA==
+X-Received: by 2002:a05:6402:e9d:b0:662:ac7e:aac9 with SMTP id
+ 4fb4d7f45d1cf-668c9724b05mr358755a12.20.1773944161064; Thu, 19 Mar 2026
+ 11:16:01 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+References: <88456d17c91737cfc09af46673b49bb9a9d36dc0.camel@gmail.com>
+In-Reply-To: <88456d17c91737cfc09af46673b49bb9a9d36dc0.camel@gmail.com>
+From: Rob Herring <robh+dt@kernel.org>
+Date: Thu, 19 Mar 2026 13:15:49 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqKRW-=er+DCTob0HmQv9OyVt7yiej-Yht6UR-mcW=LHUg@mail.gmail.com>
+X-Gm-Features: AaiRm53vSG4c09LEHiS6dxa6gpIeJLFCueUVRNSidjgOGVQ8XTb03fljpHSynso
+Message-ID: <CAL_JsqKRW-=er+DCTob0HmQv9OyVt7yiej-Yht6UR-mcW=LHUg@mail.gmail.com>
+Subject: Re: reserved-memory: node naming - generic name vs binding recommendation
+To: Vitor Soares <ivitro@gmail.com>
+Cc: devicetree-spec@vger.kernel.org, conor+dt@kernel.org, 
+	krzysztof.kozlowski+dt@linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Thu, Mar 19, 2026 at 10:27=E2=80=AFAM Vitor Soares <ivitro@gmail.com> wr=
+ote:
+>
+> Hi,
+>
+> I have a question about node naming conventions for static reserved-memor=
+y
+> allocations.
+>
+> The reserved-memory.yaml binding recommends that node names reflect the p=
+urpose
+> of the node (e.g. "framebuffer" or "dma-pool"). The base Devicetree
+> Specification (section 2.2.1) on the other hand recommends using generic =
+names
+> from its suggested list, which includes "memory", implying a "memory@<add=
+r>"
+> form.
+>
+> For nodes with a static allocation, is the binding's guidance to use purp=
+ose-
+> reflecting names the recommendation, taking precedence over the base spec=
+'s
+> generic "memory@" convention?
 
-I have a question about node naming conventions for static reserved-memory
-allocations.
+"memory" is for memory nodes (i.e. ones with 'device_type =3D
+"memory"'), so not really for reserved-memory nodes.
 
-The reserved-memory.yaml binding recommends that node names reflect the pur=
-pose
-of the node (e.g. "framebuffer" or "dma-pool"). The base Devicetree
-Specification (section 2.2.1) on the other hand recommends using generic na=
-mes
-from its suggested list, which includes "memory", implying a "memory@<addr>=
-"
-form.
+Yes, we would prefer some generic name, but there isn't one defined.
+Until one is defined, I have little opinion about what name is used
+(beyond global conventions like don't use '_'). Names reflecting the
+purpose for /reserved-memory is so widely used already, I don't really
+think it is something we can go back and fix.
 
-For nodes with a static allocation, is the binding's guidance to use purpos=
-e-
-reflecting names the recommendation, taking precedence over the base spec's
-generic "memory@" convention?
-
-Any clarification on which convention should take precedence here would be
-appreciated.
-
-Thanks
-Vitor Soares
+Rob
