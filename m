@@ -1,147 +1,128 @@
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E6FD31A576
-	for <devicetree-spec@vger.kernel.org>; Fri,  3 Apr 2026 07:07:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FD493845A9;
+	Fri,  3 Apr 2026 10:06:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775200040; cv=none; b=nWn2D7Z18Jdqcl8B/Dvbw0pJXyqvdGwRrf+FmKf2w1WSExkVpulOqvNzmFUCaJWaQS1OO7Lt0RPLVhRu+fogZSKDJOGxoMr1TkrzWID6xzm5FNMEvaCmVU+XhrptZjpM3Ugmcb3JsW/drrOQh4FifAQ6zh6ihYH7ZkdRfTwh+3g=
+	t=1775210802; cv=none; b=fgHBpWA6TILyDH08YoNDtrwQ9B222m/slr5pa9VT8ppt0JjqwtKQLFEwtnkWIHbKAd783iWbctWf01SW2BAFIDazhsHl4f+pSZo245XE/X8X/j4WbskcSbJ/TsDVYmHKlLHqFefob4xKS3lRLn0PKR/X5Fd5CN+KvKcbQyB5msA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775200040; c=relaxed/simple;
-	bh=HQ0WzPvVM65rQtVgEMV7CsRIRBV77pyZQcMintELxxM=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ipxLsfW057WhONcVJQQkgrWIp4uxwLyForaX5Xq675/tYupHIVNcQsAnQPWVkiYRpa6Y4zxSHmbZoljARz4/Xx1S2qy5Pt0JvFn+k+qA8EJYGVjo9DBgU4JrxYHytWp10ndVMkhI6Fb7WuVYoLOS0JJeQ5NVEkbdsKblgqJ9Goo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=ZUDJum8C; arc=none smtp.client-ip=185.246.84.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="ZUDJum8C"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id F093A1A3114;
-	Fri,  3 Apr 2026 07:07:16 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id C5C47603C1;
-	Fri,  3 Apr 2026 07:07:16 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 245BA10450279;
-	Fri,  3 Apr 2026 09:07:10 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1775200035; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=HylyLsnRzx35/dYQl7AED0QkFwj94BhsyPXiRhJsHG8=;
-	b=ZUDJum8CnkqVS6ILtmbvfweIflY/nHwxsyu3prVQk3WqMw76Tbb5uTKKwn5F4cTD899pcN
-	C5CPmNDjr4V00dpKDgI33M6cLqyIuflLGpkQkZa27O4lG/G3+Zwys+n4r6w8IpWqXzQJ7E
-	s6p+yvnpVopjMquzxHTNDAqQY6VZ5lj7OXAAV2WI2M58RxHnmIAKDZiDLheBejdWVpyFHx
-	nAkxbgeTq/zIr1vBxwjoyENPKJJru1CCFViGN+1fX42CTyDXS/Q0j4wRnFVZ5TaZ+B3dJE
-	BC5xO+R/wVI+f8dv7xRG92CyPqETP8IT8XpBxsLGLU2BmxFkRD2e+BEwQJY5FQ==
-Date: Fri, 3 Apr 2026 09:07:08 +0200
-From: Herve Codina <herve.codina@bootlin.com>
-To: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
-Cc: "David Gibson" <david@gibson.dropbear.id.au>, "Rob Herring"
- <robh@kernel.org>, "Krzysztof Kozlowski" <krzk@kernel.org>, "Conor Dooley"
- <conor+dt@kernel.org>, "Ayush Singh" <ayush@beagleboard.org>, "Geert
- Uytterhoeven" <geert@linux-m68k.org>,
- <devicetree-compiler@vger.kernel.org>, <devicetree@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <devicetree-spec@vger.kernel.org>, "Hui Pu"
- <hui.pu@gehealthcare.com>, "Ian Ray" <ian.ray@gehealthcare.com>, "Thomas
- Petazzoni" <thomas.petazzoni@bootlin.com>
-Subject: Re: [RFC PATCH 05/15] libfdt: Introduce fdt_first_node()
-Message-ID: <20260403090708.5d7e8ea9@bootlin.com>
-In-Reply-To: <DHHWXNCDAWG9.2LYVXAWG8RBTY@bootlin.com>
-References: <20260210173349.636766-1-herve.codina@bootlin.com>
- <20260210173349.636766-6-herve.codina@bootlin.com>
- <DHHWXNCDAWG9.2LYVXAWG8RBTY@bootlin.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1775210802; c=relaxed/simple;
+	bh=duPJZJsVgshUx0ZSuYbiYZ3biXpP3xFSjGnb4lTfNtg=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:Content-Type; b=llE2U4Kd5stoCcFl9MDUV5ahFIEmVhWnQ0KRUgI168c5Ibe1/Fe2KXOOP4FTS48pxmfjGNCqD1g5SeZ4P81/WQcxwN7sjlU9XvomYJPiYtflJirIH4T+W64XoZ8q+vf0GO0WG1dSXKbIofEYSgXSrdtuQ3q0izA5Fx1+xfONGgg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
+Received: from [10.213.19.33] (unknown [210.73.43.101])
+	by APP-01 (Coremail) with SMTP id qwCowACHLGgZkc9pk38PDA--.5212S2;
+	Fri, 03 Apr 2026 18:06:18 +0800 (CST)
+Message-ID: <00ddad5a-02f5-474e-af9c-11ce7716ddfc@iscas.ac.cn>
+Date: Fri, 3 Apr 2026 18:06:17 +0800
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Vivian Wang <wangruikang@iscas.ac.cn>
+Subject: Devicetree spec: Specifying /cpus/cpu@* unit address format?
+To: devicetree-spec@vger.kernel.org
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Paul Walmsley <pjw@kernel.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Alexandre Ghiti <alex@ghiti.fr>,
+ Chen Wang <unicorn_wang@outlook.com>, Inochi Amaoto <inochiama@gmail.com>,
+ devicetree@vger.kernel.org, linux-riscv@lists.infradead.org,
+ sophgo@lists.linux.dev
+Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
+X-CM-TRANSID:qwCowACHLGgZkc9pk38PDA--.5212S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7CrWUAF15WF18Cr4kJFWUurg_yoW5JrWrpr
+	s7uFyUtryqyF48Jw42q3WUX3y3AFWkWw4UtF95J34kAFZ8WFykZFna9wn0gFyUCF1xXa45
+	Zws09a4UC3ZrZaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUU9Ib7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4
+	A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IE
+	w4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r4j6F4UMc
+	vjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY
+	1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14v_Gw1l42xK82IYc2Ij64vIr41l4I8I3I0E4I
+	kC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWU
+	WwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr
+	0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWU
+	JVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJb
+	IYCTnIWIevJa73UjIFyTuYvjxUgvJmDUUUU
+X-CM-SenderInfo: pzdqw2pxlnt03j6l2u1dvotugofq/
 
-Hi Luca, David,
+(Also posted at: https://github.com/devicetree-org/devicetree-specificati=
+on/issues/86 )
 
-On Wed, 01 Apr 2026 17:11:15 +0200
-"Luca Ceresoli" <luca.ceresoli@bootlin.com> wrote:
+Hi all,
 
-> Hi Hervé, David,
-> 
-> I'm trying to review the patches that have no feedback so far.
-> 
-> Being new to the dtc codebase I'm mostly pointing out things that are not
-> clear from a newcomer point of view. I hope this helps anyway.
-> 
-> On Tue Feb 10, 2026 at 6:33 PM CET, Herve Codina wrote:
-> > In several places, libfdt assumes that a FDT_BEGIN_NODE tag is present
-> > at the offset 0 of the structure block.
-> >
-> > This assumption is not correct. Indeed, a FDT_NOP can be present at the
-> > offset 0 and this is a legit case.  
-> 
-> I wonder whether this can be proven by showing an example, or the specs, or
-> whatever use case that makes sense.
+Presently, there seems to be some confusion in the community about the
+format of unit addresses for "/cpus/cpu@*" nodes for a CPU with ID > 9, e=
+=2Eg.
 
-I can point the device-tree specification and add the following:
---- 8< ---
-Indeed, the FDT_NOP definition according to the device-tree specification [0]
-is the following:
-   The FDT_NOP token will be ignored by any program parsing the device
-   tree. This token has no extra data; so it is followed immediately by
-   the next token, which can be any valid token. A property or node
-   definition in the tree can be overwritten with FDT_NOP tokens to
-   remove it from the tree without needing to move other sections of
-   the tree’s representation in the devicetree blob.
+=C2=A0 =C2=A0 cpu@??? {
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 reg =3D <10>;
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* reg =3D <0xa>; */ /* This should be equiva=
+lent */
+=C2=A0 =C2=A0 }
 
-Nothing refers to any location for this tag and it has to be simply ignored.
-Having this tag at offset 0 doesn't make an exception, the tag has to be
-ignored.
 
-[0] https://github.com/devicetree-org/devicetree-specification/blob/main/source/chapter5-flattened-format.rst?plain=1#L317
---- 8< ---
+Should this be a decimal "cpu@10", or hexadecimal "cpu@a"? I can't find
+any explicit specification.
 
-> 
-> > Introduce fdt_first_node() in order to get the offset of the first node
-> > (first FDT_BEGIN_NODE tag) available in a fdt blob.
-> >
-> > Signed-off-by: Herve Codina <herve.codina@bootlin.com>
-> > ---
-> >  libfdt/fdt.c             | 25 +++++++++++++++++++++++++
-> >  libfdt/libfdt_internal.h |  1 +
-> >  2 files changed, 26 insertions(+)
-> >
-> > diff --git a/libfdt/fdt.c b/libfdt/fdt.c
-> > index 56d4dcb..676c7d7 100644
-> > --- a/libfdt/fdt.c
-> > +++ b/libfdt/fdt.c
-> > @@ -252,6 +252,31 @@ int fdt_check_prop_offset_(const void *fdt, int offset)
-> >  	return offset;
-> >  }
-> >  
-> 
-> Even though this seems to be quite uncommon in this repository, I think
-> documenting new functions would be helpful, especially preconditions,
-> postconditions and parameter values when not obvious.
-> 
-> What about:
-> 
->   Find the initial node with content (FDT_BEGIN_NODE) in a fdt, skipping
->   FDT_NOP [and <other tags> is applicable].
-> 
->   *return: pointer to the first node into the fdt or e negative error value
+  * Most other nodes specify a hex unit address
+  * I could not find anything specifying this generically
+      o AFAICT, there's no /cpus in IEEE 1275
+      o ePAPR doesn't say anything about this
+      o Presently, DTSpec doesn't say anything about this.
+  * dt-schema says it's ^cpu@[0-9a-f]+$, seemingly intending to use
+    hexadecimal, but not forbidding decimal. [1]
+  * Of the `/cpus` schemas in Linux
+    (Documentation/devicetree/bindings/{arm,mips,riscv,loongarch}/cpus.ya=
+ml),
+    none mention the node unit address
 
-As you already said, documentation is quite uncommon here.
+As of current usage:
 
-I would prefer to keep the code consistent and avoid adding documentation for
-some functions and not others.
+  * Of all the DTS files in (mainline) Linux, most either use hex, or
+    have reg < 9 for all CPUs.
+      o AFAICT from grepping, arm and arm64 consistently uses hex.
+      o Most riscv SoCs have <=3D 9 CPUs. The two that don't use decimal:=
 
-On the other side, adding some documentation could be beneficial.
+        arch/riscv/boot/dts/sophgo/{sg2042,sg2044}-cpus.dtsi
+      o No other arch has in-tree DTS with CPU reg > 9
+  * Of all the dt-bindings examples in Linux, only one uses decimal, but
+    it seems to be unintentional:
+    Documentation/devicetree/bindings/opp/opp-v2.yaml
+  * QEMU generates decimal for multiple archs in e.g.
+    `hw/{arm,riscv}/virt.c` and other places (grep -R "cpu@")
+  * Spike (RISC-V emulator) generates decimal [3]
 
-David, what do you prefer?
+It could be a good idea to have this standardized, like all other unit
+addresses.
 
-Should I document new functions I introduce?
+DTSpec says:
 
-Best regards,
-Hervé
+=C2=A0 The binding for a particular bus may specify additional, more spec=
+ific
+requirements for the format of reg and the unit-address.
+
+Since /cpus and /cpus/cpu@* are generically defined in DTSpec and
+specialized for various architectures, I believe this is the right place
+to start standardizing this. Even if arch-specific definitions are
+required, at least DTSpec can give a recommendation on whether to use
+decimal or hexadecimal.
+
+Thanks,
+Vivian "dramforever" Wang
+
+[1]: https://github.com/devicetree-org/dt-schema/blob/v2025.12/dtschema/s=
+chemas/cpus.yaml#L52-L54
+[2]: https://github.com/riscv-software-src/riscv-isa-sim/blob/5eeeb91efa9=
+66936ef7b980f5e8dd00ffbe70786/riscv/dts.cc#L61
+
