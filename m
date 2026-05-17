@@ -1,232 +1,250 @@
-Received: from DUZPR83CU001.outbound.protection.outlook.com (mail-northeuropeazon11012026.outbound.protection.outlook.com [52.101.66.26])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC9883E0240
-	for <devicetree-spec@vger.kernel.org>; Wed, 13 May 2026 08:53:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.66.26
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3511816A956
+	for <devicetree-spec@vger.kernel.org>; Sun, 17 May 2026 22:53:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.46
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1778662422; cv=fail; b=RslxCyNUv9HeS1b0OVLMc/C10NiQ9/djqgsdlQlQXrFQGtkFL4Js405bP9uIEzxEetXN24iQeEipE9SjqfD/s/s082EWpww7CDgX+rvHkvKEsSgR0vRq3Faj2K0YeAiBb+u0723260Jk1gN96Pu7g0YakCJrJDnGexTwirSiV44=
+	t=1779058397; cv=pass; b=YGBTidbum4zfoqzs6GY9pRUPS5S7hz+1bZ1HQuFL8zPvAsi1Dmnv7YGxj1f983m6nrEKSuFGxhsG15zVw9Py7Pazdcbchq9xyC94LJ7SZroCMHltSOP0sLIcfrxEkJMNNnAC4E2xVCn1y02gybTUfoJeyKNAV0I9TsLoUqCeKjE=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1778662422; c=relaxed/simple;
-	bh=fP16em5yRrsbMRnMozuAouyQmfFYLycakLvuEbYuNi8=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=kcQ94ZRJgnkySuNI8EmkmeN0c0V6vBzwicZ5lf/gJEf4kLuynn4gHYC1p8rkpXODDZv0SSDBmd7FKBP1wV1zyzMh2CudAUpKXs04oqqoIaSBh02lu2HvQwIGB4xasvaKpAbwz/jYQCF+yW0drrKPgYDKhLFejnoIERI4jPHdRdQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=siemens.com; spf=pass smtp.mailfrom=siemens.com; dkim=pass (2048-bit key) header.d=siemens.com header.i=@siemens.com header.b=u/z0n4/1; arc=fail smtp.client-ip=52.101.66.26
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=siemens.com
+	s=arc-20240116; t=1779058397; c=relaxed/simple;
+	bh=DANe3b1Lrx5r4db/7fNp7XG/tly0BIceUpq9A7Pt+OM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ACspNMVJ2OCyQGS+D6wmQNFEG1aOyz8TKq5lr88uW+dE1ktMSGC0pfkQZV/fFI6FpST3eLOOfYiK0KwRjqp2q5RaQnqWHlrhhdrKJDZZihOhyNGEcST1o5dK8GOs5980PT34zbUEfdmCxGj8xhpchn8lJqHd8VgEHqAo60TaXGs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=LV5w78JT; arc=pass smtp.client-ip=209.85.218.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=siemens.com header.i=@siemens.com header.b="u/z0n4/1"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rTmGDa1Lm9Qzwu3ktp6bGF/ffawQsWRrVJAYid1FlPoRluWjlxxwB1iuFfdCQugUFlf4TigsY4CREO9NBbp+TnNN0Nf1Hs4O1ViXFTjA9jC7VK6DNh8m0bW+kDYanNZyGBlPsn+hZ5uWr3Vsif5cBufOEmzjKs8xSUNFfZ2UjZ/3quLfrvNsa/Pycx7xQ2+HSDRqOCK8Ibd4f41KdC69NatT/BCv4m5jEquvhxXv0b8Iw5+Ux7rTForOW8ObCIJwDteVqy575J2vkqnwxS7JJWVWrDkUgAG0DIemMQJ1gntECg+WiM7ZIDfnlIKI1+MqDsUPfvYOozn+0Zv2VBHqUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fP16em5yRrsbMRnMozuAouyQmfFYLycakLvuEbYuNi8=;
- b=oP+AU9d9P1qaTLRBjOCucSmwyBNAWF2PUoJkWcJxT4wMkVhLpsnNc00MxiMPGkSH9o8c1IL3jvV9eoTl7yK4sy+B2hzTbCxq45xNf0cbuAd23k1C6Ms1dC5rggk9SzOrcB+2V9Lz3uG4W1/DXlGviZmFx4fqgL3+hofbA5uue6KSktgYgmFvmWknLK9jzRIN41IJhyCNtui09GdHKw/lwph0/Ist7IRQT80D9BocPIonxQhEfuUlsJeWn3WQ6HvHZY013hPexSaxtIV/thTNdIK8WQJRJ3q9Qo76iPS947ILzKmoC2UE/JfPA5shj+/WEg5Mim4Fe1GYjUGK7pdSVA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fP16em5yRrsbMRnMozuAouyQmfFYLycakLvuEbYuNi8=;
- b=u/z0n4/1m6EaJbzC1BjNycJj/xu+aCCaboK3LpYXzj7+N6euH44AGYsyaG48Fyrxz/OyYZavP8JkqfIt5fadmRCQdI2lAUA6Lnalc8NZxWxjp/WHUXRdgHLTNT2y7zHl38h7RBuAHypnv/fLdbqIowVImW0haG9n+4onhfWcaATEBupIBORmqLGi2dRj3p8xJNpotpkOzCt4HtuCAr/pcNqhOrcSt24kw+rNf3MTzPWa4GlUOyBtDznR2SMVGYiGd/oZoma50ohpwNX2of0YwI1F7Sft0F2JyQewElvXab14VNzfSYKGpz9Ay8sn2v2oSPjACYS0AqkfgEqbjlUOSg==
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
- by DB9PR10MB5644.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:30f::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.11; Wed, 13 May
- 2026 08:53:36 +0000
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9126:d21d:31c4:1b9f]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9126:d21d:31c4:1b9f%6]) with mapi id 15.21.0025.012; Wed, 13 May 2026
- 08:53:36 +0000
-From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-To: "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
-	"devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>
-CC: "a.fatoum@pengutronix.de" <a.fatoum@pengutronix.de>
-Subject: Re: [RFC] Pass reset reason to Linux via FDT
-Thread-Topic: [RFC] Pass reset reason to Linux via FDT
-Thread-Index: AQHc4eDCy2dEJ/VJ+EyYrfi8GPFrD7YKhF8AgAEj1QA=
-Date: Wed, 13 May 2026 08:53:35 +0000
-Message-ID: <f73b05656a7ce16e8aaa7d8fbfdc37716f5d025c.camel@siemens.com>
-References: <579fcbc186ad2aeea3c206aebc901b64fc665db1.camel@siemens.com>
-	 <2775464f-9da6-4e6f-b6ac-e84901cc3727@cherry.de>
-In-Reply-To: <2775464f-9da6-4e6f-b6ac-e84901cc3727@cherry.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-user-agent: Evolution 3.54.3 (3.54.3-2.fc41) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|DB9PR10MB5644:EE_
-x-ms-office365-filtering-correlation-id: 087e2ffd-a388-4051-9b4e-08deb0cd1e84
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|376014|1800799024|366016|11063799003|3023799003|18002099003|56012099003|22082099003|38070700021|55112099003;
-x-microsoft-antispam-message-info:
- uC1xEYtPpxqNoGlJ5fxAsfblQfH2jKcypzcl1h/Nh5lhqpVtjcEwhTBcrR0rNCcvqrM6NLfpchm2WOMTKUjE0400GYJpHCBtjmx3RfQdc2tdl03r5FJdeav/5AtMSpfp/4nT7gh/XB5ZHhpC6bAmkYfKf5nCK0AWDn2Vq4wYCWSlRhDXKnvaH5TvV9LqWnrvTxR4HcnQFj9Bm1WBYNBSChNlwB9glXvuvihoX0ZLZUXRDBBnBAPd4xg5ug2Y4rIHsWw1zYYczoyCXSyqkizGG66rmsOulJinvtIlUBGFaHCrqMy5pXCFgnEk5taWwKVJugcUv05LrIoR71OoHAvUumnY7ZnTPttmy6oBRI0CvCCP0J41x8gohO6Zj2IIxoGPwHJFz7ozqmRwIReh3EvtknkZNTc/DzBObbX3VW74dAhh0hM+GABPMxACzgrSpZ70manyWzyL8T2Zi45Jx2AiT+bNvJ5kc38sJ9CQzztJQYlX/WVTylKvnmCjyyzIzHFAPFJd2ZbIFXXyN/OQqkm5/JjmxRivZrsdoDyYQINBXnb9YA/uO30w6B8msYE4c7rpCRRHz0EEHeY+mhzue0QI1pFV2qMuQbl7nh4njaUax+9sdTi48BqMKw/UEDCTdgarPlyp92umZpaa7WC9i3i5WdWKkD/rrFeQWpSdEsLIqrB+Y12c9urR+c/WQgCtLiMqqTGuzo1IIZjAUgXyyMbP6g==
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(11063799003)(3023799003)(18002099003)(56012099003)(22082099003)(38070700021)(55112099003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?dGJYTmY1Tm9rZDNXTXd5SXFzNTVxTmRkQWJoOFRzdUh3R3hXSHljNlozTTlG?=
- =?utf-8?B?WG5rOWk5V0R3TFpsdW9qL00vQkt3UXc2QkJqVEhCbUNBZ1BDb1ZhVG5EZWk3?=
- =?utf-8?B?NDRSNlhEVmUzcloxVFR5L0pXR1M2MHZHNGk0YVJDR1BwMC9xQlZEMFZLMnUv?=
- =?utf-8?B?by9OczZLMFR0MzB1ZWY4K1I5bE9NY0lNV3F6K3hjS1gycGpPQUlWb2xPSEEz?=
- =?utf-8?B?ZmZHemxYTWdnQzdrNWdYdnVXNTlBR0tidGo3QlJOR1ZqNXBzWDl5b01aTlNM?=
- =?utf-8?B?OFF1Q1VUWk9jTUtoc0FmWGVKYmhTM1VlNmFMeTJSdlJWZjV6b0grSkJSdnp3?=
- =?utf-8?B?S2J6WkFLVEh5NDBISm5VRWRXQjMxY2h2NGliVGVTOXFaeHpmOXh1RURzazc1?=
- =?utf-8?B?MDNFZnMwYmZVOThLS1JvNXRPdm9oMzY3TnhFbGxvM3llczl4Tktxc0JtamNq?=
- =?utf-8?B?WVRYVWRMMW56RHVqOW1NSG5Tb0MxNE9rbm9CMit5UU8zT3Zib2kwbUFmSzJW?=
- =?utf-8?B?bUo3ZDJVNDh5a2Vzemh3OEgvbWNDa2dmR1FnUHl5aENZdFJMQ3Byc3RUTlYr?=
- =?utf-8?B?YjVjMmVPRXlnM1pJeHlhMk9pZitEeThXZVJqa3JPNUF0RWJycUpMQnZOeU5X?=
- =?utf-8?B?T0g2SU5STk8wTFJTSTlESDVaVmY5Z2Z1Yk1JU1FzWTk3UkphdVNoczZmK3FD?=
- =?utf-8?B?bnA2bHhxVS85VXJ2QlBUZGp1aW1sd3p5Qm82TFhoMk13Nkh5WmVrRWFZY0VN?=
- =?utf-8?B?MlRla2tvRmh0NnJQQ0QyamJtOElOM2tjZi9PbWZzc0Juay9XYi9NWFkrZXdH?=
- =?utf-8?B?Q0I3dG0vR094ek10bUtRQkRuZmtXOGFyd3NLZ1d2MTl3VXJoSE9tQnIxZDhk?=
- =?utf-8?B?RXhoMXNvNFdNZTBBMENzaXJpWGwrMk5HWHM2eXpVVnBaTkFZcFlNdWY4U0E4?=
- =?utf-8?B?NEp4YmZJME1PdGh0c0FTRlIxS1U5bWdQankrc1hLeCtyeFQwWW9uVGgvdnFD?=
- =?utf-8?B?THN2azc1alJYYU8vV3BYRjlVb0pZaWhGYndlK0JmTFZxWVdieXBYWjF2R1Uv?=
- =?utf-8?B?LzRrSXA3YnV2aUQyalR5dTN4N1g1TStqclhYdE11YnpGM0VsQVRaQUE1WU9h?=
- =?utf-8?B?RFdmWXNxVjE0NHZFL3d5bUtVSnJPZWMyM25KQ2NvWTdGU2NlN1lsLzFLRGk1?=
- =?utf-8?B?SXdaenZiZ3ptdGg3SU5rSTFMbU90OWtrNUNsT0dXVFFtMTNFNUw3ZElPRzhm?=
- =?utf-8?B?K1JmSU5PTFRBWWJrbUNJeEFOV3o3S0kxM1p6dkJEYUtHRm9CV0pIVWgra01J?=
- =?utf-8?B?NnVGZno0em1uUGFHankrd0dwZ0psdnlnRDhCaGI2VnhSd3VzVmFZYm44Sk5W?=
- =?utf-8?B?K0FJeXBEenhIQ2IzY3R0YzVSMFR3QUthWE9lOVJZc25EakNMaER1YmhVeUdi?=
- =?utf-8?B?T3IvblZuRG81OUVISUZoaVR2TXhFYkVRUlUvZDd2a2NQMnExbk5xbWRSdU1Y?=
- =?utf-8?B?TmV6TnBsakxEOFZNcDRmZXRBa2o3VTVYYXJ3L3FVbEJ0aTJkeGNLNkJRZmdj?=
- =?utf-8?B?SHVPV3E5Tk1ib01iOUg1UGxZUUwzZ3FabnRqdGlDWXZXZE9Cc05nOU5uSjhD?=
- =?utf-8?B?MW5jeFhkeGNOV1VFQnFNa1dlN00vQ09OcTZtTE9lbG5LT0twY0xZSERWV1Nr?=
- =?utf-8?B?WkdtQlRVU3ZjQjJBVkFyR3crZjhoZkFzNklUaXAwbUxLb2ZPUWo1NUZBYlVy?=
- =?utf-8?B?cXJGU0RtSktIQTBWcGtvN0pVQUpvQ0w2NndOYS9QR3ZLczFBVTU3V2xrVS9I?=
- =?utf-8?B?enhXbjhpMUFBMGxkaE5ZcGlQRmVWMWQxV2RNbFJxK0JqU3JCUlBjempHZ0l6?=
- =?utf-8?B?S1JOTlZhZGRRaEhvdEZqaXM4VXg2WVo0eUgwT0RjUUFLUldrZ2hMTXZxSEEz?=
- =?utf-8?B?eU9VNVh5TWxFU3Y2VDRpTEt2R3hQMUYrMWlIM0ppQStmZ3dyc1F4MFdzcnFP?=
- =?utf-8?B?SUZINk5uWCtMVHRKQ29LUS9SVDdrTWpsQS9Wc044NUp6Wk9vb2Z4WHdPRXQ3?=
- =?utf-8?B?T0QzcHkwSDAybnIxdEMrZm1rT3dIay9vK0M2RExrckh4R1hYeUxPMVFRRlpL?=
- =?utf-8?B?ZlExamRDclBKRmRhQU53TU4zczNHeXJnOHNoTStrdW1VUUQzaGJBUmVwSkFK?=
- =?utf-8?B?bEtGS2dBZXB4bEVGVE1BOEY4Yk9kZnhwWklaZ1I3YmlHbVVkWDdiOUIzdEZz?=
- =?utf-8?B?QmFRUUVuT1RaQk9PdzNKc2FFUS9Ma1hRaUduSEF4cEV3QlRlU01RZDlCQ0V1?=
- =?utf-8?B?cmt5RFJZdTdWRU1Fb1BkUmR1RkxFQ2JieFpBQkdaS2FLWFNRRXRkQ1ZqeEtJ?=
- =?utf-8?Q?K7aeZlH3wnIFjL4NZw3ZBSjtFAvVOA5DUQNWm?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B13ABDA1C82C174A88B481FD13C51271@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="LV5w78JT"
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-bd0fc4c336eso363119666b.3
+        for <devicetree-spec@vger.kernel.org>; Sun, 17 May 2026 15:53:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779058393; cv=none;
+        d=google.com; s=arc-20240605;
+        b=GV6v5T1Qsb+EQQKQNUcxZUZefro6cb+QKkSIl2g9SRTSHgqDTXZ8oGBeXGTRmSDrzH
+         jgE3TwC8dayFeh+6L9hjkWMvI5JFkx+bUG7NdekIF8oCZlUR8K3ruwuqrXavyUew6kTb
+         V/yA4/zynK4GHaJBelOBdC3EVa3Ic/ozPdbqB2DMfh0YzP73ATProppdCIGkAt9HXVL0
+         8WroSzP77NaFLYnCLQN4KFnBL3CSC2eQkB2mjtCKRayEPHP3oSiI1CfqbDK1rNx/pGFO
+         1wTGw+bVeIui0adP96bPt1uHE8GgMonR3lOd8N1ywBMNz1DLwYL3V7krO7ibcHNB3q0W
+         5FqA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=dqHCarJKoTYsYs2GgG6/OergL7eHJ2mPr9aCS4gATf4=;
+        fh=XrFx+ZM/5ElGT8FgWEGl/RjSjCiaYy2rk4toLdoKrmM=;
+        b=SvquDfDmuOewLjcgTVj6C43F/NSRg6iZngnrlTGubnR7XfqgtEitGAGAdvaobZjbsS
+         lNZ0Db90yeFB+cyyiaSytBrtbpEGnHfpAWmaKApPD4fq8ZD8eZ29FhrqscbFRXnZrgZo
+         k+Pqz41d1eP3+4otdF6bwwKX1znSwQfxCDsGzX9b2mSusMRQT2DgTiSs9R9cgMmFUSVl
+         1s/Fv0Yl828C71hBFBbfhd5CAxx0outpyqvDFqfIrz2lKK+17gad/xJMmvSz+LKWF1E5
+         lak/wRaxYIM79Kod4mIwNq0q21QQ0wWbmtY78+t9lXS9pQsyMm15cZ3xU/qjOTrHkvGP
+         PhKg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1779058393; x=1779663193; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=dqHCarJKoTYsYs2GgG6/OergL7eHJ2mPr9aCS4gATf4=;
+        b=LV5w78JTToreKjGF2TvLVckv/UnPpjHeiqLBWUMtVrK/BJfKki8eHBFSTqJDyENep/
+         6QooNepDY27FDCc8M4OwLrgBCZ/wH1BhoEYirCdmqqwvG9+NOXwPFfuXR3YmuaP1Z/gD
+         /TKQSRz0jhM7AAUm5f1jwr+jmgxfXoVzFvvbY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779058393; x=1779663193;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dqHCarJKoTYsYs2GgG6/OergL7eHJ2mPr9aCS4gATf4=;
+        b=PyS/EgEDs5B+9jhMsFpOqgQyvOJn3OI2NimSkxt390z8mmENnlLzi+8RdpAa6saSBM
+         ho/VgrXUUwSV6elIfF+kne+++Ax838vR78D2T5ZZIWevW+14Ay38nYCDEDfm9vQdVEEy
+         4CD6Azqcv8QdPjnvXQJnfQ1/PeVGsJkCizVCtMhoNeNiQWUcy7eO/RgKaTr4O7FX9VOM
+         MSRkj/R6vrV5PSro5dHBu2JLU2kgbfJqFQbU9TapQLZfjxPI/EU6InWWftsr95lGwe1h
+         NxE4z7zYT+QzIeelPkkGh0fBKX2SGf43CrdHerB2JMUXOwMzJTADteoxDERQJLhXOWW2
+         IgQg==
+X-Forwarded-Encrypted: i=1; AFNElJ9gBMoXNt0f1S6rKiUWaStqwyT0U3uwmU/0Yi4gDv0PoEKcy3Sud6plQzmKF/FwYqFhsr2HsvTXdA9/DFgZwy0=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywq0vTvrehFPAFzu/eij9LsKLg6avsmLBj2TLTGpsJeIwRezVpc
+	xckMMKBNtKSTI07yURDEtzLSjMJXphs3LB6ptDvK/P4Do19a7FWntxt6DfbOBCfGewX5n9s9r+A
+	Ux17qeh57Mwd1nyrB+LxnTH3BckgGLQIyOSCXpOqm
+X-Gm-Gg: Acq92OFpq5rWUEq6BWNS+yCMko5t38imaLyKdm89DjswTAYo29LP4hpYNtdEwRKCRxi
+	pipl6I+uuc1t3SUpVWHQ0ezEsqT3GjR5RXqUZFUwwFL7khWhtCYP9j2dDyOBLZzLyk/15j8vUV0
+	3bvULQHCK/os8SgTVia3kuCOqrTVjYEQUW7pJJdIF5vul2l53zH8m6V7lVJZb3aNV+rVK2NYRR3
+	EVGJlRaLLctNSakwy/ANG2hhceUuXtDm5+66Sp07nGYhevTW+k/zV9Y/KlGgMMRM+0UiEW/mHQA
+	Hcywa4Ae1rC4A13nHk8=
+X-Received: by 2002:a17:907:c291:b0:bd2:8386:2a39 with SMTP id
+ a640c23a62f3a-bd517930618mr681196366b.36.1779058393523; Sun, 17 May 2026
+ 15:53:13 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 087e2ffd-a388-4051-9b4e-08deb0cd1e84
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 May 2026 08:53:35.9707
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Um3Vs6XoNtyfhx1Kcu2FLbd4bHb8CEhiI5+gqgFyVXUgfrCc2eEZaCBf7cojcP+ovqPzslOMXgi0YUEKxT7AA3Z3A+3LK598n/fyDF+1HZw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB5644
+References: <579fcbc186ad2aeea3c206aebc901b64fc665db1.camel@siemens.com>
+ <2775464f-9da6-4e6f-b6ac-e84901cc3727@cherry.de> <f73b05656a7ce16e8aaa7d8fbfdc37716f5d025c.camel@siemens.com>
+In-Reply-To: <f73b05656a7ce16e8aaa7d8fbfdc37716f5d025c.camel@siemens.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 17 May 2026 16:53:00 -0600
+X-Gm-Features: AVHnY4L8BSGPjNxulnzFMFGoywEzwgk0uULnGG16f9D8rcNal7ZZ_-HjMJDKkxg
+Message-ID: <CAFLszTikS-QjMidEtZTcjG_t4YB_3m9aXpsRutvt6WbLyw8Lsg@mail.gmail.com>
+Subject: Re: [RFC] Pass reset reason to Linux via FDT
+To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
+Cc: "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>, 
+	"devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>, 
+	"a.fatoum@pengutronix.de" <a.fatoum@pengutronix.de>
+Content-Type: text/plain; charset="UTF-8"
 
-SGkgUXVlbnRpbiwNCg0KT24gVHVlLCAyMDI2LTA1LTEyIGF0IDE3OjI5ICswMjAwLCBRdWVudGlu
-IFNjaHVseiB3cm90ZToNCj4gPiBJIHdvdWxkIGxpa2UgdG8gcmVjZWl2ZSB5b3VyIG9waW5pb24g
-b24gdGhlIG5ldyAvY2hvc2VuL3Jlc2V0LXJlYXNvbiBwcm9wZXJ0eQ0KPiA+IEkgd291bGQgbGlr
-ZSB0byBpbnRyb2R1Y2UgaW4gdGhlIHNwZWMgYW5kIGNvbnNlcXVlbnRseSBpbiB0aGUgVS1Cb290
-Lg0KPiA+IA0KPiA+IEkndmUgcG9zdGVkIGFuIFUtQm9vdCBwYXRjaHNldCBbMV0gd2l0aCB0aGUg
-cHJvcG9zZWQgaW1wbGVtZW50YXRpb24gd2hpY2gNCj4gPiB3b3VsZCB3b3JrIG9uIFRJIEszIFNv
-Q3MgaW5pdGlhbGx5Lg0KPiA+IA0KPiA+IC0gRG8geW91IHRoaW5rIEkgbmVlZCB0byBzZW5kIGEg
-Zm9ybWFsIHBhdGNoIHRvIGRldmljZSB0cmVlIHNwZWM/DQo+IA0KPiBXZSAoVS1Cb290KSBhcmUg
-bm90IG1lcmdpbmcgbmV3IERldmljZSBUcmVlIG5vZGVzIG9yIHByb3BlcnRpZXMgd2l0aG91dCAN
-Cj4gdGhlbSBiZWluZyBhY2NlcHRlZCBpbiBlaXRoZXIgdGhlIHNwZWMgb3IgaW4gTGludXgga2Vy
-bmVsIERldmljZSBUcmVlIA0KPiBiaW5kaW5ncywgc28gaXQncyBub3QgdGhhdCB3ZSB0aGluayB5
-b3UgbmVlZCB0byBzZW5kIGEgZm9ybWFsIHBhdGNoLCBpcyANCj4gdGhhdCB5b3UgbXVzdCBhbmQg
-aXQgbmVlZHMgdG8gYmUgbWVyZ2VkIGJlZm9yZSB3ZSBjYW4gdXNlIGl0Lg0KPiANCj4gWWVzLCB0
-aGlzIGNhbiB0YWtlIG1vbnRocyBhbmQgYmUgY3VtYmVyc29tZSBidXQgRGV2aWNlIFRyZWUgaXMg
-c3VwcG9zZWQgDQo+IHRvIHJlcHJlc2VudCB0aGUgSFcgYW5kIGJlIHN5c3RlbS1hZ25vc3RpYyBz
-byB3ZSBzaG91bGQgbWFrZSBzdXJlIGFsbCANCj4gYm9vdGxvYWRlcnMgb3IgT1NlcyB1bmRlcnN0
-YW5kIGFuZCBmaWxsIHRoZSBEZXZpY2UgVHJlZSBhcyBpbnRlbmRlZC4NCj4gDQo+ID4gLSBEbyB5
-b3UgdGhpbmsgL2Nob3Nlbi9yZXNldC1yZWFzb24gaXMgdGhlIHByb3BlciBsb2NhdGlvbiBmb3Ig
-dGhlIFNvQy9wbGF0Zm9ybQ0KPiA+IMKgwqDCoCBhZ25vc3RpYyByZXNldCBjYXVzZSBpbmZvcm1h
-dGlvbj8NCj4gDQo+IC9jaG9zZW4gaXMgbGlrZWx5IHRoZSByaWdodCBwbGFjZSBjb25zaWRlcmlu
-ZyAvY2hvc2VuL2Jvb3Rzb3VyY2Ugd2hpY2ggDQo+IGlzIGFsc28gYWRkZWQgYnkgdGhlIGJvb3Rs
-b2FkZXIuDQo+IA0KPiA+IC0gRG8geW91IHRoaW5rIGhhdmluZyBhbiBvcGFxdWUgc3RyaW5nIHRo
-ZXJlIGlzIE9LLCBiZWFyaW5nIGluIG1pbmQgdGhhdCB0aGVyZQ0KPiANCj4gTm8uDQo+IA0KPiA+
-IMKgwqDCoCBpcyBubyBzdGFuZGFyZCBhcHByb2FjaCB1cCB0byBub3cgdG8gdGhpcyB0b3BpYywg
-bmVpdGhlciBpbiBMaW51eCBub3IgaW4NCj4gPiDCoMKgwqAgVS1Cb290LCB0YWtpbmcgaW50byBh
-Y2NvdW50IGRpZmZlcmVudCBTb0NzIGFuZCB2ZW5kb3JzIHByb3ZpZGUgdmVyeSBkaWZmZXJlbnQN
-Cj4gDQo+IEluIEJhcmVib3ggdGhlcmUgaXMgYSB3YXkgdGhvdWdoLiBTdHJpbmdzIGFyZSBiYWQs
-IGFuZCBldmVuIG1vcmUgc28gaWYgDQo+IHRoZXkgYXJlIGZyZWUtZm9ybSBhcyB2ZW5kb3JzIHdp
-bGwgZWl0aGVyIGJlIHZlcnkgaW52ZW50aXZlIGFuZCB0aGVyZSANCj4gY2FuIGFsc28gYmUgdHlw
-b3MuDQo+IA0KPiA+IMKgwqDCoCBpbmZvcm1hdGlvbiByZWdhcmRpbmcgcmVzZXQgY2F1c2UsIHdo
-aWNoIGlzIGJhcmVseSBwb3NzaWJsZSB0byB1bmlmeT8NCj4gPiANCj4gDQo+IEkgdGhpbmsgeW91
-IHdhbnQgdG8gaGF2ZSBhIHJlYWQgb2YgY29tbW9uL29mdHJlZS5jIGluIEJhcmVib3gsIA0KPiBz
-cGVjaWZpY2FsbHkgdGhlIC9jaG9zZW4vcmVzZXQtc291cmNlLWRldmljZSwgL2Nob3Nlbi9yZXNl
-dC1zb3VyY2UsIA0KPiAvY2hvc2VuL3Jlc2V0LXNvdXJjZS1pbnN0YW5jZSBwcm9wZXJ0aWVzIGFz
-IHdlbGwgYXMgDQo+IGNvbW1vbi9yZXNldF9zb3VyY2UuYyB3aGVyZSB0aGV5IGFsc28gcmVhZCAv
-Y2hvc2VuL3Jlc2V0LXNvdXJjZS1wcmlvcml0eS4NCg0KdGhhbmtzIGZvciB0aGUgcmVmZXJlbmNl
-ISBCYXJlYm94IGltcGxlbWVudGF0aW9uIGxvb2tzIG5pY2UsIHBvcHVsYXRlcyBleGFjdGx5DQov
-Y2hvc2VuL3Jlc2V0LXNvdXJjZSB3aXRoIGEgc3RyaW5nIGFuZCBjb3ZlcnMgbW9zdCBvZiB0aGUg
-cmVzZXQgc291cmNlcyB3aXRoIHRoZWlyDQotIHVua25vd24NCi0gUE9SDQotIFJTVA0KLSBXREcN
-Ci0gV0tFDQotIEpUQUcNCi0gVEhFUk0NCi0gRVhUDQotIEJST1dOT1VUDQoNCmJ1dCBUSSBLMyBo
-YXMgYWxzbw0KLSBFU00gKEVycm9yIFNpZ25hbGxpbmcgTW9kdWxlKQ0KLSBETVNDIChob3cgVS1C
-b290IGNhbGxzIGl0IG5vdywgSSBzdXBwb3NlIERldmljZSBNYW5hZ2VtZW50IHNvbWV0aGluZykg
-b3IgU01TIChTZWN1cml0eSBNYW5hZ2VtZW50IFN1YnN5c3RlbSwgaG93IFRSTSBuYW1lcyBpdCkN
-Cg0KYW5kIGkuTVg5IGJyaW5ncyBzb21lDQotICpMT0NLVVAgKHNlY3VyZSBjb3JlJ3MgbG9ja3Vw
-KQ0KLSBbdW5oYW5kbGVkXSBleGNlcHRpb24gKG9uIGEgc2VjdXJlIGNvcmUpDQotIEZDQ1UgKEZh
-dWx0IENvbGxlY3Rpb24gYW5kIENvbnRyb2wgVW5pdCwgc2ltaWxhciB0byBUSSdzIEVTTT8pDQot
-IEVMRSAoRWRnZUxvY2sgRW5jbGF2ZSkNCi0gQkJNIChCYXR0ZXJ5LUJhY2tlZCBNb2R1bGUpDQoN
-CklmIHdlIGRvIG5vdCB3YW50IHRvIGludGVudGlvbmFsbHkgbG9zZSB0aGlzIGluZm9ybWF0aW9u
-LCBob3cgY2FuIHdlIGFjY29tbW9kYXRlDQpmb3IgdGhlIGFib3ZlIGFuZCBmdXR1cmUgZGV2ZWxv
-cG1lbnQgaW4gdGhlIGRldmljZSB0cmVlIGJpbmRpbmdzPw0KDQo+IFRoZXJlIGFyZSBtdWx0aXBs
-ZSBpc3N1ZXMgd2l0aCB0aGUgc3VnZ2VzdGVkIGltcGxlbWVudGF0aW9uIGhlcmUuIEhvdyBkbyAN
-Cj4gd2UgaGFuZGxlIGEgZGV2aWNlIHdpdGggbXVsdGlwbGUgSVBzIHBvc3NpYmx5IHRyaWdnZXJp
-bmcgdGhlIHNhbWUga2luZCANCj4gb2YgcmVzZXQ/IEUuZy4gdGhlcmUgY2FuIGJlIGEgQ1BVIHdh
-dGNoZG9nIGJ1dCBhbHNvIGEgUE1JQyB3YXRjaGRvZy4gVGhlIA0KPiBkaWZmZXJlbmNlIGlzIHJl
-YWxseSBpbXBvcnRhbnQgYXMgb24gc29tZSBzeXN0ZW0sIHlvdSBuZWVkIHRvIHJlc2V0IHRoZSAN
-Cj4gUE1JQyBzbyB0aGUgcG93ZXItcmFpbHMgYXJlIHJlc2V0IGFuZCBpbiB0aGUgZXhwZWN0ZWQg
-c3RhdGUuDQoNCk9idmlvdXNseSBpdCB3aWxsIG5vdCBiZSBwb3NzaWJsZSB0byBzYXRpc2Z5IHRo
-ZSBtb3N0IHNvcGhpc3RpY2F0ZWQgcmVxdWlyZW1lbnRzDQp3aXRoIGp1c3Qgb25lIGltcGxlbWVu
-dGF0aW9uLiBCdXQgYXMgdXN1YWwsIHdlIHByb2JhYmx5IGNvdWxkIGNvdmVyIDgwJSBvZg0KdXNl
-IGNhc2VzIHdpdGggMjAlIG9mIGVmZm9ydC4NCg0KPiBXaGF0IGFib3V0IGFuIFNvQyB3aXRoIG11
-bHRpcGxlIHdhdGNoZG9ncyAoUm9ja2NoaXAgU29DcyBoYXZlIG1hbnkgDQo+IGRpZmZlcmVudCBz
-b3VyY2VzIGZvciB0cmlnZ2VyaW5nIHRoZSB3YXRjaGRvZyk/DQoNClByb2JhYmx5IEJhcmVib3gg
-aW1wbGVtZW50YXRpb24gaGFzIGFuIGFuc3dlciBmb3IgdGhpcyBwcm92aWRpbmcgdGhlaXINCi9j
-aG9zZW4vcmVzZXQtc291cmNlLWluc3RhbmNlIGFuZCAvY2hvc2VuL3Jlc2V0LXNvdXJjZS1kZXZp
-Y2UgKGFzIGEgZnVsbA0KRFQgbm9kZSBuYW1lKSwgYnV0IGltcGxlbWVudGluZyAvY2hvc2VuL3Jl
-c2V0LXNvdXJjZSBuZWl0aGVyIHN0cmljdGx5DQpyZXF1aXJlcyB0byBpbXBsZW1lbnQgcmVzZXQt
-c291cmNlLWluc3RhbmNlIG9yIHJlc2V0LXNvdXJjZS1kZXZpY2Ugbm93LA0Kbm9yIGRvZXMgaXQg
-YmxvY2sgdGhlbSBmcm9tIGJlaW5nIGltcGxlbWVudGVkIGxhdGVyLg0KDQo+IENvbnNpZGVyaW5n
-IEJhcmVib3ggaGFzIGhhZCBzdXBwb3J0IGZvciB0aGlzIGZvciBhIHZlcnkgbG9uZyB0aW1lLCBJ
-J20gDQo+IHN1cmUgdGhleSBoYXZlIHNvbWUgb3BpbmlvbnMgb24gd2hhdCB0byBkbyBhbmQgd2hh
-dCBub3QgdG8gZG8gOikNCj4gDQo+IENoZWVycywNCj4gUXVlbnRpbg0KPiANCj4gPiBUaGUgcHJv
-cG9zZWQgY2hhbmdlIHdvdWxkIGxvb2sgbGlrZSBmb2xsb3dpbmc6DQo+ID4gDQo+ID4gZGlmZiAt
-LWdpdCBhL2R0c2NoZW1hL3NjaGVtYXMvY2hvc2VuLnlhbWwgYi9kdHNjaGVtYS9zY2hlbWFzL2No
-b3Nlbi55YW1sDQo+ID4gaW5kZXggNjNmM2MxMi4uZDkwODQyNiAxMDA2NDQNCj4gPiAtLS0gYS9k
-dHNjaGVtYS9zY2hlbWFzL2Nob3Nlbi55YW1sDQo+ID4gKysrIGIvZHRzY2hlbWEvc2NoZW1hcy9j
-aG9zZW4ueWFtbA0KPiA+IEBAIC0xODMsNiArMTgzLDIwIEBAIHByb3BlcnRpZXM6DQo+ID4gwqDC
-oMKgwqDCoMKgwqDCoCB3aWxsIGFzc2lnbiBkZXZpY2VzIGluIGl0cyB1c3VhbCBtYW5uZXIsIG90
-aGVyd2lzZSBpdCB3aWxsIG5vdCB0cnkgdG8NCj4gPiDCoMKgwqDCoMKgwqDCoMKgIGFzc2lnbiBk
-ZXZpY2VzIGFuZCBpbnN0ZWFkIHVzZSB0aGVtIGFzIHRoZXkgYXJlIGNvbmZpZ3VyZWQgYWxyZWFk
-eS4NCj4gPiDCoMKgIA0KPiA+ICvCoCByZXNldC1yZWFzb246DQo+ID4gK8KgwqDCoCAkcmVmOiB0
-eXBlcy55YW1sIy9kZWZpbml0aW9ucy9zdHJpbmcNCj4gPiArwqDCoMKgIGRlc2NyaXB0aW9uOg0K
-PiA+ICvCoMKgwqDCoMKgIFRoaXMgcHJvcGVydHkgaXMgc2V0IGJ5IHRoZSBib290bG9hZGVyIHRv
-IGluZGljYXRlIHRoZSByZWFzb24gZm9yIHRoZQ0KPiA+ICvCoMKgwqDCoMKgIG1vc3QgcmVjZW50
-IHN5c3RlbSByZXNldCwgZS5nLiAiUE9SIiAocG93ZXItb24gcmVzZXQpLCAiV0RPRyIgKHdhdGNo
-ZG9nKSwNCj4gPiArwqDCoMKgwqDCoCAiUElOIiAoZXh0ZXJuYWwgcmVzZXQgcGluKSwgIlJTVCIg
-KHNvZnR3YXJlIHdhcm0gcmVzZXQpLCAiVEhFUk1BTCIsIGV0Yy4NCj4gPiArwqDCoMKgwqDCoCBU
-aGUgc2V0IG9mIHBvc3NpYmxlIHZhbHVlcyBpcyBwbGF0Zm9ybS1zcGVjaWZpYy4NCj4gPiArDQo+
-ID4gK8KgwqDCoMKgwqAgLyB7DQo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNob3Nl
-biB7DQo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXNl
-dC1yZWFzb24gPSAiV0RPRyI7DQo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH07DQo+
-ID4gK8KgwqDCoMKgwqAgfTsNCj4gPiArDQo+ID4gwqDCoMKgwqAgc21iaW9zMy1lbnRyeXBvaW50
-Og0KPiA+IMKgwqDCoMKgwqDCoCAkcmVmOiB0eXBlcy55YW1sIy9kZWZpbml0aW9ucy9hZGRyZXNz
-DQo+ID4gwqDCoMKgwqDCoMKgIG1heEl0ZW1zOiAxDQo+ID4gDQo+ID4gWzFdIGh0dHBzOi8vd3d3
-Lm1haWwtYXJjaGl2ZS5jb20vdS1ib290QGxpc3RzLmRlbnguZGUvbXNnNTczODExLmh0bWwNCj4g
-PiANCg0KLS0gDQpBbGV4YW5kZXIgU3ZlcmRsaW4NClNpZW1lbnMgQUcNCnd3dy5zaWVtZW5zLmNv
-bQ0K
+Hi,
+
+On Wed, 13 May 2026 at 02:57, Sverdlin, Alexander
+<alexander.sverdlin@siemens.com> wrote:
+>
+> Hi Quentin,
+>
+> On Tue, 2026-05-12 at 17:29 +0200, Quentin Schulz wrote:
+> > > I would like to receive your opinion on the new /chosen/reset-reason property
+> > > I would like to introduce in the spec and consequently in the U-Boot.
+> > >
+> > > I've posted an U-Boot patchset [1] with the proposed implementation which
+> > > would work on TI K3 SoCs initially.
+> > >
+> > > - Do you think I need to send a formal patch to device tree spec?
+> >
+> > We (U-Boot) are not merging new Device Tree nodes or properties without
+> > them being accepted in either the spec or in Linux kernel Device Tree
+> > bindings, so it's not that we think you need to send a formal patch, is
+> > that you must and it needs to be merged before we can use it.
+> >
+> > Yes, this can take months and be cumbersome but Device Tree is supposed
+> > to represent the HW and be system-agnostic so we should make sure all
+> > bootloaders or OSes understand and fill the Device Tree as intended.
+> >
+> > > - Do you think /chosen/reset-reason is the proper location for the SoC/platform
+> > >     agnostic reset cause information?
+> >
+> > /chosen is likely the right place considering /chosen/bootsource which
+> > is also added by the bootloader.
+> >
+> > > - Do you think having an opaque string there is OK, bearing in mind that there
+> >
+> > No.
+> >
+> > >     is no standard approach up to now to this topic, neither in Linux nor in
+> > >     U-Boot, taking into account different SoCs and vendors provide very different
+> >
+> > In Barebox there is a way though. Strings are bad, and even more so if
+> > they are free-form as vendors will either be very inventive and there
+> > can also be typos.
+> >
+> > >     information regarding reset cause, which is barely possible to unify?
+> > >
+> >
+> > I think you want to have a read of common/oftree.c in Barebox,
+> > specifically the /chosen/reset-source-device, /chosen/reset-source,
+> > /chosen/reset-source-instance properties as well as
+> > common/reset_source.c where they also read /chosen/reset-source-priority.
+>
+> thanks for the reference! Barebox implementation looks nice, populates exactly
+> /chosen/reset-source with a string and covers most of the reset sources with their
+> - unknown
+> - POR
+> - RST
+> - WDG
+> - WKE
+> - JTAG
+> - THERM
+> - EXT
+> - BROWNOUT
+
+I am not a fan of capital letters and abbreviations in device-tree
+properties. I think we should have
+
+cold
+warm
+watchdog
+wakeup
+jtag
+thermal
+external
+brownout
+
+>
+> but TI K3 has also
+> - ESM (Error Signalling Module)
+> - DMSC (how U-Boot calls it now, I suppose Device Management something) or SMS (Security Management Subsystem, how TRM names it)
+>
+> and i.MX9 brings some
+> - *LOCKUP (secure core's lockup)
+> - [unhandled] exception (on a secure core)
+> - FCCU (Fault Collection and Control Unit, similar to TI's ESM?)
+> - ELE (EdgeLock Enclave)
+> - BBM (Battery-Backed Module)
+>
+> If we do not want to intentionally lose this information, how can we accommodate
+> for the above and future development in the device tree bindings?
+
+You can add more options to the binding as needed.
+
+>
+> > There are multiple issues with the suggested implementation here. How do
+> > we handle a device with multiple IPs possibly triggering the same kind
+> > of reset? E.g. there can be a CPU watchdog but also a PMIC watchdog. The
+> > difference is really important as on some system, you need to reset the
+> > PMIC so the power-rails are reset and in the expected state.
+>
+> Obviously it will not be possible to satisfy the most sophisticated requirements
+> with just one implementation. But as usual, we probably could cover 80% of
+> use cases with 20% of effort.
+
+I would expect 'watchdog' to mean SoC watchdog. If we need to specify
+a PMIC watchdog we could perhaps add a 'reset-source' property?
+
+But as Quentin mentions, we should get the bindings in first.
+
+>
+> > What about an SoC with multiple watchdogs (Rockchip SoCs have many
+> > different sources for triggering the watchdog)?
+>
+> Probably Barebox implementation has an answer for this providing their
+> /chosen/reset-source-instance and /chosen/reset-source-device (as a full
+> DT node name), but implementing /chosen/reset-source neither strictly
+> requires to implement reset-source-instance or reset-source-device now,
+> nor does it block them from being implemented later.
+>
+> > Considering Barebox has had support for this for a very long time, I'm
+> > sure they have some opinions on what to do and what not to do :)
+> >
+> > Cheers,
+> > Quentin
+> >
+> > > The proposed change would look like following:
+> > >
+> > > diff --git a/dtschema/schemas/chosen.yaml b/dtschema/schemas/chosen.yaml
+> > > index 63f3c12..d908426 100644
+> > > --- a/dtschema/schemas/chosen.yaml
+> > > +++ b/dtschema/schemas/chosen.yaml
+> > > @@ -183,6 +183,20 @@ properties:
+> > >          will assign devices in its usual manner, otherwise it will not try to
+> > >          assign devices and instead use them as they are configured already.
+> > >
+> > > +  reset-reason:
+> > > +    $ref: types.yaml#/definitions/string
+> > > +    description:
+> > > +      This property is set by the bootloader to indicate the reason for the
+> > > +      most recent system reset, e.g. "POR" (power-on reset), "WDOG" (watchdog),
+> > > +      "PIN" (external reset pin), "RST" (software warm reset), "THERMAL", etc.
+> > > +      The set of possible values is platform-specific.
+> > > +
+> > > +      / {
+> > > +              chosen {
+> > > +                      reset-reason = "WDOG";
+> > > +              };
+> > > +      };
+> > > +
+> > >      smbios3-entrypoint:
+> > >        $ref: types.yaml#/definitions/address
+> > >        maxItems: 1
+> > >
+> > > [1] https://www.mail-archive.com/u-boot@lists.denx.de/msg573811.html
+> > >
+>
+
+Regards,
+Simon
