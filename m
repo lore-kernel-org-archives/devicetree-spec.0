@@ -1,250 +1,131 @@
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3511816A956
-	for <devicetree-spec@vger.kernel.org>; Sun, 17 May 2026 22:53:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.46
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1779058397; cv=pass; b=YGBTidbum4zfoqzs6GY9pRUPS5S7hz+1bZ1HQuFL8zPvAsi1Dmnv7YGxj1f983m6nrEKSuFGxhsG15zVw9Py7Pazdcbchq9xyC94LJ7SZroCMHltSOP0sLIcfrxEkJMNNnAC4E2xVCn1y02gybTUfoJeyKNAV0I9TsLoUqCeKjE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1779058397; c=relaxed/simple;
-	bh=DANe3b1Lrx5r4db/7fNp7XG/tly0BIceUpq9A7Pt+OM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ACspNMVJ2OCyQGS+D6wmQNFEG1aOyz8TKq5lr88uW+dE1ktMSGC0pfkQZV/fFI6FpST3eLOOfYiK0KwRjqp2q5RaQnqWHlrhhdrKJDZZihOhyNGEcST1o5dK8GOs5980PT34zbUEfdmCxGj8xhpchn8lJqHd8VgEHqAo60TaXGs=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=LV5w78JT; arc=pass smtp.client-ip=209.85.218.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB7444B8DE7;
+	Tue, 19 May 2026 12:28:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1779193738; cv=none; b=LsJK7YxIjFUMwiyaNwFsMgJp2HMXze95MJu09gVpR0pFOllC7CK6dm+bJM3z8vs81tB7zcfCMdymOsWnsG+Fty6ORS5qePX7X8im06bGqiwq7PudF40r7kTfhB2RL7utsFU1A+dDPW77crUcjkZTlJ51G+zADJXwdDR1yu+6X+0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1779193738; c=relaxed/simple;
+	bh=om82qKwrc/AIC3/1p1oC7XNBF2pxoCEEOVi39Yh6YnU=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Content-Type; b=cJ5uVpm1vE/rjfksx9S3SeZjzNPPbcUCuelDmkFUbQzE8b4pivulpc/lcKMV3RlYaR3MweTgjXHNqGeKNDhhTplnoIOITuvoUJIimuIaF+EwQ59DtwKD8S/Uc+Uw7mPaScQxDGwyB867hiyn77Zt+txzkJoMa58+NbCIQ/3bcpA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Hy5by4aS; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="LV5w78JT"
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-bd0fc4c336eso363119666b.3
-        for <devicetree-spec@vger.kernel.org>; Sun, 17 May 2026 15:53:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779058393; cv=none;
-        d=google.com; s=arc-20240605;
-        b=GV6v5T1Qsb+EQQKQNUcxZUZefro6cb+QKkSIl2g9SRTSHgqDTXZ8oGBeXGTRmSDrzH
-         jgE3TwC8dayFeh+6L9hjkWMvI5JFkx+bUG7NdekIF8oCZlUR8K3ruwuqrXavyUew6kTb
-         V/yA4/zynK4GHaJBelOBdC3EVa3Ic/ozPdbqB2DMfh0YzP73ATProppdCIGkAt9HXVL0
-         8WroSzP77NaFLYnCLQN4KFnBL3CSC2eQkB2mjtCKRayEPHP3oSiI1CfqbDK1rNx/pGFO
-         1wTGw+bVeIui0adP96bPt1uHE8GgMonR3lOd8N1ywBMNz1DLwYL3V7krO7ibcHNB3q0W
-         5FqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=dqHCarJKoTYsYs2GgG6/OergL7eHJ2mPr9aCS4gATf4=;
-        fh=XrFx+ZM/5ElGT8FgWEGl/RjSjCiaYy2rk4toLdoKrmM=;
-        b=SvquDfDmuOewLjcgTVj6C43F/NSRg6iZngnrlTGubnR7XfqgtEitGAGAdvaobZjbsS
-         lNZ0Db90yeFB+cyyiaSytBrtbpEGnHfpAWmaKApPD4fq8ZD8eZ29FhrqscbFRXnZrgZo
-         k+Pqz41d1eP3+4otdF6bwwKX1znSwQfxCDsGzX9b2mSusMRQT2DgTiSs9R9cgMmFUSVl
-         1s/Fv0Yl828C71hBFBbfhd5CAxx0outpyqvDFqfIrz2lKK+17gad/xJMmvSz+LKWF1E5
-         lak/wRaxYIM79Kod4mIwNq0q21QQ0wWbmtY78+t9lXS9pQsyMm15cZ3xU/qjOTrHkvGP
-         PhKg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1779058393; x=1779663193; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=dqHCarJKoTYsYs2GgG6/OergL7eHJ2mPr9aCS4gATf4=;
-        b=LV5w78JTToreKjGF2TvLVckv/UnPpjHeiqLBWUMtVrK/BJfKki8eHBFSTqJDyENep/
-         6QooNepDY27FDCc8M4OwLrgBCZ/wH1BhoEYirCdmqqwvG9+NOXwPFfuXR3YmuaP1Z/gD
-         /TKQSRz0jhM7AAUm5f1jwr+jmgxfXoVzFvvbY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779058393; x=1779663193;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dqHCarJKoTYsYs2GgG6/OergL7eHJ2mPr9aCS4gATf4=;
-        b=PyS/EgEDs5B+9jhMsFpOqgQyvOJn3OI2NimSkxt390z8mmENnlLzi+8RdpAa6saSBM
-         ho/VgrXUUwSV6elIfF+kne+++Ax838vR78D2T5ZZIWevW+14Ay38nYCDEDfm9vQdVEEy
-         4CD6Azqcv8QdPjnvXQJnfQ1/PeVGsJkCizVCtMhoNeNiQWUcy7eO/RgKaTr4O7FX9VOM
-         MSRkj/R6vrV5PSro5dHBu2JLU2kgbfJqFQbU9TapQLZfjxPI/EU6InWWftsr95lGwe1h
-         NxE4z7zYT+QzIeelPkkGh0fBKX2SGf43CrdHerB2JMUXOwMzJTADteoxDERQJLhXOWW2
-         IgQg==
-X-Forwarded-Encrypted: i=1; AFNElJ9gBMoXNt0f1S6rKiUWaStqwyT0U3uwmU/0Yi4gDv0PoEKcy3Sud6plQzmKF/FwYqFhsr2HsvTXdA9/DFgZwy0=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywq0vTvrehFPAFzu/eij9LsKLg6avsmLBj2TLTGpsJeIwRezVpc
-	xckMMKBNtKSTI07yURDEtzLSjMJXphs3LB6ptDvK/P4Do19a7FWntxt6DfbOBCfGewX5n9s9r+A
-	Ux17qeh57Mwd1nyrB+LxnTH3BckgGLQIyOSCXpOqm
-X-Gm-Gg: Acq92OFpq5rWUEq6BWNS+yCMko5t38imaLyKdm89DjswTAYo29LP4hpYNtdEwRKCRxi
-	pipl6I+uuc1t3SUpVWHQ0ezEsqT3GjR5RXqUZFUwwFL7khWhtCYP9j2dDyOBLZzLyk/15j8vUV0
-	3bvULQHCK/os8SgTVia3kuCOqrTVjYEQUW7pJJdIF5vul2l53zH8m6V7lVJZb3aNV+rVK2NYRR3
-	EVGJlRaLLctNSakwy/ANG2hhceUuXtDm5+66Sp07nGYhevTW+k/zV9Y/KlGgMMRM+0UiEW/mHQA
-	Hcywa4Ae1rC4A13nHk8=
-X-Received: by 2002:a17:907:c291:b0:bd2:8386:2a39 with SMTP id
- a640c23a62f3a-bd517930618mr681196366b.36.1779058393523; Sun, 17 May 2026
- 15:53:13 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Hy5by4aS"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77D50C2BCC6;
+	Tue, 19 May 2026 12:28:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1779193737;
+	bh=om82qKwrc/AIC3/1p1oC7XNBF2pxoCEEOVi39Yh6YnU=;
+	h=Date:From:Subject:To:From;
+	b=Hy5by4aSmLi293uNgLpLKupJfFptICD2qBOtSaKua8wTqQ4gthmC36wsOJCnGs5P7
+	 u3VAhwIAtEka/vtQWFmTzE4hvpxQNl60UerWTRwB0VKLvc5Ic/FuCShnomzl7NG1cP
+	 Tpot1GMxbV6q+EhlLLSW0niGOlv+IoOeLhD0Y1seDf/8Yqh/obnJedvof+rReU/jf+
+	 ZrfvS/HLCf2FbtGo4+MH3t6zT8Va0/ZgluZ191LI8g/Y89ywaUMqCN+7Nj62yUMuBn
+	 YBKSJ7nOidM8nbwJ6yg3Y8ZzD/AKYCSyxnniSlci5ZIbzP7rxcWvgp611WnoC6vH5T
+	 o3qPMaIeI2eYQ==
+Message-ID: <1668071d-6e18-4379-bf44-b82065731148@kernel.org>
+Date: Tue, 19 May 2026 14:28:53 +0200
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <579fcbc186ad2aeea3c206aebc901b64fc665db1.camel@siemens.com>
- <2775464f-9da6-4e6f-b6ac-e84901cc3727@cherry.de> <f73b05656a7ce16e8aaa7d8fbfdc37716f5d025c.camel@siemens.com>
-In-Reply-To: <f73b05656a7ce16e8aaa7d8fbfdc37716f5d025c.camel@siemens.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 17 May 2026 16:53:00 -0600
-X-Gm-Features: AVHnY4L8BSGPjNxulnzFMFGoywEzwgk0uULnGG16f9D8rcNal7ZZ_-HjMJDKkxg
-Message-ID: <CAFLszTikS-QjMidEtZTcjG_t4YB_3m9aXpsRutvt6WbLyw8Lsg@mail.gmail.com>
-Subject: Re: [RFC] Pass reset reason to Linux via FDT
-To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-Cc: "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>, 
-	"devicetree-spec@vger.kernel.org" <devicetree-spec@vger.kernel.org>, 
-	"a.fatoum@pengutronix.de" <a.fatoum@pengutronix.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Subject: [ANNOUNCEMENT / CFP] LPC 2026 Devicetree Microconference CFP
+Autocrypt: addr=krzk@kernel.org; keydata=
+ xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
+ cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
+ JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
+ gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
+ J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
+ NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
+ BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
+ vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
+ Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
+ TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
+ S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGVBBMBCgA/AhsDBgsJCAcDAgYVCAIJCgsE
+ FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJoF1BKBQkWlnSaAAoJEBuTQ307
+ QWKbHukP/3t4tRp/bvDnxJfmNdNVn0gv9ep3L39IntPalBFwRKytqeQkzAju0whYWg+R/rwp
+ +r2I1Fzwt7+PTjsnMFlh1AZxGDmP5MFkzVsMnfX1lGiXhYSOMP97XL6R1QSXxaWOpGNCDaUl
+ ajorB0lJDcC0q3xAdwzRConxYVhlgmTrRiD8oLlSCD5baEAt5Zw17UTNDnDGmZQKR0fqLpWy
+ 786Lm5OScb7DjEgcA2PRm17st4UQ1kF0rQHokVaotxRM74PPDB8bCsunlghJl1DRK9s1aSuN
+ hL1Pv9VD8b4dFNvCo7b4hfAANPU67W40AaaGZ3UAfmw+1MYyo4QuAZGKzaP2ukbdCD/DYnqi
+ tJy88XqWtyb4UQWKNoQqGKzlYXdKsldYqrLHGoMvj1UN9XcRtXHST/IaLn72o7j7/h/Ac5EL
+ 8lSUVIG4TYn59NyxxAXa07Wi6zjVL1U11fTnFmE29ALYQEXKBI3KUO1A3p4sQWzU7uRmbuxn
+ naUmm8RbpMcOfa9JjlXCLmQ5IP7Rr5tYZUCkZz08LIfF8UMXwH7OOEX87Y++EkAB+pzKZNNd
+ hwoXulTAgjSy+OiaLtuCys9VdXLZ3Zy314azaCU3BoWgaMV0eAW/+gprWMXQM1lrlzvwlD/k
+ whyy9wGf0AEPpLssLVt9VVxNjo6BIkt6d1pMg6mHsUEVzsFNBFVDXDQBEADNkrQYSREUL4D3
+ Gws46JEoZ9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLue
+ MNsWLJBvBaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6ei
+ OMheesVS5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wA
+ GldWsRxbf3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA
+ 6z6lBZn0WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9
+ YegxWKvXXHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt
+ 91pFzBSOIpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gU
+ BLHFTg2hYnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/
+ JoFzZ4B0p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu
+ 4vXVFBYIGmpyNPYzRm0QPwARAQABwsF8BBgBCgAmAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtB
+ YpsFAmgXUF8FCRaWWyoACgkQG5NDfTtBYptO0w//dlXJs5/42hAXKsk+PDg3wyEFb4NpyA1v
+ qmx7SfAzk9Hf6lWwU1O6AbqNMbh6PjEwadKUk1m04S7EjdQLsj/MBSgoQtCT3MDmWUUtHZd5
+ RYIPnPq3WVB47GtuO6/u375tsxhtf7vt95QSYJwCB+ZUgo4T+FV4hquZ4AsRkbgavtIzQisg
+ Dgv76tnEv3YHV8Jn9mi/Bu0FURF+5kpdMfgo1sq6RXNQ//TVf8yFgRtTUdXxW/qHjlYURrm2
+ H4kutobVEIxiyu6m05q3e9eZB/TaMMNVORx+1kM3j7f0rwtEYUFzY1ygQfpcMDPl7pRYoJjB
+ dSsm0ZuzDaCwaxg2t8hqQJBzJCezTOIkjHUsWAK+tEbU4Z4SnNpCyM3fBqsgYdJxjyC/tWVT
+ AQ18NRLtPw7tK1rdcwCl0GFQHwSwk5pDpz1NH40e6lU+NcXSeiqkDDRkHlftKPV/dV+lQXiu
+ jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
+ zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
+ XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
+To: devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-arm-msm@vger.kernel.org, Rob Herring <robh@kernel.org>,
+ Conor Dooley <conor@kernel.org>, imx@lists.linux.dev,
+ linux-kernel@vger.kernel.org, devicetree-compiler@vger.kernel.org,
+ devicetree-spec@vger.kernel.org
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hey there,
 
-On Wed, 13 May 2026 at 02:57, Sverdlin, Alexander
-<alexander.sverdlin@siemens.com> wrote:
->
-> Hi Quentin,
->
-> On Tue, 2026-05-12 at 17:29 +0200, Quentin Schulz wrote:
-> > > I would like to receive your opinion on the new /chosen/reset-reason property
-> > > I would like to introduce in the spec and consequently in the U-Boot.
-> > >
-> > > I've posted an U-Boot patchset [1] with the proposed implementation which
-> > > would work on TI K3 SoCs initially.
-> > >
-> > > - Do you think I need to send a formal patch to device tree spec?
-> >
-> > We (U-Boot) are not merging new Device Tree nodes or properties without
-> > them being accepted in either the spec or in Linux kernel Device Tree
-> > bindings, so it's not that we think you need to send a formal patch, is
-> > that you must and it needs to be merged before we can use it.
-> >
-> > Yes, this can take months and be cumbersome but Device Tree is supposed
-> > to represent the HW and be system-agnostic so we should make sure all
-> > bootloaders or OSes understand and fill the Device Tree as intended.
-> >
-> > > - Do you think /chosen/reset-reason is the proper location for the SoC/platform
-> > >     agnostic reset cause information?
-> >
-> > /chosen is likely the right place considering /chosen/bootsource which
-> > is also added by the bootloader.
-> >
-> > > - Do you think having an opaque string there is OK, bearing in mind that there
-> >
-> > No.
-> >
-> > >     is no standard approach up to now to this topic, neither in Linux nor in
-> > >     U-Boot, taking into account different SoCs and vendors provide very different
-> >
-> > In Barebox there is a way though. Strings are bad, and even more so if
-> > they are free-form as vendors will either be very inventive and there
-> > can also be typos.
-> >
-> > >     information regarding reset cause, which is barely possible to unify?
-> > >
-> >
-> > I think you want to have a read of common/oftree.c in Barebox,
-> > specifically the /chosen/reset-source-device, /chosen/reset-source,
-> > /chosen/reset-source-instance properties as well as
-> > common/reset_source.c where they also read /chosen/reset-source-priority.
->
-> thanks for the reference! Barebox implementation looks nice, populates exactly
-> /chosen/reset-source with a string and covers most of the reset sources with their
-> - unknown
-> - POR
-> - RST
-> - WDG
-> - WKE
-> - JTAG
-> - THERM
-> - EXT
-> - BROWNOUT
+There will be a dedicated Devicetree Microconference on Linux Plumbers
+2026 in October in Prague. Call For Papers is currently open.
 
-I am not a fan of capital letters and abbreviations in device-tree
-properties. I think we should have
+https://lpc.events/event/20/contributions/2317/
 
-cold
-warm
-watchdog
-wakeup
-jtag
-thermal
-external
-brownout
 
->
-> but TI K3 has also
-> - ESM (Error Signalling Module)
-> - DMSC (how U-Boot calls it now, I suppose Device Management something) or SMS (Security Management Subsystem, how TRM names it)
->
-> and i.MX9 brings some
-> - *LOCKUP (secure core's lockup)
-> - [unhandled] exception (on a secure core)
-> - FCCU (Fault Collection and Control Unit, similar to TI's ESM?)
-> - ELE (EdgeLock Enclave)
-> - BBM (Battery-Backed Module)
->
-> If we do not want to intentionally lose this information, how can we accommodate
-> for the above and future development in the device tree bindings?
+The Devicetree Microconference focuses on discussing and solving
+problems present in the systems using Devicetree as firmware
+representation. This notably is Linux kernel and U-Boot, which share the
+Devicetree bindings and sources, but also can cover topics relevant to
+Zephyr or System Devicetrees.
 
-You can add more options to the binding as needed.
 
->
-> > There are multiple issues with the suggested implementation here. How do
-> > we handle a device with multiple IPs possibly triggering the same kind
-> > of reset? E.g. there can be a CPU watchdog but also a PMIC watchdog. The
-> > difference is really important as on some system, you need to reset the
-> > PMIC so the power-rails are reset and in the expected state.
->
-> Obviously it will not be possible to satisfy the most sophisticated requirements
-> with just one implementation. But as usual, we probably could cover 80% of
-> use cases with 20% of effort.
+Topics suggested for discussion are mentioned in "Ongoing problems" in
+session description (link above), but of course are not limited to
+these. Topics should obviously follow standard Microconference
+expectation, that is to be discussion oriented.
 
-I would expect 'watchdog' to mean SoC watchdog. If we need to specify
-a PMIC watchdog we could perhaps add a 'reset-source' property?
+We discuss and try to solve actual problems, thus if one wants to
+present his new patchset, then that patchset must have been already
+reviewed on the list with inconclusive result thus having another
+discussing in person would be beneficial.
 
-But as Quentin mentions, we should get the bindings in first.
+Allocated time per slot will be between 15 to 30 minutes (20 minutes
+last year).
 
->
-> > What about an SoC with multiple watchdogs (Rockchip SoCs have many
-> > different sources for triggering the watchdog)?
->
-> Probably Barebox implementation has an answer for this providing their
-> /chosen/reset-source-instance and /chosen/reset-source-device (as a full
-> DT node name), but implementing /chosen/reset-source neither strictly
-> requires to implement reset-source-instance or reset-source-device now,
-> nor does it block them from being implemented later.
->
-> > Considering Barebox has had support for this for a very long time, I'm
-> > sure they have some opinions on what to do and what not to do :)
-> >
-> > Cheers,
-> > Quentin
-> >
-> > > The proposed change would look like following:
-> > >
-> > > diff --git a/dtschema/schemas/chosen.yaml b/dtschema/schemas/chosen.yaml
-> > > index 63f3c12..d908426 100644
-> > > --- a/dtschema/schemas/chosen.yaml
-> > > +++ b/dtschema/schemas/chosen.yaml
-> > > @@ -183,6 +183,20 @@ properties:
-> > >          will assign devices in its usual manner, otherwise it will not try to
-> > >          assign devices and instead use them as they are configured already.
-> > >
-> > > +  reset-reason:
-> > > +    $ref: types.yaml#/definitions/string
-> > > +    description:
-> > > +      This property is set by the bootloader to indicate the reason for the
-> > > +      most recent system reset, e.g. "POR" (power-on reset), "WDOG" (watchdog),
-> > > +      "PIN" (external reset pin), "RST" (software warm reset), "THERMAL", etc.
-> > > +      The set of possible values is platform-specific.
-> > > +
-> > > +      / {
-> > > +              chosen {
-> > > +                      reset-reason = "WDOG";
-> > > +              };
-> > > +      };
-> > > +
-> > >      smbios3-entrypoint:
-> > >        $ref: types.yaml#/definitions/address
-> > >        maxItems: 1
-> > >
-> > > [1] https://www.mail-archive.com/u-boot@lists.denx.de/msg573811.html
-> > >
->
 
-Regards,
-Simon
+CFP end is not fixed yet, but it will be some time after end of "Kernel
+Summit" CFP, so *probably middle of July*. I will confirm that later.
+
+
+Proposals can be submitted here:
+https://lpc.events/event/20/abstracts/
+
+Please remember to choose "Devicetree MC" as the track.
+
+Best regards,
+Krzysztof
+
