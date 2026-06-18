@@ -1,176 +1,151 @@
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3D294ADDA4
-	for <devicetree-spec@vger.kernel.org>; Fri,  5 Jun 2026 08:59:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.136.64.227
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E428D2DE702;
+	Thu, 18 Jun 2026 14:17:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780650000; cv=none; b=qDM2bCiFg21ht8L7KMwaQ/Ws1kuRG82zE3uUOOJnU5dgs51WPUP6pAwr8Fb8WYf3Oiiq0tt9XjehrvFvBlYhUs/y3s/IanSMEYOTzPgH9X0YG/xfHB4PTGYz+HGiq4hXRFCAS0QmkIvijLLmbqgGIcn4qowrEfDUA67eHQw2ItY=
+	t=1781792241; cv=none; b=kVbf1ZN/UKbwczzKm7dDY1DCKXXWNqTRq+ZYPXWCLFOiy4kaI4ZI/LcZUSrJl04XG7R7HEHEACZZc0CVUZN+5PSKlnCKK/YmekFhZD8bmm5t+yNwypyji6CVgPlMLxdrXKRutBhZacwlSvLNsVaY67CtmOCxlvcutrgAUBJHyIo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780650000; c=relaxed/simple;
-	bh=xRJffMU6TMX6VLEK3l9aI+W42yrWuhoA30JoQIOboFk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Mx8Rzdemdl6g5fDUhAH55iuL8btCtizqjggILxGzdKd9rvKMlaoSLAh0uAZ7wuv8iVfRvHlw/Z55b33Ij03r5n6x+SKnIYXuX0nAliENUPP5tBCXWGfT86KH6J/IPoDOhCxRjQxrW8FiD/rkGeANT6HJdzH+onFNuF3EUIJ1Hro=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=siemens.com; spf=pass smtp.mailfrom=rts-flowmailer.siemens.com; dkim=pass (2048-bit key) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b=VoAYkCnz; arc=none smtp.client-ip=185.136.64.227
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rts-flowmailer.siemens.com
+	s=arc-20240116; t=1781792241; c=relaxed/simple;
+	bh=A66KX7iZoA25soJuqlFgBN1g0dg8AW1IvBSbx4e4Eco=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ar+4gX91J3YLKrWkIy2mdtw1P6DdJbcMMvTqk3UrK7XNWVU+mafC9Gf/DJcalO8IYyLbDq5w07+5F+LfwLfHu6lRSDtxxcqS8xzuo0HN0fDMwhYa/KH9cY5tW/NkZmM1hlKKlCe5S/AU18loYi+Xr2QQrY2/9UmkzHdS1ibD9tM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=LHKjJYsX; arc=none smtp.client-ip=150.107.74.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="VoAYkCnz"
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20260605085945d2bafe6cf9000207fe
-        for <devicetree-spec@vger.kernel.org>;
-        Fri, 05 Jun 2026 10:59:45 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=alexander.sverdlin@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=7G3DQgdkXpwmYA0bd/45bwC3wGZZbecxJbPbuUln/v4=;
- b=VoAYkCnzTwAolb4zs4BNuqbSXVZS8C/hJi8GGjtBaCEkmodjvIdSfrb7noGzEckdPI7Ug5
- ml6aVMHqx3DxEqbeGj5EFvVeDvZ8SVXlnOapVcn6kuB7tH+DFGyeuBVeuPcxvTlUCL7wGPHM
- cJp8t+XHk8lrA9/Mqaa7mNBGdn57JMTN4JU0TPC5js45QKpMynqEMUvilz525UVtzv1A4J2z
- 7EsnQvEtTtCPAHdXrVKe6kbyip1GT2aIZLce40CVvR3SkUYntFX/QhzouTDTdIRWSPYcExgh
- J/svDVkKbqnMyZp6PBGSY4M36hqoMRWN07nVypdxSWkmN2CP3ZEkghLg==;
-From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
-To: devicetree-spec@vger.kernel.org
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
-	Ludwig Nussel <ludwig.nussel@siemens.com>,
-	Simon Glass <sjg@chromium.org>,
-	Ahmad Fatoum <a.fatoum@pengutronix.de>,
-	Quentin Schulz <quentin.schulz@cherry.de>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="LHKjJYsX"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=gibson.dropbear.id.au; s=202606; t=1781792237;
+	bh=UiQoFfb8dikde9+2fOtYoRrUSwFDzNxagqL9GEs1+c8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=LHKjJYsXP0jP/XJhkfFVQ37FP6j+tqoL2IVxy/6ml7r9l1PYqppwrgMJ2aaOSWEnr
+	 JVIMDUOZqVEv/2BnTrwW2x+LSQNbReYl1RUEGDDLdpP0YsryS/hjIQSCwpKL7m8AXv
+	 APdwAdbxiObNirew9TcNOP3k7RbWHQX9C1wPQF6faSPiuoYHZaXSeAH80ufJnEpP+U
+	 o099/fN3Jc+h/FXhE9IrTEjjeXxusgn5iwofRL9dhdoh7LvYGV1wpyMTh7wVpgLs03
+	 jkWm98GvSXTfb1p9BTPwNeDcEPKcv725UJ+urWjNi0Ej738nh853Fey+KmsoDhr+RA
+	 bTGxpx6cfp+WQ==
+Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
+	id 4gh2qK1KWdz58lZ; Fri, 19 Jun 2026 00:17:17 +1000 (AEST)
+Date: Thu, 18 Jun 2026 20:15:10 +1000
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Herve Codina <herve.codina@bootlin.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Rob Herring <robh@kernel.org>
-Subject: [PATCH v2] schemas: chosen: Add reset-reason property
-Date: Fri,  5 Jun 2026 10:59:29 +0200
-Message-ID: <20260605085938.3779084-1-alexander.sverdlin@siemens.com>
+	Ayush Singh <ayush@beagleboard.org>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	devicetree-compiler@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org,
+	Hui Pu <hui.pu@gehealthcare.com>,
+	Ian Ray <ian.ray@gehealthcare.com>,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Subject: Re: [PATCH v2 03/10] tests: asm: Introduce treehdr_vers macro
+Message-ID: <ajPFLjQ96nmsPLp2@zatzit>
+References: <20260409115426.352214-1-herve.codina@bootlin.com>
+ <20260409115426.352214-4-herve.codina@bootlin.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-456497:519-21489:flowmailer
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="lns24CUJon2t2BZq"
+Content-Disposition: inline
+In-Reply-To: <20260409115426.352214-4-herve.codina@bootlin.com>
 
-From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-Bootloaders such as U-Boot and barebox can populate the /chosen node with
-a reset-reason string property indicating the cause of the most recent
-system reset.
+--lns24CUJon2t2BZq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Define a standardized set of generic reset reason values that bootloaders
-map their platform-specific reset sources to:
+On Thu, Apr 09, 2026 at 01:54:19PM +0200, Herve Codina wrote:
+> tree.S is used to generate custom dtbs. It uses the treehdr macro to
+> build the header part.
+>=20
+> The current definition of this macro doesn't allow to set custom
+> settings related to version fields.
+>=20
+> In order to easily generate some dtb with custom version values without
+> duplicating the full header computation, introduce the treehdr_vers
+> macro.
+>=20
+> The modification doesn't introduce any functional changes.
+>=20
+> Signed-off-by: Herve Codina <herve.codina@bootlin.com>
 
-  unknown    - reset source could not be determined
-  cold       - power-on reset
-  warm       - warm restart without full power cycle
-  watchdog   - watchdog timer expiration
-  wakeup     - wake from suspend/sleep
-  jtag       - JTAG/debug initiated reset
-  thermal    - thermal shutdown/overtemperature
-  external   - external reset pin/signal
-  brownout   - supply voltage drop
-  software   - explicit software-initiated reset
-  safety     - hardware fault detection (e.g. error signaling module,
-               fault collection and control unit)
-  security   - security subsystem (e.g. secure enclave violation)
-  pmic       - PMIC-initiated reset
+I just killed the not-very-portable trees.S in the main git tree, so
+this will need reworking for the new treegen.c system.
 
-Mapping of platform-specific reset sources to generic values:
+> ---
+>  tests/trees.S | 10 +++++++---
+>  1 file changed, 7 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/tests/trees.S b/tests/trees.S
+> index d69f7f1..4db2b9b 100644
+> --- a/tests/trees.S
+> +++ b/tests/trees.S
+> @@ -8,7 +8,7 @@
+>  	.byte	(\val) & 0xff
+>  	.endm
+> =20
+> -	.macro	treehdr	tree
+> +	.macro	treehdr_vers	tree vers last_comp_vers
+>  	.balign	8
+>  	.globl	\tree
+>  \tree :
+> @@ -17,13 +17,17 @@
+>  	fdtlong	(\tree\()_struct - \tree)
+>  	fdtlong	(\tree\()_strings - \tree)
+>  	fdtlong	(\tree\()_rsvmap - \tree)
+> -	fdtlong	0x11
+> -	fdtlong	0x10
+> +	fdtlong	\vers
+> +	fdtlong	\last_comp_vers
+>  	fdtlong	0
+>  	fdtlong	(\tree\()_strings_end - \tree\()_strings)
+>  	fdtlong	(\tree\()_struct_end - \tree\()_struct)
+>  	.endm
+> =20
+> +	.macro	treehdr	tree
+> +	treehdr_vers \tree 0x11 0x10
+> +	.endm
+> +
+>  	.macro	rsvmape	addrh, addrl, lenh, lenl
+>  	fdtlong	\addrh
+>  	fdtlong	\addrl
+> --=20
+> 2.53.0
+>=20
+>=20
 
-  Generic      AM6x              i.MX9            barebox
-  -------      ----              -----            -------
-  unknown      UNKNOWN           -                unknown
-  cold         POR               por              POR
-  warm         RST (SW warm)     -                RST
-  watchdog     WDOG              wdog             WDG
-  wakeup       -                 -                WKE
-  jtag         JTAG              jtag             JTAG
-  thermal      THERMAL           tempsense        THERM
-  external     PIN               -                EXT
-  brownout     -                 -                BROWNOUT
-  software     -                 sw               -
-  safety       ESM               fccu             -
-  security     SMS/DMSC          ele              -
-  pmic         -                 pmic             -
+--=20
+David Gibson (he or they)	| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
+				| around.
+http://www.ozlabs.org/~dgibson
 
-Note: barebox already populates this property but uses abbreviated
-uppercase values (common/reset_source.c). These will need to be adapted
-to match the standardized lowercase values defined here.
+--lns24CUJon2t2BZq
+Content-Type: application/pgp-signature; name=signature.asc
 
-The list can be extended in the future as needed.
+-----BEGIN PGP SIGNATURE-----
 
-Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
----
-Changelog:
-v2:
-- added "|" to the description to preserve the formatting
-- added the meaning of each item to the schema
-v1:
-- https://lore.kernel.org/all/20260526104034.2735938-1-alexander.sverdlin@siemens.com/
-RFC:
-- https://lore.kernel.org/all/579fcbc186ad2aeea3c206aebc901b64fc665db1.camel@siemens.com/
+iQIzBAEBCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmozxSkACgkQzQJF27ox
+2GewKhAApzipErwNhduZzLZdHtLSD4WtW134EbEGXAmL6VEThToQfwwIofqLymYt
+YWSFHskRFNtRfDLttm4Tn1efaLSIhla08X6Suc2fZ9rqJMgCjMWQeThYIHdUOku5
+RFzVLAWAIZw6rlX2jiOFiHt+DwzIK0jFsfzWrGNbHzXZMegLPz4r3YENNCQFLmvR
+nK9lScYv0uTVz1vuF3VWF9o5r5bubP+AwABol3o3I4bIOOjFktdtjCmyAtWs3p/K
+auZcRhkDlTLgzJUcwjgWauGIYcwI0DUf/Lya9ILso7DjEgI1VthR+tYuy0PyMMRv
+zzYiIT6ZueKdNm5TQV+iYCudXbCtWJqDztjHtHuBx3X/cNzovKYGh7obLG1gik/r
+/8OExqnGAEfskoGdRYJn4BJaL01EYOJrNOVQ/A1KgJi8Fuc+ONwip7aFrfnyk21y
+P7jk0EK0axt6o40D+eHuIGyGRWraZ1QUbw1KSnhIRUhkpIAddowwW8k2yRvEX9QL
+ptNXGQc2Mlog3o+fbPQjWKcVOhU9FRhq2HPjdlqR2VrYwRMHX5FpQ6tgmnFOedec
+uwWp2/IDaKv7VpiXvyFQ4VxV1AoEZO08jz2U4hveBj6xb+XH56HzyKXPFkBnZkt3
+SYJgJ1VekxpXEcnj9YtlhxgPoJKRgy14o44BJBd3JmWE1KRs7Z4=
+=q0GJ
+-----END PGP SIGNATURE-----
 
- dtschema/schemas/chosen.yaml | 48 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
-
-diff --git a/dtschema/schemas/chosen.yaml b/dtschema/schemas/chosen.yaml
-index 63f3c12..f6fad1f 100644
---- a/dtschema/schemas/chosen.yaml
-+++ b/dtschema/schemas/chosen.yaml
-@@ -183,6 +183,54 @@ properties:
-       will assign devices in its usual manner, otherwise it will not try to
-       assign devices and instead use them as they are configured already.
- 
-+  reset-reason:
-+    $ref: types.yaml#/definitions/string
-+    enum:
-+      - unknown
-+      - cold
-+      - warm
-+      - watchdog
-+      - wakeup
-+      - jtag
-+      - thermal
-+      - external
-+      - brownout
-+      - software
-+      - safety
-+      - security
-+      - pmic
-+    description: |
-+      This property is set by the bootloader to indicate the reason for the
-+      most recent system reset. The values are generic categories that
-+      bootloaders map their platform-specific reset sources to.
-+
-+      If multiple reset sources are detected, the bootloader should report
-+      the most specific known cause. If the cause cannot be determined,
-+      use "unknown". If this property is absent, the bootloader does not
-+      support reset reason reporting.
-+
-+      Values:
-+        unknown  - reset source could not be determined
-+        cold     - power-on reset
-+        warm     - warm restart without full power cycle
-+        watchdog - watchdog timer expiration
-+        wakeup   - wake from suspend/sleep
-+        jtag     - JTAG/debug initiated reset
-+        thermal  - thermal shutdown/overtemperature
-+        external - external reset pin/signal
-+        brownout - supply voltage drop
-+        software - explicit software-initiated reset
-+        safety   - hardware fault detection (e.g. error signaling module,
-+                   fault collection and control unit)
-+        security - security subsystem (e.g. secure enclave violation)
-+        pmic     - PMIC-initiated reset
-+
-+      / {
-+              chosen {
-+                      reset-reason = "watchdog";
-+              };
-+      };
-+
-   smbios3-entrypoint:
-     $ref: types.yaml#/definitions/address
-     maxItems: 1
--- 
-2.52.0
-
+--lns24CUJon2t2BZq--
