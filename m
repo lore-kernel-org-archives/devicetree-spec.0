@@ -1,205 +1,372 @@
-Received: from AM0PR83CU005.outbound.protection.outlook.com (mail-westeuropeazon11010027.outbound.protection.outlook.com [52.101.69.27])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E09E3D9DB6
-	for <devicetree-spec@vger.kernel.org>; Fri, 21 Aug 2026 18:49:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.69.27
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787338189; cv=fail; b=dhmqczccPxZ/gDGZ20kprQ7JP8R9U4rYkMS2ONSmb8wReuuJ7RDY/0ECZ6Llb7lL9H2y0OCmVeZugmwLNLK5rQWk5AkiOX98h1VKOKYzVzmTGQAIdGBSOQte0Lvn61EJ9s8Z/QNbZKHMQGPYzakj+5VnsBH21a6rb3wQ1zVXuf0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787338189; c=relaxed/simple;
-	bh=S9bWco8+8l9omYj/s0iSEHA1nxxUxSpligZ17JdYbkU=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=ho/Z1RLmntMOAvBpo2PyYmDkraod0COfwdS52CkkJtdcb/Y5PqywbZ2hHzPSerpc90TdMR93IgtQ1O4wCuHmwXGFPR1ObKCXSWh3AGd9HfP23HObkhaZ1fiiAaS19F+K9+i8P+8hjqpNA7Xtqr6FoE2oQcQAOwY3SDRmTKPO5IY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cherry.de; spf=pass smtp.mailfrom=cherry.de; dkim=pass (1024-bit key) header.d=cherry.de header.i=@cherry.de header.b=T3p+Ch0+; arc=fail smtp.client-ip=52.101.69.27
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cherry.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B4103B71C3;
+	Wed, 26 Aug 2026 08:32:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787733149; cv=none; b=ateUIOCPjRdWqUYa5mF0h7odCN7qA3cTLGg17o1n2AwyUHsaepA1mjLv2ktt6WIsAfqjIsB0iQLWpFnEx9bXHZRkeTKXPrqXPKxxJ9x1Am4zbBhb4UYBBH3k95W1tp1FTjtJLk+Gu7UnHQnjLHkhIO16CGS23j0rk3TmU+gL7gA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787733149; c=relaxed/simple;
+	bh=XuEyL2T1VZz8TQ+8TN2gsz+OVuBAabLPOqtCCc25DqM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=AAEFlpufl1enUEPAYFmfLanZwbx/+8NZ527waBrvML9Dv0WiMNrEeNIbnhifTMXsvuKJj6RpvIRnWBzyV80NizY8i6xm0A24nPzDdn7XKgAAIam7dvp58RlazhsMeg7T9iAgZkZ1hekIebbIy6DYNS2Dz3rqyfqg0wUI1hT2uLc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=fWUvqX7z; arc=none smtp.client-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cherry.de header.i=@cherry.de header.b="T3p+Ch0+"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=chNevuvQ7s/soFckEwFjt5QNBuRjMEWzGHk+pcxaXjZhSWtGdYlCLVj9DyjKZWepf97i7iD2PNK84d4SAENdTv2lEAzODAjix2ugfi7pEwJfIGBH2QdO4OhpGcter68btizBnpHYQ2uafFeqNESrGUMTnX1ZB+XU8sYIo/hxjak3HPoGNCR8WMh4cgP+dLLSLiuMEKazr7Ew6Pfe0wAy7WMyJ4NHk4XI0SB9hq7qIEqLbS5VC+e6MnEQXW54caI5TizvXSPdwNRBBvlqRE6k7WLv3mSG43MVrFYGrSOv7YzJRCS3inMGRlu2ET2o63qVEBzHJGVarZKB6QTS811jtQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=z1wDjveMpv2BB7Ftio5nuw0xYbyYIVxlgUCMShEobo8=;
- b=wUGcyBrl7UU2Suz57S8TzRCI0YTLHDPD4hx3GOPPi1tzb/ubtAZl1yuOCcxKXPm631lU5sTerKqmBgvb3aNeA5ph73oa1iJKHm/9HpWIoIHlLms2/jzmCTtwSVgdj3GbiA7O3OgaluR7WQHvp/h6114ra9U307uAiPHrFh9aWg9cXTHMWKGDscH0cz7AqViET+j/d7NUs0qqNE9V7O/0n0iPTpOvimehFP8mNjMeE3PuCL+ZBw9CgdxO9b/dReef34yRsi/h2e34pE5lpQ7CZUahxhEIhn0qRbou7JQyTyv77FFee+jS5k3MsrbN6s6i4qTgLzjYcAPo61aY+VRFEw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z1wDjveMpv2BB7Ftio5nuw0xYbyYIVxlgUCMShEobo8=;
- b=T3p+Ch0+XLKEGUhcWXHNvv+2FlqRnrZvICXhSEucTuR4YBdHePGTkl4ZxN7lZ+r7YsIRLmRtPeGl0kUox4DBFoCxKa67xgiyEVV7IJF0iF0U6bXR+ozqsIXgayp6mx7SnSjktaML0h5/HfggSI83cgBecTvxEDbM6uG3jap8IRc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from VI2PR04MB11147.eurprd04.prod.outlook.com
- (2603:10a6:800:293::14) by PA4PR04MB8062.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.339.11; Fri, 21 Aug
- 2026 18:49:36 +0000
-Received: from VI2PR04MB11147.eurprd04.prod.outlook.com
- ([fe80::c859:7e6d:9345:afe1]) by VI2PR04MB11147.eurprd04.prod.outlook.com
- ([fe80::c859:7e6d:9345:afe1%6]) with mapi id 15.21.0339.008; Fri, 21 Aug 2026
- 18:49:36 +0000
-Message-ID: <2317684b-f0ed-4f36-9c0c-314ec8cd6920@cherry.de>
-Date: Fri, 21 Aug 2026 16:58:05 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] schemas: chosen: Add reset-reason property
-To: "A. Sverdlin" <alexander.sverdlin@siemens.com>,
- devicetree-spec@vger.kernel.org
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass
- <sjg@chromium.org>, Ahmad Fatoum <a.fatoum@pengutronix.de>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Rob Herring <robh@kernel.org>
-References: <20260605085938.3779084-1-alexander.sverdlin@siemens.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260605085938.3779084-1-alexander.sverdlin@siemens.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0102CA0058.eurprd01.prod.exchangelabs.com
- (2603:10a6:803::35) To VI2PR04MB11147.eurprd04.prod.outlook.com
- (2603:10a6:800:293::14)
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="fWUvqX7z"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 1C9E34E413BC;
+	Wed, 26 Aug 2026 08:32:22 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id E142A604EC;
+	Wed, 26 Aug 2026 08:32:21 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 7B26F11C7AC7A;
+	Wed, 26 Aug 2026 10:32:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1787733136; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=iHf3NfwJeH5Imme6IQkkY+C70LdYj3DtXtyLsu2TBno=;
+	b=fWUvqX7zfMrC6WJNIL57SLFPkPSu04SaIWjW7vMEVBawnqvsZSr9D2VsIG6scGiNHTNVJo
+	W5hRZz7OumsNenQeEGKC1q0nW2sVkAyUbGk1eU8mLtaTqtV8/Lk9ZRwduDWhwGoCsSN7BS
+	z2xARKH033rr7+d4gI8PdZsRIGp+U+EkEiR5wstvkuptPniNyDru38bcrUS2gNGyGzxN8j
+	v/K9SCMXXUWkeYfGVfPHX66lRmng9BC2SuDKxP0fJLrvcYDhO9uAs2xMongKrJn/PYKafd
+	rQN5C4HJ63AkuqKuRKEa41sywV3chTHBgRuwSNRFAoUuiuIq1iu0vCNCx7ODFQ==
+From: Herve Codina <herve.codina@bootlin.com>
+To: David Gibson <david@gibson.dropbear.id.au>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	David Lechner <dlechner@baylibre.com>,
+	Ayush Singh <ayush@beagleboard.org>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	devicetree-compiler@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	devicetree-spec@vger.kernel.org,
+	Hui Pu <hui.pu@gehealthcare.com>,
+	Ian Ray <ian.ray@gehealthcare.com>,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+	Herve Codina <herve.codina@bootlin.com>
+Subject: [PATCH v3 00/15] Add support for structured tags and v18 dtb version
+Date: Wed, 26 Aug 2026 10:31:31 +0200
+Message-ID: <20260826083146.304291-1-herve.codina@bootlin.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI2PR04MB11147:EE_|PA4PR04MB8062:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8204fd1a-036e-4bba-77b4-08deffb4f2d3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|23010399003|22082099003|18002099003|56012099006|6133799003|11063799006|5023799004|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	UvfHmI8NK3veTXQ8/cRbanINiGQy4g6o6KO292HqKvZBdGiQ5+oE610OLnpVVfk1gkDzDsocV89EoQ+TCjhQwcIKWiOF0BvEbkUu5E4VJyTQDUD0AeVMNSkI52OsxR0Exph0Rwk+px64UYtHX30AsGOHlk/2pEF3SQEWqq1cB962FGAD51lVvXMW9KMa866pXndK5mfFxfbX497gGN5Z1B3qErRjaEXQqT3V9JB4CDyOoRxuhfB8THRIqiYJBNbqAE0NpaHScY4LLeYBwgj5CksB1UFMXlq741E6L4/+diT9Wj6X+AETAeYBknifenDxfhCL/6ezlINl1MNplcxBk9qEgDmpHMTbR7lI8Ajs16vTvNy++PaQcbpJa1CytbYZA90aaGol07D3wW8ByjdevF3LoSt1TC8o74rhAThCM75rZ6mv2YDMclQVy9w8yaxOnub+emZOTDM09mMxk1alfUX45GXVSHzzO4PP6g5vFJv01/G6cihFGkd51jeE91HwrPpNn13CxnlEdpzexVjkgVsd/e22LNNpl9ENUlKbstsIHf+b8uvrpXJBm77L7pu3MkQuWYymvnTrvp0taYNuaphkXVYN2HK4gfTDV5Pci2JHB7sK6EHtW0ZOulv7MJkFXs202mpC1uIfOtNFjJyUukYl2m+Etk7azIh8PzLCng4=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI2PR04MB11147.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(23010399003)(22082099003)(18002099003)(56012099006)(6133799003)(11063799006)(5023799004)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ZTFuQi9mWmJWdFhxSjgrb3B5dUVHQWxoWGtCdWxWVlhycmRVRlZWTTFUM2Rt?=
- =?utf-8?B?UDJNKzh5MG91d3ltU0R4emNkbGs4MlZGbnR2WlNSMDYvREZ4SlZ4NXE5Wktl?=
- =?utf-8?B?eUNIRGlKQ1U5TUVxbnJDWmtacC9zUmdmMGZwak5zcmdXQ1dFbC9zTWRjeDVk?=
- =?utf-8?B?NytPKzdIZnZXSnlJTWpjNisvUGRkUlMwK2RHQXYwanJjNTJqUHRzKzkrUEpj?=
- =?utf-8?B?UiswZ0RRSGpOeUFZZytWTzhtanY2WGQ4MWpiL1EvZyswMTZnUnFobldsYmhV?=
- =?utf-8?B?Qm9jL0ovVG95Q0lVTmxNdVZ0cHJveTVnd2l4NjdiWjdyZVFielE3QTBsY2NQ?=
- =?utf-8?B?c2dWZXN0Sk5BaktJMFcyNi9OVkxNdUFZR1pEQk5BN21wa1N6RUptcmh6Zkpy?=
- =?utf-8?B?bkYrbG1FYWhjQnpUY3lsMGhCcHpZWERYRGZWL1NPbzlZeENCV1NMczJUREQz?=
- =?utf-8?B?c2VzOUhLd3ROdmNvMXlyRDZMeUpGVFAxSW1sRnlIaTg2VlBjQnloOHhhdm1l?=
- =?utf-8?B?a3RHOFpXc3d5YmswM0JqZlpnd2pscW9IV3dCaTNydXdBUllDTENKM1RoVTVk?=
- =?utf-8?B?aGZTcnBiZXZ3TDNyeWhyUWgxMWNGSlBDblIvdVVaL3hldEhLcFR4Z3lPZEFq?=
- =?utf-8?B?bFBLWHBNWkdtejJnZVNpUkZSMzlmaG1mMHBySTBHT1lncC9SUDF1VTdJdTVk?=
- =?utf-8?B?R3B3SnJHekdadTdTVU02eDJKZnRoeDJEYkFKMHhhdUlaOStqVC9hc1RkYkFH?=
- =?utf-8?B?TUhlUk1TMkh3QUpRTXI5WjlLdUdGZnJWaU5saHY4TUxWaTA4NjdJeUZRQWlK?=
- =?utf-8?B?SjM3TWdDNHQ3VkV3WExudlBqTGdqTXhXZ29oMXZONWxqL1Ava2tqTlhuUFcz?=
- =?utf-8?B?TFRucnlrc3gyQ3FxTURjeXRmaVZGTzJwWGpuSXJ6bkJRbjRTUGhFaXRnN1VB?=
- =?utf-8?B?TFpZK3FicGcvN0FVSXpHZUNhb3hCQlNZbUx6d3FyNU9qNDBGRG15eHpsR052?=
- =?utf-8?B?NGd3WXljSDlDTFdxVXcvWXBoN1dSNHlEbDNoWHUrWm9BTkJaYnJPNG1Zcmw1?=
- =?utf-8?B?em5SeXBsNDBjTFNDTU8wbG1SckVRbTBGNElKeTBMdUx6UU1iT0ZaRnM2ZTYz?=
- =?utf-8?B?c3hGekRjaGE5WnZYSktDbW9QYWpwSVdyUlE0MDZUZ0MxZ1pibks4c1hzcUN0?=
- =?utf-8?B?aFhVZTZ6clhFRTZjYlVyUGJWN1Ywd04yM1ZJaEtIckpkdGVBMXlHQ2t0eVRn?=
- =?utf-8?B?cVU0RHFSNzRPVzlaYXMvQlpCMlR4QXRvbHhaTXZpRVJyc2RYdjYyS2dHcnJq?=
- =?utf-8?B?Mys4VmU5K2tUZGFSayt1ZDNUbUxkU1pzMDk1R3Z2SkRpb0R0QVVXTFhrb1lM?=
- =?utf-8?B?RFpoMHEzejc1Qm1ZaXJBL0ZGTVV0SmczVVMra3R3VTlrLzU4dEtoZEN5Rk5W?=
- =?utf-8?B?ZEtNMXZ4b0Uwb0tWQUxlY0pEek5kUnB5ViszcTAzaG4xOFp0OGQ4TXlQSGJ3?=
- =?utf-8?B?RWo5YVZ3SXZaNlhyQ2xKUFN1NjBlSjdCZ2FwUGFiUnRzUlZscFcwdlFWZTIw?=
- =?utf-8?B?RmFLdXNvcUhxUzdyWUY5NmpJNnB4TDNnK0x5UnZuMG1HelNPOWlKMkxxWm1t?=
- =?utf-8?B?VjBtdnRFOEQxeG1pRWRBVHM1ZlQzYVhIOWZOSk5yRkd3U081cXpyTlJ5ZWw4?=
- =?utf-8?B?OW9iQUxtYUJPWXA2SnFkTWJ6R1F5QmtZbzIyc01Gb2UvKzVwc2FmT29IWWhU?=
- =?utf-8?B?T1dtekFzREVNaEpGc2JHYktHbjR5VUY2c0l5MXF1N2c3dzFNb3ZLVDJZYmVH?=
- =?utf-8?B?QkRvREdYL29ZSkNiQXVURlJJRW43bVVnbU1QLytYTkRkVUJmUm0zRlMrQkx3?=
- =?utf-8?B?eXVyV3MzOTJmNjlLVGZHRnlmNURGY2dSbklpZFVYa1A0SHJvK3hsczVDVXFO?=
- =?utf-8?B?enlpVzY4cW1OcjNzS1RlN3h3RWFybFNqZ2Zxa2x2REUxQVJkZ3lRU1k1QlhE?=
- =?utf-8?B?MjJtUU51N3ZUTmhtb2JRU1RkSDdnNEJ3VlprL0tFdmJSdEdWMjZiKzN3Q1Ev?=
- =?utf-8?B?UXNCNDgvM1ZBUXV0ZWNUQnlha1ovQ3FINE1tY1cvTk9NYjBYTk5SUnRzOU16?=
- =?utf-8?B?a1RlcE1yeEFHN0pHRXZBanhEYmdWTVdORFUxd2ZhWVgvaUdrRGpyekRzY2dn?=
- =?utf-8?B?c2RiWUNKOUNMdmc0STdTMU03UThEdVkyK25XVUtrdUppSDVDY04vMmROS2hI?=
- =?utf-8?B?ajVDSFJDcG1tSm1acVZaMk51ankyZndvZXdnWllrcXZWWVdyekRuN3JNSGty?=
- =?utf-8?B?U0dhd0RKNE9keGl5anVHYWpzR3FVamZVNHp6RzNtS2VIamROQ2lTSDdjMmRs?=
- =?utf-8?Q?P+XQd5tgmwhYWlwbJ5K2zvBXE7Ys5enYmkQI80dReSM3z?=
-X-MS-Exchange-AntiSpam-MessageData-1: TCCbWSnj66kgTPVNY8uuf/QiHa2iCetCQg8=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8204fd1a-036e-4bba-77b4-08deffb4f2d3
-X-MS-Exchange-CrossTenant-AuthSource: VI2PR04MB11147.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Aug 2026 18:49:36.8305
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DSqFBhK9AjVndQnErdPEEaV8oiKRcgGav59EUiUyGqCb0x58mLJ/WOFf5C+9exs+FxirueoEkGd4nJcB+kqHqymPH4stX5T8Bhhu0ujtTjU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB8062
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-Hi Alexander,
+Previously, I sent a RFC series related to support for metadata and
+addon device-trees [1].
 
-On 6/5/26 10:59 AM, A. Sverdlin wrote:
-> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> 
-> Bootloaders such as U-Boot and barebox can populate the /chosen node with
-> a reset-reason string property indicating the cause of the most recent
-> system reset.
-> 
-> Define a standardized set of generic reset reason values that bootloaders
-> map their platform-specific reset sources to:
-> 
->    unknown    - reset source could not be determined
->    cold       - power-on reset
->    warm       - warm restart without full power cycle
->    watchdog   - watchdog timer expiration
->    wakeup     - wake from suspend/sleep
->    jtag       - JTAG/debug initiated reset
->    thermal    - thermal shutdown/overtemperature
->    external   - external reset pin/signal
->    brownout   - supply voltage drop
->    software   - explicit software-initiated reset
->    safety     - hardware fault detection (e.g. error signaling module,
->                 fault collection and control unit)
->    security   - security subsystem (e.g. secure enclave violation)
->    pmic       - PMIC-initiated reset
-> 
-> Mapping of platform-specific reset sources to generic values:
-> 
->    Generic      AM6x              i.MX9            barebox
->    -------      ----              -----            -------
->    unknown      UNKNOWN           -                unknown
->    cold         POR               por              POR
->    warm         RST (SW warm)     -                RST
->    watchdog     WDOG              wdog             WDG
->    wakeup       -                 -                WKE
->    jtag         JTAG              jtag             JTAG
->    thermal      THERMAL           tempsense        THERM
->    external     PIN               -                EXT
->    brownout     -                 -                BROWNOUT
->    software     -                 sw               -
->    safety       ESM               fccu             -
->    security     SMS/DMSC          ele              -
->    pmic         -                 pmic             -
-> 
-> Note: barebox already populates this property but uses abbreviated
-> uppercase values (common/reset_source.c). These will need to be adapted
-> to match the standardized lowercase values defined here.
-> 
-> The list can be extended in the future as needed.
-> 
+During the discussion the concept of structured tags and "unknown" tags
+emerged as well as the need to have them handled as a prerequisite of
+support for metadata and addon.
 
-We'll want to eventually extend it and match what barebox does by adding 
-more information (e.g. which IP triggered the reset, possibly 
-IP-specific information such as which reset in the IP triggered the 
-reset, thinking about the watchdog IP in Rockchip SoCs with multiple 
-sources for a watchdog event to kick in).
+The conclusion was the need for a new dtb version (v18) with support
+for:
+  - Structured tags and based on them, "unknown" tags.
+    Those structured tags allow to have an standardized definition of
+    tags with the capability of skipping a tag and its related data
+    when a "unknown" tag is incountered by a given version of libfdt,
+    dtc and tools. Those "unknown" tags are tags defined in future
+    versions. Even if they exact meaning is unknown for an 'old'
+    version, they structure is understood and the 'old' version can skip
+    them without any errors if allowed.
 
-Considering the DT people weren't too happy last time I didn't provide 
-the whole picture, I would like to avoid being involved in upsetting 
-them again, so please provide the full discussion we had in the RFC so 
-they know this is only the beginning of reset-related properties we're 
-eventually planning to add to the DT bindings. Maybe they'll suggest 
-something that works better for them based on that feedback. I still 
-believe this is a partial implementation and stopping half-way to 
-something that would be useful (Barebox for sure didn't implement new 
-properties for nothing ;) ).
+  - Flags in the dtb header (dt_flags).
+    The goal of this field is to have a placeholder to specify the
+    type of dtb we are dealing with. For instance, addons dtb will set a
+    flag in this placeholder
 
-Cheers,
-Quentin
+  - A last compatible version for writing purpose.
+    The goal of the new dtb header field (last_comp_version_w) is to
+    disable globally any modification. It works similarly to
+    last_comp_version but for modification. It can be used to avoid any
+    modification that could be done by an 'old' version and could lead
+    to inconsistencies between the modification itself and some
+    "unknown" tags.
+
+This current series implements those features and leads to the v18 dtb
+version.
+
+First patch is a fix/improvement of fdtget. IMHO, this patch could be
+taken even if other patches in the series lead to discussion.
+
+Patches 2 to 4 add support (and update tests) for a possible FDT_NOP tag
+at offset 0. Here also, those patches are fixes patches.
+
+Patch 5 is a preparation patch improving the test treegen tool.
+
+Patch 6 introduces the structured tags. The patch gives definitions
+needed to handle those tags.
+
+Patches 7, 8 and 9 handles "unknown" tags in fdtdump, dtc and libfdt.
+This is the reading part implementation related to "unknown" tags in
+tools and lib.
+
+Patch 9 to 13 are preparation commits for patch 14 and patch 14 itself
+is handling modifications (writing part) when unknown tags are involved.
+
+The last patch (patch 15) bumps the dtb version including changes that
+cannot be moved out of the version bump without having a v18 without all
+expected features.
+
+Also, several tests are added as soon as the related feature is
+supported. Those tests are part of the last commit adding the feature.
+
+As already said, this current series is a prerequisite to the support
+for metadata and addons. The RFC series related to metadata and addons
+[1] will be rebased on top of this prerequisite. Please, keep that in
+mind for the review of this current prerequisite series.
+
+[1] https://lore.kernel.org/all/20260112142009.1006236-1-herve.codina@bootlin.com/
+
+This v3 iteration is rebased on top of the last upstream code with also
+several additional modification mostly related to:
+  - feedback received on v2
+  - nopulate test improvement (FDT_NODE at offset 0)
+  - wip (write in place) modification missed in previous iteration
+
+Best regards,
+Hervé
+
+Changes:
+
+v2 -> v3
+  v2: https://lore.kernel.org/devicetree-compiler/20260409115426.352214-1-herve.codina@bootlin.com/
+
+  Rebase on top of the last master branch of the dtc repository.
+
+  Even if Frank Li has sent his 'Reviewed-by' tag on all v2 patches,
+  his 'Reviewed-by' tag is not added on patches having substantial
+  modification in this v3.
+
+  - Patch 1 (New patch):
+    Remove open coded loops in fdtget.
+
+  - Patch 2 (patch 1 and 2 in v2):
+    Squash v2 patch 1 and patch 2
+    Rename fdt_first_node() to fdt_root_offset()
+    Make fdt_root_offset() accessible from users of libfdt library.
+    Fix libfdt functions that must take care of root node offset vs
+    offset 0 (identified thanks to nopulate update and missed in v2):
+       - fdt_get_name(),
+       - fdt_first_property_offset(),
+       - fdt_supernode_atdepth_offset(),
+       - fdt_node_depth(),
+       - fdt_add_property_().
+    Update commit log
+    Add 'Reviewed-by: Frank Li'
+
+  - Patch 3 (new patch):
+    Update tests to avoid considering offset 0 as the expected offset
+    for the root node.
+
+  - Patch 4 (new patch):
+    Improve nopulate to add a FDT_NOP tag at offset 0 (i.e. before the
+    root node).
+
+  - Patch 5 (patch 3 in v2)
+    Port modification done on tree.S in v2 to the treegen tool
+
+  - Patch 6 (patch 4 in v2)
+    Force structured tags to be unsigned. This avoids later
+    signed/unsigned mismatch.
+    Add 'Reviewed-by: Frank Li'
+
+  - Patch 7 (patch 5 in v2)
+    Use treegen tool to generate unknown_tags_can_skip.dtb and
+    unknown_tags_no_skip.dtb.
+    Slightly modified unknown_tags_can_skip.dtb content.
+    Add 'Reviewed-by: Frank Li'
+
+  - Patch 8 (patch 6 in v2)
+    Update expected dtbs due to slightly modification in
+    unknown_tags_can_skip.dtb
+    Add 'Reviewed-by: Frank Li'
+
+  - Patch 9 (patch 7 in v2)
+    Rename fdt_is_unknown_tag() to fdt_tag_is_unknown()
+    Add 'Reviewed-by: Frank Li'
+
+  - Patch 10 (patch 8 in v2)
+    Add 'Reviewed-by: Frank Li'
+
+  - Patch 11 (New patch)
+    Introduce fdt_getprop_by_offset_w() and its related test.
+    This new function is needed for later fdt_wip modifications.
+
+  - Patch 12 (New patch)
+    Introduce fdt_getprop_offset_namelen() and its simple variant
+    fdt_getprop_offset(). This new function is needed for later fdt_wip
+    modifications
+
+  - Patch 13 (New patch)
+    Introduce wip_func, a test utility to call wip (write inplace)
+    functions family. This allows to write test with custom scenario
+    when unknown tags are involved.
+
+  - Patch 14 (patch 9 in v2)
+    Handle modification done using inplace functions (fdt_wip.c). Those
+    were missed in previous v2.
+    Add a test involving wip functions when unknown tags are present.
+    Update expected dtbs due to slightly modification in
+    unknown_tags_can_skip.dtb
+
+  - Patch 15 (patch 10 in v2)
+    Add a test for the dt_flags default value
+    Update header generation in treegen tool and use treegen tool to
+    generate last_comp_version_w.dtb
+    Add 'Reviewed-by: Frank Li'
+
+v1 -> v2
+  v1: https://lore.kernel.org/devicetree-compiler/20260316171640.6fb0d952@bootlin.com/T/#t
+
+  Rebase on top of the last master branch of the dtc repository.
+  Remove the RFC tag.
+
+  - Patches 1, 2, 3, 4 and 7 in v1: Removed
+    Already applied.
+
+  - Patch 1 (5 in v1)
+    Update the commit log.
+
+  - Patch 2 (6 in v1)
+    Fix a typo in the commit log.
+    Add a comment related to 'offset <= 0' in fdt_next_node().
+
+  - Patch 3 (8 in v1)
+    No change
+
+  - Patch 4 (9 in v1)
+    Fix typos in commit log.
+    Replace DATA_LNG_ENCODING by DATA_LEN_ENCODING in commit log.
+    Use SKIP_SAFE instead of CAN_SKIP in commit log.
+    Rename FDT_TAG_DATA_LNG to FDT_TAG_DATA_VARLEN in tags definition.
+    Rename FDT_TEST_LNG_CAN_SKIP to FDT_TEST_VARLEN_CAN_SKIP.
+
+  - Patch 5 (10 in v1)
+    Use FDT_TAG_DATA_VARLEN instead of FDT_TAG_DATA_LNG.
+    Use FDT_TEST_VARLEN_CAN_SKIP instead of FDT_TEST_LNG_CAN_SKIP.
+    Update values used in the unknown_tags_can_skip dtb test file.
+    Use 'len' instead of 'lng'
+    Update the '-uu' option help message.
+    Update the fdtdump test to be stricter (avoid removing some specific
+    comments related to unknown tags in sed command used in the test).
+
+  - Patch 6 (11 in v1)
+    Use FDT_TAG_DATA_VARLEN instead of FDT_TAG_DATA_LNG.
+    Update the dtc test due to unknown_tags_can_skip dtb changes.
+    Add 'Reviewed-by: Luca Ceresoli'
+
+  - Patch 7 (12 in v1)
+    Replace fdt_get_next() by fdt_next_tag() in commit title and log.
+    Fix a typo in commit log.
+    Use FDT_TAG_DATA_VARLEN instead of FDT_TAG_DATA_LNG.
+    Update the fdtget test due to unknown_tags_can_skip dtb changes.
+    Add 'Reviewed-by: Luca Ceresoli'
+
+  - Patch 8 (13 in v1)
+    Fix commit log.
+    Add 'Reviewed-by: Luca Ceresoli'
+
+  - Patch 9 (14 in v1)
+    Update the fdtput test due to unknown_tags_can_skip dtb and
+    fdtdump changes.
+    Add a missing ')' in commit log
+    Add 'Reviewed-by: Luca Ceresoli'
+
+  - Patch 10 (15 in v1)
+    Fix typos and clarify several parts of the commit log.
+
+Herve Codina (15):
+  fdtget: Use libfdt iterators instead of open coded loops
+  libfdt: Don't assume the root node is available at offset 0
+  tests: Don't assume the root node is available at offset 0
+  tests/nopulate: Add a FDT_NOP before the root node
+  tests: treegen: Introduce emit_fdt_header_vers()
+  Introduce structured tag value definition
+  fdtdump: Handle unknown tags
+  flattree: Handle unknown tags
+  libfdt: Handle unknown tags in fdt_next_tag()
+  libfdt: Introduce fdt_ptr_offset_()
+  libfdt: Introduce fdt_getprop_by_offset_w()
+  libfdt: Introduce fdt_getprop_offset_namelen()
+  tests: Add wip_func utility
+  libfdt: Handle unknown tags on dtb modifications
+  Introduce v18 dtb version
+
+ dtc.h                                         |   2 +-
+ fdtdump.c                                     |  53 ++++-
+ fdtget.c                                      |  73 ++----
+ flattree.c                                    | 102 +++++++-
+ libfdt/fdt.c                                  | 114 ++++++++-
+ libfdt/fdt.h                                  |  28 +++
+ libfdt/fdt_ro.c                               |  70 +++++-
+ libfdt/fdt_rw.c                               | 161 ++++++++++++-
+ libfdt/fdt_sw.c                               |   3 +
+ libfdt/fdt_wip.c                              |  28 ++-
+ libfdt/libfdt.h                               |  28 ++-
+ libfdt/libfdt_internal.h                      |  19 ++
+ libfdt/version.lds                            |   1 +
+ pylibfdt/libfdt.i                             |  18 ++
+ tests/.gitignore                              |   1 +
+ tests/Makefile.tests                          |   8 +-
+ tests/dtflags_default.dtb.expect              |   1 +
+ tests/dtflags_default.dts                     |  10 +
+ tests/get_prop_offset_w.c                     |  84 +++++++
+ tests/meson.build                             |   5 +
+ tests/node_offset_by_compatible.c             |   4 +-
+ tests/node_offset_by_prop_value.c             |  11 +-
+ tests/nopulate.c                              |   3 +
+ tests/path_offset.c                           |  13 +-
+ tests/pylibfdt_tests.py                       |  10 +-
+ tests/root_node.c                             |   6 +-
+ tests/run_tests.sh                            | 152 +++++++++++-
+ tests/tests.h                                 |   1 +
+ tests/testutils.c                             |  20 +-
+ tests/treegen.c                               | 219 +++++++++++++++++-
+ tests/unknown_tags_can_skip.dtb.dts.expect    |  19 ++
+ tests/unknown_tags_can_skip.dtb.expect        |  29 +++
+ ...own_tags_can_skip.fdtput.test.dtb.0.expect |  32 +++
+ ...own_tags_can_skip.fdtput.test.dtb.1.expect |  36 +++
+ ...own_tags_can_skip.fdtput.test.dtb.2.expect |  34 +++
+ ...own_tags_can_skip.fdtput.test.dtb.3.expect |  36 +++
+ ...own_tags_can_skip.fdtput.test.dtb.4.expect |  35 +++
+ ...own_tags_can_skip.fdtput.test.dtb.5.expect |  33 +++
+ ...own_tags_can_skip.fdtput.test.dtb.6.expect |  28 +++
+ ...nknown_tags_can_skip.wip.test.dtb.0.expect |  32 +++
+ ...nknown_tags_can_skip.wip.test.dtb.1.expect |  36 +++
+ ...nknown_tags_can_skip.wip.test.dtb.2.expect |  38 +++
+ ...nknown_tags_can_skip.wip.test.dtb.3.expect |  39 ++++
+ tests/wip_func.c                              | 127 ++++++++++
+ 44 files changed, 1688 insertions(+), 114 deletions(-)
+ create mode 100644 tests/dtflags_default.dtb.expect
+ create mode 100644 tests/dtflags_default.dts
+ create mode 100644 tests/get_prop_offset_w.c
+ create mode 100644 tests/unknown_tags_can_skip.dtb.dts.expect
+ create mode 100644 tests/unknown_tags_can_skip.dtb.expect
+ create mode 100644 tests/unknown_tags_can_skip.fdtput.test.dtb.0.expect
+ create mode 100644 tests/unknown_tags_can_skip.fdtput.test.dtb.1.expect
+ create mode 100644 tests/unknown_tags_can_skip.fdtput.test.dtb.2.expect
+ create mode 100644 tests/unknown_tags_can_skip.fdtput.test.dtb.3.expect
+ create mode 100644 tests/unknown_tags_can_skip.fdtput.test.dtb.4.expect
+ create mode 100644 tests/unknown_tags_can_skip.fdtput.test.dtb.5.expect
+ create mode 100644 tests/unknown_tags_can_skip.fdtput.test.dtb.6.expect
+ create mode 100644 tests/unknown_tags_can_skip.wip.test.dtb.0.expect
+ create mode 100644 tests/unknown_tags_can_skip.wip.test.dtb.1.expect
+ create mode 100644 tests/unknown_tags_can_skip.wip.test.dtb.2.expect
+ create mode 100644 tests/unknown_tags_can_skip.wip.test.dtb.3.expect
+ create mode 100644 tests/wip_func.c
+
+-- 
+2.55.0
+
