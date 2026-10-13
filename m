@@ -1,34 +1,34 @@
 Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54FEF23504B;
-	Thu,  1 Oct 2026 03:07:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B70D4746C0;
+	Tue, 13 Oct 2026 07:10:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=150.107.74.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790824047; cv=none; b=XxOSkW2m/3LVX6HchhOPER0vY/0u+6qik4izC+kkLWLLSpNKfK7Z5osuJ8O+k3n6fAArFdm0waRkPFMq5uXL254JBEHZvCusPIZz5cH4rbyiPzVIQ+kvYn9sd2DLD/sx5bGiDYFvwvw4YbalUv8WYX6cpq3GkrA3YhLrsxng4/M=
+	t=1791875457; cv=none; b=L9FTY53oPtqE3CSEy6uXZIQIQkSe4qGW3u4DX5Zk+nO6w0POtnCnVhpOVKn6/5oAVj0ikqKufIt2aWcaSVbY22GYWdjwhyMXLvWaDtfUobneUg7BGBwLmavM+iVN74WVCZaPmHK5KpPSDTFvZduGy4RJ6VsAcEBvaKSwcKvAgpY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790824047; c=relaxed/simple;
-	bh=JRi19CNJWdydvmgaCrO7Xm3Y8D+dm+m9bJQORLq/h5w=;
+	s=arc-20240116; t=1791875457; c=relaxed/simple;
+	bh=hByn10bJNoZebm6V3wgBX07ezYPy6CjWK72QGerzSF4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MPrcg/FHN8Y1h9mwqzhLWmc97Jg4lKvc9nuAidDAetJ/3wRUTisI6m66IQRtcPPQTFCNvTuvYY62+JF8SvTCkyGYcU84Q7mlWmWMCfRWbMk/l9B3ibv6MpQB3Btd3H4i70B//RsSObyJiIfWQPi5vSOqUVaMUtsBO8DIpXBxpaM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=kyPVlzfQ; arc=none smtp.client-ip=150.107.74.76
+	 Content-Type:Content-Disposition:In-Reply-To; b=DB1WsCS1YPRlTIh9AY+1+hbZdmxi1jFMS+wSaXY2HXRLcVbN856TmK4CeIC66jYvDSEAyvWA0HE0AuVP66A2E1bJ+W5exUzR2o1MF21blLwVEG3IBUFFJkM+cY/i8ERdCHiDIeZlSOoyuubYWmuBNBzXFttyOGx6DgidnWEgu9A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au; spf=pass smtp.mailfrom=gandalf.ozlabs.org; dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b=I/SvRCW9; arc=none smtp.client-ip=150.107.74.76
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="kyPVlzfQ"
+	dkim=pass (2048-bit key) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.b="I/SvRCW9"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=gibson.dropbear.id.au; s=202608; t=1790824008;
-	bh=79l0PU9xsEA2c8px+aAYUOhYWnIthBLkoNxEU0uga80=;
+	d=gibson.dropbear.id.au; s=202610; t=1791875450;
+	bh=KHJJ6bd4PUseGr9aMvadgkcCTpYbLf5JRG/Ap/xrrkI=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=kyPVlzfQcU/eDARNoelEKnTremYQbUZJMl1sC6n92TrBv8gDMlhQoBUKEo09Z4e9m
-	 4Y5koRMwGGGuri/NIH+kivozO8TPgopFarKETVce5HUrp7xMF5bdkpLxGlhm2AvbYU
-	 /Aeu/99mbPN1Mc5S/DsJGH22oPchZ3ykaYqkxUYyHrEp7xT8Jw71AFQtcjJZLEIsKW
-	 su0nfkbes273jcpags7EPJUBjFPV7S2mIQUkCUCyg/WKmZ5+0tYOLWARpxtZBwhO7Q
-	 0U15GLmb9Gi5EjlDqSTqWaMozLHjfDKEYJpjZ+rnCUQQjwd2rlfOhBtoeS16IUiynI
-	 nHELC0phMnImg==
+	b=I/SvRCW9IIg/yJppNC0i7uucBdfRXKfIyAJiJMe2XSmK9lYQCSkZ90p2jb3yryzIb
+	 zcBq32Pqy4dCdgwB60M4G1KIf3r31D7rumDKMnq/tlmhaLrdxT7XhMTR3oEcgbIoYI
+	 rYq9WwPeC9N580i9UsAGhwJyIeRRcce33RmHqkXhGKBqMx19vkTFGnUCKjkh7wrVTd
+	 MdEFAEC7wXl0WGOKvb93vQ54pKmFj6cVDR6Z/O9Foq3BGvJO8lJg97rnrRsPZpIz9I
+	 SbZnTacw0Ao7g8IjjDfGYsdNtjQhO8HWCozTmybul2YOlZmnB9GNri2tD8u3JYNW88
+	 8FPrG3raHXGrQ==
 Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
-	id 4hwGzD6kZzz4w9b; Thu, 01 Oct 2026 13:06:48 +1000 (AEST)
-Date: Thu, 1 Oct 2026 13:07:12 +1000
+	id 4j3lqG295hz4xcZ; Tue, 13 Oct 2026 18:10:50 +1100 (AEDT)
+Date: Tue, 13 Oct 2026 18:10:39 +1100
 From: David Gibson <david@gibson.dropbear.id.au>
 To: Herve Codina <herve.codina@bootlin.com>
 Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
@@ -44,16 +44,12 @@ Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Frank Li <Frank.Li@nxp.com>
-Subject: Re: [PATCH v3 09/15] libfdt: Handle unknown tags in fdt_next_tag()
-Message-ID: <ar3OSMgYqFPhLEqM@gractus.seuss>
+Subject: Re: [PATCH v3 15/15] Introduce v18 dtb version
+Message-ID: <as3ZWBr3wRonkxXF@gractus.seuss>
 References: <20260826083146.304291-1-herve.codina@bootlin.com>
- <20260826083146.304291-10-herve.codina@bootlin.com>
- <aqpc9HZ2T74Q2lYs@gractus.seuss>
- <20260917103410.1fcfe0f1@bootlin.com>
- <aqu0c3qMJOLoD0Ho@gractus.seuss>
- <20260917192814.70cbecbb@bootlin.com>
- <aq4Tg0cAD8z6IL9Q@gractus.seuss>
- <20260930183949.3f1b2fd2@bootlin.com>
+ <20260826083146.304291-16-herve.codina@bootlin.com>
+ <arDMhoNNXcPi81sR@gractus.seuss>
+ <20260925152157.511dc65c@bootlin.com>
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
@@ -61,334 +57,198 @@ List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="uuESIAIrR7/YWdu+"
+	protocol="application/pgp-signature"; boundary="WjVfNxm1aa21zhMm"
 Content-Disposition: inline
-In-Reply-To: <20260930183949.3f1b2fd2@bootlin.com>
+In-Reply-To: <20260925152157.511dc65c@bootlin.com>
 
---uuESIAIrR7/YWdu+
-Content-Type: text/plain; charset=us-ascii
+--WjVfNxm1aa21zhMm
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 30, 2026 at 06:47:08PM +0200, Herve Codina wrote:
+On Fri, Sep 25, 2026 at 03:21:57PM +0200, Herve Codina wrote:
 > Hi David,
 >=20
-> On Sat, 19 Sep 2026 14:46:05 +1000
+> On Mon, 21 Sep 2026 16:20:02 +1000
 > David Gibson <david@gibson.dropbear.id.au> wrote:
 >=20
-> ...
->=20
-> >=20
-> > > Upper layer using fdt_next_tag() should not handle this tag skipping =
-the
-> > > general case and let fdt_next_tag() do this job.
+> > On Wed, Aug 26, 2026 at 10:31:46AM +0200, Herve Codina wrote:
+> > > This v18 version will add support for
+> > >   - Structured tags.
+> > >     Those tags value definition will allow "old" libfdt, dtc and other
+> > >     tools to skip unknown tags if encountered in future dtb version.
 > > >=20
-> > > Got the feeling that we are going to add complexity at upper layer to=
- handle
-> > > a feature that should be handled at low level.
-> > >  =20
-> > > >  =20
-> > > > > Ok, we can have a wrapper on top of
-> > > > > fdt_next_tag() to skip unknown tags.
-> > > > >=20
-> > > > > fdt_next_tag() is a low level function but the rule related to sk=
-ipping
-> > > > > unknown tags is also a low level rule.
-> > > > >=20
-> > > > > We have to choose:
-> > > > > a) fdt_next_tag() as I proposed
-> > > > >    Of course ok for me
-> > > > >=20
-> > > > > b) fdt_next_tag() returns all tags -> Full handling at caller side
-> > > > >    Ok, we can go in that direction but it will bring quite a lot =
+> > >     libfdt, dtc and other tools implementing version v18 will be able=
+ to
+> > >     skip unknown tags available in dtbd generated with later version =
 of
-> > > > >    code duplication.   =20
-> > > >=20
-> > > > I'm not sure it's that bad, since fdt_next_tag() loops will typical=
-ly
-> > > > already have a 'default' case for irrelevant tags, which will
-> > > > generally be handled the same as unknown tags. =20
+> > >     dtc.
 > > >=20
-> > > Well as we did for "offset 0 vs real root node offset", I think the b=
-est way
-> > > to known if it's bad or not is to try. =20
-> >=20
-> > Agreed.
-> >=20
-> > > I will not have time this week to propose something and I have a trai=
-ning
-> > > next week.
+> > >   - dt_flags header field.
+> > >     For now this flag field is set to 0. It is a placeholder for futu=
+re
+> > >     dtb version and could be used to store some dtb related informati=
+on
+> > >     such as the kind of dtb. For instance, the future addons format w=
+ill
+> > >     use this field to clearly identify that the dtb is an addon dtb.
 > > >=20
-> > > If you're ok for a try, I will do it but not as quickly as I did for =
-the
-> > > "offset 0 vs real root node offset" topic.
-> > >  =20
+> > >   - last_comp_version_w header field.
+> > >     This field is similar to last_comp_version but for writing.
+> > >     It contains the lowest version of the devicetree data structure w=
+ith
+> > >     which the version used can safely perform modifications (taking i=
+nto
+> > >     account following rules related to unknown tags).
+> > >     If this lowest version is greater than the last known supported
+> > >     version, modification are simply forbidden and lead to a
+> > >     FDT_ERR_BADVERSION error.
+> > >=20
+> > > For modification, when an unknown tag that can be skipped is involved
+> > > and last_comp_version_w allows modifications, the following rules
+> > > apply: =20
+> >=20
+> > "last_comp_version_w allows modifications" is a bit hard to
+> > understand.  What exactly is the version number against which we're
+> > comparing that value?
 >=20
-> I did my homework and I think I was wrong. fdt_next_tag() can return all =
-tags
-> without adding too much complexity in current code.
-
-Right, I suspected that would be the case.
-
-> Here is the diff to consider that fully replaces this current patch.
+> We had one last_comp_version.
 >=20
-> You can note that I've added the FDT_TAG_IS_SKIPPABLE() macro. This macro
-> should be added in a previous commit introducing structured tag (or skipp=
-able
-> if renamed). According to discussion we've already had related to "struct=
-ure"
-> tag format, the FDT_TAG_IS_SKIPPABLE() macro content will not be that one=
- but
-> you've got the idea of its usage in the diff.
-
-Ok.  I'm having second thoughts about the "skippable" terminology
-based on the complications for read-write access, but I'll discuss
-that in full elsewhere.
-
-Whatever we call it, the idea of an is_new_style(tag) macro makes
-sense.
-
-> --- 8< ---
-> diff --git a/libfdt/fdt.c b/libfdt/fdt.c
-> index eb803e8a..e426414b 100644
-> --- a/libfdt/fdt.c
-> +++ b/libfdt/fdt.c
-> @@ -218,7 +218,37 @@ uint32_t fdt_next_tag(const void *fdt, int startoffs=
-et, int *nextoffset)
->  		break;
-> =20
->  	default:
-> -		return FDT_END;
-> +		if (!(tag & FDT_TAG_STRUCTURED) || !(tag & FDT_TAG_SKIP_SAFE))
-> +			return FDT_END;
-> +
-> +		switch (tag & FDT_TAG_DATA_MASK) {
-> +		case FDT_TAG_DATA_NONE:
-> +			break;
-> +		case FDT_TAG_DATA_1CELL:
-> +			offset +=3D FDT_CELLSIZE;
-> +			break;
-> +		case FDT_TAG_DATA_2CELLS:
-> +			offset +=3D 2 * FDT_CELLSIZE;
-> +			break;
-> +		case FDT_TAG_DATA_VARLEN:
-> +			/* Get the length */
-> +			lenp =3D fdt_offset_ptr(fdt, offset, sizeof(*lenp));
-> +			if (!can_assume(VALID_DTB) && !lenp)
-> +				return FDT_END; /* premature end */
-> +			len =3D fdt32_to_cpu(*lenp);
-> +			/*
-> +			 * Skip the cell encoding the length and the
-> +			 * following length bytes
-> +			 */
-> +			len +=3D sizeof(*lenp);
-> +			sum =3D len + offset;
-> +			if (!can_assume(VALID_DTB) &&
-> +			    (sum >=3D INT_MAX || sum < (uint32_t) offset))
-> +				return FDT_END; /* premature end */
-> +
-> +			offset +=3D len;
-> +			break;
-> +		}
->  	}
-> =20
->  	if (!fdt_offset_ptr(fdt, startoffset, offset - startoffset))
-> @@ -303,6 +333,7 @@ int fdt_next_node(const void *fdt, int offset, int *d=
-epth)
->  		switch (tag) {
->  		case FDT_PROP:
->  		case FDT_NOP:
-> +		default: /* All Skippable tags */
->  			break;
-> =20
->  		case FDT_BEGIN_NODE:
-> diff --git a/libfdt/fdt.h b/libfdt/fdt.h
-> index f41a355f..55138261 100644
-> --- a/libfdt/fdt.h
-> +++ b/libfdt/fdt.h
-> @@ -73,6 +73,8 @@ struct fdt_property {
->  #define FDT_TAG_CAN_SKIP(tag_data, tag_id) \
->  		(FDT_TAG_STRUCTURED | FDT_TAG_SKIP_SAFE | tag_data | tag_id)
-> =20
-> +#define FDT_TAG_IS_SKIPPABLE(_tag) (((_tag) & (FDT_TAG_STRUCTURED | FDT_=
-TAG_SKIP_SAFE)) =3D=3D (FDT_TAG_STRUCTURED | FDT_TAG_SKIP_SAFE))
-> +
->  /* Tests reserved tags */
->  #define FDT_TEST_NONE_CAN_SKIP		FDT_TAG_CAN_SKIP(FDT_TAG_DATA_NONE, 0)
->  #define FDT_TEST_1CELL_CAN_SKIP		FDT_TAG_CAN_SKIP(FDT_TAG_DATA_1CELL, 0)
-> diff --git a/libfdt/fdt_check.c b/libfdt/fdt_check.c
-> index 2fd5b61d..8bd9b252 100644
-> --- a/libfdt/fdt_check.c
-> +++ b/libfdt/fdt_check.c
-> @@ -45,7 +45,8 @@ int fdt_check_full(const void *fdt, size_t bufsize)
->  			return nextoffset;
-> =20
->  		/* If we see two root nodes, something is wrong */
-> -		if (expect_end && tag !=3D FDT_END && tag !=3D FDT_NOP)
-> +		if (expect_end && tag !=3D FDT_END && tag !=3D FDT_NOP &&
-> +			!FDT_TAG_IS_SKIPPABLE(tag))
->  			return -FDT_ERR_BADSTRUCTURE;
-> =20
->  		switch (tag) {
-> @@ -92,7 +93,8 @@ int fdt_check_full(const void *fdt, size_t bufsize)
->  			break;
-> =20
->  		default:
-> -			return -FDT_ERR_INTERNAL;
-> +			/* Skippable tags -> Skip them */
-> +			break;
->  		}
->  	}
->  }
-> diff --git a/libfdt/fdt_ro.c b/libfdt/fdt_ro.c
-> index 856c62f1..3cc0435c 100644
-> --- a/libfdt/fdt_ro.c
-> +++ b/libfdt/fdt_ro.c
-> @@ -219,7 +219,7 @@ static int nextprop_(const void *fdt, int offset)
->  			return offset;
->  		}
->  		offset =3D nextoffset;
-> -	} while (tag =3D=3D FDT_NOP);
-> +	} while (tag =3D=3D FDT_NOP || FDT_TAG_IS_SKIPPABLE(tag));
-> =20
->  	return -FDT_ERR_NOTFOUND;
->  }
-> diff --git a/tests/run_tests.sh b/tests/run_tests.sh
-> index 8fc23cb7..225c22f8 100755
-> --- a/tests/run_tests.sh
-> +++ b/tests/run_tests.sh
-> @@ -577,11 +577,12 @@ libfdt_tests () {
->      run_test dtbs_equal_ordered cell-overflow.test.dtb cell-overflow-res=
-ults.test.dtb
-> =20
->      # check full tests
-> -    for good in test_tree1.dtb; do
-> +    for good in test_tree1.dtb unknown_tags_can_skip.dtb; do
->  	run_test check_full $good
->      done
->      for bad in truncated_property.dtb truncated_string.dtb \
-> -		truncated_memrsv.dtb two_roots.dtb named_root.dtb; do
-> +		truncated_memrsv.dtb two_roots.dtb named_root.dtb \
-> +		unknown_tags_no_skip.dtb; do
->  	run_test check_full -n $bad
->      done
->  }
-> @@ -962,6 +963,10 @@ fdtget_tests () {
->      run_fdtget_test "<the dead silence>" -tx \
->  	-d "<the dead silence>" $dtb /randomnode doctor-who
->      run_fdtget_test "<blink>" -tx -d "<blink>" $dtb /memory doctor-who
-> +
-> +    # test with unknown tags involved
-> +    run_fdtget_test "25601 25602" unknown_tags_can_skip.dtb /subnode1 pr=
-op-int
-> +    run_wrap_error_test $DTGET unknown_tags_no_skip.dtb /subnode1 prop-i=
-nt
->  }
-> =20
->  fdtput_tests () {
-> --- 8< ---
-
-That looks fine, except insofar as other changes we've already
-discussed will require updates here too.
-
-> Also I've modified tests/dtbs_equal_ordered.c but I am not sure that the
-> modification I did is a modification you will accept.
+> Now we have two last_comp_version, one for reading and one for writing.
+> We compare again the dtb version supported by our libfdt version.
 >=20
-> We could just ignore skippable tags but I choose to test data when such an
-> skippable tag is encoutered.
+> This comes from the discussion [1]
 >=20
-> This leads to the following modification:
-> --- 8< ---
-> --- a/tests/dtbs_equal_ordered.c
-> +++ b/tests/dtbs_equal_ordered.c
-> @@ -71,6 +71,7 @@ static void compare_structure(const void *fdt1, const v=
-oid *fdt2)
->  	int err;
->  	const struct fdt_property *prop1, *prop2;
->  	int len1, len2;
-> +	const void *raw1, *raw2;
-> =20
->  	while (1) {
->  		do {
-> @@ -102,6 +103,9 @@ static void compare_structure(const void *fdt1, const=
- void *fdt2)
->  				     name1, name2, offset1, offset2);
->  			break;
-> =20
-> +		case FDT_END_NODE:
-> +			break;
-> +
->  		case FDT_PROP:
->  			prop1 =3D fdt_offset_ptr(fdt1, offset1, sizeof(*prop1));
->  			if (!prop1)
-> @@ -128,6 +132,36 @@ static void compare_structure(const void *fdt1, cons=
-t void *fdt2)
-> =20
->  		case FDT_END:
->  			return;
-> +
-> +		default:
-> +			if (!FDT_TAG_IS_SKIPPABLE(tag1))
-> +				FAIL("Cannot check tag data at (%d, %d)",
-> +					offset1, offset2);
-> +
-> +			/*
-> +			 * Even if we don't known the meaning of data,
-> +			 * we can check that raw data are the same.
-> +			 */
-> +			len1 =3D nextoffset1 - offset1;
-> +			len2 =3D nextoffset2 - offset2;
-> +
-> +			if (len1 !=3D len2) {
-> +				MISMATCH("tag data length mismatch at (%d, %d)",
-> +					offset1, offset2);
-> +			}
-> +
-> +			raw1 =3D fdt_offset_ptr(fdt1, offset1, len1);
-> +			if (!raw1)
-> +				FAIL("Could get fdt1 raw buffer at %d", offset1);
-> +
-> +			raw2 =3D fdt_offset_ptr(fdt2, offset2, len2);
-> +			if (!raw1)
-> +				FAIL("Could get fdt1 raw buffer at %d", offset2);
-> +
-> +			if (memcmp(raw1, raw2, len1) !=3D 0)
-> +				MISMATCH("Tag data value mismatch at (%d, %d)",
-> +					 offset1, offset2);
-> +			break;
->  		}
->  	}
->  }
-> --- 8< ---
+> [1] https://lore.kernel.org/all/CAL_JsqLRrbZje_gGZPBDni6StFa+6rdiECtk49on=
+8VfkP7CDvw@mail.gmail.com/
 
-So, as I mentioned elswhere a version of dtbs_equal_ordered that also
-checks tag data sounds like a very useful tool.  But, I can also see
-the use of comparisons that ignore metadata tags.  So, I think we want
-both variants.  That could be either separate test binaries, or an
-option to dtbs_equal_ordered and/or dtbs_equal_unordered, whicever
-turns out easier.
+Ok, I now see that the logic is you simply fail to proceed with writes
+if the library's latest understood version is < last_comp_version_w.
 
-> With that done, my conclusion is: Yes we can return all tags in fdt_next_=
-tag().
-> I think you will agree this conclusion.
+As I said elsewhere, this approach doesn't particularly make sense to
+me.  If lib_version >=3D last_comp_version you *can* write, even if it
+means stripping everything that's not understood at lib_version.
 
-Excellent.
+So the real question here is how do we know, for any given structured
+tag, what write operations require the version to be downgraded (which
+might in turn require this and/or other structured tags to be stripped
+entirely).
 
-> For dtbs_equal_ordered.c, should we compare skippable tags and related da=
-ta as
-> I did (diff above) or should we just skip them? what is your
-> opinion?
+This is related to (though not the same as) the question of whether
+introducing a new structured tags requires a bump to the dtb version
+(though not to last_comp_version, of course).
 
-As above, I think we want both options.
+Here's the simplest model I can think of.  It's what I'd suggest,
+unless one of it's limitations is a showstopper for what you have in mind:
 
-> For the next patch ("libfdt: Handle unknown tags on dtb modifications")
-> returning all tags from fdt_next_tag() has also some impacts but nothing =
-more
-> complex than modification provided here. I can provide the full diff if y=
-ou
-> want. Let me know.
+ - version and last_comp_version retain their meanings.  No new header
+   version.
+ - New structured tags *do* require a new version.  If a dtb wants to
+   include a specific tag, it must label itself with a version that
+   defines that tag.  To enforce that:
+    - For read operations, if we encounter a (known) tag that
+      doesn't belong in the header version, we throw an error (either
+      BADSTRUCTURE, or a new error for the purpose).
+       - If version <=3D FDT_LAST_SUPPORTED_VERSION and we encounter an
+         unknown tag that also trips the error (since if it was
+	 defined in this version, we should know about it).
+    - For write operations (including in-place), we always error if
+      version > FDT_LAST_SUPPORTED_VERSION (done in fdt_rw_probe_()).
+    - fdt_open_into() _is_ permitted if version > FDT_LAST_SUPPORTED_VERSIO=
+N.
+      It will strip all unknown structured tags from the entire tree
+      and downgrade the version to FDT_LAST_SUPPORTED_VERSION.
 
-Not for now, leave it until you post the next revision of the series.
+This does mean that every new tag does require a new version, which
+may make experimenting with new tags more awkward.  More
+significantly, it also means that any change requires a version
+downgrade, even if it's just updating a handful of properties.
+
+On the plus side, it's fairly simple, retains as much as possible
+current version semantics.  Most especially there's no tricky
+questions about what sorts of writes might invalidate an unknown tag
+(they'll all be stripped by the time we permit a write operation).
+
+If those limitations really are a showstopper, I do have a few other
+models that might work, though.
+
+> > >   - When a property is modified, tags related to this property are
+> > >     removed and the dtb version is downgraded. =20
+> >=20
+> > We need a definition of what "related to" means somewhere.
+>=20
+> Yes a tag is said related to a property if it is available after its FDT_=
+PROP and
+> before the next FDT_PROP (other proterty) of FDT_BEGIN_NODE (subnode) for=
+ FDT_NODE_END
+> (end of node).
+>=20
+> This is defined by "structured tag"
+>=20
+> Devicetree Specification will be updated to have all of this documentation
+> available.
+
+Ok.
+
+> > >   - When a property is removed, tags related to this property are
+> > >     obviously removed. The dtb version is kept unchanged.
+> > >=20
+> > >   - When a property or a node is added, obviously no unknown tags are
+> > >     added and the dtb version is kept unchanged. =20
+> >=20
+> > Again, this rule doesn't make sense to me at the same time as the
+> > property modification rule.
+>=20
+> A current libfdt/dtc version cannot add tags which will be defined in the
+> future.
+
+Sure, but it can still add whole new nodes or properties.  The
+question is whether a version can mandate the presence of certain
+tags.  Dowgrading the version when we strip tags from a modified
+property suggests "yes", but _not_ downgrading the version when we
+add new property suggests "no".
+
+> > >   - When a node is removed, tags related to this node are obviously
+> > >     removed. The dtb version is kept unchanged.
+> > >=20
+> > >   - Adding, removing or modifying a property is not considered as a n=
+ode
+> > >     modification and so, those operations have no impacts on unknown
+> > >     tags related to the node. Those node related tags are kept
+> > >     unchanged.
+> > >=20
+> > >   - The only modification considered as a node modification is setting
+> > >     its name. We consider that this operation has no impact on tags
+> > >     related to the node. Here also, those node related tags and the d=
+tb
+> > >     version are kept unchanged.
+> > >=20
+> > >   - Global (dtb related) unknown tags are kept unchanged regardless t=
+he
+> > >     modification done.
+> > >=20
+> > > In all cases, if unknown tags are not involved in a modification, the
+> > > dtb version is not downgraded when the modification is made.
+> > >=20
+> > > It is worth noting that with this v18 version, the dtb version is not
+> > > downgraded for any modification but only when unknown tags are removed
+> > > due to a property modification. In v17 or older version any modificat=
+ion
+> > > led to a dtb version downgrade. =20
+> >=20
+> > I don't think removing that behaviour is safe.  Even if the rules
+> > above make sense specifically for the metadata tags (which I'm not yet
+> > convinced of), that's not sufficient.  If nothing else, future
+> > versions could add extra header fields.  If we modify the tree, those
+> > header fields could be stale, or even removed.
+>=20
+> last_comp_version_w will be used by the future version to prevent this
+> kind of issue with old version.
+>=20
+> Best regards,
+> Herv=E9
+>=20
+>=20
 
 --=20
 David Gibson (he or they)	| I'll have my music baroque, and my code
@@ -396,24 +256,24 @@ david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
 				| around.
 http://www.ozlabs.org/~dgibson
 
---uuESIAIrR7/YWdu+
+--WjVfNxm1aa21zhMm
 Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmq9zkgACgkQzQJF27ox
-2GcLSA//ZwnRGgcYS4zA5QfYRwPFSY4YFG2+itM+V8B7V2Uxidr5xsBZekflfZAy
-UqjC5I5NR86g+LCd1D1Z2OcI4hFQvU2mk20E0U/MvxToixR53yAwVaf+CyE8YBxB
-t9M1o8YTJHq/jm7PqerghzTwfaXcZmdRV3/8MhYs8CYZVPE2c6QQ+pME0/qdtdI1
-anC4VT6eqx0IzpyyX9WggtvNhMuSgS+uCppZ6jU9rMbZ/jOKSm92dvRHMBUX01U0
-NWLY4IU6eviBvx3jyPi8Ssxd0QKs0WgoXO8Ffe95CqyzgRP/Q/FwLt23r/zWh6zc
-Gb0ZXK/k7BQ2CfQIHcaU9k6RcbtLxG7Y1ImoSeuQya/akuivZDBVYV7j0lMoL2pc
-j3xdeUDAv90qlTcjItdMTdYQzmrPwJYXGWXhulTH/0ojk2OFv6Qw4INMEUFIFM5i
-5F56SR1qKCUKOb+AKSvjbt8BDKd2yAR/h3NcFyZ5+MsVAIMDj45SedCDBoV1Z+D6
-pE/qwKZJinek7/GWtKpAmHiiKYdgrdQNl6m//nFoTARyBPBSPnkp2VjzOHbOhVV6
-CV4QnljnHSgQCVrhWvPUDXIwEj6TocMBaHU4oFTfcA3yEsGZ3HPqgbC8mEMVH1rj
-Bkjr66ehwLzVH4DdsENASWNBC99kjSRaa/wdxOixlXhv36bC6MM=
-=visW
+iQIzBAABCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmrN2VgACgkQzQJF27ox
+2GfR2A/+Pl4h60Lh95Q9QFtaHZ1rs8OTFnjzlvlQ9cJvsf/QXuAY4IeRu7UEgG6c
+j7Qri16XK7vjlPcSmHp61/o59LWliA30BoH/FEbQoFcqoK+hY1yY6zdemK2Xgv9k
+dBTCQwngE8/x6vijiYNraOFD2KXexdAYc1KrKEptGFG6O2/Fs0WRGVOAOYEGOvS9
+wkAU+a2zrjFR7+6rBPZwCL55v9rND1R9RjIFUriy4VmyrE/jo9w9q/kZ1GjVd2Q7
+mV1Hlq9yyLiuX4DfRJWLBA+f92FJQClUiYOD7WmIN4ly293rmkKFaAHSxBArXbL3
+8vSyUGWCzt5gnowFWGdOjD6Nx4yHbKUAxCgRm9UjOG4kv159wpLgoWNHwAl+H26I
+0VaMPAW41AipZ1jvwO5TQ4L4xXgii6uAaTHKWHvxYTH2bWJpSC42LdD9Rg2s6uXf
+Lnd9Li7pteTXNESoVizmyPqVBzBSsdeMDiO+C1XpNBwcPP4mSD4C2Ypnjcdt6RCq
+pUQ3xeeqySXBvrb2wQLCx+D+zgg3vDEDoWub7BnpRvQvB4+tHmzpQn0L/ybQab8M
+IWofVnGRU1kRc9Qvy7GZ8DJV1QSyMr+G8jVFXWagdOIzfFQEdkZcB7KwMcpK2N/a
+8GGg1dea/fnXM6Cfa0iemWq9r4tKRNaQzr8dI8TZ3qCqOB+dFjc=
+=disM
 -----END PGP SIGNATURE-----
 
---uuESIAIrR7/YWdu+--
+--WjVfNxm1aa21zhMm--
