@@ -1,159 +1,175 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D374F5187F3;
-	Tue, 13 Oct 2026 17:04:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E494052122F
+	for <devicetree-spec@vger.kernel.org>; Tue, 13 Oct 2026 17:05:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791911047; cv=none; b=qZAELinpPEIiaMjQuPhucO5ZFu9ZE9GbTZMItT5bHtM0+EiQnvPBG5/MdyacuVA5Dn+oDQDplcMv9y8UgJ0BfH2RenjRM1XHa9kWf37HW/gTMYbwgttmWJCHyKzdGqhqnB5Cuv8ShV29onF4GmPO8StAgvr8ZovpZ29GdNmIFH0=
+	t=1791911108; cv=none; b=q8SidDlG3uGf+yoYx1llZApdGZ/X7GsMRaIiFhM/jOOVc9//puuQF9KZrxlS306d9TmhrilAkQoUEHf/MFHuPw5gmrvFAiq18Bbi0SnMOVfSS7FsLQRaQ0pyjfiSetW37o1PpULbiV8tYoUM5CB0Pky2J+3KegKYHpedXDFNScU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791911047; c=relaxed/simple;
-	bh=x0tlcIF2lObPCdrx3V3Hg3SZs1jyCigLQXwl1Sc4VK0=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=g0q0f8uziuYlCoL2jDtKESmmeui3ZgzCIutVTOe7gya/BhIVcYxfnkG171jp/Fk9L+7v8NuJ+3DaF5shzHmm0DtKT8wW8fc5OqOUxY+AOM076DTaahg6YfOB6YQRWJ1g8/ChvdNjYJEOjX8f8ukU7GwbuRFSCVzF9ePgXFlsl5A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=iMwrHCj5; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1791911108; c=relaxed/simple;
+	bh=2QlKdhqLjOY5e3Bdkpg6nTgY/XoA5wIjighrEK3eFYc=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=dk5TPaaF4/24m4e90866AQo6HXi932EBopyFzF4y7OTIs7/+Z5LAP3w2iSuVNz6x7o+rHV61EfaWcuIljH7/UILwcJTNGrmPmcBQIMlf6UM5II3BF40ffGKUSdMI1p4hhkZjP4PLxKwq0XOmmNKbtpaB58CB9ZqKd1AepvUIk2Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=beagleboard.org; spf=fail smtp.mailfrom=beagleboard.org; dkim=pass (2048-bit key) header.d=beagleboard.org header.i=@beagleboard.org header.b=dI8x3VSt; arc=none smtp.client-ip=209.85.216.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=beagleboard.org
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=beagleboard.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="iMwrHCj5"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id AC60EC653F4;
-	Tue, 13 Oct 2026 17:04:58 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id DC78E60362;
-	Tue, 13 Oct 2026 17:04:02 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 06E2611D71770;
-	Tue, 13 Oct 2026 19:03:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1791911037; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=K5KzQ9Q3OfGaPYx8IICSG1GMcopMbejHgte/43UVeBk=;
-	b=iMwrHCj5Q9XMd1RPed6KNzyVpgWx/Xr1MJr1N4qJrvg8QjCbEY6dsx8KfVQiBv0NzEudfJ
-	FzDBFLA7C7AN736GVEVy1RQYHgHKAQCaM4t0dWdGOcWza3+uEGduASQhq6yTvxXrbiirKg
-	ee4clz97AfKwB31k3wp23dmRj+3v2P5fSzIGstqzzNeAhKxyxWGkH3zftEonto5KhMXkVk
-	UitekmJ/shqG+9BGYxY3EJcmHeJnLR3jXb2qTyW5NByioSu27OaRVBH2yx4mm/h1TpEa/f
-	rMCSDmkeef9NURIERhwaYslWq02vuvHoypPErKzs060Cl18PKteNXdgSQpPrfA==
-Date: Tue, 13 Oct 2026 19:03:47 +0200
-From: Herve Codina <herve.codina@bootlin.com>
-To: David Gibson <david@gibson.dropbear.id.au>, Rob Herring
- <robh@kernel.org>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Laurent Pinchart
- <laurent.pinchart@ideasonboard.com>, David Lechner <dlechner@baylibre.com>,
- Ayush Singh <ayush@beagleboard.org>, Geert Uytterhoeven
- <geert@linux-m68k.org>, devicetree-compiler@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- devicetree-spec@vger.kernel.org, Hui Pu <hui.pu@gehealthcare.com>, Ian Ray
- <ian.ray@gehealthcare.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, Frank Li
- <Frank.Li@nxp.com>
+	dkim=pass (2048-bit key) header.d=beagleboard.org header.i=@beagleboard.org header.b="dI8x3VSt"
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-3a4b3ac8fb7so1452645a91.0
+        for <devicetree-spec@vger.kernel.org>; Tue, 13 Oct 2026 10:05:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=beagleboard.org; s=google; t=1791911106; x=1792515906; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:user-agent
+         :message-id:date:references:in-reply-to:subject:cc:to:from:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=CwU5LaJ8KTA2IGMIL390JbjNAV+cV5JYFFixG+zisXw=;
+        b=dI8x3VStpoT4IYd3lebvRxmq3GRz0RNa/rCL5ppyDznT/aNACXIN+TSPIAcPrw8MP+
+         cWfczgXhBkQqiEeCa71zRpBq8U0KWcuu4+MJjDEXFaCYfXNrmqsSj+ZD6pGrsl3txqPG
+         LGqwIYKnfl3oAAQ3wiSJIVGjBMEY6IL2As3FjDeWPappfgBwyqubPH8fOKTGc6hlMW8y
+         mXJYpcP0KsrdPdxU6O2UIlcfjxF0ezlQV3pWAdgokdF7Sh9OZHZbClK+Vp6SZrHSvWWd
+         CcNamPbujBsVSa7HavvfkDJjAghe7yMEi8spYtSmwzG6ewcC7wA87NBKsYf8JshmT8fK
+         EhBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791911106; x=1792515906;
+        h=content-transfer-encoding:content-type:mime-version:user-agent
+         :message-id:date:references:in-reply-to:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=CwU5LaJ8KTA2IGMIL390JbjNAV+cV5JYFFixG+zisXw=;
+        b=u0kErqDhArCEZwbaBZWSwMLuMrA908AD29cRxzNhSQPqElxh90zGnS7PZ8K3jpNgcr
+         BcggAw/2UOtBHxJ8YjSAgYdyvPkvVFR2l3bnr7et6ARqBg+qBb90JdH79imJm0Od/mYG
+         WVfBymyBXbgV9xN1NyuGPF67WrpyQRc7z8aeMZuZjsfHYBf62TwuxmYLgBvwv2Qi5Lrz
+         VkLkgaC/fD2syXQ60fbi8DFFfwo2uzM0sz6rJ6EuTHhkACfdgb0CscyX0mL7gtZLxrFG
+         ye+WQsBTAPtnTj4Er2K/XZWbLJzdzpEPRacnryhBXEYGbbgvb/kkzy5B4VxmRQifboBP
+         H4Iw==
+X-Forwarded-Encrypted: i=1; AKwUvBwENFdEg8KflltwDK2iXo21pA+uFCUarFekD+eglzXRxLpBjMUgK1fX7t/6FxXFDSYMup2jeCXYdl9/2wqXDnk=@vger.kernel.org
+X-Gm-Message-State: AFq9FYJvEikArgxVx1ZPomuCUvVIk4ABcqLgAo8l9uPGdgDzH88LAuR0
+	THKQwjm0Q9yFRK6XUB4X0TSLPHGoxnKZLPthQGwZhoBOOQ+InPYakqPF2OqET+mh1g==
+X-Gm-Gg: AYBFou27J/wyveSsWdpna8BakvN5UjGoUOiJkgTc+jaWgwszws56LYiGxo5RJ4ojVsG
+	IxNOeRy+5Z+OglCuK66s/3X5F6T3r3nJuHPiNRemKbo3/qRkXGZEM/uv2iTMGqYbK2A3eajND5/
+	EkESu+pNq3swkpls5Tzg+c1XZApSX5f+0RpIwrY7y9UJ9hqR1XbKcufbs1winBBW9FDcep4zQ3E
+	RsdAEGOVxEVFvTQX4nLVZuk5ooQEIWggp6lpg9NkQOfSm4N1fTwE+VTlwjy/731j3R0s5eKORFg
+	WQc6QXrzdn40R5aXQ8930lcvVHxAH+TBTxNp7LDSDkGoBTKi1F13v3NREiCuGyPDFPLGUB4ZX1M
+	I7A86CAZ6LR19k/XXs2Q76UBCWxiXsL28fxvDJiBgsxl1xydg/BFzWTc/BYQi6pgWHh5Dv8ht+A
+	Y6Jm5K4WJdGY4XnixI5YrwU4HZhGy7+tHhE9M3Vim0CQN21CwhWnC68aVPpC9MAuFp8UfYiU07W
+	Q==
+X-Received: by 2002:a17:90b:524f:b0:3a8:de1:db07 with SMTP id 98e67ed59e1d1-3ab3a239c16mr10909223a91.5.1791911106085;
+        Tue, 13 Oct 2026 10:05:06 -0700 (PDT)
+Received: from fedorapc ([2405:201:4019:32fc:3c55:6b24:5147:322b])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ac60e83ccdsm385592a91.15.2026.10.13.10.05.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Oct 2026 10:05:05 -0700 (PDT)
+From: Ayush Singh <ayush@beagleboard.org>
+To: David Gibson <david@gibson.dropbear.id.au>
+Cc: Herve Codina <herve.codina@bootlin.com>,  Rob Herring <robh@kernel.org>,
+  Krzysztof Kozlowski <krzk@kernel.org>,  Conor Dooley
+ <conor+dt@kernel.org>,  Laurent Pinchart
+ <laurent.pinchart@ideasonboard.com>,  David Lechner
+ <dlechner@baylibre.com>,  Ayush Singh <ayush@beagleboard.org>,  Geert
+ Uytterhoeven <geert@linux-m68k.org>,  devicetree-compiler@vger.kernel.org,
+  devicetree@vger.kernel.org,  linux-kernel@vger.kernel.org,
+  devicetree-spec@vger.kernel.org,  Hui Pu <hui.pu@gehealthcare.com>,  Ian
+ Ray <ian.ray@gehealthcare.com>,  Luca Ceresoli
+ <luca.ceresoli@bootlin.com>,  Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>,  Frank Li <Frank.Li@nxp.com>
 Subject: Re: [PATCH v3 15/15] Introduce v18 dtb version
-Message-ID: <20261013190347.4f1d9b9d@bootlin.com>
-In-Reply-To: <as3ZWBr3wRonkxXF@gractus.seuss>
+In-Reply-To: <as3ZWBr3wRonkxXF@gractus.seuss> (David Gibson's message of "Tue,
+	13 Oct 2026 18:10:39 +1100")
 References: <20260826083146.304291-1-herve.codina@bootlin.com>
- <20260826083146.304291-16-herve.codina@bootlin.com>
- <arDMhoNNXcPi81sR@gractus.seuss>
- <20260925152157.511dc65c@bootlin.com>
- <as3ZWBr3wRonkxXF@gractus.seuss>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
+	<20260826083146.304291-16-herve.codina@bootlin.com>
+	<arDMhoNNXcPi81sR@gractus.seuss> <20260925152157.511dc65c@bootlin.com>
+	<as3ZWBr3wRonkxXF@gractus.seuss>
+Date: Tue, 13 Oct 2026 22:34:57 +0530
+Message-ID: <87pkxd4jly.fsf@beagleboard.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Subscribe: <mailto:devicetree-spec+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi David, Rob,
-
-On Tue, 13 Oct 2026 18:10:39 +1100
-David Gibson <david@gibson.dropbear.id.au> wrote:
+David Gibson <david@gibson.dropbear.id.au> writes:
 
 > On Fri, Sep 25, 2026 at 03:21:57PM +0200, Herve Codina wrote:
-> > Hi David,
-> > 
-> > On Mon, 21 Sep 2026 16:20:02 +1000
-> > David Gibson <david@gibson.dropbear.id.au> wrote:
-> >   
-> > > On Wed, Aug 26, 2026 at 10:31:46AM +0200, Herve Codina wrote:  
-> > > > This v18 version will add support for
-> > > >   - Structured tags.
-> > > >     Those tags value definition will allow "old" libfdt, dtc and other
-> > > >     tools to skip unknown tags if encountered in future dtb version.
-> > > > 
-> > > >     libfdt, dtc and other tools implementing version v18 will be able to
-> > > >     skip unknown tags available in dtbd generated with later version of
-> > > >     dtc.
-> > > > 
-> > > >   - dt_flags header field.
-> > > >     For now this flag field is set to 0. It is a placeholder for future
-> > > >     dtb version and could be used to store some dtb related information
-> > > >     such as the kind of dtb. For instance, the future addons format will
-> > > >     use this field to clearly identify that the dtb is an addon dtb.
-> > > > 
-> > > >   - last_comp_version_w header field.
-> > > >     This field is similar to last_comp_version but for writing.
-> > > >     It contains the lowest version of the devicetree data structure with
-> > > >     which the version used can safely perform modifications (taking into
-> > > >     account following rules related to unknown tags).
-> > > >     If this lowest version is greater than the last known supported
-> > > >     version, modification are simply forbidden and lead to a
-> > > >     FDT_ERR_BADVERSION error.
-> > > > 
-> > > > For modification, when an unknown tag that can be skipped is involved
-> > > > and last_comp_version_w allows modifications, the following rules
-> > > > apply:    
-> > > 
-> > > "last_comp_version_w allows modifications" is a bit hard to
-> > > understand.  What exactly is the version number against which we're
-> > > comparing that value?  
-> > 
-> > We had one last_comp_version.
-> > 
-> > Now we have two last_comp_version, one for reading and one for writing.
-> > We compare again the dtb version supported by our libfdt version.
-> > 
-> > This comes from the discussion [1]
-> > 
-> > [1] https://lore.kernel.org/all/CAL_JsqLRrbZje_gGZPBDni6StFa+6rdiECtk49on8VfkP7CDvw@mail.gmail.com/  
-> 
+>> Hi David,
+>>=20
+>> On Mon, 21 Sep 2026 16:20:02 +1000
+>> David Gibson <david@gibson.dropbear.id.au> wrote:
+>>=20
+>> > On Wed, Aug 26, 2026 at 10:31:46AM +0200, Herve Codina wrote:
+>> > > This v18 version will add support for
+>> > >   - Structured tags.
+>> > >     Those tags value definition will allow "old" libfdt, dtc and oth=
+er
+>> > >     tools to skip unknown tags if encountered in future dtb version.
+>> > >=20
+>> > >     libfdt, dtc and other tools implementing version v18 will be abl=
+e to
+>> > >     skip unknown tags available in dtbd generated with later version=
+ of
+>> > >     dtc.
+>> > >=20
+>> > >   - dt_flags header field.
+>> > >     For now this flag field is set to 0. It is a placeholder for fut=
+ure
+>> > >     dtb version and could be used to store some dtb related informat=
+ion
+>> > >     such as the kind of dtb. For instance, the future addons format =
+will
+>> > >     use this field to clearly identify that the dtb is an addon dtb.
+>> > >=20
+>> > >   - last_comp_version_w header field.
+>> > >     This field is similar to last_comp_version but for writing.
+>> > >     It contains the lowest version of the devicetree data structure =
+with
+>> > >     which the version used can safely perform modifications (taking =
+into
+>> > >     account following rules related to unknown tags).
+>> > >     If this lowest version is greater than the last known supported
+>> > >     version, modification are simply forbidden and lead to a
+>> > >     FDT_ERR_BADVERSION error.
+>> > >=20
+>> > > For modification, when an unknown tag that can be skipped is involved
+>> > > and last_comp_version_w allows modifications, the following rules
+>> > > apply:=20=20
+>> >=20
+>> > "last_comp_version_w allows modifications" is a bit hard to
+>> > understand.  What exactly is the version number against which we're
+>> > comparing that value?
+>>=20
+>> We had one last_comp_version.
+>>=20
+>> Now we have two last_comp_version, one for reading and one for writing.
+>> We compare again the dtb version supported by our libfdt version.
+>>=20
+>> This comes from the discussion [1]
+>>=20
+>> [1] https://lore.kernel.org/all/CAL_JsqLRrbZje_gGZPBDni6StFa+6rdiECtk49o=
+n8VfkP7CDvw@mail.gmail.com/
+>
 > Ok, I now see that the logic is you simply fail to proceed with writes
 > if the library's latest understood version is < last_comp_version_w.
-> 
+>
 > As I said elsewhere, this approach doesn't particularly make sense to
-> me.  If lib_version >= last_comp_version you *can* write, even if it
+> me.  If lib_version >=3D last_comp_version you *can* write, even if it
 > means stripping everything that's not understood at lib_version.
-> 
+>
 > So the real question here is how do we know, for any given structured
 > tag, what write operations require the version to be downgraded (which
 > might in turn require this and/or other structured tags to be stripped
 > entirely).
-
-The rules is well known. An old libfdt version will strip the tag and
-downgrade the version. If, when we define a new tags this rules cannot be
-follow by olf libfdt version, last_comp_version_w will be set to protect
-against modification.
-
-Maybe the problem is just downgrading the version.
-
-Instead of downgrading it could be better if we mark the dtb "one or more
-'unknown' tags have been removed due to a write by an old libfdt version" ?
-
-We have a dt_flags header field. We can dedicate one bit for this marker.
-
-Could it make sense ?
-
-> 
+>
 > This is related to (though not the same as) the question of whether
 > introducing a new structured tags requires a bump to the dtb version
 > (though not to last_comp_version, of course).
-> 
+>
 > Here's the simplest model I can think of.  It's what I'd suggest,
 > unless one of it's limitations is a showstopper for what you have in mind:
-> 
+>
 >  - version and last_comp_version retain their meanings.  No new header
 >    version.
 >  - New structured tags *do* require a new version.  If a dtb wants to
@@ -162,132 +178,123 @@ Could it make sense ?
 >     - For read operations, if we encounter a (known) tag that
 >       doesn't belong in the header version, we throw an error (either
 >       BADSTRUCTURE, or a new error for the purpose).
->        - If version <= FDT_LAST_SUPPORTED_VERSION and we encounter an
+>        - If version <=3D FDT_LAST_SUPPORTED_VERSION and we encounter an
 >          unknown tag that also trips the error (since if it was
 > 	 defined in this version, we should know about it).
 >     - For write operations (including in-place), we always error if
 >       version > FDT_LAST_SUPPORTED_VERSION (done in fdt_rw_probe_()).
->     - fdt_open_into() _is_ permitted if version > FDT_LAST_SUPPORTED_VERSION.
+>     - fdt_open_into() _is_ permitted if version > FDT_LAST_SUPPORTED_VERS=
+ION.
 >       It will strip all unknown structured tags from the entire tree
 >       and downgrade the version to FDT_LAST_SUPPORTED_VERSION.
-> 
+>
 > This does mean that every new tag does require a new version, which
 > may make experimenting with new tags more awkward.  More
 > significantly, it also means that any change requires a version
 > downgrade, even if it's just updating a handful of properties.
-> 
+>
 > On the plus side, it's fairly simple, retains as much as possible
 > current version semantics.  Most especially there's no tricky
 > questions about what sorts of writes might invalidate an unknown tag
 > (they'll all be stripped by the time we permit a write operation).
-> 
+>
 > If those limitations really are a showstopper, I do have a few other
 > models that might work, though.
 
-The use case we want to support (initially mentioned by Rob) can be summarize
-in the following.
+The limitations do not sound too bad. And it feels easier to implement than
+keeping track of read and write versions separately for each new tag.
 
-Assume:
- - bootloader: supported version 2.0
- - kernel: supported version 3.0
- - dtb version 3.0: New tags, skippable but unknown in version 2.0
-
-The bootloader has to modify the dtb version 3.0. I has to add nodes such as
-'choosen', 'memory', 'reserved-memory', plus probably modify some others
-properties (usual fixup() stuff).
-
-Then it passes this dtb to the kernel.
-
-This bootloader (version 2.0) will encounter unknown tags. We don't want the
-bootloader stops in that case and we just want him to do the best it can do
-ending to pass the dtb to the kernel.
-
-Indeed, if this bootloader writes a property with an unknown related tag, it
-has to handle this unknwon related tag (rules already exposed).
-
-When the dtb version 3.0 has defined new tags, the rules related to
-modification performed are well known and several thinks can be done to avoid
-the old bootloader applying modification rules.
-- The tag is not skippable
-  Game over for the old bootloader, an error is reported if the tag is found
-- last_comp_version_w
-  Game over for the old bootloader, modification not allowed.
-
-In that case, the only solution is to bump the bootloader version.
-
-> 
-> > > >   - When a property is modified, tags related to this property are
-> > > >     removed and the dtb version is downgraded.    
-> > > 
-> > > We need a definition of what "related to" means somewhere.  
-> > 
-> > Yes a tag is said related to a property if it is available after its FDT_PROP and
-> > before the next FDT_PROP (other proterty) of FDT_BEGIN_NODE (subnode) for FDT_NODE_END
-> > (end of node).
-> > 
-> > This is defined by "structured tag"
-> > 
-> > Devicetree Specification will be updated to have all of this documentation
-> > available.  
-> 
+>
+>> > >   - When a property is modified, tags related to this property are
+>> > >     removed and the dtb version is downgraded.=20=20
+>> >=20
+>> > We need a definition of what "related to" means somewhere.
+>>=20
+>> Yes a tag is said related to a property if it is available after its FDT=
+_PROP and
+>> before the next FDT_PROP (other proterty) of FDT_BEGIN_NODE (subnode) fo=
+r FDT_NODE_END
+>> (end of node).
+>>=20
+>> This is defined by "structured tag"
+>>=20
+>> Devicetree Specification will be updated to have all of this documentati=
+on
+>> available.
+>
 > Ok.
-> 
-> > > >   - When a property is removed, tags related to this property are
-> > > >     obviously removed. The dtb version is kept unchanged.
-> > > > 
-> > > >   - When a property or a node is added, obviously no unknown tags are
-> > > >     added and the dtb version is kept unchanged.    
-> > > 
-> > > Again, this rule doesn't make sense to me at the same time as the
-> > > property modification rule.  
-> > 
-> > A current libfdt/dtc version cannot add tags which will be defined in the
-> > future.  
-> 
+>
+>> > >   - When a property is removed, tags related to this property are
+>> > >     obviously removed. The dtb version is kept unchanged.
+>> > >=20
+>> > >   - When a property or a node is added, obviously no unknown tags are
+>> > >     added and the dtb version is kept unchanged.=20=20
+>> >=20
+>> > Again, this rule doesn't make sense to me at the same time as the
+>> > property modification rule.
+>>=20
+>> A current libfdt/dtc version cannot add tags which will be defined in the
+>> future.
+>
 > Sure, but it can still add whole new nodes or properties.  The
 > question is whether a version can mandate the presence of certain
 > tags.  Dowgrading the version when we strip tags from a modified
 > property suggests "yes", but _not_ downgrading the version when we
 > add new property suggests "no".
 
-If the version mandate some tags on nodes and properties, last_comp_version_w
-will be used to block old bootloaders. They are not more allowed to modify the
-dtb. They need to be bumped to newer versions.
+Well, I could see version mandating the presence of certain tags for
+devicetree overlays at least. Not quite sure if the same would apply for
+new addon board overlays though.
 
-> 
-> > > >   - When a node is removed, tags related to this node are obviously
-> > > >     removed. The dtb version is kept unchanged.
-> > > > 
-> > > >   - Adding, removing or modifying a property is not considered as a node
-> > > >     modification and so, those operations have no impacts on unknown
-> > > >     tags related to the node. Those node related tags are kept
-> > > >     unchanged.
-> > > > 
-> > > >   - The only modification considered as a node modification is setting
-> > > >     its name. We consider that this operation has no impact on tags
-> > > >     related to the node. Here also, those node related tags and the dtb
-> > > >     version are kept unchanged.
-> > > > 
-> > > >   - Global (dtb related) unknown tags are kept unchanged regardless the
-> > > >     modification done.
-> > > > 
-> > > > In all cases, if unknown tags are not involved in a modification, the
-> > > > dtb version is not downgraded when the modification is made.
-> > > > 
-> > > > It is worth noting that with this v18 version, the dtb version is not
-> > > > downgraded for any modification but only when unknown tags are removed
-> > > > due to a property modification. In v17 or older version any modification
-> > > > led to a dtb version downgrade.    
-> > > 
-> > > I don't think removing that behaviour is safe.  Even if the rules
-> > > above make sense specifically for the metadata tags (which I'm not yet
-> > > convinced of), that's not sufficient.  If nothing else, future
-> > > versions could add extra header fields.  If we modify the tree, those
-> > > header fields could be stale, or even removed.  
-> > 
-> > last_comp_version_w will be used by the future version to prevent this
-> > kind of issue with old version.
-> > 
+>
+>> > >   - When a node is removed, tags related to this node are obviously
+>> > >     removed. The dtb version is kept unchanged.
+>> > >=20
+>> > >   - Adding, removing or modifying a property is not considered as a =
+node
+>> > >     modification and so, those operations have no impacts on unknown
+>> > >     tags related to the node. Those node related tags are kept
+>> > >     unchanged.
+>> > >=20
+>> > >   - The only modification considered as a node modification is setti=
+ng
+>> > >     its name. We consider that this operation has no impact on tags
+>> > >     related to the node. Here also, those node related tags and the =
+dtb
+>> > >     version are kept unchanged.
+>> > >=20
+>> > >   - Global (dtb related) unknown tags are kept unchanged regardless =
+the
+>> > >     modification done.
+>> > >=20
+>> > > In all cases, if unknown tags are not involved in a modification, the
+>> > > dtb version is not downgraded when the modification is made.
+>> > >=20
+>> > > It is worth noting that with this v18 version, the dtb version is not
+>> > > downgraded for any modification but only when unknown tags are remov=
+ed
+>> > > due to a property modification. In v17 or older version any modifica=
+tion
+>> > > led to a dtb version downgrade.=20=20
+>> >=20
+>> > I don't think removing that behaviour is safe.  Even if the rules
+>> > above make sense specifically for the metadata tags (which I'm not yet
+>> > convinced of), that's not sufficient.  If nothing else, future
+>> > versions could add extra header fields.  If we modify the tree, those
+>> > header fields could be stale, or even removed.
+>>=20
+>> last_comp_version_w will be used by the future version to prevent this
+>> kind of issue with old version.
+>>=20
+>> Best regards,
+>> Herv=C3=A9
+>>=20
+>>=20
 
-Best regards,
-Hervé
+
+Best Regards,
+Ayush Singh
+
+--=20
+BeagleBoard.org Foundation
+https://www.beagleboard.org
