@@ -1,51 +1,51 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=150.107.74.76
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792990311;
-	b=L5AmCx6mX69UwgPjPRQsPog5OSFAb77D6fO9sZRwVS8o/5nh4c2gzAgEIFaUJSyu7vB+
-	 tzGpXbkR7OVf7sqT6pSVc+qOOMs0leHSJPipNi7o3QER/mXInebHInI3baR0aaiGW3Oan
-	 K5wL7c0BB1nWUeU34jjzEvqPN6MyRxuzInnHArDj/LfzaHCL1ff1VoGncpLmT02ySvHpg
-	 XvTriTW9HS8nihS37fxrsgG+yj3B4R9XqAQq+AEyJz3R2VqVNRgnK479iv5Olr4cGInh/
-	 PAPGzHdMNTaRoN4e9/cjADqtiBmsnKXiAikgsENfyGHlCIJrM7QRf7RXbogNozUiUlg==
+	t=1792990316;
+	b=aJ/rBMCusHBW6JiIp6jgF5Ay1YwZQmazZFLaYebQXGfsPkGmpOTlfi60Ryd/BOf9gXZ6
+	 pBOQhN1t9o2Shi/rd/Hdy4W7Gn7BHdLzYND9mhqbFFCgFEmq4xqPwWHcHYYm9LLOYLAyp
+	 Ttqz4OPNczL38NbVn6lgcEt4BNIIrpSXV3Mj3c4mfx16tX10fn4Abp6MwR0uPUUozxu+u
+	 aNl6514/4p6ePjefjGQeDmf1z2B1w437bmPBao5liDDJYAM+TGkAXIlw1/TtPOLIEh8gM
+	 Dp0IZ/zJ8fr9gTmXW+XmYcK+UMZTPV4vuuqqKrpHTCBTBhYlvBfLOnGP8ew8MkLIkMw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792990311;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792990316;
 	h=DMARC-Filter:DKIM-Signature:Received:Date:From:To:Cc:Subject:
 	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
 	 In-Reply-To;
-	bh=f9r1ZE6effix1uzB18resIhatR8ycz7JQ1ggkOa4O88=;
-	b=wbmM1hajxkv1Xm+rcxuYaCn1rbIhqTL6OUonPkLnQkzV2ZHr8V3jUTY+69YaX+cK+G2V
-	 IRSjCrbIfVFKCDZhGHN5DtptzagBlGyZV0XK3ph466tO0SpHeTPBBg6nRvxKhheQpN6Ut
-	 m0O5aKrMg6k+6Yg7Sb27py2TTlDbSd75PxVGVzwI99ym2ehJFGIFbq2j7v2MKBx3xx4rv
-	 aRO31HVL9UBqGzRfFR8t+zq6UOMFFdqpuUPX7E1GRGN6Ymcb/jjjzkaVTwcRonO1T6SmN
-	 JgA85G0KtoZ8Du6XVdl5hyDyY8w4I1F1wjPMY8nHwAoYyMjLbGnaaxqmHrhxku09EMQ==
+	bh=CHthpTQQZ9sGbZv3eMYNrP/2BiwvzD4xW9hS+MDiu4E=;
+	b=NH6zL0YqpfcRmqgPJlr6UOdm9SzDK7Hbjj1705ZqBaK1SItqtYF5qUY8KbKU8Mbw/XXp
+	 f1dQSiPmak8Q2Yffnr/Wvf1fCuwD2uJB8LXE/q29uuQBKNgfzBuwU+9ByFIovyf1Xsn7t
+	 fRybP0xzca63BORCcpqBiCbkuf8b7bRarZ5jMUShBrj0Hdq/urkDKKeaKhRUEG2ALZCbI
+	 bK7ey3hET6PFIqygHaQr6G0K0Zvhhvr0VmvJoxQsaM9qMAObooa6gV4eB3g9C1w+9XXdb
+	 QJ+yC/hVMPiL0fIxRSow5gL47xidsjYhykjCBfEm9Qd6wQMbfD8v4dE9HCMpHhLpdCw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=none header.from=gibson.dropbear.id.au;
 	spf=pass smtp.mailfrom=gandalf.ozlabs.org;
-	dkim=pass header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.a=rsa-sha256 header.s=202610 header.b=f9StagWW;
+	dkim=pass header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.a=rsa-sha256 header.s=202610 header.b=nqcQH6qO;
 	arc=none smtp.remote-ip=150.107.74.76
 Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28778606A31F;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 287A4606A320;
 	Mon, 26 Oct 2026 04:51:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 28778606A31F
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 287A4606A320
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.a=rsa-sha256 header.s=202610 header.b=f9StagWW
+	dkim=pass (2048-bit key, unprotected) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.a=rsa-sha256 header.s=202610 header.b=nqcQH6qO
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=gibson.dropbear.id.au; s=202610; t=1792990301;
-	bh=f9r1ZE6effix1uzB18resIhatR8ycz7JQ1ggkOa4O88=;
+	bh=CHthpTQQZ9sGbZv3eMYNrP/2BiwvzD4xW9hS+MDiu4E=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=f9StagWW0nAEcYQIgrgW4wcax1b4PLYY3ziRWiJoHqkssAxqs0B+aDzAhivSa3TKP
-	 sx8a4G3l1dOaT8bvS1/JvbAKJvVDSmXya55rDCYpN4dU7jD6Z+1LWdgaKzw4mzDJSD
-	 JoxgmnaPd1ogKlquw45GcLRCM0eJmi7uCoyM1PZ7XcmDyoei1Vd4MZYpamjUnWzIlv
-	 SHNk31OO4x33yvnoAoEgKwj+gO+wvl+kxHJ6akduaAm+mzf6gPOXGWQF8lAUeypW01
-	 AGXIBwRjKotH7oCjbnml4vyrWVBF1B0aLQrzyPrzoUzZeUGtltN8asOL3rKD9y1nQY
-	 yzonNBUjyYpCg==
+	b=nqcQH6qOHu80jttG8Gxn8wYoMCh+xxT1PzhNjXc+0GaPX6w6HWo9LoPcE0O/YXarS
+	 l6LQID6yIc8feO+6wUBvb1wfv9ZF9WrZEls/UKzSWDo6cx7rJMCyUZr6XMWGQRgb19
+	 FF9bXOFxhGSXreA2ZVm2W2uF8s2Etuu72wbq4pMXGsbeIOUkK+IZZ4++jOrv4eC3WL
+	 51rEjqAOC2lSBYdUfTKQ2WHD0la0uwGi0M/m1vZFZ/rUDgNF3us20iQAxgiUrCKzk6
+	 SVRCvmFA8CVh5rAC0PI9tgkv/bjReo4LfeEkKari0fwJ8+M3CSe3kMYw0f5p4J0BrY
+	 HOOTk8h/0d3bQ==
 Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
-	id 4jCh6j3b9cz4wHs; Mon, 26 Oct 2026 15:51:41 +1100 (AEDT)
-Date: Mon, 26 Oct 2026 12:30:31 +1100
+	id 4jCh6j3hQKz4wCC; Mon, 26 Oct 2026 15:51:41 +1100 (AEDT)
+Date: Mon, 26 Oct 2026 12:33:51 +1100
 From: David Gibson <david@gibson.dropbear.id.au>
 To: Herve Codina <herve.codina@bootlin.com>
 Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
@@ -60,16 +60,12 @@ Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
 	Ian Ray <ian.ray@gehealthcare.com>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Subject: Re: [RFC PATCH v2 07/74] Add support for FDT_PROPDATA_PHANDLE dtb tag
-Message-ID: <at6tLoIGUblHcEBz@gractus.seuss>
+Subject: Re: [RFC PATCH v2 08/74] livetree: Improve get_node_by_phandle()
+Message-ID: <at6t-l9XYYFfS48T@gractus.seuss>
 References: <20260826094950.1088288-1-herve.codina@bootlin.com>
- <20260826094950.1088288-8-herve.codina@bootlin.com>
- <atgtw8QubzVfWMYP@gractus.seuss>
- <20261021192615.1f5b91ff@bootlin.com>
- <atl8nkrGFvhWRqDr@gractus.seuss>
- <20261022114741.31171b04@bootlin.com>
- <atq3H0Ts4wTBTVCV@gractus.seuss>
- <20261023132949.4fc3072b@bootlin.com>
+ <20260826094950.1088288-9-herve.codina@bootlin.com>
+ <atrTn_I_8O6q9QUW@gractus.seuss>
+ <20261023181533.0c44a57f@bootlin.com>
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Post: <mailto:devicetree-spec@vger.kernel.org>
@@ -80,273 +76,257 @@ List-Owner: <mailto:devicetree-spec+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="5UZzi/wIDVoUkAnO"
+	protocol="application/pgp-signature"; boundary="U416GTGFp8OvSBTQ"
 Content-Disposition: inline
-In-Reply-To: <20261023132949.4fc3072b@bootlin.com>
+In-Reply-To: <20261023181533.0c44a57f@bootlin.com>
 
---5UZzi/wIDVoUkAnO
-Content-Type: text/plain; charset=iso-8859-1
+--U416GTGFp8OvSBTQ
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 23, 2026 at 01:29:49PM +0200, Herve Codina wrote:
+On Fri, Oct 23, 2026 at 06:15:33PM +0200, Herve Codina wrote:
 > Hi David,
 >=20
-> On Fri, 23 Oct 2026 12:23:58 +1100
+> On Fri, 23 Oct 2026 14:25:29 +1100
 > David Gibson <david@gibson.dropbear.id.au> wrote:
 >=20
-> ...
->=20
-> > > > > > > -static struct data data_append_markers(struct data d, struct=
- marker *m)
-> > > > > > > +struct data data_append_markers(struct data d, struct marker=
- *m)
-> > > > > > >  {
-> > > > > > >  	struct marker **mp =3D &d.markers;
-> > > > > > > =20
-> > > > > > > @@ -288,6 +288,7 @@ struct marker *alloc_marker(unsigned int =
-offset, enum markertype type,
-> > > > > > >  	m->type =3D type;
-> > > > > > >  	m->ref =3D ref;
-> > > > > > >  	m->next =3D NULL;
-> > > > > > > +	m->is_local =3D 0;     =20
-> > > > > >=20
-> > > > > > Storing is_local in the marker doesn't make sense to me.  I thi=
-nk the
-> > > > > > locality should be calculated only when we actually go to emit =
-the dtb
-> > > > > > - I believe we should be able to deduce it from m->ref.   =20
-> > > > >=20
-> > > > > When we parse a dtb, we do not have any reference for local phand=
-le, we have
-> > > > > only the phandle value.   =20
-> > > >=20
-> > > > Heh, right, I remarked on that further down.
-> > > >  =20
-> > > > > Later in build_dt_info(), complete_references() is called. This n=
-ew function
-> > > > > is introduced in patch 9 ("dtc: Complete REF_PHANDLE markers with=
- ref strings
-> > > > > and is_local flags"). It completes the reference either filling t=
-he ref field
-> > > > > based on the phandle value for all local reference (parsing from =
-a dtb) or
-> > > > > setting is_local based on the reference (parsing from a dts).   =
-=20
-> > > >=20
-> > > > Ah, right having that logic in a different patch makes it harder to
-> > > > follow.
-> > > >=20
-> > > > What concerns me here is that currently we have an invariant that a
-> > > > REF_PHANDLE marker always has a meaningful m->ref field - from as s=
-oon
-> > > > as it's added to the property data.
-> > > >=20
-> > > > This patch breaks that assumption, which means when looking at some
-> > > > random part of the code it's hard to know whether we're in a state
-> > > > where m->ref is valid or it might not me.
-> > > >=20
-> > > > One approach is to minimise the gap where m->ref is invalid.  That's
-> > > > both in terms of code path - at minimum the m->ref fields should be
-> > > > valid by return from dt_from_*().  It's also in terms of not leaving
-> > > > intermediate patches where this is not fixed up.
-> > > >=20
-> > > > The other approach would be to create new marker types indicating
-> > > > these intermediate states.  The markers are for dtc internal use, t=
-hey
-> > > > don't need to have 1 to 1 correspondance with things in either dtb =
-or
-> > > > source format. =20
+> > On Wed, Aug 26, 2026 at 11:48:37AM +0200, Herve Codina wrote:
+> > > get_node_by_phandle() allows to get a node based on its phandle value.
+> > > It checks the phandle value against value available in internal node
+> > > structure.
 > > >=20
-> > > I don't want to introduce new markers for handling intermediate state=
-s.
+> > > This internal phandle value is updated during process_check() and so,
+> > > get_node_by_phandle() cannot give correct results before the
+> > > process_check() call.
 > > >=20
-> > > I really prefer avoiding those kind of "fake" marker which will have
-> > > a short lifetime and should not be seen by code (other than the code
-> > > moving this intermediate state to the final state).
+> > > Improve get_node_by_phandle() to look at node phandle properties when
+> > > the internal phandle value is not valid.
 > > >=20
-> > > My strategy was to ensure that once build_dt_info() is called, all
-> > > markers are fully correct with all field (is_local and ref) correctly
-> > > set.
-> > >=20
-> > > build_dt_info() is called by all parser at the end of the parsing
-> > > operation to return a struct dt_info which is the dtc internal
-> > > internal representation used by the rest of code.
-> > >=20
-> > > Are you ok with this strategy? =20
+> > > This allows to return a correct matching node even if process_check()
+> > > was not called yet. =20
 > >=20
-> > Having transitional states that don't last beyond build_dt_info() is
-> > acceptable in principle, however:
+> > The idea is sound - it's always been kind of clunky that we need the
+> > process_checks() pass to fill the phandles before we can use them.
+> > But, there's at least one significant catch:
 > >=20
-> >   1) That leaves m->is_local and m->ref redudant after that point,
-> >      which I don't like very much
->=20
-> Ok I've looked deeper to remove the is_local field. It should be doable.
->=20
-> complete_references(), probably renamed to fixup_references(), will still=
- be
-> needed
-
-Right, I'd expect that.
-
-> and called from build_dt_info().
-
-This I'm less certain about, since the function needs to fix up in
-opposite directions depending on the input mode.  But, I'll look at
-the patch once it's posted.
-
-> Indeed, all refs need to point to a
-> valid string (path or label).
->=20
-> The idea removing is_local is to have the transitional state where ref ca=
-n be NULL.
-> (REF_PHANDLE created from FDT_PROPDATA_PHANDLE where no ref are available=
- but just
-> the phandle value).
->=20
-> Those NULL ref, identifying a local phandle, will be updated by fixup_ref=
-erences()
-> called from build_dt_info().
->=20
-> I plan also to remove the is_local field from export symbols structure. I=
-ndeed, the
-> exact same problematic exist with export symbol and related to this 'is_l=
-ocal' topic
-> REF_PHANDLE markers and export symbols have no reason to be handled in a =
-different
-> way.
-
-Ok.  I'll keep that in mind once I start looking at those patches.
-
-> I plan to introduce an new function:
->     bool ref_is_local(struct dt_info *dti, const char *ref)
-> in order to determine if a given reference is local or not.
-
-Sounds good.
-
-> As you already stated, this will be needed to emit the correct tag in the=
- output dtb.
->=20
-> This function will walk the tree, no way to avoid that with a 'is_local' =
-flag.
-
-Ok.
-
-> >   2) As of this patch specifically, that's not the case.  I don't want
-> >      to have intermediate commits where this invariant is not
-> >      preserved (it's bad for bisects).
+> > [Aside: you might notice the way it's done violates the principle I
+> >  stated elsewhere of avoiding structures where you must know where you
+> >  are in the flow to know which parts are populated.  My type
+> >  discipline has improved since I first wrote this code :)]
 > >=20
-> > > If yes, patches order in this series will be changed.
-> > >=20
-> > > The current order is
-> > >  - Patch 7: Add support for FDT_PROPDATA_PHANDLE dtb tag
-> > >  - Patch 8: livetree: Improve get_node_by_phandle()
-> > >  - Patch 9: dtc: Complete REF_PHANDLE markers with ref strings and is=
-_local flags
-> > >=20
-> > > With that order we have the incomplete marker state present after pat=
-ch 7 and
-> > > before patch 9.
-> > >=20
-> > > Moving 'Add support for FDT_PROPDATA_PHANDLE dtb tag' after introduci=
-ng the marker
-> > > state completion will avoid the problem.
-> > >  - Patch 7: livetree: Improve get_node_by_phandle()
-> > >  - Patch 8: dtc: Complete REF_PHANDLE markers with ref strings and is=
-_local flags
-> > >  - Patch 9: Add support for FDT_PROPDATA_PHANDLE dtb tag
-> > >=20
-> > > Patch 8 and 9 could be squashed if you prefer to have the completion =
-added
-> > > in the 'Add support for FDT_PROPDATA_PHANDLE dtb tag' patch. =20
+> > We need to gracefully handle the case of malformed phandle /
+> > linux,phandle properties; that's actually the reason for the weird
+> > placement of this in checks.c.  By treating it as a "check" we handle
+> > this case by failing the check.  Other checks that rely on phandles
+> > then have the 'explicit_phandles' check as a prereq so they don't need
+> > to verify this again.  We can still report errors for other checks
+> > that don't rely on that (which is the whole point of the checks
+> > mechanism).
 > >=20
-> > That sounds ok, though I think I'll have to look at the final result
-> > to be sure.  I would prefer 8 & 9 be merged together for
-> > reviewability.  That said, the libfdt parts of the changes could be
-> > split out into an earlier patch than the dtc parts to keep the sizes
-> > smaller.
+> > That's not the only way to do it, of course, but we need something to
+> > check for that error case.  Further notes on the code.
+> >=20
+> > > With the recently introduced FDT_PROPDATA_HANDLE dtb tag, this will be
+> > > needed to update internal phandle references before the call to
+> > > process_check(). Indeed, this tag allows to identify phandles and
+> > > internal references need to be updated based on the phandle value bef=
+ore
+> > > the process_check() call.
+> > >=20
+> > > Signed-off-by: Herve Codina <herve.codina@bootlin.com>
+> > > ---
+> > >  livetree.c | 21 ++++++++++++++++++++-
+> > >  1 file changed, 20 insertions(+), 1 deletion(-)
+> > >=20
+> > > diff --git a/livetree.c b/livetree.c
+> > > index abe73de1..a9f8c5d2 100644
+> > > --- a/livetree.c
+> > > +++ b/livetree.c
+> > > @@ -628,16 +628,35 @@ struct node *get_node_by_label(struct node *tre=
+e, const char *label)
+> > >  	return NULL;
+> > >  }
+> > > =20
+> > > +static cell_t get_node_phandle_existing(struct node *node)
+> > > +{
+> > > +	struct property *prop;
+> > > +
+> > > +	if (phandle_is_valid(node->phandle))
+> > > +		return node->phandle;
+> > > +
+> > > +	prop =3D get_property(node, "phandle");
+> > > +	if (!prop) {
+> > > +		prop =3D get_property(node, "linux,phandle");
+> > > +		if (!prop)
+> > > +			return 0;
+> > > +	}
+> > > +
+> > > +	return propval_cell(prop); =20
+> >=20
+> > In the case of a malformed property, this could SEGV.
 >=20
-> Ok, I will merge and extract libfdt related parts to a specific patch.
+> Ok, will update to
+> --- 8< ---
+> 	if (prop->val.len !=3D sizeof(cell_t))
+> 		return 0;
+>=20
+> 	return propval_cell(prop)
+> --- 8< ---
 >=20
 > >=20
-> > > > It seems to me there's an important difference between the -Idts and
-> > > > -Idtb cases: in the dts case, we have a valid reference, but the
-> > > > phandle needs to be filled in later; in the dtb case, we have a val=
-id
-> > > > phandle, but the reference needs to be filled in later.  Using
-> > > > different marker types for those cases doesn't seem unreasonable for
-> > > > me.  In fact, for clarity it might even make sense to have a third
-> > > > variant for "both phandle and m->ref are valid" - the fixup code
-> > > > between input and output would convert either of the first two
-> > > > variants into the third, which is what the final output code would
-> > > > require.
-> > > >=20
-> > > > That's not necessarily the best way to do it, but I really prefer
-> > > > where what's valid in a structure can be determined from the type a=
-nd
-> > > > contents alone - rather than having to know where you are in a comp=
-lex
-> > > > code path to know what's valid. =20
-> > >=20
-> > > Performing marker completion in build_dt_info() avoid additional mark=
-ers
-> > > and avoid also incomplete markers in the code path.
-> > >=20
-> > > Before build_dt_info() call, the internal devicetree representation d=
-oesn't
-> > > exits for dtc. We are in the process of parsing and so we are buildin=
-g this
-> > > internal representation. After this call, the internal representation=
- exists
-> > > and all markers are fully set without the need to introduce (and hand=
-le)
-> > > additional markers.
-> > >=20
-> > > In other word, dti returned by all dt_from_*() functions returns a fu=
-lly
-> > > complete dt_info.
-> > > --- 8< ---
-> > > 	if (streq(inform, "dts"))
-> > > 		dti =3D dt_from_source(arg);
-> > > 	else if (streq(inform, "fs"))
-> > > 		dti =3D dt_from_fs(arg);
-> > > 	else if(streq(inform, "dtb"))
-> > > 		dti =3D dt_from_blob(arg);
-> > > 	else
-> > > 		die("Unknown input format \"%s\"\n", inform);
-> > > --- 8< ---
-> > >=20
-> > > User of this dti will never see an incomplete marker. =20
+> > > +}
+> > > +
+> > >  struct node *get_node_by_phandle(struct node *tree, cell_t phandle)
+> > >  {
+> > >  	struct node *child, *node;
+> > > +	cell_t tree_phandle;
+> > > =20
+> > >  	if (!phandle_is_valid(phandle)) {
+> > >  		assert(generate_fixups);
+> > >  		return NULL;
+> > >  	}
+> > > =20
+> > > -	if (tree->phandle =3D=3D phandle) {
+> > > +	tree_phandle =3D get_node_phandle_existing(tree); =20
 > >=20
-> > Ok, that works.
->=20
-> Fine.
->=20
-> ...
->=20
-> > >=20
-> > > What do you thing about:
-> > > --- 8< ---
-> > > 	/**
-> > > 	 * fdt_next_tag - get next tag in the device tree
-> > > 	...
-> > > 	* returns:
-> > >  	*	The tag type, either a known tag or an unknown structured tag
-> > > 	*       if this unknown tag can be skipped (SAFE_SKIP bit set in this
-> > > 	*       tag).
-> > > 	*	In case of error, FDT_END is returned with @nextoffset set to
-> > > 	*	a negative error code.
-> > >  	*/
-> > > --- 8< --- =20
+> > This means that every time we search for a phandle, for every node
+> > scanned before the destination with no phandle, we do a full property
+> > scan to check that no, it still doesn't have a phandle.
 > >=20
-> > I don't think the extra detail really helps much - just "The tag
-> > type." would be fine, I think.
+> > I don't care that much about dtc performance, but that's still a bit
+> > much to swallow.  I think we need to cache negative lookups to avoid
+> > that.  Happily, since there are two invalid phandle values this
+> > shouldn't be too hard.  We could, say, use tree->phandle =3D=3D 0 to me=
+an
+> > we don't know if there's a phandle, and tree->phandle =3D=3D -1 to mean
+> > we've scanned the properties and we know there isn't one.
+> >=20
+> > In fact, caching property lookups might be the better way to do this.
+> > Rather than having an explicit pass where tree->phandle is populated,
+> > we could have get_node_by_phandle() cache its property scan (success
+> > or failure) in tree->phandle.
+> >=20
+> > I think that's a more elegant approach than the current one, but we do
+> > still need to handle the malformed property case.
 >=20
-> Ok on my side, I will remove the detail.
+> Well, get_node_phandle_existing() can be improved:
+> ---- 8< ----
+> static cell_t get_node_phandle_existing(struct node *node)
+> {
+> 	cell_t phandle1, phandle2;
+> 	struct property *prop1, *prop2;
 >=20
-> Best regards,
-> Herv=E9
+> 	if (phandle_is_valid(node->phandle))
+> 		return node->phandle;
+> 	if (node->phandle =3D=3D ~0UL) {
+> 		/*
+> 		 * We've already looked at existing properties and no valid
+> 		 * phandle value were present. Avoid looking at them again
+> 		 * and just return the invalid phandle value.
+> 		 */
+> 		return 0;
+> 	}
 >=20
+> 	/* Try to get it from the 'phandle' property */
+> 	phandle1 =3D 0; /* Assume invalid */
+> 	prop1 =3D get_property(node, "phandle");
+> 	if (prop1) {
+> 		if (prop1->val.len =3D=3D sizeof(cell_t))
+> 			phandle1 =3D propval_cell(prop1); /* Well formed -> Get it */
+> 	}
+>=20
+> 	/* Try to get it from the 'linux,phandle' property */
+> 	phandle2 =3D 0; /* Assume invalid */
+> 	prop2 =3D get_property(node, "linux,phandle");
+> 	if (prop2) {
+> 		if (prop2->val.len =3D=3D sizeof(cell_t))
+> 			phandle2 =3D propval_cell(prop2); /* Well formed -> Get it */
+> 	}
+>=20
+> 	if (prop1 && prop2) {
+> 		/*
+> 		 * Both property are present. They values must be the same
+> 		 * and valid.
+> 		 */
+> 		if (phandle1 =3D=3D phandle2) && phandle_is_valid(phandle1)) {
+> 			/* Ok, Cache this correct phandle value and return it */
+> 			node->phandle =3D phandle1;
+> 			return phandle1;
+> 		}
+> 	} else if (prop1) {
+> 		/*
+> 		 * Only the 'phandle' property is present.
+> 		 * Check its value validity
+> 		 */
+> 		if (phandle_is_valid(phandle1)) {
+> 			/* Ok, Cache this correct phandle value and return it */
+> 			node->phandle =3D phandle1;
+> 			return phandle1;
+> 		}
+> 	} else if (prop2) {
+> 		/*
+> 		 * Only the 'linux,phandle' property is present.
+> 		 * Check its value validity
+> 		 */
+> 		if (phandle_is_valid(phandle2)) {
+> 			/* Ok, Cache this correct phandle value and return it */
+> 			node->phandle =3D phandle2;
+> 			return phandle2;
+> 		}
+> 	}
+>=20
+> 	/*
+> 	 * No valid phandle value were found. Cache this information and return
+> 	 * the invalid phandle value.
+> 	 */
+> 	node->phandle =3D=3D ~0UL;
+> 	return 0;
+> }
+> --- 8< ---
+
+That looks good to me.  But the "existing" in the name no longer says
+anything useful - this can be the standard way to get a node's
+phandle.  In fact it might be worth changing the name of the
+node->phandle field to make sure we don't have any stale users rather
+than going through the get_phandle() function.
+
+> In get_node_by_phandle(), no change compared to my proposition and so the
+> full function is:
+> --- 8< ---
+> struct node *get_node_by_phandle(struct node *tree, cell_t phandle)
+> {
+>         struct node *child, *node;
+>         cell_t tree_phandle;
+>=20
+>         if (!phandle_is_valid(phandle)) {
+>                 assert(generate_fixups);
+>                 return NULL;
+>         }
+>=20
+>         tree_phandle =3D get_node_phandle_existing(tree);
+>         if (phandle_is_valid(tree_phandle) && tree_phandle =3D=3D phandle=
+) {
+>                 if (tree->deleted)
+>                         return NULL;
+>                 return tree;
+>         }
+>=20
+>         for_each_child(tree, child) {
+>                 node =3D get_node_by_phandle(child, phandle);
+>                 if (node)
+>                         return node;
+>         }
+>=20
+>         return NULL;
+> }
+> --- 8< ---
+>=20
+> Caching should work correctly without any other modification.
+>=20
+> I let you double-check on your side. Let me know about your opinion.
+
+Yes, I think that should work.
 
 --=20
 David Gibson (he or they)	| I'll have my music baroque, and my code
@@ -354,24 +334,24 @@ david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
 				| around.
 http://www.ozlabs.org/~dgibson
 
---5UZzi/wIDVoUkAnO
+--U416GTGFp8OvSBTQ
 Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmrerS4ACgkQzQJF27ox
-2Gc5ZA//RFSzhc3frY0NIu5OWq2dLeSQYr/M4+IT2AB40PKNO+au+DFaaHKHXjBY
-93TM+A3gB720eJGT2jc+JlVvYu6/+ak/YIMjyXMn/dmyTnzotvgvRb4/SQQ2Zh3U
-9fmw2BoXFLnE+LuEbTdwJlaLoFWdCeITbdo/IpBsiyHk/NacQOOGvcw8zphWyof1
-tnk4Dtc3Q+eXh7uuWzOUatKeqhdt3Ux7SUvcdj9MGNN1q3cL2cB2pjNPuFVnYP0T
-iLuQ/McfAKlWApSdFJUupAgwGxAN/1NgHhvBX51z77oY7Hr4p9dXQO/1lPlUMc9c
-ddDUOvG8HSsv9hzVC8Yu7mpVoI0PSpTlwnr4ckQjsh2o1dPizKhKmaS/Sf+IQj5T
-60CI+HyKv3dRs64CpBORhb8MAyYywVqLRSYI9kgFeH1P+YOdTH3eXWbtiIDfg9wr
-E7KkTtf2lOQgusmJmuGYDbIAjPwyXaNaZUM27p/bEwFIoM8RFhC4LFcDqI6TNWcH
-/eYLHhNMhszQtFoxjZmz5rJQYK6Qn93jkTbyykeemo7pyD75j3WAu05Hqk4VDZca
-oZFg6RFEDVBKGiwf65x6A9ixQ65H9arhVYIKgXGD2v5C3F8pbORWAaSA2y62Rdok
-jKKfCQI+EPlXqev4G0/FVrCkgpDUqGSf5CYBMxkMMi5f14dZFkk=
-=NKs8
+iQIzBAABCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmrerfoACgkQzQJF27ox
+2GeSww//Z5180hHqKm0lTbB2rhPEhdSbrpF47kP1k1uvc9ho+/fHRlZXHYrRIkDz
+fNAZ/rZKHf4O8mqNCwIDtU9etV2kqv0Q5gUFPid+mSRx8DbJcWjI7E/S8Z8NpCfB
+C5ZQ2Z05kLrVBrGhnJ8DsZGfAXfK4Uvq6BmBDAqZYJMnkALwLZN/1H3OSAYsR5wk
+Rnf22NuIY5oTYHLkneJHc4089wDpGybMUggdiz4rAkJ3e7vnl1EddxAIIb8cWl7i
+cLhNrENAAR2RmNY6+Tw6roqNnbjF5O0ruglWTI9thOdiI9xxovabv/4XRGvbb+Bq
+A0ACFVz0vE/QZuf8glt2eUJmbHoscOP3HnjAlyvqKyyvGK+sDRz2GfBEN+vwmqyj
+Xh5jyuGDDXTLD+x9gZ7PXBa2xi8Y5XWW3lvveBo/vfRmr2D4LUmLMWQWPSQl5dCa
+WhU9EOqUKKZcFjOzxGRF44lwHDNNfF+2W9YR7nmIb5KZPC0uxV7MujAa8VSR8OVw
+vHjYGqKXxzuK5RnnDdz8LUfcEYFOrYz0K7aeBgJZqmr47kuXCgUK/Io9S/VvjncJ
+jRKkQI6QYkeuk8CYGgj4tKTOIV0ZEaEo9/wuQ2oIpS0LI0AunesN81tWSc67lsuF
+7FmZwWSx1rreoss1u7qDj6qN7ahE2nJPRjlhdmgCiA48ncQGsSY=
+=BrSe
 -----END PGP SIGNATURE-----
 
---5UZzi/wIDVoUkAnO--
+--U416GTGFp8OvSBTQ--
