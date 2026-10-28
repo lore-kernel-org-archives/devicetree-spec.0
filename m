@@ -1,51 +1,51 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=150.107.74.76
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793067802;
-	b=fIaTnqwzKtl5k5tfnkak/TdQdRrmULKEs4oH2CKzY9cho0/gxSgdzeM8pcCsAAVoT4XN
-	 CnpUpsValxJ3BCgHMULL6Ee4Wk3+YZfC8qTi/eBnez6ny4E4QrhIg6G36nGbU1J1X3cxJ
-	 lpsVrw5i1JGibsdmzj+cBqEtYMDc/tYuI16qdrK8HhtaFoh/xrLXnqhvyxYa5r7GFggAn
-	 itW1agrjp4k36zwG3/o2Rfrnho/S6M6TO/7xQyUjDimqhWbrHBd/bYlUhOCl7hlYW2RWH
-	 LcNF4D5hYdpmQtLPZbwQiB77B+P1upP3wI3pYuw17IePScK8Z25wPkwpW3kSfen5ByQ==
+	t=1793155285;
+	b=BORNqSuYuSB503pRNCbDTjjIz0mXdyTD73U+wydGlHRUJqe0eeVWDkEcEAIpGCM4Arxg
+	 HBe2wPXHvH8yTscG0Dh1n9rxJ86hJpXlyrbOMlYjMY+Ja1psyUqVYnAIDX2wU031QK4vz
+	 6jUXWMfcpwcRtaZdaGInNY5bIX3NY9BGRyCDxwFluwiQJLKJE1EIOFpioBmHMOKraCOEM
+	 zqk1jIXy3Yp2q1Bl594MRH90I0GWoa/9HAvwD0lgEVnqQhj1JZ7Ia4tvOT7Fkkt1IOWme
+	 m/3R1CICxlJ7RUW/ATjycV3jCc3zU/+wWPvPGr+25Ezsizau/GNsWyu9jX7FgYspgvg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793067802;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793155285;
 	h=DMARC-Filter:DKIM-Signature:Received:Date:From:To:Cc:Subject:
 	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
 	 In-Reply-To;
-	bh=7etAlynTAC6r0h2EFYqGEY7YZrfneyXCS4sNmRykkhQ=;
-	b=Ho3/X1oPhRGjBqewxf1cyRYtKtve3y5Uw1MImGDlKmY2HVBVPUQIjRFJkaCBJLgFCFLF
-	 +7dZIQSGoPMWRU2FCIDno15a/PPXLdxXTNXUmAgOW6gIxcP7C/03YlbZyDorAjRCulU54
-	 Al2k6Rsh2V/T0yY4r1esYRogWH3bXx8JQEicS3MjL9QINHcZ7xUscbw1oeG1msjBjkpJ0
-	 jVJ2a/bQ4RKamm6Cvo64MKwtYNgnYpvAaidSj1lbeICfyPu13U/1aucSLnZEFFuyjrLs7
-	 pw9g1dVZBfxMMeQoRSppjU0fxhz7oCKbNg8js9iM+We3+lnYiRZmRYzeAVMYXr7cn2w==
+	bh=QX2W0lQnijfwrGlTgWM1dFah9f2G2nTUmcOGxD8rgv0=;
+	b=tK8CwLvP5LGU+WazWRrhxbN3ZF41RusvxJq1n3CqkafcwM3wx/fKgi4D1mO0KrDyxJyg
+	 NNar2uKFD/VwbKozNljHeOHICWr/r3+HYsqa0z6yd6jawaHJRF63+TT47N66EEeGjLHPa
+	 VvqYn2eNcEGbhum+bnDNC+Ug+jOpNR4aA4/Loj7kmw4/AhTnkAPk9Z1+XxHai9F5dnUy9
+	 hg3ZIdxk8KOcgmdto123id/QLDjhSMJaWd7Tbqkv3ipQfD6O+SwsdZ40VjF1F6q3gV6Ky
+	 6+6h0YDBxB/NR5XhP/bswfl1jf8q0K1b1sGbCp3UeGkF5uLZFO/fmPPLyq8cBIrcxgw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=none header.from=gibson.dropbear.id.au;
 	spf=pass smtp.mailfrom=gandalf.ozlabs.org;
-	dkim=pass header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.a=rsa-sha256 header.s=202610 header.b=tsEPSCdV;
+	dkim=pass header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.a=rsa-sha256 header.s=202610 header.b=UNgMn3Om;
 	arc=none smtp.remote-ip=150.107.74.76
 Received: from mail.ozlabs.org (gandalf.ozlabs.org [150.107.74.76])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D47A8606A31A;
-	Tue, 27 Oct 2026 02:23:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D47A8606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EC2F606A32A;
+	Wed, 28 Oct 2026 02:41:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2EC2F606A32A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gibson.dropbear.id.au
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gandalf.ozlabs.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.a=rsa-sha256 header.s=202610 header.b=tsEPSCdV
+	dkim=pass (2048-bit key, unprotected) header.d=gibson.dropbear.id.au header.i=@gibson.dropbear.id.au header.a=rsa-sha256 header.s=202610 header.b=UNgMn3Om
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=gibson.dropbear.id.au; s=202610; t=1793067797;
-	bh=7etAlynTAC6r0h2EFYqGEY7YZrfneyXCS4sNmRykkhQ=;
+	d=gibson.dropbear.id.au; s=202610; t=1793155280;
+	bh=QX2W0lQnijfwrGlTgWM1dFah9f2G2nTUmcOGxD8rgv0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=tsEPSCdVr5Gq9tp1W1WXdapsM4lKpNh6VfsshDRMdQEaI0+QCxK/2xZ4PjR85MtcB
-	 ARTxB4KmpT31Bor0KMmsCwAOl6fPkw6S0V0f/BMFZmtQIui5WytPLmyYAeB4VGNWPh
-	 r254c4WsXnU7Mi2Nj4n9eegZyiQLRfhrfTlyzwnkw8PERJcicXNM3KvnCHriFDZ6a2
-	 MVKLKZEizn84L1vnzbyxVkbdniIVc8w+mPJFbihriFQX7EtdzXozhJJm0MpbMsbLH8
-	 uq7lBZBeX0h6xa0Hm1c8M6a8jCu3cc2O5O/ptNTeX8h3VMDv81htj86bd1iVkPb+4F
-	 mDjoT9l0IxJyg==
+	b=UNgMn3OmnMkYrjdQPiws9YH9jbOG+rNbqRqZCrjzrat3wJ4fheGgBDcO/Xcfpi4At
+	 PpPfMUsIc7pYHDy3ASRuE24PBlDyXMC56COPlDpVGofS9K05qrjJiUIhEkV2lwJSlc
+	 XKYtDEUVYTW/Z+QBRNSk7jglD5RxUDORnuNUZdFe4W8uI6tN3Yg9YA4KYP5l6v+XfJ
+	 1dqD2gFKnGbDw7rkI6p2gBEpretwbnqdGtslWpYrj0sqfcM++svO0cIXMY8x9KAFG1
+	 yvWPBPOQmCwzmlP54f7eOcUhtyHHd0K9UlecDQh69wS99VS8j0R3UAEnFYw+A6EbC4
+	 47UwooYXA+//Q==
 Received: by gandalf.ozlabs.org (Postfix, from userid 1007)
-	id 4jDDn13VNWz4wDx; Tue, 27 Oct 2026 13:23:17 +1100 (AEDT)
-Date: Tue, 27 Oct 2026 13:23:11 +1100
+	id 4jDs7N5XWTz4wTN; Wed, 28 Oct 2026 13:41:20 +1100 (AEDT)
+Date: Wed, 28 Oct 2026 13:41:14 +1100
 From: David Gibson <david@gibson.dropbear.id.au>
 To: Herve Codina <herve.codina@bootlin.com>
 Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
@@ -59,20 +59,15 @@ Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
 	Hui Pu <hui.pu@gehealthcare.com>,
 	Ian Ray <ian.ray@gehealthcare.com>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	Frank Li <Frank.Li@nxp.com>
-Subject: Re: [PATCH v3 15/15] Introduce v18 dtb version
-Message-ID: <auALCWwk8uauD1xm@gractus.seuss>
-References: <atGzdxETQZ9ovJFh@gractus.seuss>
- <20261019151121.26d99f30@bootlin.com>
- <atgi4rMsw5W6kKkS@gractus.seuss>
- <20261021172043.4bbd2bc5@bootlin.com>
- <atmASGg1OZt9jfXI@gractus.seuss>
- <20261022151454.67125e41@bootlin.com>
- <atrNI_hqwxvfsRj7@gractus.seuss>
- <20261023105511.3ad2bc4d@bootlin.com>
- <at1lLjOGvo34dXZI@gractus.seuss>
- <20261026094233.0f5f8270@bootlin.com>
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Subject: Re: [RFC PATCH v2 08/74] livetree: Improve get_node_by_phandle()
+Message-ID: <auFgv_f0av-JxMjg@gractus.seuss>
+References: <20260826094950.1088288-1-herve.codina@bootlin.com>
+ <20260826094950.1088288-9-herve.codina@bootlin.com>
+ <atrTn_I_8O6q9QUW@gractus.seuss>
+ <20261023181533.0c44a57f@bootlin.com>
+ <at6t-l9XYYFfS48T@gractus.seuss>
+ <20261026125615.055e7214@bootlin.com>
 X-Mailing-List: devicetree-spec@vger.kernel.org
 List-Id: <devicetree-spec.vger.kernel.org>
 List-Post: <mailto:devicetree-spec@vger.kernel.org>
@@ -83,394 +78,383 @@ List-Owner: <mailto:devicetree-spec+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="iFyX4dvPeieVf2AA"
+	protocol="application/pgp-signature"; boundary="lpYmQE31+ktOK+HY"
 Content-Disposition: inline
-In-Reply-To: <20261026094233.0f5f8270@bootlin.com>
+In-Reply-To: <20261026125615.055e7214@bootlin.com>
 
---iFyX4dvPeieVf2AA
-Content-Type: text/plain; charset=us-ascii
+--lpYmQE31+ktOK+HY
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 26, 2026 at 09:42:33AM +0100, Herve Codina wrote:
+On Mon, Oct 26, 2026 at 12:56:15PM +0100, Herve Codina wrote:
 > Hi David,
 >=20
-> On Sun, 25 Oct 2026 13:11:14 +1100
+> On Mon, 26 Oct 2026 12:33:51 +1100
 > David Gibson <david@gibson.dropbear.id.au> wrote:
 >=20
-> > On Fri, Oct 23, 2026 at 10:55:11AM +0200, Herve Codina wrote:
+> > On Fri, Oct 23, 2026 at 06:15:33PM +0200, Herve Codina wrote:
 > > > Hi David,
 > > >=20
-> > > On Fri, 23 Oct 2026 13:57:54 +1100
+> > > On Fri, 23 Oct 2026 14:25:29 +1100
 > > > David Gibson <david@gibson.dropbear.id.au> wrote:
 > > >  =20
-> > > > On Thu, Oct 22, 2026 at 03:14:54PM +0200, Herve Codina wrote: =20
-> > > > > Hi David,
+> > > > On Wed, Aug 26, 2026 at 11:48:37AM +0200, Herve Codina wrote: =20
+> > > > > get_node_by_phandle() allows to get a node based on its phandle v=
+alue.
+> > > > > It checks the phandle value against value available in internal n=
+ode
+> > > > > structure.
 > > > > >=20
-> > > > > On Thu, 22 Oct 2026 14:17:38 +1100
-> > > > > David Gibson <david@gibson.dropbear.id.au> wrote:
-> > > > >    =20
-> > > > > > On Wed, Oct 21, 2026 at 05:20:43PM +0200, Herve Codina wrote:  =
- =20
-> > > > > > > Hi David,
-> > > > > > >=20
-> > > > > > > On Wed, 21 Oct 2026 13:26:49 +1100
-> > > > > > > David Gibson <david@gibson.dropbear.id.au> wrote:
-> > > > > > >      =20
-> > > > > > > > >=20
-> > > > > > > > > Ok, my proposal seems to be a no-go and so I will follow =
-your proposal given
-> > > > > > > > > above.       =20
-> > > > > > > >=20
-> > > > > > > > To be clear, I'm rejecting the original proposal because I =
-think it's
-> > > > > > > > internally inconsistent (if you follow the consequences of =
-decisions
-> > > > > > > > far enough).  I'm not necessarily opposed to something othe=
-r than the
-> > > > > > > > above, as long as the rules for when unknown tags must be i=
-nvalidated
-> > > > > > > > (and what that does to the version) are made very clear in =
-the
-> > > > > > > > structured tag spec.  e.g. see an alternative proposal belo=
-w.     =20
-> > > > > > >=20
-> > > > > > > No problem, I understand your point.
-> > > > > > >=20
-> > > > > > > ...
-> > > > > > >      =20
-> > > > > > > >=20
-> > > > > > > > Essentially the theory of the proposal above is to be maxim=
-ally
-> > > > > > > > conservative: any write (adding, removing, changing, in-pla=
-ce,
-> > > > > > > > whatever) will invalidate all unknown tags and downgrade th=
-e version.
-> > > > > > > >=20
-> > > > > > > >=20
-> > > > > > > > But, here's an alternative proposal for invalidation/versio=
-n semantics
-> > > > > > > > that I think is consistent, while being a bit closer to you=
-r original
-> > > > > > > > proposal.
-> > > > > > > >=20
-> > > > > > > > 1. version and last_comp_version retain their meanings.  No=
- new header
-> > > > > > > >    version.     =20
-> > > > > > >=20
-> > > > > > > Ok
-> > > > > > >      =20
-> > > > > > > > 2. If version >=3D 18 the tree may include any structured t=
-ags, even if
-> > > > > > > >    they weren't defined as of v18.     =20
-> > > > > > >=20
-> > > > > > > Ok
-> > > > > > >      =20
-> > > > > > > > 3. Some future version might _require_ certain structured t=
-ags to be
-> > > > > > > >    present.  But a client must only rely on those tags if t=
-he version
-> > > > > > > >    indicates it can.
-> > > > > > > >      - e.g. suppose FDT_FOO tag is introduced in v20.  A cl=
-ient
-> > > > > > > >        reading a v19 tree _might_ see some FDT_FOO tags (be=
-cause of
-> > > > > > > >        (2)), but cannot rely on them being present in all t=
-he places
-> > > > > > > >        they should be.     =20
-> > > > > > >=20
-> > > > > > > Ok, kind of degraded mode. Whether or not a v20 compatible cl=
-ient can continue
-> > > > > > > or not will depend of each tags known by this v20 client. For=
- some tags, having
-> > > > > > > them removed will not be a problem whereas it will be a probl=
-em for some other.     =20
-> > > > > >=20
-> > > > > > Exactly.
-> > > > > >    =20
-> > > > > > > Makes sense.
-> > > > > > >      =20
-> > > > > > > > 4. Any write to a property (including in place) invalidates=
- all
-> > > > > > > >    unknown tags on that property (they must be stripped)   =
-  =20
-> > > > > > >=20
-> > > > > > > Ok
-> > > > > > >      =20
-> > > > > > > > 5. Any write to a property invalidates all unknown tags on =
-that
-> > > > > > > >    property's node     =20
-> > > > > > >=20
-> > > > > > > Will see in the implementation. The offset of the written pro=
-perty will be
-> > > > > > > incorrect after the write. Indeed, some tags (tags related to=
- the node)
-> > > > > > > available before the property can be removed. With splices in=
-stead of
-> > > > > > > FDT_NOP, offsets change.     =20
-> > > > > >=20
-> > > > > > Oh, good point, this rule doesn't work.  I think we still have a
-> > > > > > consistent set of rules if property writes don't invalidate par=
-ent
-> > > > > > node tags (subnode add/delete still would).  Of coutse, that do=
-es
-> > > > > > further restrict what sorts of information you could safely put=
- in
-> > > > > > node tags under this scheme.
-> > > > > >    =20
-> > > > > > > This also brings a question. Are API functions such as fdt_ge=
-t_property_by_offset_w()
-> > > > > > > need to be deprecated?     =20
-> > > > > >=20
-> > > > > > I think we can keep it - kind of like fdt_next_tag() this is a
-> > > > > > low-level function.  If you use it, you're opting in to having =
-to deal
-> > > > > > with tag invalidation.
-> > > > > >    =20
-> > > > > > > Those kind of functions return a pointer to the data of a pro=
-perty for modification
-> > > > > > > by the caller. We don't know if the caller will modify or not=
- the property.
-> > > > > > >=20
-> > > > > > > Without deprecated it we can change the function to
-> > > > > > > ---- 8< ----
-> > > > > > > struct fdt_property *fdt_get_property_by_offset_w(void *fdt,
-> > > > > > > 						  int offset,
-> > > > > > > 						  int *lenp)
-> > > > > > > {
-> > > > > > > 	int new_offset;
-> > > > > > >=20
-> > > > > > >         /*
-> > > > > > >          * The modification is goind to be done out of libfdt.
-> > > > > > >          * Unknown tags are removed (rules for modification w=
-hen unknown tags
-> > > > > > >          * are involved) but also known tags. Indeed, we cann=
-ot know if the
-> > > > > > >          * modification will have impacts on known tags
-> > > > > > >          */
-> > > > > > > 	new_offset =3D fdt_remove_all_tags_due_to_property_modificat=
-ion(fdt, offset);
-> > > > > > >=20
-> > > > > > > 	return (struct fdt_property *)(uintptr_t)
-> > > > > > > 		fdt_get_property_by_offset(fdt, new_offset, lenp);
-> > > > > > > }
-> > > > > > > ---- 8< ----
-> > > > > > >=20
-> > > > > > > The idea is to be conservative here also and consider that pr=
-operty data retrieved
-> > > > > > > for writing will be modified by the caller.
-> > > > > > >=20
-> > > > > > > Also, the offset used as parameter of fdt_get_property_by_off=
-set_w() is no more
-> > > > > > > valid after the call.
-> > > > > > >=20
-> > > > > > > Last point to have in mind, getting the node offset from the =
-property offset will
-> > > > > > > need to walk the tree from the beginning. It can be costly.  =
-   =20
-> > > > > >=20
-> > > > > > Right, that's what I was thinking of when I said this might not=
- be
-> > > > > > practical to implement.  It's doable in the common case where w=
-e alter
-> > > > > > properties by node offset + property name, but not when we use a
-> > > > > > property offset.  But the fact that this would change the offse=
-t of
-> > > > > > the property in queestion is a much bigger showstopper.
-> > > > > >    =20
-> > > > > > > > 6. Adding or deleting a property on a node invalidates all =
-unknown tags
-> > > > > > > >    on the node     =20
-> > > > > > >=20
-> > > > > > > Ok.
-> > > > > > >      =20
-> > > > > > > > 7. Adding or deleting a subnode invalidates all unknown tag=
-s on the
-> > > > > > > >    node     =20
-> > > > > > >=20
-> > > > > > > Ok.
-> > > > > > >      =20
-> > > > > > > > 8. Whenever a tag is invalidated and stripped, the overall =
-version
-> > > > > > > >    must be downgraded (to let clients know they can't count=
- on tags
-> > > > > > > >    being present)     =20
-> > > > > > >=20
-> > > > > > > Ok.
-> > > > > > >      =20
-> > > > > > > >=20
-> > > > > > > > Points (4)-(7) are all somewhat negotiable.  In particular,=
- I'm not
-> > > > > > > > sure how feasible (6) is to implement.     =20
-> > > > > > >=20
-> > > > > > > Well, this new proposal is more complex to implement than you=
-r first
-> > > > > > > proposal but it has a finer grain to handle unknown tags on m=
-odification.     =20
-> > > > > >=20
-> > > > > > Certainly - that's why I proposed the other one first :).
-> > > > > >    =20
-> > > > > > > I can try to implement something based on this new proposal. =
-    =20
-> > > > > >=20
-> > > > > > To be clear, I kind of prefer my first proposal still.  The que=
-stion
-> > > > > > is whether what the updated scheme buys (preserving more tags w=
-hen a
-> > > > > > bootloader makes minor writes) worth the added complexity of
-> > > > > > implementation.  You're better placed to answer that question t=
-han I
-> > > > > > am.   =20
+> > > > > This internal phandle value is updated during process_check() and=
+ so,
+> > > > > get_node_by_phandle() cannot give correct results before the
+> > > > > process_check() call.
 > > > > >=20
-> > > > > I would like to avoid bootloaders being blocking points and so:
-> > > > >  a) They should not failed if they encounter an unknown skippable=
- tag.
-> > > > >     We are in sync on this point.
+> > > > > Improve get_node_by_phandle() to look at node phandle properties =
+when
+> > > > > the internal phandle value is not valid.
 > > > > >=20
-> > > > >  b) They should preserve tags as much as possible.
-> > > > >     The goal is to allow following software components (probably =
-the Kernel)
-> > > > >     to handle new tags.
-> > > > >     This is the point where the right balance has be found.   =20
+> > > > > This allows to return a correct matching node even if process_che=
+ck()
+> > > > > was not called yet.   =20
 > > > >=20
-> > > > Right.  I understand why these are both desirable.  However (b) is
-> > > > pretty tricky, because of the question of invalidation.  It
-> > > > necessarily involves a tradeoff between how much can be preserved
-> > > > versus what sorts of information future tags can carry.
+> > > > The idea is sound - it's always been kind of clunky that we need the
+> > > > process_checks() pass to fill the phandles before we can use them.
+> > > > But, there's at least one significant catch:
+> > > >=20
+> > > > [Aside: you might notice the way it's done violates the principle I
+> > > >  stated elsewhere of avoiding structures where you must know where =
+you
+> > > >  are in the flow to know which parts are populated.  My type
+> > > >  discipline has improved since I first wrote this code :)]
+> > > >=20
+> > > > We need to gracefully handle the case of malformed phandle /
+> > > > linux,phandle properties; that's actually the reason for the weird
+> > > > placement of this in checks.c.  By treating it as a "check" we hand=
+le
+> > > > this case by failing the check.  Other checks that rely on phandles
+> > > > then have the 'explicit_phandles' check as a prereq so they don't n=
+eed
+> > > > to verify this again.  We can still report errors for other checks
+> > > > that don't rely on that (which is the whole point of the checks
+> > > > mechanism).
+> > > >=20
+> > > > That's not the only way to do it, of course, but we need something =
+to
+> > > > check for that error case.  Further notes on the code.
 > > > >  =20
-> > > > > Your first proposal is maybe too much aggressive on b). That's wh=
-y, even it
-> > > > > is more complex to implement I would prefer your last proposal (t=
-aking into
-> > > > > account the property offset issue) which can be summarize with th=
-e following
-> > > > > table:
+> > > > > With the recently introduced FDT_PROPDATA_HANDLE dtb tag, this wi=
+ll be
+> > > > > needed to update internal phandle references before the call to
+> > > > > process_check(). Indeed, this tag allows to identify phandles and
+> > > > > internal references need to be updated based on the phandle value=
+ before
+> > > > > the process_check() call.
 > > > > >=20
-> > > > >                       | existing prop | existing node (1)   | Dow=
-ngrade
-> > > > >                       | unknown tag   | unknown tag         | ver=
-sion (2)
-> > > > > ----------------------+---------------+---------------------+----=
--------
-> > > > > Modify a property (5) |    Remove     | Keep (3) 	    | Yes
-> > > > > Add a property        |    NA         | Remove              | Yes
-> > > > > Delete a property     |    Remove     | Remove              | Yes=
- (4)
-> > > > > Add a sub-node        |    NA         | Remove              | Yes
-> > > > > Delete a sub-node     |    NA         | Remove              | Yes
-> > > > > ----------------------+---------------+---------------------+----=
--------   =20
+> > > > > Signed-off-by: Herve Codina <herve.codina@bootlin.com>
+> > > > > ---
+> > > > >  livetree.c | 21 ++++++++++++++++++++-
+> > > > >  1 file changed, 20 insertions(+), 1 deletion(-)
+> > > > >=20
+> > > > > diff --git a/livetree.c b/livetree.c
+> > > > > index abe73de1..a9f8c5d2 100644
+> > > > > --- a/livetree.c
+> > > > > +++ b/livetree.c
+> > > > > @@ -628,16 +628,35 @@ struct node *get_node_by_label(struct node =
+*tree, const char *label)
+> > > > >  	return NULL;
+> > > > >  }
+> > > > > =20
+> > > > > +static cell_t get_node_phandle_existing(struct node *node)
+> > > > > +{
+> > > > > +	struct property *prop;
+> > > > > +
+> > > > > +	if (phandle_is_valid(node->phandle))
+> > > > > +		return node->phandle;
+> > > > > +
+> > > > > +	prop =3D get_property(node, "phandle");
+> > > > > +	if (!prop) {
+> > > > > +		prop =3D get_property(node, "linux,phandle");
+> > > > > +		if (!prop)
+> > > > > +			return 0;
+> > > > > +	}
+> > > > > +
+> > > > > +	return propval_cell(prop);   =20
 > > > >=20
-> > > > Great summary, thanks.
+> > > > In the case of a malformed property, this could SEGV. =20
+> > >=20
+> > > Ok, will update to
+> > > --- 8< ---
+> > > 	if (prop->val.len !=3D sizeof(cell_t))
+> > > 		return 0;
+> > >=20
+> > > 	return propval_cell(prop)
+> > > --- 8< ---
+> > >  =20
 > > > >  =20
-> > > > > (1) The existing node is the node were the property or sub-node i=
-nvolved
-> > > > >     are present. Not all nodes, not the parent node but the node =
-directly
-> > > > >     impacted by the modification.
-> > > > >=20
-> > > > > (2) We downgrade the version only if tag are removed. If no unkno=
-wn tags are
-> > > > >     involved (and so not removed), the version will not be be dow=
-ngraded.   =20
+> > > > > +}
+> > > > > +
+> > > > >  struct node *get_node_by_phandle(struct node *tree, cell_t phand=
+le)
+> > > > >  {
+> > > > >  	struct node *child, *node;
+> > > > > +	cell_t tree_phandle;
+> > > > > =20
+> > > > >  	if (!phandle_is_valid(phandle)) {
+> > > > >  		assert(generate_fixups);
+> > > > >  		return NULL;
+> > > > >  	}
+> > > > > =20
+> > > > > -	if (tree->phandle =3D=3D phandle) {
+> > > > > +	tree_phandle =3D get_node_phandle_existing(tree);   =20
 > > > >=20
-> > > > Sadly, that doesn't work.  We have to downgrade on property
-> > > > modification for the same reason we must downgrade on adding a
-> > > > property: it might be adding data that requires certain tags in the
-> > > > later version. =20
+> > > > This means that every time we search for a phandle, for every node
+> > > > scanned before the destination with no phandle, we do a full proper=
+ty
+> > > > scan to check that no, it still doesn't have a phandle.
+> > > >=20
+> > > > I don't care that much about dtc performance, but that's still a bit
+> > > > much to swallow.  I think we need to cache negative lookups to avoid
+> > > > that.  Happily, since there are two invalid phandle values this
+> > > > shouldn't be too hard.  We could, say, use tree->phandle =3D=3D 0 t=
+o mean
+> > > > we don't know if there's a phandle, and tree->phandle =3D=3D -1 to =
+mean
+> > > > we've scanned the properties and we know there isn't one.
+> > > >=20
+> > > > In fact, caching property lookups might be the better way to do thi=
+s.
+> > > > Rather than having an explicit pass where tree->phandle is populate=
+d,
+> > > > we could have get_node_by_phandle() cache its property scan (success
+> > > > or failure) in tree->phandle.
+> > > >=20
+> > > > I think that's a more elegant approach than the current one, but we=
+ do
+> > > > still need to handle the malformed property case. =20
 > > >=20
-> > > Oh yes, I missed that point.
+> > > Well, get_node_phandle_existing() can be improved:
+> > > ---- 8< ----
+> > > static cell_t get_node_phandle_existing(struct node *node)
+> > > {
+> > > 	cell_t phandle1, phandle2;
+> > > 	struct property *prop1, *prop2;
 > > >=20
-> > > (2) The version is always downgrade on any changes (modification, add=
-ition,
-> > >     deletion of a property or a sub-node) even if no tags are removed.
-> > >     Indeed the modification done (even a property or sub-node deletio=
-n) can
-> > >     requires certain tags in the later version.
-> > >     Downgrading the version on all changes is the way to state that t=
-he
-> > >     resulting dtb may be no more compliant with the later version. =
+> > > 	if (phandle_is_valid(node->phandle))
+> > > 		return node->phandle;
+> > > 	if (node->phandle =3D=3D ~0UL) {
+> > > 		/*
+> > > 		 * We've already looked at existing properties and no valid
+> > > 		 * phandle value were present. Avoid looking at them again
+> > > 		 * and just return the invalid phandle value.
+> > > 		 */
+> > > 		return 0;
+> > > 	}
+> > >=20
+> > > 	/* Try to get it from the 'phandle' property */
+> > > 	phandle1 =3D 0; /* Assume invalid */
+> > > 	prop1 =3D get_property(node, "phandle");
+> > > 	if (prop1) {
+> > > 		if (prop1->val.len =3D=3D sizeof(cell_t))
+> > > 			phandle1 =3D propval_cell(prop1); /* Well formed -> Get it */
+> > > 	}
+> > >=20
+> > > 	/* Try to get it from the 'linux,phandle' property */
+> > > 	phandle2 =3D 0; /* Assume invalid */
+> > > 	prop2 =3D get_property(node, "linux,phandle");
+> > > 	if (prop2) {
+> > > 		if (prop2->val.len =3D=3D sizeof(cell_t))
+> > > 			phandle2 =3D propval_cell(prop2); /* Well formed -> Get it */
+> > > 	}
+> > >=20
+> > > 	if (prop1 && prop2) {
+> > > 		/*
+> > > 		 * Both property are present. They values must be the same
+> > > 		 * and valid.
+> > > 		 */
+> > > 		if (phandle1 =3D=3D phandle2) && phandle_is_valid(phandle1)) {
+> > > 			/* Ok, Cache this correct phandle value and return it */
+> > > 			node->phandle =3D phandle1;
+> > > 			return phandle1;
+> > > 		}
+> > > 	} else if (prop1) {
+> > > 		/*
+> > > 		 * Only the 'phandle' property is present.
+> > > 		 * Check its value validity
+> > > 		 */
+> > > 		if (phandle_is_valid(phandle1)) {
+> > > 			/* Ok, Cache this correct phandle value and return it */
+> > > 			node->phandle =3D phandle1;
+> > > 			return phandle1;
+> > > 		}
+> > > 	} else if (prop2) {
+> > > 		/*
+> > > 		 * Only the 'linux,phandle' property is present.
+> > > 		 * Check its value validity
+> > > 		 */
+> > > 		if (phandle_is_valid(phandle2)) {
+> > > 			/* Ok, Cache this correct phandle value and return it */
+> > > 			node->phandle =3D phandle2;
+> > > 			return phandle2;
+> > > 		}
+> > > 	}
+> > >=20
+> > > 	/*
+> > > 	 * No valid phandle value were found. Cache this information and ret=
+urn
+> > > 	 * the invalid phandle value.
+> > > 	 */
+> > > 	node->phandle =3D=3D ~0UL;
+> > > 	return 0;
+> > > }
+> > > --- 8< ---
+> >=20
+> > That looks good to me.  But the "existing" in the name no longer says
+> > anything useful - this can be the standard way to get a node's
+> > phandle.  In fact it might be worth changing the name of the
+> > node->phandle field to make sure we don't have any stale users rather
+> > than going through the get_phandle() function.
+>=20
+> Ok, I will rename node->phandle to node->phandle_ and add a comment saying
+> that phandle_ field must not be accessed directly.
+
+You can even switch it back after you've checked there are no stray
+accesses to it.
+
+> Related to existing users, I can see check_explicit_phandles() available
+> in the checks.c file.
+>=20
+> check_explicit_phandles() could use the new get_node_phandle_exising() wi=
+th
+> the caching feature. The only problematic part will be
+> --- 8< ---
+> 	if (linux_phandle && phandle && (phandle !=3D linux_phandle))
+> 		FAIL(c, dti, node, "mismatching 'phandle' and 'linux,phandle'"
+> 		     " properties");
+> --- 8< ---
+>
+> Indeed, this check is done in get_node_phandle_existing() and the function
+> returns 0 (invalid phandle) when both properties are set with a different
+> value. A value other than 0 should be returned by get_node_phandle_existi=
+ng()
+> to identify that mismatching properties values.
+>=20
+> This should not be a big deal if we introduced a new invalid phandle valu=
+e:
+>   - 0:
+>     Invalid value. Can be returned by get_node_phandle_existing().
+>=20
+>   - ~0:
+>     Unresolved value (phandle value in properties) or value cached in=20
+>     phandle->node_ for "mismatch 'phandle' and 'linux,phandle' properties
+>     values". Can be returned by get_node_phandle_existing().
+>=20
+>   - (~0)-1:
+>     Invalid value in properties and or value cached in phandle->node_ for=
+ Invalid value.
+>     Will not be returned by get_node_phandle_existing().
+>     When this cached value is found, 0 will be returned.
+>
+> In phandle_is_valid(), those 3 values will be checked to determine if the=
+ phandle
+> value is valid or not.
+
+Alas, we can't do that.  Which phandle values are valid is long
+established from the IEEE1275 days, and we can't really change it.  I
+don't _know_ if there are existing trees out there using 0xfffffffe as
+a valid phandle, but there could be.
+
+*thinks*
+
+In some ways it would be elegant for get_node_phandle_existing() to
+report the various different error conditions separately, but I think
+the awkwardness of passing that information back to the checks is
+going to outweigh it.
+
+So, I think we're actually better off separating lookup of phandles
+=66rom validation.  So get_node_phandle_existing() (or whatever we call
+it) will return 0 if there's no valid phandle, whether that's simply
+because it's missing, or there's something malformed.  Separately
+check_explicit_phandles() will report specific types of malformed
+phandle properties.
+
+It does result in a little redudant logic, but I think it's the best
+overall approach for now.
+
+> Now last point, renaming get_node_phandle_existing().
+>=20
+> get_node_phandle() already exist. It get a phandle but also if the node d=
+oesn't
+> have a phandle, it allocate a new phandle value and set node "phandle" or
+> "linux, phandle" property to this allocated value.
+
+Ah, sorry, I misunderstood what the "existing" was referring to.
+
+> IHMO, get_node_phandle() should be renamed to set_node_phandle() and
+> get_node_phandle_existing() should be renamed to get_node_phandle().
+
+Right, the existing name is bad.  But let's go with
+get_or_assign_phandle() for the existing one and get_phandle() for the
+new one.  (The "node" added no useful information and this way they're
+two new names to reduce confusion).
+
+> Does all of these make sense?
+>=20
+> I so, I will try to implement that and maybe I will see other issue I mig=
+ht
+> have missed.
+>=20
+> Worth noting that if you're ok to rename get_node_phandle() to
+> set_node_phandle(), I will do it in a dedicated patch. Indeed, this will
+> ensure that get_node_phandle() has been renamed everywhere (compilation
+> without failure) and so I can safely rename get_node_phandle_existing() to
+> get_node_phandle() in a next patch.
+>=20
+> >=20
+> > > In get_node_by_phandle(), no change compared to my proposition and so=
+ the
+> > > full function is:
+> > > --- 8< ---
+> > > struct node *get_node_by_phandle(struct node *tree, cell_t phandle)
+> > > {
+> > >         struct node *child, *node;
+> > >         cell_t tree_phandle;
+> > >=20
+> > >         if (!phandle_is_valid(phandle)) {
+> > >                 assert(generate_fixups);
+> > >                 return NULL;
+> > >         }
+> > >=20
+> > >         tree_phandle =3D get_node_phandle_existing(tree);
+> > >         if (phandle_is_valid(tree_phandle) && tree_phandle =3D=3D pha=
+ndle) {
+> > >                 if (tree->deleted)
+> > >                         return NULL;
+> > >                 return tree;
+> > >         }
+> > >=20
+> > >         for_each_child(tree, child) {
+> > >                 node =3D get_node_by_phandle(child, phandle);
+> > >                 if (node)
+> > >                         return node;
+> > >         }
+> > >=20
+> > >         return NULL;
+> > > }
+> > > --- 8< ---
+> > >=20
+> > > Caching should work correctly without any other modification.
+> > >=20
+> > > I let you double-check on your side. Let me know about your opinion. =
 =20
 > >=20
-> > Probably wants some editing for clarity in the final version, but
-> > basically sounds good.
+> > Yes, I think that should work.
 > >=20
-> > > > > (3) Removing unknown tags in the node when a property is modified=
- will lead
-> > > > >     to the property offset change. Prefer avoid the property offs=
-et change
-> > > > >     and so keep node related unknown tags in that case.   =20
-> > > >=20
-> > > > Right, if we did that it would basically mean totally (and
-> > > > incompatibly) redesigning the libfdt interface.
-> > > >  =20
-> > > > > (4) The version is downgrade only if we remove some tags related =
-to the
-> > > > >     node. If we remove only tags related to the property we delet=
-e, there
-> > > > >     is no reason to downgrade the version.   =20
-> > > >=20
-> > > > Unlike (2), I'm not certain if this one is unsafe.  But I suspect it
-> > > > might be, and having it behave differently from case (2) seems
-> > > > confusing to me. =20
-> > >=20
-> > > Hum ok, let be conservative and remove the note (4).
-> > >=20
-> > > The updated note (2) handles all modification. On any changes with an=
-d without
-> > > tag removal, the version is downgraded. =20
-> >=20
-> > Ok.
-> >=20
-> > > > > (5) All property modifications done outside libfdt using directly=
- the
-> > > > >     property data pointer will not lead to any unknown tag remova=
-l.
-> > > > >    =20
-> > > > >     This point is for the usage of fdt_get_property_by_offset_w(),
-> > > > >     fdt_get_property_namelen_w(), fdt_get_property_w(),
-> > > > >     fdt_getprop_by_offset_w(), fdt_getprop_namelen_w(), fdt_getpr=
-op_w() and
-> > > > >     maybe other similar functions where the property is returned =
-writable
-> > > > >     for possible modification. 'modify a property' mentioned in t=
-he table
-> > > > >     is related to modification done using fdt_setprop_*() and fdt=
-_appendprop_*()
-> > > > >     function families.   =20
-> > > >=20
-> > > > Right.  "I know what I'm doing" is part of the implicit contract wh=
-en
-> > > > using those functions. =20
-> > >=20
-> > > Also this note (5) will be updated
-> > >=20
-> > > (5) All property modifications done outside libfdt using directly the
-> > >     property data pointer will not lead to any unknown tag removal nor
-> > >     a version downgrade. =20
-> >=20
-> > The idea's right, though I don't think that expresses it particularly
-> > well.  Not a priority right now, we can revise that later.
-> >=20
-> > > > > On your side, is all of that conservative enough to be used when =
-modification
-> > > > > involved unknown tags?   =20
-> > > >=20
-> > > > Not quite, as noted, but we might be able to get it there. =20
-> > >=20
-> > > Is it better? =20
-> >=20
-> > Yes, it is.
 >=20
-> Ok, I think we've reached an agreement :)
-
-I concur.
-
-> We have a new set of rules for handling "unknwon" tags on modification.
-> I will implement this set in the next iteration.
-
-Sounds good.  Let's hope there's not some showstopper inconsistency
-neither of us spotted yet.
+> Best regards,
+> Herv=E9
+>=20
 
 --=20
 David Gibson (he or they)	| I'll have my music baroque, and my code
@@ -478,24 +462,24 @@ david AT gibson.dropbear.id.au	| minimalist, thank you, not the other way
 				| around.
 http://www.ozlabs.org/~dgibson
 
---iFyX4dvPeieVf2AA
+--lpYmQE31+ktOK+HY
 Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmrgCwkACgkQzQJF27ox
-2GdRRxAAiFgBj9ZokIG27+Szw8NheNzVuWXhe5UJSZslprtCuWefJ+OKdwcp11w1
-/zDA3LqJF2ZFyL+x/jGI+k1j6fRcwR/imcb9RCN4FRTAV5gxPTOlHz1LVAQiluM9
-1D2gCIKwrD0Nx4S4nse3NxEPbihudzEBUrMFfv/r8O5ktPUdzsIapJE8yAX2obD5
-dkpMVlj0iHLe6DjY1zYhtkQTMRX8rjGJw5gusRFEdTkgCmD9BFwgeoLlMs8giYnM
-+a3dVJ5CxDCVV7GWgwiMycTupLm4PX1NJ40raqZHQgiiwjLYguU5PNupvuv6vrXI
-C05YBCn/MGvhRAx8xS67PiH6W9vzmrgSyzNyToUhJBbSVrPcb3TbO42/hLUDTWVI
-xR/zTkqQqMeIRPHcfMAaFBlPI3kRfNCcLrFWudkUdpmLUMv7SrC6gvD9MXEeckpJ
-dg1gDDuht+KvS5UnuTazbsuhjNWxcNmTEE0jQzWRqkLYAf51FXW+CfHAqGdFunlz
-Oh9Grl9lZHZ3Q26M4pi9ZhIAEs5/8Zgw9NZTVd4bmhz04DcaID1Ps2tTTWzZ0LJW
-ew52ZwXvd7c1HwtYKqzdQhMkQnIviivYbWZe1rgs9FSmhXioETKt4gMD/BMQkiXn
-KUSVyTrNw9Up7niTCaFuDsO+gCSCoX2sgyYL0WVfLXJ98J/lqsI=
-=E392
+iQIzBAABCgAdFiEEO+dNsU4E3yXUXRK2zQJF27ox2GcFAmrhYL8ACgkQzQJF27ox
+2Gc8xxAAm0qhmdEl/r4H+AvrqxTUYfa97hm7LpvCEusXFEcbb+KfKSxLCSb86ach
+wZIZXqPZ7aaOCqbbuJBs0LP7X3gjebYg73/p9c1OjCpNb+266VW5C+514bc1Hygz
+kW8o4X4dsrEnoIa35DJCu5c1JZ4tBrpRx8nyuL+D5+FtlMEiBgG5i1YZRwdcz4Lv
+bhfZdLg+FNNIoZ8ABdxjJ7TStPR6FMKtflPQPksZtg+btJxuXS4OccpdKlELtACl
+fECpqjQtlZu9IeW/bFAcreCTyMGNuqB/jhfMiDiIbDQSYOjrNRHUtz540aemulJ/
+j3pmz3DIKvNjiZ6MN2O1akxA5r0jKtaUGT7Xb1JEUTe/ekXbkH1FP4/4TdZnpMsw
+Rzniw0t0F8j5CS4MOC8g3u1NnHYzVUBG/qfm+BhJqXji42blouWaYuY/dCv28dR7
+Pn+HTc25lqa3ks2chBdgwG92NK8X1n4j1RXjwJ+leV68suF0tz7x27DcB6Z0YoFS
+6lkxOfaTTpP4z306AUo33l8buqNdmH7DY9jywMRNFJbITmPD7XFZxBsyI8hi1Ett
+EFPyKXOfw+p77UMFUUvHCK+WfCE8iz1wNnnb23VvTQYWczP5uQwCOfyYDt57Xuk5
+Ft29GU/GgbyDPNzGJDslgNKa6vFvMJKqIIC9plARkXiCpIDZtTI=
+=L/7v
 -----END PGP SIGNATURE-----
 
---iFyX4dvPeieVf2AA--
+--lpYmQE31+ktOK+HY--
