@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793176883;
-	b=qEQDr+WrNVqtY6K2Snt5CH3Xcwh3Za4Q8ruvDgCdIuF6GHlJci/L6WfuSPE7L+gVri1O
-	 UsV/EBmNvNeHdVAkL9lI/m4iJQ9K0efrRTPpdYsTWVtg3Jtdwj1/+qUd6RoDNc2/Gi/JH
-	 C4TVyDEbCbqBF/v33CZCEmpjMwKLiRCIgIiR34VJSeZR3yYq67uh7Eh6spYyd61pASiCC
-	 gpYPFyRFEHp806cfXTrB8YbTjXLhhPspuR6MTxlC38j48sIO8iYa9jnWGUlHyTF3jPOQm
-	 l25qwoAxPCJpQcU9S67uwj5voX/zewEfKOv+iKQHKQoHQRK+fNKoB5QcHbY09bk1bow==
+	t=1793318567;
+	b=WpBgv8c0tC8QFRdImEU3HG74eTAV2Qvs4QNJwYnlrQkjg0j+QirQMcTztiuaEfZbrYWB
+	 gX1NenLSfmFadfS2OCCTmlSTITsw8WM1AbjicX82AZxboszCGVk011OehPVCAmGmsqdmF
+	 WXB0FB/1M9SMcTbm5obIi5tpaI6RkCBpS17SqxsQLsqXL3l1pCrX5UmQusrhvoOr0OIhm
+	 Cuxa2gvEZ0ohtKvuXx6Ys3901x9IeLgTXLR9PIRpI8vTHwgKoiuSeuk2Ovuc7wFIF4VHO
+	 4mtUHYz6vT8Mtbm6iC1yU8HYshpWDahhS44Smzob7hft7db0hYN5v31RrKR4DaLCV3w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793176883;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793318567;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Date:From:To:
 	 Cc:Subject:Message-ID:In-Reply-To:References:Organization:X-Mailer:
 	 MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Last-TLS-Session-Version;
-	bh=JzDymCFq2m8GeSdsBCaxEaw3VPeIifTesv3xlvlZRsU=;
-	b=qaMTaGhXd6G7cz5qJZhjp7ELjAzDMDCFsTkFo/uUeUHFqzL6VaMQZK+dzxjgScUU3Srj
-	 SSXCAX/BBcfRUJJg6B4giKPG5z361WYme8dV9RpPeD+uDhtDS9Zpw2h6u2CJVMhKbBQxO
-	 pPNtWEpHkvsGc7u186j+xq1SKIW06YcVltS13qc/yRFWd7OhdoTqebkkfE8nZ4C5NQGkh
-	 9Bl07sLpj+3XUalYNo3jDSgZ2uGaLCdzK++URy2xNVgiERJFysz/bwnuiRD6qBQkhCs0L
-	 nGF1TyZLxfdzIIIUY2ALzO/av9/3y5WqxE1diLdDHZF8Rgo2wicdhv0mof84tePd9FA==
+	bh=EekVTKvOeeC7YsplvAwGdEYQ+UvW9EdugEoPsQ9stwE=;
+	b=pG7WirRb9BETfC0/76K2BarbSvDzwCE+PRXLZcpXIwHOM0NVMDy+5tB2YFg0Hl9yXhA9
+	 LoSd6SMHeoWP+qR5rsrfOQvtUJdhguVhyAUR8k8Fl4VKWKYH9Ca01efWVEej2jOI1Diss
+	 WGtUYLIucbjUCXk/S2QE2BlcQEZNzMTWAhVfizpUfUvR3nnuQuREcjSk0OsYoThzL0Nlr
+	 6SC6Z+U9J9Ck9BxTnyVcWEcmrwltjo0eL4fpClzbzRIHt/5f6rQfi+e5WO8axyb+MurHp
+	 eG86bGYGxk1tkRzsYOZqnNyj2jCB7X/UiUXFIqVVyY/7wkMIIkKWIhIEviBL/QkI7tQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Ds8tqWhZ;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=tFz8MHm1;
 	arc=none smtp.remote-ip=185.246.84.56
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8061C606A31D
-	for <devicetree-spec@vger.kernel.org>; Wed, 28 Oct 2026 08:41:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8061C606A31D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12CC5606A31F;
+	Fri, 30 Oct 2026 00:02:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 12CC5606A31F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Ds8tqWhZ
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=tFz8MHm1
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id CBF861A12CD;
-	Wed, 28 Oct 2026 08:41:19 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 5F16B1A1382;
+	Fri, 30 Oct 2026 00:02:43 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 9625560769;
-	Wed, 28 Oct 2026 08:41:19 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 520A6103290C7;
-	Wed, 28 Oct 2026 09:41:11 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 308106076A;
+	Fri, 30 Oct 2026 00:02:43 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 5DE84103287DA;
+	Fri, 30 Oct 2026 01:02:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793176878; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1793318557; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=JzDymCFq2m8GeSdsBCaxEaw3VPeIifTesv3xlvlZRsU=;
-	b=Ds8tqWhZvvYFmQ+UpQMgKqBwdgMFv9QoHA/ftwXysGUxeBcTFREOWKznS5/c87oSvnOHU4
-	jFYoM0ROX3OjPEL1iA2sz26jjx+UnRyS5ZxoYTZfwNVF2KDMZrv38/OTfn8bmp1HWBlSUR
-	GMvEQYPSS65vW3kcXoe7Ym/X9j11KtKDR3N1ZNfhL/RYlXpTR4yEk6nROGu7sTsCyNcG7E
-	Hb+DreDaSxkBpIhF/Tj75HwfqY1SSnuzMrC9iJeYT6JGYtOyF+V+wCwZc2zpKMTbuDfSam
-	O2kCKVOdIgXHF5i+ozcApN8ug2WMsKJDuVeiCqZSfwYRDlUwUZfXNHSEdup61g==
-Date: Wed, 28 Oct 2026 09:41:10 +0100
+	bh=EekVTKvOeeC7YsplvAwGdEYQ+UvW9EdugEoPsQ9stwE=;
+	b=tFz8MHm16YurNh2mIlIObooIYNsnhPs4cj3xNZ/bT4oXGpWFRAXR1ilWe2CvEdZ5RO1PPx
+	LhyyqVDYi2l57JpiH2vwFLCfaXHw1WSFaUPT8lQhGdQl5+SwHOV2+aID9eeHE9ifID4Wnj
+	3nA3XaC4DTitcDWgnFv0F4kTYhzVHCu9tp7Rw3UhlDTsz5lsgoYVNvWjROitSNF0IQtVh/
+	nwZ8O+4cpqdUpl+WWRjg2mHAW577eyN3bJelcrmO7CGqwExB5HkygFQiZKfppR0Di1N1vs
+	3MpxzOIQoXLBxqp3BTjtANZjLfu/lzlXJEwhgbHETx9IGMFJP8tXiYr2x7DDLg==
+Date: Fri, 30 Oct 2026 01:02:28 +0100
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>
 Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
@@ -62,17 +62,21 @@ Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
  devicetree-spec@vger.kernel.org, Hui Pu <hui.pu@gehealthcare.com>, Ian Ray
  <ian.ray@gehealthcare.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Subject: Re: [RFC PATCH v2 08/74] livetree: Improve get_node_by_phandle()
-Message-ID: <20261028094110.2a8133a2@bootlin.com>
-In-Reply-To: <auFgv_f0av-JxMjg@gractus.seuss>
-References: <20260826094950.1088288-1-herve.codina@bootlin.com>
-	<20260826094950.1088288-9-herve.codina@bootlin.com>
-	<atrTn_I_8O6q9QUW@gractus.seuss>
-	<20261023181533.0c44a57f@bootlin.com>
-	<at6t-l9XYYFfS48T@gractus.seuss>
-	<20261026125615.055e7214@bootlin.com>
-	<auFgv_f0av-JxMjg@gractus.seuss>
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, Frank Li
+ <Frank.Li@nxp.com>
+Subject: Re: [PATCH v3 15/15] Introduce v18 dtb version
+Message-ID: <20261030010228.34d9daca@bootlin.com>
+In-Reply-To: <20261021155923.55e48904@bootlin.com>
+References: <20260826083146.304291-1-herve.codina@bootlin.com>
+	<20260826083146.304291-16-herve.codina@bootlin.com>
+	<arDMhoNNXcPi81sR@gractus.seuss>
+	<20260925152157.511dc65c@bootlin.com>
+	<as3ZWBr3wRonkxXF@gractus.seuss>
+	<20261013190347.4f1d9b9d@bootlin.com>
+	<atGzdxETQZ9ovJFh@gractus.seuss>
+	<20261019151121.26d99f30@bootlin.com>
+	<atgi4rMsw5W6kKkS@gractus.seuss>
+	<20261021155923.55e48904@bootlin.com>
 Organization: Bootlin
 X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-redhat-linux-gnu)
 X-Mailing-List: devicetree-spec@vger.kernel.org
@@ -90,102 +94,78 @@ X-Last-TLS-Session-Version: TLSv1.3
 
 Hi David,
 
-On Wed, 28 Oct 2026 13:41:14 +1100
-David Gibson <david@gibson.dropbear.id.au> wrote:
+I know you are busy but if you could give me your opinion on this last
+message that would be greatly appreciated.
 
-...
+I've started to prepare the next iteration of the series adding support for
+"structured" tags and their definition need to be stable to move forward.
 
-> > 
-> > Ok, I will rename node->phandle to node->phandle_ and add a comment saying
-> > that phandle_ field must not be accessed directly.  
-> 
-> You can even switch it back after you've checked there are no stray
-> accesses to it.
+The question to answer to complete the definition of the "structured" tag
+format is: Should SAFE_SKIP bit be re-introduced?
 
-If I switch it back, why talking about renaming?
-
-Of course, I will do this renaming locally to be sure that I handle all
-users but in the end no commit will rename this field.
-
-> 
-> > Related to existing users, I can see check_explicit_phandles() available
-> > in the checks.c file.
-> > 
-> > check_explicit_phandles() could use the new get_node_phandle_exising() with
-> > the caching feature. The only problematic part will be
-> > --- 8< ---
-> > 	if (linux_phandle && phandle && (phandle != linux_phandle))
-> > 		FAIL(c, dti, node, "mismatching 'phandle' and 'linux,phandle'"
-> > 		     " properties");
-> > --- 8< ---
-> >
-> > Indeed, this check is done in get_node_phandle_existing() and the function
-> > returns 0 (invalid phandle) when both properties are set with a different
-> > value. A value other than 0 should be returned by get_node_phandle_existing()
-> > to identify that mismatching properties values.
-> > 
-> > This should not be a big deal if we introduced a new invalid phandle value:
-> >   - 0:
-> >     Invalid value. Can be returned by get_node_phandle_existing().
-> > 
-> >   - ~0:
-> >     Unresolved value (phandle value in properties) or value cached in 
-> >     phandle->node_ for "mismatch 'phandle' and 'linux,phandle' properties
-> >     values". Can be returned by get_node_phandle_existing().
-> > 
-> >   - (~0)-1:
-> >     Invalid value in properties and or value cached in phandle->node_ for Invalid value.
-> >     Will not be returned by get_node_phandle_existing().
-> >     When this cached value is found, 0 will be returned.
-> >
-> > In phandle_is_valid(), those 3 values will be checked to determine if the phandle
-> > value is valid or not.  
-> 
-> Alas, we can't do that.  Which phandle values are valid is long
-> established from the IEEE1275 days, and we can't really change it.  I
-> don't _know_ if there are existing trees out there using 0xfffffffe as
-> a valid phandle, but there could be.
-
-Ok.
-
-> 
-> *thinks*
-> 
-> In some ways it would be elegant for get_node_phandle_existing() to
-> report the various different error conditions separately, but I think
-> the awkwardness of passing that information back to the checks is
-> going to outweigh it.
-> 
-> So, I think we're actually better off separating lookup of phandles
-> from validation.  So get_node_phandle_existing() (or whatever we call
-> it) will return 0 if there's no valid phandle, whether that's simply
-> because it's missing, or there's something malformed.  Separately
-> check_explicit_phandles() will report specific types of malformed
-> phandle properties.
-> 
-> It does result in a little redudant logic, but I think it's the best
-> overall approach for now.
-
-Right. Ok on my side to have this redundancy.
-
-> 
-> > Now last point, renaming get_node_phandle_existing().
-> > 
-> > get_node_phandle() already exist. It get a phandle but also if the node doesn't
-> > have a phandle, it allocate a new phandle value and set node "phandle" or
-> > "linux, phandle" property to this allocated value.  
-> 
-> Ah, sorry, I misunderstood what the "existing" was referring to.
-> 
-> > IHMO, get_node_phandle() should be renamed to set_node_phandle() and
-> > get_node_phandle_existing() should be renamed to get_node_phandle().  
-> 
-> Right, the existing name is bad.  But let's go with
-> get_or_assign_phandle() for the existing one and get_phandle() for the
-> new one.  (The "node" added no useful information and this way they're
-> two new names to reduce confusion).
-
-Ok, will use those names.
+IMHO, it should.
 
 Best regards,
 Hervé
+
+On Wed, 21 Oct 2026 15:59:23 +0200
+Herve Codina <herve.codina@bootlin.com> wrote:
+
+> Hi David,
+> 
+> On Wed, 21 Oct 2026 13:26:49 +1100
+> David Gibson <david@gibson.dropbear.id.au> wrote:
+> 
+> > 
+> > Correct.  Btw, I know I suggested "skippable tag" as a term, but given
+> > how that gets kind of misleading in the case of writes, I'm coming to
+> > prefer the orignal "structured tag" term.  
+> 
+> Ok, no problem to switch back to "structured tag". On my side also, I prefer
+> this term.
+> 
+> Now I think that the bit indicating if a structured tag can be skip or not
+> should be kept. I know the we can use "old" tag format when a tag cannot be
+> skipped but I thing that using structured tags for those tags can lead to some
+> benefit. For instance, in fdt_tag_next() we can benefit of the data size
+> encoded for structured tags for all king of structured tags (skippable and not
+> skippable) and retrieve the next tag without the need for parsing data related
+> to a tag. When tag has a string as data, without the length we have to scan the
+> string to find its end. Of course we can add the length if the tag definition
+> but this is automatically implied if we use a structured tag.
+> 
+> So for structured tag, I can propose:
+> - bit 31: 1 to identify a structured tag
+> - bit 30: SAFE_SKIP bit (1 if we can skip, O otherwise)
+> - bit 29..24: Data lendth encoding
+>    0b000000: No data
+>    0b000001: 1 32bit word of data
+>    ...
+>    0b111110: 63 x 32bit words data
+>    0b111111: varlen encoding (1 32bit word added after the tag to encode the
+>            data length in bytes.
+> - bit 23..0: Tag id
+> 
+> Without the SAFE_SKIP bit, all structured tags must be skippable. IMHO, we
+> could regret this limitation in the future.
+> 
+> The cost of the SAFE_SKIP bit is not a lot. When we check to see if an
+> unkwown tag can be skipped, we are going to move from
+>   if (tag & 1<31)
+> to
+>   if ((tag & (1<31 | 1<<30)) == (1<31 | 1<<30))
+> 
+> IHMO, this is acceptable.
+> 
+> Of course, if the SAFE_SKIP bit is re-introduced, I will also re-add the test
+> checking that unknown structured tag that cannot be skipped leads to an error.
+> 
+> Best regards,
+> Hervé
+
+
+
+-- 
+Hervé Codina, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
