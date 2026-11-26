@@ -1,55 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795692197;
-	b=WEs9RQwFNxlfvenlRv4WV7FODDzmPL1SdYbB4tD+aDlUo/l1fBb388O81v1D8EcXZNQq
-	 msGgGM0u1RdJlVSOyps+Wfz5Xia1KZ1NIOyT1vxsnDs12LLcKawmPLRJME5/Pl3vkBTkc
-	 wcXfO6AjXrR6h+zC2dpu2ZB8kvTM6Av8Nn5lZHcPh7/s+UTHyQ1+LNDNilaWqoLgfN4l8
-	 Ss5RLe/x+rfDYlsMrnSfoJdGLf2CNBGd48YKLk7eLO+5PY7uwoaBKLNCmGpMpCsKZsuaV
-	 KnIR9+ADOE0knaWua7Kik3MRAZ2vPaIjmhB7EkzeF0URILaz9mA3QZSFUlSLIonaFBw==
+	t=1795692202;
+	b=P5HdZJ1Nejpz8QXxQr9XXwFF+2KOFr8121Qu/EWL6D/KMRsys+Sy1LTEfBHdhWYK/3sY
+	 9atICNZ86EZCxBJ32yN7mQ/59F77r5GwZxmVFfwxhihkFTyXGX94Ut8RU/cf3hLaa0dZT
+	 wfWpFEpTdcPDtbOb9Xys9JQ+AiLSGlQdTN6qsW8XRjLcydGwX7wWgeFEq9OxpaLSbMje0
+	 zprlLvTGx2KO1xGqhLOZUDQly7Wgm5Djvi5Tm7KI2/YcvV5sF61YMQDLHRAXbnfp31E5E
+	 u/o3hoKAXgmAuwq6Wd1iqATHWIj5Aw7T0zOSZMQzOYqogpGyh2DNtNh1/05fSWV3fiw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795692197;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795692202;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:To:Cc:
 	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=4czkjQp1yb4FQmISqfXg0AHOdrF4VgNaliAeYiiFirM=;
-	b=Y5g1fNH9KoDX9DIctbw3aXwetmBbLdGeqpw+3abz3HDhKj5W7f+p2F/87MYjYnTvwOJ3
-	 2hdKFmzIVDW4G61X3SL4xTIRWfhl1Jnzsb4Vm+8Eyvtn9FUM6bimY+cIR1O/S7VBpWxd3
-	 LRux7SkOR8OXEHu3JcAogN86q/RAJzZS+ZqNdShObPIDvG1+kdMH6GyAerkKgyH5le2ar
-	 RZBUmukOQLGxvgFkbdxVUmVFpzgQFyxe0R7LwI4KPdsWhJesinJGA8DZN6DAk6DJZCmMc
-	 6tVI3NXUgkQ0TEdgDSfrJhjyeEkbteps+yn4urr2QfuCcMxMhEogueE+U0c54pYTAQw==
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+	bh=aaXBpVUsxWks4S8WneNNxsk86aDtwl54ji96E5mQoy8=;
+	b=3gagXSYvbjS8S+DQ7e7oTA0UatLd++7lOd4MEH2ERH++iWchNyMr28ybKvy6NbnPphdA
+	 hKOLFW1T38ICDYANCj2jf5EsooTOeDPhH1j/EFtYjeBxI87OonmJTmBOmLEg5Ftpa6wy8
+	 rTKQaKI+Wf8Q1UeuYGthY3Gj3EGRLDQk1drYZI5i75OhMq8qAIyTw/NmsbcWBHJx9jYdP
+	 0+4BWfdICGQJy5LrqlrwpN9nFN05zHrhjKySWLj1hK/z+m67EWVxxC7slg4bH2eplKDZB
+	 bJF8Zez/B89MBJZjPWGNyXSJ5swueIkFftjxYCKhiryLNviB4kqVBQMS50AndF1oWRA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=glz6r9aN;
-	arc=none smtp.remote-ip=185.171.202.116
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=LAg0mqpY;
+	arc=none smtp.remote-ip=185.246.84.56
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD7E5606A335
-	for <devicetree-spec@vger.kernel.org>; Thu, 26 Nov 2026 11:23:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DD7E5606A335
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FA93606A33A
+	for <devicetree-spec@vger.kernel.org>; Thu, 26 Nov 2026 11:23:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6FA93606A33A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=glz6r9aN
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=LAg0mqpY
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id A4733C2B9C9;
-	Thu, 26 Nov 2026 11:23:23 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 1A4BB1A1810;
+	Thu, 26 Nov 2026 11:23:20 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 5E10060237;
-	Thu, 26 Nov 2026 11:23:15 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 70E8811E6B324;
-	Thu, 26 Nov 2026 12:23:10 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id DC6C860237;
+	Thu, 26 Nov 2026 11:23:19 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D901B11E6B367;
+	Thu, 26 Nov 2026 12:23:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1795692193; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1795692197; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=4czkjQp1yb4FQmISqfXg0AHOdrF4VgNaliAeYiiFirM=;
-	b=glz6r9aNXNyu3Nyt2zAPccT9CPBqx66ue77xuWU2ce6pTl1HD2zmYAFqwMx4rIqKGt40X2
-	9lslQ9weSuMqaYBQzbLY9v8Slf7x3tp05+kNqPrW5YrRGn0kpWxLSZoPatNyMhUKMTrIK6
-	PPIwb7HshfafRuJO1UJJlLGVykfh8GK/dLwSzhBJN+y8n198c7O0YkEyCjjuUuBCa9+07f
-	CYy014NSCa5HuZKbgdzz93AQVS7yWRz1j1X1IolnXNmOOgZ43pm6iKPsZO2jLSeKfeU0bW
-	lUlDNoAwFLu5WIQFUVdoMHRyta+mVbC9FHLySRNn0K10TKoA/EQDfAAHqeCdPA==
+	bh=aaXBpVUsxWks4S8WneNNxsk86aDtwl54ji96E5mQoy8=;
+	b=LAg0mqpYS037Dxvw5vx2d6QJjX48nCEylBE0GXhR6byM0pM5Yw68ajHjHIbxd7NCwUXhot
+	l7m/7pr6V6E2fUxIAgWUnXOk5RMf2EujBZiUVGGmSZeglSIo2Mw3Kfc0dbpwf/NEVF9poj
+	ylrFYPXxwFFMuHF1E8Y+vqjPFe/EuSLLqAKSQJ99RT+3GJ5nRIQ1XWajvxpZuSaaaex95O
+	HxSZ8oOjhH1dtcwZeAmC6udJJ2Z2nJl4uijJsxXeRSvNa9zE+ZAWdMvAsg5Rjagzc5IPRa
+	h3euDRZt0cexb9rV/xUZZd9Hib6H+6xAMTTEuyRNsuBiMlID2mAUXl9stJ4SlA==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -70,9 +70,9 @@ Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [PATCH v4 01/22] libfdt: Don't assume the root node is available at offset 0
-Date: Thu, 26 Nov 2026 12:22:18 +0100
-Message-ID: <20261126112239.636284-2-herve.codina@bootlin.com>
+Subject: [PATCH v4 02/22] tests: Add a test for fdt_root_offset()
+Date: Thu, 26 Nov 2026 12:22:19 +0100
+Message-ID: <20261126112239.636284-3-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261126112239.636284-1-herve.codina@bootlin.com>
 References: <20261126112239.636284-1-herve.codina@bootlin.com>
@@ -85,361 +85,207 @@ List-Unsubscribe: <mailto:devicetree-spec+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:devicetree-spec+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-In several places, libfdt assumes that the root offset (i.e. the first
-FDT_BEGIN_NODE tag) is present at offset 0 of the structure block.
+The fdt_root_offset() function has been recently introduced.
 
-This assumption is not correct. An FDT_NOP tag can be present at offset
-0 and this is a legitimate case. Indeed, the device-tree specification
-[0] defines the FDT_NOP tag as follows:
-
-   The FDT_NOP token will be ignored by any program parsing the device
-   tree. This token has no extra data; so it is followed immediately by
-   the next token, which can be any valid token. A property or node
-   definition in the tree can be overwritten with FDT_NOP tokens to
-   remove it from the tree without needing to move other sections of
-   the tree’s representation in the devicetree blob.
-
-Nothing specifies a location for this tag, so it has to be simply
-ignored. Having this tag at offset 0 doesn't make an exception; the tag
-has to be ignored.
-
-Introduce fdt_root_offset() in order to get the offset of the root node
-(first FDT_BEGIN_NODE tag) available in an FDT blob taking care of
-FDT_NOP tags.
-
-Use this function to get the root node offset instead of looking for
-this node at offset 0.
-
-[0] https://github.com/devicetree-org/devicetree-specification/blob/main/source/chapter5-flattened-format.rst?plain=1#L317
+Add a specific test for this function.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
-Reviewed-by: Frank Li <Frank.Li@nxp.com>
 ---
- libfdt/fdt.c             | 43 ++++++++++++++++++++++---
- libfdt/fdt_ro.c          | 69 ++++++++++++++++++++++++++++++----------
- libfdt/fdt_rw.c          |  8 ++++-
- libfdt/libfdt.h          | 15 ++++++++-
- libfdt/libfdt_internal.h |  2 +-
- libfdt/version.lds       |  1 +
- 6 files changed, 113 insertions(+), 25 deletions(-)
+ tests/.gitignore     |  1 +
+ tests/Makefile.tests |  4 ++--
+ tests/meson.build    |  2 ++
+ tests/root_offset.c  | 45 +++++++++++++++++++++++++++++++++++++++++
+ tests/run_tests.sh   |  3 +++
+ tests/treegen.c      | 48 ++++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 101 insertions(+), 2 deletions(-)
+ create mode 100644 tests/root_offset.c
 
-diff --git a/libfdt/fdt.c b/libfdt/fdt.c
-index c7cedfba..a5ec7f95 100644
---- a/libfdt/fdt.c
-+++ b/libfdt/fdt.c
-@@ -253,16 +253,49 @@ uint32_t fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
- 	return tag;
+diff --git a/tests/.gitignore b/tests/.gitignore
+index 69693129..914699be 100644
+--- a/tests/.gitignore
++++ b/tests/.gitignore
+@@ -56,6 +56,7 @@ tmp.*
+ /references
+ /relref_merge
+ /root_node
++/root_offset
+ /rw_tree1
+ /rw_oom
+ /set_name
+diff --git a/tests/Makefile.tests b/tests/Makefile.tests
+index dfb2fe52..f6b22fbd 100644
+--- a/tests/Makefile.tests
++++ b/tests/Makefile.tests
+@@ -1,5 +1,5 @@
+ LIB_TESTS_L = get_mem_rsv \
+-	root_node find_property subnode_offset path_offset \
++	root_node root_offset find_property subnode_offset path_offset \
+ 	get_name getprop get_prop_offset get_phandle \
+ 	get_path supernode_atdepth_offset parent_offset \
+ 	node_offset_by_prop_value node_offset_by_phandle \
+@@ -44,7 +44,7 @@ TESTS = $(LIB_TESTS) $(DL_LIB_TESTS)
+ TESTS_TREES_L = test_tree1.dtb bad_node_char.dtb bad_node_format.dtb \
+ 	bad_prop_char.dtb ovf_size_strings.dtb truncated_property.dtb \
+ 	truncated_string.dtb truncated_memrsv.dtb unterminated_memrsv.dtb \
+-	two_roots.dtb named_root.dtb bad_proplen.dtb
++	two_roots.dtb named_root.dtb root_offset_12.dtb bad_proplen.dtb
+ TESTS_TREES = $(TESTS_TREES_L:%=$(TESTS_PREFIX)%)
+ 
+ TESTS_TARGETS = $(TESTS) $(TESTS_TREES)
+diff --git a/tests/meson.build b/tests/meson.build
+index 97fb15a6..3d16ae23 100644
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -17,6 +17,7 @@ treegen_dtb = custom_target(
+     'unterminated_memrsv.dtb',
+     'two_roots.dtb',
+     'named_root.dtb',
++    'root_offset_12.dtb',
+     'bad_proplen.dtb',
+   ]
+ )
+@@ -76,6 +77,7 @@ tests = [
+   'references',
+   'relref_merge',
+   'root_node',
++  'root_offset',
+   'rw_oom',
+   'rw_tree1',
+   'set_name',
+diff --git a/tests/root_offset.c b/tests/root_offset.c
+new file mode 100644
+index 00000000..029f84b6
+--- /dev/null
++++ b/tests/root_offset.c
+@@ -0,0 +1,45 @@
++// SPDX-License-Identifier: LGPL-2.1-or-later
++/*
++ * libfdt - Flat Device Tree manipulation
++ *	Basic testcase for fdt_root_offset()
++ *
++ * Copyright (C) 2026 Bootlin.
++ *
++ * Authors:
++ *   Herve Codina <herve.codina@bootlin.com>
++ */
++
++#include <stdlib.h>
++#include <stdio.h>
++#include <string.h>
++#include <stdint.h>
++
++#include <libfdt.h>
++
++#include "tests.h"
++#include "testdata.h"
++
++int main(int argc, char *argv[])
++{
++	int expected_root_offset;
++	int root_offset;
++	void *fdt;
++
++	if (argc != 3)
++		CONFIG("Usage: %s <expected root offset> <dtb file>", argv[0]);
++
++	test_init(argc, argv);
++	expected_root_offset = strtol(argv[1], NULL, 0);
++	fdt = load_blob(argv[2]);
++
++	root_offset = fdt_root_offset(fdt);
++	if (root_offset < 0)
++		FAIL("fdt_root_offset() fails (%d - %s)",
++		     root_offset, fdt_strerror(root_offset));
++
++	if (root_offset != expected_root_offset)
++		FAIL("fdt_root_offset() returns %d, expected %d",
++		     root_offset, expected_root_offset);
++
++	PASS();
++}
+diff --git a/tests/run_tests.sh b/tests/run_tests.sh
+index 1d3e79ac..65ea5894 100755
+--- a/tests/run_tests.sh
++++ b/tests/run_tests.sh
+@@ -435,6 +435,9 @@ check_tests () {
+ ALL_LAYOUTS="mts mst tms tsm smt stm"
+ 
+ libfdt_tests () {
++    run_test root_offset 0 test_tree1.dtb
++    run_test root_offset 12 root_offset_12.dtb
++
+     tree1_tests test_tree1.dtb
+ 
+     run_dtc_test -I dts -O dtb -o addresses.test.dtb "$SRCDIR/addresses.dts"
+diff --git a/tests/treegen.c b/tests/treegen.c
+index 3e7a6f24..c9bf5711 100644
+--- a/tests/treegen.c
++++ b/tests/treegen.c
+@@ -701,6 +701,53 @@ static struct buf make_named_root(void)
+ 	return b;
  }
  
--int fdt_check_node_offset_(const void *fdt, int offset)
-+int fdt_root_offset(const void *fdt)
- {
-+	int nextoffset = 0;
-+	int offset;
-+	uint32_t tag;
++/* Tree with the root node at the offset 12 */
++static struct buf make_root_offset_12(void)
++{
++	struct buf b = buf_init();
++	size_t hdr;
++	size_t p_int, p_sn_int;
 +
-+	do {
-+		offset = nextoffset;
-+		tag = fdt_next_tag(fdt, offset, &nextoffset);
-+		switch (tag) {
-+		case FDT_END_NODE:
-+		case FDT_PROP:
-+			return -FDT_ERR_BADSTRUCTURE;
++	hdr = emit_fdt_header(&b);
++	emit_align(&b, 8);
 +
-+		case FDT_BEGIN_NODE:
-+			return offset;
++	emit_rsvmap_empty(&b, hdr);
++	emit_rsvmap_empty(&b, hdr);
 +
-+		default:
-+			break;
-+		}
-+	} while (tag != FDT_END);
++	{
++		size_t ss = start_block(&b);
 +
-+	return (nextoffset < 0) ? nextoffset : -FDT_ERR_BADSTRUCTURE;
++		emit_u32(&b, FDT_NOP);
++		emit_u32(&b, FDT_NOP);
++		emit_u32(&b, FDT_NOP);
++
++		emit_begin_node(&b, "");
++			p_int = emit_prop_u32(&b, 0, 0x1);
++
++			emit_begin_node(&b, "subnode");
++				p_sn_int = emit_prop_u32(&b, 0, 0x2);
++			emit_end_node(&b);
++		emit_end_node(&b);
++
++		finish_struct_block(&b, hdr, ss);
++	}
++
++	{
++		size_t strs = start_block(&b);
++		size_t s;
++
++		s = emit_string(&b, "prop-int");
++		fill_prop_name(&b, strs, p_int, s);
++		fill_prop_name(&b, strs, p_sn_int, s);
++
++		finish_strings_block(&b, hdr, strs);
++	}
++
++	finish_totalsize(&b, hdr);
++
++	return b;
 +}
 +
-+int fdt_check_node_offset_(const void *fdt, int *offset)
-+{
-+	int nextoffset;
-+
- 	if (!can_assume(VALID_INPUT)
--	    && ((offset < 0) || (offset % FDT_TAGSIZE)))
-+	    && ((*offset < 0) || (*offset % FDT_TAGSIZE)))
- 		return -FDT_ERR_BADOFFSET;
- 
--	if (fdt_next_tag(fdt, offset, &offset) != FDT_BEGIN_NODE)
-+	if (*offset == 0) {
-+		*offset = fdt_root_offset(fdt);
-+		if (*offset < 0)
-+			return *offset;
-+	}
-+
-+	if (fdt_next_tag(fdt, *offset, &nextoffset) != FDT_BEGIN_NODE)
- 		return -FDT_ERR_BADOFFSET;
- 
--	return offset;
-+	return nextoffset;
- }
- 
- int fdt_check_prop_offset_(const void *fdt, int offset)
-@@ -283,7 +316,7 @@ int fdt_next_node(const void *fdt, int offset, int *depth)
- 	uint32_t tag;
- 
- 	if (offset >= 0)
--		if ((nextoffset = fdt_check_node_offset_(fdt, offset)) < 0)
-+		if ((nextoffset = fdt_check_node_offset_(fdt, &offset)) < 0)
- 			return nextoffset;
- 
- 	do {
-diff --git a/libfdt/fdt_ro.c b/libfdt/fdt_ro.c
-index 05903e39..1a4b3aec 100644
---- a/libfdt/fdt_ro.c
-+++ b/libfdt/fdt_ro.c
-@@ -291,7 +291,7 @@ int fdt_path_offset_namelen(const void *fdt, const char *path, int namelen)
- 		while (*p == '/') {
- 			p++;
- 			if (p == end)
--				return offset;
-+				goto terminate;
- 		}
- 		q = memchr(p, '/', end - p);
- 		if (! q)
-@@ -304,7 +304,13 @@ int fdt_path_offset_namelen(const void *fdt, const char *path, int namelen)
- 		p = q;
- 	}
- 
--	return offset;
-+terminate:
-+	/*
-+	 * Return a single canonical offset for the root node: if the path
-+	 * resolved to offset 0 but the blob has FDT_NOP tags before the root,
-+	 * report the real root offset instead.
-+	 */
-+	return offset ? offset : fdt_root_offset(fdt);
- }
- 
- int fdt_path_offset(const void *fdt, const char *path)
-@@ -314,14 +320,17 @@ int fdt_path_offset(const void *fdt, const char *path)
- 
- const char *fdt_get_name(const void *fdt, int nodeoffset, int *len)
+ static struct buf make_bad_proplen(void)
  {
--	const struct fdt_node_header *nh = fdt_offset_ptr_(fdt, nodeoffset);
-+	const struct fdt_node_header *nh;
- 	const char *nameptr;
- 	int err;
+ 	struct buf b = buf_init();
+@@ -751,6 +798,7 @@ static struct {
+ 	TREE(unterminated_memrsv),
+ 	TREE(two_roots),
+ 	TREE(named_root),
++	TREE(root_offset_12),
+ 	TREE(bad_proplen),
+ };
  
--	if (!can_assume(VALID_DTB) && (((err = fdt_ro_probe_(fdt)) < 0)
--	    || ((err = fdt_check_node_offset_(fdt, nodeoffset)) < 0)))
--			goto fail;
-+	if (!can_assume(VALID_DTB) && (err = fdt_ro_probe_(fdt)) < 0)
-+		goto fail;
-+
-+	if ((err = fdt_check_node_offset_(fdt, &nodeoffset)) < 0)
-+		goto fail;
- 
-+	nh = fdt_offset_ptr_(fdt, nodeoffset);
- 	nameptr = nh->name;
- 
- 	if (!can_assume(LATEST) && fdt_version(fdt) < 0x10) {
-@@ -354,7 +363,7 @@ int fdt_first_property_offset(const void *fdt, int nodeoffset)
- {
- 	int offset;
- 
--	if ((offset = fdt_check_node_offset_(fdt, nodeoffset)) < 0)
-+	if ((offset = fdt_check_node_offset_(fdt, &nodeoffset)) < 0)
- 		return offset;
- 
- 	return nextprop_(fdt, offset);
-@@ -584,6 +593,7 @@ int fdt_get_path(const void *fdt, int nodeoffset, char *buf, int buflen)
- {
- 	int pdepth = 0, p = 0;
- 	int offset, depth, namelen, err;
-+	int root_offset;
- 	const char *name;
- 
- 	FDT_RO_PROBE(fdt);
-@@ -592,10 +602,17 @@ int fdt_get_path(const void *fdt, int nodeoffset, char *buf, int buflen)
- 		return -FDT_ERR_NOSPACE;
- 
- 	if (!can_assume(VALID_INPUT)
--	    && ((err = fdt_check_node_offset_(fdt, nodeoffset)) < 0))
-+	    && ((err = fdt_check_node_offset_(fdt, &nodeoffset)) < 0))
- 		return err;
- 
--	for (offset = 0, depth = 0;
-+	root_offset = fdt_root_offset(fdt);
-+	if (root_offset < 0)
-+		return root_offset;
-+
-+	if (!nodeoffset)
-+		nodeoffset = root_offset;
-+
-+	for (offset = root_offset, depth = 0;
- 	     (offset >= 0) && (depth >= 0) && (offset <= nodeoffset);
- 	     offset = fdt_next_node(fdt, offset, &depth)) {
- 		while (pdepth > depth) {
-@@ -641,13 +658,21 @@ int fdt_supernode_atdepth_offset(const void *fdt, int nodeoffset,
- {
- 	int offset, depth;
- 	int supernodeoffset = -FDT_ERR_INTERNAL;
-+	int root_offset;
- 
- 	FDT_RO_PROBE(fdt);
- 
- 	if (supernodedepth < 0)
- 		return -FDT_ERR_NOTFOUND;
- 
--	for (offset = 0, depth = 0;
-+	root_offset = fdt_root_offset(fdt);
-+	if (root_offset < 0)
-+		return root_offset;
-+
-+	if (!nodeoffset)
-+		nodeoffset = root_offset;
-+
-+	for (offset = root_offset, depth = 0;
- 	     (offset >= 0) && (offset <= nodeoffset);
- 	     offset = fdt_next_node(fdt, offset, &depth)) {
- 		if (depth == supernodedepth)
-@@ -677,12 +702,15 @@ int fdt_supernode_atdepth_offset(const void *fdt, int nodeoffset,
- int fdt_node_depth(const void *fdt, int nodeoffset)
- {
- 	int nodedepth;
--	int err;
-+	int offset;
-+
-+	offset = fdt_supernode_atdepth_offset(fdt, nodeoffset, 0, &nodedepth);
-+	if (offset < 0)
-+		return offset;
-+
-+	if (!can_assume(LIBFDT_FLAWLESS) && offset != fdt_root_offset(fdt))
-+		return -FDT_ERR_INTERNAL;
- 
--	err = fdt_supernode_atdepth_offset(fdt, nodeoffset, 0, &nodedepth);
--	if (err)
--		return (can_assume(LIBFDT_FLAWLESS) || err < 0) ? err :
--			-FDT_ERR_INTERNAL;
- 	return nodedepth;
- }
- 
-@@ -690,13 +718,20 @@ int fdt_parent_offset(const void *fdt, int nodeoffset)
- {
- #if FDT_PARENT_MAX_DEPTH
- 	int supernode[FDT_PARENT_MAX_DEPTH];
--	int offset, depth;
-+	int root_offset, offset, depth;
- #endif
- 	int nodedepth;
- 
- #if FDT_PARENT_MAX_DEPTH
- 	FDT_RO_PROBE(fdt);
- 
-+	root_offset = fdt_root_offset(fdt);
-+	if (root_offset < 0)
-+		return root_offset;
-+
-+	if (!nodeoffset)
-+		nodeoffset = root_offset;
-+
- 	/*
- 	 * Walk the tree once, remembering the most recent node seen at each
- 	 * depth. On reaching the target node, its parent is the last node
-@@ -708,7 +743,7 @@ int fdt_parent_offset(const void *fdt, int nodeoffset)
- 	 * happens when nodeoffset does not name a node. Fall back in that
- 	 * case, so that the checks below reject it
- 	 */
--	for (offset = 0, depth = 0;
-+	for (offset = root_offset, depth = 0;
- 	     offset >= 0 && offset <= nodeoffset;
- 	     offset = fdt_next_node(fdt, offset, &depth)) {
- 		if (depth < 0)
-diff --git a/libfdt/fdt_rw.c b/libfdt/fdt_rw.c
-index 1f2c56f4..ee1e94e6 100644
---- a/libfdt/fdt_rw.c
-+++ b/libfdt/fdt_rw.c
-@@ -226,7 +226,7 @@ static int fdt_add_property_(void *fdt, int nodeoffset, const char *name,
- 	int err;
- 	int allocated;
- 
--	if ((nextoffset = fdt_check_node_offset_(fdt, nodeoffset)) < 0)
-+	if ((nextoffset = fdt_check_node_offset_(fdt, &nodeoffset)) < 0)
- 		return nextoffset;
- 
- 	namestroff = fdt_find_add_string_(fdt, name, namelen, &allocated);
-@@ -390,6 +390,12 @@ int fdt_add_subnode_namelen(void *fdt, int parentoffset,
- 
- 	FDT_RW_PROBE(fdt);
- 
-+	if (!parentoffset) {
-+		parentoffset = fdt_root_offset(fdt);
-+		if (parentoffset < 0)
-+			return parentoffset;
-+	}
-+
- 	offset = fdt_subnode_offset_namelen(fdt, parentoffset, name, namelen);
- 	if (offset >= 0)
- 		return -FDT_ERR_EXISTS;
-diff --git a/libfdt/libfdt.h b/libfdt/libfdt.h
-index c69a18ed..7a1915a5 100644
---- a/libfdt/libfdt.h
-+++ b/libfdt/libfdt.h
-@@ -503,6 +503,19 @@ int fdt_num_mem_rsv(const void *fdt);
-  */
- int fdt_get_mem_rsv(const void *fdt, int n, uint64_t *address, uint64_t *size);
- 
-+/**
-+ * fdt_root_offset - Get the offset of the root node
-+ * @fdt: pointer to the device tree blob
-+ *
-+ * The root node can be located after the offset 0. Indeed FDT_NOP tags can be
-+ * present at offset 0. fdt_root_offset() takes care of those possible FDT_NOP
-+ * tags.
-+ *
-+ * returns: offset of the root node or negative libfdt error value otherwise
-+ */
-+int fdt_root_offset(const void *fdt);
-+
-+
- /**
-  * fdt_subnode_offset_namelen - find a subnode based on substring
-  * @fdt: pointer to the device tree blob
-@@ -1025,7 +1038,7 @@ int fdt_get_path(const void *fdt, int nodeoffset, char *buf, int buflen);
-  * at a specific depth from the root (where the root itself has depth
-  * 0, its immediate subnodes depth 1 and so forth).  So
-  *	fdt_supernode_atdepth_offset(fdt, nodeoffset, 0, NULL);
-- * will always return 0, the offset of the root node.  If the node at
-+ * will always return the offset of the root node.  If the node at
-  * nodeoffset has depth D, then:
-  *	fdt_supernode_atdepth_offset(fdt, nodeoffset, D, NULL);
-  * will return nodeoffset itself.
-diff --git a/libfdt/libfdt_internal.h b/libfdt/libfdt_internal.h
-index eefea2a3..8df9ffba 100644
---- a/libfdt/libfdt_internal.h
-+++ b/libfdt/libfdt_internal.h
-@@ -20,7 +20,7 @@ int32_t fdt_ro_probe_(const void *fdt);
- 		}							\
- 	}
- 
--int fdt_check_node_offset_(const void *fdt, int offset);
-+int fdt_check_node_offset_(const void *fdt, int *offset);
- int fdt_check_prop_offset_(const void *fdt, int offset);
- 
- const char *fdt_find_string_len_(const char *strtab, int tabsize, const char *s,
-diff --git a/libfdt/version.lds b/libfdt/version.lds
-index cbfef546..d0b71669 100644
---- a/libfdt/version.lds
-+++ b/libfdt/version.lds
-@@ -7,6 +7,7 @@ LIBFDT_1.2 {
- 		fdt_string;
- 		fdt_num_mem_rsv;
- 		fdt_get_mem_rsv;
-+		fdt_root_offset;
- 		fdt_subnode_offset_namelen;
- 		fdt_subnode_offset;
- 		fdt_path_offset_namelen;
 -- 
 2.56.1
 
