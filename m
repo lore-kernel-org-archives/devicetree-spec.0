@@ -1,55 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795692209;
-	b=szKKhL8bj5LWks4FD6ReY6V4m83SoposGjwy86pMV/WnAIWoovA1VfcP3sTXZyH4Gb+r
-	 urNyH/Qw+/k6RXRyeYELEHbmFUl+RilFw7GSnfeF6lwX2Md4AmtwXwYxGBu5fpk63kCy0
-	 w2hMqCKZHtbSx20DUOb5wj7z/EotWCF4GcJ9aiRqhwLXheGXbycnR1UXmUMVFZyCxjQZU
-	 Af9omuSjz/kQwXTUD/qfu+fZtWG+txtFL0TrHMnA53UksNz1wzL4qzrcpVO3VGPuOZ0Ad
-	 KxaRL+//vl3LN6U3zjTtOtkBgVnngF70LR6wGv2s/yMzk1lJllwPVx1t87HLO1nNjqA==
+	t=1795692212;
+	b=V4w7/ItdwzURaNBPZvQoIuQZ6U7ocWPfnokkfbLAtMXDX8QXWp+GEurF6byYJD33pNpd
+	 nl2tuEIHtNN8t18vbVS8IOAQMZdBKKljpz4oeEV32m44Bqrxeul7bj2OOpr9xhzjmSlUv
+	 qCnoAIF9vOimDe0El+T+Er3bBmleXW/2Pr7XznPxhqzJjXioaUe0gYrIQFf2a3tUkhHkv
+	 2+azd+gGLZi4ye9vwu9k6X0HgJ2DwPMSFhe4iEo6y0rI7txZ8aDDUTKxH+VTQ/av0BTqM
+	 JJZzfeAHzHWAZopx80S9zsWdo9dcfRvEeGvw32bQRellzLwzywrm9nc9/dokhMgrdHw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795692209;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795692212;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:To:Cc:
 	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=7vXlSRXuLLmD/e6VWvr8dD+6KNmhy5l5OvwMf0QWBaA=;
-	b=jVbaPa2+7SQVqhvZjg4QD/zIMuqs5+vneyfHb+B3e/VfRaBDdxE4Y7XwDuuh0OSSm47V
-	 qVGnE92Js+Cf0W+ZmteyiKPBDn/TKosIpQc8n9fXerykgHELFc+TxeB7D0o0Yf/mhSNHo
-	 wbfW3nk7U30RmGBNuika8OSJWa3sI1l0/BLOjZYzrHF8HGgJSQR/HpYK8TNcctIvUToez
-	 dlXzXseO/8VFycpdow9WkP3r0tlu4Gkg1MXBwbFNFUjY6Nc3uqn1jz27Cn58WsE8Si+I6
-	 RCvS8IXk1e4oRUoJgumpQ0EQgSmpEd3KKlieuM8zz1cFgXowH39sZht7a2ERi1fVNPg==
+	bh=IAYrY00zEa8fJNaul9FWej9b698lYsbtVQJkZQbyH1U=;
+	b=4jq7Aas4VlY5K0iWLJc58wLt/uR2cNDAuoUZDzaWPBLAv28rHhCj14BJKRbInDYw8adH
+	 AEEIdul95PjDufy/kfQjwd/wvVvoThVZTa+A9iOfyA3m6qNSg19t35Ndmqc2KUZXYR/JV
+	 ZpufFbXB5GqTBrdiUVS7oJa77Mp9vHE+y/mdlzIEO9+iyZYEf+XRhddqBd7ZHyeUMJlgE
+	 AdB4wZmbaB/0L7u8Ls+TUDJPJJw31Z3m/CSG5ViyM0mCVL6/LFtzbw3vcD+wNGvdsOWcg
+	 KWnvnAUc6HTPHHr6SFHVXmm/3hque5Cm9N4Ml9MkF14ft7oQeMYqVi8nPdSa/C9A3kQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=pWvlthHI;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Grvo6Qvw;
 	arc=none smtp.remote-ip=185.171.202.116
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B692606A6B7
-	for <devicetree-spec@vger.kernel.org>; Thu, 26 Nov 2026 11:23:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8B692606A6B7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92DFF606A332;
+	Thu, 26 Nov 2026 11:23:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 92DFF606A332
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=pWvlthHI
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Grvo6Qvw
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 6BD81C2B9C7;
-	Thu, 26 Nov 2026 11:23:35 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 6C7B3C2B9C9;
+	Thu, 26 Nov 2026 11:23:38 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 218E660237;
-	Thu, 26 Nov 2026 11:23:27 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 7E04B11E6B361;
-	Thu, 26 Nov 2026 12:23:22 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 2762B60237;
+	Thu, 26 Nov 2026 11:23:30 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C8AF311E6B363;
+	Thu, 26 Nov 2026 12:23:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1795692205; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1795692208; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=7vXlSRXuLLmD/e6VWvr8dD+6KNmhy5l5OvwMf0QWBaA=;
-	b=pWvlthHIjB2HS9ck1O98NTeJGisl7Hdxjnr0itRStgV0sngcKMyTEFtYQy+3M3rebr1DNu
-	pldS1qVHYnn0a84rAm6M71dNt5QjBaxV7QIojS1YbBzZFXO3eCXVNo+UhNq3lH+J5PTTlP
-	j63/uOODSCWofxoblLbrn/YLxztlvvn0JKimnFUPVujsZkGOgZi3x/GVBybnBnGM8kzynn
-	2ueMZUxEkbfynuA+7w+lXft+0Pz6xKAmVkEey/HAMQKyuTsUxnXCK7irhgrZO0db+Fk/ot
-	R5+oEg5kuwpZMP74eOrjswdrg1UgtDKTMWmO65+oz4DGsH115KRA6Z8DcoPdOw==
+	bh=IAYrY00zEa8fJNaul9FWej9b698lYsbtVQJkZQbyH1U=;
+	b=Grvo6Qvw13/wH2ChMXTnAqTxAZa1ZR40jzEXxwaaBd61ufdfhwNileelf1HvFRW55vU0Gu
+	P30AUlgR/UphrIPYdYxdLUF3z+YQJUWPAM1I2akEWnvqCodj1Da/dD62IB9EdGygrxBSk4
+	cGQlq7Z2PsonrPKiOEcke8UQoIRGZuYF2/sUClkqnfIX3lbzeklKEXHwb5YU7nIddRRuRc
+	ztGjy6oV21MgW7skj/ZgXClfXLFAIpRiSdbsZwsq7gR7Sr97dyUHBN+uCDoEbrinYv1LYv
+	FmdzoVBqAeZEyVxcLMI4s0wCJC1z+lrs6PzDQY1JlTUNH8l+ENwvk6N40vwREA==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -70,9 +70,9 @@ Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [PATCH v4 04/22] tests/nopulate: Add an FDT_NOP before the root node
-Date: Thu, 26 Nov 2026 12:22:21 +0100
-Message-ID: <20261126112239.636284-5-herve.codina@bootlin.com>
+Subject: [PATCH v4 05/22] tests: dtbs_equal_ordered: Add --noskip-nop option
+Date: Thu, 26 Nov 2026 12:22:22 +0100
+Message-ID: <20261126112239.636284-6-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261126112239.636284-1-herve.codina@bootlin.com>
 References: <20261126112239.636284-1-herve.codina@bootlin.com>
@@ -88,35 +88,98 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-An FDT_NOP tag can be present at offset 0 and so before the root node.
-This is a legitimate case.
+dtbs_equal_ordered skips FDT_NOP tags by default when it compares dtbs.
 
-The nopulate tool adds an FDT_NOP tag after each tag encountered but it
-doesn't add an FDT_NOP tag at offset 0.
-
-Improve nopulate to fix this gap and add an FDT_NOP tag at offset 0.
+Add an option to override this behavior and take into account FDT_NOP
+tags in dtbs comparison.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
-Reviewed-by: David Gibson <david@gibson.dropbear.id.au>
 ---
- tests/nopulate.c | 3 +++
- 1 file changed, 3 insertions(+)
+ tests/dtbs_equal_ordered.c | 42 +++++++++++++++++++++++++++++---------
+ 1 file changed, 32 insertions(+), 10 deletions(-)
 
-diff --git a/tests/nopulate.c b/tests/nopulate.c
-index 32624a7b..b3a7184a 100644
---- a/tests/nopulate.c
-+++ b/tests/nopulate.c
-@@ -23,7 +23,10 @@ static int nopulate_struct(char *buf, const char *fdt)
- 	uint32_t tag;
- 	char *p;
+diff --git a/tests/dtbs_equal_ordered.c b/tests/dtbs_equal_ordered.c
+index 90c7344d..488e08b8 100644
+--- a/tests/dtbs_equal_ordered.c
++++ b/tests/dtbs_equal_ordered.c
+@@ -16,6 +16,7 @@
+ #include "testdata.h"
  
-+	/* Add a FDT_NOP before the root node (first node) */
- 	p = buf;
-+	*((fdt32_t *)p) = cpu_to_fdt32(FDT_NOP);
-+	p += FDT_TAGSIZE;
+ static int notequal; /* = 0 */
++static int ignore_nop = 1;
  
- 	do {
- 		offset = nextoffset;
+ #define MISMATCH(fmt, ...)			\
+ 	do { \
+@@ -76,11 +77,11 @@ static void compare_structure(const void *fdt1, const void *fdt2)
+ 		do {
+ 			offset1 = nextoffset1;
+ 			tag1 = fdt_next_tag(fdt1, offset1, &nextoffset1);
+-		} while (tag1 == FDT_NOP);
++		} while (ignore_nop && (tag1 == FDT_NOP));
+ 		do {
+ 			offset2 = nextoffset2;
+ 			tag2 = fdt_next_tag(fdt2, offset2, &nextoffset2);
+-		} while (tag2 == FDT_NOP);
++		} while (ignore_nop && (tag2 == FDT_NOP));
+ 
+ 		if (tag1 != tag2)
+ 			MISMATCH("Tag mismatch (%d != %d) at (%d, %d)",
+@@ -126,26 +127,47 @@ static void compare_structure(const void *fdt1, const void *fdt2)
+ 					 offset1, offset2);
+ 			break;
+ 
++		case FDT_NOP:
++			break;
++
+ 		case FDT_END:
+ 			return;
+ 		}
+ 	}
+ }
+ 
++static void badargs(char **argv)
++{
++	CONFIG("Usage: %s [-n] --noskip-nop <dtb file> <dtb file>", argv[0]);
++}
++
+ int main(int argc, char *argv[])
+ {
+ 	void *fdt1, *fdt2;
+ 	uint32_t cpuid1, cpuid2;
++	char **args;
++	int argsleft;
+ 
+ 	test_init(argc, argv);
+-	if ((argc != 3)
+-	    && ((argc != 4) || !streq(argv[1], "-n")))
+-		CONFIG("Usage: %s [-n] <dtb file> <dtb file>", argv[0]);
+-	if (argc == 4)
+-		notequal = 1;
+-
+-	fdt1 = load_blob(argv[argc-2]);
+-	fdt2 = load_blob(argv[argc-1]);
++
++	args = &argv[1];
++	argsleft = argc - 1;
++
++	while (argsleft > 2) {
++		if (streq(args[0], "-n"))
++			notequal = 1;
++		else if (streq(args[0], "--noskip-nop"))
++			ignore_nop = 0;
++		else
++			badargs(argv);
++		args++;
++		argsleft--;
++	}
++	if (argsleft != 2)
++		badargs(argv);
++
++	fdt1 = load_blob(args[0]);
++	fdt2 = load_blob(args[1]);
+ 
+ 	compare_mem_rsv(fdt1, fdt2);
+ 	compare_structure(fdt1, fdt2);
 -- 
 2.56.1
 
