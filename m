@@ -1,55 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795692205;
-	b=DjEPtTAGAnf6bG1sOfORpk12aHqfBQt3a/gs6s47JoHfZ7iA3RFvAGyfEXLfuBOwfNBG
-	 0r1JiJOMMnDt3wdyNWB1clnAiy6dXUtM9SqCRU2xzx+nQq0wvXBoEs3xngFmAUg4JxzrH
-	 vMNnH3QI1W+4Dj+DG8f48VTM0ucSaGwwxEItjn+U3YIYN/hKZ98BESJWeCEfbH1GtjImE
-	 Xom8KAx1JesetfSHUAWlYZszx8ciooMz8MCya+EL5Lzvw0lfaYY0ELuVjLDEey6efgJYy
-	 ezO0dVRrRuplwhyXVau3/TL7K0Zg3h7u5I7/hsZYUKKbWxgL6tvFddgOtqNh5RD79fA==
+	t=1795692209;
+	b=szKKhL8bj5LWks4FD6ReY6V4m83SoposGjwy86pMV/WnAIWoovA1VfcP3sTXZyH4Gb+r
+	 urNyH/Qw+/k6RXRyeYELEHbmFUl+RilFw7GSnfeF6lwX2Md4AmtwXwYxGBu5fpk63kCy0
+	 w2hMqCKZHtbSx20DUOb5wj7z/EotWCF4GcJ9aiRqhwLXheGXbycnR1UXmUMVFZyCxjQZU
+	 Af9omuSjz/kQwXTUD/qfu+fZtWG+txtFL0TrHMnA53UksNz1wzL4qzrcpVO3VGPuOZ0Ad
+	 KxaRL+//vl3LN6U3zjTtOtkBgVnngF70LR6wGv2s/yMzk1lJllwPVx1t87HLO1nNjqA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795692205;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795692209;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:To:Cc:
 	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=rdnU/cJrXgRDHjsQA0OdxtjatwK73gCJQhkPIi05jjY=;
-	b=BQnpS4moc8PaDDXbcRXZndldQECmOAgs4IQIeMzJD5c5Ob/BDyPCzkZpwwpCttO2dADO
-	 q9QIix3DF5j1IHY+L98JAkg7s2HEXo2Dpb14JxItmiGtwg+T2hTojKeRyVtL1lb1CUAnO
-	 ibVZEh35DNMxJeeXlsijx066BX8xUXoxkr6YKPSdNF+gHl4q9O4169mxCDkZFr43SJJTP
-	 3+TsIExMBx3ObHUZf4H7wlYQx7564lmqW70m/12cTLZpCf8+WaE17gZZPO3XINnYlr4g7
-	 Hw4ymhsfkopyYrC0KYGhPYNuq9bUwPwpjB8ir/qy3c1PVsPUmsqxN62r4uwzcRh9nQQ==
+	bh=7vXlSRXuLLmD/e6VWvr8dD+6KNmhy5l5OvwMf0QWBaA=;
+	b=jVbaPa2+7SQVqhvZjg4QD/zIMuqs5+vneyfHb+B3e/VfRaBDdxE4Y7XwDuuh0OSSm47V
+	 qVGnE92Js+Cf0W+ZmteyiKPBDn/TKosIpQc8n9fXerykgHELFc+TxeB7D0o0Yf/mhSNHo
+	 wbfW3nk7U30RmGBNuika8OSJWa3sI1l0/BLOjZYzrHF8HGgJSQR/HpYK8TNcctIvUToez
+	 dlXzXseO/8VFycpdow9WkP3r0tlu4Gkg1MXBwbFNFUjY6Nc3uqn1jz27Cn58WsE8Si+I6
+	 RCvS8IXk1e4oRUoJgumpQ0EQgSmpEd3KKlieuM8zz1cFgXowH39sZht7a2ERi1fVNPg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=VnhujKMu;
-	arc=none smtp.remote-ip=185.246.84.56
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=pWvlthHI;
+	arc=none smtp.remote-ip=185.171.202.116
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19EC1606A686;
-	Thu, 26 Nov 2026 11:23:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 19EC1606A686
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B692606A6B7
+	for <devicetree-spec@vger.kernel.org>; Thu, 26 Nov 2026 11:23:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8B692606A6B7
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=VnhujKMu
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=pWvlthHI
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id AE1601A1812;
-	Thu, 26 Nov 2026 11:23:23 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 6BD81C2B9C7;
+	Thu, 26 Nov 2026 11:23:35 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 833D360237;
-	Thu, 26 Nov 2026 11:23:23 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id CD1D511E6B324;
-	Thu, 26 Nov 2026 12:23:18 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 218E660237;
+	Thu, 26 Nov 2026 11:23:27 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 7E04B11E6B361;
+	Thu, 26 Nov 2026 12:23:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1795692201; h=from:subject:date:message-id:to:cc:mime-version:
+	t=1795692205; h=from:subject:date:message-id:to:cc:mime-version:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=rdnU/cJrXgRDHjsQA0OdxtjatwK73gCJQhkPIi05jjY=;
-	b=VnhujKMu0Dpf8kDJwKiIoTuFo8z0xKmkFLWTPmIv+GhE7/67XVPOpychiB3dRpFQOCTt0i
-	boiTDLp487NCOWo+UGNBtSMdHEzKSvQvyA61Zgf/wF5r5Lmd2uvgyO+ZOZgDjkpZ2Flnf9
-	ojouOH1XMxkuYPJYvepzA0VoB9GXWt+MLplHjx0u8pZeisFc8bxAA20rcOzPTkvl/0Tt47
-	VDFnfN5Apku9kbQmBmAQ2M7GAuXjVa6zvAXCRjuKLaAKca3TA3KC/qhacbNd80piMfddFT
-	XxA9eqzlpf77vgXwCRFg3/F+iBt9i5FglIEia+alJcj7jivNP3U1HoMUNBrN+A==
+	bh=7vXlSRXuLLmD/e6VWvr8dD+6KNmhy5l5OvwMf0QWBaA=;
+	b=pWvlthHIjB2HS9ck1O98NTeJGisl7Hdxjnr0itRStgV0sngcKMyTEFtYQy+3M3rebr1DNu
+	pldS1qVHYnn0a84rAm6M71dNt5QjBaxV7QIojS1YbBzZFXO3eCXVNo+UhNq3lH+J5PTTlP
+	j63/uOODSCWofxoblLbrn/YLxztlvvn0JKimnFUPVujsZkGOgZi3x/GVBybnBnGM8kzynn
+	2ueMZUxEkbfynuA+7w+lXft+0Pz6xKAmVkEey/HAMQKyuTsUxnXCK7irhgrZO0db+Fk/ot
+	R5+oEg5kuwpZMP74eOrjswdrg1UgtDKTMWmO65+oz4DGsH115KRA6Z8DcoPdOw==
 From: Herve Codina <herve.codina@bootlin.com>
 To: David Gibson <david@gibson.dropbear.id.au>,
 	Rob Herring <robh@kernel.org>,
@@ -70,9 +70,9 @@ Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
 	Luca Ceresoli <luca.ceresoli@bootlin.com>,
 	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 	Herve Codina <herve.codina@bootlin.com>
-Subject: [PATCH v4 03/22] tests: Don't assume the root node is available at offset 0
-Date: Thu, 26 Nov 2026 12:22:20 +0100
-Message-ID: <20261126112239.636284-4-herve.codina@bootlin.com>
+Subject: [PATCH v4 04/22] tests/nopulate: Add an FDT_NOP before the root node
+Date: Thu, 26 Nov 2026 12:22:21 +0100
+Message-ID: <20261126112239.636284-5-herve.codina@bootlin.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261126112239.636284-1-herve.codina@bootlin.com>
 References: <20261126112239.636284-1-herve.codina@bootlin.com>
@@ -88,167 +88,35 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 
-Several tests use offset 0 as the offset of the root node. Either to
-check the offset returned by tested functions or to directly manipulate
-the root node retrieved using fdt_offset_ptr(fdt, 0, ...).
+An FDT_NOP tag can be present at offset 0 and so before the root node.
+This is a legitimate case.
 
-The root node is not always at offset 0. Indeed, an FDT_NOP tag can be
-present at offset 0. fdt_root_offset() returns the offset of the root
-node taking care of possible FDT_NOP tags.
+The nopulate tool adds an FDT_NOP tag after each tag encountered but it
+doesn't add an FDT_NOP tag at offset 0.
 
-Use fdt_root_offset() to get the offset of the root node and use this
-value whenever the offset of the root node is expected.
+Improve nopulate to fix this gap and add an FDT_NOP tag at offset 0.
 
 Signed-off-by: Herve Codina <herve.codina@bootlin.com>
+Reviewed-by: David Gibson <david@gibson.dropbear.id.au>
 ---
- tests/node_offset_by_compatible.c |  4 +++-
- tests/node_offset_by_prop_value.c | 11 +++++++----
- tests/path_offset.c               | 13 +++++++++----
- tests/root_node.c                 |  9 +++++----
- 4 files changed, 24 insertions(+), 13 deletions(-)
+ tests/nopulate.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/tests/node_offset_by_compatible.c b/tests/node_offset_by_compatible.c
-index a9e67835..1278a562 100644
---- a/tests/node_offset_by_compatible.c
-+++ b/tests/node_offset_by_compatible.c
-@@ -39,12 +39,14 @@ static void check_search(void *fdt, const char *compat, ...)
- int main(int argc, char *argv[])
- {
- 	void *fdt;
-+	int root_offset;
- 	int subnode1_offset, subnode2_offset;
- 	int subsubnode1_offset, subsubnode2_offset;
+diff --git a/tests/nopulate.c b/tests/nopulate.c
+index 32624a7b..b3a7184a 100644
+--- a/tests/nopulate.c
++++ b/tests/nopulate.c
+@@ -23,7 +23,10 @@ static int nopulate_struct(char *buf, const char *fdt)
+ 	uint32_t tag;
+ 	char *p;
  
- 	test_init(argc, argv);
- 	fdt = load_blob_arg(argc, argv);
++	/* Add a FDT_NOP before the root node (first node) */
+ 	p = buf;
++	*((fdt32_t *)p) = cpu_to_fdt32(FDT_NOP);
++	p += FDT_TAGSIZE;
  
-+	root_offset = fdt_root_offset(fdt);
- 	subnode1_offset = fdt_path_offset(fdt, "/subnode@1");
- 	subnode2_offset = fdt_path_offset(fdt, "/subnode@2");
- 	subsubnode1_offset = fdt_path_offset(fdt, "/subnode@1/subsubnode");
-@@ -54,7 +56,7 @@ int main(int argc, char *argv[])
- 	    || (subsubnode1_offset < 0) || (subsubnode2_offset < 0))
- 		FAIL("Can't find required nodes");
- 
--	check_search(fdt, "test_tree1", 0, -FDT_ERR_NOTFOUND);
-+	check_search(fdt, "test_tree1", root_offset, -FDT_ERR_NOTFOUND);
- 	check_search(fdt, "subnode1", subnode1_offset, -FDT_ERR_NOTFOUND);
- 	check_search(fdt, "subsubnode1", subsubnode1_offset, -FDT_ERR_NOTFOUND);
- 	check_search(fdt, "subsubnode2", subsubnode2_offset, -FDT_ERR_NOTFOUND);
-diff --git a/tests/node_offset_by_prop_value.c b/tests/node_offset_by_prop_value.c
-index 48ab1d93..329409b9 100644
---- a/tests/node_offset_by_prop_value.c
-+++ b/tests/node_offset_by_prop_value.c
-@@ -64,12 +64,14 @@ static void check_search_str(void *fdt, const char *propname,
- int main(int argc, char *argv[])
- {
- 	void *fdt;
-+	int root_offset;
- 	int subnode1_offset, subnode2_offset;
- 	int subsubnode1_offset, subsubnode2_offset;
- 
- 	test_init(argc, argv);
- 	fdt = load_blob_arg(argc, argv);
- 
-+	root_offset = fdt_root_offset(fdt);
- 	subnode1_offset = fdt_path_offset(fdt, "/subnode@1");
- 	subnode2_offset = fdt_path_offset(fdt, "/subnode@2");
- 	subsubnode1_offset = fdt_path_offset(fdt, "/subnode@1/subsubnode");
-@@ -79,19 +81,20 @@ int main(int argc, char *argv[])
- 	    || (subsubnode1_offset < 0) || (subsubnode2_offset < 0))
- 		FAIL("Can't find required nodes");
- 
--	check_search_cell(fdt, "prop-int", TEST_VALUE_1, 0, subnode1_offset,
--			  subsubnode1_offset, -FDT_ERR_NOTFOUND);
-+	check_search_cell(fdt, "prop-int", TEST_VALUE_1, root_offset,
-+			  subnode1_offset, subsubnode1_offset, -FDT_ERR_NOTFOUND);
- 
- 	check_search_cell(fdt, "prop-int", TEST_VALUE_2, subnode2_offset,
- 			  subsubnode2_offset, -FDT_ERR_NOTFOUND);
- 
--	check_search_str(fdt, "prop-str", TEST_STRING_1, 0, -FDT_ERR_NOTFOUND);
-+	check_search_str(fdt, "prop-str", TEST_STRING_1, root_offset,
-+			  -FDT_ERR_NOTFOUND);
- 
- 	check_search_str(fdt, "prop-str", "no such string", -FDT_ERR_NOTFOUND);
- 
- 	check_search_cell(fdt, "prop-int", TEST_VALUE_1+1, -FDT_ERR_NOTFOUND);
- 
--	check_search(fdt, "no-such-prop", NULL, 0, -FDT_ERR_NOTFOUND);
-+	check_search(fdt, "no-such-prop", NULL, root_offset, -FDT_ERR_NOTFOUND);
- 
- 	PASS();
- }
-diff --git a/tests/path_offset.c b/tests/path_offset.c
-index ad8db833..62574842 100644
---- a/tests/path_offset.c
-+++ b/tests/path_offset.c
-@@ -84,11 +84,16 @@ int main(int argc, char *argv[])
- 	void *fdt;
- 	int subnode1_offset, subnode2_offset;
- 	int subsubnode1_offset, subsubnode2_offset, subsubnode2_offset2;
-+	int root_offset;
- 
- 	test_init(argc, argv);
- 	fdt = load_blob_arg(argc, argv);
- 
--	check_path_offset(fdt, "/", 0);
-+	root_offset = fdt_root_offset(fdt);
-+	if (root_offset < 0)
-+		FAIL("fdt_root_offset() failed: %s", fdt_strerror(root_offset));
-+
-+	check_path_offset(fdt, "/", root_offset);
- 
- 	subnode1_offset = check_subnode(fdt, 0, "subnode@1");
- 	subnode2_offset = check_subnode(fdt, 0, "subnode@2");
-@@ -106,8 +111,8 @@ int main(int argc, char *argv[])
- 
- 	/* Test paths with extraneous separators */
- 	check_path_offset(fdt, "", -FDT_ERR_BADPATH);
--	check_path_offset(fdt, "//", 0);
--	check_path_offset(fdt, "///", 0);
-+	check_path_offset(fdt, "//", root_offset);
-+	check_path_offset(fdt, "///", root_offset);
- 	check_path_offset(fdt, "//subnode@1", subnode1_offset);
- 	check_path_offset(fdt, "/subnode@1/", subnode1_offset);
- 	check_path_offset(fdt, "//subnode@1///", subnode1_offset);
-@@ -116,7 +121,7 @@ int main(int argc, char *argv[])
- 	/* Test fdt_path_offset_namelen() */
- 	check_path_offset_namelen(fdt, "/subnode@1", -1, -FDT_ERR_BADPATH);
- 	check_path_offset_namelen(fdt, "/subnode@1", 0, -FDT_ERR_BADPATH);
--	check_path_offset_namelen(fdt, "/subnode@1", 1, 0);
-+	check_path_offset_namelen(fdt, "/subnode@1", 1, root_offset);
- 	check_path_offset_namelen(fdt, "/subnode@1/subsubnode", 10, subnode1_offset);
- 	check_path_offset_namelen(fdt, "/subnode@1/subsubnode", 11, subnode1_offset);
- 	check_path_offset_namelen(fdt, "/subnode@2TRAILINGGARBAGE", 10, subnode2_offset);
-diff --git a/tests/root_node.c b/tests/root_node.c
-index 37e6f059..7c2033af 100644
---- a/tests/root_node.c
-+++ b/tests/root_node.c
-@@ -19,18 +19,19 @@ int main(int argc, char *argv[])
- {
- 	void *fdt;
- 	const struct fdt_node_header *nh;
-+	int root_offset;
- 
- 	test_init(argc, argv);
- 	fdt = load_blob_arg(argc, argv);
- 
--	nh = fdt_offset_ptr(fdt, 0, sizeof(*nh));
-+	root_offset = fdt_root_offset(fdt);
-+	if (root_offset < 0)
-+		FAIL("fdt_root_offset() returns %d", root_offset);
- 
-+	nh = fdt_offset_ptr(fdt, root_offset, sizeof(*nh));
- 	if (! nh)
- 		FAIL("NULL retrieving root node");
- 
--	if (fdt32_to_cpu(nh->tag) != FDT_BEGIN_NODE)
--		FAIL("Wrong tag on root node");
--
- 	if (strlen(nh->name) != 0)
- 		FAIL("Wrong name for root node, \"%s\" instead of empty",
- 		     nh->name);
+ 	do {
+ 		offset = nextoffset;
 -- 
 2.56.1
 
